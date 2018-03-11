@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
-		FC479515205553E900218362 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479514205553E900218362 /* ViewController.m */; };
 		FC479518205553E900218362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC479516205553E900218362 /* Main.storyboard */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
 		FC479520205553E900218362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47951F205553E900218362 /* main.m */; };
 		FC47952A205553EA00218362 /* testAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479529205553EA00218362 /* testAppTests.m */; };
 		FC479535205553EA00218362 /* testAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479534205553EA00218362 /* testAppUITests.m */; };
+		FC47954C20556E6200218362 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47954B20556E6200218362 /* BaseViewController.m */; };
+		FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47954E20556E8B00218362 /* CoverMainViewController.m */; };
+		FC47955220556E9A00218362 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955120556E9A00218362 /* PriceViewController.m */; };
+		FC47955520556EAB00218362 /* GetCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955420556EAB00218362 /* GetCarViewController.m */; };
+		FC47955820556EBB00218362 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955720556EBB00218362 /* UserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +42,6 @@
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC479513205553E900218362 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FC479514205553E900218362 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FC479517205553E900218362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC479519205553E900218362 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC47951C205553E900218362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,16 @@
 		FC479530205553EA00218362 /* testAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479534205553EA00218362 /* testAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testAppUITests.m; sourceTree = "<group>"; };
 		FC479536205553EA00218362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC47954A20556E6200218362 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		FC47954B20556E6200218362 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		FC47954D20556E8B00218362 /* CoverMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverMainViewController.h; sourceTree = "<group>"; };
+		FC47954E20556E8B00218362 /* CoverMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverMainViewController.m; sourceTree = "<group>"; };
+		FC47955020556E9A00218362 /* PriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceViewController.h; sourceTree = "<group>"; };
+		FC47955120556E9A00218362 /* PriceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceViewController.m; sourceTree = "<group>"; };
+		FC47955320556EAB00218362 /* GetCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarViewController.h; sourceTree = "<group>"; };
+		FC47955420556EAB00218362 /* GetCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarViewController.m; sourceTree = "<group>"; };
+		FC47955620556EBB00218362 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		FC47955720556EBB00218362 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +113,16 @@
 		FC47950F205553E900218362 /* testApp */ = {
 			isa = PBXGroup;
 			children = (
+				FC47955920556EE300218362 /* Common */,
+				FC4795472055565600218362 /* LoginView */,
+				FC4795462055565200218362 /* CoverMainView */,
+				FC4795452055564E00218362 /* PriceView */,
+				FC4795442055564A00218362 /* GetCarView */,
+				FC4795422055563B00218362 /* UserView */,
+				FC47954920556E1700218362 /* Tool */,
+				FC47954820556DE400218362 /* Extend */,
 				FC479510205553E900218362 /* AppDelegate.h */,
 				FC479511205553E900218362 /* AppDelegate.m */,
-				FC479513205553E900218362 /* ViewController.h */,
-				FC479514205553E900218362 /* ViewController.m */,
 				FC479516205553E900218362 /* Main.storyboard */,
 				FC479519205553E900218362 /* Assets.xcassets */,
 				FC47951B205553E900218362 /* LaunchScreen.storyboard */,
@@ -130,6 +148,72 @@
 				FC479536205553EA00218362 /* Info.plist */,
 			);
 			path = testAppUITests;
+			sourceTree = "<group>";
+		};
+		FC4795422055563B00218362 /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955620556EBB00218362 /* UserViewController.h */,
+				FC47955720556EBB00218362 /* UserViewController.m */,
+			);
+			path = UserView;
+			sourceTree = "<group>";
+		};
+		FC4795442055564A00218362 /* GetCarView */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955320556EAB00218362 /* GetCarViewController.h */,
+				FC47955420556EAB00218362 /* GetCarViewController.m */,
+			);
+			path = GetCarView;
+			sourceTree = "<group>";
+		};
+		FC4795452055564E00218362 /* PriceView */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955020556E9A00218362 /* PriceViewController.h */,
+				FC47955120556E9A00218362 /* PriceViewController.m */,
+			);
+			path = PriceView;
+			sourceTree = "<group>";
+		};
+		FC4795462055565200218362 /* CoverMainView */ = {
+			isa = PBXGroup;
+			children = (
+				FC47954D20556E8B00218362 /* CoverMainViewController.h */,
+				FC47954E20556E8B00218362 /* CoverMainViewController.m */,
+			);
+			path = CoverMainView;
+			sourceTree = "<group>";
+		};
+		FC4795472055565600218362 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		FC47954820556DE400218362 /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		FC47954920556E1700218362 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		FC47955920556EE300218362 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FC47954A20556E6200218362 /* BaseViewController.h */,
+				FC47954B20556E6200218362 /* BaseViewController.m */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +349,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC479515205553E900218362 /* ViewController.m in Sources */,
+				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
+				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
+				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
+				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
+				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

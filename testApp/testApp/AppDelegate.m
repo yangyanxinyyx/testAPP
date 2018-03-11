@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
+#import "CoverMainViewController.h"
+#import "PriceViewController.h"
+#import "GetCarViewController.h"
+#import "UserViewController.h"
+@interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -16,7 +19,46 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+
+    CoverMainViewController *cover = [[CoverMainViewController alloc]init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:cover];
+    cover.tabBarItem.title = @"首页";
+    cover.tabBarItem.selectedImage = [UIImage imageNamed:@"首页"];
+    cover.tabBarItem.image = [UIImage imageNamed:@"首页"];
+
+    PriceViewController *price = [[PriceViewController alloc] init ];
+    UINavigationController *navPrice = [[UINavigationController alloc] initWithRootViewController:price];
+    price.tabBarItem.title = @"报价";
+    price.tabBarItem.selectedImage = [UIImage imageNamed:@"报价"];
+    price.tabBarItem.image = [UIImage imageNamed:@"报价"];
+
+    GetCarViewController *getCar = [[GetCarViewController alloc] init ];
+    UINavigationController *navGetCar = [[UINavigationController alloc] initWithRootViewController:getCar];
+    getCar.tabBarItem.title = @"接车";
+    getCar.tabBarItem.image = [UIImage imageNamed:@"接车"];
+    getCar.tabBarItem.selectedImage = [UIImage imageNamed:@"接车"];
+
+    UserViewController *user = [[UserViewController alloc] init ];
+    UINavigationController *navUser = [[UINavigationController alloc ] initWithRootViewController:user];
+    user.tabBarItem.title = @"我的";
+    user.tabBarItem.image = [UIImage imageNamed:@"我的"];
+    user.tabBarItem.selectedImage = [UIImage imageNamed:@"我的"];
+
+
+    UITabBarController *tabC = [[UITabBarController alloc] init];
+    tabC.viewControllers = [NSArray arrayWithObjects:navVC,navPrice,navGetCar,navUser, nil];
+    tabC.tabBar.translucent = NO;
+    tabC.delegate = self;
+    self.window.rootViewController =tabC;
+
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:90/255.0 green:192/255.0 blue:249/255.0 alpha:1]];
+
+
     return YES;
 }
 
