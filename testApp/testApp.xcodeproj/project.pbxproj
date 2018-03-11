@@ -19,6 +19,7 @@
 		FC47955220556E9A00218362 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955120556E9A00218362 /* PriceViewController.m */; };
 		FC47955520556EAB00218362 /* GetCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955420556EAB00218362 /* GetCarViewController.m */; };
 		FC47955820556EBB00218362 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955720556EBB00218362 /* UserViewController.m */; };
+		FC47955C2055765F00218362 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955B2055765F00218362 /* UserInfoManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		FC47955420556EAB00218362 /* GetCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarViewController.m; sourceTree = "<group>"; };
 		FC47955620556EBB00218362 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		FC47955720556EBB00218362 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		FC47955A2055765F00218362 /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
+		FC47955B2055765F00218362 /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,8 @@
 			children = (
 				FC47954A20556E6200218362 /* BaseViewController.h */,
 				FC47954B20556E6200218362 /* BaseViewController.m */,
+				FC47955A2055765F00218362 /* UserInfoManager.h */,
+				FC47955B2055765F00218362 /* UserInfoManager.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 			files = (
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
+				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
