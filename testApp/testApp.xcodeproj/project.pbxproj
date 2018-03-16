@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
 		A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD79205AD86500F2F83F /* 背景@2x.png */; };
 		A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25178A2E205BF12F00B9293E /* PriceInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoViewController.h; sourceTree = "<group>"; };
+		25178A2F205BF12F00B9293E /* PriceInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoViewController.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD79205AD86500F2F83F /* 背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景@2x.png"; sourceTree = "<group>"; };
 		A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心@2x.png"; sourceTree = "<group>"; };
@@ -116,6 +119,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25178A2B205BF0EB00B9293E /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		25178A2C205BF10000B9293E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25178A2D205BF10900B9293E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				25178A2E205BF12F00B9293E /* PriceInfoViewController.h */,
+				25178A2F205BF12F00B9293E /* PriceInfoViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +304,9 @@
 		FC4795452055564E00218362 /* PriceView */ = {
 			isa = PBXGroup;
 			children = (
+				25178A2D205BF10900B9293E /* Controller */,
+				25178A2C205BF10000B9293E /* Model */,
+				25178A2B205BF0EB00B9293E /* VIew */,
 				FC47955020556E9A00218362 /* PriceViewController.h */,
 				FC47955120556E9A00218362 /* PriceViewController.m */,
 			);
@@ -510,6 +539,7 @@
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
+				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
