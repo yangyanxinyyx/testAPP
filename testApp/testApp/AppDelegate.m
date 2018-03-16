@@ -26,27 +26,27 @@
 
     CoverMainViewController *cover = [[CoverMainViewController alloc]init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:cover];
-    cover.tabBarItem.title = @"首页";
-    cover.tabBarItem.selectedImage = [UIImage imageNamed:@"首页"];
-    cover.tabBarItem.image = [UIImage imageNamed:@"首页"];
+    navVC.tabBarItem.title = @"首页";
+    navVC.tabBarItem.selectedImage = [UIImage imageNamed:@"首页"];
+    navVC.tabBarItem.image = [UIImage imageNamed:@"首页"];
 
     PriceViewController *price = [[PriceViewController alloc] init ];
     UINavigationController *navPrice = [[UINavigationController alloc] initWithRootViewController:price];
-    price.tabBarItem.title = @"报价";
-    price.tabBarItem.selectedImage = [UIImage imageNamed:@"报价"];
-    price.tabBarItem.image = [UIImage imageNamed:@"报价"];
+    navPrice.tabBarItem.title = @"报价";
+    navPrice.tabBarItem.selectedImage = [UIImage imageNamed:@"报价"];
+    navPrice.tabBarItem.image = [UIImage imageNamed:@"报价"];
 
     GetCarViewController *getCar = [[GetCarViewController alloc] init ];
     UINavigationController *navGetCar = [[UINavigationController alloc] initWithRootViewController:getCar];
-    getCar.tabBarItem.title = @"接车";
-    getCar.tabBarItem.image = [UIImage imageNamed:@"接车"];
-    getCar.tabBarItem.selectedImage = [UIImage imageNamed:@"接车"];
+    navGetCar.tabBarItem.title = @"接车";
+    navGetCar.tabBarItem.image = [UIImage imageNamed:@"接车"];
+    navGetCar.tabBarItem.selectedImage = [UIImage imageNamed:@"接车"];
 
     UserViewController *user = [[UserViewController alloc] init ];
     UINavigationController *navUser = [[UINavigationController alloc ] initWithRootViewController:user];
-    user.tabBarItem.title = @"我的";
-    user.tabBarItem.image = [UIImage imageNamed:@"我的"];
-    user.tabBarItem.selectedImage = [UIImage imageNamed:@"我的"];
+    navUser.tabBarItem.title = @"我的";
+    navUser.tabBarItem.image = [UIImage imageNamed:@"我的"];
+    navUser.tabBarItem.selectedImage = [UIImage imageNamed:@"我的"];
 
 
     UITabBarController *tabC = [[UITabBarController alloc] init];
@@ -56,7 +56,7 @@
     self.window.rootViewController =tabC;
 
     [[UINavigationBar appearance] setTranslucent:NO];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:90/255.0 green:192/255.0 blue:249/255.0 alpha:1]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:104/255.0 green:153/255.0 blue:232/255.0 alpha:1]];
 
 
     return YES;
