@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD79205AD86500F2F83F /* 背景@2x.png */; };
+		A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */; };
+		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
+		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
+		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC479518205553E900218362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC479516205553E900218362 /* Main.storyboard */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
@@ -43,9 +48,18 @@
 
 /* Begin PBXFileReference section */
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A71EFD79205AD86500F2F83F /* 背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景@2x.png"; sourceTree = "<group>"; };
+		A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心@2x.png"; sourceTree = "<group>"; };
+		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
+		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
+		A79A510F20597F91000D8D0F /* XCUserTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserTopView.h; sourceTree = "<group>"; };
+		A79A511020597F91000D8D0F /* XCUserTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserTopView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
+		FC280578205B63D700DD0DA9 /* MyMedalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalViewController.h; sourceTree = "<group>"; };
+		FC280579205B63D700DD0DA9 /* MyMedalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMedalViewController.m; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -111,6 +125,66 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A71EFD77205AD7EC00F2F83F /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */,
+				A71EFD79205AD86500F2F83F /* 背景@2x.png */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		A71EFD78205AD7FA00F2F83F /* categary */ = {
+			isa = PBXGroup;
+			children = (
+				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
+				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
+			);
+			path = categary;
+			sourceTree = "<group>";
+		};
+		A79A510720597A0F000D8D0F /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		A79A510820597A21000D8D0F /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				A71EFD78205AD7FA00F2F83F /* categary */,
+				A71EFD77205AD7EC00F2F83F /* resource */,
+				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		A79A510C20597F09000D8D0F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955620556EBB00218362 /* UserViewController.h */,
+				FC47955720556EBB00218362 /* UserViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A79A510D20597F1E000D8D0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A79A510E20597F27000D8D0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A79A510F20597F91000D8D0F /* XCUserTopView.h */,
+				A79A511020597F91000D8D0F /* XCUserTopView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B52118B0BB7070CDBEEBB2CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +224,8 @@
 				FC4795452055564E00218362 /* PriceView */,
 				FC4795442055564A00218362 /* GetCarView */,
 				FC4795422055563B00218362 /* UserView */,
-				FC47954920556E1700218362 /* Tool */,
-				FC47954820556DE400218362 /* Extend */,
+				A79A510720597A0F000D8D0F /* Tool */,
+				A79A510820597A21000D8D0F /* Extend */,
 				FC479510205553E900218362 /* AppDelegate.h */,
 				FC479511205553E900218362 /* AppDelegate.m */,
 				FC479516205553E900218362 /* Main.storyboard */,
@@ -185,8 +259,9 @@
 		FC4795422055563B00218362 /* UserView */ = {
 			isa = PBXGroup;
 			children = (
-				FC47955620556EBB00218362 /* UserViewController.h */,
-				FC47955720556EBB00218362 /* UserViewController.m */,
+				A79A510E20597F27000D8D0F /* View */,
+				A79A510D20597F1E000D8D0F /* Model */,
+				A79A510C20597F09000D8D0F /* Controller */,
 			);
 			path = UserView;
 			sourceTree = "<group>";
@@ -214,6 +289,8 @@
 			children = (
 				FC47954D20556E8B00218362 /* CoverMainViewController.h */,
 				FC47954E20556E8B00218362 /* CoverMainViewController.m */,
+				FC280578205B63D700DD0DA9 /* MyMedalViewController.h */,
+				FC280579205B63D700DD0DA9 /* MyMedalViewController.m */,
 			);
 			path = CoverMainView;
 			sourceTree = "<group>";
@@ -223,20 +300,6 @@
 			children = (
 			);
 			path = LoginView;
-			sourceTree = "<group>";
-		};
-		FC47954820556DE400218362 /* Extend */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extend;
-			sourceTree = "<group>";
-		};
-		FC47954920556E1700218362 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
 			sourceTree = "<group>";
 		};
 		FC47955920556EE300218362 /* Common */ = {
@@ -361,6 +424,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */,
+				A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC479518205553E900218362 /* Main.storyboard in Resources */,
@@ -439,14 +504,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
+				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
+				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

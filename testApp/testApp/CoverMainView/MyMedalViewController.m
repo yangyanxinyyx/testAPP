@@ -1,30 +1,22 @@
 //
-//  CoverMainViewController.m
+//  MyMedalViewController.m
 //  testApp
 //
-//  Created by 杨焱鑫 on 2018/3/11.
+//  Created by 杨焱鑫 on 2018/3/16.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "CoverMainViewController.h"
 #import "MyMedalViewController.h"
 
-@interface CoverMainViewController ()
+@interface MyMedalViewController ()
 
 @end
 
-@implementation CoverMainViewController
+@implementation MyMedalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
-
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    MyMedalViewController *medal = [[MyMedalViewController alloc] init];
-    [self.navigationController pushViewController:medal animated:YES];
+    self.title = @"我的勋章";
 }
 
 - (void)didReceiveMemoryWarning {
