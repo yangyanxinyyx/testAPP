@@ -7,12 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD79205AD86500F2F83F /* 背景@2x.png */; };
-		A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
+		FC280581205CF05D00DD0DA9 /* FinishTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280580205CF05D00DD0DA9 /* FinishTipsView.m */; };
+		FC280584205CFAE200DD0DA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280583205CFAE200DD0DA9 /* LoginViewController.m */; };
+		FC280587205CFDE700DD0DA9 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280586205CFDE700DD0DA9 /* FindPasswordViewController.m */; };
+		FC280592205D113B00DD0DA9 /* login_preson@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC28058D205D113B00DD0DA9 /* login_preson@2x.png */; };
+		FC280593205D113B00DD0DA9 /* login_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC28058E205D113B00DD0DA9 /* login_code@2x.png */; };
+		FC280594205D113B00DD0DA9 /* login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC28058F205D113B00DD0DA9 /* login_username@2x.png */; };
+		FC280595205D113B00DD0DA9 /* login_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC280590205D113B00DD0DA9 /* login_location@2x.png */; };
+		FC280596205D113B00DD0DA9 /* login_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC280591205D113B00DD0DA9 /* login_password@2x.png */; };
+		FC28059C205D11A100DD0DA9 /* login_preson@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC280597205D11A000DD0DA9 /* login_preson@3x.png */; };
+		FC28059D205D11A100DD0DA9 /* login_username@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC280598205D11A000DD0DA9 /* login_username@3x.png */; };
+		FC28059E205D11A100DD0DA9 /* login_password@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC280599205D11A000DD0DA9 /* login_password@3x.png */; };
+		FC28059F205D11A100DD0DA9 /* login_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC28059A205D11A100DD0DA9 /* login_location@3x.png */; };
+		FC2805A0205D11A100DD0DA9 /* login_code@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC28059B205D11A100DD0DA9 /* login_code@3x.png */; };
+		FC2805A3205D3B1600DD0DA9 /* UserInfoConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805A2205D3B1600DD0DA9 /* UserInfoConfirmView.m */; };
+		FC2805A6205D93F400DD0DA9 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805A4205D93F400DD0DA9 /* back@2x.png */; };
+		FC2805A7205D93F400DD0DA9 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805A5205D93F400DD0DA9 /* back@3x.png */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC479518205553E900218362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC479516205553E900218362 /* Main.storyboard */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
@@ -48,8 +62,6 @@
 
 /* Begin PBXFileReference section */
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
-		A71EFD79205AD86500F2F83F /* 背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景@2x.png"; sourceTree = "<group>"; };
-		A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心@2x.png"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
@@ -60,6 +72,26 @@
 		DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
 		FC280578205B63D700DD0DA9 /* MyMedalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalViewController.h; sourceTree = "<group>"; };
 		FC280579205B63D700DD0DA9 /* MyMedalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMedalViewController.m; sourceTree = "<group>"; };
+		FC28057F205CF05D00DD0DA9 /* FinishTipsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinishTipsView.h; sourceTree = "<group>"; };
+		FC280580205CF05D00DD0DA9 /* FinishTipsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinishTipsView.m; sourceTree = "<group>"; };
+		FC280582205CFAE200DD0DA9 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FC280583205CFAE200DD0DA9 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FC280585205CFDE700DD0DA9 /* FindPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindPasswordViewController.h; sourceTree = "<group>"; };
+		FC280586205CFDE700DD0DA9 /* FindPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindPasswordViewController.m; sourceTree = "<group>"; };
+		FC28058D205D113B00DD0DA9 /* login_preson@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_preson@2x.png"; sourceTree = "<group>"; };
+		FC28058E205D113B00DD0DA9 /* login_code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_code@2x.png"; sourceTree = "<group>"; };
+		FC28058F205D113B00DD0DA9 /* login_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_username@2x.png"; sourceTree = "<group>"; };
+		FC280590205D113B00DD0DA9 /* login_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_location@2x.png"; sourceTree = "<group>"; };
+		FC280591205D113B00DD0DA9 /* login_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_password@2x.png"; sourceTree = "<group>"; };
+		FC280597205D11A000DD0DA9 /* login_preson@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_preson@3x.png"; sourceTree = "<group>"; };
+		FC280598205D11A000DD0DA9 /* login_username@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_username@3x.png"; sourceTree = "<group>"; };
+		FC280599205D11A000DD0DA9 /* login_password@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_password@3x.png"; sourceTree = "<group>"; };
+		FC28059A205D11A100DD0DA9 /* login_location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_location@3x.png"; sourceTree = "<group>"; };
+		FC28059B205D11A100DD0DA9 /* login_code@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_code@3x.png"; sourceTree = "<group>"; };
+		FC2805A1205D3B1600DD0DA9 /* UserInfoConfirmView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoConfirmView.h; sourceTree = "<group>"; };
+		FC2805A2205D3B1600DD0DA9 /* UserInfoConfirmView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoConfirmView.m; sourceTree = "<group>"; };
+		FC2805A4205D93F400DD0DA9 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		FC2805A5205D93F400DD0DA9 /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -125,15 +157,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A71EFD77205AD7EC00F2F83F /* resource */ = {
-			isa = PBXGroup;
-			children = (
-				A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */,
-				A71EFD79205AD86500F2F83F /* 背景@2x.png */,
-			);
-			path = resource;
-			sourceTree = "<group>";
-		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				A71EFD78205AD7FA00F2F83F /* categary */,
-				A71EFD77205AD7EC00F2F83F /* resource */,
 				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 			);
 			path = Extend;
@@ -193,6 +215,65 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC28057E205BABEA00DD0DA9 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				FC2805A4205D93F400DD0DA9 /* back@2x.png */,
+				FC2805A5205D93F400DD0DA9 /* back@3x.png */,
+				FC28058C205D101B00DD0DA9 /* login */,
+				FC28058B205D101800DD0DA9 /* New Group3 */,
+				FC28058A205D101600DD0DA9 /* New Group2 */,
+				FC280589205D101400DD0DA9 /* New Group1 */,
+				FC280588205D101000DD0DA9 /* New Group */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		FC280588205D101000DD0DA9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		FC280589205D101400DD0DA9 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		FC28058A205D101600DD0DA9 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		FC28058B205D101800DD0DA9 /* New Group3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group3";
+			sourceTree = "<group>";
+		};
+		FC28058C205D101B00DD0DA9 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				FC28058E205D113B00DD0DA9 /* login_code@2x.png */,
+				FC280590205D113B00DD0DA9 /* login_location@2x.png */,
+				FC280591205D113B00DD0DA9 /* login_password@2x.png */,
+				FC28058D205D113B00DD0DA9 /* login_preson@2x.png */,
+				FC28058F205D113B00DD0DA9 /* login_username@2x.png */,
+				FC28059B205D11A100DD0DA9 /* login_code@3x.png */,
+				FC28059A205D11A100DD0DA9 /* login_location@3x.png */,
+				FC280599205D11A000DD0DA9 /* login_password@3x.png */,
+				FC280597205D11A000DD0DA9 /* login_preson@3x.png */,
+				FC280598205D11A000DD0DA9 /* login_username@3x.png */,
+			);
+			path = login;
+			sourceTree = "<group>";
+		};
 		FC479504205553E900218362 = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +299,7 @@
 		FC47950F205553E900218362 /* testApp */ = {
 			isa = PBXGroup;
 			children = (
+				FC28057E205BABEA00DD0DA9 /* resource */,
 				FC47955920556EE300218362 /* Common */,
 				FC4795472055565600218362 /* LoginView */,
 				FC4795462055565200218362 /* CoverMainView */,
@@ -298,6 +380,12 @@
 		FC4795472055565600218362 /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
+				FC280582205CFAE200DD0DA9 /* LoginViewController.h */,
+				FC280583205CFAE200DD0DA9 /* LoginViewController.m */,
+				FC280585205CFDE700DD0DA9 /* FindPasswordViewController.h */,
+				FC280586205CFDE700DD0DA9 /* FindPasswordViewController.m */,
+				FC2805A1205D3B1600DD0DA9 /* UserInfoConfirmView.h */,
+				FC2805A2205D3B1600DD0DA9 /* UserInfoConfirmView.m */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -311,6 +399,8 @@
 				FC47955B2055765F00218362 /* UserInfoManager.m */,
 				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
 				FCFAF950205A7011001E9796 /* BaseTabbarController.m */,
+				FC28057F205CF05D00DD0DA9 /* FinishTipsView.h */,
+				FC280580205CF05D00DD0DA9 /* FinishTipsView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -424,11 +514,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */,
-				A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */,
+				FC280595205D113B00DD0DA9 /* login_location@2x.png in Resources */,
+				FC28059D205D11A100DD0DA9 /* login_username@3x.png in Resources */,
+				FC280593205D113B00DD0DA9 /* login_code@2x.png in Resources */,
+				FC2805A6205D93F400DD0DA9 /* back@2x.png in Resources */,
+				FC2805A0205D11A100DD0DA9 /* login_code@3x.png in Resources */,
+				FC2805A7205D93F400DD0DA9 /* back@3x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
+				FC28059E205D11A100DD0DA9 /* login_password@3x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC479518205553E900218362 /* Main.storyboard in Resources */,
+				FC280596205D113B00DD0DA9 /* login_password@2x.png in Resources */,
+				FC28059F205D11A100DD0DA9 /* login_location@3x.png in Resources */,
+				FC280594205D113B00DD0DA9 /* login_username@2x.png in Resources */,
+				FC28059C205D11A100DD0DA9 /* login_preson@3x.png in Resources */,
+				FC280592205D113B00DD0DA9 /* login_preson@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,9 +604,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC280581205CF05D00DD0DA9 /* FinishTipsView.m in Sources */,
+				FC280587205CFDE700DD0DA9 /* FindPasswordViewController.m in Sources */,
 				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
+				FC2805A3205D3B1600DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
+				FC280584205CFAE200DD0DA9 /* LoginViewController.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
