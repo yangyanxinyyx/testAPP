@@ -35,12 +35,16 @@
 
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 310)/2, (SCREEN_HEIGHT - 190)/2 -5, 310, 190)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 310)/2, (SCREEN_HEIGHT - 190)/2 -5, 310, 220)];
+    contentView.backgroundColor = [UIColor whiteColor];
+    contentView.layer.cornerRadius = 5;
+    contentView.layer.masksToBounds = YES;
     [self addSubview:contentView];
 
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(118, 15, 74, 15)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, 15, 80, 16)];
     titleLabel.font = [UIFont systemFontOfSize:15];
     titleLabel.text = @"请确认信息";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:titleLabel];
 
     UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 310, 1)];
@@ -50,15 +54,16 @@
     NSArray *titles = @[@"姓名",@"部门",@"工号"];
     NSArray *contents = @[self.name,self.department,self.workNumber];
     for (int i=0; i<titles.count; i++) {
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(line1.frame) + 11 + 28 * i, 26, 13)];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(16, CGRectGetMaxY(line1.frame) + 11 + 28 * i, 28, 14)];
         title.text = titles[i];
         title.font = [UIFont systemFontOfSize:13];
         [contentView addSubview:title];
 
-        UILabel *content = [[UILabel alloc] initWithFrame:CGRectMake(50, CGRectGetMaxY(line1.frame) + 11 + 28 * i, 26, 13)];
+        UILabel *content = [[UILabel alloc] initWithFrame:CGRectMake(50, CGRectGetMaxY(line1.frame) + 11 + 28 * i, 120, 14)];
         content.text = contents[i];
         content.textAlignment = NSTextAlignmentLeft;
         content.font = [UIFont systemFontOfSize:13];
+        content.textColor = COLOR_RGB_255(154, 154, 154);
         [contentView addSubview:content];
     }
 
@@ -80,8 +85,17 @@
 
 - (void)pressConfirmBtn
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didConfirmUserInfo)]) {
-        [self.delegate didConfirmUserInfo];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didConfirmUserInfo:)]) {
+        [self removeFromSuperview];
+        [self.delegate didConfirmUserInfo:YES];
+    }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didConfirmUserInfo:)]) {
+        [self removeFromSuperview];
+        [self.delegate didConfirmUserInfo:NO];
     }
 }
 /*

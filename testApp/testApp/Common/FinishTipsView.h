@@ -10,4 +10,6 @@
 
 @interface FinishTipsView : UIView
 
+- (instancetype)initWithTitle:(NSString *)title complete:(void (^)(void))complete;
+
 @end

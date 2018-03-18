@@ -30,6 +30,7 @@
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;
     self.window.rootViewController = tab;
+
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 
     return YES;
