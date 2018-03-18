@@ -8,19 +8,22 @@
 
 #import "FinishTipsView.h"
 
+typedef void(^Complete)(void);
+
 @interface FinishTipsView ()
 @property (nonatomic,strong) UILabel *tipsLabel;
+@property (nonatomic, copy) Complete complete;
 @end
 
 @implementation FinishTipsView
 
-- (instancetype)initWithTitle:(NSString *)title superView:(UIView *)superView;
+- (instancetype)initWithTitle:(NSString *)title complete:(void (^)(void))complete
 {
     if (self = [super init]) {
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [self createUI];
         self.tipsLabel.text = title;
-        [superView addSubview:self];
+        self.complete = complete;
     }
     return self;
 }
@@ -45,13 +48,18 @@
 
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self removeFromSuperview];
-
+        if (self.complete) {
+            self.complete();
+        }
     });
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self removeFromSuperview];
+    if (self.complete) {
+        self.complete();
+    }
 }
 
 

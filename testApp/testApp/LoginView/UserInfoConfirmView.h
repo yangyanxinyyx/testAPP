@@ -10,11 +10,13 @@
 
 @protocol UserInfoComfirmVIewDelegate <NSObject>
 
-- (void)didConfirmUserInfo;
+- (void)didConfirmUserInfo:(BOOL)isConfirm;
 
 @end
 
 @interface UserInfoConfirmView : UIView
+
+- (instancetype)initwithName:(NSString *)name department:(NSString *)department worknumber:(NSString *)number;
 
 @property (nonatomic,weak) id<UserInfoComfirmVIewDelegate>delegate;
 

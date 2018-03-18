@@ -12,6 +12,21 @@
 #define SCREEN_SCALE  [UIScreen mainScreen].scale
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
+
+static inline void XCLog(NSString *log, ...)
+{
+#ifdef DEBUG
+    NSLog(@"Debug Log: %@", log);
+#endif
+}
+static inline void XCErrorLog(BOOL errorCondition, Class class, NSString *methodName, NSString *errorDescription, NSString *detail)
+{
+#ifdef DEBUG
+    if (errorCondition) {
+        NSLog(@"Error at %@ %@, description: %@, detail: %@.", NSStringFromClass(class), methodName, errorDescription, detail);
+    }
+#endif
+}
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

@@ -7,6 +7,7 @@
 //
 
 #import "FindPasswordViewController.h"
+#import "FinishTipsView.h"
 
 @interface FindPasswordViewController ()<UITextFieldDelegate>
 
@@ -25,7 +26,7 @@
 
 - (void)createUI
 {
-    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kNavMargan, SCREEN_WIDTH, 190 * kScaleHeight)];
+    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + kNavMargan, SCREEN_WIDTH, 190 * kScaleHeight)];
     [self.view addSubview:topImageView];
     topImageView.backgroundColor = [UIColor redColor];
     topImageView.image = [UIImage imageNamed:@""];
@@ -39,7 +40,8 @@
         accoutTextField.clearButtonMode = UITextFieldViewModeAlways;
         accoutTextField.clearsOnBeginEditing = YES;
         accoutTextField.textAlignment = NSTextAlignmentLeft;
-        accoutTextField.keyboardType = UIKeyboardTypeNumberPad;
+        accoutTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        accoutTextField.returnKeyType = UIReturnKeyDone;
         accoutTextField.delegate = self;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:images[i]]];
         accoutTextField.leftView=imageView;
@@ -94,7 +96,8 @@
 
 - (void)pressConfirmBtn:(UIButton *)sender
 {
-
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"密码设置成功" complete:nil];
+    [self.view addSubview:tipsView];
 }
 
 - (void)pressBackBtn:(UIButton *)sender
