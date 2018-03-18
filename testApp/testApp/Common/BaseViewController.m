@@ -16,7 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.navigationController.viewControllers.count > 1) {
+        BaseViewController *VC = (BaseViewController *)[self.navigationController.viewControllers lastObject];
+        VC.tabBarController.tabBar.hidden = YES;
+
+    }else{
+        BaseViewController *VC = (BaseViewController *)[self.navigationController.viewControllers lastObject];
+        VC.tabBarController.tabBar.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

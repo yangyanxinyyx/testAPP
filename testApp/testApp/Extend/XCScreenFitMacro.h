@@ -10,6 +10,7 @@
 #define XCScreenFitMacro_h
 
 #import <Foundation/Foundation.h>
+#import "sys/utsname.h"
 
 #pragma mark -  屏幕适配常量
 
@@ -64,11 +65,12 @@
 
 #pragma mark -  颜色宏
 
-#define COLOR_RGB_255(r,g,b)        [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define RGBCOLOR(r,g,b)             [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define RGBACOLOR(r,g,b,a)          [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 #define RGBASTRINGCOLOR(COLORSTRING)    [UIColor colorWithRGBHexString:COLORSTRING]
 
+#define COLOR_RGB_255(r, g, b)      [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define COLOR_RGBA_255(r, g, b, a)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 #pragma mark -  自定义的函数宏
 
 /* 备注说明：
@@ -120,7 +122,22 @@ _Pragma("clang diagnostic pop") \
 } while (0)
 
 
+//适配iPhoneX
+#define isIPhoneX           ((SCREEN_WIDTH == 375.f && SCREEN_HEIGHT == 812.f) || isIPhoneXSystemInfo() ? YES : NO)
+#define kBottomMargan        (isIPhoneX ? 34.f : 0.f)
+#define kNavMargan        (isIPhoneX ? 44.f : 0.f)
 
-
+inline static BOOL isIPhoneXSystemInfo() {
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *deviceString = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    if ([deviceString isEqualToString:@"iPhone10,3"]) {
+        return YES;
+    }else if ([deviceString isEqualToString:@"iPhone10,6"]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
 
 #endif /* XCScreenFitMacro_h */

@@ -11,6 +11,8 @@
 #import "PriceViewController.h"
 #import "GetCarViewController.h"
 #import "UserViewController.h"
+#import "BaseTabbarController.h"
+
 @interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
@@ -24,40 +26,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    CoverMainViewController *cover = [[CoverMainViewController alloc]init];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:cover];
-    navVC.tabBarItem.title = @"首页";
-    navVC.tabBarItem.selectedImage = [UIImage imageNamed:@"首页"];
-    navVC.tabBarItem.image = [UIImage imageNamed:@"首页"];
 
-    PriceViewController *price = [[PriceViewController alloc] init ];
-    UINavigationController *navPrice = [[UINavigationController alloc] initWithRootViewController:price];
-    navPrice.tabBarItem.title = @"报价";
-    navPrice.tabBarItem.selectedImage = [UIImage imageNamed:@"报价"];
-    navPrice.tabBarItem.image = [UIImage imageNamed:@"报价"];
+    BaseTabbarController *tab = [[BaseTabbarController alloc] init];
+    tab.delegate = self;
+    self.window.rootViewController = tab;
 
-    GetCarViewController *getCar = [[GetCarViewController alloc] init ];
-    UINavigationController *navGetCar = [[UINavigationController alloc] initWithRootViewController:getCar];
-    navGetCar.tabBarItem.title = @"接车";
-    navGetCar.tabBarItem.image = [UIImage imageNamed:@"接车"];
-    navGetCar.tabBarItem.selectedImage = [UIImage imageNamed:@"接车"];
-
-    UserViewController *user = [[UserViewController alloc] init ];
-    UINavigationController *navUser = [[UINavigationController alloc ] initWithRootViewController:user];
-    navUser.tabBarItem.title = @"我的";
-    navUser.tabBarItem.image = [UIImage imageNamed:@"我的"];
-    navUser.tabBarItem.selectedImage = [UIImage imageNamed:@"我的"];
-
-
-    UITabBarController *tabC = [[UITabBarController alloc] init];
-    tabC.viewControllers = [NSArray arrayWithObjects:navVC,navPrice,navGetCar,navUser, nil];
-    tabC.tabBar.translucent = NO;
-    tabC.delegate = self;
-    self.window.rootViewController =tabC;
-
-    [[UINavigationBar appearance] setTranslucent:NO];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:104/255.0 green:153/255.0 blue:232/255.0 alpha:1]];
-
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 
     return YES;
 }

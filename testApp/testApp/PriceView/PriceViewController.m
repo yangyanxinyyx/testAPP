@@ -7,6 +7,7 @@
 //
 
 #import "PriceViewController.h"
+#import "PriceInfoViewController.h"
 
 @interface PriceViewController ()
 
@@ -18,21 +19,19 @@
     [super viewDidLoad];
     self.title = @"报价";
 
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(20, 44, 100, 50);
+    [button setTitle:@"报价详情" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(touchButtonFunction) forControlEvents:UIControlEventTouchDown];
+    button.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:button];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchButtonFunction{
+    PriceInfoViewController *pinfoVC = [[PriceInfoViewController alloc]init];
+    [self.navigationController pushViewController:pinfoVC animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

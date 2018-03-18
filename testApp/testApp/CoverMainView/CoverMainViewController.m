@@ -7,6 +7,8 @@
 //
 
 #import "CoverMainViewController.h"
+#import "MyMedalViewController.h"
+#import "LoginViewController.h"
 
 @interface CoverMainViewController ()
 
@@ -18,6 +20,21 @@
     [super viewDidLoad];
     self.title = @"首页";
 
+    [self getLoginUserInfo];
+
+
+}
+
+- (void)getLoginUserInfo
+{
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    [self presentViewController:loginVC animated:YES completion:nil];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    MyMedalViewController *medal = [[MyMedalViewController alloc] init];
+    [self.navigationController pushViewController:medal animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
