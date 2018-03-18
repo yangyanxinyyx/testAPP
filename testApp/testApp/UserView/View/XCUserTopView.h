@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol XCUserTopViewDelegate <NSObject>
+@optional
+- (void)XCUserTopViewMyCommissionButtonClickHandler:(UIButton *)button;
+- (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button;
+@end
+
 @interface XCUserTopView : UIView
 
-/** <# 注释 #> */
+@property (nonatomic, weak) id<XCUserTopViewDelegate> delegate ;
 @property (nonatomic, strong) UIImage * userIcon ;
+@property (nonatomic, copy) NSString * userName;
 
 @end
