@@ -12,4 +12,6 @@
 
 @interface RequestAPI : NSObject
 
++(void)getUserInfo:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail;
+
 @end

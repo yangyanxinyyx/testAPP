@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "FindPasswordViewController.h"
 #import "UserInfoConfirmView.h"
+#import "RequestAPI.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,UserInfoComfirmVIewDelegate>
 
@@ -89,12 +90,22 @@
 
 - (void)pressLoginBtn:(UIButton *)sender
 {
+    NSDictionary  *param = @{
+                             @"userCode":@"17350805203",
+                             @"password":@"1"
+                             };
+    [RequestAPI getUserInfo:param success:^(id response) {
+        NSLog(@"%@",response);
+
+        UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:@"王尼玛" department:@"技术部" worknumber:@"012"];
+        confirmView.delegate = self;
+        [self.view addSubview:confirmView];
+    } fail:^(id error) {
+        NSLog(@"%@",error);
+    }];
 
 
 
-    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:@"王尼玛" department:@"技术部" worknumber:@"012"];
-    confirmView.delegate = self;
-    [self.view addSubview:confirmView];
 }
 
 - (void)pressForgetBtn:(UIButton *)sender
