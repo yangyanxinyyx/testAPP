@@ -8,8 +8,9 @@
 
 #import "LoginViewController.h"
 #import "FindPasswordViewController.h"
+#import "UserInfoConfirmView.h"
 
-@interface LoginViewController ()<UITextFieldDelegate>
+@interface LoginViewController ()<UITextFieldDelegate,UserInfoComfirmVIewDelegate>
 
 @property (nonatomic,strong) UITextField *accoutTextField;
 @property (nonatomic,strong) UITextField *passwordTextField;
@@ -26,7 +27,7 @@
 
 - (void)createUI
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kNavMargan, SCREEN_WIDTH, 190 * kScaleHeight)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + kNavMargan, SCREEN_WIDTH, 190 * kScaleHeight)];
     [self.view addSubview:imageView];
     imageView.backgroundColor = [UIColor redColor];
     imageView.image = [UIImage imageNamed:@""];
@@ -37,7 +38,8 @@
     _accoutTextField.clearButtonMode = UITextFieldViewModeAlways;
     _accoutTextField.clearsOnBeginEditing = YES;
     _accoutTextField.textAlignment = NSTextAlignmentLeft;
-    _accoutTextField.keyboardType = UIKeyboardTypeNumberPad;
+    _accoutTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    _accoutTextField.returnKeyType = UIReturnKeyDone;
     _accoutTextField.delegate = self;
     UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_username.png"]];
     _accoutTextField.leftView=imageView1;
@@ -51,7 +53,8 @@
     _passwordTextField.clearButtonMode = UITextFieldViewModeAlways;
     _passwordTextField.clearsOnBeginEditing = YES;
     _passwordTextField.textAlignment = NSTextAlignmentLeft;
-    _passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
+    _passwordTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    _passwordTextField.returnKeyType = UIReturnKeyDone;
     _passwordTextField.delegate = self;
     UIImageView *imageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_password.png"]];
     _passwordTextField.leftView = imageView2;
@@ -86,7 +89,12 @@
 
 - (void)pressLoginBtn:(UIButton *)sender
 {
-     [self dismissViewControllerAnimated:YES completion:nil];
+
+
+
+    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:@"王尼玛" department:@"技术部" worknumber:@"012"];
+    confirmView.delegate = self;
+    [self.view addSubview:confirmView];
 }
 
 - (void)pressForgetBtn:(UIButton *)sender
@@ -94,6 +102,16 @@
     FindPasswordViewController *VC = [[FindPasswordViewController alloc] init];
      self.modalPresentationStyle=UIModalPresentationPopover;
     [self presentViewController:VC animated:YES completion:nil];
+}
+
+#pragma mark userInfoConfrimDelegate;
+- (void)didConfirmUserInfo:(BOOL)isConfirm
+{
+    if (isConfirm) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+
+    }
 }
 
 #pragma mark textfieldDelegate
@@ -104,7 +122,10 @@
 
 }
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

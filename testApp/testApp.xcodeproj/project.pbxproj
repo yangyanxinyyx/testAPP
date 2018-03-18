@@ -44,6 +44,8 @@
 		FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CE205D96DF00DD0DA9 /* FindPasswordViewController.m */; };
 		FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805D1205D96DF00DD0DA9 /* LoginViewController.m */; };
 		FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */; };
+		FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */; };
+		FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -141,6 +143,10 @@
 		FC2805D1205D96DF00DD0DA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FC2805D2205D96DF00DD0DA9 /* UserInfoConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoConfirmView.h; sourceTree = "<group>"; };
 		FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoConfirmView.m; sourceTree = "<group>"; };
+		FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
+		FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
+		FC2805E3205E5EB000DD0DA9 /* RequestAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAPI.h; sourceTree = "<group>"; };
+		FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAPI.m; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -281,6 +287,8 @@
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
+				FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */,
+				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);
@@ -416,6 +424,35 @@
 			path = resource;
 			sourceTree = "<group>";
 		};
+		FC2805E0205E5E4100DD0DA9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				FC47954A20556E6200218362 /* BaseViewController.h */,
+				FC47954B20556E6200218362 /* BaseViewController.m */,
+				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
+				FCFAF950205A7011001E9796 /* BaseTabbarController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		FC2805E1205E5E6100DD0DA9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FC2805E3205E5EB000DD0DA9 /* RequestAPI.h */,
+				FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FC2805E2205E5E6C00DD0DA9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955A2055765F00218362 /* UserInfoManager.h */,
+				FC47955B2055765F00218362 /* UserInfoManager.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		FC479504205553E900218362 = {
 			isa = PBXGroup;
 			children = (
@@ -537,14 +574,11 @@
 		FC47955920556EE300218362 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FC2805E2205E5E6C00DD0DA9 /* Data */,
+				FC2805E1205E5E6100DD0DA9 /* Network */,
+				FC2805E0205E5E4100DD0DA9 /* Base */,
 				FC2805CB205D96CD00DD0DA9 /* FinishTipsView.h */,
 				FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */,
-				FC47954A20556E6200218362 /* BaseViewController.h */,
-				FC47954B20556E6200218362 /* BaseViewController.m */,
-				FC47955A2055765F00218362 /* UserInfoManager.h */,
-				FC47955B2055765F00218362 /* UserInfoManager.m */,
-				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
-				FCFAF950205A7011001E9796 /* BaseTabbarController.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -770,12 +804,18 @@
 				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
+				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
 				A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */,
 				25036832205E50060052209A /* PriceInspectViewController.m in Sources */,
 				25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
+
 				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
+
+				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
+
+
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
@@ -939,9 +979,18 @@
 				DEVELOPMENT_TEAM = G583SJY324;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"$(SRCROOT)/Pods\"/**",
+				);
 				INFOPLIST_FILE = testApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = outPutTeam.testApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -957,9 +1006,18 @@
 				DEVELOPMENT_TEAM = G583SJY324;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"$(SRCROOT)/Pods\"/**",
+				);
 				INFOPLIST_FILE = testApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = outPutTeam.testApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
