@@ -9,7 +9,9 @@
 #import "PriceInfoViewController.h"
 #import "PriceInfolabelTableViewCell.h"
 #import "PriceCommerceInsTableViewCell.h"
-@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "PriceInfoAddTableViewCell.h"
+#import "PriceInfoSaveTableViewCell.h"
+@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @end
 
@@ -17,15 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"报价详情";
     [self createUI];
 }
 
 #pragma mark - UITableView delegate
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    static NSString *identifier = @"cell";
     static NSString *priceInforLabel = @"infoLabel";
     static NSString *priceCommerceIns = @"commerceIns";
     static NSString *priceCommerceInsFirst = @"commerceInsFirst";
+    static NSString * priceInfoAdd = @"infoAdd";
+    static NSString *priceInfoSave = @"infoSave";
     if (indexPath.section == 0) {
         PriceInfolabelTableViewCell *infoLableCell = [tableView dequeueReusableCellWithIdentifier:priceInforLabel];
         if (!infoLableCell) {
@@ -36,55 +40,52 @@
         infoLableCell.labelNumber.text = @"¥ 30000000";
         return infoLableCell;
     } else if (indexPath.section == 1) {
-//        if (indexPath.row == 0) {
-//            PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceInsFirst];
-//            if (!commerceInsCell) {
-//                commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceInsFirst];
-//            }
-//            if (indexPath.row == 0) {
-//                commerceInsCell.isFirst = YES;
-//            } else {
-//                commerceInsCell.isFirst = NO;
-//            }
-//            commerceInsCell.labelTag.text = @"机动车损险";
-//            commerceInsCell.labelInsure.text = @"不计免赔";
-//            commerceInsCell.labelAnnotate.text = @"投保";
-//            commerceInsCell.labelNumber.text = @"3000";
-//            return commerceInsCell;
-//        } else {
-//            PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceIns];
-//            if (!commerceInsCell) {
-//                commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceIns];
-//            }
-//
-//            commerceInsCell.isFirst = NO;
-//
-//            commerceInsCell.labelTag.text = @"机动车损险";
-//            commerceInsCell.labelInsure.text = @"不计免赔";
-//            commerceInsCell.labelAnnotate.text = @"投保";
-//            commerceInsCell.labelNumber.text = @"3000";
-//            return commerceInsCell;
-//        }
-        PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceInsFirst];
-        if (!commerceInsCell) {
-            commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceInsFirst];
-        }
-        if (indexPath.row == 0) {
-            commerceInsCell.isFirst = YES;
+        if (indexPath.row < 5) {
+            PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceInsFirst];
+            if (!commerceInsCell) {
+                commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceInsFirst];
+            }
+            if (indexPath.row == 0) {
+                commerceInsCell.isFirst = YES;
+            } else {
+                commerceInsCell.isFirst = NO;
+            }
+            commerceInsCell.labelTag.text = @"机动车损险";
+            commerceInsCell.labelInsure.text = @"不计免赔";
+            commerceInsCell.labelAnnotate.text = @"投保";
+            commerceInsCell.labelNumber.text = @"3000";
+            return commerceInsCell;
+        } else if (indexPath.row == 5){
+            PriceInfoAddTableViewCell *infoAddCell = [tableView dequeueReusableCellWithIdentifier:priceInfoAdd];
+            if (!infoAddCell) {
+                infoAddCell = [[PriceInfoAddTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoAdd];
+            }
+            return infoAddCell;
         } else {
-            commerceInsCell.isFirst = NO;
+            PriceInfolabelTableViewCell *infoLableCell = [tableView dequeueReusableCellWithIdentifier:priceInforLabel];
+            if (!infoLableCell) {
+                infoLableCell = [[PriceInfolabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInforLabel];
+            }
+            infoLableCell.labelTag.text = @"合计";
+            infoLableCell.labelNumber.text = @"¥ 30000000";
+            return infoLableCell;
         }
-        commerceInsCell.labelTag.text = @"机动车损险";
-        commerceInsCell.labelInsure.text = @"不计免赔";
-        commerceInsCell.labelAnnotate.text = @"投保";
-        commerceInsCell.labelNumber.text = @"3000";
-        return commerceInsCell;
-    } else {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        
+    } else if (indexPath.section == 2) {
+        PriceInfolabelTableViewCell *infoLableCell = [tableView dequeueReusableCellWithIdentifier:priceInforLabel];
+        if (!infoLableCell) {
+            infoLableCell = [[PriceInfolabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInforLabel];
         }
-        return cell;
+        infoLableCell.labelTag.text = @"总计";
+        infoLableCell.labelNumber.text = @"¥ 30000000";
+        return infoLableCell;
+    }  else {
+        PriceInfoSaveTableViewCell *infoSaveCell = [tableView dequeueReusableCellWithIdentifier:priceInfoSave];
+        if (!infoSaveCell) {
+            infoSaveCell = [[PriceInfoSaveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoSave];
+        }
+        infoSaveCell.delegate = self;
+        return infoSaveCell;
     }
     
 }
@@ -108,34 +109,53 @@
     
 }
 
+
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 2;
     } else if (section == 1) {
-        return 5;
+        return 7;
+    } else {
+        return 1;
     }
-    return 2;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70 * ViewRateBaseOnIP6;
+    if (indexPath.section == 3) {
+        return 252*ViewRateBaseOnIP6;
+    } else {
+        return 88 * ViewRateBaseOnIP6;
+    }
+   
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section < 2) {
       return 70 * ViewRateBaseOnIP6;
-    } else {
+    } else if (section == 2){
         return 30 * ViewRateBaseOnIP6;
+    } else {
+        return 0;
     }
     
 }
 
+#pragma mark- cell Delegate
+- (void)savePriveInfoDelegate{
+    NSLog(@"保存");
+}
 
+- (void)submitNuclearInsDelegate{
+    NSLog(@"提交核保");
+    
+}
 
+#pragma mark- function
 
 #pragma mark - UI
 - (void)createUI{
@@ -149,7 +169,7 @@
         _myTableView.dataSource = self;
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
-        
+        _myTableView.bounces = YES;
         _myTableView.separatorColor = [UIColor purpleColor];
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }

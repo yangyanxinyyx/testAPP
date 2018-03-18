@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
 		25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */; };
+		2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */; };
+		2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */; };
+		25036832205E50060052209A /* PriceInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036831205E50060052209A /* PriceInspectViewController.m */; };
+		25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036834205E51940052209A /* PriceInspectTableViewCell.m */; };
+		25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */; };
+		2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503683D205E5C0F0052209A /* priceCIQChangeView.m */; };
+		25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */; };
+		25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036843205E99620052209A /* PriceCarRecordTableViewCell.m */; };
+		25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036846205EA5760052209A /* PriceCIQLastYInfoView.m */; };
+		2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */; };
+		2503684E205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */; };
 		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
 		25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */; };
-
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */; };
@@ -30,7 +39,6 @@
 		FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B3205D96B800DD0DA9 /* login_preson@3x.png */; };
 		FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B4205D96B800DD0DA9 /* login_username@2x.png */; };
 		FC2805C8205D96B900DD0DA9 /* login_username@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B5205D96B800DD0DA9 /* login_username@3x.png */; };
-		FC2805C9205D96B900DD0DA9 /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805BB205D96B800DD0DA9 /* 个人中心@2x.png */; };
 		FC2805CA205D96B900DD0DA9 /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805BC205D96B800DD0DA9 /* 背景@2x.png */; };
 		FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */; };
 		FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CE205D96DF00DD0DA9 /* FindPasswordViewController.m */; };
@@ -71,6 +79,28 @@
 /* Begin PBXFileReference section */
 		25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCommerceInsTableViewCell.h; sourceTree = "<group>"; };
 		25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCommerceInsTableViewCell.m; sourceTree = "<group>"; };
+		2503682A205E4A060052209A /* PriceInfoAddTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoAddTableViewCell.h; sourceTree = "<group>"; };
+		2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoAddTableViewCell.m; sourceTree = "<group>"; };
+		2503682D205E4A800052209A /* PriceInfoSaveTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoSaveTableViewCell.h; sourceTree = "<group>"; };
+		2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoSaveTableViewCell.m; sourceTree = "<group>"; };
+		25036830205E50060052209A /* PriceInspectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInspectViewController.h; sourceTree = "<group>"; };
+		25036831205E50060052209A /* PriceInspectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInspectViewController.m; sourceTree = "<group>"; };
+		25036833205E51940052209A /* PriceInspectTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInspectTableViewCell.h; sourceTree = "<group>"; };
+		25036834205E51940052209A /* PriceInspectTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInspectTableViewCell.m; sourceTree = "<group>"; };
+		25036836205E5AE90052209A /* PriceCarInsuranceQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarInsuranceQViewController.h; sourceTree = "<group>"; };
+		25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarInsuranceQViewController.m; sourceTree = "<group>"; };
+		2503683C205E5C0F0052209A /* priceCIQChangeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceCIQChangeView.h; sourceTree = "<group>"; };
+		2503683D205E5C0F0052209A /* priceCIQChangeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceCIQChangeView.m; sourceTree = "<group>"; };
+		2503683F205E8EE70052209A /* PriceCarILasetYTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarILasetYTableViewCell.h; sourceTree = "<group>"; };
+		25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarILasetYTableViewCell.m; sourceTree = "<group>"; };
+		25036842205E99620052209A /* PriceCarRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarRecordTableViewCell.h; sourceTree = "<group>"; };
+		25036843205E99620052209A /* PriceCarRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarRecordTableViewCell.m; sourceTree = "<group>"; };
+		25036845205EA5760052209A /* PriceCIQLastYInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCIQLastYInfoView.h; sourceTree = "<group>"; };
+		25036846205EA5760052209A /* PriceCIQLastYInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCIQLastYInfoView.m; sourceTree = "<group>"; };
+		25036849205EAA010052209A /* priceCRQLastYLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceCRQLastYLabelTableViewCell.h; sourceTree = "<group>"; };
+		2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceCRQLastYLabelTableViewCell.m; sourceTree = "<group>"; };
+		2503684C205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCRQLastYInfoTableViewCell.h; sourceTree = "<group>"; };
+		2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCRQLastYInfoTableViewCell.m; sourceTree = "<group>"; };
 		25178A2E205BF12F00B9293E /* PriceInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoViewController.h; sourceTree = "<group>"; };
 		25178A2F205BF12F00B9293E /* PriceInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoViewController.m; sourceTree = "<group>"; };
 		25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
@@ -166,10 +196,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25036848205EA9950052209A /* 上年续保报价 */ = {
+			isa = PBXGroup;
+			children = (
+				25036849205EAA010052209A /* priceCRQLastYLabelTableViewCell.h */,
+				2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */,
+				2503684C205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.h */,
+				2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */,
+			);
+			path = "上年续保报价";
+			sourceTree = "<group>";
+		};
 		25178A2B205BF0EB00B9293E /* VIew */ = {
 			isa = PBXGroup;
 			children = (
 				25178A31205BF19700B9293E /* cell */,
+				2503683C205E5C0F0052209A /* priceCIQChangeView.h */,
+				2503683D205E5C0F0052209A /* priceCIQChangeView.m */,
+				25036845205EA5760052209A /* PriceCIQLastYInfoView.h */,
+				25036846205EA5760052209A /* PriceCIQLastYInfoView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -186,6 +231,10 @@
 			children = (
 				25178A2E205BF12F00B9293E /* PriceInfoViewController.h */,
 				25178A2F205BF12F00B9293E /* PriceInfoViewController.m */,
+				25036830205E50060052209A /* PriceInspectViewController.h */,
+				25036831205E50060052209A /* PriceInspectViewController.m */,
+				25036836205E5AE90052209A /* PriceCarInsuranceQViewController.h */,
+				25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -193,10 +242,21 @@
 		25178A31205BF19700B9293E /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				25036848205EA9950052209A /* 上年续保报价 */,
 				25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */,
 				25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */,
 				25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */,
 				25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */,
+				2503682A205E4A060052209A /* PriceInfoAddTableViewCell.h */,
+				2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */,
+				2503682D205E4A800052209A /* PriceInfoSaveTableViewCell.h */,
+				2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */,
+				25036833205E51940052209A /* PriceInspectTableViewCell.h */,
+				25036834205E51940052209A /* PriceInspectTableViewCell.m */,
+				2503683F205E8EE70052209A /* PriceCarILasetYTableViewCell.h */,
+				25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */,
+				25036842205E99620052209A /* PriceCarRecordTableViewCell.h */,
+				25036843205E99620052209A /* PriceCarRecordTableViewCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -608,7 +668,6 @@
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
-				FC479518205553E900218362 /* Main.storyboard in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
 				FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */,
@@ -693,6 +752,7 @@
 				25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */,
 				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
+				2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */,
@@ -700,15 +760,25 @@
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
+				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
+				25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */,
+				25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */,
+				2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
+				2503684E205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m in Sources */,
+				25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */,
 				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
 				A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */,
+				25036832205E50060052209A /* PriceInspectViewController.m in Sources */,
+				25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
+				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
+				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
