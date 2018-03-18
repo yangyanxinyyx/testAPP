@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */; };
 		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
+		25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */; };
 		A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD79205AD86500F2F83F /* 背景@2x.png */; };
 		A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
@@ -15,7 +17,6 @@
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
-		FC479518205553E900218362 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC479516205553E900218362 /* Main.storyboard */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
 		FC479520205553E900218362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47951F205553E900218362 /* main.m */; };
@@ -48,8 +49,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCommerceInsTableViewCell.h; sourceTree = "<group>"; };
+		25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCommerceInsTableViewCell.m; sourceTree = "<group>"; };
 		25178A2E205BF12F00B9293E /* PriceInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoViewController.h; sourceTree = "<group>"; };
 		25178A2F205BF12F00B9293E /* PriceInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoViewController.m; sourceTree = "<group>"; };
+		25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
+		25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfolabelTableViewCell.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD79205AD86500F2F83F /* 背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景@2x.png"; sourceTree = "<group>"; };
 		A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心@2x.png"; sourceTree = "<group>"; };
@@ -66,7 +71,6 @@
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC479517205553E900218362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC479519205553E900218362 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC47951C205553E900218362 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC47951E205553E900218362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 		25178A2B205BF0EB00B9293E /* VIew */ = {
 			isa = PBXGroup;
 			children = (
+				25178A31205BF19700B9293E /* cell */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -140,6 +145,17 @@
 				25178A2F205BF12F00B9293E /* PriceInfoViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		25178A31205BF19700B9293E /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */,
+				25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */,
+				25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */,
+				25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
@@ -254,7 +270,6 @@
 				A79A510820597A21000D8D0F /* Extend */,
 				FC479510205553E900218362 /* AppDelegate.h */,
 				FC479511205553E900218362 /* AppDelegate.m */,
-				FC479516205553E900218362 /* Main.storyboard */,
 				FC479519205553E900218362 /* Assets.xcassets */,
 				FC47951B205553E900218362 /* LaunchScreen.storyboard */,
 				FC47951E205553E900218362 /* Info.plist */,
@@ -457,7 +472,6 @@
 				A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
-				FC479518205553E900218362 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,9 +547,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */,
 				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
+				25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
@@ -581,14 +597,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		FC479516205553E900218362 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FC479517205553E900218362 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FC47951B205553E900218362 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -710,7 +718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5VMXNS7PPW;
+				DEVELOPMENT_TEAM = G583SJY324;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = testApp/Info.plist;
@@ -728,7 +736,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5VMXNS7PPW;
+				DEVELOPMENT_TEAM = G583SJY324;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = testApp/Info.plist;

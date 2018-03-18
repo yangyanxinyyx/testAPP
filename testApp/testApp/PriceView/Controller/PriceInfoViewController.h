@@ -6,8 +6,8 @@
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "BaseTabbarController.h"
+#import "BaseViewController.h"
 
-@interface PriceInfoViewController : BaseTabbarController
+@interface PriceInfoViewController : BaseViewController
 
 @end
