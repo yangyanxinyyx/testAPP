@@ -10,8 +10,6 @@
 		25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */; };
 		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
 		25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */; };
-		A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD79205AD86500F2F83F /* 背景@2x.png */; };
-		A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -34,6 +32,7 @@
 		FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CE205D96DF00DD0DA9 /* FindPasswordViewController.m */; };
 		FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805D1205D96DF00DD0DA9 /* LoginViewController.m */; };
 		FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */; };
+		FC2805DC205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805DB205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -74,8 +73,6 @@
 		25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
 		25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfolabelTableViewCell.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
-		A71EFD79205AD86500F2F83F /* 背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景@2x.png"; sourceTree = "<group>"; };
-		A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心@2x.png"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
@@ -108,6 +105,8 @@
 		FC2805D1205D96DF00DD0DA9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FC2805D2205D96DF00DD0DA9 /* UserInfoConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoConfirmView.h; sourceTree = "<group>"; };
 		FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoConfirmView.m; sourceTree = "<group>"; };
+		FC2805DA205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
+		FC2805DB205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -207,18 +206,11 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A71EFD77205AD7EC00F2F83F /* resource */ = {
-			isa = PBXGroup;
-			children = (
-				A71EFD7D205ADBA600F2F83F /* 个人中心@2x.png */,
-				A71EFD79205AD86500F2F83F /* 背景@2x.png */,
-			);
-			path = resource;
-			sourceTree = "<group>";
-		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
+				FC2805DA205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.h */,
+				FC2805DB205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.m */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);
@@ -236,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				A71EFD78205AD7FA00F2F83F /* categary */,
-				A71EFD77205AD7EC00F2F83F /* resource */,
 				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 			);
 			path = Extend;
@@ -588,9 +579,7 @@
 			files = (
 				FC2805C9205D96B900DD0DA9 /* 个人中心@2x.png in Resources */,
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
-				A71EFD7E205ADBA600F2F83F /* 个人中心@2x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
-				A71EFD7B205AD86500F2F83F /* 背景@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC2805C4205D96B900DD0DA9 /* login_password@3x.png in Resources */,
 				FC2805C3205D96B900DD0DA9 /* login_password@2x.png in Resources */,
@@ -598,7 +587,6 @@
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
-				FC479518205553E900218362 /* Main.storyboard in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
 				FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */,
@@ -698,6 +686,7 @@
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
+				FC2805DC205E25C600DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
