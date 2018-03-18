@@ -65,11 +65,12 @@
 
 #pragma mark -  颜色宏
 
-#define COLOR_RGB_255(r,g,b)        [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define RGBCOLOR(r,g,b)             [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 #define RGBACOLOR(r,g,b,a)          [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 #define RGBASTRINGCOLOR(COLORSTRING)    [UIColor colorWithRGBHexString:COLORSTRING]
 
+#define COLOR_RGB_255(r, g, b)      [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
+#define COLOR_RGBA_255(r, g, b, a)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 #pragma mark -  自定义的函数宏
 
 /* 备注说明：
