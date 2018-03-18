@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
 		25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */; };
 		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
 		25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */; };
-
+		A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */; };
+		A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4892205E5429001670D3 /* XCUserListHeaderView.m */; };
+		A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4895205E590D001670D3 /* XCUserListModel.m */; };
+		A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */; };
+		A71E489D205EB22B001670D3 /* XCCheckoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */; };
+		A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */; };
+		A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */; };
@@ -30,7 +35,6 @@
 		FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B3205D96B800DD0DA9 /* login_preson@3x.png */; };
 		FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B4205D96B800DD0DA9 /* login_username@2x.png */; };
 		FC2805C8205D96B900DD0DA9 /* login_username@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805B5205D96B800DD0DA9 /* login_username@3x.png */; };
-		FC2805C9205D96B900DD0DA9 /* 个人中心@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805BB205D96B800DD0DA9 /* 个人中心@2x.png */; };
 		FC2805CA205D96B900DD0DA9 /* 背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805BC205D96B800DD0DA9 /* 背景@2x.png */; };
 		FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */; };
 		FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CE205D96DF00DD0DA9 /* FindPasswordViewController.m */; };
@@ -76,6 +80,20 @@
 		25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
 		25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfolabelTableViewCell.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A71E488E205E48AA001670D3 /* XCUserListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListCollectionViewCell.h; sourceTree = "<group>"; };
+		A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListCollectionViewCell.m; sourceTree = "<group>"; };
+		A71E4891205E5429001670D3 /* XCUserListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListHeaderView.h; sourceTree = "<group>"; };
+		A71E4892205E5429001670D3 /* XCUserListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListHeaderView.m; sourceTree = "<group>"; };
+		A71E4894205E590D001670D3 /* XCUserListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListModel.h; sourceTree = "<group>"; };
+		A71E4895205E590D001670D3 /* XCUserListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListModel.m; sourceTree = "<group>"; };
+		A71E4898205EB1E3001670D3 /* XCCheckoutBaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutBaseTableViewController.h; sourceTree = "<group>"; };
+		A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutBaseTableViewController.m; sourceTree = "<group>"; };
+		A71E489B205EB22B001670D3 /* XCCheckoutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutTableViewCell.h; sourceTree = "<group>"; };
+		A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutTableViewCell.m; sourceTree = "<group>"; };
+		A71E489E205EB2E7001670D3 /* XCCheckoutModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutModel.h; sourceTree = "<group>"; };
+		A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutModel.m; sourceTree = "<group>"; };
+		A71E48A2205ED0B4001670D3 /* XCUserUnderWritingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserUnderWritingViewController.h; sourceTree = "<group>"; };
+		A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserUnderWritingViewController.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
@@ -210,6 +228,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A71E4897205E9B01001670D3 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				A79A510F20597F91000D8D0F /* XCUserTopView.h */,
+				A79A511020597F91000D8D0F /* XCUserTopView.m */,
+				A7C9E0F8205D8B9F00FFEF5B /* XCUserListView.h */,
+				A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */,
+				A71E488E205E48AA001670D3 /* XCUserListCollectionViewCell.h */,
+				A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */,
+				A71E4891205E5429001670D3 /* XCUserListHeaderView.h */,
+				A71E4892205E5429001670D3 /* XCUserListHeaderView.m */,
+			);
+			path = "个人中心";
+			sourceTree = "<group>";
+		};
+		A71E48A1205ED099001670D3 /* subController */ = {
+			isa = PBXGroup;
+			children = (
+				A71E48A2205ED0B4001670D3 /* XCUserUnderWritingViewController.h */,
+				A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */,
+			);
+			path = subController;
+			sourceTree = "<group>";
+		};
 		A71EFD77205AD7EC00F2F83F /* resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,9 +296,11 @@
 		A79A510C20597F09000D8D0F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A71E48A1205ED099001670D3 /* subController */,
 				FC47955620556EBB00218362 /* UserViewController.h */,
 				FC47955720556EBB00218362 /* UserViewController.m */,
-				A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */,
+				A71E4898205EB1E3001670D3 /* XCCheckoutBaseTableViewController.h */,
+				A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,6 +308,11 @@
 		A79A510D20597F1E000D8D0F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A71E4894205E590D001670D3 /* XCUserListModel.h */,
+				A71E4895205E590D001670D3 /* XCUserListModel.m */,
+				A71E489E205EB2E7001670D3 /* XCCheckoutModel.h */,
+				A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */,
+				A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,10 +320,9 @@
 		A79A510E20597F27000D8D0F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A79A510F20597F91000D8D0F /* XCUserTopView.h */,
-				A79A511020597F91000D8D0F /* XCUserTopView.m */,
-				A7C9E0F8205D8B9F00FFEF5B /* XCUserListView.h */,
-				A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */,
+				A71E4897205E9B01001670D3 /* 个人中心 */,
+				A71E489B205EB22B001670D3 /* XCCheckoutTableViewCell.h */,
+				A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -608,7 +656,6 @@
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
-				FC479518205553E900218362 /* Main.storyboard in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
 				FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */,
@@ -698,18 +745,25 @@
 				25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
+				A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */,
 				FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */,
+				A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
+				A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */,
+				A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */,
 				A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */,
+				A71E489D205EB22B001670D3 /* XCCheckoutTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
+				A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */,
+				A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

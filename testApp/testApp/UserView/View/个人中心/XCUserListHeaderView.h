@@ -1,5 +1,5 @@
 //
-//  XCUserListView.h
+//  XCUserListHeaderView.h
 //  testApp
 //
 //  Created by Melody on 2018/3/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XCUserListView : UICollectionView
+@interface XCUserListHeaderView : UICollectionReusableView
 
-- (instancetype)initWithFrame:(CGRect)frame listData:(NSArray *)listDataArray;
+@property (nonatomic, copy) NSString * groupName ;
 @end

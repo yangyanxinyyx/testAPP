@@ -102,6 +102,7 @@
 				<key>url</key>
 				<string>XCUserRepairViewController</string>
 			</dict>
+			<dict/>
 		</array>
 	</dict>
 	<dict>
@@ -156,6 +157,9 @@
 				<key>url</key>
 				<string>XCShopViewController</string>
 			</dict>
+			<dict/>
+			<dict/>
+			<dict/>
 		</array>
 	</dict>
 </array>
