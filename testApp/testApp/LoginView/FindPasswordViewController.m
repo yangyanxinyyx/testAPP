@@ -52,7 +52,7 @@
             accoutTextField.frame = CGRectMake(10, CGRectGetMaxY(topImageView.frame) + i * 44, SCREEN_WIDTH-20 - 90, 44);
 
             UIButton *sendCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 90,CGRectGetMaxY(topImageView.frame) + i * 44+ 7, 90, 30)];
-            [sendCodeBtn setTitle:@"确认" forState:UIControlStateNormal];
+            [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
             [sendCodeBtn setTitleColor:COLOR_RGB_255(57, 174, 54) forState:UIControlStateNormal];
             sendCodeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
             sendCodeBtn.layer.cornerRadius = 5;
@@ -82,7 +82,7 @@
     [confirmBtn addTarget:self action:@selector(pressConfirmBtn:) forControlEvents:UIControlEventTouchUpInside];
 
     UIImage *image = [UIImage imageNamed:@"back.png"];
-    UIButton *backBtn = [[UIButton  alloc] initWithFrame:CGRectMake(15, 13, image.size.width, image.size.height)];
+    UIButton *backBtn = [[UIButton  alloc] initWithFrame:CGRectMake(15, 13 + STATUS_BAR_HEIGHT + kNavMargan, image.size.width, image.size.height)];
     [backBtn setImage:image forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(pressBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];

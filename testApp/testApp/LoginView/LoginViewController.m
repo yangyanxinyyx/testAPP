@@ -11,6 +11,7 @@
 #import "UserInfoConfirmView.h"
 #import "RequestAPI.h"
 
+
 @interface LoginViewController ()<UITextFieldDelegate,UserInfoComfirmVIewDelegate>
 
 @property (nonatomic,strong) UITextField *accoutTextField;
@@ -96,10 +97,52 @@
                              };
     [RequestAPI getUserInfo:param success:^(id response) {
         NSLog(@"%@",response);
+        if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"登录成功");
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = response[@"data"];
+                    [UserInfoManager shareInstance].code = data[@"code"] ? data[@"code"] : NULL;
+                    [UserInfoManager shareInstance].employeeId = data[@"employeeId"] ? [data[@"employeeId"] integerValue]: 0;
+                    [UserInfoManager shareInstance].employeeName = data[@"employeeName"] ? data[@"employeeName"] : NULL;
+                    [UserInfoManager shareInstance].iconUrl = data[@"iconUrl"] ? data[@"iconUrl"] : NULL;
+                    [UserInfoManager shareInstance].userID = data[@"id"] ? data[@"id"] : NULL;
+                    [UserInfoManager shareInstance].isStoreAdministrator = data[@"isStoreAdministrator"] ? data[@"isStoreAdministrator"] : NULL;
+                    [UserInfoManager shareInstance].name = data[@"name"] ? data[@"name"] : NULL;
+                    [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : NULL;
+                    [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : NULL;
+                    [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : NULL;
+                    if ( data[@"store"] && [data[@"store"] isKindOfClass:[NSDictionary class]]) {
+                        NSDictionary *temp = data[@"store"];
+                        [UserInfoManager shareInstance].isStore = temp.count > 0 ? YES : NO;
+                    }
+                    [UserInfoManager shareInstance].storeID = data[@"storeID"] ? data[@"storeID"] : NULL;
+                    [UserInfoManager shareInstance].storeName = data[@"storeName"] ? data[@"storeName"] : NULL;
+                    [UserInfoManager shareInstance].storeCode = data[@"storeCode"] ? data[@"storeCode"] : NULL;
+                    [UserInfoManager shareInstance].tel = data[@"tel"] ? data[@"tel"] : NULL;
+                    [UserInfoManager shareInstance].corporateName = data[@"corporateName"] ? data[@"corporateName"] : NULL;
+                    [UserInfoManager shareInstance].corporateCellphone = data[@"corporateCellphone"] ? data[@"corporateCellphone"] : NULL;
+                    [UserInfoManager shareInstance].address = data[@"address"] ? data[@"address"] : NULL;
+                    [UserInfoManager shareInstance].ticketID = data[@"newTicketId"] ? data[@"newTicketId"] : NULL;
+                    UserInfoManager *manager = [UserInfoManager shareInstance];
+                    NSLog(@"");
+                }
 
-        UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:@"王尼玛" department:@"技术部" worknumber:@"012"];
-        confirmView.delegate = self;
-        [self.view addSubview:confirmView];
+                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%ld",[UserInfoManager shareInstance].employeeId]];
+                confirmView.delegate = self;
+                [self.view addSubview:confirmView];
+
+
+
+            }else if (([response[@"result"] integerValue] == 0)){
+                NSLog(@"登录失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"账号或密码错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+
+
+
     } fail:^(id error) {
         NSLog(@"%@",error);
     }];

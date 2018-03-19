@@ -359,7 +359,6 @@
 			children = (
 				A71EFD78205AD7FA00F2F83F /* categary */,
 				A71EFD77205AD7EC00F2F83F /* resource */,
-				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 			);
 			path = Extend;
 			sourceTree = "<group>";
@@ -544,6 +543,7 @@
 				FC47951B205553E900218362 /* LaunchScreen.storyboard */,
 				FC47951E205553E900218362 /* Info.plist */,
 				FC47951F205553E900218362 /* main.m */,
+				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 				A79A510520595E7C000D8D0F /* PrefixHeader.pch */,
 			);
 			path = testApp;
@@ -866,12 +866,8 @@
 				25036832205E50060052209A /* PriceInspectViewController.m in Sources */,
 				25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
-
 				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
-
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
-
-
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,

@@ -10,7 +10,37 @@
 
 @interface UserInfoManager : NSObject
 
-@property (nonatomic,assign) BOOL isShop;
+@property (nonatomic,strong) NSString *ticketID;
+
+@property (nonatomic,strong) NSString *code;
+@property (nonatomic,assign) NSInteger employeeId;
+@property (nonatomic,strong) NSString *employeeName;
+@property (nonatomic,strong) NSString *iconUrl;
+@property (nonatomic,strong) NSString *userID;
+@property (nonatomic,strong) NSString *isStoreAdministrator;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *needModifyPwsNextLogin;
+@property (nonatomic,strong) NSString *noModifyPsw;
+@property (nonatomic,strong) NSString *phone;
+
+@property (nonatomic,assign) BOOL isStore;
+
+@property (nonatomic,strong) NSString *storeID;
+@property (nonatomic,strong) NSString *storeName;
+@property (nonatomic,strong) NSString *storeCode;
+@property (nonatomic,strong) NSString *tel;
+@property (nonatomic,strong) NSString *corporateName;
+@property (nonatomic,strong) NSString *corporateCellphone;
+@property (nonatomic,strong) NSString *address;
+
+
+
+
+
+
+
+
+
 
 
 + (UserInfoManager *)shareInstance;

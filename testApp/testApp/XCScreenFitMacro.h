@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 #import "sys/utsname.h"
+#import "FinishTipsView.h"
+#import "UserInfoManager.h"
 
 #pragma mark -  屏幕适配常量
 
