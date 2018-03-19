@@ -10,7 +10,7 @@
 
 @interface UserInfoManager : NSObject
 
-@property (nonatomic,strong) NSString *ticketID;
+@property (nonatomic,strong) NSString *ticketID;     //每次调接口都要刷新
 
 @property (nonatomic,strong) NSString *code;
 @property (nonatomic,assign) NSInteger employeeId;
@@ -23,7 +23,7 @@
 @property (nonatomic,strong) NSString *noModifyPsw;
 @property (nonatomic,strong) NSString *phone;
 
-@property (nonatomic,assign) BOOL isStore;
+@property (nonatomic,assign) BOOL isStore;         //是否是门店 下面的属性是门店才有的
 
 @property (nonatomic,strong) NSString *storeID;
 @property (nonatomic,strong) NSString *storeName;
