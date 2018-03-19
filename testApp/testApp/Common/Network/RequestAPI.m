@@ -24,15 +24,21 @@
 
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
 
-    [manager POST:tmpUrl parameters:paramenter progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:LOGIN_API parameters:paramenter progress:^(NSProgress * _Nonnull uploadProgress) {
         //返回请求返回进度
         NSLog(@"downloadProgress-->%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //请求成功返回数据 根据responseSerializer 返回不同的数据格式
         NSLog(@"responseObject-->%@",responseObject);
+        if (success) {
+            success(responseObject);
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //请求失败
         NSLog(@"error-->%@",error);
+        if (fail) {
+            fail(error);
+        }
     }];
 
 }
