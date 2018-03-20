@@ -11,6 +11,7 @@
 @interface BaseNavigationBar()
 @property (nonatomic,strong)UILabel *titleLabel;
 @property (nonatomic,strong)UIButton *finishBtn;
+@property (nonatomic,strong)UIView *line;
 @end
 
 @implementation BaseNavigationBar
@@ -45,9 +46,9 @@
     [_finishBtn addTarget:self action:@selector(pressFinishBtn) forControlEvents:UIControlEventTouchUpInside];
     _finishBtn.hidden = YES;
 
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
-    line.backgroundColor = COLOR_RGB_255(242, 242, 242);
-    [self addSubview:line];
+    self.line = [[UIView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
+    _line.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    [self addSubview:_line];
 
 }
 
@@ -76,6 +77,9 @@
 {
     _backgroundColor = backgroundColor;
     self.backgroundColor = backgroundColor;
+    if ([backgroundColor isEqual:[UIColor clearColor]]) {
+        self.line.backgroundColor = backgroundColor;
+    }
 }
 
 - (void)pressCancelBtn
