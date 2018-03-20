@@ -18,6 +18,7 @@
         [self.contentView addSubview:self.labelTag];
         [self.contentView addSubview:self.labelInfo];
         [self.contentView addSubview:self.labelNumber];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

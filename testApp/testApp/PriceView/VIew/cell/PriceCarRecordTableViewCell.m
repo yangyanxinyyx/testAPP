@@ -26,6 +26,7 @@
         
         self.imageViewLeft = [[UIImageView alloc]init];
         [self.contentView addSubview:self.imageViewLeft];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

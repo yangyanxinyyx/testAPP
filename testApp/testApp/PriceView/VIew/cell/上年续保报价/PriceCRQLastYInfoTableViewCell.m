@@ -21,6 +21,7 @@
         [self.contentView addSubview:self.labelInfo];
         self.labelNum = [[UILabel alloc] init];
         [self.contentView addSubview:self.labelNum];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

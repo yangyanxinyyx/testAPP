@@ -13,6 +13,7 @@
 }
 @property (nonatomic, strong) UIButton *buttonLastY;
 @property (nonatomic, strong) UIButton *buttonPriceRecord;
+@property (nonatomic, strong) UILabel *labelGreen;
 @end
 
 @implementation priceCIQChangeView
@@ -22,6 +23,7 @@
         isLaseY = YES;
         [self addSubview:self.buttonLastY];
         [self addSubview:self.buttonPriceRecord];
+        [self addSubview:self.labelGreen];
     }
     return self;
 }
@@ -53,11 +55,19 @@
     return _buttonPriceRecord;
 }
 
+- (UILabel *)labelGreen{
+    if (!_labelGreen) {
+        _labelGreen = [[UILabel alloc] initWithFrame:CGRectMake(0, 154 * ViewRateBaseOnIP6, SCREEN_WIDTH / 2, 6 * ViewRateBaseOnIP6)];
+        _labelGreen.backgroundColor = [UIColor colorWithHexString:@"#4ff0b2"];
+    }
+    return _labelGreen;
+}
 - (void)toucheButtonLastY:(UIButton *)button{
     _buttonLastY.backgroundColor = [UIColor colorWithHexString:@"#6899e8"];
     [_buttonLastY setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     _buttonPriceRecord.backgroundColor = [UIColor whiteColor];
     [_buttonPriceRecord setTitleColor:[UIColor colorWithHexString:@"#444444"] forState:UIControlStateNormal];
+    _labelGreen.frame = CGRectMake(0, 154 * ViewRateBaseOnIP6, SCREEN_WIDTH / 2, 6 * ViewRateBaseOnIP6);
     isLaseY = YES;
     [self.delegate changeModel:isLaseY];
 }
@@ -67,6 +77,7 @@
     [_buttonPriceRecord setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     _buttonLastY.backgroundColor = [UIColor whiteColor];
     [_buttonLastY setTitleColor:[UIColor colorWithHexString:@"#444444"] forState:UIControlStateNormal];
+    _labelGreen.frame = CGRectMake(SCREEN_WIDTH / 2, 154 * ViewRateBaseOnIP6, SCREEN_WIDTH / 2, 6 * ViewRateBaseOnIP6);
     isLaseY = NO;
     [self.delegate changeModel:isLaseY];
 }

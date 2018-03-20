@@ -16,6 +16,7 @@
         [self.contentView addSubview:self.labelName];
         self.buttoninspect = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:self.buttoninspect];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
