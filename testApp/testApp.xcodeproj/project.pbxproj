@@ -382,7 +382,6 @@
 			children = (
 				A71EFD78205AD7FA00F2F83F /* categary */,
 				A71EFD77205AD7EC00F2F83F /* resource */,
-				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 			);
 			path = Extend;
 			sourceTree = "<group>";
@@ -567,6 +566,7 @@
 				FC47951B205553E900218362 /* LaunchScreen.storyboard */,
 				FC47951E205553E900218362 /* Info.plist */,
 				FC47951F205553E900218362 /* main.m */,
+				A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */,
 				A79A510520595E7C000D8D0F /* PrefixHeader.pch */,
 			);
 			path = testApp;
