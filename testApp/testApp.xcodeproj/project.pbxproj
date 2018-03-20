@@ -65,7 +65,27 @@
 		FC47955520556EAB00218362 /* GetCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955420556EAB00218362 /* GetCarViewController.m */; };
 		FC47955820556EBB00218362 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955720556EBB00218362 /* UserViewController.m */; };
 		FC47955C2055765F00218362 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955B2055765F00218362 /* UserInfoManager.m */; };
+		FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */; };
+		FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB2206150E400986A9E /* user_select@2x.png */; };
+		FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */; };
+		FCCC0EBB206150E400986A9E /* user_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB4206150E400986A9E /* user_nomnal@2x.png */; };
+		FCCC0EBC206150E400986A9E /* coverMain_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB5206150E400986A9E /* coverMain_select@2x.png */; };
+		FCCC0EBD206150E400986A9E /* getCar_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB6206150E400986A9E /* getCar_nomnal@2x.png */; };
+		FCCC0EBE206150E400986A9E /* price_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB7206150E400986A9E /* price_select@2x.png */; };
+		FCCC0EC0206150F600986A9E /* getCar_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EBF206150F600986A9E /* getCar_select@2x.png */; };
+		FCCC0EC92061519000986A9E /* price_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC12061519000986A9E /* price_select@3x.png */; };
+		FCCC0ECA2061519000986A9E /* price_nomnal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC22061519000986A9E /* price_nomnal@3x.png */; };
+		FCCC0ECB2061519000986A9E /* user_nomnal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC32061519000986A9E /* user_nomnal@3x.png */; };
+		FCCC0ECC2061519000986A9E /* getCar_nomnal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC42061519000986A9E /* getCar_nomnal@3x.png */; };
+		FCCC0ECD2061519000986A9E /* coverMain_nomnal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC52061519000986A9E /* coverMain_nomnal@3x.png */; };
+		FCCC0ECE2061519000986A9E /* user_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC62061519000986A9E /* user_select@3x.png */; };
+		FCCC0ECF2061519000986A9E /* coverMain_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC72061519000986A9E /* coverMain_select@3x.png */; };
+		FCCC0ED02061519000986A9E /* getCar_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EC82061519000986A9E /* getCar_select@3x.png */; };
+		FCCC0ED3206151D700986A9E /* next@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0ED1206151D700986A9E /* next@3x.png */; };
+		FCCC0ED4206151D700986A9E /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0ED2206151D700986A9E /* next@2x.png */; };
+		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFAF950205A7011001E9796 /* BaseTabbarController.m */; };
+		FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFB6023206102E500587763 /* CoverPerformanceView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,8 +213,30 @@
 		FC47955720556EBB00218362 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		FC47955A2055765F00218362 /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
 		FC47955B2055765F00218362 /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
+		FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_nomnal@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB2206150E400986A9E /* user_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_nomnal@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB4206150E400986A9E /* user_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_nomnal@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB5206150E400986A9E /* coverMain_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_select@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB6206150E400986A9E /* getCar_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "getCar_nomnal@2x.png"; sourceTree = "<group>"; };
+		FCCC0EB7206150E400986A9E /* price_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_select@2x.png"; sourceTree = "<group>"; };
+		FCCC0EBF206150F600986A9E /* getCar_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "getCar_select@2x.png"; sourceTree = "<group>"; };
+		FCCC0EC12061519000986A9E /* price_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_select@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC22061519000986A9E /* price_nomnal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_nomnal@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC32061519000986A9E /* user_nomnal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_nomnal@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC42061519000986A9E /* getCar_nomnal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "getCar_nomnal@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC52061519000986A9E /* coverMain_nomnal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_nomnal@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC62061519000986A9E /* user_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC72061519000986A9E /* coverMain_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_select@3x.png"; sourceTree = "<group>"; };
+		FCCC0EC82061519000986A9E /* getCar_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "getCar_select@3x.png"; sourceTree = "<group>"; };
+		FCCC0ED1206151D700986A9E /* next@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@3x.png"; sourceTree = "<group>"; };
+		FCCC0ED2206151D700986A9E /* next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@2x.png"; sourceTree = "<group>"; };
+		FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
+		FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		FCFAF94F205A7011001E9796 /* BaseTabbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTabbarController.h; sourceTree = "<group>"; };
 		FCFAF950205A7011001E9796 /* BaseTabbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabbarController.m; sourceTree = "<group>"; };
+		FCFB6022206102E500587763 /* CoverPerformanceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverPerformanceView.h; sourceTree = "<group>"; };
+		FCFB6023206102E500587763 /* CoverPerformanceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverPerformanceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -410,8 +452,10 @@
 			children = (
 				FC2805A9205D96B800DD0DA9 /* back@2x.png */,
 				FC2805AA205D96B800DD0DA9 /* back@3x.png */,
+				FCCC0ED2206151D700986A9E /* next@2x.png */,
+				FCCC0ED1206151D700986A9E /* next@3x.png */,
 				FC2805AB205D96B800DD0DA9 /* login */,
-				FC2805B6205D96B800DD0DA9 /* New Group */,
+				FC2805B6205D96B800DD0DA9 /* CoverMain */,
 				FC2805B7205D96B800DD0DA9 /* New Group1 */,
 				FC2805B8205D96B800DD0DA9 /* New Group2 */,
 				FC2805B9205D96B800DD0DA9 /* New Group3 */,
@@ -437,11 +481,27 @@
 			path = login;
 			sourceTree = "<group>";
 		};
-		FC2805B6205D96B800DD0DA9 /* New Group */ = {
+		FC2805B6205D96B800DD0DA9 /* CoverMain */ = {
 			isa = PBXGroup;
 			children = (
+				FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */,
+				FCCC0EB5206150E400986A9E /* coverMain_select@2x.png */,
+				FCCC0EB6206150E400986A9E /* getCar_nomnal@2x.png */,
+				FCCC0EBF206150F600986A9E /* getCar_select@2x.png */,
+				FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */,
+				FCCC0EB7206150E400986A9E /* price_select@2x.png */,
+				FCCC0EB4206150E400986A9E /* user_nomnal@2x.png */,
+				FCCC0EB2206150E400986A9E /* user_select@2x.png */,
+				FCCC0EC52061519000986A9E /* coverMain_nomnal@3x.png */,
+				FCCC0EC72061519000986A9E /* coverMain_select@3x.png */,
+				FCCC0EC42061519000986A9E /* getCar_nomnal@3x.png */,
+				FCCC0EC82061519000986A9E /* getCar_select@3x.png */,
+				FCCC0EC22061519000986A9E /* price_nomnal@3x.png */,
+				FCCC0EC12061519000986A9E /* price_select@3x.png */,
+				FCCC0EC32061519000986A9E /* user_nomnal@3x.png */,
+				FCCC0EC62061519000986A9E /* user_select@3x.png */,
 			);
-			path = "New Group";
+			path = CoverMain;
 			sourceTree = "<group>";
 		};
 		FC2805B7205D96B800DD0DA9 /* New Group1 */ = {
@@ -481,6 +541,8 @@
 				FC47954B20556E6200218362 /* BaseViewController.m */,
 				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
 				FCFAF950205A7011001E9796 /* BaseTabbarController.m */,
+				FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */,
+				FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -603,6 +665,8 @@
 			children = (
 				FC47954D20556E8B00218362 /* CoverMainViewController.h */,
 				FC47954E20556E8B00218362 /* CoverMainViewController.m */,
+				FCFB6022206102E500587763 /* CoverPerformanceView.h */,
+				FCFB6023206102E500587763 /* CoverPerformanceView.m */,
 				FC280578205B63D700DD0DA9 /* MyMedalViewController.h */,
 				FC280579205B63D700DD0DA9 /* MyMedalViewController.m */,
 			);
@@ -745,20 +809,38 @@
 			files = (
 				A7C9E0FC205D8F5E00FFEF5B /* userListViewData.plist in Resources */,
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
+				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC2805C4205D96B900DD0DA9 /* login_password@3x.png in Resources */,
 				FC2805C3205D96B900DD0DA9 /* login_password@2x.png in Resources */,
+				FCCC0EC0206150F600986A9E /* getCar_select@2x.png in Resources */,
+				FCCC0ED02061519000986A9E /* getCar_select@3x.png in Resources */,
 				FC2805C5205D96B900DD0DA9 /* login_preson@2x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
+				FCCC0EC92061519000986A9E /* price_select@3x.png in Resources */,
+				FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */,
+				FCCC0ECC2061519000986A9E /* getCar_nomnal@3x.png in Resources */,
+				FCCC0ECA2061519000986A9E /* price_nomnal@3x.png in Resources */,
+				FCCC0ECB2061519000986A9E /* user_nomnal@3x.png in Resources */,
+				FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
+				FCCC0EBE206150E400986A9E /* price_select@2x.png in Resources */,
+				FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */,
 				FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */,
+				FCCC0ECD2061519000986A9E /* coverMain_nomnal@3x.png in Resources */,
+				FCCC0EBC206150E400986A9E /* coverMain_select@2x.png in Resources */,
 				FC2805CA205D96B900DD0DA9 /* 背景@2x.png in Resources */,
 				FC2805C0205D96B900DD0DA9 /* login_code@3x.png in Resources */,
+				FCCC0ECE2061519000986A9E /* user_select@3x.png in Resources */,
+				FCCC0ED4206151D700986A9E /* next@2x.png in Resources */,
+				FCCC0EBD206150E400986A9E /* getCar_nomnal@2x.png in Resources */,
+				FCCC0EBB206150E400986A9E /* user_nomnal@2x.png in Resources */,
 				FC2805C8205D96B900DD0DA9 /* login_username@3x.png in Resources */,
+				FCCC0ECF2061519000986A9E /* coverMain_select@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +927,7 @@
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
 				A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */,
 				FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */,
+				FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */,
 				A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
@@ -873,6 +956,7 @@
 				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 				A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */,
+				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,
 				A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

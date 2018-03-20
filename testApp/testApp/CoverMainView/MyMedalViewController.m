@@ -7,8 +7,11 @@
 //
 
 #import "MyMedalViewController.h"
+#import "BaseNavigationBar.h"
 
-@interface MyMedalViewController ()
+@interface MyMedalViewController ()<BaseNavigationBarDelegate>
+
+
 
 @end
 
@@ -16,7 +19,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"我的勋章";
+    [self.navigationController setNavigationBarHidden:YES];
+    self.view.backgroundColor = [UIColor whiteColor];
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate  = self;
+    topBar.title = @"我的勋章";
+    [self.view addSubview:topBar];
+
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
+{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
