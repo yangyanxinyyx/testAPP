@@ -21,6 +21,7 @@
 @property (nonatomic, strong) UIView *viewSegmentation;
 @property (nonatomic, strong) UIButton *buttonRevisePrice;
 @property (nonatomic, strong) UIButton *buttonPrice;
+@property (nonatomic, strong) UIView *viewSegment;
 @end
 
 @implementation PriceCarInsuranceQViewController
@@ -148,6 +149,7 @@
     [self.view addSubview:self.buttonPrice];
     [self.view addSubview:self.buttonRevisePrice];
     [self.view addSubview:self.viewSegmentation];
+    [self.view addSubview:self.viewSegment];
 }
 
 - (priceCIQChangeView *)CIQChangeView{
@@ -160,7 +162,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 180 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 244 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor whiteColor];
@@ -176,7 +178,7 @@
 
 - (UITableView *)tableViewlast{
     if (!_tableViewlast) {
-        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
+        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
         _tableViewlast.delegate = self;
         _tableViewlast.dataSource = self;
         _tableViewlast.backgroundColor = [UIColor whiteColor];
@@ -213,6 +215,13 @@
     return _viewPriceRecord;
 }
 
+- (UIView *)viewSegment{
+    if (!_viewSegment) {
+        _viewSegment = [[UIView alloc] initWithFrame:CGRectMake(0, 180 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];
+        _viewSegment.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
+    }
+    return _viewSegment;
+}
 - (UIView *)viewSegmentation{
     if (!_viewSegmentation) {
         _viewSegmentation = [[UIView alloc] initWithFrame:CGRectMake(0, 937 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];

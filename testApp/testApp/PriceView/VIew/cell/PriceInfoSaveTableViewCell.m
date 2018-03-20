@@ -21,6 +21,7 @@
         self.buttonSave = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:self.buttonSave];
         [self.contentView addSubview:self.buttonSubmit];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
     return self;

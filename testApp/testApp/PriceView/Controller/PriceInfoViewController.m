@@ -164,7 +164,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         //取消滚动条的显示

@@ -19,6 +19,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.imageViewAdd = [[UIImageView alloc] init];
         [self.contentView addSubview:self.imageViewAdd];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

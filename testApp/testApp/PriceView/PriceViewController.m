@@ -10,6 +10,7 @@
 #import "PriceInfoViewController.h"
 #import "PriceInspectViewController.h"
 #import "PriceCarInsuranceQViewController.h"
+#import "PriceCustomerInformEntryViewController.h"
 @interface PriceViewController ()
 
 @end
@@ -41,6 +42,13 @@
     button2.backgroundColor = [UIColor blueColor];
     [self.view addSubview:button2];
     
+    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button3.frame = CGRectMake(220, 144, 100, 50);
+    [button3 setTitle:@"查看报价" forState:UIControlStateNormal];
+    [button3 addTarget:self action:@selector(touchButtonFunction3) forControlEvents:UIControlEventTouchDown];
+    button3.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:button3];
+    
 }
 
 - (void)touchButtonFunction{
@@ -55,6 +63,11 @@
 
 - (void)touchButtonFunction2{
     PriceCarInsuranceQViewController *pinfoVC = [[PriceCarInsuranceQViewController alloc]init];
+    [self.navigationController pushViewController:pinfoVC animated:YES];
+}
+
+- (void)touchButtonFunction3{
+    PriceCustomerInformEntryViewController *pinfoVC = [[PriceCustomerInformEntryViewController alloc]init];
     [self.navigationController pushViewController:pinfoVC animated:YES];
 }
 @end

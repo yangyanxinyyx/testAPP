@@ -21,7 +21,7 @@
         [self.contentView addSubview:self.labelInsure];
         [self.contentView addSubview:self.labelAnnotate];
         [self.contentView addSubview:self.labelNumber];
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
