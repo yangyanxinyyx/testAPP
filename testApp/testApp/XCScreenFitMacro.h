@@ -13,6 +13,7 @@
 #import "sys/utsname.h"
 #import "FinishTipsView.h"
 #import "UserInfoManager.h"
+#import "BaseNavigationBar.h"
 
 #pragma mark -  屏幕适配常量
 
