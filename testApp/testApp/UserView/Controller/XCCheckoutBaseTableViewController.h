@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XCCheckoutTableViewCell.h"
+#define kcheckCellID @"checkCell"
 
 @interface XCCheckoutBaseTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 

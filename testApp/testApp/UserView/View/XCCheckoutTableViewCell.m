@@ -88,7 +88,7 @@
     
     CGFloat buttonW = 160 * ViewRateBaseOnIP6;
     CGFloat buttonH = 60 * ViewRateBaseOnIP6;
-    [self.checkButton setFrame:CGRectMake(self.frame.size.width - 30 * ViewRateBaseOnIP6 - buttonW, ( self.frame.size.height - buttonH ) * 0.5 , buttonW, buttonH)];
+    [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
     
 }
 
@@ -128,11 +128,12 @@
 
 - (void)setUserName:(NSString *)userName
 {
-    if (!_userName) {
+    if (!userName) {
         return;
     }
     _userName = userName;
-    [self.userNameLabel setText:_userName];
+    NSString *userNameStr = [NSString stringWithFormat:@"车主: %@",_userName];
+    [self.userNameLabel setText:userNameStr];
 }
 
 - (void)setIssureTime:(NSString *)issureTime
@@ -141,7 +142,8 @@
         return;
     }
     _issureTime = issureTime;
-    [self.issueTimeLabel setText:_issureTime];
+     NSString *issureTimeStr = [NSString stringWithFormat:@"出单时间: %@",_issureTime];
+    [self.issueTimeLabel setText:issureTimeStr];
 }
 
 
