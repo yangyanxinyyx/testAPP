@@ -32,9 +32,14 @@
     [super viewDidLoad];
     //self.title = @"个人中心";
     // [self.navigationItem setTitle:@"个人中心"];
+    NSLog(@"===========>userList%@",[[UserInfoManager shareInstance] description]);
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     [self initWithData];
     [self setUI];
+    UserInfoManager *userManager = [UserInfoManager shareInstance];
+    if (userManager) {
+        [self.topView setUserName:userManager.name];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -53,6 +53,8 @@
 //                deleteButton = subview.subviews[1];
                 [subview setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
                 deleteButton = subview.subviews[0];
+                [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+
 //                UIButton *readButton = subview.subviews[0];
                 [self configDeleteButton:deleteButton];
 //                [self configReadButton:readButton];
@@ -88,9 +90,10 @@
     {
 //        [deleteButton.titleLabel setFont:[UIFont fontWithName:@"SFUIText-Regular" size:12.0]];
 //        [deleteButton setTitleColor:COLOR_RGB_255(0, 77, 162) forState:UIControlStateNormal];
+
         [deleteButton setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
-        [deleteButton setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateHighlighted];
         [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+        
         
 //        [deleteButton setBackgroundImage:[UIImage imageNamed:@"删除"]  forState:UIControlStateHighlighted];
         // 调整按钮上图片和文字的相对位置（该方法的实现在下面）
@@ -141,7 +144,19 @@
     self.editingIndexPath = nil;
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (@available(iOS 11.0, *)) {
+        UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            NSLog(@"=======>Cell Delected Action");
 
+            completionHandler(YES);
+        }];
+        action.backgroundColor = COLOR_RGB_255(0, 77, 162);
+
+        return [UISwipeActionsConfiguration configurationWithActions:@[action]];
+    }
+    return nil;
+}
 
 /*
 // Override to support conditional editing of the table view.
