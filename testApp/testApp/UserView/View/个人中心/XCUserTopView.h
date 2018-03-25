@@ -17,7 +17,9 @@
 @interface XCUserTopView : UIView
 
 @property (nonatomic, weak) id<XCUserTopViewDelegate> delegate ;
-@property (nonatomic, strong) UIImage * userIcon ;
+
+@property (nonatomic, copy) NSString * userIconUrlString;
+
 @property (nonatomic, copy) NSString * userName;
 
 @end

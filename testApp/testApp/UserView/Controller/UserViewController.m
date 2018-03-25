@@ -12,15 +12,18 @@
 #import "XCUserListCollectionViewCell.h"
 #import "XCUserListHeaderView.h"
 #import "XCUserListModel.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "XCMyCommissionViewController.h"
+#import "FindPasswordViewController.h"
 #define kCellID @"myCellID"
 #define kHeaderViewID @"myHeaderID"
 #define kFooterViewID @"myFooterID"
 @interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
+{
+    BOOL _isStore;
+}
 @property (nonatomic, strong) XCUserTopView * topView;
 @property (nonatomic, strong) XCUserListView * listView ;
-
 @property (nonatomic, strong) NSMutableArray * listViewDataArray ;
 @end
 
@@ -32,13 +35,19 @@
     [super viewDidLoad];
     //self.title = @"个人中心";
     // [self.navigationItem setTitle:@"个人中心"];
-    NSLog(@"===========>userList%@",[[UserInfoManager shareInstance] description]);
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
-    [self initWithData];
-    [self setUI];
+    _isStore = NO;
     UserInfoManager *userManager = [UserInfoManager shareInstance];
+    if (userManager.isStore) {
+        _isStore = YES;
+    }
+    [self initWithListData];
+    [self setUI];
+    //设置用户数据UI
     if (userManager) {
         [self.topView setUserName:userManager.name];
+        if (userManager.iconUrl) {
+            [self.topView setUserIconUrlString:userManager.iconUrl];
+        }
     }
 }
 
@@ -59,7 +68,6 @@
         [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)];
         [self.listView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + self.topView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topView.frame.size.height - STATUS_BAR_HEIGHT - 98 * ViewRateBaseOnIP6)];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,14 +77,14 @@
 #pragma mark - UI
 
 - (void)setUI {
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     self.topView = [[XCUserTopView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; // 要适配IPhoneX
     self.topView.delegate = self;
     [self.view addSubview:self.topView];
-
     if (self.listViewDataArray) {
         [self.view addSubview:self.listView];
     }
-    
 }
 
 #pragma mark - Action Method
@@ -88,17 +96,22 @@
 - (void)XCUserTopViewMyCommissionButtonClickHandler:(UIButton *)button
 {
     XCLog(@"ClickmyCommissionBtn");
+    XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+    [self.navigationController pushViewController:myCommissionVC animated:YES];
 }
 
 - (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button
 {
     XCLog(@"ClickModifyPasswordBtn");
+    FindPasswordViewController *findPasswordVC =[[FindPasswordViewController alloc] init];
+    [self.navigationController pushViewController:findPasswordVC animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource&&UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+
     return self.listViewDataArray.count;
 }
 
@@ -120,6 +133,7 @@
     cell.title = model.title;
 //  cell.icon = [UIImage imageWithContentsOfFile:model.iconPath];
     cell.icon = [UIImage imageNamed:model.iconPath];
+    
     
     return cell;
 }
@@ -165,25 +179,32 @@
     NSDictionary *groupInfo = self.listViewDataArray[indexPath.section];
     NSArray *listArr = groupInfo[@"List"];
     XCUserListModel *model = [[XCUserListModel alloc] initWithItemInfo:listArr[indexPath.row]];
-    
     NSLog(@"=====CollectionViewSelect %@",model.urlString);
     
     if (model.urlString && ![model.urlString isEqualToString:@""]) {
         UIViewController *subVC = [NSClassFromString(model.urlString) new];
         [self.navigationController pushViewController:subVC animated:YES];
-        
     }
-    
-    
 }
 
 #pragma mark - Privacy Method
 
-- (void)initWithData
+- (void)initWithListData
 {
     NSString *filePath = [[NSBundle mainBundle]pathForResource:@"userListViewData" ofType:@"plist"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        self.listViewDataArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+         NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+        NSInteger listCount = dataArr.count;
+        if (_isStore) {
+            if (dataArr.count >= 1) {
+                listCount = dataArr.count - 1;
+            }
+        }
+        self.listViewDataArray = [NSMutableArray arrayWithCapacity:listCount];
+        for (int i = 0 ; i < listCount; i++) {
+            id object = dataArr[i];
+            [self.listViewDataArray addObject:object];
+        }
     }else {
         XCLog(@"Error: class:%@ -initWithData filePath was None",[self class]);
     }

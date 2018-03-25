@@ -10,6 +10,7 @@
 #import "XCCheckoutTableViewCell.h"
 #define kcheckCellID @"checkCell"
 
-@interface XCCheckoutBaseTableViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+@interface XCCheckoutBaseTableViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic, strong) UITableView * tableView ;
 
 @end
