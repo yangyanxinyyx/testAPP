@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//徽章
+//勋章
 @interface UserMedal : NSObject
 
 @property (nonatomic,strong) NSString *yearFirst;

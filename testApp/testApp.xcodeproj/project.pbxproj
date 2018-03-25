@@ -70,6 +70,7 @@
 		FC47955C2055765F00218362 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955B2055765F00218362 /* UserInfoManager.m */; };
 		FC4F7D032067748100468032 /* BaseViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D022067748100468032 /* BaseViewController1.m */; };
 		FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0B2067762500468032 /* MedalDetailViewController.m */; };
+		FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0E2067791F00468032 /* MedalDetailCell.m */; };
 		FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */; };
 		FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB2206150E400986A9E /* user_select@2x.png */; };
 		FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */; };
@@ -228,6 +229,8 @@
 		FC4F7D022067748100468032 /* BaseViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController1.m; sourceTree = "<group>"; };
 		FC4F7D0A2067762500468032 /* MedalDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalDetailViewController.h; sourceTree = "<group>"; };
 		FC4F7D0B2067762500468032 /* MedalDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailViewController.m; sourceTree = "<group>"; };
+		FC4F7D0D2067791F00468032 /* MedalDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalDetailCell.h; sourceTree = "<group>"; };
+		FC4F7D0E2067791F00468032 /* MedalDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailCell.m; sourceTree = "<group>"; };
 		FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_nomnal@2x.png"; sourceTree = "<group>"; };
 		FCCC0EB2206150E400986A9E /* user_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@2x.png"; sourceTree = "<group>"; };
 		FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_nomnal@2x.png"; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				FCFB6023206102E500587763 /* CoverPerformanceView.m */,
 				FC1724EF20668FDB00B23D7F /* MyMedalView.h */,
 				FC1724F020668FDB00B23D7F /* MyMedalView.m */,
+				FC4F7D0D2067791F00468032 /* MedalDetailCell.h */,
+				FC4F7D0E2067791F00468032 /* MedalDetailCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -983,6 +988,7 @@
 				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
 				25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
+				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,
 				25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */,
 				2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,

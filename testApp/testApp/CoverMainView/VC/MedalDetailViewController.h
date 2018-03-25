@@ -10,4 +10,6 @@
 
 @interface MedalDetailViewController : BaseViewController1
 
+- (instancetype)initWithTitle:(NSString *)title;
+
 @end

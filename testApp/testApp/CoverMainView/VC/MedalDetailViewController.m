@@ -7,16 +7,140 @@
 //
 
 #import "MedalDetailViewController.h"
+#import "MedalDetailCell.h"
 
-@interface MedalDetailViewController ()
+static NSString *identifier = @"listCell";
+
+@interface MedalDetailViewController ()<BaseNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) NSMutableArray *dataSource;
+@property (nonatomic,strong) NSMutableArray *openArray;
+@property (nonatomic,strong) NSString *navTitle;
 
 @end
 
 @implementation MedalDetailViewController
 
+- (instancetype)initWithTitle:(NSString *)title
+{
+    if (self = [super init]) {
+        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+
+        BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+        topBar.delegate  = self;
+        topBar.title = title;
+        self.navTitle = title;
+        [self.view addSubview:topBar];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self createUI];
+
     // Do any additional setup after loading the view.
+}
+
+- (void)createUI
+{
+    self.dataSource = [NSMutableArray array];
+    self.openArray = [NSMutableArray array];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, 360) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    [self.view addSubview:_tableView];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MedalDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[MedalDetailCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+
+        if ([self.navTitle isEqualToString:@"年度勋章"]) {
+            if (indexPath.row == 0) {
+                cell.label1.text = @"年冠军勋章";
+                cell.label2.text = @"业绩年度第一名";
+                cell.label3.text = @"奖金300元";
+                
+            }else if (indexPath.row == 1){
+                cell.label1.text = @"年亚军勋章";
+                cell.label2.text = @"业绩年度第二名";
+                cell.label3.text = @"奖金200元";
+            }else{
+                cell.label1.text = @"年季军勋章";
+                cell.label2.text = @"业绩年度第三名";
+                cell.label3.text = @"奖金100元";
+            }
+
+        }else{
+            if (indexPath.row == 0) {
+                cell.label1.text = @"月冠军勋章";
+                cell.label2.text = @"业绩月度第一名";
+                cell.label3.text = @"奖金300元";
+
+            }else if (indexPath.row == 1){
+                cell.label1.text = @"月亚军勋章";
+                cell.label2.text = @"业绩月度第二名";
+                cell.label3.text = @"奖金200元";
+            }else{
+                cell.label1.text = @"月季军勋章";
+                cell.label2.text = @"业绩月度第三名";
+                cell.label3.text = @"奖金100元";
+            }
+        }
+
+
+
+
+
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.tableView.frame = CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, 204*_openArray.count + 120*(3-_openArray.count));
+    if ([self.openArray containsObject:indexPath]) {
+        return 204;
+    }else{
+        return 120;
+    }
+
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MedalDetailCell *cell = (MedalDetailCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.isOpen ==YES) {
+        cell.isOpen = NO;
+    }else{
+        cell.isOpen = YES;
+    }
+
+    if ([self.openArray containsObject:indexPath]) {
+        [self.openArray removeObject:indexPath];
+    }else{
+        [self.openArray addObject:indexPath];
+    }
+    [self.tableView reloadData];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
+{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
