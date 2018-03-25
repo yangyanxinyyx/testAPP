@@ -7,7 +7,7 @@
 //
 
 #import "XCUserTopView.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface XCUserTopView()
 
 @property (nonatomic, strong) UIImageView * bgImageView ;
@@ -48,7 +48,9 @@
     [super layoutSubviews];
     
     [self.bgImageView setFrame:CGRectMake(0, 0, self.bounds.size.width, 330 * ViewRateBaseOnIP6)];
-    [self.titleLabel setFrame:CGRectMake(304 * ViewRateBaseOnIP6, 35 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
+    [self.titleLabel sizeToFit];
+    [self.titleLabel setFrame:CGRectMake((self.frame.size.width  - self.titleLabel.frame.size.width) * 0.5, 35 * ViewRateBaseOnIP6, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height)];
+
     NSInteger innerWidth = 690 * ViewRateBaseOnIP6;
     NSInteger innerHeight = 310 * ViewRateBaseOnIP6;
     
@@ -101,16 +103,73 @@
 
 #pragma mark - Privacy Method
 
+- (UIImage *)circleOldImage:(UIImage *)originalImage borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor
+{
+    // 1.加载原图
+    UIImage *oldImage = originalImage;
+    
+    // 2.开启上下文
+    CGFloat imageW = oldImage.size.width + 2 * borderWidth;
+    CGFloat imageH = oldImage.size.height + 2 * borderWidth;
+    CGSize imageSize = CGSizeMake(imageW, imageH);
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
+    
+    // 3.取得当前的上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    // 4.画边框(大圆)
+    [borderColor set];
+    CGFloat bigRadius = imageW * 0.5; // 大圆半径
+    CGFloat centerX = bigRadius; // 圆心
+    CGFloat centerY = bigRadius;
+    CGContextAddArc(ctx, centerX, centerY, bigRadius, 0, M_PI * 2, 0);
+    CGContextFillPath(ctx); // 画圆
+    
+    // 5.小圆
+    CGFloat smallRadius = bigRadius - borderWidth;
+    CGContextAddArc(ctx, centerX, centerY, smallRadius, 0, M_PI * 2, 0);
+    // 裁剪(后面画的东西才会受裁剪的影响)
+    CGContextClip(ctx);
+    
+    // 6.画图
+    [oldImage drawInRect:CGRectMake(borderWidth, borderWidth, oldImage.size.width, oldImage.size.height)];
+    
+    // 7.取图
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // 8.结束上下文
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 #pragma mark - Setter&Getter
 
-- (void)setUserIcon:(UIImage *)userIcon
+- (void)setUserIconUrlString:(NSString *)userIconUrlString
 {
-    if (!userIcon) {
-        return;
+//    NSURL *iconURL = [NSURL URLWithString:@"https://b-ssl.duitang.com/uploads/item/201503/21/20150321114038_fJyMS.jpeg"];
+    if (isUsable(userIconUrlString,[NSString class])) {
+        UIImage *userIcon = [self circleOldImage:[UIImage imageNamed:@"个人中心"] borderWidth:1.0 borderColor:COLOR_RGB_255( 104.0, 153.0, 232.0)];
+        NSURL *iconURL = [NSURL URLWithString:userIconUrlString];
+        if (iconURL) {
+            _userIconUrlString = userIconUrlString;
+            __weak typeof (self)weakSelf = self;
+            [self.iconImageView sd_setImageWithURL:iconURL placeholderImage:userIcon completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (weakSelf.iconImageView) {
+                    [weakSelf.iconImageView setImage:image];
+                    weakSelf.iconImageView.layer.borderWidth = 1;
+                    weakSelf.iconImageView.layer.borderColor = COLOR_RGB_255(104.0, 153.0, 232.0).CGColor;
+                    weakSelf.iconImageView.layer.cornerRadius = _iconImageView.frame.size.width/2.0;
+                    weakSelf.iconImageView.layer.masksToBounds = YES;
+                }
+            }];
+        }else {
+            NSLog(@"class:%s setUserIconUrlString: url was nil",__func__);
+        }
+        
+    }else {
+        NSLog(@"class:%s setUserIconUrlString: urlStr is not Usable",__func__);
     }
-    _userIcon = userIcon;
-    self.iconImageView.image = _userIcon;
-    
 }
 
 - (void)setUserName:(NSString *)userName
@@ -161,7 +220,7 @@
     if (_iconImageView == nil) {
         UIImage *userIcon = [UIImage imageNamed:@"个人中心"];
         _iconImageView = [[UIImageView alloc] initWithImage:userIcon];
-        _iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+
     }
     return _iconImageView;
 }

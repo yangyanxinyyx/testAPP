@@ -27,6 +27,49 @@ static inline void XCErrorLog(BOOL errorCondition, Class class, NSString *method
     }
 #endif
 }
+
+//************** 类型安全判断 **************
+
+static inline bool isUsableArray(NSArray *array, NSInteger index) {
+    if (array && [array isKindOfClass:[NSArray class]] && (NSInteger)array.count > index && index >= 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+static inline bool isUsableDictionary(NSDictionary *dic) {
+    if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+static inline bool isUsableNSString(NSString *aString, NSString *inequalString) {
+    if (inequalString == nil) {
+        if (aString && [aString isKindOfClass:[NSString class]]) {
+            return YES;
+        }
+    }
+    else {
+        if (aString && [aString isKindOfClass:[NSString class]] && ![aString isEqualToString:inequalString]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+static inline bool isUsable(NSObject *object, Class aClass) {
+    if (object && [object isKindOfClass:aClass]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+//************** 类型安全判断 end **************
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
