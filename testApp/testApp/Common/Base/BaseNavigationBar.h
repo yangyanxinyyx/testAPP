@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSString *title;
 @property (nonatomic,strong) NSString *finishBtnTitle;
 @property (nonatomic,strong) UIImage *finishBtnImage;
-@property (nonatomic,strong) UIColor *backgroundColor;
+@property (nonatomic,strong) UIColor *bgColor;
 
 @property (nonatomic,weak) id<BaseNavigationBarDelegate>delegate;
 

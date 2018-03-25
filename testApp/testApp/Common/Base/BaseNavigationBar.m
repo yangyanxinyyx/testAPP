@@ -27,6 +27,8 @@
 
 - (void)createUI
 {
+    self.backgroundColor = [UIColor whiteColor];
+
     UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [self addSubview:cancelBtn];
     cancelBtn.backgroundColor = [UIColor clearColor];
@@ -73,12 +75,12 @@
     _finishBtn.hidden = NO;
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor
+- (void)setBgColor:(UIColor *)bgColor
 {
-    _backgroundColor = backgroundColor;
-    self.backgroundColor = backgroundColor;
-    if ([backgroundColor isEqual:[UIColor clearColor]]) {
-        self.line.backgroundColor = backgroundColor;
+    _bgColor = bgColor;
+    self.backgroundColor = bgColor;
+    if ([bgColor isEqual:[UIColor clearColor]]) {
+        self.line.backgroundColor = bgColor;
     }
 }
 

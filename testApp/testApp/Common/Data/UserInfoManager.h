@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+//徽章
+@interface UserMedal : NSObject
 
+@property (nonatomic,strong) NSString *yearFirst;
+@property (nonatomic,strong) NSString *yearSecond;
+@property (nonatomic,strong) NSString *yearThird;
+@property (nonatomic,strong) NSString *presonFirst;
+@property (nonatomic,strong) NSString *presonSecond;
+@property (nonatomic,strong) NSString *presonThird;
+
+@end
+
+//用户信息
 @interface UserInfoManager : NSObject
 
 @property (nonatomic,strong) NSString *ticketID;     //每次调接口都要刷新
@@ -33,16 +45,12 @@
 @property (nonatomic,strong) NSString *corporateCellphone;
 @property (nonatomic,strong) NSString *address;
 
-
-
-
-
-
-
-
-
+@property (nonatomic,strong) UserMedal *userMedal;
 
 
 + (UserInfoManager *)shareInstance;
 
 @end
+
+
+

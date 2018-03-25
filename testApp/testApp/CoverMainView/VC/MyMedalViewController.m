@@ -8,8 +8,9 @@
 
 #import "MyMedalViewController.h"
 #import "BaseNavigationBar.h"
+#import "MyMedalView.h"
 
-@interface MyMedalViewController ()<BaseNavigationBarDelegate>
+@interface MyMedalViewController ()<BaseNavigationBarDelegate,MyMedalViewDelegate>
 
 
 
@@ -20,12 +21,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate  = self;
     topBar.title = @"我的勋章";
     [self.view addSubview:topBar];
 
+    [self createUI];
+
+}
+
+- (void)createUI
+{
+    MyMedalView *presonMedal = [[MyMedalView alloc] initWithInfo:@[@"X1",@"X2",@"X3"] title:@"个人徽章"];
+    presonMedal.frame = CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, 181);
+    presonMedal.delegate = self;
+    [self.view addSubview:presonMedal];
+
+    MyMedalView *yearMedal = [[MyMedalView alloc] initWithInfo:@[@"X3",@"X2",@"X1"] title:@"年度徽章"];
+    yearMedal.frame = CGRectMake(0, 10 + 181 +10+ kHeightForNavigation, SCREEN_WIDTH, 181);
+    yearMedal.delegate = self;
+    [self.view addSubview:yearMedal];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
@@ -33,6 +49,11 @@
     if (isCancel) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (void)MyMedalViewDidSelectToDetail:(NSString *)title
+{
+
 }
 
 - (void)didReceiveMemoryWarning {

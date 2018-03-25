@@ -6,8 +6,8 @@
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseViewController1.h"
 
-@interface GetCarViewController : BaseViewController
+@interface GetCarViewController : BaseViewController1
 
 @end

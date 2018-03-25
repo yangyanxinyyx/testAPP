@@ -6,10 +6,10 @@
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseViewController1.h"
 
 
 
-@interface PriceInfoViewController : BaseViewController
+@interface PriceInfoViewController : BaseViewController1
 
 @end
