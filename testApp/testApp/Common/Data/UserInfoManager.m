@@ -8,8 +8,8 @@
 
 #import "UserInfoManager.h"
 
-@interface UserInfoManager ()
 
+@implementation UserMedal
 
 @end
 

@@ -36,6 +36,7 @@
 		A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */; };
 		A7C9E0FC205D8F5E00FFEF5B /* userListViewData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
+		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
 		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
 		FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805A9205D96B800DD0DA9 /* back@2x.png */; };
 		FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2805AA205D96B800DD0DA9 /* back@3x.png */; };
@@ -62,12 +63,13 @@
 		FC479520205553E900218362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47951F205553E900218362 /* main.m */; };
 		FC47952A205553EA00218362 /* testAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479529205553EA00218362 /* testAppTests.m */; };
 		FC479535205553EA00218362 /* testAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479534205553EA00218362 /* testAppUITests.m */; };
-		FC47954C20556E6200218362 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47954B20556E6200218362 /* BaseViewController.m */; };
 		FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47954E20556E8B00218362 /* CoverMainViewController.m */; };
 		FC47955220556E9A00218362 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955120556E9A00218362 /* PriceViewController.m */; };
 		FC47955520556EAB00218362 /* GetCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955420556EAB00218362 /* GetCarViewController.m */; };
 		FC47955820556EBB00218362 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955720556EBB00218362 /* UserViewController.m */; };
 		FC47955C2055765F00218362 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955B2055765F00218362 /* UserInfoManager.m */; };
+		FC4F7D032067748100468032 /* BaseViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D022067748100468032 /* BaseViewController1.m */; };
+		FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0B2067762500468032 /* MedalDetailViewController.m */; };
 		FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */; };
 		FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB2206150E400986A9E /* user_select@2x.png */; };
 		FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */; };
@@ -169,6 +171,8 @@
 		A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = userListViewData.plist; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
+		FC1724EF20668FDB00B23D7F /* MyMedalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalView.h; sourceTree = "<group>"; };
+		FC1724F020668FDB00B23D7F /* MyMedalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMedalView.m; sourceTree = "<group>"; };
 		FC280578205B63D700DD0DA9 /* MyMedalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalViewController.h; sourceTree = "<group>"; };
 		FC280579205B63D700DD0DA9 /* MyMedalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMedalViewController.m; sourceTree = "<group>"; };
 		FC2805A9205D96B800DD0DA9 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
@@ -210,8 +214,6 @@
 		FC479530205553EA00218362 /* testAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479534205553EA00218362 /* testAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testAppUITests.m; sourceTree = "<group>"; };
 		FC479536205553EA00218362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC47954A20556E6200218362 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		FC47954B20556E6200218362 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		FC47954D20556E8B00218362 /* CoverMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverMainViewController.h; sourceTree = "<group>"; };
 		FC47954E20556E8B00218362 /* CoverMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverMainViewController.m; sourceTree = "<group>"; };
 		FC47955020556E9A00218362 /* PriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceViewController.h; sourceTree = "<group>"; };
@@ -222,6 +224,10 @@
 		FC47955720556EBB00218362 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		FC47955A2055765F00218362 /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
 		FC47955B2055765F00218362 /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
+		FC4F7D012067748100468032 /* BaseViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController1.h; sourceTree = "<group>"; };
+		FC4F7D022067748100468032 /* BaseViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController1.m; sourceTree = "<group>"; };
+		FC4F7D0A2067762500468032 /* MedalDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalDetailViewController.h; sourceTree = "<group>"; };
+		FC4F7D0B2067762500468032 /* MedalDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailViewController.m; sourceTree = "<group>"; };
 		FCCC0EB1206150E400986A9E /* price_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "price_nomnal@2x.png"; sourceTree = "<group>"; };
 		FCCC0EB2206150E400986A9E /* user_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@2x.png"; sourceTree = "<group>"; };
 		FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverMain_nomnal@2x.png"; sourceTree = "<group>"; };
@@ -470,6 +476,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC1724EA20654D5F00B23D7F /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FC47954D20556E8B00218362 /* CoverMainViewController.h */,
+				FC47954E20556E8B00218362 /* CoverMainViewController.m */,
+				FC280578205B63D700DD0DA9 /* MyMedalViewController.h */,
+				FC280579205B63D700DD0DA9 /* MyMedalViewController.m */,
+				FC4F7D0A2067762500468032 /* MedalDetailViewController.h */,
+				FC4F7D0B2067762500468032 /* MedalDetailViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FC1724EB20654D6600B23D7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCFB6022206102E500587763 /* CoverPerformanceView.h */,
+				FCFB6023206102E500587763 /* CoverPerformanceView.m */,
+				FC1724EF20668FDB00B23D7F /* MyMedalView.h */,
+				FC1724F020668FDB00B23D7F /* MyMedalView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FC2805A8205D96B800DD0DA9 /* resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,8 +590,8 @@
 		FC2805E0205E5E4100DD0DA9 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FC47954A20556E6200218362 /* BaseViewController.h */,
-				FC47954B20556E6200218362 /* BaseViewController.m */,
+				FC4F7D012067748100468032 /* BaseViewController1.h */,
+				FC4F7D022067748100468032 /* BaseViewController1.m */,
 				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
 				FCFAF950205A7011001E9796 /* BaseTabbarController.m */,
 				FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */,
@@ -686,12 +716,8 @@
 		FC4795462055565200218362 /* CoverMainView */ = {
 			isa = PBXGroup;
 			children = (
-				FC47954D20556E8B00218362 /* CoverMainViewController.h */,
-				FC47954E20556E8B00218362 /* CoverMainViewController.m */,
-				FCFB6022206102E500587763 /* CoverPerformanceView.h */,
-				FCFB6023206102E500587763 /* CoverPerformanceView.m */,
-				FC280578205B63D700DD0DA9 /* MyMedalViewController.h */,
-				FC280579205B63D700DD0DA9 /* MyMedalViewController.m */,
+				FC1724EB20654D6600B23D7F /* View */,
+				FC1724EA20654D5F00B23D7F /* VC */,
 			);
 			path = CoverMainView;
 			sourceTree = "<group>";
@@ -914,7 +940,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DE3B55DF1562C52B024B604F /* [CP] Embed Pods Frameworks */ = {
@@ -956,6 +982,7 @@
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
 				25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */,
+				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */,
 				2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
@@ -965,7 +992,6 @@
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
-				FC47954C20556E6200218362 /* BaseViewController.m in Sources */,
 				A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */,
 				A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */,
 				25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
@@ -982,7 +1008,9 @@
 				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 				A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */,
+				FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */,
 				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,
+				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,
 				A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

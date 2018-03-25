@@ -1,13 +1,13 @@
 //
-//  BaseViewController.h
+//  CoverMainViewController.h
 //  testApp
 //
 //  Created by 杨焱鑫 on 2018/3/11.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController1.h"
 
-@interface BaseViewController : UIViewController
+@interface CoverMainViewController : BaseViewController1
 
 @end

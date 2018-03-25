@@ -6,8 +6,8 @@
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseViewController1.h"
 
-@interface PriceCarInsuranceQViewController : BaseViewController
+@interface PriceCarInsuranceQViewController : BaseViewController1
 
 @end

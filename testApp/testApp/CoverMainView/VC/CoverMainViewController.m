@@ -31,10 +31,10 @@
 
 - (void)createUI
 {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kNavMargan + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - kNavMargan - STATUS_BAR_HEIGHT)];
     _scrollView.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [ self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(375, 898-20);
+    _scrollView.contentSize = CGSizeMake(0, 898-20);
     _scrollView.bounces = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
