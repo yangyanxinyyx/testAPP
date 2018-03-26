@@ -87,10 +87,7 @@
             cell.labelName.text = @"出单机构";
             cell.labelTag.text = @"广州分公司";
         }
-        
-        
-        
-        
+          
         return cell;
         
     } else if (indexPath.row < 11 && indexPath.row > 8){
