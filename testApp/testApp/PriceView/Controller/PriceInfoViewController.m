@@ -11,7 +11,7 @@
 #import "PriceCommerceInsTableViewCell.h"
 #import "PriceInfoAddTableViewCell.h"
 #import "PriceInfoSaveTableViewCell.h"
-@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate>
+@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @end
 
@@ -19,9 +19,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"报价详情";
+
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate = self;
+    topBar.title = @"报价详情";
+    [self.view addSubview:topBar];
     [self createUI];
 }
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 #pragma mark - UITableView delegate
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -164,7 +175,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         //取消滚动条的显示

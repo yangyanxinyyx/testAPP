@@ -11,7 +11,7 @@
 #import "PriceCarRecordTableViewCell.h"
 #import "priceCRQLastYLabelTableViewCell.h"
 #import "PriceCRQLastYInfoTableViewCell.h"
-@interface PriceCarInsuranceQViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate>
+@interface PriceCarInsuranceQViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
 @property (nonatomic, strong) UIView *viewLastY;
@@ -22,15 +22,26 @@
 @property (nonatomic, strong) UIButton *buttonRevisePrice;
 @property (nonatomic, strong) UIButton *buttonPrice;
 @property (nonatomic, strong) UIView *viewSegment;
+@property (nonatomic, strong) UIView *contenView;
 @end
 
 @implementation PriceCarInsuranceQViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"车险报价";
+    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate = self;
+    topBar.title = @"车险报价";
+    [self.view addSubview:topBar];
     [self createUI];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - function
@@ -140,16 +151,23 @@
 }
 
 - (void)createUI{
-    [self.view addSubview:self.viewBear];
-    [self.view addSubview:self.CIQChangeView];
+    [self.view addSubview:self.contenView];
+    [self.contenView addSubview:self.viewBear];
+    [self.contenView addSubview:self.CIQChangeView];
     [self.viewBear addSubview:self.viewLastY];
     [self.viewBear addSubview:self.viewPriceRecord];
     [self.viewLastY addSubview:self.tableViewlast];
     [self.viewPriceRecord addSubview:self.myTableView];
-    [self.view addSubview:self.buttonPrice];
-    [self.view addSubview:self.buttonRevisePrice];
-    [self.view addSubview:self.viewSegmentation];
-    [self.view addSubview:self.viewSegment];
+    [self.contenView addSubview:self.buttonPrice];
+    [self.contenView addSubview:self.buttonRevisePrice];
+    [self.contenView addSubview:self.viewSegmentation];
+    [self.contenView addSubview:self.viewSegment];
+}
+- (UIView *)contenView{
+    if (!_contenView) {
+        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    }
+    return _contenView;
 }
 
 - (priceCIQChangeView *)CIQChangeView{

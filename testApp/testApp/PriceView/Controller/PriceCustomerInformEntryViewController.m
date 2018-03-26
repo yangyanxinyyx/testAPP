@@ -9,7 +9,7 @@
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceCustomerInformEntryTableViewCell.h"
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
-@interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 
 @property (nonatomic, strong) UITableView *myTableView;
 @end
@@ -18,9 +18,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"客户信息录入";
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate = self;
+    topBar.title = @"客户信息录入";
+    [self.view addSubview:topBar];
     [self createUI];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - tabnleview detegate
@@ -127,7 +136,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor whiteColor];
