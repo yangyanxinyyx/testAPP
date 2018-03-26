@@ -71,15 +71,24 @@ static NSString *identifier = @"listCell";
                 cell.label1.text = @"年冠军勋章";
                 cell.label2.text = @"业绩年度第一名";
                 cell.label3.text = @"奖金300元";
+                cell.label5.text = @"1、个人在公司年度业绩排名第一名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金300元/次，可重复领取";
                 
             }else if (indexPath.row == 1){
                 cell.label1.text = @"年亚军勋章";
                 cell.label2.text = @"业绩年度第二名";
                 cell.label3.text = @"奖金200元";
+                cell.label5.text = @"1、个人在公司年度业绩排名第二名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金200元/次，可重复领取";
             }else{
                 cell.label1.text = @"年季军勋章";
                 cell.label2.text = @"业绩年度第三名";
                 cell.label3.text = @"奖金100元";
+                cell.label5.text = @"1、个人在公司年度业绩排名第三名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金100元/次，可重复领取";
             }
 
         }else{
@@ -87,15 +96,24 @@ static NSString *identifier = @"listCell";
                 cell.label1.text = @"月冠军勋章";
                 cell.label2.text = @"业绩月度第一名";
                 cell.label3.text = @"奖金300元";
+                cell.label5.text = @"1、个人在公司月度业绩排名第一名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金300元/次，可重复领取";
 
             }else if (indexPath.row == 1){
                 cell.label1.text = @"月亚军勋章";
                 cell.label2.text = @"业绩月度第二名";
                 cell.label3.text = @"奖金200元";
+                cell.label5.text = @"1、个人在公司月度业绩排名第二名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金200元/次，可重复领取";
             }else{
                 cell.label1.text = @"月季军勋章";
                 cell.label2.text = @"业绩月度第三名";
                 cell.label3.text = @"奖金100元";
+                cell.label5.text = @"1、个人在公司月度业绩排名第三名";
+                cell.label6.text = @"2、业绩最低要求5万起";
+                cell.label7.text = @"3、奖金100元/次，可重复领取";
             }
         }
 

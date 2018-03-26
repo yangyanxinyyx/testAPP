@@ -20,6 +20,8 @@
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor whiteColor];
+        self.clipsToBounds = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.line = [[UIView alloc] init];
         _line.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [self.contentView addSubview:_line];
@@ -45,6 +47,21 @@
         _label4.font = [UIFont systemFontOfSize:12];
         _label4.text = @"详情";
         [self.contentView addSubview:_label4];
+
+        _label5 = [[UILabel alloc] init];
+        _label5.font = [UIFont systemFontOfSize:11];
+        _label5.textColor = COLOR_RGB_255(131, 131, 131);
+        [self.contentView addSubview:_label5];
+
+        _label6 = [[UILabel alloc] init];
+        _label6.font = [UIFont systemFontOfSize:11];
+        _label6.textColor = COLOR_RGB_255(131, 131, 131);
+        [self.contentView addSubview:_label6];
+
+        _label7 = [[UILabel alloc] init];
+        _label7.font = [UIFont systemFontOfSize:11];
+        _label7.textColor = COLOR_RGB_255(131, 131, 131);
+        [self.contentView addSubview:_label7];
 
         self.imageArrow = [[UIImageView alloc] init];
         _imageArrow.backgroundColor = [UIColor redColor];
@@ -78,6 +95,12 @@
 
     _label4.frame = CGRectMake(SCREEN_WIDTH - 24 - 38, 50 + 10, 26, 12);
 
+    _label5.frame = CGRectMake(15, 126 + 10, 180, 11);
+
+    _label6.frame = CGRectMake(15, 147 + 10, 180, 11);
+
+    _label7.frame = CGRectMake(15, 168 + 10, 180, 11);
+
     _imageArrow.frame = CGRectMake(SCREEN_WIDTH - 15 - 14, 53 + 10, 14, 7);
 
     _line2.frame = CGRectMake(0, 110 + 10, SCREEN_WIDTH, 1);
@@ -86,17 +109,17 @@
 - (void)setIsOpen:(BOOL)isOpen
 {
     _isOpen = isOpen;
-    if (isOpen) {
-        [UIView beginAnimations:@"rotate" context:nil];
-        [UIView setAnimationDuration:0.3f];
-        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, -3.141593 );
-        [UIView commitAnimations];
-    }else{
-        [UIView beginAnimations:@"rotate" context:nil];
-        [UIView setAnimationDuration:0.3f];
-        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, 3.141593 );
-        [UIView commitAnimations];
-    }
+//    if (isOpen) {
+//        [UIView beginAnimations:@"rotate" context:nil];
+//        [UIView setAnimationDuration:0.3f];
+//        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, -3.141593 );
+//        [UIView commitAnimations];
+//    }else{
+//        [UIView beginAnimations:@"rotate" context:nil];
+//        [UIView setAnimationDuration:0.3f];
+//        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, 3.141593 );
+//        [UIView commitAnimations];
+//    }
 }
 
 - (void)awakeFromNib {

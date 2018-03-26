@@ -22,6 +22,9 @@
 @property (nonatomic,strong) UILabel *label2;
 @property (nonatomic,strong) UILabel *label3;
 @property (nonatomic,strong) UILabel *label4;
+@property (nonatomic,strong) UILabel *label5;
+@property (nonatomic,strong) UILabel *label6;
+@property (nonatomic,strong) UILabel *label7;
 
 @property (nonatomic,strong) UIImageView *imageArrow;
 @end

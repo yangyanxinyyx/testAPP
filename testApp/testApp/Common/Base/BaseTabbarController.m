@@ -10,7 +10,7 @@
 
 #import "CoverMainViewController.h"
 #import "PriceViewController.h"
-#import "GetCarViewController.h"
+#import "GetCarListViewController.h"
 #import "UserViewController.h"
 
 @interface BaseTabbarController ()
@@ -35,7 +35,7 @@
     navPrice.tabBarItem.image = [UIImage imageNamed:@"price_nomnal.png"];
     [navPrice setNavigationBarHidden:YES];
 
-    GetCarViewController *getCar = [[GetCarViewController alloc] init ];
+    GetCarListViewController *getCar = [[GetCarListViewController alloc] init ];
     UINavigationController *navGetCar = [[UINavigationController alloc] initWithRootViewController:getCar];
     navGetCar.tabBarItem.title = @"接车";
     navGetCar.tabBarItem.image = [UIImage imageNamed:@"getCar_nomnal.png"];
