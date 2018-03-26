@@ -24,7 +24,6 @@
 		25663ED3205FEC1C0076039A /* PriceCustomerInformEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */; };
 		25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */; };
 		25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */; };
-		25D671682069530F00F7A684 /* PriceUnderwritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D671672069530E00F7A684 /* PriceUnderwritingViewController.m */; };
 		25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */; };
 		25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */; };
 		25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */; };
@@ -33,6 +32,8 @@
 		25D67188206953EB00F7A684 /* PriceUnderwritingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */; };
 		25D67189206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */; };
 		25D6718A206953EB00F7A684 /* PriceUnderwritingRenewalTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */; };
+		25D6718D206954BA00F7A684 /* PriceUnderwritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */; };
+		25D6718E206954C800F7A684 /* PriceUnderwritingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */; };
 		A71D2D6A2062C302009B889D /* XCMyCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71D2D692062C302009B889D /* XCMyCommissionViewController.m */; };
 		A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */; };
 		A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4892205E5429001670D3 /* XCUserListHeaderView.m */; };
@@ -161,8 +162,6 @@
 		25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryTableViewCell.m; sourceTree = "<group>"; };
 		25663ED8206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntrySubmitTableViewCell.h; sourceTree = "<group>"; };
 		25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntrySubmitTableViewCell.m; sourceTree = "<group>"; };
-		25D671662069530E00F7A684 /* PriceUnderwritingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PriceUnderwritingViewController.h; path = ../../../../../PriceUnderwritingViewController.h; sourceTree = "<group>"; };
-		25D671672069530E00F7A684 /* PriceUnderwritingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PriceUnderwritingViewController.m; path = ../../../../../PriceUnderwritingViewController.m; sourceTree = "<group>"; };
 		25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTextTableViewCell.m; sourceTree = "<group>"; };
 		25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingChooseTableViewCell.h; sourceTree = "<group>"; };
 		25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTableViewCell.h; sourceTree = "<group>"; };
@@ -171,6 +170,8 @@
 		25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTableViewCell.m; sourceTree = "<group>"; };
 		25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingChooseTableViewCell.m; sourceTree = "<group>"; };
 		25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingRenewalTableViewCell.h; sourceTree = "<group>"; };
+		25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingViewController.h; sourceTree = "<group>"; };
+		25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingViewController.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71D2D682062C302009B889D /* XCMyCommissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionViewController.h; sourceTree = "<group>"; };
 		A71D2D692062C302009B889D /* XCMyCommissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionViewController.m; sourceTree = "<group>"; };
@@ -361,8 +362,8 @@
 				25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */,
 				25663ED1205FEC1C0076039A /* PriceCustomerInformEntryViewController.h */,
 				25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */,
-				25D671662069530E00F7A684 /* PriceUnderwritingViewController.h */,
-				25D671672069530E00F7A684 /* PriceUnderwritingViewController.m */,
+				25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */,
+				25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1053,6 +1054,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D6718E206954C800F7A684 /* PriceUnderwritingViewController.h in Sources */,
 				25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */,
 				25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */,
 				25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */,
@@ -1089,6 +1091,7 @@
 				2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				2503684E205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m in Sources */,
+				25D6718D206954BA00F7A684 /* PriceUnderwritingViewController.m in Sources */,
 				25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */,
 				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				A7C8818B2066750B0073568F /* XCUserUnderWritingDetailViewController.m in Sources */,
@@ -1107,7 +1110,6 @@
 				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
-				25D671682069530F00F7A684 /* PriceUnderwritingViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
