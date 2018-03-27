@@ -9,6 +9,7 @@
 #import "MyMedalViewController.h"
 #import "BaseNavigationBar.h"
 #import "MyMedalView.h"
+#import "MedalDetailViewController.h"
 
 @interface MyMedalViewController ()<BaseNavigationBarDelegate,MyMedalViewDelegate>
 
@@ -20,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate  = self;
@@ -33,12 +33,12 @@
 
 - (void)createUI
 {
-    MyMedalView *presonMedal = [[MyMedalView alloc] initWithInfo:@[@"X1",@"X2",@"X3"] title:@"个人徽章"];
+    MyMedalView *presonMedal = [[MyMedalView alloc] initWithInfo:@[@"X1",@"X2",@"X3"] title:@"个人勋章"];
     presonMedal.frame = CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, 181);
     presonMedal.delegate = self;
     [self.view addSubview:presonMedal];
 
-    MyMedalView *yearMedal = [[MyMedalView alloc] initWithInfo:@[@"X3",@"X2",@"X1"] title:@"年度徽章"];
+    MyMedalView *yearMedal = [[MyMedalView alloc] initWithInfo:@[@"X3",@"X2",@"X1"] title:@"年度勋章"];
     yearMedal.frame = CGRectMake(0, 10 + 181 +10+ kHeightForNavigation, SCREEN_WIDTH, 181);
     yearMedal.delegate = self;
     [self.view addSubview:yearMedal];
@@ -53,7 +53,8 @@
 
 - (void)MyMedalViewDidSelectToDetail:(NSString *)title
 {
-
+    MedalDetailViewController *detailVC = [[MedalDetailViewController alloc] initWithTitle:title];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

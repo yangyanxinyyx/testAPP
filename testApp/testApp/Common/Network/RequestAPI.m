@@ -8,7 +8,11 @@
 
 #import "RequestAPI.h"
 
-#define LOGIN_API @"http://115.29.174.77:8081/XC/api/app/userLogin"
+#define API_PREFIX @"http://115.29.174.77:8081/XC"
+
+#define LOGIN_API [NSString stringWithFormat:@"%@/api/app/userLogin",API_PREFIX]
+
+#define UPDATEPASSWORD_API [NSString stringWithFormat:@"%@/api/web/sysUser/updatePassword",API_PREFIX]
 
 @implementation RequestAPI
 
@@ -52,5 +56,13 @@
     }];
 }
 
++(void)updatePassWord:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:UPDATEPASSWORD_API paramenter:paramenter success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 
 @end

@@ -11,6 +11,7 @@
 #import "PriceInspectViewController.h"
 #import "PriceCarInsuranceQViewController.h"
 #import "PriceCustomerInformEntryViewController.h"
+#import "PriceUnderwritingViewController.h"
 @interface PriceViewController ()
 
 @end
@@ -44,10 +45,19 @@
     
     UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
     button3.frame = CGRectMake(220, 144, 100, 50);
-    [button3 setTitle:@"查看报价" forState:UIControlStateNormal];
+    [button3 setTitle:@"客户信息录入" forState:UIControlStateNormal];
     [button3 addTarget:self action:@selector(touchButtonFunction3) forControlEvents:UIControlEventTouchDown];
     button3.backgroundColor = [UIColor blueColor];
     [self.view addSubview:button3];
+    
+    UIButton *button4 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button4.frame = CGRectMake(20, 244, 100, 50);
+    [button4 setTitle:@"调整核保" forState:UIControlStateNormal];
+    [button4 addTarget:self action:@selector(touchButtonFunction4) forControlEvents:UIControlEventTouchDown];
+    button4.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:button4];
+    
+
     
 }
 
@@ -68,6 +78,11 @@
 
 - (void)touchButtonFunction3{
     PriceCustomerInformEntryViewController *pinfoVC = [[PriceCustomerInformEntryViewController alloc]init];
+    [self.navigationController pushViewController:pinfoVC animated:YES];
+}
+
+- (void)touchButtonFunction4{
+    PriceUnderwritingViewController *pinfoVC = [[PriceUnderwritingViewController alloc]init];
     [self.navigationController pushViewController:pinfoVC animated:YES];
 }
 @end

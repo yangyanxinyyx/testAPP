@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController1.h"
-
+#import "BaseNavigationBar.h"
 @interface BaseViewController1 ()
 
 @end

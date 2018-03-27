@@ -12,6 +12,10 @@
 
 @interface RequestAPI : NSObject
 
+//登录后获取用户信息
 +(void)getUserInfo:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail;
+
+//修改密码
++(void)updatePassWord:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
 @end

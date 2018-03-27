@@ -9,7 +9,7 @@
 #import "PriceInspectViewController.h"
 #import "PriceInspectTableViewCell.h"
 
-@interface PriceInspectViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInspectTableViewCellDelegate>
+@interface PriceInspectViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInspectTableViewCellDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @end
 
@@ -18,8 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"查看报价";
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate = self;
+    topBar.title = @"查看报价";
+    [self.view addSubview:topBar];
+    
     [self createUI];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 #pragma mark- tableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -51,7 +61,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         //取消滚动条的显示
