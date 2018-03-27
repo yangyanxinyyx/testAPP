@@ -9,8 +9,10 @@
 #import "XCUserUnderWritingDetailViewController.h"
 #import "XCCheckoutDetailTextCell.h"
 #import "XCCheckoutDetailTextFiledCell.h"
+#import "XCCheckoutDetailInputCell.h"
 #define kTextCellID @"textCellID"
 #define kTextFiledCellID @"textFiledCellID"
+#define kTextInputCellID @"inpuitCellID"
 @interface XCUserUnderWritingDetailViewController ()
 
 @end
@@ -21,8 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextFiledCellID];
-    
+    [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
+    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
+    [self.tableView registerClass:[XCCheckoutDetailInputCell class] forCellReuseIdentifier:kTextInputCellID];
+    self.bottomHeight = 140 * ViewRateBaseOnIP6;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,23 +49,28 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
- 
-    
+
     if (indexPath.row == 1) {
         XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
         [textFiledCell setTitle:@"缴费通知单"];
-        [textFiledCell setTitlePlaceholder:@"请输出出单"];
+        [textFiledCell setTitlePlaceholder:@"输入单号"];
         return textFiledCell;
+    }else if (indexPath.row == 2){
+        XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];
+        [inputCell setTitle:@"是否续保"];
+
+        return inputCell;
     }else {
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:@"投保人:"];
         [cell setTitlePlaceholder:@"刘某某"];
         return cell;
-
     }
-    
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80 * ViewRateBaseOnIP6;
+}
 
 @end

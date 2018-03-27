@@ -10,6 +10,7 @@
 #define PrefixHeader_pch
 
 #define SCREEN_SCALE  [UIScreen mainScreen].scale
+#define SCREEN_TABBAR_HEIGHT 49
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
 
