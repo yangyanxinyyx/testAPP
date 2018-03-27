@@ -11,9 +11,12 @@
 #import "PriceUnderwritingChooseTableViewCell.h"
 #import "PriceUnderwritingTextTableViewCell.h"
 #import "PriceUnderwritingRenewalTableViewCell.h"
-@interface PriceUnderwritingViewController ()<BaseNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource>
+#import "PriceUnderwritingImportTableViewCell.h"
+#import "PriceUnderwritingSureTableViewCell.h"
+@interface PriceUnderwritingViewController ()<BaseNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,PriceUnderwritingImportTableViewCellDelegate,PriceUnderwritingTextTableViewCellDelegate,PriceUnderwritingSureTableViewCellDelegate>
 @property (nonatomic, strong) UIView *viewContent;
 @property (nonatomic, strong) UITableView *myTableView;
+@property (nonatomic, strong) NSNotification *notification;
 @end
 
 @implementation PriceUnderwritingViewController
@@ -25,6 +28,10 @@
     topBar.delegate = self;
     topBar.title = @"提交核保";
     [self.view addSubview:topBar];
+    
+    // 创建通知
+    _notification = [NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:nil];
+  
     [self createUI];
 }
 
@@ -34,10 +41,45 @@
     }
 }
 
+
+#pragma mark- cell delegate
+- (void)textViewChangeWithTextView:(UITextView *)textView{
+    NSLog(@"%@",textView.text);
+}
+
+- (void)textViewBeginWithTextView:(UITextView *)textView{
+    [UIView animateWithDuration:0.2 animations:^{
+      self.myTableView.contentOffset = CGPointMake(0, 520 * ViewRateBaseOnIP6);
+    }];
+}
+
+-(void)textViewENDWithTextView:(UITextView *)textView{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.myTableView.contentOffset = CGPointMake(0,0);
+    }];
+}
+
+- (void)textFieldBeginWithTextField:(UITextField *)textField{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.myTableView.contentOffset = CGPointMake(0, 400 * ViewRateBaseOnIP6);
+    }];
+}
+
+- (void)textFieldENDWithTextField:(UITextField *)textField{
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.myTableView.contentOffset = CGPointMake(0, 0 * ViewRateBaseOnIP6);
+    }];
+}
+
+- (void)comfirmToSubmit{
+    NSLog(@"确认提交");
+}
+
 #pragma mark- UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 12;
+    return 14;
     
 }
 
@@ -96,6 +138,7 @@
         if (!cell) {
             cell = [[PriceUnderwritingTextTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
+        cell.delegate = self;
         if (indexPath.row == 9) {
             cell.labelName.text = @"交强险(业务员)金额:";
             
@@ -110,12 +153,21 @@
             cell = [[PriceUnderwritingRenewalTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         } 
         return cell;
-    } else {
-        static NSString *identifier = @"identifier";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    } else if (indexPath.row == 12){
+        static NSString *identifier = @"identifierImport";
+        PriceUnderwritingImportTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[PriceUnderwritingImportTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
+        cell.delegate = self;
+        return cell;
+    } else {
+        static NSString *identifier = @"identifierCombit";
+        PriceUnderwritingSureTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[PriceUnderwritingSureTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        cell.delegate = self;
         return cell;
     }
     
@@ -123,7 +175,35 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80 * ViewRateBaseOnIP6;
+    if (indexPath.row == 12) {
+        return 233 * ViewRateBaseOnIP6;
+    } else if (indexPath.row == 13 ){
+        return 158 *  ViewRateBaseOnIP6;
+    } else {
+        
+        return 80 * ViewRateBaseOnIP6;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20 * ViewRateBaseOnIP6;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20 * ViewRateBaseOnIP6)];
+    view.backgroundColor = [UIColor colorWithHexString:@"f2f2f2"];
+    return view;
+    
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    // 通过 通知中心 发送 通知
+    [[NSNotificationCenter defaultCenter] postNotification:_notification];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    // 通过 通知中心 发送 通知
+    [[NSNotificationCenter defaultCenter] postNotification:_notification];
+    
 }
 
 #pragma mark0 UI
@@ -147,7 +227,7 @@
         _myTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = YES;
+        _myTableView.bounces = NO;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTableView;
