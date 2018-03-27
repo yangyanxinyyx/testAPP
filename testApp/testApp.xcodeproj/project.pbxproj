@@ -412,14 +412,14 @@
 		25D6717A206953A600F7A684 /* 提交核保 */ = {
 			isa = PBXGroup;
 			children = (
-				25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */,
 				25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */,
-				25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */,
-				25D6717E206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.m */,
-				25D6717F206953A600F7A684 /* PriceUnderwritingTextTableViewCell.h */,
-				25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */,
 				25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */,
+				25D6717F206953A600F7A684 /* PriceUnderwritingTextTableViewCell.h */,
+				25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */,
+				25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */,
+				25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */,
 				25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */,
+				25D6717E206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.m */,
 			);
 			path = "提交核保";
 			sourceTree = "<group>";

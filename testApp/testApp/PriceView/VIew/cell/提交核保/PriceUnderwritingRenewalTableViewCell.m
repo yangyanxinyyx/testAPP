@@ -24,8 +24,8 @@
         [self.contentView addSubview:self.labelName];
         
         self.buttonSelect = [[UIButton alloc] init];
-        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [self.contentView addSubview:self.imageView];
+        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@"unSelect"] forState:UIControlStateNormal];
+        [self.contentView addSubview:self.buttonSelect];
         
         
     }
@@ -56,10 +56,11 @@
 
 - (void)touchButtonSelect:(UIButton *)button{
     if (_isSelect) {
-        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@"select"] forState:UIControlStateNormal];
     } else {
-        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@"unSelect"] forState:UIControlStateNormal];
     }
+    _isSelect = !_isSelect;
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
