@@ -95,43 +95,79 @@
                              @"userCode":@"17350805203",
                              @"password":@"1"
                              };
-    [RequestAPI getUserInfo:param success:^(id response) {
+    [RequestAPI getUserInfo:param header:nil success:^(id response) {
         NSLog(@"%@",response);
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
             if ([response[@"result"] integerValue] == 1) {
                 NSLog(@"登录成功");
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *data = response[@"data"];
-                    [UserInfoManager shareInstance].code = data[@"code"] ? data[@"code"] : NULL;
-                    [UserInfoManager shareInstance].employeeId = data[@"employeeId"] ? [data[@"employeeId"] integerValue]: 0;
-                    [UserInfoManager shareInstance].employeeName = data[@"employeeName"] ? data[@"employeeName"] : NULL;
-                    [UserInfoManager shareInstance].iconUrl = data[@"iconUrl"] ? data[@"iconUrl"] : NULL;
-                    [UserInfoManager shareInstance].userID = data[@"id"] ? data[@"id"] : NULL;
-                    [UserInfoManager shareInstance].isStoreAdministrator = data[@"isStoreAdministrator"] ? data[@"isStoreAdministrator"] : NULL;
-                    [UserInfoManager shareInstance].name = data[@"name"] ? data[@"name"] : NULL;
-                    [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : NULL;
-                    [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : NULL;
-                    [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : NULL;
+                    [UserInfoManager shareInstance].code = data[@"code"] ? data[@"code"] : @"";
+                    [UserInfoManager shareInstance].employeeId = data[@"employeeId"] ? data[@"employeeId"] : 0;
+                    [UserInfoManager shareInstance].employeeName = data[@"employeeName"] ? data[@"employeeName"] : @"";
+                    [UserInfoManager shareInstance].iconUrl = data[@"iconUrl"] ? data[@"iconUrl"] : @"";
+                    [UserInfoManager shareInstance].userID = data[@"id"] ? data[@"id"] : @"";
+                    [UserInfoManager shareInstance].isStoreAdministrator = data[@"isStoreAdministrator"] ? data[@"isStoreAdministrator"] : @"";
+                    [UserInfoManager shareInstance].name = data[@"name"] ? data[@"name"] : @"";
+                    [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : @"";
+                    [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : @"";
+                    [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : @"";
                     if ( data[@"store"] && [data[@"store"] isKindOfClass:[NSDictionary class]]) {
                         NSDictionary *temp = data[@"store"];
                         [UserInfoManager shareInstance].isStore = temp.count > 0 ? YES : NO;
                     }
-                    [UserInfoManager shareInstance].storeID = data[@"storeID"] ? data[@"storeID"] : NULL;
-                    [UserInfoManager shareInstance].storeName = data[@"storeName"] ? data[@"storeName"] : NULL;
-                    [UserInfoManager shareInstance].storeCode = data[@"storeCode"] ? data[@"storeCode"] : NULL;
-                    [UserInfoManager shareInstance].tel = data[@"tel"] ? data[@"tel"] : NULL;
-                    [UserInfoManager shareInstance].corporateName = data[@"corporateName"] ? data[@"corporateName"] : NULL;
-                    [UserInfoManager shareInstance].corporateCellphone = data[@"corporateCellphone"] ? data[@"corporateCellphone"] : NULL;
-                    [UserInfoManager shareInstance].address = data[@"address"] ? data[@"address"] : NULL;
-                    [UserInfoManager shareInstance].ticketID = data[@"newTicketId"] ? data[@"newTicketId"] : NULL;
-                    UserInfoManager *manager = [UserInfoManager shareInstance];
-                    NSLog(@"");
+                    [UserInfoManager shareInstance].storeID = data[@"storeID"] ? data[@"storeID"] : @"";
+                    [UserInfoManager shareInstance].storeName = data[@"storeName"] ? data[@"storeName"] : @"";
+                    [UserInfoManager shareInstance].storeCode = data[@"storeCode"] ? data[@"storeCode"] : @"";
+                    [UserInfoManager shareInstance].tel = data[@"tel"] ? data[@"tel"] : @"";
+                    [UserInfoManager shareInstance].corporateName = data[@"corporateName"] ? data[@"corporateName"] : @"";
+                    [UserInfoManager shareInstance].corporateCellphone = data[@"corporateCellphone"] ? data[@"corporateCellphone"] : @"";
+                    [UserInfoManager shareInstance].address = data[@"address"] ? data[@"address"] : @"";
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//                    UserInfoManager *manager = [UserInfoManager shareInstance];
+//                    NSLog(@"");
+//                    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+//                    confirmView.delegate = self;
+//                    [self.view addSubview:confirmView];
+
+
                 }
 
-                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%ld",[UserInfoManager shareInstance].employeeId]];
-                confirmView.delegate = self;
-                [self.view addSubview:confirmView];
+                //获取车险信息
+                NSDictionary  *param = @{
+                                         @"salesman_id":[UserInfoManager shareInstance].userID
+                                         };
+                [RequestAPI getPersonalPolicy:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    NSLog(@"%@",response);
+                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"获取车险信息成功");
+                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                                NSDictionary *data = response[@"data"];
+                                [UserInfoManager shareInstance].performanceMedal.lastYearCar = data[@"last_year_car"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthCar = data[@"last_month_car"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthCar = data[@"now_month_car"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
+                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                                UserInfoManager *manager = [UserInfoManager shareInstance];
+                                NSLog(@"");
+                                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+                                confirmView.delegate = self;
+                                [self.view addSubview:confirmView];
 
+                            }
+                        }else if (([response[@"result"] integerValue] == 0)){
+                            NSLog(@"获取车险信息失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取车险信息错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
 
 
             }else if (([response[@"result"] integerValue] == 0)){
@@ -144,7 +180,8 @@
 
 
     } fail:^(id error) {
-        NSLog(@"%@",error);
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
     }];
 
 
@@ -162,6 +199,7 @@
 - (void)didConfirmUserInfo:(BOOL)isConfirm
 {
     if (isConfirm) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadCoverMainViewData" object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
 

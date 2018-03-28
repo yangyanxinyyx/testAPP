@@ -108,6 +108,10 @@
 		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */; };
 		FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */; };
+		FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF87668206BCF1500CF6FDE /* YXScrollView.m */; };
+		FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766A206BCF9B00CF6FDE /* 汽车1.jpg */; };
+		FCF8766E206BCF9C00CF6FDE /* 汽车3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766B206BCF9B00CF6FDE /* 汽车3.jpg */; };
+		FCF8766F206BCF9C00CF6FDE /* 汽车2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766C206BCF9B00CF6FDE /* 汽车2.jpg */; };
 		FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFAF950205A7011001E9796 /* BaseTabbarController.m */; };
 		FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFB6023206102E500587763 /* CoverPerformanceView.m */; };
 /* End PBXBuildFile section */
@@ -295,6 +299,11 @@
 		FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarListViewController.m; sourceTree = "<group>"; };
 		FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewGuestViewController.h; sourceTree = "<group>"; };
 		FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewGuestViewController.m; sourceTree = "<group>"; };
+		FCF87667206BCF1500CF6FDE /* YXScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXScrollView.h; sourceTree = "<group>"; };
+		FCF87668206BCF1500CF6FDE /* YXScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXScrollView.m; sourceTree = "<group>"; };
+		FCF8766A206BCF9B00CF6FDE /* 汽车1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车1.jpg"; sourceTree = "<group>"; };
+		FCF8766B206BCF9B00CF6FDE /* 汽车3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车3.jpg"; sourceTree = "<group>"; };
+		FCF8766C206BCF9B00CF6FDE /* 汽车2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车2.jpg"; sourceTree = "<group>"; };
 		FCFAF94F205A7011001E9796 /* BaseTabbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTabbarController.h; sourceTree = "<group>"; };
 		FCFAF950205A7011001E9796 /* BaseTabbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabbarController.m; sourceTree = "<group>"; };
 		FCFB6022206102E500587763 /* CoverPerformanceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverPerformanceView.h; sourceTree = "<group>"; };
@@ -468,14 +477,6 @@
 			path = subController;
 			sourceTree = "<group>";
 		};
-		A71EFD77205AD7EC00F2F83F /* resource */ = {
-			isa = PBXGroup;
-			children = (
-				A72B7473205D05D8002ED176 /* 个人中心 */,
-			);
-			path = resource;
-			sourceTree = "<group>";
-		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,16 +488,11 @@
 			path = categary;
 			sourceTree = "<group>";
 		};
-		A72B7473205D05D8002ED176 /* 个人中心 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "个人中心";
-			sourceTree = "<group>";
-		};
 		A79A510720597A0F000D8D0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				FCF87667206BCF1500CF6FDE /* YXScrollView.h */,
+				FCF87668206BCF1500CF6FDE /* YXScrollView.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -505,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				A71EFD78205AD7FA00F2F83F /* categary */,
-				A71EFD77205AD7EC00F2F83F /* resource */,
 			);
 			path = Extend;
 			sourceTree = "<group>";
@@ -630,6 +625,9 @@
 		FC2805B6205D96B800DD0DA9 /* CoverMain */ = {
 			isa = PBXGroup;
 			children = (
+				FCF8766A206BCF9B00CF6FDE /* 汽车1.jpg */,
+				FCF8766C206BCF9B00CF6FDE /* 汽车2.jpg */,
+				FCF8766B206BCF9B00CF6FDE /* 汽车3.jpg */,
 				FCCC0EB3206150E400986A9E /* coverMain_nomnal@2x.png */,
 				FCCC0EB5206150E400986A9E /* coverMain_select@2x.png */,
 				FCCC0EB6206150E400986A9E /* getCar_nomnal@2x.png */,
@@ -957,6 +955,7 @@
 			files = (
 				A7C9E0FC205D8F5E00FFEF5B /* userListViewData.plist in Resources */,
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
+				FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */,
 				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
@@ -966,6 +965,7 @@
 				FCCC0ED02061519000986A9E /* getCar_select@3x.png in Resources */,
 				FC2805C5205D96B900DD0DA9 /* login_preson@2x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
+				FCF8766E206BCF9C00CF6FDE /* 汽车3.jpg in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
 				FCCC0EC92061519000986A9E /* price_select@3x.png in Resources */,
 				FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */,
@@ -975,6 +975,7 @@
 				FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
+				FCF8766F206BCF9C00CF6FDE /* 汽车2.jpg in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
 				FCCC0EBE206150E400986A9E /* price_select@2x.png in Resources */,
 				FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */,
@@ -1079,6 +1080,7 @@
 				25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */,
 				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
+				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
 				2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
