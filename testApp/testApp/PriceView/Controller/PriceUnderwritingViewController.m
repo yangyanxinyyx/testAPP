@@ -13,10 +13,12 @@
 #import "PriceUnderwritingRenewalTableViewCell.h"
 #import "PriceUnderwritingImportTableViewCell.h"
 #import "PriceUnderwritingSureTableViewCell.h"
+#import "SelectTimeView.h"
 @interface PriceUnderwritingViewController ()<BaseNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,PriceUnderwritingImportTableViewCellDelegate,PriceUnderwritingTextTableViewCellDelegate,PriceUnderwritingSureTableViewCellDelegate>
 @property (nonatomic, strong) UIView *viewContent;
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) NSNotification *notification;
+@property (nonatomic, strong) SelectTimeView *selectTimeV;
 @end
 
 @implementation PriceUnderwritingViewController
@@ -196,6 +198,12 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 5) {
+        _selectTimeV.hidden = NO;
+    }
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     // 通过 通知中心 发送 通知
     [[NSNotificationCenter defaultCenter] postNotification:_notification];
@@ -210,6 +218,15 @@
 - (void)createUI{
     [self.view addSubview:self.viewContent];
     [self.viewContent addSubview:self.myTableView];
+    
+    _selectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _selectTimeV.block = ^(NSString *timeStr){
+        if (timeStr) {
+            NSLog(@"%@",timeStr);
+        }
+    };
+    [[UIApplication sharedApplication].keyWindow addSubview:_selectTimeV];
+    _selectTimeV.hidden = YES;
 }
 - (UIView *)viewContent{
     if (!_viewContent) {

@@ -26,6 +26,7 @@
 		25663ED3205FEC1C0076039A /* PriceCustomerInformEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */; };
 		25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */; };
 		25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */; };
+		25BC5790206BD75700BC297E /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BC578F206BD75700BC297E /* SelectTimeView.m */; };
 		25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */; };
 		25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */; };
 		25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */; };
@@ -170,6 +171,8 @@
 		25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryTableViewCell.m; sourceTree = "<group>"; };
 		25663ED8206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntrySubmitTableViewCell.h; sourceTree = "<group>"; };
 		25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntrySubmitTableViewCell.m; sourceTree = "<group>"; };
+		25BC578E206BD75700BC297E /* SelectTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
+		25BC578F206BD75700BC297E /* SelectTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
 		25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTextTableViewCell.m; sourceTree = "<group>"; };
 		25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingChooseTableViewCell.h; sourceTree = "<group>"; };
 		25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTableViewCell.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				2503683D205E5C0F0052209A /* priceCIQChangeView.m */,
 				25036845205EA5760052209A /* PriceCIQLastYInfoView.h */,
 				25036846205EA5760052209A /* PriceCIQLastYInfoView.m */,
+				25BC578E206BD75700BC297E /* SelectTimeView.h */,
+				25BC578F206BD75700BC297E /* SelectTimeView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -1106,6 +1111,7 @@
 				25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */,
 				A7C8818F2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
+				25BC5790206BD75700BC297E /* SelectTimeView.m in Sources */,
 				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,
 				25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */,
 				A71D2D6A2062C302009B889D /* XCMyCommissionViewController.m in Sources */,
