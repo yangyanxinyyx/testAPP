@@ -13,6 +13,10 @@
 
 @end
 
+@implementation PerformanceMedal
+
+@end
+
 @implementation UserInfoManager
 
 + (UserInfoManager *)shareInstance {
@@ -21,6 +25,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[UserInfoManager alloc] init];
+        manager.performanceMedal = [[PerformanceMedal alloc] init];
+        manager.userMedal = [[UserMedal alloc] init];
     });
 
     return manager;

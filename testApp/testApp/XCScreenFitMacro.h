@@ -14,6 +14,7 @@
 #import "FinishTipsView.h"
 #import "UserInfoManager.h"
 #import "BaseNavigationBar.h"
+#import "RequestAPI.h"
 
 #pragma mark -  屏幕适配常量
 

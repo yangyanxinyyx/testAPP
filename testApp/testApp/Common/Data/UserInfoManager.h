@@ -19,16 +19,28 @@
 
 @end
 
+//个人车险业绩
+@interface PerformanceMedal : NSObject
+
+@property (nonatomic,strong) NSString *lastYearCar;
+@property (nonatomic,strong) NSString *lastMonthCar;
+@property (nonatomic,strong) NSString *nowMonthCar;
+@property (nonatomic,strong) NSString *lastYearCarRanking;
+@property (nonatomic,strong) NSString *lastMonthCarRanking;
+@property (nonatomic,strong) NSString *nowMonthCarRanking;
+
+@end
+
 //用户信息
 @interface UserInfoManager : NSObject
 
 @property (nonatomic,strong) NSString *ticketID;     //每次调接口都要刷新
 
 @property (nonatomic,strong) NSString *code;
-@property (nonatomic,assign) NSInteger employeeId;
+@property (nonatomic,assign) NSNumber *employeeId;
 @property (nonatomic,strong) NSString *employeeName;
 @property (nonatomic,strong) NSString *iconUrl;
-@property (nonatomic,strong) NSString *userID;
+@property (nonatomic,strong) NSNumber *userID;
 @property (nonatomic,strong) NSString *isStoreAdministrator;
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSString *needModifyPwsNextLogin;
@@ -46,7 +58,7 @@
 @property (nonatomic,strong) NSString *address;
 
 @property (nonatomic,strong) UserMedal *userMedal;
-
+@property (nonatomic,strong) PerformanceMedal *performanceMedal;
 
 + (UserInfoManager *)shareInstance;
 
