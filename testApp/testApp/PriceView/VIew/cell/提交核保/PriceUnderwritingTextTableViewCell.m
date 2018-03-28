@@ -8,10 +8,13 @@
 
 #import "PriceUnderwritingTextTableViewCell.h"
 
+@interface PriceUnderwritingTextTableViewCell()<UITextFieldDelegate>
+@end
 @implementation PriceUnderwritingTextTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.labelName = [[UILabel alloc] init];
         [self.contentView addSubview:self.labelName];
@@ -29,6 +32,7 @@
     self.labelName.font = [UIFont systemFontOfSize:27 * ViewRateBaseOnIP6];
     
     self.textFieldMoney.frame = CGRectMake(336 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, SCREEN_WIDTH - 366 * ViewRateBaseOnIP6, 26 *  ViewRateBaseOnIP6);
+    self.textFieldMoney.delegate = self;
     self.textFieldMoney.placeholder = @"请输入金额";
     [self.textFieldMoney setValue:[UIColor colorWithHexString:@"#a5a5a5"] forKeyPath:@"_placeholderLabel.textColor"];
     self.textFieldMoney.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
@@ -43,6 +47,20 @@
     CGContextStrokeRect(context, CGRectMake(30 * ViewRateBaseOnIP6, rect.size.height, rect.size.width - 60 * ViewRateBaseOnIP6, 1 * ViewRateBaseOnIP6));
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self.delegate textFieldBeginWithTextField:textField];
+}
+
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.delegate textFieldENDWithTextField:textField];
+    
+}
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    [self.textFieldMoney resignFirstResponder];
+    
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
