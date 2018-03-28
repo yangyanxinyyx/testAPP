@@ -17,13 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"待核保";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
 
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -39,7 +34,6 @@
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }
-
 
 #pragma mark - privary Method
 

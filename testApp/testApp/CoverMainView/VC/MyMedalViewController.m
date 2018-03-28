@@ -33,12 +33,12 @@
 
 - (void)createUI
 {
-    MyMedalView *presonMedal = [[MyMedalView alloc] initWithInfo:@[@"X1",@"X2",@"X3"] title:@"个人勋章"];
+    MyMedalView *presonMedal = [[MyMedalView alloc] initWithInfo:@[[UserInfoManager shareInstance].userMedal.presonFirst,[UserInfoManager shareInstance].userMedal.presonSecond,[UserInfoManager shareInstance].userMedal.presonThird] title:@"个人勋章"];
     presonMedal.frame = CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, 181);
     presonMedal.delegate = self;
     [self.view addSubview:presonMedal];
 
-    MyMedalView *yearMedal = [[MyMedalView alloc] initWithInfo:@[@"X3",@"X2",@"X1"] title:@"年度勋章"];
+    MyMedalView *yearMedal = [[MyMedalView alloc] initWithInfo:@[[UserInfoManager shareInstance].userMedal.yearFirst,[UserInfoManager shareInstance].userMedal.yearSecond,[UserInfoManager shareInstance].userMedal.yearThird] title:@"年度勋章"];
     yearMedal.frame = CGRectMake(0, 10 + 181 +10+ kHeightForNavigation, SCREEN_WIDTH, 181);
     yearMedal.delegate = self;
     [self.view addSubview:yearMedal];

@@ -47,7 +47,7 @@
         [self addSubview:imageView];
 
         UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54+60, 80, 12)];
-        countLabel.text = info[i];
+        countLabel.text = [NSString stringWithFormat:@"X%@",info[i]] ;
         countLabel.font = [UIFont systemFontOfSize:12];
         countLabel.textColor = COLOR_RGB_255(51, 51, 51);
         countLabel.textAlignment = NSTextAlignmentCenter;

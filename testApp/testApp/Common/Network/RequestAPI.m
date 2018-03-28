@@ -9,26 +9,39 @@
 #import "RequestAPI.h"
 
 #define API_PREFIX @"http://115.29.174.77:8081/XC"
+//#define API_PREFIX @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri="
 
+//登录
 #define LOGIN_API [NSString stringWithFormat:@"%@/api/app/userLogin",API_PREFIX]
 
+//修改密码
 #define UPDATEPASSWORD_API [NSString stringWithFormat:@"%@/api/web/sysUser/updatePassword",API_PREFIX]
+
+//个人车险
+#define PERSONALPOLICY_API [NSString stringWithFormat:@"%@/api/web/medaltable/seletPolicy",API_PREFIX]
+
+//我的勋章
+#define MYMEDAL_API [NSString stringWithFormat:@"%@/api/web/medaltable/selectMedalTableType",API_PREFIX]
+
+
 
 @implementation RequestAPI
 
-+(void)getRequest:(NSString *)url paramenter:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail{
++(void)getRequest:(NSString *)url paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
 
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    if (header) {
+         [manager.requestSerializer setValue:header forHTTPHeaderField:@"Authorization"];
+    }
 
     manager.requestSerializer.timeoutInterval = 30.0f;
 
-//    [manager.requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
 
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
 
-    [manager POST:LOGIN_API parameters:paramenter progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:url parameters:paramenter progress:^(NSProgress * _Nonnull uploadProgress) {
         //返回请求返回进度
         NSLog(@"downloadProgress-->%@",uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -47,18 +60,36 @@
 
 }
 
-+(void)getUserInfo:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail{
++(void)getUserInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
-    [self getRequest:LOGIN_API paramenter:paramenter success:^(id response) {
+    [self getRequest:LOGIN_API paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
          fail(error);
     }];
 }
 
-+(void)updatePassWord:(NSDictionary *)paramenter success:(void(^)(id response))success fail:(void(^)(id error))fail{
++(void)getPersonalPolicy:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+//@"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/app/medaltable/seletPolicy"
+    [self getRequest:PERSONALPOLICY_API paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 
-    [self getRequest:UPDATEPASSWORD_API paramenter:paramenter success:^(id response) {
++(void)getMyMedal:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:MYMEDAL_API paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)updatePassWord:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:UPDATEPASSWORD_API paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
