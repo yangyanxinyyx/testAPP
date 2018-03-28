@@ -97,8 +97,9 @@
 
 - (void)checkButtonClick:(UIButton *)button
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutCellClickCheckoutButtonHandler:)]) {
-        [self.delegate XCCheckoutCellClickCheckoutButtonHandler:button];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutCellClickCheckoutButtonHandler:cell:)]) {
+        [self.delegate XCCheckoutCellClickCheckoutButtonHandler:button cell:self];
+
     }else {
         XCLog(@"CLass:%@ - checkButtonClick: Failure ",[self class]);
     }

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "XCCheckoutTableViewCell.h"
+
+#import "LYZAlertView.h"
 #define kcheckCellID @"checkCell"
 
 @interface XCCheckoutBaseTableViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>

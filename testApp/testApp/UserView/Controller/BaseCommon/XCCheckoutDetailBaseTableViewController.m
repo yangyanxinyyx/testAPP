@@ -15,6 +15,9 @@
 @implementation XCCheckoutDetailBaseTableViewController
 
 #pragma mark - lifeCycle
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -25,6 +28,14 @@
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:self.tableView];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+    self.tabBarController.tabBar.hidden = YES;
     
 }
 
@@ -63,8 +74,8 @@
 -(void)setBottomHeight:(CGFloat)bottomHeight
 {
     _bottomHeight = bottomHeight;
-    CGFloat tableViewH = SCREEN_HEIGHT - StatusBarHeight - _bottomHeight - SCREEN_TABBAR_HEIGHT;
-    [self.tableView setFrame:CGRectMake(0, SafeAreaBottomBarHeight, SCREEN_HEIGHT, tableViewH)];
+    CGFloat tableViewH = SCREEN_HEIGHT - 64 -  _bottomHeight ;
+    [self.tableView setFrame:CGRectMake(0,  64, SCREEN_WIDTH, tableViewH)];
 }
 
 

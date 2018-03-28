@@ -21,7 +21,7 @@
 				<key>iconName</key>
 				<string>已核保代缴费</string>
 				<key>url</key>
-				<string>XCUserUnderWritingFinishViewController</string>
+				<string>XCUserWaitingToPayingViewController</string>
 			</dict>
 			<dict>
 				<key>title</key>

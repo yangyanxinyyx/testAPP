@@ -1,34 +1,28 @@
 //
-//  XCUserUnderWritingViewController.m
+//  XCUserWaitingToPayingViewController.m
 //  testApp
 //
-//  Created by Melody on 2018/3/19.
+//  Created by Melody on 2018/3/28.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCUserUnderWritingViewController.h"
-#import "LYZAlertView.h"
-#import "XCUserUnderWritingDetailViewController.h"
-@interface XCUserUnderWritingViewController ()<XCCheckoutTableViewCellDelegate>
+#import "XCUserWaitingToPayingViewController.h"
+#import "XCUserWaitingToPayingDetailViewController.h"
+@interface XCUserWaitingToPayingViewController ()<XCCheckoutTableViewCellDelegate>
 
 @end
 
-@implementation XCUserUnderWritingViewController
+@implementation XCUserWaitingToPayingViewController
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"已核保代缴费";
+    self.title = @"待核保";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +34,7 @@
 
 - (void)clickCheckDetailButton
 {
-    XCUserUnderWritingDetailViewController *detailVC = [[XCUserUnderWritingDetailViewController alloc] init];
+    XCUserWaitingToPayingDetailViewController *detailVC = [[XCUserWaitingToPayingDetailViewController alloc] init];
     
     [self.navigationController pushViewController:detailVC animated:YES];
     
@@ -55,10 +49,10 @@
     LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否删除" content:nil comfirmStr:@"是" cancelStr:@"否" comfirmClick:^(LYZAlertView *alertView) {
         //(TODO)删除数据
         [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
-           } cancelClick:^(LYZAlertView *alertView) {
+    } cancelClick:^(LYZAlertView *alertView) {
         [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
     }];
-
+    
     [self.view addSubview:alertView];
 }
 
@@ -113,7 +107,8 @@
 
 #pragma mark - XCCheckoutTableViewCellDelegate
 
-- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button
+
+- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
     [self clickCheckDetailButton];
 }

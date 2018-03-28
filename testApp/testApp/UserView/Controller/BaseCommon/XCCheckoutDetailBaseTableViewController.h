@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XCCheckoutDetailTextCell.h"
+#import "XCCheckoutDetailTextFiledCell.h"
+#import "XCCheckoutDetailInputCell.h"
+#import "FinishTipsView.h"
 #define ktableCellID @"myCellID"
+#define kTextCellID @"textCellID"
+#define kTextFiledCellID @"textFiledCellID"
+#define kTextInputCellID @"inpuitCellID"
+
 @interface XCCheckoutDetailBaseTableViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView ;

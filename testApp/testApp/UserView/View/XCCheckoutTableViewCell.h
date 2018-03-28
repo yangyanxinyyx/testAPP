@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class XCCheckoutTableViewCell;
 @protocol XCCheckoutTableViewCellDelegate <NSObject>
 
-- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button;
+- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell;
 
 @end
 
