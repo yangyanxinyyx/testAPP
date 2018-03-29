@@ -200,7 +200,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 5) {
-        _selectTimeV.hidden = NO;
+        [_selectTimeV inputSelectTiemView:YES];
+        _selectTimeV.block = ^(NSString *timeStr) {
+            
+        };
+    }
+    if (indexPath.row == 6) {
+        [_selectTimeV inputSelectTiemView:YES];
+        _selectTimeV.block = ^(NSString *timeStr) {
+          
+        };
+    }
+    
+    if (indexPath.row == 7) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"广发" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        [alertController addAction:action];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

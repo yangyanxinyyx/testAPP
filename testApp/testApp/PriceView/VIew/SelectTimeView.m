@@ -134,17 +134,17 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UILabel *label = (UILabel *)[_pickerView viewForRow:yearIndex forComponent:0];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
+            UIButton *button = (UIButton *)[_pickerView viewForRow:yearIndex forComponent:0];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
-            label = (UILabel *)[_pickerView viewForRow:monthIndex forComponent:1];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
+            button = (UIButton *)[_pickerView viewForRow:monthIndex forComponent:1];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
-            label = (UILabel *)[_pickerView viewForRow:dayIndex forComponent:2];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
+            button = (UIButton *)[_pickerView viewForRow:dayIndex forComponent:2];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
         
@@ -169,7 +169,7 @@
 - (void)clickYes:(UIButton *)button{
     if (_block) {
         
-        NSString *timeStr = [NSString stringWithFormat:@"%@%@%@",((UILabel *)[_pickerView viewForRow:yearIndex forComponent:0]).text, ((UILabel *)[_pickerView viewForRow:monthIndex forComponent:1]).text, ((UILabel *)[_pickerView viewForRow:dayIndex forComponent:2]).text];
+        NSString *timeStr = [NSString stringWithFormat:@"%@%@%@",((UIButton *)[_pickerView viewForRow:yearIndex forComponent:0]).titleLabel.text, ((UIButton *)[_pickerView viewForRow:monthIndex forComponent:1]).titleLabel.text, ((UIButton *)[_pickerView viewForRow:dayIndex forComponent:2]).titleLabel.text];
         
         
         timeStr = [timeStr stringByReplacingOccurrencesOfString:@"年" withString:@"/"];
@@ -247,9 +247,9 @@
         yearIndex = row;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UILabel *label = (UILabel *)[pickerView viewForRow:row forComponent:component];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
+            UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
         
@@ -276,13 +276,13 @@
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UILabel *label = (UILabel *)[pickerView viewForRow:row forComponent:component];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:32 * ViewRateBaseOnIP6];
+            UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
-            label = (UILabel *)[pickerView viewForRow:dayIndex forComponent:2];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:32 * ViewRateBaseOnIP6];
+            button = (UIButton *)[pickerView viewForRow:dayIndex forComponent:2];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
     }else {
@@ -290,9 +290,9 @@
         dayIndex = row;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UILabel *label = (UILabel *)[pickerView viewForRow:row forComponent:component];
-            label.textColor = [UIColor colorWithHexString:@"4494f0"];
-            label.font = [UIFont systemFontOfSize:32 * ViewRateBaseOnIP6];
+            UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
     }
@@ -312,24 +312,62 @@
         }
     
     //设置文字的属性
-    UILabel *genderLabel = [[UILabel alloc] init];
-    genderLabel.textAlignment = NSTextAlignmentCenter;
-    genderLabel.textColor = [UIColor colorWithHexString:@"cccccc"];
-    genderLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
+    UIButton *genderLabel = [[UIButton alloc] init];
+    [genderLabel setTitleColor:[UIColor colorWithHexString:@"cccccc"] forState:UIControlStateNormal];
+    [genderLabel.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+    
+    
     if (component == 0) {
-        
-        genderLabel.text = self.yearArray[row];
+        [genderLabel setTitle:self.yearArray[row] forState:UIControlStateNormal];
+        genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, -80 * ViewRateBaseOnIP6, 0, 0);
         
     }else if (component == 1) {
-        
-        genderLabel.text = self.monthArray[row];
+        [genderLabel setTitle:self.monthArray[row] forState:UIControlStateNormal];
         
     }else {
-        
-        genderLabel.text = self.dayArray[row];
+        [genderLabel setTitle:self.dayArray[row] forState:UIControlStateNormal];
+        genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -120 * ViewRateBaseOnIP6);
     }
     
     return genderLabel;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        topView.frame = CGRectMake(0, SCREEN_HEIGHT - 546 * ViewRateBaseOnIP6, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6);
+        _pickerView.frame = CGRectMake(0, SCREEN_HEIGHT - 466 * ViewRateBaseOnIP6, SCREEN_WIDTH, 466 * ViewRateBaseOnIP6);
+        
+    } completion:^(BOOL finished) {
+        
+        //        [self removeFromSuperview];
+        self.hidden = YES;
+    }];
+}
+
+- (void)inputSelectTiemView:(BOOL)isInput{
+    if (isInput) {
+        [UIView animateWithDuration:0.25 animations:^{
+           self.hidden = NO;
+        }];
+    }
+    NSCalendar *calendar = [[NSCalendar alloc]
+                            initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    // 定义一个时间字段的旗标，指定将会获取指定年、月、日、时、分、秒的信息
+    unsigned unitFlags = NSCalendarUnitYear |
+    NSCalendarUnitMonth |  NSCalendarUnitDay |
+    NSCalendarUnitHour |  NSCalendarUnitMinute |
+    NSCalendarUnitSecond | NSCalendarUnitWeekday;
+    // 获取不同时间字段的信息
+    NSDateComponents *comp = [calendar components: unitFlags fromDate:[NSDate date]];
+    
+    yearIndex = [self.yearArray indexOfObject:[NSString stringWithFormat:@"%ld年", comp.year]];
+    monthIndex = [self.monthArray indexOfObject:[NSString stringWithFormat:@"%02ld月", comp.month]];
+    dayIndex = [self.dayArray indexOfObject:[NSString stringWithFormat:@"%02ld日", comp.day]];
+    
+    [_pickerView selectRow:yearIndex inComponent:0 animated:YES];
+    [_pickerView selectRow:monthIndex inComponent:1 animated:YES];
+    [_pickerView selectRow:dayIndex inComponent:2 animated:YES];
 }
 
 @end
