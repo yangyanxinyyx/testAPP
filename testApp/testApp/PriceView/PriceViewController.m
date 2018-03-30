@@ -12,6 +12,7 @@
 #import "PriceCarInsuranceQViewController.h"
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceUnderwritingViewController.h"
+#import "PriceAdjustViewController.h"
 @interface PriceViewController ()
 
 @end
@@ -44,7 +45,7 @@
     [self.view addSubview:button2];
     
     UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button3.frame = CGRectMake(220, 144, 100, 50);
+    button3.frame = CGRectMake(220, 144, 150, 50);
     [button3 setTitle:@"客户信息录入" forState:UIControlStateNormal];
     [button3 addTarget:self action:@selector(touchButtonFunction3) forControlEvents:UIControlEventTouchDown];
     button3.backgroundColor = [UIColor blueColor];
@@ -56,6 +57,13 @@
     [button4 addTarget:self action:@selector(touchButtonFunction4) forControlEvents:UIControlEventTouchDown];
     button4.backgroundColor = [UIColor blueColor];
     [self.view addSubview:button4];
+    
+    UIButton *button5 = [UIButton buttonWithType:UIButtonTypeCustom];
+    button5.frame = CGRectMake(220, 244, 150, 50);
+    [button5 setTitle:@"调整报价" forState:UIControlStateNormal];
+    [button5 addTarget:self action:@selector(touchButtonFunction5) forControlEvents:UIControlEventTouchDown];
+    button5.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:button5];
     
 
     
@@ -84,5 +92,10 @@
 - (void)touchButtonFunction4{
     PriceUnderwritingViewController *pinfoVC = [[PriceUnderwritingViewController alloc]init];
     [self.navigationController pushViewController:pinfoVC animated:YES];
+}
+
+- (void)touchButtonFunction5{
+    PriceAdjustViewController *vc = [[PriceAdjustViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
