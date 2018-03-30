@@ -9,7 +9,8 @@
 #import "XCUserUnderWritingViewController.h"
 #import "XCUserUnderWritingDetailViewController.h"
 @interface XCUserUnderWritingViewController ()<XCCheckoutTableViewCellDelegate>
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray * dataArr ;
 @end
 
 @implementation XCUserUnderWritingViewController
@@ -17,7 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"待核保";
-
+    self.dataArr = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",@"4", nil];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,8 +43,11 @@
 {
     __weak typeof (self)weakSelf = self;
     LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否删除" content:nil comfirmStr:@"是" cancelStr:@"否" comfirmClick:^(LYZAlertView *alertView) {
+        [self.dataArr removeObjectAtIndex:indexpath.row];
+        
         //(TODO)删除数据
         [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
+        [self.tableView reloadData];
            } cancelClick:^(LYZAlertView *alertView) {
         [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
     }];
@@ -62,7 +67,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,10 +95,13 @@
         UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
             NSLog(@"=======>Cell Delected Action");
             [weakSelf showAlertViewWithIndepthPathCell:indexPath];
+            [tableView setEditing:NO animated:YES];  // 这句很重要，退出编辑模式，隐藏左滑菜单
+
         }];
         action.backgroundColor = COLOR_RGB_255(0, 77, 162);
-        
-        return [UISwipeActionsConfiguration configurationWithActions:@[action]];
+        UISwipeActionsConfiguration *actions = [UISwipeActionsConfiguration configurationWithActions:@[action]];
+//        actions.performsFirstActionWithFullSwipe = NO;
+        return actions;
     }
     return nil;
 }
@@ -104,9 +112,5 @@
 {
     [self clickCheckDetailButton];
 }
-
-
-
-
 
 @end

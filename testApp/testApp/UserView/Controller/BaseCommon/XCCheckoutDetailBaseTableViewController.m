@@ -27,6 +27,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
     
 }
@@ -57,6 +58,11 @@
 
 #pragma mark - Table viewdata source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;
 }
@@ -68,6 +74,8 @@
     return cell;
     
 }
+
+
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter

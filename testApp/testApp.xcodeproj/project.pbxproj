@@ -46,6 +46,15 @@
 		A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */; };
 		A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */; };
 		A7473833206A84B000BCFE73 /* XCCheckoutDetailInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7473832206A84B000BCFE73 /* XCCheckoutDetailInputCell.m */; };
+		A751BD5E206D28460084C397 /* XCCheckoutDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD5D206D28460084C397 /* XCCheckoutDetailHeaderView.m */; };
+		A751BD61206D42AB0084C397 /* XCMyCommissionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD60206D42AB0084C397 /* XCMyCommissionListCell.m */; };
+		A751BD64206D43D90084C397 /* XCMyCommissionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD63206D43D90084C397 /* XCMyCommissionListModel.m */; };
+		A751BD67206D492C0084C397 /* XCUserCaseBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD66206D492C0084C397 /* XCUserCaseBaseTableViewController.m */; };
+		A751BD6A206D4C9A0084C397 /* XCUserCaseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD69206D4C9A0084C397 /* XCUserCaseListCell.m */; };
+		A751BD6D206D58AA0084C397 /* XCUserInjuryCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD6C206D58AA0084C397 /* XCUserInjuryCaseViewController.m */; };
+		A751BD70206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD6F206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.m */; };
+		A751BD73206D58D20084C397 /* XCUserParticularCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD72206D58D20084C397 /* XCUserParticularCaseViewController.m */; };
+		A751BD76206D58E40084C397 /* XCUserBePaymentCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A751BD75206D58E40084C397 /* XCUserBePaymentCaseViewController.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
@@ -220,6 +229,24 @@
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A7473831206A84B000BCFE73 /* XCCheckoutDetailInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailInputCell.h; sourceTree = "<group>"; };
 		A7473832206A84B000BCFE73 /* XCCheckoutDetailInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailInputCell.m; sourceTree = "<group>"; };
+		A751BD5C206D28460084C397 /* XCCheckoutDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailHeaderView.h; sourceTree = "<group>"; };
+		A751BD5D206D28460084C397 /* XCCheckoutDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailHeaderView.m; sourceTree = "<group>"; };
+		A751BD5F206D42AB0084C397 /* XCMyCommissionListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionListCell.h; sourceTree = "<group>"; };
+		A751BD60206D42AB0084C397 /* XCMyCommissionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionListCell.m; sourceTree = "<group>"; };
+		A751BD62206D43D90084C397 /* XCMyCommissionListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionListModel.h; sourceTree = "<group>"; };
+		A751BD63206D43D90084C397 /* XCMyCommissionListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionListModel.m; sourceTree = "<group>"; };
+		A751BD65206D492C0084C397 /* XCUserCaseBaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseBaseTableViewController.h; sourceTree = "<group>"; };
+		A751BD66206D492C0084C397 /* XCUserCaseBaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseBaseTableViewController.m; sourceTree = "<group>"; };
+		A751BD68206D4C9A0084C397 /* XCUserCaseListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseListCell.h; sourceTree = "<group>"; };
+		A751BD69206D4C9A0084C397 /* XCUserCaseListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseListCell.m; sourceTree = "<group>"; };
+		A751BD6B206D58AA0084C397 /* XCUserInjuryCaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserInjuryCaseViewController.h; sourceTree = "<group>"; };
+		A751BD6C206D58AA0084C397 /* XCUserInjuryCaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserInjuryCaseViewController.m; sourceTree = "<group>"; };
+		A751BD6E206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserNoResponsibilityCaseViewController.h; sourceTree = "<group>"; };
+		A751BD6F206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseViewController.m; sourceTree = "<group>"; };
+		A751BD71206D58D20084C397 /* XCUserParticularCaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseViewController.h; sourceTree = "<group>"; };
+		A751BD72206D58D20084C397 /* XCUserParticularCaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseViewController.m; sourceTree = "<group>"; };
+		A751BD74206D58E40084C397 /* XCUserBePaymentCaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserBePaymentCaseViewController.h; sourceTree = "<group>"; };
+		A751BD75206D58E40084C397 /* XCUserBePaymentCaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserBePaymentCaseViewController.m; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
@@ -581,6 +608,8 @@
 				A71E4895205E590D001670D3 /* XCUserListModel.m */,
 				A71E489E205EB2E7001670D3 /* XCCheckoutModel.h */,
 				A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */,
+				A751BD62206D43D90084C397 /* XCMyCommissionListModel.h */,
+				A751BD63206D43D90084C397 /* XCMyCommissionListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -597,6 +626,12 @@
 				A7C8818E2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m */,
 				A7473831206A84B000BCFE73 /* XCCheckoutDetailInputCell.h */,
 				A7473832206A84B000BCFE73 /* XCCheckoutDetailInputCell.m */,
+				A751BD5C206D28460084C397 /* XCCheckoutDetailHeaderView.h */,
+				A751BD5D206D28460084C397 /* XCCheckoutDetailHeaderView.m */,
+				A751BD5F206D42AB0084C397 /* XCMyCommissionListCell.h */,
+				A751BD60206D42AB0084C397 /* XCMyCommissionListCell.m */,
+				A751BD68206D4C9A0084C397 /* XCUserCaseListCell.h */,
+				A751BD69206D4C9A0084C397 /* XCUserCaseListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -608,6 +643,8 @@
 				A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */,
 				A7C88183206665D80073568F /* XCCheckoutDetailBaseTableViewController.h */,
 				A7C88184206665D80073568F /* XCCheckoutDetailBaseTableViewController.m */,
+				A751BD65206D492C0084C397 /* XCUserCaseBaseTableViewController.h */,
+				A751BD66206D492C0084C397 /* XCUserCaseBaseTableViewController.m */,
 			);
 			path = BaseCommon;
 			sourceTree = "<group>";
@@ -681,6 +718,8 @@
 		A7E1E9D3206BFA28001C9A5D /* 人伤案件 */ = {
 			isa = PBXGroup;
 			children = (
+				A751BD6B206D58AA0084C397 /* XCUserInjuryCaseViewController.h */,
+				A751BD6C206D58AA0084C397 /* XCUserInjuryCaseViewController.m */,
 			);
 			path = "人伤案件";
 			sourceTree = "<group>";
@@ -720,6 +759,8 @@
 		A7E1E9D9206BFB07001C9A5D /* 无责案件 */ = {
 			isa = PBXGroup;
 			children = (
+				A751BD6E206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.h */,
+				A751BD6F206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.m */,
 			);
 			path = "无责案件";
 			sourceTree = "<group>";
@@ -727,6 +768,8 @@
 		A7E1E9DA206BFB0F001C9A5D /* 特殊案件 */ = {
 			isa = PBXGroup;
 			children = (
+				A751BD71206D58D20084C397 /* XCUserParticularCaseViewController.h */,
+				A751BD72206D58D20084C397 /* XCUserParticularCaseViewController.m */,
 			);
 			path = "特殊案件";
 			sourceTree = "<group>";
@@ -734,6 +777,8 @@
 		A7E1E9DB206BFB15001C9A5D /* 代垫付案件 */ = {
 			isa = PBXGroup;
 			children = (
+				A751BD74206D58E40084C397 /* XCUserBePaymentCaseViewController.h */,
+				A751BD75206D58E40084C397 /* XCUserBePaymentCaseViewController.m */,
 			);
 			path = "代垫付案件";
 			sourceTree = "<group>";
@@ -1272,12 +1317,15 @@
 				FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */,
 				25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */,
 				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
+				A751BD70206D58BC0084C397 /* XCUserNoResponsibilityCaseViewController.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
 				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
+				A751BD6A206D4C9A0084C397 /* XCUserCaseListCell.m in Sources */,
 				2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */,
 				A7E1E9EE206BFDB0001C9A5D /* XCUserViolationDetailViewController.m in Sources */,
 				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
+				A751BD61206D42AB0084C397 /* XCMyCommissionListCell.m in Sources */,
 				25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
@@ -1287,6 +1335,7 @@
 				FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */,
 				FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */,
 				A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */,
+				A751BD73206D58D20084C397 /* XCUserParticularCaseViewController.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				A7E1E9E2206BFD0A001C9A5D /* XCUserViolationViewController.m in Sources */,
 				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
@@ -1309,6 +1358,7 @@
 				25D6718D206954BA00F7A684 /* PriceUnderwritingViewController.m in Sources */,
 				250844A6206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m in Sources */,
 				25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */,
+				A751BD67206D492C0084C397 /* XCUserCaseBaseTableViewController.m in Sources */,
 				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
 				A7C8818B2066750B0073568F /* XCUserUnderWritingDetailViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
@@ -1316,15 +1366,19 @@
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */,
 				A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */,
+				A751BD5E206D28460084C397 /* XCCheckoutDetailHeaderView.m in Sources */,
 				25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
 				A7E1E9EB206BFD99001C9A5D /* XCUserAnnualReviewDetailViewController.m in Sources */,
 				A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */,
+				A751BD76206D58E40084C397 /* XCUserBePaymentCaseViewController.m in Sources */,
 				25663ED3205FEC1C0076039A /* PriceCustomerInformEntryViewController.m in Sources */,
+				A751BD64206D43D90084C397 /* XCMyCommissionListModel.m in Sources */,
 				A71E489D205EB22B001670D3 /* XCCheckoutTableViewCell.m in Sources */,
 				25036832205E50060052209A /* PriceInspectViewController.m in Sources */,
 				25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
+				A751BD6D206D58AA0084C397 /* XCUserInjuryCaseViewController.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,

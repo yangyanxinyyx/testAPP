@@ -23,6 +23,7 @@
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
     [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
     [self.tableView registerClass:[XCCheckoutDetailInputCell class] forCellReuseIdentifier:kTextInputCellID];
+    [self.tableView registerClass:[XCCheckoutDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
     [self initUI];
 }
 
@@ -104,6 +105,22 @@
         return cell;
     }
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    XCCheckoutDetailHeaderView *headerView = (XCCheckoutDetailHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
+    
+    [headerView setGroupName:@"基本信息"];
+    
+    return headerView;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 70 * ViewRateBaseOnIP6;
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

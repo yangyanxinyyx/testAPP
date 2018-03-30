@@ -35,12 +35,13 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
     self.tabBarController.tabBar.hidden = YES;
-    [self.tableView setFrame:CGRectMake(0, 64 + 20 * ViewRateBaseOnIP6, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 20 * ViewRateBaseOnIP6)];
+   
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self.tableView setFrame:CGRectMake(0, 64 + 20 * ViewRateBaseOnIP6, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 20 * ViewRateBaseOnIP6)];
     if (self.editingIndexPath)
     {
         [self configSwipeButtons];
@@ -124,8 +125,6 @@
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Table view data source
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
