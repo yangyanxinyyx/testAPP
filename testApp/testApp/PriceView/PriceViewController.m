@@ -13,89 +13,85 @@
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceUnderwritingViewController.h"
 #import "PriceAdjustViewController.h"
-@interface PriceViewController ()
-
+@interface PriceViewController ()<UIScrollViewDelegate>
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIView *topView;
+@property (nonatomic, strong) UIScrollView *myScrollView;
+@property (nonatomic, strong) UIView *searchContenView;
+@property (nonatomic, strong) UITextField *textField;
 @end
 
 @implementation PriceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"报价";
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(20, 44, 100, 50);
-    [button setTitle:@"报价详情" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(touchButtonFunction) forControlEvents:UIControlEventTouchDown];
-    button.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button];
-    
-    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button1.frame = CGRectMake(220, 44, 100, 50);
-    [button1 setTitle:@"查看报价" forState:UIControlStateNormal];
-    [button1 addTarget:self action:@selector(touchButtonFunction1) forControlEvents:UIControlEventTouchDown];
-    button1.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button1];
-    
-    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button2.frame = CGRectMake(20, 144, 100, 50);
-    [button2 setTitle:@"车险报价" forState:UIControlStateNormal];
-    [button2 addTarget:self action:@selector(touchButtonFunction2) forControlEvents:UIControlEventTouchDown];
-    button2.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button2];
-    
-    UIButton *button3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button3.frame = CGRectMake(220, 144, 150, 50);
-    [button3 setTitle:@"客户信息录入" forState:UIControlStateNormal];
-    [button3 addTarget:self action:@selector(touchButtonFunction3) forControlEvents:UIControlEventTouchDown];
-    button3.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button3];
-    
-    UIButton *button4 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button4.frame = CGRectMake(20, 244, 100, 50);
-    [button4 setTitle:@"调整核保" forState:UIControlStateNormal];
-    [button4 addTarget:self action:@selector(touchButtonFunction4) forControlEvents:UIControlEventTouchDown];
-    button4.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button4];
-    
-    UIButton *button5 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button5.frame = CGRectMake(220, 244, 150, 50);
-    [button5 setTitle:@"调整报价" forState:UIControlStateNormal];
-    [button5 addTarget:self action:@selector(touchButtonFunction5) forControlEvents:UIControlEventTouchDown];
-    button5.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:button5];
-    
-
-    
+    [self createUI];
 }
 
-- (void)touchButtonFunction{
-    PriceInfoViewController *pinfoVC = [[PriceInfoViewController alloc]init];
-    [self.navigationController pushViewController:pinfoVC animated:YES];
+- (void)createUI{
+    [self.view addSubview:self.contentView];
+    [self.contentView addSubview:self.topView];
+    [self.contentView addSubview:self.myScrollView];
+    [self.topView addSubview:self.searchContenView];
+    [self.searchContenView addSubview:self.textField];
+}
+- (UIView *)contentView{
+    if (!_contentView) {
+        _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 22, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT)];
+    }
+    return _contentView;
+}
+- (UIScrollView *)myScrollView{
+    if (!_myScrollView) {
+        _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 88 * ViewRateBaseOnIP6 , SCREEN_WIDTH, SCREEN_WIDTH -(88 * ViewRateBaseOnIP6 + 22) -SCREEN_TABBAR_HEIGHT)];
+        _myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+        _myScrollView.bounces = NO;
+        _myScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+        _myScrollView.showsVerticalScrollIndicator = NO;
+        _myScrollView.showsHorizontalScrollIndicator = NO;
+        _myScrollView.delegate = self;
+    }
+    return _myScrollView;
 }
 
-- (void)touchButtonFunction1{
-    PriceInspectViewController *pinfoVC = [[PriceInspectViewController alloc]init];
-    [self.navigationController pushViewController:pinfoVC animated:YES];
+- (UIView *)topView{
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6)];
+        _topView.backgroundColor = [UIColor whiteColor];
+        UIView *segmentView = [[UIView alloc] initWithFrame:CGRectMake(0, 88 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];
+        segmentView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
+        [_topView addSubview:segmentView];
+    }
+    return _topView;
 }
 
-- (void)touchButtonFunction2{
-    PriceCarInsuranceQViewController *pinfoVC = [[PriceCarInsuranceQViewController alloc]init];
-    [self.navigationController pushViewController:pinfoVC animated:YES];
+- (UIView *)searchContenView {
+    if (!_searchContenView) {
+        _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 56 * ViewRateBaseOnIP6)];
+        _searchContenView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        _searchContenView.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
+        _searchContenView.layer.masksToBounds = YES;
+    }
+    return _searchContenView;
 }
 
-- (void)touchButtonFunction3{
-    PriceCustomerInformEntryViewController *pinfoVC = [[PriceCustomerInformEntryViewController alloc]init];
-    [self.navigationController pushViewController:pinfoVC animated:YES];
+- (UITextField *)textField{
+    if (!_textField) {
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6)];
+        _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        _textField.placeholder = @"车牌号/车架号";
+        [_textField setValue:[UIColor colorWithHexString:@"#838383"] forKeyPath:@"_placeholderLabel.textColor"];
+        [_textField setValue:[UIFont boldSystemFontOfSize:26 * ViewRateBaseOnIP6] forKeyPath:@"_placeholderLabel.font"];
+        UIImageView *rightView = [[UIImageView alloc]init];
+        rightView.image = [UIImage imageNamed:@"search"];
+        rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
+        rightView.contentMode = UIViewContentModeCenter;
+        _textField.rightView = rightView;
+        _textField.rightViewMode = UITextFieldViewModeAlways;
+    }
+    return _textField;
 }
 
-- (void)touchButtonFunction4{
-    PriceUnderwritingViewController *pinfoVC = [[PriceUnderwritingViewController alloc]init];
-    [self.navigationController pushViewController:pinfoVC animated:YES];
-}
 
-- (void)touchButtonFunction5{
-    PriceAdjustViewController *vc = [[PriceAdjustViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 @end
