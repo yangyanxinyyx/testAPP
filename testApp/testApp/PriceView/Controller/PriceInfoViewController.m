@@ -57,9 +57,9 @@
                 commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceInsFirst];
             }
             if (indexPath.row == 0) {
-                commerceInsCell.isFirst = YES;
+                [commerceInsCell setCellFrameWithFirst:YES];
             } else {
-                commerceInsCell.isFirst = NO;
+                [commerceInsCell setCellFrameWithFirst:NO];
             }
             commerceInsCell.labelTag.text = @"机动车损险";
             commerceInsCell.labelInsure.text = @"不计免赔";
