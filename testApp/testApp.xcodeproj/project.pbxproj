@@ -7,52 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */; };
-		2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */; };
-		2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */; };
-		25036832205E50060052209A /* PriceInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036831205E50060052209A /* PriceInspectViewController.m */; };
-		25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036834205E51940052209A /* PriceInspectTableViewCell.m */; };
-		25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */; };
-		2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503683D205E5C0F0052209A /* priceCIQChangeView.m */; };
-		25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */; };
-		25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036843205E99620052209A /* PriceCarRecordTableViewCell.m */; };
-		25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25036846205EA5760052209A /* PriceCIQLastYInfoView.m */; };
-		2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */; };
-		2503684E205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */; };
-		250844A3206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 250844A2206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m */; };
-		250844A6206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 250844A5206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m */; };
-		25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A2F205BF12F00B9293E /* PriceInfoViewController.m */; };
-		25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */; };
-		25663ED3205FEC1C0076039A /* PriceCustomerInformEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */; };
-		25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */; };
-		25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */; };
-		25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */; };
-		25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */; };
-		25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */; };
-		25D67186206953EB00F7A684 /* PriceUnderwritingRenewalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717E206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.m */; };
-		25D67187206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6717F206953A600F7A684 /* PriceUnderwritingTextTableViewCell.h */; };
-		25D67188206953EB00F7A684 /* PriceUnderwritingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */; };
-		25D67189206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */; };
-		25D6718A206953EB00F7A684 /* PriceUnderwritingRenewalTableViewCell.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */; };
-		25D6718D206954BA00F7A684 /* PriceUnderwritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */; };
-		25D6718E206954C800F7A684 /* PriceUnderwritingViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */; };
-		A71D2D6A2062C302009B889D /* XCMyCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71D2D692062C302009B889D /* XCMyCommissionViewController.m */; };
-		A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */; };
-		A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4892205E5429001670D3 /* XCUserListHeaderView.m */; };
-		A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4895205E590D001670D3 /* XCUserListModel.m */; };
-		A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */; };
-		A71E489D205EB22B001670D3 /* XCCheckoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */; };
-		A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */; };
-		A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
-		A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A511020597F91000D8D0F /* XCUserTopView.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
-		A7C88185206665D80073568F /* XCCheckoutDetailBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C88184206665D80073568F /* XCCheckoutDetailBaseTableViewController.m */; };
-		A7C88188206667370073568F /* XCCheckoutDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C88187206667370073568F /* XCCheckoutDetailTextCell.m */; };
-		A7C8818B2066750B0073568F /* XCUserUnderWritingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818A2066750B0073568F /* XCUserUnderWritingDetailViewController.m */; };
-		A7C8818F2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818E2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m */; };
-		A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */; };
-		A7C9E0FC205D8F5E00FFEF5B /* userListViewData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
 		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
@@ -75,6 +31,75 @@
 		FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */; };
 		FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */; };
 		FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */; };
+		FC32BD362074652C00817156 /* PriceAdjustViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCF32074652C00817156 /* PriceAdjustViewController.m */; };
+		FC32BD372074652C00817156 /* PriceCarInsuranceQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCF52074652C00817156 /* PriceCarInsuranceQViewController.m */; };
+		FC32BD382074652C00817156 /* PriceCustomerInformEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCF72074652C00817156 /* PriceCustomerInformEntryViewController.m */; };
+		FC32BD392074652C00817156 /* PriceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCF92074652C00817156 /* PriceInfoViewController.m */; };
+		FC32BD3A2074652C00817156 /* PriceInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCFB2074652C00817156 /* PriceInspectViewController.m */; };
+		FC32BD3B2074652C00817156 /* PriceUnderwritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCFD2074652C00817156 /* PriceUnderwritingViewController.m */; };
+		FC32BD3C2074652C00817156 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BCFF2074652C00817156 /* PriceViewController.m */; };
+		FC32BD3D2074652C00817156 /* PriceCarILasetYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD032074652C00817156 /* PriceCarILasetYTableViewCell.m */; };
+		FC32BD3E2074652C00817156 /* PriceCarRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD052074652C00817156 /* PriceCarRecordTableViewCell.m */; };
+		FC32BD3F2074652C00817156 /* PriceCommerceInsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD072074652C00817156 /* PriceCommerceInsTableViewCell.m */; };
+		FC32BD402074652C00817156 /* PriceInfoAddTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD092074652C00817156 /* PriceInfoAddTableViewCell.m */; };
+		FC32BD412074652C00817156 /* PriceInfolabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD0B2074652C00817156 /* PriceInfolabelTableViewCell.m */; };
+		FC32BD422074652C00817156 /* PriceInfoSaveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD0D2074652C00817156 /* PriceInfoSaveTableViewCell.m */; };
+		FC32BD432074652C00817156 /* PriceInspectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD0F2074652C00817156 /* PriceInspectTableViewCell.m */; };
+		FC32BD442074652C00817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD122074652C00817156 /* PriceCRQLastYInfoTableViewCell.m */; };
+		FC32BD452074652C00817156 /* priceCRQLastYLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD142074652C00817156 /* priceCRQLastYLabelTableViewCell.m */; };
+		FC32BD462074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD172074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m */; };
+		FC32BD472074652C00817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD192074652C00817156 /* PriceCustomerInformEntryTableViewCell.m */; };
+		FC32BD482074652C00817156 /* PriceUnderwritingChooseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD1C2074652C00817156 /* PriceUnderwritingChooseTableViewCell.m */; };
+		FC32BD492074652C00817156 /* PriceUnderwritingImportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD1E2074652C00817156 /* PriceUnderwritingImportTableViewCell.m */; };
+		FC32BD4A2074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD202074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m */; };
+		FC32BD4B2074652C00817156 /* PriceUnderwritingSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD222074652C00817156 /* PriceUnderwritingSureTableViewCell.m */; };
+		FC32BD4C2074652C00817156 /* PriceUnderwritingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD242074652C00817156 /* PriceUnderwritingTableViewCell.m */; };
+		FC32BD4D2074652C00817156 /* PriceUnderwritingTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD262074652C00817156 /* PriceUnderwritingTextTableViewCell.m */; };
+		FC32BD4E2074652C00817156 /* PriceAdjustSureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD292074652C00817156 /* PriceAdjustSureTableViewCell.m */; };
+		FC32BD4F2074652C00817156 /* PriceAdjustTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD2B2074652C00817156 /* PriceAdjustTableViewCell.m */; };
+		FC32BD502074652C00817156 /* priceCIQChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD2D2074652C00817156 /* priceCIQChangeView.m */; };
+		FC32BD512074652C00817156 /* PriceCIQLastYInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD2F2074652C00817156 /* PriceCIQLastYInfoView.m */; };
+		FC32BD522074652C00817156 /* PriceInfoCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD312074652C00817156 /* PriceInfoCellView.m */; };
+		FC32BD532074652C00817156 /* SelectSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD332074652C00817156 /* SelectSheetView.m */; };
+		FC32BD542074652C00817156 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD352074652C00817156 /* SelectTimeView.m */; };
+		FC32BDB52074656200817156 /* XCCheckoutBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD592074656100817156 /* XCCheckoutBaseTableViewController.m */; };
+		FC32BDB62074656200817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD5B2074656100817156 /* XCCheckoutDetailBaseTableViewController.m */; };
+		FC32BDB72074656200817156 /* XCUserCaseBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD5D2074656100817156 /* XCUserCaseBaseTableViewController.m */; };
+		FC32BDB82074656200817156 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD5F2074656100817156 /* UserViewController.m */; };
+		FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD622074656100817156 /* XCMyCommissionViewController.m */; };
+		FC32BDBA2074656200817156 /* XCUserInjuryCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD662074656100817156 /* XCUserInjuryCaseViewController.m */; };
+		FC32BDBB2074656200817156 /* XCUserBePaymentCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD692074656100817156 /* XCUserBePaymentCaseViewController.m */; };
+		FC32BDBC2074656200817156 /* XCUserNoResponsibilityCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD6C2074656100817156 /* XCUserNoResponsibilityCaseViewController.m */; };
+		FC32BDBD2074656200817156 /* XCUserParticularCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD6F2074656100817156 /* XCUserParticularCaseViewController.m */; };
+		FC32BDBE2074656200817156 /* XCUserAnnualReviewDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD732074656100817156 /* XCUserAnnualReviewDetailViewController.m */; };
+		FC32BDBF2074656200817156 /* XCUserAnnualReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD752074656100817156 /* XCUserAnnualReviewViewController.m */; };
+		FC32BDC02074656200817156 /* XCUserRepairDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD782074656100817156 /* XCUserRepairDetailViewController.m */; };
+		FC32BDC12074656200817156 /* XCUserRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD7A2074656100817156 /* XCUserRepairViewController.m */; };
+		FC32BDC22074656200817156 /* XCUserViolationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD7D2074656100817156 /* XCUserViolationDetailViewController.m */; };
+		FC32BDC32074656200817156 /* XCUserViolationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD7F2074656100817156 /* XCUserViolationViewController.m */; };
+		FC32BDC42074656200817156 /* XCUserWaitingToPayingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD832074656100817156 /* XCUserWaitingToPayingDetailViewController.m */; };
+		FC32BDC52074656200817156 /* XCUserWaitingToPayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD852074656100817156 /* XCUserWaitingToPayingViewController.m */; };
+		FC32BDC62074656200817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD882074656100817156 /* XCUserWaitingToWriteListDetailViewController.m */; };
+		FC32BDC72074656200817156 /* XCUserWaitingToWriteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD8A2074656100817156 /* XCUserWaitingToWriteListViewController.m */; };
+		FC32BDC82074656200817156 /* XCUserUnderWritingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD8D2074656100817156 /* XCUserUnderWritingDetailViewController.m */; };
+		FC32BDC92074656200817156 /* XCUserUnderWritingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD8F2074656100817156 /* XCUserUnderWritingViewController.m */; };
+		FC32BDCA2074656200817156 /* XCCustomerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD922074656100817156 /* XCCustomerDetailViewController.m */; };
+		FC32BDCB2074656200817156 /* XCCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD942074656100817156 /* XCCustomerViewController.m */; };
+		FC32BDCC2074656200817156 /* XCCheckoutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD972074656100817156 /* XCCheckoutModel.m */; };
+		FC32BDCD2074656200817156 /* XCMyCommissionListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD992074656100817156 /* XCMyCommissionListModel.m */; };
+		FC32BDCE2074656200817156 /* XCUserListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD9B2074656100817156 /* XCUserListModel.m */; };
+		FC32BDCF2074656200817156 /* userListViewData.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC32BD9C2074656100817156 /* userListViewData.plist */; };
+		FC32BDD02074656200817156 /* XCCheckoutDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BD9F2074656100817156 /* XCCheckoutDetailHeaderView.m */; };
+		FC32BDD12074656200817156 /* XCCheckoutDetailInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDA12074656100817156 /* XCCheckoutDetailInputCell.m */; };
+		FC32BDD22074656200817156 /* XCCheckoutDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDA32074656100817156 /* XCCheckoutDetailTextCell.m */; };
+		FC32BDD32074656200817156 /* XCCheckoutDetailTextFiledCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDA52074656100817156 /* XCCheckoutDetailTextFiledCell.m */; };
+		FC32BDD42074656200817156 /* XCCheckoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */; };
+		FC32BDD52074656200817156 /* XCMyCommissionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDA92074656100817156 /* XCMyCommissionListCell.m */; };
+		FC32BDD62074656200817156 /* XCUserCaseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDAB2074656100817156 /* XCUserCaseListCell.m */; };
+		FC32BDD72074656200817156 /* XCUserListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDAE2074656100817156 /* XCUserListCollectionViewCell.m */; };
+		FC32BDD82074656200817156 /* XCUserListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB02074656100817156 /* XCUserListHeaderView.m */; };
+		FC32BDD92074656200817156 /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB22074656100817156 /* XCUserListView.m */; };
+		FC32BDDA2074656200817156 /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB42074656100817156 /* XCUserTopView.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -82,9 +107,7 @@
 		FC47952A205553EA00218362 /* testAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479529205553EA00218362 /* testAppTests.m */; };
 		FC479535205553EA00218362 /* testAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479534205553EA00218362 /* testAppUITests.m */; };
 		FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47954E20556E8B00218362 /* CoverMainViewController.m */; };
-		FC47955220556E9A00218362 /* PriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955120556E9A00218362 /* PriceViewController.m */; };
 		FC47955520556EAB00218362 /* GetCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955420556EAB00218362 /* GetCarViewController.m */; };
-		FC47955820556EBB00218362 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955720556EBB00218362 /* UserViewController.m */; };
 		FC47955C2055765F00218362 /* UserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC47955B2055765F00218362 /* UserInfoManager.m */; };
 		FC4F7D032067748100468032 /* BaseViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D022067748100468032 /* BaseViewController1.m */; };
 		FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0B2067762500468032 /* MedalDetailViewController.m */; };
@@ -138,90 +161,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCommerceInsTableViewCell.h; sourceTree = "<group>"; };
-		25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCommerceInsTableViewCell.m; sourceTree = "<group>"; };
-		2503682A205E4A060052209A /* PriceInfoAddTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoAddTableViewCell.h; sourceTree = "<group>"; };
-		2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoAddTableViewCell.m; sourceTree = "<group>"; };
-		2503682D205E4A800052209A /* PriceInfoSaveTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoSaveTableViewCell.h; sourceTree = "<group>"; };
-		2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoSaveTableViewCell.m; sourceTree = "<group>"; };
-		25036830205E50060052209A /* PriceInspectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInspectViewController.h; sourceTree = "<group>"; };
-		25036831205E50060052209A /* PriceInspectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInspectViewController.m; sourceTree = "<group>"; };
-		25036833205E51940052209A /* PriceInspectTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInspectTableViewCell.h; sourceTree = "<group>"; };
-		25036834205E51940052209A /* PriceInspectTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInspectTableViewCell.m; sourceTree = "<group>"; };
-		25036836205E5AE90052209A /* PriceCarInsuranceQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarInsuranceQViewController.h; sourceTree = "<group>"; };
-		25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarInsuranceQViewController.m; sourceTree = "<group>"; };
-		2503683C205E5C0F0052209A /* priceCIQChangeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceCIQChangeView.h; sourceTree = "<group>"; };
-		2503683D205E5C0F0052209A /* priceCIQChangeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceCIQChangeView.m; sourceTree = "<group>"; };
-		2503683F205E8EE70052209A /* PriceCarILasetYTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarILasetYTableViewCell.h; sourceTree = "<group>"; };
-		25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarILasetYTableViewCell.m; sourceTree = "<group>"; };
-		25036842205E99620052209A /* PriceCarRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCarRecordTableViewCell.h; sourceTree = "<group>"; };
-		25036843205E99620052209A /* PriceCarRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCarRecordTableViewCell.m; sourceTree = "<group>"; };
-		25036845205EA5760052209A /* PriceCIQLastYInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCIQLastYInfoView.h; sourceTree = "<group>"; };
-		25036846205EA5760052209A /* PriceCIQLastYInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCIQLastYInfoView.m; sourceTree = "<group>"; };
-		25036849205EAA010052209A /* priceCRQLastYLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceCRQLastYLabelTableViewCell.h; sourceTree = "<group>"; };
-		2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceCRQLastYLabelTableViewCell.m; sourceTree = "<group>"; };
-		2503684C205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCRQLastYInfoTableViewCell.h; sourceTree = "<group>"; };
-		2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCRQLastYInfoTableViewCell.m; sourceTree = "<group>"; };
-		250844A1206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingImportTableViewCell.h; sourceTree = "<group>"; };
-		250844A2206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingImportTableViewCell.m; sourceTree = "<group>"; };
-		250844A4206A950600DD65DD /* PriceUnderwritingSureTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingSureTableViewCell.h; sourceTree = "<group>"; };
-		250844A5206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingSureTableViewCell.m; sourceTree = "<group>"; };
-		25178A2E205BF12F00B9293E /* PriceInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoViewController.h; sourceTree = "<group>"; };
-		25178A2F205BF12F00B9293E /* PriceInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoViewController.m; sourceTree = "<group>"; };
-		25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
-		25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfolabelTableViewCell.m; sourceTree = "<group>"; };
-		25663ED1205FEC1C0076039A /* PriceCustomerInformEntryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntryViewController.h; sourceTree = "<group>"; };
-		25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryViewController.m; sourceTree = "<group>"; };
-		25663ED5205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntryTableViewCell.h; sourceTree = "<group>"; };
-		25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryTableViewCell.m; sourceTree = "<group>"; };
-		25663ED8206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntrySubmitTableViewCell.h; sourceTree = "<group>"; };
-		25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntrySubmitTableViewCell.m; sourceTree = "<group>"; };
-		25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTextTableViewCell.m; sourceTree = "<group>"; };
-		25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingChooseTableViewCell.h; sourceTree = "<group>"; };
-		25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTableViewCell.h; sourceTree = "<group>"; };
-		25D6717E206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingRenewalTableViewCell.m; sourceTree = "<group>"; };
-		25D6717F206953A600F7A684 /* PriceUnderwritingTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTextTableViewCell.h; sourceTree = "<group>"; };
-		25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTableViewCell.m; sourceTree = "<group>"; };
-		25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingChooseTableViewCell.m; sourceTree = "<group>"; };
-		25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingRenewalTableViewCell.h; sourceTree = "<group>"; };
-		25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingViewController.h; sourceTree = "<group>"; };
-		25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingViewController.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
-		A71D2D682062C302009B889D /* XCMyCommissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionViewController.h; sourceTree = "<group>"; };
-		A71D2D692062C302009B889D /* XCMyCommissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionViewController.m; sourceTree = "<group>"; };
-		A71E488E205E48AA001670D3 /* XCUserListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListCollectionViewCell.h; sourceTree = "<group>"; };
-		A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListCollectionViewCell.m; sourceTree = "<group>"; };
-		A71E4891205E5429001670D3 /* XCUserListHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListHeaderView.h; sourceTree = "<group>"; };
-		A71E4892205E5429001670D3 /* XCUserListHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListHeaderView.m; sourceTree = "<group>"; };
-		A71E4894205E590D001670D3 /* XCUserListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListModel.h; sourceTree = "<group>"; };
-		A71E4895205E590D001670D3 /* XCUserListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListModel.m; sourceTree = "<group>"; };
-		A71E4898205EB1E3001670D3 /* XCCheckoutBaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutBaseTableViewController.h; sourceTree = "<group>"; };
-		A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutBaseTableViewController.m; sourceTree = "<group>"; };
-		A71E489B205EB22B001670D3 /* XCCheckoutTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutTableViewCell.h; sourceTree = "<group>"; };
-		A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutTableViewCell.m; sourceTree = "<group>"; };
-		A71E489E205EB2E7001670D3 /* XCCheckoutModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutModel.h; sourceTree = "<group>"; };
-		A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutModel.m; sourceTree = "<group>"; };
-		A71E48A2205ED0B4001670D3 /* XCUserUnderWritingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserUnderWritingViewController.h; sourceTree = "<group>"; };
-		A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserUnderWritingViewController.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
-		A79A510F20597F91000D8D0F /* XCUserTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserTopView.h; sourceTree = "<group>"; };
-		A79A511020597F91000D8D0F /* XCUserTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserTopView.m; sourceTree = "<group>"; };
 		A7C8818020662B4A0073568F /* LYZAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZAlertView.h; sourceTree = "<group>"; };
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
-		A7C88183206665D80073568F /* XCCheckoutDetailBaseTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailBaseTableViewController.h; sourceTree = "<group>"; };
-		A7C88184206665D80073568F /* XCCheckoutDetailBaseTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailBaseTableViewController.m; sourceTree = "<group>"; };
-		A7C88186206667370073568F /* XCCheckoutDetailTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailTextCell.h; sourceTree = "<group>"; };
-		A7C88187206667370073568F /* XCCheckoutDetailTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailTextCell.m; sourceTree = "<group>"; };
-		A7C881892066750B0073568F /* XCUserUnderWritingDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserUnderWritingDetailViewController.h; sourceTree = "<group>"; };
-		A7C8818A2066750B0073568F /* XCUserUnderWritingDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserUnderWritingDetailViewController.m; sourceTree = "<group>"; };
-		A7C8818D2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailTextFiledCell.h; sourceTree = "<group>"; };
-		A7C8818E2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailTextFiledCell.m; sourceTree = "<group>"; };
-		A7C9E0F8205D8B9F00FFEF5B /* XCUserListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListView.h; sourceTree = "<group>"; };
-		A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListView.m; sourceTree = "<group>"; };
-		A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = userListViewData.plist; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
 		FC1724EF20668FDB00B23D7F /* MyMedalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalView.h; sourceTree = "<group>"; };
@@ -254,6 +200,143 @@
 		FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC2805E3205E5EB000DD0DA9 /* RequestAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAPI.h; sourceTree = "<group>"; };
 		FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAPI.m; sourceTree = "<group>"; };
+		FC32BCF22074652C00817156 /* PriceAdjustViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceAdjustViewController.h; sourceTree = "<group>"; };
+		FC32BCF32074652C00817156 /* PriceAdjustViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceAdjustViewController.m; sourceTree = "<group>"; };
+		FC32BCF42074652C00817156 /* PriceCarInsuranceQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCarInsuranceQViewController.h; sourceTree = "<group>"; };
+		FC32BCF52074652C00817156 /* PriceCarInsuranceQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCarInsuranceQViewController.m; sourceTree = "<group>"; };
+		FC32BCF62074652C00817156 /* PriceCustomerInformEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntryViewController.h; sourceTree = "<group>"; };
+		FC32BCF72074652C00817156 /* PriceCustomerInformEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryViewController.m; sourceTree = "<group>"; };
+		FC32BCF82074652C00817156 /* PriceInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInfoViewController.h; sourceTree = "<group>"; };
+		FC32BCF92074652C00817156 /* PriceInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfoViewController.m; sourceTree = "<group>"; };
+		FC32BCFA2074652C00817156 /* PriceInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInspectViewController.h; sourceTree = "<group>"; };
+		FC32BCFB2074652C00817156 /* PriceInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInspectViewController.m; sourceTree = "<group>"; };
+		FC32BCFC2074652C00817156 /* PriceUnderwritingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingViewController.h; sourceTree = "<group>"; };
+		FC32BCFD2074652C00817156 /* PriceUnderwritingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingViewController.m; sourceTree = "<group>"; };
+		FC32BCFE2074652C00817156 /* PriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceViewController.h; sourceTree = "<group>"; };
+		FC32BCFF2074652C00817156 /* PriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceViewController.m; sourceTree = "<group>"; };
+		FC32BD022074652C00817156 /* PriceCarILasetYTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCarILasetYTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD032074652C00817156 /* PriceCarILasetYTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCarILasetYTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD042074652C00817156 /* PriceCarRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCarRecordTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD052074652C00817156 /* PriceCarRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCarRecordTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD062074652C00817156 /* PriceCommerceInsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCommerceInsTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD072074652C00817156 /* PriceCommerceInsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCommerceInsTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD082074652C00817156 /* PriceInfoAddTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInfoAddTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD092074652C00817156 /* PriceInfoAddTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfoAddTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD0A2074652C00817156 /* PriceInfolabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInfolabelTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD0B2074652C00817156 /* PriceInfolabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfolabelTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD0C2074652C00817156 /* PriceInfoSaveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInfoSaveTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD0D2074652C00817156 /* PriceInfoSaveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfoSaveTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD0E2074652C00817156 /* PriceInspectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInspectTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD0F2074652C00817156 /* PriceInspectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInspectTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD112074652C00817156 /* PriceCRQLastYInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCRQLastYInfoTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD122074652C00817156 /* PriceCRQLastYInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCRQLastYInfoTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD132074652C00817156 /* priceCRQLastYLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priceCRQLastYLabelTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD142074652C00817156 /* priceCRQLastYLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = priceCRQLastYLabelTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD162074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntrySubmitTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD172074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntrySubmitTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD182074652C00817156 /* PriceCustomerInformEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCustomerInformEntryTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD192074652C00817156 /* PriceCustomerInformEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerInformEntryTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD1B2074652C00817156 /* PriceUnderwritingChooseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingChooseTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD1C2074652C00817156 /* PriceUnderwritingChooseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingChooseTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD1D2074652C00817156 /* PriceUnderwritingImportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingImportTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD1E2074652C00817156 /* PriceUnderwritingImportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingImportTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD1F2074652C00817156 /* PriceUnderwritingRenewalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingRenewalTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD202074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingRenewalTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD212074652C00817156 /* PriceUnderwritingSureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingSureTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD222074652C00817156 /* PriceUnderwritingSureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingSureTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD232074652C00817156 /* PriceUnderwritingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD242074652C00817156 /* PriceUnderwritingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD252074652C00817156 /* PriceUnderwritingTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceUnderwritingTextTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD262074652C00817156 /* PriceUnderwritingTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceUnderwritingTextTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD282074652C00817156 /* PriceAdjustSureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceAdjustSureTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD292074652C00817156 /* PriceAdjustSureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceAdjustSureTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD2A2074652C00817156 /* PriceAdjustTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceAdjustTableViewCell.h; sourceTree = "<group>"; };
+		FC32BD2B2074652C00817156 /* PriceAdjustTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceAdjustTableViewCell.m; sourceTree = "<group>"; };
+		FC32BD2C2074652C00817156 /* priceCIQChangeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priceCIQChangeView.h; sourceTree = "<group>"; };
+		FC32BD2D2074652C00817156 /* priceCIQChangeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = priceCIQChangeView.m; sourceTree = "<group>"; };
+		FC32BD2E2074652C00817156 /* PriceCIQLastYInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCIQLastYInfoView.h; sourceTree = "<group>"; };
+		FC32BD2F2074652C00817156 /* PriceCIQLastYInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceCIQLastYInfoView.m; sourceTree = "<group>"; };
+		FC32BD302074652C00817156 /* PriceInfoCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceInfoCellView.h; sourceTree = "<group>"; };
+		FC32BD312074652C00817156 /* PriceInfoCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfoCellView.m; sourceTree = "<group>"; };
+		FC32BD322074652C00817156 /* SelectSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSheetView.h; sourceTree = "<group>"; };
+		FC32BD332074652C00817156 /* SelectSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSheetView.m; sourceTree = "<group>"; };
+		FC32BD342074652C00817156 /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
+		FC32BD352074652C00817156 /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
+		FC32BD582074656100817156 /* XCCheckoutBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutBaseTableViewController.h; sourceTree = "<group>"; };
+		FC32BD592074656100817156 /* XCCheckoutBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutBaseTableViewController.m; sourceTree = "<group>"; };
+		FC32BD5A2074656100817156 /* XCCheckoutDetailBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailBaseTableViewController.h; sourceTree = "<group>"; };
+		FC32BD5B2074656100817156 /* XCCheckoutDetailBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailBaseTableViewController.m; sourceTree = "<group>"; };
+		FC32BD5C2074656100817156 /* XCUserCaseBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserCaseBaseTableViewController.h; sourceTree = "<group>"; };
+		FC32BD5D2074656100817156 /* XCUserCaseBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseBaseTableViewController.m; sourceTree = "<group>"; };
+		FC32BD5E2074656100817156 /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		FC32BD5F2074656100817156 /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		FC32BD612074656100817156 /* XCMyCommissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionViewController.h; sourceTree = "<group>"; };
+		FC32BD622074656100817156 /* XCMyCommissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionViewController.m; sourceTree = "<group>"; };
+		FC32BD652074656100817156 /* XCUserInjuryCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserInjuryCaseViewController.h; sourceTree = "<group>"; };
+		FC32BD662074656100817156 /* XCUserInjuryCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserInjuryCaseViewController.m; sourceTree = "<group>"; };
+		FC32BD682074656100817156 /* XCUserBePaymentCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserBePaymentCaseViewController.h; sourceTree = "<group>"; };
+		FC32BD692074656100817156 /* XCUserBePaymentCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserBePaymentCaseViewController.m; sourceTree = "<group>"; };
+		FC32BD6B2074656100817156 /* XCUserNoResponsibilityCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserNoResponsibilityCaseViewController.h; sourceTree = "<group>"; };
+		FC32BD6C2074656100817156 /* XCUserNoResponsibilityCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseViewController.m; sourceTree = "<group>"; };
+		FC32BD6E2074656100817156 /* XCUserParticularCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseViewController.h; sourceTree = "<group>"; };
+		FC32BD6F2074656100817156 /* XCUserParticularCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseViewController.m; sourceTree = "<group>"; };
+		FC32BD722074656100817156 /* XCUserAnnualReviewDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserAnnualReviewDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD732074656100817156 /* XCUserAnnualReviewDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserAnnualReviewDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD742074656100817156 /* XCUserAnnualReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserAnnualReviewViewController.h; sourceTree = "<group>"; };
+		FC32BD752074656100817156 /* XCUserAnnualReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserAnnualReviewViewController.m; sourceTree = "<group>"; };
+		FC32BD772074656100817156 /* XCUserRepairDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserRepairDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD782074656100817156 /* XCUserRepairDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserRepairDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD792074656100817156 /* XCUserRepairViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserRepairViewController.h; sourceTree = "<group>"; };
+		FC32BD7A2074656100817156 /* XCUserRepairViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserRepairViewController.m; sourceTree = "<group>"; };
+		FC32BD7C2074656100817156 /* XCUserViolationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserViolationDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD7D2074656100817156 /* XCUserViolationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD7E2074656100817156 /* XCUserViolationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserViolationViewController.h; sourceTree = "<group>"; };
+		FC32BD7F2074656100817156 /* XCUserViolationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationViewController.m; sourceTree = "<group>"; };
+		FC32BD822074656100817156 /* XCUserWaitingToPayingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserWaitingToPayingDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD832074656100817156 /* XCUserWaitingToPayingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserWaitingToPayingDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD842074656100817156 /* XCUserWaitingToPayingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserWaitingToPayingViewController.h; sourceTree = "<group>"; };
+		FC32BD852074656100817156 /* XCUserWaitingToPayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserWaitingToPayingViewController.m; sourceTree = "<group>"; };
+		FC32BD872074656100817156 /* XCUserWaitingToWriteListDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserWaitingToWriteListDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD882074656100817156 /* XCUserWaitingToWriteListDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserWaitingToWriteListDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD892074656100817156 /* XCUserWaitingToWriteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserWaitingToWriteListViewController.h; sourceTree = "<group>"; };
+		FC32BD8A2074656100817156 /* XCUserWaitingToWriteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserWaitingToWriteListViewController.m; sourceTree = "<group>"; };
+		FC32BD8C2074656100817156 /* XCUserUnderWritingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserUnderWritingDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD8D2074656100817156 /* XCUserUnderWritingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserUnderWritingDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD8E2074656100817156 /* XCUserUnderWritingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserUnderWritingViewController.h; sourceTree = "<group>"; };
+		FC32BD8F2074656100817156 /* XCUserUnderWritingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserUnderWritingViewController.m; sourceTree = "<group>"; };
+		FC32BD912074656100817156 /* XCCustomerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCustomerDetailViewController.h; sourceTree = "<group>"; };
+		FC32BD922074656100817156 /* XCCustomerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCustomerDetailViewController.m; sourceTree = "<group>"; };
+		FC32BD932074656100817156 /* XCCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCustomerViewController.h; sourceTree = "<group>"; };
+		FC32BD942074656100817156 /* XCCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCustomerViewController.m; sourceTree = "<group>"; };
+		FC32BD962074656100817156 /* XCCheckoutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutModel.h; sourceTree = "<group>"; };
+		FC32BD972074656100817156 /* XCCheckoutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutModel.m; sourceTree = "<group>"; };
+		FC32BD982074656100817156 /* XCMyCommissionListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionListModel.h; sourceTree = "<group>"; };
+		FC32BD992074656100817156 /* XCMyCommissionListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionListModel.m; sourceTree = "<group>"; };
+		FC32BD9A2074656100817156 /* XCUserListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserListModel.h; sourceTree = "<group>"; };
+		FC32BD9B2074656100817156 /* XCUserListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserListModel.m; sourceTree = "<group>"; };
+		FC32BD9C2074656100817156 /* userListViewData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = userListViewData.plist; sourceTree = "<group>"; };
+		FC32BD9E2074656100817156 /* XCCheckoutDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailHeaderView.h; sourceTree = "<group>"; };
+		FC32BD9F2074656100817156 /* XCCheckoutDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailHeaderView.m; sourceTree = "<group>"; };
+		FC32BDA02074656100817156 /* XCCheckoutDetailInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailInputCell.h; sourceTree = "<group>"; };
+		FC32BDA12074656100817156 /* XCCheckoutDetailInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailInputCell.m; sourceTree = "<group>"; };
+		FC32BDA22074656100817156 /* XCCheckoutDetailTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailTextCell.h; sourceTree = "<group>"; };
+		FC32BDA32074656100817156 /* XCCheckoutDetailTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailTextCell.m; sourceTree = "<group>"; };
+		FC32BDA42074656100817156 /* XCCheckoutDetailTextFiledCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailTextFiledCell.h; sourceTree = "<group>"; };
+		FC32BDA52074656100817156 /* XCCheckoutDetailTextFiledCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailTextFiledCell.m; sourceTree = "<group>"; };
+		FC32BDA62074656100817156 /* XCCheckoutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCheckoutTableViewCell.h; sourceTree = "<group>"; };
+		FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutTableViewCell.m; sourceTree = "<group>"; };
+		FC32BDA82074656100817156 /* XCMyCommissionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCMyCommissionListCell.h; sourceTree = "<group>"; };
+		FC32BDA92074656100817156 /* XCMyCommissionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCMyCommissionListCell.m; sourceTree = "<group>"; };
+		FC32BDAA2074656100817156 /* XCUserCaseListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserCaseListCell.h; sourceTree = "<group>"; };
+		FC32BDAB2074656100817156 /* XCUserCaseListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseListCell.m; sourceTree = "<group>"; };
+		FC32BDAD2074656100817156 /* XCUserListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserListCollectionViewCell.h; sourceTree = "<group>"; };
+		FC32BDAE2074656100817156 /* XCUserListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserListCollectionViewCell.m; sourceTree = "<group>"; };
+		FC32BDAF2074656100817156 /* XCUserListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserListHeaderView.h; sourceTree = "<group>"; };
+		FC32BDB02074656100817156 /* XCUserListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserListHeaderView.m; sourceTree = "<group>"; };
+		FC32BDB12074656100817156 /* XCUserListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserListView.h; sourceTree = "<group>"; };
+		FC32BDB22074656100817156 /* XCUserListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserListView.m; sourceTree = "<group>"; };
+		FC32BDB32074656100817156 /* XCUserTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserTopView.h; sourceTree = "<group>"; };
+		FC32BDB42074656100817156 /* XCUserTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserTopView.m; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -269,12 +352,8 @@
 		FC479536205553EA00218362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC47954D20556E8B00218362 /* CoverMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverMainViewController.h; sourceTree = "<group>"; };
 		FC47954E20556E8B00218362 /* CoverMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverMainViewController.m; sourceTree = "<group>"; };
-		FC47955020556E9A00218362 /* PriceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceViewController.h; sourceTree = "<group>"; };
-		FC47955120556E9A00218362 /* PriceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceViewController.m; sourceTree = "<group>"; };
 		FC47955320556EAB00218362 /* GetCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarViewController.h; sourceTree = "<group>"; };
 		FC47955420556EAB00218362 /* GetCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarViewController.m; sourceTree = "<group>"; };
-		FC47955620556EBB00218362 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
-		FC47955720556EBB00218362 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		FC47955A2055765F00218362 /* UserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoManager.h; sourceTree = "<group>"; };
 		FC47955B2055765F00218362 /* UserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoManager.m; sourceTree = "<group>"; };
 		FC4F7D012067748100468032 /* BaseViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController1.h; sourceTree = "<group>"; };
@@ -348,107 +427,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25036848205EA9950052209A /* 上年续保报价 */ = {
-			isa = PBXGroup;
-			children = (
-				25036849205EAA010052209A /* priceCRQLastYLabelTableViewCell.h */,
-				2503684A205EAA010052209A /* priceCRQLastYLabelTableViewCell.m */,
-				2503684C205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.h */,
-				2503684D205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m */,
-			);
-			path = "上年续保报价";
-			sourceTree = "<group>";
-		};
-		25178A2B205BF0EB00B9293E /* VIew */ = {
-			isa = PBXGroup;
-			children = (
-				25178A31205BF19700B9293E /* cell */,
-				2503683C205E5C0F0052209A /* priceCIQChangeView.h */,
-				2503683D205E5C0F0052209A /* priceCIQChangeView.m */,
-				25036845205EA5760052209A /* PriceCIQLastYInfoView.h */,
-				25036846205EA5760052209A /* PriceCIQLastYInfoView.m */,
-			);
-			path = VIew;
-			sourceTree = "<group>";
-		};
-		25178A2C205BF10000B9293E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		25178A2D205BF10900B9293E /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				25178A2E205BF12F00B9293E /* PriceInfoViewController.h */,
-				25178A2F205BF12F00B9293E /* PriceInfoViewController.m */,
-				25036830205E50060052209A /* PriceInspectViewController.h */,
-				25036831205E50060052209A /* PriceInspectViewController.m */,
-				25036836205E5AE90052209A /* PriceCarInsuranceQViewController.h */,
-				25036837205E5AE90052209A /* PriceCarInsuranceQViewController.m */,
-				25663ED1205FEC1C0076039A /* PriceCustomerInformEntryViewController.h */,
-				25663ED2205FEC1C0076039A /* PriceCustomerInformEntryViewController.m */,
-				25D6718B206954BA00F7A684 /* PriceUnderwritingViewController.h */,
-				25D6718C206954BA00F7A684 /* PriceUnderwritingViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		25178A31205BF19700B9293E /* cell */ = {
-			isa = PBXGroup;
-			children = (
-				25D6717A206953A600F7A684 /* 提交核保 */,
-				25663ED4205FEE420076039A /* 客户信息录入 */,
-				25036848205EA9950052209A /* 上年续保报价 */,
-				25178A32205BF47800B9293E /* PriceInfolabelTableViewCell.h */,
-				25178A33205BF47800B9293E /* PriceInfolabelTableViewCell.m */,
-				25036824205D57870052209A /* PriceCommerceInsTableViewCell.h */,
-				25036825205D57870052209A /* PriceCommerceInsTableViewCell.m */,
-				2503682A205E4A060052209A /* PriceInfoAddTableViewCell.h */,
-				2503682B205E4A060052209A /* PriceInfoAddTableViewCell.m */,
-				2503682D205E4A800052209A /* PriceInfoSaveTableViewCell.h */,
-				2503682E205E4A800052209A /* PriceInfoSaveTableViewCell.m */,
-				25036833205E51940052209A /* PriceInspectTableViewCell.h */,
-				25036834205E51940052209A /* PriceInspectTableViewCell.m */,
-				2503683F205E8EE70052209A /* PriceCarILasetYTableViewCell.h */,
-				25036840205E8EE70052209A /* PriceCarILasetYTableViewCell.m */,
-				25036842205E99620052209A /* PriceCarRecordTableViewCell.h */,
-				25036843205E99620052209A /* PriceCarRecordTableViewCell.m */,
-			);
-			path = cell;
-			sourceTree = "<group>";
-		};
-		25663ED4205FEE420076039A /* 客户信息录入 */ = {
-			isa = PBXGroup;
-			children = (
-				25663ED5205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.h */,
-				25663ED6205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m */,
-				25663ED8206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.h */,
-				25663ED9206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m */,
-			);
-			path = "客户信息录入";
-			sourceTree = "<group>";
-		};
-		25D6717A206953A600F7A684 /* 提交核保 */ = {
-			isa = PBXGroup;
-			children = (
-				25D6717C206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.h */,
-				25D67181206953A600F7A684 /* PriceUnderwritingChooseTableViewCell.m */,
-				25D6717F206953A600F7A684 /* PriceUnderwritingTextTableViewCell.h */,
-				25D6717B206953A600F7A684 /* PriceUnderwritingTextTableViewCell.m */,
-				25D6717D206953A600F7A684 /* PriceUnderwritingTableViewCell.h */,
-				25D67180206953A600F7A684 /* PriceUnderwritingTableViewCell.m */,
-				25D67182206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.h */,
-				25D6717E206953A600F7A684 /* PriceUnderwritingRenewalTableViewCell.m */,
-				250844A1206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.h */,
-				250844A2206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m */,
-				250844A4206A950600DD65DD /* PriceUnderwritingSureTableViewCell.h */,
-				250844A5206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m */,
-			);
-			path = "提交核保";
-			sourceTree = "<group>";
-		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,41 +434,6 @@
 				DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		A71D2D6B2062C5E2009B889D /* MyCommission */ = {
-			isa = PBXGroup;
-			children = (
-				A71D2D682062C302009B889D /* XCMyCommissionViewController.h */,
-				A71D2D692062C302009B889D /* XCMyCommissionViewController.m */,
-			);
-			path = MyCommission;
-			sourceTree = "<group>";
-		};
-		A71E4897205E9B01001670D3 /* 个人中心 */ = {
-			isa = PBXGroup;
-			children = (
-				A79A510F20597F91000D8D0F /* XCUserTopView.h */,
-				A79A511020597F91000D8D0F /* XCUserTopView.m */,
-				A7C9E0F8205D8B9F00FFEF5B /* XCUserListView.h */,
-				A7C9E0F9205D8B9F00FFEF5B /* XCUserListView.m */,
-				A71E488E205E48AA001670D3 /* XCUserListCollectionViewCell.h */,
-				A71E488F205E48AA001670D3 /* XCUserListCollectionViewCell.m */,
-				A71E4891205E5429001670D3 /* XCUserListHeaderView.h */,
-				A71E4892205E5429001670D3 /* XCUserListHeaderView.m */,
-			);
-			path = "个人中心";
-			sourceTree = "<group>";
-		};
-		A71E48A1205ED099001670D3 /* subController */ = {
-			isa = PBXGroup;
-			children = (
-				A71E48A2205ED0B4001670D3 /* XCUserUnderWritingViewController.h */,
-				A71E48A3205ED0B4001670D3 /* XCUserUnderWritingViewController.m */,
-				A7C881892066750B0073568F /* XCUserUnderWritingDetailViewController.h */,
-				A7C8818A2066750B0073568F /* XCUserUnderWritingDetailViewController.m */,
-			);
-			path = subController;
 			sourceTree = "<group>";
 		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
@@ -519,55 +462,6 @@
 				A71EFD78205AD7FA00F2F83F /* categary */,
 			);
 			path = Extend;
-			sourceTree = "<group>";
-		};
-		A79A510C20597F09000D8D0F /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				A7C8818C2066BBDD0073568F /* BaseCommon */,
-				A71D2D6B2062C5E2009B889D /* MyCommission */,
-				A71E48A1205ED099001670D3 /* subController */,
-				FC47955620556EBB00218362 /* UserViewController.h */,
-				FC47955720556EBB00218362 /* UserViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		A79A510D20597F1E000D8D0F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				A71E4894205E590D001670D3 /* XCUserListModel.h */,
-				A71E4895205E590D001670D3 /* XCUserListModel.m */,
-				A71E489E205EB2E7001670D3 /* XCCheckoutModel.h */,
-				A71E489F205EB2E7001670D3 /* XCCheckoutModel.m */,
-				A7C9E0FB205D8F5E00FFEF5B /* userListViewData.plist */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		A79A510E20597F27000D8D0F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				A71E4897205E9B01001670D3 /* 个人中心 */,
-				A71E489B205EB22B001670D3 /* XCCheckoutTableViewCell.h */,
-				A71E489C205EB22B001670D3 /* XCCheckoutTableViewCell.m */,
-				A7C88186206667370073568F /* XCCheckoutDetailTextCell.h */,
-				A7C88187206667370073568F /* XCCheckoutDetailTextCell.m */,
-				A7C8818D2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.h */,
-				A7C8818E2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		A7C8818C2066BBDD0073568F /* BaseCommon */ = {
-			isa = PBXGroup;
-			children = (
-				A71E4898205EB1E3001670D3 /* XCCheckoutBaseTableViewController.h */,
-				A71E4899205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m */,
-				A7C88183206665D80073568F /* XCCheckoutDetailBaseTableViewController.h */,
-				A7C88184206665D80073568F /* XCCheckoutDetailBaseTableViewController.m */,
-			);
-			path = BaseCommon;
 			sourceTree = "<group>";
 		};
 		B52118B0BB7070CDBEEBB2CF /* Frameworks */ = {
@@ -725,6 +619,373 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		FC32BCF02074652C00817156 /* PriceView */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BCF12074652C00817156 /* Controller */,
+				FC32BCFE2074652C00817156 /* PriceViewController.h */,
+				FC32BCFF2074652C00817156 /* PriceViewController.m */,
+				FC32BD002074652C00817156 /* VIew */,
+			);
+			path = PriceView;
+			sourceTree = "<group>";
+		};
+		FC32BCF12074652C00817156 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BCF22074652C00817156 /* PriceAdjustViewController.h */,
+				FC32BCF32074652C00817156 /* PriceAdjustViewController.m */,
+				FC32BCF42074652C00817156 /* PriceCarInsuranceQViewController.h */,
+				FC32BCF52074652C00817156 /* PriceCarInsuranceQViewController.m */,
+				FC32BCF62074652C00817156 /* PriceCustomerInformEntryViewController.h */,
+				FC32BCF72074652C00817156 /* PriceCustomerInformEntryViewController.m */,
+				FC32BCF82074652C00817156 /* PriceInfoViewController.h */,
+				FC32BCF92074652C00817156 /* PriceInfoViewController.m */,
+				FC32BCFA2074652C00817156 /* PriceInspectViewController.h */,
+				FC32BCFB2074652C00817156 /* PriceInspectViewController.m */,
+				FC32BCFC2074652C00817156 /* PriceUnderwritingViewController.h */,
+				FC32BCFD2074652C00817156 /* PriceUnderwritingViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FC32BD002074652C00817156 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD012074652C00817156 /* cell */,
+				FC32BD2C2074652C00817156 /* priceCIQChangeView.h */,
+				FC32BD2D2074652C00817156 /* priceCIQChangeView.m */,
+				FC32BD2E2074652C00817156 /* PriceCIQLastYInfoView.h */,
+				FC32BD2F2074652C00817156 /* PriceCIQLastYInfoView.m */,
+				FC32BD302074652C00817156 /* PriceInfoCellView.h */,
+				FC32BD312074652C00817156 /* PriceInfoCellView.m */,
+				FC32BD322074652C00817156 /* SelectSheetView.h */,
+				FC32BD332074652C00817156 /* SelectSheetView.m */,
+				FC32BD342074652C00817156 /* SelectTimeView.h */,
+				FC32BD352074652C00817156 /* SelectTimeView.m */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		FC32BD012074652C00817156 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD022074652C00817156 /* PriceCarILasetYTableViewCell.h */,
+				FC32BD032074652C00817156 /* PriceCarILasetYTableViewCell.m */,
+				FC32BD042074652C00817156 /* PriceCarRecordTableViewCell.h */,
+				FC32BD052074652C00817156 /* PriceCarRecordTableViewCell.m */,
+				FC32BD062074652C00817156 /* PriceCommerceInsTableViewCell.h */,
+				FC32BD072074652C00817156 /* PriceCommerceInsTableViewCell.m */,
+				FC32BD082074652C00817156 /* PriceInfoAddTableViewCell.h */,
+				FC32BD092074652C00817156 /* PriceInfoAddTableViewCell.m */,
+				FC32BD0A2074652C00817156 /* PriceInfolabelTableViewCell.h */,
+				FC32BD0B2074652C00817156 /* PriceInfolabelTableViewCell.m */,
+				FC32BD0C2074652C00817156 /* PriceInfoSaveTableViewCell.h */,
+				FC32BD0D2074652C00817156 /* PriceInfoSaveTableViewCell.m */,
+				FC32BD0E2074652C00817156 /* PriceInspectTableViewCell.h */,
+				FC32BD0F2074652C00817156 /* PriceInspectTableViewCell.m */,
+				FC32BD102074652C00817156 /* 上年续保报价 */,
+				FC32BD152074652C00817156 /* 客户信息录入 */,
+				FC32BD1A2074652C00817156 /* 提交核保 */,
+				FC32BD272074652C00817156 /* 调整报价 */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		FC32BD102074652C00817156 /* 上年续保报价 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD112074652C00817156 /* PriceCRQLastYInfoTableViewCell.h */,
+				FC32BD122074652C00817156 /* PriceCRQLastYInfoTableViewCell.m */,
+				FC32BD132074652C00817156 /* priceCRQLastYLabelTableViewCell.h */,
+				FC32BD142074652C00817156 /* priceCRQLastYLabelTableViewCell.m */,
+			);
+			path = "上年续保报价";
+			sourceTree = "<group>";
+		};
+		FC32BD152074652C00817156 /* 客户信息录入 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD162074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.h */,
+				FC32BD172074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m */,
+				FC32BD182074652C00817156 /* PriceCustomerInformEntryTableViewCell.h */,
+				FC32BD192074652C00817156 /* PriceCustomerInformEntryTableViewCell.m */,
+			);
+			path = "客户信息录入";
+			sourceTree = "<group>";
+		};
+		FC32BD1A2074652C00817156 /* 提交核保 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD1B2074652C00817156 /* PriceUnderwritingChooseTableViewCell.h */,
+				FC32BD1C2074652C00817156 /* PriceUnderwritingChooseTableViewCell.m */,
+				FC32BD1D2074652C00817156 /* PriceUnderwritingImportTableViewCell.h */,
+				FC32BD1E2074652C00817156 /* PriceUnderwritingImportTableViewCell.m */,
+				FC32BD1F2074652C00817156 /* PriceUnderwritingRenewalTableViewCell.h */,
+				FC32BD202074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m */,
+				FC32BD212074652C00817156 /* PriceUnderwritingSureTableViewCell.h */,
+				FC32BD222074652C00817156 /* PriceUnderwritingSureTableViewCell.m */,
+				FC32BD232074652C00817156 /* PriceUnderwritingTableViewCell.h */,
+				FC32BD242074652C00817156 /* PriceUnderwritingTableViewCell.m */,
+				FC32BD252074652C00817156 /* PriceUnderwritingTextTableViewCell.h */,
+				FC32BD262074652C00817156 /* PriceUnderwritingTextTableViewCell.m */,
+			);
+			path = "提交核保";
+			sourceTree = "<group>";
+		};
+		FC32BD272074652C00817156 /* 调整报价 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD282074652C00817156 /* PriceAdjustSureTableViewCell.h */,
+				FC32BD292074652C00817156 /* PriceAdjustSureTableViewCell.m */,
+				FC32BD2A2074652C00817156 /* PriceAdjustTableViewCell.h */,
+				FC32BD2B2074652C00817156 /* PriceAdjustTableViewCell.m */,
+			);
+			path = "调整报价";
+			sourceTree = "<group>";
+		};
+		FC32BD552074656100817156 /* UserView */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD562074656100817156 /* Controller */,
+				FC32BD952074656100817156 /* Model */,
+				FC32BD9C2074656100817156 /* userListViewData.plist */,
+				FC32BD9D2074656100817156 /* View */,
+			);
+			path = UserView;
+			sourceTree = "<group>";
+		};
+		FC32BD562074656100817156 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD572074656100817156 /* BaseCommon */,
+				FC32BD5E2074656100817156 /* UserViewController.h */,
+				FC32BD5F2074656100817156 /* UserViewController.m */,
+				FC32BD602074656100817156 /* 我的佣金 */,
+				FC32BD632074656100817156 /* 案件跟进 */,
+				FC32BD702074656100817156 /* 车务客户列表 */,
+				FC32BD802074656100817156 /* 车险客户列表 */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FC32BD572074656100817156 /* BaseCommon */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD582074656100817156 /* XCCheckoutBaseTableViewController.h */,
+				FC32BD592074656100817156 /* XCCheckoutBaseTableViewController.m */,
+				FC32BD5A2074656100817156 /* XCCheckoutDetailBaseTableViewController.h */,
+				FC32BD5B2074656100817156 /* XCCheckoutDetailBaseTableViewController.m */,
+				FC32BD5C2074656100817156 /* XCUserCaseBaseTableViewController.h */,
+				FC32BD5D2074656100817156 /* XCUserCaseBaseTableViewController.m */,
+			);
+			path = BaseCommon;
+			sourceTree = "<group>";
+		};
+		FC32BD602074656100817156 /* 我的佣金 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD612074656100817156 /* XCMyCommissionViewController.h */,
+				FC32BD622074656100817156 /* XCMyCommissionViewController.m */,
+			);
+			path = "我的佣金";
+			sourceTree = "<group>";
+		};
+		FC32BD632074656100817156 /* 案件跟进 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD642074656100817156 /* 人伤案件 */,
+				FC32BD672074656100817156 /* 代垫付案件 */,
+				FC32BD6A2074656100817156 /* 无责案件 */,
+				FC32BD6D2074656100817156 /* 特殊案件 */,
+			);
+			path = "案件跟进";
+			sourceTree = "<group>";
+		};
+		FC32BD642074656100817156 /* 人伤案件 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD652074656100817156 /* XCUserInjuryCaseViewController.h */,
+				FC32BD662074656100817156 /* XCUserInjuryCaseViewController.m */,
+			);
+			path = "人伤案件";
+			sourceTree = "<group>";
+		};
+		FC32BD672074656100817156 /* 代垫付案件 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD682074656100817156 /* XCUserBePaymentCaseViewController.h */,
+				FC32BD692074656100817156 /* XCUserBePaymentCaseViewController.m */,
+			);
+			path = "代垫付案件";
+			sourceTree = "<group>";
+		};
+		FC32BD6A2074656100817156 /* 无责案件 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD6B2074656100817156 /* XCUserNoResponsibilityCaseViewController.h */,
+				FC32BD6C2074656100817156 /* XCUserNoResponsibilityCaseViewController.m */,
+			);
+			path = "无责案件";
+			sourceTree = "<group>";
+		};
+		FC32BD6D2074656100817156 /* 特殊案件 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD6E2074656100817156 /* XCUserParticularCaseViewController.h */,
+				FC32BD6F2074656100817156 /* XCUserParticularCaseViewController.m */,
+			);
+			path = "特殊案件";
+			sourceTree = "<group>";
+		};
+		FC32BD702074656100817156 /* 车务客户列表 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD712074656100817156 /* 年审 */,
+				FC32BD762074656100817156 /* 维修 */,
+				FC32BD7B2074656100817156 /* 违章 */,
+			);
+			path = "车务客户列表";
+			sourceTree = "<group>";
+		};
+		FC32BD712074656100817156 /* 年审 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD722074656100817156 /* XCUserAnnualReviewDetailViewController.h */,
+				FC32BD732074656100817156 /* XCUserAnnualReviewDetailViewController.m */,
+				FC32BD742074656100817156 /* XCUserAnnualReviewViewController.h */,
+				FC32BD752074656100817156 /* XCUserAnnualReviewViewController.m */,
+			);
+			path = "年审";
+			sourceTree = "<group>";
+		};
+		FC32BD762074656100817156 /* 维修 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD772074656100817156 /* XCUserRepairDetailViewController.h */,
+				FC32BD782074656100817156 /* XCUserRepairDetailViewController.m */,
+				FC32BD792074656100817156 /* XCUserRepairViewController.h */,
+				FC32BD7A2074656100817156 /* XCUserRepairViewController.m */,
+			);
+			path = "维修";
+			sourceTree = "<group>";
+		};
+		FC32BD7B2074656100817156 /* 违章 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD7C2074656100817156 /* XCUserViolationDetailViewController.h */,
+				FC32BD7D2074656100817156 /* XCUserViolationDetailViewController.m */,
+				FC32BD7E2074656100817156 /* XCUserViolationViewController.h */,
+				FC32BD7F2074656100817156 /* XCUserViolationViewController.m */,
+			);
+			path = "违章";
+			sourceTree = "<group>";
+		};
+		FC32BD802074656100817156 /* 车险客户列表 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD812074656100817156 /* 已核保代缴费 */,
+				FC32BD862074656100817156 /* 已缴费待打单 */,
+				FC32BD8B2074656100817156 /* 待核保 */,
+				FC32BD902074656100817156 /* 我的客户 */,
+			);
+			path = "车险客户列表";
+			sourceTree = "<group>";
+		};
+		FC32BD812074656100817156 /* 已核保代缴费 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD822074656100817156 /* XCUserWaitingToPayingDetailViewController.h */,
+				FC32BD832074656100817156 /* XCUserWaitingToPayingDetailViewController.m */,
+				FC32BD842074656100817156 /* XCUserWaitingToPayingViewController.h */,
+				FC32BD852074656100817156 /* XCUserWaitingToPayingViewController.m */,
+			);
+			path = "已核保代缴费";
+			sourceTree = "<group>";
+		};
+		FC32BD862074656100817156 /* 已缴费待打单 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD872074656100817156 /* XCUserWaitingToWriteListDetailViewController.h */,
+				FC32BD882074656100817156 /* XCUserWaitingToWriteListDetailViewController.m */,
+				FC32BD892074656100817156 /* XCUserWaitingToWriteListViewController.h */,
+				FC32BD8A2074656100817156 /* XCUserWaitingToWriteListViewController.m */,
+			);
+			path = "已缴费待打单";
+			sourceTree = "<group>";
+		};
+		FC32BD8B2074656100817156 /* 待核保 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD8C2074656100817156 /* XCUserUnderWritingDetailViewController.h */,
+				FC32BD8D2074656100817156 /* XCUserUnderWritingDetailViewController.m */,
+				FC32BD8E2074656100817156 /* XCUserUnderWritingViewController.h */,
+				FC32BD8F2074656100817156 /* XCUserUnderWritingViewController.m */,
+			);
+			path = "待核保";
+			sourceTree = "<group>";
+		};
+		FC32BD902074656100817156 /* 我的客户 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD912074656100817156 /* XCCustomerDetailViewController.h */,
+				FC32BD922074656100817156 /* XCCustomerDetailViewController.m */,
+				FC32BD932074656100817156 /* XCCustomerViewController.h */,
+				FC32BD942074656100817156 /* XCCustomerViewController.m */,
+			);
+			path = "我的客户";
+			sourceTree = "<group>";
+		};
+		FC32BD952074656100817156 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD962074656100817156 /* XCCheckoutModel.h */,
+				FC32BD972074656100817156 /* XCCheckoutModel.m */,
+				FC32BD982074656100817156 /* XCMyCommissionListModel.h */,
+				FC32BD992074656100817156 /* XCMyCommissionListModel.m */,
+				FC32BD9A2074656100817156 /* XCUserListModel.h */,
+				FC32BD9B2074656100817156 /* XCUserListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FC32BD9D2074656100817156 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BD9E2074656100817156 /* XCCheckoutDetailHeaderView.h */,
+				FC32BD9F2074656100817156 /* XCCheckoutDetailHeaderView.m */,
+				FC32BDA02074656100817156 /* XCCheckoutDetailInputCell.h */,
+				FC32BDA12074656100817156 /* XCCheckoutDetailInputCell.m */,
+				FC32BDA22074656100817156 /* XCCheckoutDetailTextCell.h */,
+				FC32BDA32074656100817156 /* XCCheckoutDetailTextCell.m */,
+				FC32BDA42074656100817156 /* XCCheckoutDetailTextFiledCell.h */,
+				FC32BDA52074656100817156 /* XCCheckoutDetailTextFiledCell.m */,
+				FC32BDA62074656100817156 /* XCCheckoutTableViewCell.h */,
+				FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */,
+				FC32BDA82074656100817156 /* XCMyCommissionListCell.h */,
+				FC32BDA92074656100817156 /* XCMyCommissionListCell.m */,
+				FC32BDAA2074656100817156 /* XCUserCaseListCell.h */,
+				FC32BDAB2074656100817156 /* XCUserCaseListCell.m */,
+				FC32BDAC2074656100817156 /* 个人中心 */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FC32BDAC2074656100817156 /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BDAD2074656100817156 /* XCUserListCollectionViewCell.h */,
+				FC32BDAE2074656100817156 /* XCUserListCollectionViewCell.m */,
+				FC32BDAF2074656100817156 /* XCUserListHeaderView.h */,
+				FC32BDB02074656100817156 /* XCUserListHeaderView.m */,
+				FC32BDB12074656100817156 /* XCUserListView.h */,
+				FC32BDB22074656100817156 /* XCUserListView.m */,
+				FC32BDB32074656100817156 /* XCUserTopView.h */,
+				FC32BDB42074656100817156 /* XCUserTopView.m */,
+			);
+			path = "个人中心";
+			sourceTree = "<group>";
+		};
 		FC479504205553E900218362 = {
 			isa = PBXGroup;
 			children = (
@@ -754,9 +1015,9 @@
 				FC47955920556EE300218362 /* Common */,
 				FC4795472055565600218362 /* LoginView */,
 				FC4795462055565200218362 /* CoverMainView */,
-				FC4795452055564E00218362 /* PriceView */,
+				FC32BCF02074652C00817156 /* PriceView */,
 				FC4795442055564A00218362 /* GetCarView */,
-				FC4795422055563B00218362 /* UserView */,
+				FC32BD552074656100817156 /* UserView */,
 				A79A510720597A0F000D8D0F /* Tool */,
 				A79A510820597A21000D8D0F /* Extend */,
 				FC479510205553E900218362 /* AppDelegate.h */,
@@ -789,16 +1050,6 @@
 			path = testAppUITests;
 			sourceTree = "<group>";
 		};
-		FC4795422055563B00218362 /* UserView */ = {
-			isa = PBXGroup;
-			children = (
-				A79A510E20597F27000D8D0F /* View */,
-				A79A510D20597F1E000D8D0F /* Model */,
-				A79A510C20597F09000D8D0F /* Controller */,
-			);
-			path = UserView;
-			sourceTree = "<group>";
-		};
 		FC4795442055564A00218362 /* GetCarView */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,18 +1058,6 @@
 				FCF87673206BFF4C00CF6FDE /* VC */,
 			);
 			path = GetCarView;
-			sourceTree = "<group>";
-		};
-		FC4795452055564E00218362 /* PriceView */ = {
-			isa = PBXGroup;
-			children = (
-				25178A2D205BF10900B9293E /* Controller */,
-				25178A2C205BF10000B9293E /* Model */,
-				25178A2B205BF0EB00B9293E /* VIew */,
-				FC47955020556E9A00218362 /* PriceViewController.h */,
-				FC47955120556E9A00218362 /* PriceViewController.m */,
-			);
-			path = PriceView;
 			sourceTree = "<group>";
 		};
 		FC4795462055565200218362 /* CoverMainView */ = {
@@ -1005,7 +1244,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7C9E0FC205D8F5E00FFEF5B /* userListViewData.plist in Resources */,
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
 				FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */,
 				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
@@ -1032,6 +1270,7 @@
 				FCCC0EBE206150E400986A9E /* price_select@2x.png in Resources */,
 				FCCC0EB9206150E400986A9E /* user_select@2x.png in Resources */,
 				FC2805C6205D96B900DD0DA9 /* login_preson@3x.png in Resources */,
+				FC32BDCF2074656200817156 /* userListViewData.plist in Resources */,
 				FCCC0ECD2061519000986A9E /* coverMain_nomnal@3x.png in Resources */,
 				FCCC0EBC206150E400986A9E /* coverMain_select@2x.png in Resources */,
 				FC2805CA205D96B900DD0DA9 /* 背景@2x.png in Resources */,
@@ -1117,77 +1356,100 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D6718E206954C800F7A684 /* PriceUnderwritingViewController.h in Sources */,
 				FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */,
-				25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */,
-				25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */,
-				25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */,
-				25D67186206953EB00F7A684 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
-				25D67187206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.h in Sources */,
-				25D67188206953EB00F7A684 /* PriceUnderwritingTableViewCell.m in Sources */,
-				25D67189206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.m in Sources */,
-				25D6718A206953EB00F7A684 /* PriceUnderwritingRenewalTableViewCell.h in Sources */,
-				A7C88188206667370073568F /* XCCheckoutDetailTextCell.m in Sources */,
-				25178A34205BF47800B9293E /* PriceInfolabelTableViewCell.m in Sources */,
+				FC32BDC12074656200817156 /* XCUserRepairViewController.m in Sources */,
 				FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */,
-				25663ED7205FEEFA0076039A /* PriceCustomerInformEntryTableViewCell.m in Sources */,
-				A79A511120597F91000D8D0F /* XCUserTopView.m in Sources */,
+				FC32BDD82074656200817156 /* XCUserListHeaderView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
 				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
-				2503684B205EAA010052209A /* priceCRQLastYLabelTableViewCell.m in Sources */,
-				FC47955820556EBB00218362 /* UserViewController.m in Sources */,
+				FC32BDCE2074656200817156 /* XCUserListModel.m in Sources */,
+				FC32BD462074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
+				FC32BDBC2074656200817156 /* XCUserNoResponsibilityCaseViewController.m in Sources */,
+				FC32BDD92074656200817156 /* XCUserListView.m in Sources */,
+				FC32BDD22074656200817156 /* XCCheckoutDetailTextCell.m in Sources */,
+				FC32BD372074652C00817156 /* PriceCarInsuranceQViewController.m in Sources */,
+				FC32BDC92074656200817156 /* XCUserUnderWritingViewController.m in Sources */,
+				FC32BDBD2074656200817156 /* XCUserParticularCaseViewController.m in Sources */,
+				FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
-				25036826205D57870052209A /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
-				FC47955220556E9A00218362 /* PriceViewController.m in Sources */,
-				A7C88185206665D80073568F /* XCCheckoutDetailBaseTableViewController.m in Sources */,
-				A71E48A4205ED0B4001670D3 /* XCUserUnderWritingViewController.m in Sources */,
+				FC32BDCA2074656200817156 /* XCCustomerDetailViewController.m in Sources */,
+				FC32BDC02074656200817156 /* XCUserRepairDetailViewController.m in Sources */,
+				FC32BD4D2074652C00817156 /* PriceUnderwritingTextTableViewCell.m in Sources */,
+				FC32BD4A2074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
+				FC32BD3B2074652C00817156 /* PriceUnderwritingViewController.m in Sources */,
+				FC32BDCC2074656200817156 /* XCCheckoutModel.m in Sources */,
+				FC32BD492074652C00817156 /* PriceUnderwritingImportTableViewCell.m in Sources */,
 				FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */,
 				FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */,
-				A71E4896205E590D001670D3 /* XCUserListModel.m in Sources */,
+				FC32BD412074652C00817156 /* PriceInfolabelTableViewCell.m in Sources */,
+				FC32BD502074652C00817156 /* priceCIQChangeView.m in Sources */,
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
-				2503683E205E5C0F0052209A /* priceCIQChangeView.m in Sources */,
 				A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */,
-				25036847205EA5760052209A /* PriceCIQLastYInfoView.m in Sources */,
-				A7C8818F2066BDBE0073568F /* XCCheckoutDetailTextFiledCell.m in Sources */,
+				FC32BD3C2074652C00817156 /* PriceViewController.m in Sources */,
+				FC32BDD72074656200817156 /* XCUserListCollectionViewCell.m in Sources */,
+				FC32BD3A2074652C00817156 /* PriceInspectViewController.m in Sources */,
+				FC32BDBF2074656200817156 /* XCUserAnnualReviewViewController.m in Sources */,
+				FC32BD432074652C00817156 /* PriceInspectTableViewCell.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,
-				25036838205E5AE90052209A /* PriceCarInsuranceQViewController.m in Sources */,
-				A71D2D6A2062C302009B889D /* XCMyCommissionViewController.m in Sources */,
-				2503682C205E4A060052209A /* PriceInfoAddTableViewCell.m in Sources */,
+				FC32BD382074652C00817156 /* PriceCustomerInformEntryViewController.m in Sources */,
+				FC32BD532074652C00817156 /* SelectSheetView.m in Sources */,
+				FC32BDCB2074656200817156 /* XCCustomerViewController.m in Sources */,
+				FC32BD522074652C00817156 /* PriceInfoCellView.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
-				2503684E205EAEAB0052209A /* PriceCRQLastYInfoTableViewCell.m in Sources */,
-				25D6718D206954BA00F7A684 /* PriceUnderwritingViewController.m in Sources */,
-				250844A6206A950600DD65DD /* PriceUnderwritingSureTableViewCell.m in Sources */,
-				25036841205E8EE70052209A /* PriceCarILasetYTableViewCell.m in Sources */,
-				25178A30205BF12F00B9293E /* PriceInfoViewController.m in Sources */,
-				A7C8818B2066750B0073568F /* XCUserUnderWritingDetailViewController.m in Sources */,
+				FC32BDBA2074656200817156 /* XCUserInjuryCaseViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
+				FC32BDB82074656200817156 /* UserViewController.m in Sources */,
+				FC32BDC72074656200817156 /* XCUserWaitingToWriteListViewController.m in Sources */,
+				FC32BDB52074656200817156 /* XCCheckoutBaseTableViewController.m in Sources */,
+				FC32BD4F2074652C00817156 /* PriceAdjustTableViewCell.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
+				FC32BD512074652C00817156 /* PriceCIQLastYInfoView.m in Sources */,
+				FC32BD442074652C00817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
-				A71E4890205E48AA001670D3 /* XCUserListCollectionViewCell.m in Sources */,
-				A71E489A205EB1E3001670D3 /* XCCheckoutBaseTableViewController.m in Sources */,
-				25663EDA206004470076039A /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
-				A7C9E0FA205D8B9F00FFEF5B /* XCUserListView.m in Sources */,
-				25663ED3205FEC1C0076039A /* PriceCustomerInformEntryViewController.m in Sources */,
-				A71E489D205EB22B001670D3 /* XCCheckoutTableViewCell.m in Sources */,
-				25036832205E50060052209A /* PriceInspectViewController.m in Sources */,
-				25036835205E51940052209A /* PriceInspectTableViewCell.m in Sources */,
+				FC32BD3E2074652C00817156 /* PriceCarRecordTableViewCell.m in Sources */,
+				FC32BDC62074656200817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */,
+				FC32BDD52074656200817156 /* XCMyCommissionListCell.m in Sources */,
+				FC32BD4C2074652C00817156 /* PriceUnderwritingTableViewCell.m in Sources */,
+				FC32BD402074652C00817156 /* PriceInfoAddTableViewCell.m in Sources */,
+				FC32BD472074652C00817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */,
+				FC32BDC52074656200817156 /* XCUserWaitingToPayingViewController.m in Sources */,
+				FC32BDD42074656200817156 /* XCCheckoutTableViewCell.m in Sources */,
+				FC32BD3F2074652C00817156 /* PriceCommerceInsTableViewCell.m in Sources */,
+				FC32BDC32074656200817156 /* XCUserViolationViewController.m in Sources */,
+				FC32BD392074652C00817156 /* PriceInfoViewController.m in Sources */,
+				FC32BDD32074656200817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
+				FC32BD362074652C00817156 /* PriceAdjustViewController.m in Sources */,
+				FC32BDD02074656200817156 /* XCCheckoutDetailHeaderView.m in Sources */,
+				FC32BD542074652C00817156 /* SelectTimeView.m in Sources */,
+				FC32BDDA2074656200817156 /* XCUserTopView.m in Sources */,
+				FC32BD452074652C00817156 /* priceCRQLastYLabelTableViewCell.m in Sources */,
+				FC32BD3D2074652C00817156 /* PriceCarILasetYTableViewCell.m in Sources */,
+				FC32BD482074652C00817156 /* PriceUnderwritingChooseTableViewCell.m in Sources */,
+				FC32BDC22074656200817156 /* XCUserViolationDetailViewController.m in Sources */,
+				FC32BDB62074656200817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */,
+				FC32BDC42074656200817156 /* XCUserWaitingToPayingDetailViewController.m in Sources */,
+				FC32BD422074652C00817156 /* PriceInfoSaveTableViewCell.m in Sources */,
+				FC32BD4B2074652C00817156 /* PriceUnderwritingSureTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
-				25036844205E99620052209A /* PriceCarRecordTableViewCell.m in Sources */,
+				FC32BDB72074656200817156 /* XCUserCaseBaseTableViewController.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
+				FC32BDBE2074656200817156 /* XCUserAnnualReviewDetailViewController.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
+				FC32BDBB2074656200817156 /* XCUserBePaymentCaseViewController.m in Sources */,
+				FC32BDCD2074656200817156 /* XCMyCommissionListModel.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
-				2503682F205E4A800052209A /* PriceInfoSaveTableViewCell.m in Sources */,
+				FC32BDD62074656200817156 /* XCUserCaseListCell.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
-				A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */,
 				FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */,
+				FC32BDC82074656200817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
 				FCF87672206BD9C600CF6FDE /* GetCarModel.m in Sources */,
-				250844A3206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m in Sources */,
 				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,
 				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,
-				A71E4893205E5429001670D3 /* XCUserListHeaderView.m in Sources */,
+				FC32BD4E2074652C00817156 /* PriceAdjustSureTableViewCell.m in Sources */,
+				FC32BDD12074656200817156 /* XCCheckoutDetailInputCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

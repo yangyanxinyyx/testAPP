@@ -147,7 +147,9 @@
 }
 
 +(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
-    [self getRequest:MYCOMISSION_API paramenter:paramenter header:header success:^(id response) {
+
+//    NSString *str= @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/web/commission/selectCommission";
+    [self getRequest:MYCOMISSION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
