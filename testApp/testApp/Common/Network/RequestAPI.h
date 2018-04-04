@@ -24,4 +24,8 @@
 //我的勋章
 +(void)getMyMedal:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
+#pragma mark - 个人中心
+
+//我的佣金
++(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 @end

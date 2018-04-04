@@ -7,7 +7,7 @@
 //
 
 #import "XCMyCommissionViewController.h"
-
+#import "RequestAPI.h"
 @interface XCMyCommissionViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView ;
@@ -19,6 +19,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title  = @"我的佣金";
+    NSDictionary *param = @{
+                            @"user_id":[UserInfoManager shareInstance].userID,
+                            };
+    [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
+        NSLog(@"%@",response);
+    } fail:^(id error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated

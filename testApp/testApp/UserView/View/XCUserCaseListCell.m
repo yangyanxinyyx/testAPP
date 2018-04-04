@@ -43,7 +43,8 @@
     [_checkDetailBtn.titleLabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
 //    [_checkDetailBtn.titleLabel setTextColor:COLOR_RGB_255(104, 153, 232)];
     [_checkDetailBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
-    [_checkDetailBtn.titleLabel setText:@"查看详情"];
+    [_checkDetailBtn setTitle:@"查看详情" forState:UIControlStateNormal];
+    [_checkDetailBtn addTarget:self action:@selector(clickCheckDetail:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_caseNameLabel];
     [self addSubview:_caseProcessLabel];
     [self addSubview:_checkDetailBtn];
@@ -61,13 +62,20 @@
     labelSize = _caseProcessLabel.frame.size;
     [_caseProcessLabel setFrame:CGRectMake(_caseNameLabel.frame.origin.x, _caseNameLabel.frame.origin.y + _caseProcessLabel.frame.size.height + 20 * ViewRateBaseOnIP6 , labelSize.width, 24 * ViewRateBaseOnIP6)];
     
-//    [_checkDetailBtn sizeToFit];
+    [_checkDetailBtn sizeToFit];
     labelSize = _checkDetailBtn.frame.size;
     [_checkDetailBtn setFrame:CGRectMake(616 * ViewRateBaseOnIP6, (self.bounds.size.height - 24 * ViewRateBaseOnIP6) * 0.5, labelSize.width, 24 * ViewRateBaseOnIP6 )];
     
 }
 
 #pragma mark - Action Method
+- (void)clickCheckDetail:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCUserCaseListCellClickDetailButtonHandler:cell:)]) {
+        [self.delegate XCUserCaseListCellClickDetailButtonHandler:button cell:self];
+    }
+}
+
 
 #pragma mark - Delegates & Notifications
 
