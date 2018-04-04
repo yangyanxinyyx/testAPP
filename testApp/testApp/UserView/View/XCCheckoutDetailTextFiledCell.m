@@ -36,15 +36,15 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
     [_titleLabel sizeToFit];
     CGSize labelSize = _titleLabel.frame.size;
-    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6, labelSize.width,24 * ViewRateBaseOnIP6)];
+    CGFloat labeH = 25 * ViewRateBaseOnIP6;
+    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
     
     [_textField sizeToFit];
     labelSize = _textField.frame.size;
-    [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, 24 * ViewRateBaseOnIP6)];
-    
+    [_textField setBackgroundColor:COLOR_RGB_255(240, 240, 240)];
+    [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
 }
 #pragma mark - Init Method
 
@@ -87,12 +87,24 @@
 
 - (void)setTitle:(NSString *)title
 {
-    [_titleLabel setText:title];
+    if ([_title isEqualToString:title]) {
+        return;
+    }
+    _title = title;
+    [_titleLabel setText:_title];
+    [_titleLabel sizeToFit];
+
 }
 
 - (void)setTitlePlaceholder:(NSString *)titlePlaceholder
 {
-    [_textField setPlaceholder:titlePlaceholder];
+    if ([_titlePlaceholder isEqualToString:titlePlaceholder]) {
+        return;
+    }
+    _titlePlaceholder = titlePlaceholder;
+    NSString *newString = [NSString stringWithFormat:@"   %@",_titlePlaceholder];
+    [_textField setPlaceholder:newString];
+    [_textField sizeToFit];
 }
 
 @end

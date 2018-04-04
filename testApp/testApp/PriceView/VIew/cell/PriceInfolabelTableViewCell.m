@@ -42,7 +42,6 @@
     self.labelNumber.backgroundColor = [UIColor clearColor];
     self.labelNumber.textColor = [UIColor colorWithHexString:@"#444444"];
     self.labelNumber.font = [UIFont systemFontOfSize:22 * ViewRateBaseOnIP6];
-    
 }
 
 - (void)awakeFromNib {

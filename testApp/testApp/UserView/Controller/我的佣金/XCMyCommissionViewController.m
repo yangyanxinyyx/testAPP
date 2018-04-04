@@ -7,7 +7,7 @@
 //
 
 #import "XCMyCommissionViewController.h"
-
+#import "RequestAPI.h"
 @interface XCMyCommissionViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView * tableView ;
@@ -18,16 +18,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title  = @"我的佣金";
+    NSDictionary *param = @{
+                            @"user_id":[UserInfoManager shareInstance].userID,
+                            };
+    [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
+        NSLog(@"%@",response);
+    } fail:^(id error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+
 }
 
 #pragma mark - UITableViewDelegate&DateSourceDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 10;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,10 +59,5 @@
     return cell;
     
 }
-
-
-
-
-
 
 @end

@@ -38,11 +38,12 @@
     
     [_titleLabel sizeToFit];
     CGSize labelSize = _titleLabel.frame.size;
-    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6, labelSize.width,24 * ViewRateBaseOnIP6)];
+    CGFloat labeH = 25 * ViewRateBaseOnIP6;
+    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
     
     [_placeholderLabel sizeToFit];
     labelSize = _placeholderLabel.frame.size;
-    [_placeholderLabel setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, 24 * ViewRateBaseOnIP6)];
+    [_placeholderLabel setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, labeH)];
     
 }
 
@@ -56,10 +57,11 @@
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
+
 - (void)configSubVies
 {
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_titleLabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
+    [_titleLabel setFont:[UIFont systemFontOfSize: 26 * ViewRateBaseOnIP6]];
     [_titleLabel setTextColor:COLOR_RGB_255(68, 68, 68)];
     [self addSubview:_titleLabel];
     
@@ -74,12 +76,24 @@
 
 - (void)setTitle:(NSString *)title
 {
-    [_titleLabel setText:title];
+    [_titleLabel setText:title]; if ([_title isEqualToString:title]) {
+        return;
+    }
+    _title = title;
+    [_titleLabel setText:_title];
+    [_titleLabel sizeToFit];
+
 }
 
 - (void)setTitlePlaceholder:(NSString *)titlePlaceholder
 {
-    [_placeholderLabel setText:titlePlaceholder];
+    if ([_titlePlaceholder isEqualToString:titlePlaceholder]) {
+        return;
+    }
+    _titlePlaceholder = titlePlaceholder;
+    [_placeholderLabel setText:_titlePlaceholder];
+    [_placeholderLabel sizeToFit];
+
 }
 
 

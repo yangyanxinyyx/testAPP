@@ -13,10 +13,15 @@
 #import "PriceUnderwritingRenewalTableViewCell.h"
 #import "PriceUnderwritingImportTableViewCell.h"
 #import "PriceUnderwritingSureTableViewCell.h"
+#import "SelectTimeView.h"
+#import "SelectSheetView.h"
 @interface PriceUnderwritingViewController ()<BaseNavigationBarDelegate,UITableViewDelegate,UITableViewDataSource,PriceUnderwritingImportTableViewCellDelegate,PriceUnderwritingTextTableViewCellDelegate,PriceUnderwritingSureTableViewCellDelegate>
 @property (nonatomic, strong) UIView *viewContent;
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) NSNotification *notification;
+@property (nonatomic, strong) SelectTimeView *selectTimeV;
+@property (nonatomic, strong) SelectSheetView *selectSheetVCompany;
+@property (nonatomic, strong) SelectSheetView *selectSheetVInstitution;
 @end
 
 @implementation PriceUnderwritingViewController
@@ -196,6 +201,29 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 5) {
+        [_selectTimeV inputSelectTiemView:YES];
+        _selectTimeV.block = ^(NSString *timeStr) {
+            
+        };
+    }
+    if (indexPath.row == 6) {
+        [_selectTimeV inputSelectTiemView:YES];
+        _selectTimeV.block = ^(NSString *timeStr) {
+          
+        };
+    }
+    
+    if (indexPath.row == 7) {
+        _selectSheetVCompany.hidden = NO;
+    }
+    
+    if (indexPath.row == 8) {
+        _selectSheetVInstitution.hidden = NO;
+    }
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     // 通过 通知中心 发送 通知
     [[NSNotificationCenter defaultCenter] postNotification:_notification];
@@ -210,6 +238,25 @@
 - (void)createUI{
     [self.view addSubview:self.viewContent];
     [self.viewContent addSubview:self.myTableView];
+    
+    _selectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[UIApplication sharedApplication].keyWindow addSubview:_selectTimeV];
+    _selectTimeV.hidden = YES;
+    
+    _selectSheetVCompany = [[SelectSheetView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_selectSheetVCompany setDataWithDataArray:@[@"广州分公司",@"佛山分公司",@"湛江分公司",@"肇庆分公司"]];
+    [[UIApplication sharedApplication].keyWindow addSubview:_selectSheetVCompany];
+    _selectSheetVCompany.hidden = YES;
+    
+    _selectSheetVInstitution = [[SelectSheetView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_selectSheetVInstitution setDataWithDataArray:@[@"人保-白云支",@"人保-从化支",@"人保-金融街",@"人保-开发支",@"广州平安",@"广州其他"]];
+    [[UIApplication sharedApplication].keyWindow addSubview:_selectSheetVInstitution];
+    _selectSheetVInstitution.hidden = YES;
+    
+    _selectSheetVInstitution.block = ^(NSInteger tag) {
+//        NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:tag];
+//        [self.myTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    };
 }
 - (UIView *)viewContent{
     if (!_viewContent) {

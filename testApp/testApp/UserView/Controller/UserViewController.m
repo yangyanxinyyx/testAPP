@@ -51,11 +51,13 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
 }
+
 
 - (void)viewWillLayoutSubviews
 {
@@ -226,6 +228,7 @@
         [_listView  registerClass:[XCUserListCollectionViewCell class] forCellWithReuseIdentifier:kCellID];
         [_listView registerClass:[XCUserListHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewID];
         [_listView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID];
+        _listView.showsVerticalScrollIndicator = NO;
         _listView.dataSource = self;
         _listView.delegate = self;
     }

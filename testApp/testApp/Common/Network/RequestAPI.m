@@ -31,6 +31,8 @@
 
 //业务端获取门店订单列表（接车列表）
 #define GETCARLIST_API [NSString stringWithFormat:@"%@/api/web/order/findOrderByStoreId",API_PREFIX]
+//我的佣金
+#define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
 
 @implementation RequestAPI
 
@@ -138,6 +140,14 @@
 +(void)updatePassWord:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:UPDATEPASSWORD_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:MYCOMISSION_API paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

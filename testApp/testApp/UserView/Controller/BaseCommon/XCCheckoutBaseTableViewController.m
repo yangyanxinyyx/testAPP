@@ -20,17 +20,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    [self.view setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.tableView registerClass:[XCCheckoutTableViewCell class] forCellReuseIdentifier:kcheckCellID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+    self.tabBarController.tabBar.hidden = YES;
+   
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self.tableView setFrame:CGRectMake(0, 64 + 20 * ViewRateBaseOnIP6, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 20 * ViewRateBaseOnIP6)];
     if (self.editingIndexPath)
     {
         [self configSwipeButtons];
@@ -115,8 +126,6 @@
 
 #pragma mark - Table view data source
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
@@ -144,5 +153,6 @@
 {
     self.editingIndexPath = nil;
 }
+
 
 @end

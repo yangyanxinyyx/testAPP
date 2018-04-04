@@ -14,4 +14,5 @@
 @property (nonatomic, strong) UILabel *labelAnnotate;
 @property (nonatomic, strong) UILabel *labelInsure;
 @property (nonatomic, strong) UILabel *labelNumber;
+- (void)setCellFrameWithFirst:(BOOL)isFirst;
 @end
