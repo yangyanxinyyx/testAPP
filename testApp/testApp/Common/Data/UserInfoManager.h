@@ -7,6 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@interface CoverMainModel : NSObject
+
+@end
+
 //勋章
 @interface UserMedal : NSObject
 

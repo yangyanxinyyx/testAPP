@@ -114,6 +114,8 @@
 		FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766A206BCF9B00CF6FDE /* 汽车1.jpg */; };
 		FCF8766E206BCF9C00CF6FDE /* 汽车3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766B206BCF9B00CF6FDE /* 汽车3.jpg */; };
 		FCF8766F206BCF9C00CF6FDE /* 汽车2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCF8766C206BCF9B00CF6FDE /* 汽车2.jpg */; };
+		FCF87672206BD9C600CF6FDE /* GetCarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF87671206BD9C600CF6FDE /* GetCarModel.m */; };
+		FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF87676206BFF7C00CF6FDE /* GetCarListCell.m */; };
 		FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFAF950205A7011001E9796 /* BaseTabbarController.m */; };
 		FCFB6024206102E500587763 /* CoverPerformanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFB6023206102E500587763 /* CoverPerformanceView.m */; };
 /* End PBXBuildFile section */
@@ -310,6 +312,10 @@
 		FCF8766A206BCF9B00CF6FDE /* 汽车1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车1.jpg"; sourceTree = "<group>"; };
 		FCF8766B206BCF9B00CF6FDE /* 汽车3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车3.jpg"; sourceTree = "<group>"; };
 		FCF8766C206BCF9B00CF6FDE /* 汽车2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "汽车2.jpg"; sourceTree = "<group>"; };
+		FCF87670206BD9C600CF6FDE /* GetCarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarModel.h; sourceTree = "<group>"; };
+		FCF87671206BD9C600CF6FDE /* GetCarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarModel.m; sourceTree = "<group>"; };
+		FCF87675206BFF7C00CF6FDE /* GetCarListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarListCell.h; sourceTree = "<group>"; };
+		FCF87676206BFF7C00CF6FDE /* GetCarListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarListCell.m; sourceTree = "<group>"; };
 		FCFAF94F205A7011001E9796 /* BaseTabbarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTabbarController.h; sourceTree = "<group>"; };
 		FCFAF950205A7011001E9796 /* BaseTabbarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabbarController.m; sourceTree = "<group>"; };
 		FCFB6022206102E500587763 /* CoverPerformanceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverPerformanceView.h; sourceTree = "<group>"; };
@@ -796,12 +802,9 @@
 		FC4795442055564A00218362 /* GetCarView */ = {
 			isa = PBXGroup;
 			children = (
-				FC47955320556EAB00218362 /* GetCarViewController.h */,
-				FC47955420556EAB00218362 /* GetCarViewController.m */,
-				FCF86B9B2069580100CF6FDE /* GetCarListViewController.h */,
-				FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */,
-				FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */,
-				FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */,
+				FCC6AAAB2073AEF500A17B35 /* Model */,
+				FCF87674206BFF5400CF6FDE /* View */,
+				FCF87673206BFF4C00CF6FDE /* VC */,
 			);
 			path = GetCarView;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 		FC4795462055565200218362 /* CoverMainView */ = {
 			isa = PBXGroup;
 			children = (
+				FCC6AAAA2073AEEC00A17B35 /* Model */,
 				FC1724EB20654D6600B23D7F /* View */,
 				FC1724EA20654D5F00B23D7F /* VC */,
 			);
@@ -852,6 +856,44 @@
 				A7C8818120662B4A0073568F /* LYZAlertView.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		FCC6AAAA2073AEEC00A17B35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FCC6AAAB2073AEF500A17B35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCF87670206BD9C600CF6FDE /* GetCarModel.h */,
+				FCF87671206BD9C600CF6FDE /* GetCarModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FCF87673206BFF4C00CF6FDE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				FC47955320556EAB00218362 /* GetCarViewController.h */,
+				FC47955420556EAB00218362 /* GetCarViewController.m */,
+				FCF86B9B2069580100CF6FDE /* GetCarListViewController.h */,
+				FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */,
+				FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */,
+				FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		FCF87674206BFF5400CF6FDE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCF87675206BFF7C00CF6FDE /* GetCarListCell.h */,
+				FCF87676206BFF7C00CF6FDE /* GetCarListCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1076,6 +1118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25D6718E206954C800F7A684 /* PriceUnderwritingViewController.h in Sources */,
+				FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */,
 				25D67183206953EB00F7A684 /* PriceUnderwritingTextTableViewCell.m in Sources */,
 				25D67184206953EB00F7A684 /* PriceUnderwritingChooseTableViewCell.h in Sources */,
 				25D67185206953EB00F7A684 /* PriceUnderwritingTableViewCell.h in Sources */,
@@ -1140,6 +1183,7 @@
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 				A71E48A0205EB2E7001670D3 /* XCCheckoutModel.m in Sources */,
 				FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */,
+				FCF87672206BD9C600CF6FDE /* GetCarModel.m in Sources */,
 				250844A3206A844C00DD65DD /* PriceUnderwritingImportTableViewCell.m in Sources */,
 				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,
 				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,

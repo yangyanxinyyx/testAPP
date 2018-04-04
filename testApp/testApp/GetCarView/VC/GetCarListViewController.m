@@ -8,7 +8,10 @@
 
 #import "GetCarListViewController.h"
 
-@interface GetCarListViewController ()
+@interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property(nonatomic,strong)UITableView *tab;
+@property(nonatomic,strong)NSMutableArray *dataSource;
 
 @end
 
@@ -16,7 +19,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+
+    [self createUI];
+
+}
+
+- (void)createUI
+{
+    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-50-30) style:UITableViewStylePlain];
+    [self.view addSubview:_tab];
+
+    _tab.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
