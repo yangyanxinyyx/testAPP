@@ -8,6 +8,9 @@
 
 #import "UserInfoManager.h"
 
+@implementation CoverMainModel
+
+@end
 
 @implementation UserMedal
 
@@ -27,6 +30,7 @@
         manager = [[UserInfoManager alloc] init];
         manager.performanceMedal = [[PerformanceMedal alloc] init];
         manager.userMedal = [[UserMedal alloc] init];
+        manager.coverMainModel = [[CoverMainModel alloc] init];
     });
 
     return manager;

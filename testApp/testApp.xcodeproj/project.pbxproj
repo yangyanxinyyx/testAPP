@@ -100,6 +100,11 @@
 		FC32BDD82074656200817156 /* XCUserListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB02074656100817156 /* XCUserListHeaderView.m */; };
 		FC32BDD92074656200817156 /* XCUserListView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB22074656100817156 /* XCUserListView.m */; };
 		FC32BDDA2074656200817156 /* XCUserTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDB42074656100817156 /* XCUserTopView.m */; };
+		FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDEC207601FC00817156 /* CoverAnnouncementModel.m */; };
+		FC32BDF02076021900817156 /* CoverLoopimageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDEF2076021900817156 /* CoverLoopimageModel.m */; };
+		FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDF220760DE500817156 /* CoverAnnouncementView.m */; };
+		FC32BDF6207612A300817156 /* 提醒@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF4207612A300817156 /* 提醒@3x.png */; };
+		FC32BDF7207612A300817156 /* 提醒@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF5207612A300817156 /* 提醒@2x.png */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -337,6 +342,14 @@
 		FC32BDB22074656100817156 /* XCUserListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserListView.m; sourceTree = "<group>"; };
 		FC32BDB32074656100817156 /* XCUserTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCUserTopView.h; sourceTree = "<group>"; };
 		FC32BDB42074656100817156 /* XCUserTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCUserTopView.m; sourceTree = "<group>"; };
+		FC32BDEB207601FC00817156 /* CoverAnnouncementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverAnnouncementModel.h; sourceTree = "<group>"; };
+		FC32BDEC207601FC00817156 /* CoverAnnouncementModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverAnnouncementModel.m; sourceTree = "<group>"; };
+		FC32BDEE2076021900817156 /* CoverLoopimageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverLoopimageModel.h; sourceTree = "<group>"; };
+		FC32BDEF2076021900817156 /* CoverLoopimageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverLoopimageModel.m; sourceTree = "<group>"; };
+		FC32BDF120760DE500817156 /* CoverAnnouncementView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverAnnouncementView.h; sourceTree = "<group>"; };
+		FC32BDF220760DE500817156 /* CoverAnnouncementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverAnnouncementView.m; sourceTree = "<group>"; };
+		FC32BDF4207612A300817156 /* 提醒@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提醒@3x.png"; sourceTree = "<group>"; };
+		FC32BDF5207612A300817156 /* 提醒@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提醒@2x.png"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -494,6 +507,8 @@
 				FC1724F020668FDB00B23D7F /* MyMedalView.m */,
 				FC4F7D0D2067791F00468032 /* MedalDetailCell.h */,
 				FC4F7D0E2067791F00468032 /* MedalDetailCell.m */,
+				FC32BDF120760DE500817156 /* CoverAnnouncementView.h */,
+				FC32BDF220760DE500817156 /* CoverAnnouncementView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -554,6 +569,8 @@
 				FCCC0EC12061519000986A9E /* price_select@3x.png */,
 				FCCC0EC32061519000986A9E /* user_nomnal@3x.png */,
 				FCCC0EC62061519000986A9E /* user_select@3x.png */,
+				FC32BDF5207612A300817156 /* 提醒@2x.png */,
+				FC32BDF4207612A300817156 /* 提醒@3x.png */,
 			);
 			path = CoverMain;
 			sourceTree = "<group>";
@@ -1100,6 +1117,10 @@
 		FCC6AAAA2073AEEC00A17B35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC32BDEB207601FC00817156 /* CoverAnnouncementModel.h */,
+				FC32BDEC207601FC00817156 /* CoverAnnouncementModel.m */,
+				FC32BDEE2076021900817156 /* CoverLoopimageModel.h */,
+				FC32BDEF2076021900817156 /* CoverLoopimageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1245,6 +1266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
+				FC32BDF6207612A300817156 /* 提醒@3x.png in Resources */,
 				FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */,
 				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
@@ -1252,6 +1274,7 @@
 				FC2805C4205D96B900DD0DA9 /* login_password@3x.png in Resources */,
 				FC2805C3205D96B900DD0DA9 /* login_password@2x.png in Resources */,
 				FCCC0EC0206150F600986A9E /* getCar_select@2x.png in Resources */,
+				FC32BDF7207612A300817156 /* 提醒@2x.png in Resources */,
 				FCCC0ED02061519000986A9E /* getCar_select@3x.png in Resources */,
 				FC2805C5205D96B900DD0DA9 /* login_preson@2x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
@@ -1417,6 +1440,7 @@
 				FC32BD472074652C00817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */,
 				FC32BDC52074656200817156 /* XCUserWaitingToPayingViewController.m in Sources */,
 				FC32BDD42074656200817156 /* XCCheckoutTableViewCell.m in Sources */,
+				FC32BDF02076021900817156 /* CoverLoopimageModel.m in Sources */,
 				FC32BD3F2074652C00817156 /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC32BDC32074656200817156 /* XCUserViolationViewController.m in Sources */,
 				FC32BD392074652C00817156 /* PriceInfoViewController.m in Sources */,
@@ -1427,6 +1451,7 @@
 				FC32BDDA2074656200817156 /* XCUserTopView.m in Sources */,
 				FC32BD452074652C00817156 /* priceCRQLastYLabelTableViewCell.m in Sources */,
 				FC32BD3D2074652C00817156 /* PriceCarILasetYTableViewCell.m in Sources */,
+				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
 				FC32BD482074652C00817156 /* PriceUnderwritingChooseTableViewCell.m in Sources */,
 				FC32BDC22074656200817156 /* XCUserViolationDetailViewController.m in Sources */,
 				FC32BDB62074656200817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */,
@@ -1434,6 +1459,7 @@
 				FC32BD422074652C00817156 /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC32BD4B2074652C00817156 /* PriceUnderwritingSureTableViewCell.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
+				FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */,
 				FC32BDB72074656200817156 /* XCUserCaseBaseTableViewController.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
 				FC32BDBE2074656200817156 /* XCUserAnnualReviewDetailViewController.m in Sources */,
