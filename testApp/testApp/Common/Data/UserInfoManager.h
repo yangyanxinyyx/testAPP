@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 @interface CoverMainModel : NSObject
 
+@property (nonatomic,strong) NSMutableArray *announcementDatas;
+@property (nonatomic,strong) NSMutableArray *loopImageDatas;
 @end
 
 //勋章
@@ -63,6 +65,8 @@
 
 @property (nonatomic,strong) UserMedal *userMedal;
 @property (nonatomic,strong) PerformanceMedal *performanceMedal;
+@property (nonatomic,strong) CoverMainModel *coverMainModel;
+
 
 + (UserInfoManager *)shareInstance;
 

@@ -10,7 +10,8 @@
 #import "FindPasswordViewController.h"
 #import "UserInfoConfirmView.h"
 #import "RequestAPI.h"
-
+#import "CoverLoopimageModel.h"
+#import "CoverAnnouncementModel.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,UserInfoComfirmVIewDelegate>
 
@@ -92,8 +93,8 @@
 - (void)pressLoginBtn:(UIButton *)sender
 {
     NSDictionary  *param = @{
-                             @"userCode":@"13570229475",
-                             @"password":@"xc123456"
+                             @"userCode":@"17350805203",
+                             @"password":@"1"
                              };
     [RequestAPI getUserInfo:param header:nil success:^(id response) {
         NSLog(@"%@",response);
@@ -124,16 +125,15 @@
                     [UserInfoManager shareInstance].corporateCellphone = data[@"corporateCellphone"] ? data[@"corporateCellphone"] : @"";
                     [UserInfoManager shareInstance].address = data[@"address"] ? data[@"address"] : @"";
                     [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-//                    UserInfoManager *manager = [UserInfoManager shareInstance];
-//                    NSLog(@"");
-//                    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
-//                    confirmView.delegate = self;
-//                    [self.view addSubview:confirmView];
+                    UserInfoManager *manager = [UserInfoManager shareInstance];
+                    NSLog(@"");
+                    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+                    confirmView.delegate = self;
+                    [self.view addSubview:confirmView];
 
 
                 }
-                
-                [self didConfirmUserInfo:YES];
+
 //                //获取车险信息
 //                NSDictionary  *param = @{
 //                                         @"salesman_id":[UserInfoManager shareInstance].userID
@@ -153,10 +153,7 @@
 //                                [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
 //                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
 //                                UserInfoManager *manager = [UserInfoManager shareInstance];
-//                                NSLog(@"");
-//                                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
-//                                confirmView.delegate = self;
-//                                [self.view addSubview:confirmView];
+//                                [self loadCoverModel];
 //
 //                            }
 //                        }else if (([response[@"result"] integerValue] == 0)){
@@ -178,13 +175,84 @@
             }
         }
 
-
-
     } fail:^(id error) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [self.view addSubview:tipsView];
     }];
 
+
+
+}
+
+- (void)loadCoverModel
+{
+    //获取公告信息
+    NSDictionary  *param = @{
+                             @"PageSize":@(10),
+                             @"PageIndex":@(1)
+                             };
+    [RequestAPI getCoverAnnouncement:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        NSLog(@"%@",response);
+        if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"获取公告成功");
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = response[@"data"];
+                    NSArray *dataSet = data[@"dataSet"];
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    for (NSDictionary *dicData in dataSet) {
+                        CoverAnnouncementModel *announcement = [[CoverAnnouncementModel alloc] init];
+                        [announcement setValuesForKeysWithDictionary:dicData];
+                        [[UserInfoManager shareInstance].coverMainModel.announcementDatas addObject:announcement];
+                    }
+                }
+
+                //获取轮播图信息
+                NSDictionary  *param = @{
+                                         @"type":@"业务端首页轮播图"
+                                         };
+                [RequestAPI getCoverAnnouncement:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    NSLog(@"%@",response);
+                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"获取轮播图成功");
+                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                                NSDictionary *data = response[@"data"];
+                                NSArray *dataSet = data[@"dataSet"];
+                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                                for (NSDictionary *dicData in dataSet) {
+                                    CoverLoopimageModel *loopimage = [[CoverLoopimageModel alloc] init];
+                                    [loopimage setValuesForKeysWithDictionary:dicData];
+                                    [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
+                                }
+                            }
+
+                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+                            confirmView.delegate = self;
+                            [self.view addSubview:confirmView];
+
+                        }else if (([response[@"result"] integerValue] == 0)){
+                            NSLog(@"获取轮播图失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取轮播图错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
+
+
+            }else if (([response[@"result"] integerValue] == 0)){
+                NSLog(@"获取公告失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取公告错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
 
 
 }
