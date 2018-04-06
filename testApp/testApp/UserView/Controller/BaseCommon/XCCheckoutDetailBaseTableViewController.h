@@ -13,6 +13,7 @@
 #import "XCCheckoutDetailInputCell.h"
 #import "XCCheckoutDetailHeaderView.h"
 #import "FinishTipsView.h"
+#import "LYZAlertView.h"
 #define ktableCellID @"myCellID"
 #define kTextCellID @"textCellID"
 #define kTextFiledCellID @"textFiledCellID"
@@ -28,6 +29,11 @@
 @property (nonatomic,strong) NSString *navTitle;
 @property (nonatomic, strong) UITableView * tableView ;
 
+
+/**
+ 保单信息Title
+ */
+@property (nonatomic, strong) NSMutableArray * dataTitleArrM ;
 @property (nonatomic, assign) CGFloat bottomHeight ;
 
 - (instancetype)initWithTitle:(NSString *)title;

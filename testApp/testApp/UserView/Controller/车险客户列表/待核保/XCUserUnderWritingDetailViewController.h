@@ -10,7 +10,5 @@
 
 @interface XCUserUnderWritingDetailViewController : XCCheckoutDetailBaseTableViewController
 
-/** <# 注释 #> */
-@property (nonatomic, strong) NSMutableArray * dataTitleArrM ;
 
 @end

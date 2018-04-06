@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UILabel * placeholderLabel ;
+@property (nonatomic, strong) UIView * separtatorLine ;
+
 @end
 
 @implementation XCCheckoutDetailTextCell
@@ -22,6 +24,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _shouldShowSeparator = NO;
         [self configSubVies];
     }
     return self;
@@ -44,7 +47,9 @@
     [_placeholderLabel sizeToFit];
     labelSize = _placeholderLabel.frame.size;
     [_placeholderLabel setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, labeH)];
-    
+    if (_shouldShowSeparator) {
+        [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+    }
 }
 
 #pragma mark - Action Method
@@ -69,14 +74,17 @@
     [_placeholderLabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
     [_placeholderLabel setTextColor:COLOR_RGB_255(165, 165, 165)];
     [self addSubview:_placeholderLabel];
-
+    
+    _separtatorLine = [[UIView alloc] init];
+    [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
+    [self addSubview:_separtatorLine];
 }
 
 #pragma mark - Setter&Getter
 
 - (void)setTitle:(NSString *)title
 {
-    [_titleLabel setText:title]; if ([_title isEqualToString:title]) {
+    if ([_title isEqualToString:title]) {
         return;
     }
     _title = title;
@@ -93,9 +101,7 @@
     _titlePlaceholder = titlePlaceholder;
     [_placeholderLabel setText:_titlePlaceholder];
     [_placeholderLabel sizeToFit];
-
 }
-
 
 
 @end

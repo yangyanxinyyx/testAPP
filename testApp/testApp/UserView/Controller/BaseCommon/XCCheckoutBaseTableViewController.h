@@ -10,9 +10,10 @@
 #import "BaseViewController1.h"
 #import "XCCheckoutTableViewCell.h"
 #import "LYZAlertView.h"
+#import "XCCheckoutBaseFooterView.h"
 #define kcheckCellID @"checkCell"
 #define kheaderViewID @"headerViewID"
-#define kfooterViewID @"footerViewID"
+#define kfooterViewID @"basefooterViewID"
 @interface XCCheckoutBaseTableViewController : BaseViewController1<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 /**
  自定义导航栏

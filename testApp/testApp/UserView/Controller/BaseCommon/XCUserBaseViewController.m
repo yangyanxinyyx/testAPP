@@ -1,0 +1,66 @@
+//
+//  XCUserBaseViewController.m
+//  testApp
+//
+//  Created by Melody on 2018/4/6.
+//  Copyright © 2018年 outPutTeam. All rights reserved.
+//
+
+#import "XCUserBaseViewController.h"
+
+@interface XCUserBaseViewController ()
+
+@end
+
+@implementation XCUserBaseViewController
+
+#pragma mark - lifeCycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Init Method
+
+- (instancetype)initWithTitle:(NSString *)title
+{
+    if (self = [super init]) {
+        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+        _topBar = [[BaseNavigationBar alloc] init];
+        _topBar.delegate  = self;
+        _topBar.title = title;
+        self.navTitle = title;
+        [self.view addSubview:_topBar];
+    }
+    return self;
+}
+
+#pragma mark - Action Method
+
+#pragma mark - Delegates & Notifications
+
+#pragma mark - BaseNavigationBarDelegate
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
+{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+#pragma mark - Privacy Method
+
+#pragma mark - Setter&Getter
+
+- (void)setNavTitle:(NSString *)navTitle
+{
+    _navTitle = navTitle;
+    [_topBar setTitle:navTitle];
+}
+
+
+@end

@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) NSString * titlePlaceholder ;
 
+//显示分割线 默认为NO
+@property (nonatomic, assign) BOOL shouldShowSeparator ;
+
 @end

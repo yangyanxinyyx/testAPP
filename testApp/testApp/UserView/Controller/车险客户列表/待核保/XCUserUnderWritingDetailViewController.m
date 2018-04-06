@@ -41,7 +41,7 @@
 {
     [super viewDidLayoutSubviews];
     CGFloat buttonH = 98 * ViewRateBaseOnIP6;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - buttonH)];
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + buttonH))];
     [_commitBtn setFrame:CGRectMake(0,  CGRectGetMaxY(self.tableView.frame), SCREEN_WIDTH, buttonH)];
     
 }
@@ -50,8 +50,12 @@
 
 - (void)commitUnderWriting:(UIButton *)button
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功,待审核!" complete:nil];
-    [self.view addSubview:tipsView];
+    
+    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否撤销" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+       
+    }];
+
+    [self.view addSubview:alertView];
     
 }
 
@@ -68,7 +72,7 @@
                                   @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
                                   @"交强险(业务员)金额:",@"商业险(业务员)金额:",@"交强险(出单员)金额:",
                                   @"商业险(出单员)金额:",@"出单员:",@"是否续保"];
-    NSArray *policyTitleNameArr = @[@"交强险",@"机动车损险",@"第三责任险",@"车上(司机)险",@"车上(乘客)险"];
+    NSArray *policyTitleNameArr = @[@"交强险:",@"机动车损险:",@"第三责任险:",@"车上(司机)险:",@"车上(乘客)险:"];
     self.dataTitleArrM = [[NSMutableArray alloc] init];
     [self.dataTitleArrM addObject:baseTitleNameArr];
     [self.dataTitleArrM addObject:policyTitleNameArr];
@@ -80,7 +84,7 @@
     
     _commitBtn = [UIButton buttonWithType:0];
     [_commitBtn setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-    [_commitBtn setTitle:@"提交核保" forState:UIControlStateNormal];
+    [_commitBtn setTitle:@"撤销核保" forState:UIControlStateNormal];
     [_commitBtn.titleLabel setFont:[UIFont systemFontOfSize:36 * ViewRateBaseOnIP6]];
     [_commitBtn addTarget:self action:@selector(commitUnderWriting:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commitBtn];

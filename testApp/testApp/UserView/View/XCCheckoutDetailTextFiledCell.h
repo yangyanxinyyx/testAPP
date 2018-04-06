@@ -19,7 +19,9 @@
 @property (nonatomic, weak) id<XCCheckoutDetailTextFiledCellDelegate> delegate;
 
 @property (nonatomic, strong) NSString * title ;
-
 @property (nonatomic, strong) NSString * titlePlaceholder ;
+
+//显示分割线 默认为NO
+@property (nonatomic, assign) BOOL shouldShowSeparator ;
 
 @end

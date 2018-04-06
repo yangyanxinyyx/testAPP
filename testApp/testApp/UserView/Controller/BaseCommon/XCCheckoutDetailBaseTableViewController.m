@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ktableCellID];
     [self.tableView registerClass:[XCCheckoutDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
@@ -48,6 +48,9 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    [self.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,9 +141,8 @@
 -(void)setBottomHeight:(CGFloat)bottomHeight
 {
     _bottomHeight = bottomHeight;
-    CGFloat tableViewH = SCREEN_HEIGHT - kHeightForNavigation -  _bottomHeight ;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, tableViewH)];
-}
+    CGFloat tableViewH = SCREEN_HEIGHT - (kHeightForNavigation +  _bottomHeight + kBottomMargan) ;
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, tableViewH)];}
 
 
 

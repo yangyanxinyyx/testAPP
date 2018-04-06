@@ -37,7 +37,7 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[XCCheckoutTableViewCell class] forCellReuseIdentifier:kcheckCellID];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
-    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kfooterViewID];
+    [self.tableView registerClass:[XCCheckoutBaseFooterView class] forHeaderFooterViewReuseIdentifier:kfooterViewID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -49,10 +49,8 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    CGFloat scrrenH = SCREEN_HEIGHT;
-    CGFloat navH = kHeightForNavigation;
-    CGFloat tableH = scrrenH -  navH - safeAreaBottom ;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, tableH)];
+
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
     // =================== modify by Liangyz 删除功能01
     //    if (self.editingIndexPath)
     //    {
@@ -159,8 +157,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kfooterViewID];
-
-    [footerView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+ 
     return footerView;
 }
 
@@ -180,7 +177,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.1;
+    return 80 * ViewRateBaseOnIP6;
 }
 
 
