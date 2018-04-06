@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"已核保代缴费详情";
 
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
     [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
@@ -56,7 +55,6 @@
     [_distributionPolicyBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
     [_distributionPolicyBtn.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
     [_distributionPolicyBtn setTitle:@"配送保单" forState:UIControlStateNormal];
-    
     
     _distributionPolicyBtn.layer.cornerRadius = 3;
     _distributionPolicyBtn.layer.borderWidth = 1;

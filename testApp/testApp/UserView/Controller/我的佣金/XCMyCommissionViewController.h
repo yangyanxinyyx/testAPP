@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface XCMyCommissionViewController : UIViewController
+#import "BaseViewController1.h"
+@interface XCMyCommissionViewController : BaseViewController1
 
 @end

@@ -10,7 +10,8 @@
 #import "XCUserCaseListCell.h"
 #define kmyCellID @"myCellID"
 #define kcaseListCelID @"myCaseListCellID"
-
+#define kheaderViewID @"headerViewID"
+#define kfooterViewID @"footerViewID"
 @interface XCUserCaseBaseTableViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView * tableView ;
 @end

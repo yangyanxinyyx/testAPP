@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7011E6220760C1200C06D15 /* NSString+MoneyString.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6120760C1200C06D15 /* NSString+MoneyString.m */; };
+		A7011E6620764B8900C06D15 /* XCModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6520764B8900C06D15 /* XCModifyPwdViewController.m */; };
+		A7011E6C2076799A00C06D15 /* XCCheckoutDetailBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6B2076799A00C06D15 /* XCCheckoutDetailBaseModel.m */; };
+		A7011E6F207679D500C06D15 /* XCCheckoutDetailPolicyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6E207679D500C06D15 /* XCCheckoutDetailPolicyModel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -162,6 +166,14 @@
 
 /* Begin PBXFileReference section */
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A7011E6020760C1200C06D15 /* NSString+MoneyString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MoneyString.h"; sourceTree = "<group>"; };
+		A7011E6120760C1200C06D15 /* NSString+MoneyString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
+		A7011E6420764B8900C06D15 /* XCModifyPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCModifyPwdViewController.h; sourceTree = "<group>"; };
+		A7011E6520764B8900C06D15 /* XCModifyPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCModifyPwdViewController.m; sourceTree = "<group>"; };
+		A7011E6A2076799A00C06D15 /* XCCheckoutDetailBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailBaseModel.h; sourceTree = "<group>"; };
+		A7011E6B2076799A00C06D15 /* XCCheckoutDetailBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailBaseModel.m; sourceTree = "<group>"; };
+		A7011E6D207679D500C06D15 /* XCCheckoutDetailPolicyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailPolicyModel.h; sourceTree = "<group>"; };
+		A7011E6E207679D500C06D15 /* XCCheckoutDetailPolicyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailPolicyModel.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
@@ -436,6 +448,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A7011E672076789300C06D15 /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				A7011E6420764B8900C06D15 /* XCModifyPwdViewController.h */,
+				A7011E6520764B8900C06D15 /* XCModifyPwdViewController.m */,
+			);
+			path = "修改密码";
+			sourceTree = "<group>";
+		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +464,8 @@
 				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
+				A7011E6020760C1200C06D15 /* NSString+MoneyString.h */,
+				A7011E6120760C1200C06D15 /* NSString+MoneyString.m */,
 			);
 			path = categary;
 			sourceTree = "<group>";
@@ -758,10 +781,11 @@
 		FC32BD562074656100817156 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A7011E672076789300C06D15 /* 修改密码 */,
+				FC32BD602074656100817156 /* 我的佣金 */,
 				FC32BD572074656100817156 /* BaseCommon */,
 				FC32BD5E2074656100817156 /* UserViewController.h */,
 				FC32BD5F2074656100817156 /* UserViewController.m */,
-				FC32BD602074656100817156 /* 我的佣金 */,
 				FC32BD632074656100817156 /* 案件跟进 */,
 				FC32BD702074656100817156 /* 车务客户列表 */,
 				FC32BD802074656100817156 /* 车险客户列表 */,
@@ -884,9 +908,9 @@
 		FC32BD802074656100817156 /* 车险客户列表 */ = {
 			isa = PBXGroup;
 			children = (
+				FC32BD8B2074656100817156 /* 待核保 */,
 				FC32BD812074656100817156 /* 已核保代缴费 */,
 				FC32BD862074656100817156 /* 已缴费待打单 */,
-				FC32BD8B2074656100817156 /* 待核保 */,
 				FC32BD902074656100817156 /* 我的客户 */,
 			);
 			path = "车险客户列表";
@@ -939,12 +963,16 @@
 		FC32BD952074656100817156 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FC32BD962074656100817156 /* XCCheckoutModel.h */,
-				FC32BD972074656100817156 /* XCCheckoutModel.m */,
 				FC32BD982074656100817156 /* XCMyCommissionListModel.h */,
 				FC32BD992074656100817156 /* XCMyCommissionListModel.m */,
+				FC32BD962074656100817156 /* XCCheckoutModel.h */,
+				FC32BD972074656100817156 /* XCCheckoutModel.m */,
 				FC32BD9A2074656100817156 /* XCUserListModel.h */,
 				FC32BD9B2074656100817156 /* XCUserListModel.m */,
+				A7011E6A2076799A00C06D15 /* XCCheckoutDetailBaseModel.h */,
+				A7011E6B2076799A00C06D15 /* XCCheckoutDetailBaseModel.m */,
+				A7011E6D207679D500C06D15 /* XCCheckoutDetailPolicyModel.h */,
+				A7011E6E207679D500C06D15 /* XCCheckoutDetailPolicyModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -952,6 +980,8 @@
 		FC32BD9D2074656100817156 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC32BDA82074656100817156 /* XCMyCommissionListCell.h */,
+				FC32BDA92074656100817156 /* XCMyCommissionListCell.m */,
 				FC32BD9E2074656100817156 /* XCCheckoutDetailHeaderView.h */,
 				FC32BD9F2074656100817156 /* XCCheckoutDetailHeaderView.m */,
 				FC32BDA02074656100817156 /* XCCheckoutDetailInputCell.h */,
@@ -962,8 +992,6 @@
 				FC32BDA52074656100817156 /* XCCheckoutDetailTextFiledCell.m */,
 				FC32BDA62074656100817156 /* XCCheckoutTableViewCell.h */,
 				FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */,
-				FC32BDA82074656100817156 /* XCMyCommissionListCell.h */,
-				FC32BDA92074656100817156 /* XCMyCommissionListCell.m */,
 				FC32BDAA2074656100817156 /* XCUserCaseListCell.h */,
 				FC32BDAB2074656100817156 /* XCUserCaseListCell.m */,
 				FC32BDAC2074656100817156 /* 个人中心 */,
@@ -1356,6 +1384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7011E6220760C1200C06D15 /* NSString+MoneyString.m in Sources */,
 				FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */,
 				FC32BDC12074656200817156 /* XCUserRepairViewController.m in Sources */,
 				FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */,
@@ -1374,6 +1403,7 @@
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
 				FC32BDCA2074656200817156 /* XCCustomerDetailViewController.m in Sources */,
+				A7011E6F207679D500C06D15 /* XCCheckoutDetailPolicyModel.m in Sources */,
 				FC32BDC02074656200817156 /* XCUserRepairDetailViewController.m in Sources */,
 				FC32BD4D2074652C00817156 /* PriceUnderwritingTextTableViewCell.m in Sources */,
 				FC32BD4A2074652C00817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
@@ -1422,6 +1452,8 @@
 				FC32BD392074652C00817156 /* PriceInfoViewController.m in Sources */,
 				FC32BDD32074656200817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
 				FC32BD362074652C00817156 /* PriceAdjustViewController.m in Sources */,
+				A7011E6C2076799A00C06D15 /* XCCheckoutDetailBaseModel.m in Sources */,
+				A7011E6620764B8900C06D15 /* XCModifyPwdViewController.m in Sources */,
 				FC32BDD02074656200817156 /* XCCheckoutDetailHeaderView.m in Sources */,
 				FC32BD542074652C00817156 /* SelectTimeView.m in Sources */,
 				FC32BDDA2074656200817156 /* XCUserTopView.m in Sources */,

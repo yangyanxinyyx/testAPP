@@ -92,8 +92,8 @@
 - (void)pressLoginBtn:(UIButton *)sender
 {
     NSDictionary  *param = @{
-                             @"userCode":@"17350805203",
-                             @"password":@"1"
+                             @"userCode":@"13570229475",
+                             @"password":@"xc123456"
                              };
     [RequestAPI getUserInfo:param header:nil success:^(id response) {
         NSLog(@"%@",response);
@@ -132,42 +132,43 @@
 
 
                 }
-
-                //获取车险信息
-                NSDictionary  *param = @{
-                                         @"salesman_id":[UserInfoManager shareInstance].userID
-                                         };
-                [RequestAPI getPersonalPolicy:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                    NSLog(@"%@",response);
-                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
-                        if ([response[@"result"] integerValue] == 1) {
-                            NSLog(@"获取车险信息成功");
-                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-                                NSDictionary *data = response[@"data"];
-                                [UserInfoManager shareInstance].performanceMedal.lastYearCar = data[@"last_year_car"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car"]]:@"";
-                                [UserInfoManager shareInstance].performanceMedal.lastMonthCar = data[@"last_month_car"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car"]]:@"";
-                                [UserInfoManager shareInstance].performanceMedal.nowMonthCar = data[@"now_month_car"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car"]]:@"";
-                                [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
-                                [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
-                                [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
-                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-                                UserInfoManager *manager = [UserInfoManager shareInstance];
-                                NSLog(@"");
-                                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
-                                confirmView.delegate = self;
-                                [self.view addSubview:confirmView];
-
-                            }
-                        }else if (([response[@"result"] integerValue] == 0)){
-                            NSLog(@"获取车险信息失败");
-                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取车险信息错误" complete:nil];
-                            [self.view addSubview:tipsView];
-                        }
-                    }
-                } fail:^(id error) {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-                    [self.view addSubview:tipsView];
-                }];
+                
+                [self didConfirmUserInfo:YES];
+//                //获取车险信息
+//                NSDictionary  *param = @{
+//                                         @"salesman_id":[UserInfoManager shareInstance].userID
+//                                         };
+//                [RequestAPI getPersonalPolicy:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//                    NSLog(@"%@",response);
+//                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+//                        if ([response[@"result"] integerValue] == 1) {
+//                            NSLog(@"获取车险信息成功");
+//                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+//                                NSDictionary *data = response[@"data"];
+//                                [UserInfoManager shareInstance].performanceMedal.lastYearCar = data[@"last_year_car"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car"]]:@"";
+//                                [UserInfoManager shareInstance].performanceMedal.lastMonthCar = data[@"last_month_car"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car"]]:@"";
+//                                [UserInfoManager shareInstance].performanceMedal.nowMonthCar = data[@"now_month_car"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car"]]:@"";
+//                                [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
+//                                [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
+//                                [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
+//                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//                                UserInfoManager *manager = [UserInfoManager shareInstance];
+//                                NSLog(@"");
+//                                UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+//                                confirmView.delegate = self;
+//                                [self.view addSubview:confirmView];
+//
+//                            }
+//                        }else if (([response[@"result"] integerValue] == 0)){
+//                            NSLog(@"获取车险信息失败");
+//                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取车险信息错误" complete:nil];
+//                            [self.view addSubview:tipsView];
+//                        }
+//                    }
+//                } fail:^(id error) {
+//                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+//                    [self.view addSubview:tipsView];
+//                }];
 
 
             }else if (([response[@"result"] integerValue] == 0)){

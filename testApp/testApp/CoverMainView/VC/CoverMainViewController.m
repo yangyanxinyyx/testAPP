@@ -32,7 +32,7 @@
 
     [self createUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"kReloadCoverMainViewData" object:nil];
-
+      
 }
 
 - (void)createUI
@@ -90,12 +90,12 @@
     [_carView removeFromSuperview];
     [_repairView removeFromSuperview];
     NSArray * array = @[
-                        [UserInfoManager shareInstance].performanceMedal.lastYearCar,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthCar,
-                        [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
+//                        [UserInfoManager shareInstance].performanceMedal.lastYearCar,
+//                        [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
+//                        [UserInfoManager shareInstance].performanceMedal.nowMonthCar,
+//                        [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking,
+//                        [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
+//                        [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
                         ];
 
     _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:array];

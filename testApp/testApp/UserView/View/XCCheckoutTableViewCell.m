@@ -15,7 +15,7 @@
 @property (nonatomic, strong) UILabel * userNameLabel ;
 @property (nonatomic, strong) UILabel * issueTimeLabel ;
 @property (nonatomic, strong) UIButton * checkButton ;
-
+@property (nonatomic, strong) UIView * separpatorLine ;
 @end
 
 @implementation XCCheckoutTableViewCell
@@ -73,6 +73,10 @@
         checkButton;
     });
     
+    _separpatorLine = [[UIView alloc] init];
+    [_separpatorLine setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [self addSubview:_separpatorLine];
+    
 }
 
 - (void)layoutSubviews
@@ -90,6 +94,8 @@
     CGFloat buttonW = 160 * ViewRateBaseOnIP6;
     CGFloat buttonH = 60 * ViewRateBaseOnIP6;
     [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
+    
+    [_separpatorLine setFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
     
 }
 

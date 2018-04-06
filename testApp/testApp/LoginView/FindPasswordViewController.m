@@ -20,8 +20,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self createUI];
 
-
-
 }
 
 - (void)createUI
@@ -63,11 +61,11 @@
             [self.view addSubview:sendCodeBtn];
         }
 
-        if (i != 2) {
+//        if (i != 2) {
             UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(topImageView.frame) + 44 * (i +1), SCREEN_WIDTH - 30, 1)];
             line.backgroundColor = COLOR_RGBA_255(229, 229, 229, 1);
             [self.view addSubview:line];
-        }
+//        }
 
     }
 

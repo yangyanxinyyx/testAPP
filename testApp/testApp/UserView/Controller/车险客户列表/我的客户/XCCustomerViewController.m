@@ -37,7 +37,7 @@
 
 - (void)clickCheckDetailButton
 {
-    XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] init];
+    XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@""];
     
     [self.navigationController pushViewController:detailVC animated:YES];
     
