@@ -9,9 +9,11 @@
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceCustomerInformEntryTableViewCell.h"
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
-@interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
+@interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *myTableView;
+@property (nonatomic, strong) NSNotification *notification;
+@property (nonatomic, strong) NSMutableDictionary *dictionaryInfo;
 @end
 
 @implementation PriceCustomerInformEntryViewController
@@ -23,6 +25,7 @@
     topBar.delegate = self;
     topBar.title = @"客户信息录入";
     [self.view addSubview:topBar];
+    _notification = [NSNotification notificationWithName:@"CustomerNotification" object:nil userInfo:nil];
     [self createUI];
 }
 
@@ -30,6 +33,75 @@
     if (isCancel) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+#pragma mark - network
+- (void)pressCustomerInformationInput{
+    if (self.dictionaryInfo) {
+        [RequestAPI getCustomerInformationInput:self.dictionaryInfo header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            
+            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *data = response[@"data"];
+                if (!data) {
+                    NSLog(@"提交成功");
+                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"提交成功,待审核" complete:^{
+                        
+                    }];
+                    [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+                }
+            }
+        } fail:^(id error) {
+            
+        }];
+    }
+}
+
+
+#pragma mark - cell delegate
+- (void)textFieldBeginEditing:(UITextField *)textField{
+    if (textField.tag > 6) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.myTableView.contentOffset = CGPointMake(0, SCREEN_HEIGHT / 4 + textField.tag * 12 * ViewRateBaseOnIP6);
+        }];
+    }
+}
+
+- (void)textFieldendEditing:(UITextField *)textField{
+    if (textField.tag > 6) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.myTableView.contentOffset = CGPointMake(0, 0);
+        }];
+    }
+    
+    if (textField.tag == 0) {
+        [self.dictionaryInfo setObject:textField.text forKey:@"plateNo"];
+    } else if (textField.tag == 1) {
+        [self.dictionaryInfo setObject:textField.text forKey:@"recordDate"];
+    } else if (textField.tag == 2){
+        [self.dictionaryInfo setObject:textField.text forKey:@"vinNo"];
+    } else if (textField.tag == 3){
+        [self.dictionaryInfo setObject:textField.text forKey:@"recordDate"];
+    } else if (textField.tag == 4){
+        [self.dictionaryInfo setObject:textField.text forKey:@"model"];
+    } else if (textField.tag == 5){
+        [self.dictionaryInfo setObject:textField.text forKey:@"brand"];
+    } else if (textField.tag == 6){
+        [self.dictionaryInfo setObject:textField.text forKey:@"phoneNo"];
+    } else if (textField.tag == 7){
+        [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
+    } else if (textField.tag == 8){
+        [self.dictionaryInfo setObject:textField.text forKey:@"source"];
+    } else if (textField.tag == 9){
+        [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+    } else if (textField.tag == 10){
+        [self.dictionaryInfo setObject:textField.text forKey:@"sex"];
+    } else if (textField.tag == 11){
+        [self.dictionaryInfo setObject:textField.text forKey:@"birthday"];
+    } else if (textField.tag == 12){
+        [self.dictionaryInfo setObject:textField.text forKey:@"quyv"];
+    } else {
+        [self.dictionaryInfo setObject:textField.text forKey:@"address"];
+    }
+    NSLog(@"%@",self.dictionaryInfo);
 }
 
 #pragma mark - tabnleview detegate
@@ -81,9 +153,11 @@
         if (!cell) {
             cell = [[PriceCustomerInformEntryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
+        cell.delegate = self;
+        cell.textField.tag = indexPath.section * 7 +indexPath.row;
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                cell.labelName.text = @"*车牌号 :";
+                [cell setLabelNameText:@"*车牌号 :"];
             } else if (indexPath.row == 1) {
                 cell.labelName.text = @"初登日期:";
             } else if (indexPath.row == 2){
@@ -124,11 +198,19 @@
         }
         return cell;
     }
-    
-    
-    
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        [self pressCustomerInformationInput];
+    }
+
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    // 通过 通知中心 发送 通知
+    [[NSNotificationCenter defaultCenter] postNotification:_notification];
+}
 #pragma marik - UI
 - (void)createUI{
     [self.view addSubview:self.myTableView];
@@ -148,5 +230,11 @@
     return _myTableView;
 }
 
+- (NSMutableDictionary *)dictionaryInfo{
+    if (!_dictionaryInfo) {
+        _dictionaryInfo = [NSMutableDictionary dictionary];
+    }
+    return _dictionaryInfo;
+}
 
 @end

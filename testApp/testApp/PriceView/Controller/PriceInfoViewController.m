@@ -11,6 +11,8 @@
 #import "PriceCommerceInsTableViewCell.h"
 #import "PriceInfoAddTableViewCell.h"
 #import "PriceInfoSaveTableViewCell.h"
+#import "PriceUnderwritingViewController.h"
+#import "PriceAdjustViewController.h"
 @interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @end
@@ -38,7 +40,7 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     static NSString *priceInforLabel = @"infoLabel";
     static NSString *priceCommerceIns = @"commerceIns";
-    static NSString *priceCommerceInsFirst = @"commerceInsFirst";
+//    static NSString *priceCommerceInsFirst = @"commerceInsFirst";
     static NSString * priceInfoAdd = @"infoAdd";
     static NSString *priceInfoSave = @"infoSave";
     if (indexPath.section == 0) {
@@ -51,16 +53,12 @@
         infoLableCell.labelNumber.text = @"¥ 30000000";
         return infoLableCell;
     } else if (indexPath.section == 1) {
-        if (indexPath.row < 5) {
-            PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceInsFirst];
+    if (indexPath.row < 5 ){
+            PriceCommerceInsTableViewCell *commerceInsCell = [tableView dequeueReusableCellWithIdentifier:priceCommerceIns];
             if (!commerceInsCell) {
-                commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceInsFirst];
+                commerceInsCell = [[PriceCommerceInsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceCommerceIns];
             }
-            if (indexPath.row == 0) {
-                [commerceInsCell setCellFrameWithFirst:YES];
-            } else {
-                [commerceInsCell setCellFrameWithFirst:NO];
-            }
+        
             commerceInsCell.labelTag.text = @"机动车损险";
             commerceInsCell.labelInsure.text = @"不计免赔";
             commerceInsCell.labelAnnotate.text = @"投保";
@@ -140,7 +138,14 @@
     if (indexPath.section == 3) {
         return 252*ViewRateBaseOnIP6;
     } else {
-        return 88 * ViewRateBaseOnIP6;
+        if (indexPath.section == 1 && indexPath.row < 4) {
+            return 58 * ViewRateBaseOnIP6;
+        } else if(indexPath.row == 4) {
+            return 88 * ViewRateBaseOnIP6;
+        } else {
+           return 88 * ViewRateBaseOnIP6;
+        }
+        
     }
    
 }
@@ -156,13 +161,22 @@
     
 }
 
+//点击cell
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1 && indexPath.row == 5) {
+        PriceAdjustViewController *adjustVC = [[PriceAdjustViewController alloc] init];
+        [self.navigationController pushViewController:adjustVC animated:YES];
+    }
+}
+
 #pragma mark- cell Delegate
 - (void)savePriveInfoDelegate{
     NSLog(@"保存");
 }
 
 - (void)submitNuclearInsDelegate{
-    NSLog(@"提交核保");
+    PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
+    [self.navigationController pushViewController:priceUnderVC animated:YES];
     
 }
 
@@ -178,10 +192,10 @@
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
+        _myTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
         _myTableView.bounces = YES;
-        _myTableView.separatorColor = [UIColor purpleColor];
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTableView;

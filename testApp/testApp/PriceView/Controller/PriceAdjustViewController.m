@@ -156,8 +156,9 @@
         _myTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = NO;
+        _myTableView.bounces = YES;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _myTableView.separatorColor = [UIColor clearColor];
     }
     return _myTableView;
 }

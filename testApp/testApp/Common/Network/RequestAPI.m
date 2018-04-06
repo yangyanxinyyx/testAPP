@@ -34,6 +34,24 @@
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
 
+//客户车辆查询
+#define CUSTOMERVEHICLEENQUIRIES_API [NSString stringWithFormat:@"%@/api/web/car/findOrAddCustomerAndCar",API_PREFIX]
+
+//Customer information input. 客户信息录入
+#define CustomerInformatioInput_API [NSString stringWithFormat:@"%@/api/web/customers/insertCustomerAndCar",API_PREFIX]
+
+// 获取报价记录
+#define PRICERECORD_API [NSString stringWithFormat:@"%@/api/web/offer/queryOffer",API_PREFIX]
+
+//报价
+#define PRICEOFFER_API [NSString stringWithFormat:@"%@/api/web/bihu/appPrecisePrice",API_PREFIX]
+
+//获取上年报价记录
+#define LASTYEARPRICERECORD_API [NSString stringWithFormat:@"%@/api/web/bihu/getLastYearQuotation",API_PREFIX]
+
+//获取投保价格
+#define INSUREDPRICE_API [NSString stringWithFormat:@"%@/api/web/dict/selectLinesByDictCode",API_PREFIX]
+
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -93,7 +111,7 @@
 }
 
 +(void)getPersonalPolicy:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
-//@"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/app/medaltable/seletPolicy"
+//@"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/app/medaltable/seletPol
     [self getRequest:PERSONALPOLICY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
@@ -156,4 +174,57 @@
     }];
 }
 
+#pragma mark 报价
+//车牌号查询
++ (void)getCustomerVehicleEnquiries:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:CUSTOMERVEHICLEENQUIRIES_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//客户信息录入
++ (void)getCustomerInformationInput:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:CustomerInformatioInput_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//报价记录
++ (void)getPriceRecord:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:PRICERECORD_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//报价
++ (void)getPriceOffer:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:PRICEOFFER_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+// 获取客户上年报价
++ (void)getLastYearPriceRecord:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:LASTYEARPRICERECORD_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++ (void)getInsuredrice:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:INSUREDPRICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(paramenter);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 @end

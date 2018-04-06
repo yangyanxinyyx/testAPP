@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PriceCustomerInformEntryTableViewCellDelegate <NSObject>
+- (void)textFieldBeginEditing:(UITextField *)textField;
+- (void)textFieldendEditing:(UITextField *)textField;
+@end
 @interface PriceCustomerInformEntryTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, weak) id <PriceCustomerInformEntryTableViewCellDelegate> delegate;
+- (void)setLabelNameText:(NSString *)text;
 @end

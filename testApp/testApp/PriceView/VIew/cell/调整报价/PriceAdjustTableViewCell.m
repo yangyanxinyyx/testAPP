@@ -74,14 +74,19 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
+
+// 自绘分割线
+- (void)drawRect:(CGRect)rect{
+    //获取cell系统自带的分割线，获取分割线对象目的是为了保持自定义分割线frame和系统自带的分割线一样。如果不想一样，可以忽略。
+    UIView *separatorView = [self valueForKey:@"_separatorView"];
+    NSLog(@"%@",NSStringFromCGRect(separatorView.frame));
+    NSLog(@"%@",NSStringFromCGRect(rect));
+    [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor); CGContextFillRect(context, rect); //上分割线，
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithHexString:@"ffffff"].CGColor);
-    //    CGContextStrokeRect(context, CGRectMake(5, 0, rect.size.width - 10, 1));
     
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithHexString:@"#e5e5e5"].CGColor); CGContextStrokeRect(context, CGRectMake(30 * ViewRateBaseOnIP6, rect.size.height, rect.size.width - 60 * ViewRateBaseOnIP6, 1 * ViewRateBaseOnIP6));
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithHexString:@"#e5e5e5"].CGColor);
+    CGContextStrokeRect(context, separatorView.frame);
+    
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

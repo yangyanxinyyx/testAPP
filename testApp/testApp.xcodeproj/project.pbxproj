@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -161,6 +162,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25D6DE6B2075F78600B66778 /* PriceCustomerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerModel.h; sourceTree = "<group>"; };
+		25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerModel.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -427,6 +430,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25D6DE692075F74700B66778 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				25D6DE6A2075F75800B66778 /* 报价首页 */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25D6DE6A2075F75800B66778 /* 报价首页 */ = {
+			isa = PBXGroup;
+			children = (
+				25D6DE6B2075F78600B66778 /* PriceCustomerModel.h */,
+				25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */,
+			);
+			path = "报价首页";
+			sourceTree = "<group>";
+		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,6 +642,7 @@
 		FC32BCF02074652C00817156 /* PriceView */ = {
 			isa = PBXGroup;
 			children = (
+				25D6DE692075F74700B66778 /* Model */,
 				FC32BCF12074652C00817156 /* Controller */,
 				FC32BCFE2074652C00817156 /* PriceViewController.h */,
 				FC32BCFF2074652C00817156 /* PriceViewController.m */,
@@ -1373,6 +1394,7 @@
 				FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
+				25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */,
 				FC32BDCA2074656200817156 /* XCCustomerDetailViewController.m in Sources */,
 				FC32BDC02074656200817156 /* XCUserRepairDetailViewController.m in Sources */,
 				FC32BD4D2074652C00817156 /* PriceUnderwritingTextTableViewCell.m in Sources */,

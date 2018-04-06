@@ -30,12 +30,10 @@
     self.labelTag.textColor = [UIColor colorWithHexString:@"#444444"];
     self.labelTag.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
     
-    
     self.labelInfo.frame = CGRectMake(355 * ViewRateBaseOnIP6, 33 *ViewRateBaseOnIP6, 100, 23 *ViewRateBaseOnIP6);
     self.labelInfo.backgroundColor = [UIColor clearColor];
     self.labelInfo.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
     self.labelInfo.font = [UIFont systemFontOfSize:23 * ViewRateBaseOnIP6];
-    
     
     self.labelNumber.frame = CGRectMake(200 * ViewRateBaseOnIP6, 32 * ViewRateBaseOnIP6, SCREEN_WIDTH - 230 * ViewRateBaseOnIP6, 22 * ViewRateBaseOnIP6);
     self.labelNumber.textAlignment = NSTextAlignmentRight;
@@ -44,6 +42,12 @@
     self.labelNumber.font = [UIFont systemFontOfSize:22 * ViewRateBaseOnIP6];
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithHexString:@"#e5e5e5"].CGColor); CGContextStrokeRect(context, CGRectMake(30 * ViewRateBaseOnIP6, rect.size.height, rect.size.width - 60 * ViewRateBaseOnIP6, 1 * ViewRateBaseOnIP6));
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

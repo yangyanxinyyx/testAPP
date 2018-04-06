@@ -11,6 +11,11 @@
 #import "PriceCarRecordTableViewCell.h"
 #import "priceCRQLastYLabelTableViewCell.h"
 #import "PriceCRQLastYInfoTableViewCell.h"
+
+#import "PriceAdjustViewController.h"
+#import "PriceInspectViewController.h"
+#import "PriceInfoViewController.h"
+
 @interface PriceCarInsuranceQViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -44,13 +49,21 @@
     }
 }
 
+
+
+#pragma mark- network
+
+
+
 #pragma mark - function
 - (void)touchButtonRevisePrice:(UIButton *)button{
-    NSLog(@"修改报价方案");
+    PriceAdjustViewController *priceAdjuestVC = [[PriceAdjustViewController alloc]init];
+    [self.navigationController pushViewController:priceAdjuestVC animated:YES];
 }
 
 - (void)touchButtonPrice:(UIButton *)button{
-    NSLog(@"报价");
+    PriceInspectViewController *priceInsVC = [[PriceInspectViewController alloc] init];
+    [self.navigationController pushViewController:priceInsVC animated:YES];
 }
 
 #pragma  mark - view delegate
@@ -148,6 +161,13 @@
         return 0;
     }
 
+}
+// 点击cell
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == self.myTableView) {
+        PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
+        [self.navigationController pushViewController:priceInfoVC animated:YES];
+    }
 }
 
 - (void)createUI{
