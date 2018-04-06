@@ -13,6 +13,8 @@
 @property(nonatomic,strong)UITableView *tab;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 
+@property (nonatomic,strong) UIView *forbidTipsView;
+
 @end
 
 @implementation GetCarListViewController
@@ -27,10 +29,50 @@
 
 - (void)createUI
 {
-    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64-50-30) style:UITableViewStylePlain];
+
+    if (![UserInfoManager shareInstance].isStore) {
+        [self.view addSubview:self.forbidTipsView];
+        return;
+    }
+
+    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44) style:UITableViewStylePlain];
     [self.view addSubview:_tab];
 
     _tab.dataSource = self;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPat
+{
+    return nil;
+}
+
+- (UIView *)forbidTipsView
+{
+    if (!_forbidTipsView) {
+        _forbidTipsView = [[UIView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44)];
+        _forbidTipsView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        imageView.image = [UIImage imageNamed:@"禁止.png"];
+        imageView.center = CGPointMake(SCREEN_WIDTH/2, _forbidTipsView.bounds.size.height/2);
+        [_forbidTipsView addSubview:imageView];
+
+
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
+        label.font = [UIFont systemFontOfSize:11];
+        label.text = @"业务员不可用!";
+        label.textColor = COLOR_RGB_255(165, 165, 165);
+        [_forbidTipsView addSubview:label];
+
+
+    }
+    return _forbidTipsView;
 }
 
 - (void)didReceiveMemoryWarning {
