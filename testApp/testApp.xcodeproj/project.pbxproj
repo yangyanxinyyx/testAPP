@@ -27,6 +27,7 @@
 		A7634D152078FD1E00373DBD /* XCUserChargebackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D142078FD1E00373DBD /* XCUserChargebackListViewController.m */; };
 		A7634D182078FDBA00373DBD /* XCUserChargebackListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */; };
 		A7634D1B2079098900373DBD /* XCUserCaseListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D1A2079098900373DBD /* XCUserCaseListModel.m */; };
+		25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -125,6 +126,12 @@
 		FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BDF220760DE500817156 /* CoverAnnouncementView.m */; };
 		FC32BDF6207612A300817156 /* 提醒@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF4207612A300817156 /* 提醒@3x.png */; };
 		FC32BDF7207612A300817156 /* 提醒@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF5207612A300817156 /* 提醒@2x.png */; };
+		FC32BDFE20764D3500817156 /* 禁止@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF820764D3400817156 /* 禁止@3x.png */; };
+		FC32BDFF20764D3500817156 /* 禁止@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDF920764D3400817156 /* 禁止@2x.png */; };
+		FC32BE0020764D3500817156 /* 搜索@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDFA20764D3400817156 /* 搜索@2x.png */; };
+		FC32BE0120764D3500817156 /* 搜索@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDFB20764D3500817156 /* 搜索@3x.png */; };
+		FC32BE0220764D3500817156 /* 暂无订单@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDFC20764D3500817156 /* 暂无订单@3x.png */; };
+		FC32BE0320764D3500817156 /* 暂无订单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC32BDFD20764D3500817156 /* 暂无订单@2x.png */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -186,6 +193,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25D6DE6B2075F78600B66778 /* PriceCustomerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceCustomerModel.h; sourceTree = "<group>"; };
+		25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCustomerModel.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A7011E6020760C1200C06D15 /* NSString+MoneyString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MoneyString.h"; sourceTree = "<group>"; };
 		A7011E6120760C1200C06D15 /* NSString+MoneyString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
@@ -410,6 +419,12 @@
 		FC32BDF220760DE500817156 /* CoverAnnouncementView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverAnnouncementView.m; sourceTree = "<group>"; };
 		FC32BDF4207612A300817156 /* 提醒@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提醒@3x.png"; sourceTree = "<group>"; };
 		FC32BDF5207612A300817156 /* 提醒@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "提醒@2x.png"; sourceTree = "<group>"; };
+		FC32BDF820764D3400817156 /* 禁止@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "禁止@3x.png"; sourceTree = "<group>"; };
+		FC32BDF920764D3400817156 /* 禁止@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "禁止@2x.png"; sourceTree = "<group>"; };
+		FC32BDFA20764D3400817156 /* 搜索@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索@2x.png"; sourceTree = "<group>"; };
+		FC32BDFB20764D3500817156 /* 搜索@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索@3x.png"; sourceTree = "<group>"; };
+		FC32BDFC20764D3500817156 /* 暂无订单@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无订单@3x.png"; sourceTree = "<group>"; };
+		FC32BDFD20764D3500817156 /* 暂无订单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无订单@2x.png"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -500,6 +515,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25D6DE692075F74700B66778 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				25D6DE6A2075F75800B66778 /* 报价首页 */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25D6DE6A2075F75800B66778 /* 报价首页 */ = {
+			isa = PBXGroup;
+			children = (
+				25D6DE6B2075F78600B66778 /* PriceCustomerModel.h */,
+				25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */,
+			);
+			path = "报价首页";
+			sourceTree = "<group>";
+		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,7 +670,7 @@
 				FCCC0ED1206151D700986A9E /* next@3x.png */,
 				FC2805AB205D96B800DD0DA9 /* login */,
 				FC2805B6205D96B800DD0DA9 /* CoverMain */,
-				FC2805B7205D96B800DD0DA9 /* New Group1 */,
+				FC2805B7205D96B800DD0DA9 /* GetCar */,
 				FC2805B8205D96B800DD0DA9 /* New Group2 */,
 				FC2805B9205D96B800DD0DA9 /* New Group3 */,
 				FC2805BA205D96B800DD0DA9 /* resource */,
@@ -691,11 +723,17 @@
 			path = CoverMain;
 			sourceTree = "<group>";
 		};
-		FC2805B7205D96B800DD0DA9 /* New Group1 */ = {
+		FC2805B7205D96B800DD0DA9 /* GetCar */ = {
 			isa = PBXGroup;
 			children = (
+				FC32BDF920764D3400817156 /* 禁止@2x.png */,
+				FC32BDF820764D3400817156 /* 禁止@3x.png */,
+				FC32BDFA20764D3400817156 /* 搜索@2x.png */,
+				FC32BDFB20764D3500817156 /* 搜索@3x.png */,
+				FC32BDFD20764D3500817156 /* 暂无订单@2x.png */,
+				FC32BDFC20764D3500817156 /* 暂无订单@3x.png */,
 			);
-			path = "New Group1";
+			path = GetCar;
 			sourceTree = "<group>";
 		};
 		FC2805B8205D96B800DD0DA9 /* New Group2 */ = {
@@ -755,6 +793,7 @@
 		FC32BCF02074652C00817156 /* PriceView */ = {
 			isa = PBXGroup;
 			children = (
+				25D6DE692075F74700B66778 /* Model */,
 				FC32BCF12074652C00817156 /* Controller */,
 				FC32BCFE2074652C00817156 /* PriceViewController.h */,
 				FC32BCFF2074652C00817156 /* PriceViewController.m */,
@@ -1418,6 +1457,7 @@
 				FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */,
 				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
+				FC32BDFF20764D3500817156 /* 禁止@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC2805C4205D96B900DD0DA9 /* login_password@3x.png in Resources */,
 				FC2805C3205D96B900DD0DA9 /* login_password@2x.png in Resources */,
@@ -1427,8 +1467,10 @@
 				FC2805C5205D96B900DD0DA9 /* login_preson@2x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FCF8766E206BCF9C00CF6FDE /* 汽车3.jpg in Resources */,
+				FC32BE0120764D3500817156 /* 搜索@3x.png in Resources */,
 				FC2805BE205D96B900DD0DA9 /* back@3x.png in Resources */,
 				FCCC0EC92061519000986A9E /* price_select@3x.png in Resources */,
+				FC32BE0320764D3500817156 /* 暂无订单@2x.png in Resources */,
 				FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */,
 				FCCC0ECC2061519000986A9E /* getCar_nomnal@3x.png in Resources */,
 				FCCC0ECA2061519000986A9E /* price_nomnal@3x.png in Resources */,
@@ -1436,6 +1478,8 @@
 				FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
+				FC32BE0020764D3500817156 /* 搜索@2x.png in Resources */,
+				FC32BE0220764D3500817156 /* 暂无订单@3x.png in Resources */,
 				FCF8766F206BCF9C00CF6FDE /* 汽车2.jpg in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
 				FCCC0EBE206150E400986A9E /* price_select@2x.png in Resources */,
@@ -1447,6 +1491,7 @@
 				FC2805CA205D96B900DD0DA9 /* 背景@2x.png in Resources */,
 				FC2805C0205D96B900DD0DA9 /* login_code@3x.png in Resources */,
 				FCCC0ECE2061519000986A9E /* user_select@3x.png in Resources */,
+				FC32BDFE20764D3500817156 /* 禁止@3x.png in Resources */,
 				FCCC0ED4206151D700986A9E /* next@2x.png in Resources */,
 				FCCC0EBD206150E400986A9E /* getCar_nomnal@2x.png in Resources */,
 				FCCC0EBB206150E400986A9E /* user_nomnal@2x.png in Resources */,
@@ -1547,6 +1592,7 @@
 				FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
+				25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */,
 				FC32BDCA2074656200817156 /* XCCustomerDetailViewController.m in Sources */,
 				A7011E6F207679D500C06D15 /* XCCheckoutDetailPolicyModel.m in Sources */,
 				FC32BDC02074656200817156 /* XCUserRepairDetailViewController.m in Sources */,

@@ -29,6 +29,12 @@
     self.imageViewAdd.frame = CGRectMake(356 * ViewRateBaseOnIP6, 25 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
     self.imageViewAdd.image = [UIImage imageNamed:@""];
 }
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithHexString:@"#e5e5e5"].CGColor); CGContextStrokeRect(context, CGRectMake(30 * ViewRateBaseOnIP6, rect.size.height, rect.size.width - 60 * ViewRateBaseOnIP6, 1 * ViewRateBaseOnIP6));
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

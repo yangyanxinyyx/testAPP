@@ -8,6 +8,7 @@
 
 #import "PriceInspectViewController.h"
 #import "PriceInspectTableViewCell.h"
+#import "PriceInfoViewController.h"
 
 @interface PriceInspectViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInspectTableViewCellDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -52,7 +53,8 @@
 }
 #pragma mark - cell Delegate
 - (void)inspectPriceDelegate{
-    NSLog(@"查看报价");
+    PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
+    [self.navigationController pushViewController:priceInfoVC animated:YES];
 }
 #pragma mark - UI
 - (void)createUI{
@@ -64,10 +66,10 @@
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
+        _myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
         _myTableView.bounces = YES;
-        _myTableView.separatorColor = [UIColor purpleColor];
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTableView;
