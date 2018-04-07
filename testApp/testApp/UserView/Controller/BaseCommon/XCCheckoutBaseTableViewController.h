@@ -22,6 +22,7 @@
 @property (nonatomic,strong) NSString *navTitle;
 
 @property (nonatomic, strong) UITableView * tableView ;
+@property (nonatomic, strong) NSMutableArray * dataArr ;
 
 - (instancetype)initWithTitle:(NSString *)title;
 

@@ -53,7 +53,7 @@
 				<key>iconName</key>
 				<string>退单</string>
 				<key>url</key>
-				<string></string>
+				<string>XCUserChargebackListViewController</string>
 			</dict>
 			<dict>
 				<key>title</key>

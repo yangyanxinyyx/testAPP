@@ -6,8 +6,7 @@
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCCheckoutDetailBaseTableViewController.h"
+#import "XCUserBaseViewController.h"
 
-@interface XCCustomerDetailViewController : XCCheckoutDetailBaseTableViewController
-
+@interface XCCustomerDetailViewController : XCUserBaseViewController
 @end

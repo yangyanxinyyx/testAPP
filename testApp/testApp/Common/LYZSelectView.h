@@ -10,10 +10,10 @@
 
 @interface LYZSelectView : UIView
 
-typedef void (^confirmBlock)(LYZSelectView *alertView,NSString *selectStr);
+typedef void (^selectConfirmBlock)(LYZSelectView *alertView,NSString *selectStr);
 
 + (instancetype)alterViewWithArray:(NSArray<NSString *>*)dataArr
-                      confirmClick:(confirmBlock)confirmblock;
+                      confirmClick:(selectConfirmBlock)confirmblock;
 
 
 @end

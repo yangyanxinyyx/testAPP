@@ -7,29 +7,17 @@
 //
 
 #import "XCDistributionPolicyViewController.h"
-#import "XCCheckoutDetailTextCell.h"
-#import "XCCheckoutDetailTextFiledCell.h"
 #import "XCDistributionPicketCell.h"
 #import "XCDistributionFooterView.h"
 #import "XCDistributionInputCell.h"
-#import "FinishTipsView.h"
-#import "SelectTimeView.h"
 #import "LYZSelectView.h"
-#define ktextCellID @"textCellID"
-#define ktextFiledCellID @"textFiledID"
-#define kpicketCellID @"picketCellID"
-#define kheaderViewID @"headerViewID"
-#define kfooterViewID @"footerViewID"
-#define kinputCellID @"inputCellID"
 
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom)
 @interface XCDistributionPolicyViewController ()<UITableViewDelegate,UITableViewDataSource,
 XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 
 @property (nonatomic, assign) BOOL isSelectDistribution ;
-@property (nonatomic, strong) NSMutableArray * dataArrM ;
 @property (nonatomic, strong) NSArray * titleArr ;
-@property (nonatomic, strong) UITableView * tableView ;
 
 
 //@property (nonatomic, strong) UIButton * confirmBtn ;
@@ -112,12 +100,12 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 - (void)createUI
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:ktextCellID];
-    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:ktextFiledCellID];
-    [self.tableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kpicketCellID];
-    [self.tableView registerClass:[XCDistributionInputCell class] forCellReuseIdentifier:kinputCellID];
-    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
-    [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kfooterViewID];
+    [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
+    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
+    [self.tableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
+    [self.tableView registerClass:[XCDistributionInputCell class] forCellReuseIdentifier:kInputCellID];
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
+    [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, ktableViewH)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -173,19 +161,19 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     }
 
     if ([self isTextCellTypeWithIndex:indexPath]) {
-        XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:ktextCellID];
+        XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
         textCell.shouldShowSeparator = YES;
         textCell.title = titleName;
         textCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return textCell;
     }else if([self isPicketCellTypeWithIndex:indexPath]) {
-        XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kpicketCellID];
+        XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
         picketCell.title = titleName;
         picketCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         return picketCell;
     }else if([self isInputCellTypeWithIndex:indexPath]){
-            XCDistributionInputCell *inputCell = (XCDistributionInputCell *)[tableView dequeueReusableCellWithIdentifier:kinputCellID];
+            XCDistributionInputCell *inputCell = (XCDistributionInputCell *)[tableView dequeueReusableCellWithIdentifier:kInputCellID];
             inputCell.title = titleName;
             inputCell.userInteractionEnabled = YES;
             inputCell.delegate =self;
@@ -194,7 +182,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
         return inputCell;
     }
     
-    XCCheckoutDetailTextFiledCell *textFiledCell =(XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:ktextFiledCellID];
+    XCCheckoutDetailTextFiledCell *textFiledCell =(XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID];
     textFiledCell.title = titleName;
     textFiledCell.shouldShowSeparator = YES;
     textFiledCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -216,14 +204,14 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kheaderViewID];
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
     
     return headerView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kfooterViewID];
+    XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
     footerView.delegate = self;
     return footerView;
 }
@@ -331,10 +319,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     [keyboardEndFrameValue getValue:&keyboardEndFrame];
     //    NSLog(@"=====>:%d",(int)keyboardEndFrame.size.height);
     //向上移动
+    __weak typeof (self)weakSelf = self;
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.tableView.frame;
+        CGRect frame = weakSelf.tableView.frame;
         frame.size.height = ktableViewH -  keyboardEndFrame.size.height;
-        _tableView.frame = frame;
+        weakSelf.tableView.frame = frame;
     }];
     
 }
@@ -342,10 +331,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 //键盘隐藏
 - (void)keyboardHide:(NSNotification *)notification {
     //往下移动
+    __weak typeof (self)weakSelf = self;
     [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.tableView.frame;
+        CGRect frame = weakSelf.tableView.frame;
         frame.size.height = ktableViewH ;
-        _tableView.frame = frame;
+        weakSelf.tableView.frame = frame;
     }];
     
 }

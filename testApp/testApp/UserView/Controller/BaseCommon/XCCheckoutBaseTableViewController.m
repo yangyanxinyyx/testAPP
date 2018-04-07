@@ -11,7 +11,6 @@
 #import "XCCheckoutBaseTableViewController.h"
 @interface XCCheckoutBaseTableViewController ()
 @property (strong, nonatomic) NSIndexPath* editingIndexPath;  //当前左滑cell的index，在代理方法中设置
-
 @end
 
 @implementation XCCheckoutBaseTableViewController

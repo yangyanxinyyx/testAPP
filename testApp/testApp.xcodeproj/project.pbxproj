@@ -19,6 +19,14 @@
 		A75E1F9A2077ABB900C81215 /* XCDistributionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75E1F992077ABB900C81215 /* XCDistributionFooterView.m */; };
 		A75E1F9D2077B25A00C81215 /* XCDistributionInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A75E1F9C2077B25A00C81215 /* XCDistributionInputCell.m */; };
 		A75E1FA02077DD9D00C81215 /* LYZSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75E1F9F2077DD9D00C81215 /* LYZSelectView.m */; };
+		A7634D022078BDEF00373DBD /* XCCustomerViolationPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D012078BDEF00373DBD /* XCCustomerViolationPreviewViewController.m */; };
+		A7634D052078BE1B00373DBD /* XCCustomerAnnualReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D042078BE1B00373DBD /* XCCustomerAnnualReviewViewController.m */; };
+		A7634D082078BE4200373DBD /* XCCustomerRepairViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D072078BE4200373DBD /* XCCustomerRepairViewController.m */; };
+		A7634D0B2078CC6C00373DBD /* XCCheckoutDetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D0A2078CC6C00373DBD /* XCCheckoutDetailPhotoCell.m */; };
+		A7634D0E2078F95500373DBD /* XCCustomerFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D0D2078F95500373DBD /* XCCustomerFollowViewController.m */; };
+		A7634D152078FD1E00373DBD /* XCUserChargebackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D142078FD1E00373DBD /* XCUserChargebackListViewController.m */; };
+		A7634D182078FDBA00373DBD /* XCUserChargebackListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */; };
+		A7634D1B2079098900373DBD /* XCUserCaseListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D1A2079098900373DBD /* XCUserCaseListModel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -204,6 +212,22 @@
 		A75E1F9C2077B25A00C81215 /* XCDistributionInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCDistributionInputCell.m; sourceTree = "<group>"; };
 		A75E1F9E2077DD9D00C81215 /* LYZSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZSelectView.h; sourceTree = "<group>"; };
 		A75E1F9F2077DD9D00C81215 /* LYZSelectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZSelectView.m; sourceTree = "<group>"; };
+		A7634D002078BDEF00373DBD /* XCCustomerViolationPreviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerViolationPreviewViewController.h; sourceTree = "<group>"; };
+		A7634D012078BDEF00373DBD /* XCCustomerViolationPreviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerViolationPreviewViewController.m; sourceTree = "<group>"; };
+		A7634D032078BE1B00373DBD /* XCCustomerAnnualReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerAnnualReviewViewController.h; sourceTree = "<group>"; };
+		A7634D042078BE1B00373DBD /* XCCustomerAnnualReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerAnnualReviewViewController.m; sourceTree = "<group>"; };
+		A7634D062078BE4200373DBD /* XCCustomerRepairViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerRepairViewController.h; sourceTree = "<group>"; };
+		A7634D072078BE4200373DBD /* XCCustomerRepairViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerRepairViewController.m; sourceTree = "<group>"; };
+		A7634D092078CC6C00373DBD /* XCCheckoutDetailPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutDetailPhotoCell.h; sourceTree = "<group>"; };
+		A7634D0A2078CC6C00373DBD /* XCCheckoutDetailPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutDetailPhotoCell.m; sourceTree = "<group>"; };
+		A7634D0C2078F95500373DBD /* XCCustomerFollowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerFollowViewController.h; sourceTree = "<group>"; };
+		A7634D0D2078F95500373DBD /* XCCustomerFollowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerFollowViewController.m; sourceTree = "<group>"; };
+		A7634D132078FD1E00373DBD /* XCUserChargebackListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserChargebackListViewController.h; sourceTree = "<group>"; };
+		A7634D142078FD1E00373DBD /* XCUserChargebackListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserChargebackListViewController.m; sourceTree = "<group>"; };
+		A7634D162078FDBA00373DBD /* XCUserChargebackListDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserChargebackListDetailViewController.h; sourceTree = "<group>"; };
+		A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserChargebackListDetailViewController.m; sourceTree = "<group>"; };
+		A7634D192079098900373DBD /* XCUserCaseListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseListModel.h; sourceTree = "<group>"; };
+		A7634D1A2079098900373DBD /* XCUserCaseListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseListModel.m; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
@@ -518,6 +542,38 @@
 				A75E1F9C2077B25A00C81215 /* XCDistributionInputCell.m */,
 			);
 			path = "配送保单";
+			sourceTree = "<group>";
+		};
+		A7634D0F2078FC1B00373DBD /* 退单 */ = {
+			isa = PBXGroup;
+			children = (
+				A7634D162078FDBA00373DBD /* XCUserChargebackListDetailViewController.h */,
+				A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */,
+				A7634D132078FD1E00373DBD /* XCUserChargebackListViewController.h */,
+				A7634D142078FD1E00373DBD /* XCUserChargebackListViewController.m */,
+			);
+			path = "退单";
+			sourceTree = "<group>";
+		};
+		A7634D102078FC3100373DBD /* 财务审核中 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "财务审核中";
+			sourceTree = "<group>";
+		};
+		A7634D112078FC3E00373DBD /* 续保列表 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "续保列表";
+			sourceTree = "<group>";
+		};
+		A7634D122078FC5400373DBD /* 配送 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "配送";
 			sourceTree = "<group>";
 		};
 		A79A510720597A0F000D8D0F /* Tool */ = {
@@ -841,8 +897,8 @@
 				FC32BD5E2074656100817156 /* UserViewController.h */,
 				FC32BD5F2074656100817156 /* UserViewController.m */,
 				FC32BD802074656100817156 /* 车险客户列表 */,
-				FC32BD632074656100817156 /* 案件跟进 */,
 				FC32BD702074656100817156 /* 车务客户列表 */,
+				FC32BD632074656100817156 /* 案件跟进 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -967,6 +1023,10 @@
 				FC32BD8B2074656100817156 /* 待核保 */,
 				FC32BD812074656100817156 /* 已核保代缴费 */,
 				FC32BD862074656100817156 /* 已缴费待打单 */,
+				A7634D122078FC5400373DBD /* 配送 */,
+				A7634D0F2078FC1B00373DBD /* 退单 */,
+				A7634D102078FC3100373DBD /* 财务审核中 */,
+				A7634D112078FC3E00373DBD /* 续保列表 */,
 				FC32BD902074656100817156 /* 我的客户 */,
 			);
 			path = "车险客户列表";
@@ -1016,6 +1076,14 @@
 				FC32BD922074656100817156 /* XCCustomerDetailViewController.m */,
 				FC32BD932074656100817156 /* XCCustomerViewController.h */,
 				FC32BD942074656100817156 /* XCCustomerViewController.m */,
+				A7634D0C2078F95500373DBD /* XCCustomerFollowViewController.h */,
+				A7634D0D2078F95500373DBD /* XCCustomerFollowViewController.m */,
+				A7634D062078BE4200373DBD /* XCCustomerRepairViewController.h */,
+				A7634D072078BE4200373DBD /* XCCustomerRepairViewController.m */,
+				A7634D002078BDEF00373DBD /* XCCustomerViolationPreviewViewController.h */,
+				A7634D012078BDEF00373DBD /* XCCustomerViolationPreviewViewController.m */,
+				A7634D032078BE1B00373DBD /* XCCustomerAnnualReviewViewController.h */,
+				A7634D042078BE1B00373DBD /* XCCustomerAnnualReviewViewController.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";
@@ -1033,6 +1101,8 @@
 				A7011E6B2076799A00C06D15 /* XCCheckoutDetailBaseModel.m */,
 				A7011E6D207679D500C06D15 /* XCCheckoutDetailPolicyModel.h */,
 				A7011E6E207679D500C06D15 /* XCCheckoutDetailPolicyModel.m */,
+				A7634D192079098900373DBD /* XCUserCaseListModel.h */,
+				A7634D1A2079098900373DBD /* XCUserCaseListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1053,6 +1123,8 @@
 				FC32BDA32074656100817156 /* XCCheckoutDetailTextCell.m */,
 				FC32BDA42074656100817156 /* XCCheckoutDetailTextFiledCell.h */,
 				FC32BDA52074656100817156 /* XCCheckoutDetailTextFiledCell.m */,
+				A7634D092078CC6C00373DBD /* XCCheckoutDetailPhotoCell.h */,
+				A7634D0A2078CC6C00373DBD /* XCCheckoutDetailPhotoCell.m */,
 				FC32BDA62074656100817156 /* XCCheckoutTableViewCell.h */,
 				FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */,
 				FC32BDAA2074656100817156 /* XCUserCaseListCell.h */,
@@ -1459,6 +1531,7 @@
 				A75E1F9A2077ABB900C81215 /* XCDistributionFooterView.m in Sources */,
 				FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */,
 				FC32BDC12074656200817156 /* XCUserRepairViewController.m in Sources */,
+				A7634D182078FDBA00373DBD /* XCUserChargebackListDetailViewController.m in Sources */,
 				FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */,
 				FC32BDD82074656200817156 /* XCUserListHeaderView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
@@ -1500,6 +1573,7 @@
 				FC32BD382074652C00817156 /* PriceCustomerInformEntryViewController.m in Sources */,
 				FC32BD532074652C00817156 /* SelectSheetView.m in Sources */,
 				FC32BDCB2074656200817156 /* XCCustomerViewController.m in Sources */,
+				A7634D1B2079098900373DBD /* XCUserCaseListModel.m in Sources */,
 				FC32BD522074652C00817156 /* PriceInfoCellView.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
@@ -1517,16 +1591,21 @@
 				FC32BD3E2074652C00817156 /* PriceCarRecordTableViewCell.m in Sources */,
 				FC32BDC62074656200817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */,
 				A75E1F8120776F7000C81215 /* XCUserBaseViewController.m in Sources */,
+				A7634D022078BDEF00373DBD /* XCCustomerViolationPreviewViewController.m in Sources */,
 				FC32BDD52074656200817156 /* XCMyCommissionListCell.m in Sources */,
+				A7634D052078BE1B00373DBD /* XCCustomerAnnualReviewViewController.m in Sources */,
 				FC32BD4C2074652C00817156 /* PriceUnderwritingTableViewCell.m in Sources */,
+				A7634D0E2078F95500373DBD /* XCCustomerFollowViewController.m in Sources */,
 				FC32BD402074652C00817156 /* PriceInfoAddTableViewCell.m in Sources */,
 				FC32BD472074652C00817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */,
+				A7634D082078BE4200373DBD /* XCCustomerRepairViewController.m in Sources */,
 				FC32BDC52074656200817156 /* XCUserWaitingToPayingViewController.m in Sources */,
 				FC32BDD42074656200817156 /* XCCheckoutTableViewCell.m in Sources */,
 				FC32BDF02076021900817156 /* CoverLoopimageModel.m in Sources */,
 				FC32BD3F2074652C00817156 /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC32BDC32074656200817156 /* XCUserViolationViewController.m in Sources */,
 				FC32BD392074652C00817156 /* PriceInfoViewController.m in Sources */,
+				A7634D0B2078CC6C00373DBD /* XCCheckoutDetailPhotoCell.m in Sources */,
 				FC32BDD32074656200817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
 				FC32BD362074652C00817156 /* PriceAdjustViewController.m in Sources */,
 				A7011E6C2076799A00C06D15 /* XCCheckoutDetailBaseModel.m in Sources */,
@@ -1550,6 +1629,7 @@
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
 				FC32BDBE2074656200817156 /* XCUserAnnualReviewDetailViewController.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
+				A7634D152078FD1E00373DBD /* XCUserChargebackListViewController.m in Sources */,
 				FC32BDBB2074656200817156 /* XCUserBePaymentCaseViewController.m in Sources */,
 				FC32BDCD2074656200817156 /* XCMyCommissionListModel.m in Sources */,
 				A75E1F7E2077612300C81215 /* XCDistributionPolicyViewController.m in Sources */,

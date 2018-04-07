@@ -10,7 +10,7 @@
 
 @interface LYZSelectView ()
 @property (nonatomic, strong) UIView * contentView ;
-@property (nonatomic, copy) confirmBlock confirmblock;
+@property (nonatomic, copy) selectConfirmBlock confirmblock;
 @end
 
 @implementation LYZSelectView
@@ -18,7 +18,7 @@
 #pragma mark - Init Method
 
 +(instancetype)alterViewWithArray:(NSArray<NSString *> *)dataArr
-                     confirmClick:(confirmBlock)confirmblock
+                     confirmClick:(selectConfirmBlock)confirmblock
 {
     LYZSelectView *alterView = [[LYZSelectView alloc]initWithArray:dataArr];
     alterView.confirmblock = confirmblock;
