@@ -15,7 +15,8 @@
 @property (nonatomic, strong) UILabel * userNameLabel ;
 @property (nonatomic, strong) UILabel * issueTimeLabel ;
 @property (nonatomic, strong) UIButton * checkButton ;
-
+@property (nonatomic, strong) UIButton * underWritingButton ;
+@property (nonatomic, strong) UIView * separpatorLine ;
 @end
 
 @implementation XCCheckoutTableViewCell
@@ -26,6 +27,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        _isCustomerCell = NO;
         [self configSubVies];
     }
     return self;
@@ -73,6 +75,20 @@
         checkButton;
     });
     
+    _underWritingButton = [UIButton buttonWithType:0];
+    [_underWritingButton setTitle:@"核保" forState:UIControlStateNormal];
+    _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
+    [_underWritingButton setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+    _underWritingButton.layer.cornerRadius = 3;
+    _underWritingButton.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
+    _underWritingButton.layer.borderWidth = 0.5;
+    [_underWritingButton addTarget:self action:@selector(clickUnderWritingButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_underWritingButton];
+    
+    _separpatorLine = [[UIView alloc] init];
+    [_separpatorLine setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [self addSubview:_separpatorLine];
+    
 }
 
 - (void)layoutSubviews
@@ -89,7 +105,21 @@
     
     CGFloat buttonW = 160 * ViewRateBaseOnIP6;
     CGFloat buttonH = 60 * ViewRateBaseOnIP6;
-    [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
+#warning 等待新的UI图重新布局
+    if (_isCustomerCell) {
+        [self.underWritingButton setFrame:CGRectMake(self.frame.size.width - (31 * ViewRateBaseOnIP6 + buttonW) * 2,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];        
+        
+        [self.checkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.checkButton.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+        [self.checkButton setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
+        [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
+        
+    }else {
+        [self.underWritingButton setFrame:CGRectZero];
+        [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
+    }
+    
+    [_separpatorLine setFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
     
 }
 
@@ -102,6 +132,16 @@
 
     }else {
         XCLog(@"CLass:%@ - checkButtonClick: Failure ",[self class]);
+    }
+}
+
+- (void)clickUnderWritingButton:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutCellClickUnderWritingButtonHandler:cell:)]) {
+        [self.delegate XCCheckoutCellClickUnderWritingButtonHandler:button cell:self];
+        
+    }else {
+        XCLog(@"CLass:%@ - (void)clickUnderWritingButton:Failure ",[self class]);
     }
 }
 
@@ -146,6 +186,12 @@
     _issureTime = issureTime;
      NSString *issureTimeStr = [NSString stringWithFormat:@"出单时间: %@",_issureTime];
     [self.issueTimeLabel setText:issureTimeStr];
+}
+
+- (void)setIsCustomerCell:(BOOL)isCustomerCell
+{
+    _isCustomerCell = isCustomerCell;
+    [self layoutSubviews];
 }
 
 

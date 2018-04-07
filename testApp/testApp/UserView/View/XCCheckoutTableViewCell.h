@@ -11,7 +11,7 @@
 @protocol XCCheckoutTableViewCellDelegate <NSObject>
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell;
-
+- (void)XCCheckoutCellClickUnderWritingButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell;
 @end
 
 @interface XCCheckoutTableViewCell : UITableViewCell
@@ -24,5 +24,8 @@
 @property (nonatomic, copy) NSString * issureTime;
 
 @property (nonatomic, weak) id <XCCheckoutTableViewCellDelegate> delegate;
+
+/** 我的客户Cell */
+@property (nonatomic, assign) BOOL  isCustomerCell;
 
 @end

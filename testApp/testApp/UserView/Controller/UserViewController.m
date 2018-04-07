@@ -7,6 +7,7 @@
 //
 
 #import "UserViewController.h"
+#import "XCCheckoutBaseTableViewController.h"
 #import "XCUserTopView.h"
 #import "XCUserListView.h"
 #import "XCUserListCollectionViewCell.h"
@@ -14,7 +15,7 @@
 #import "XCUserListModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "XCMyCommissionViewController.h"
-#import "FindPasswordViewController.h"
+#import "XCModifyPwdViewController.h"
 #define kCellID @"myCellID"
 #define kHeaderViewID @"myHeaderID"
 #define kFooterViewID @"myFooterID"
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) XCUserTopView * topView;
 @property (nonatomic, strong) XCUserListView * listView ;
 @property (nonatomic, strong) NSMutableArray * listViewDataArray ;
+
 @end
 
 @implementation UserViewController
@@ -48,6 +50,7 @@
         if (userManager.iconUrl) {
             [self.topView setUserIconUrlString:userManager.iconUrl];
         }
+        
     }
 }
 
@@ -63,19 +66,18 @@
 {
     [super viewWillLayoutSubviews];
     
-    if (isIPhoneX) {
-        [self.topView setFrame:CGRectMake(0, StatusBarHeight, SCREEN_WIDTH, StatusBarHeight + 310 * ViewRateBaseOnIP6)];
-        [self.listView setFrame:CGRectMake(0, StatusBarHeight + self.topView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topView.frame.size.height - STATUS_BAR_HEIGHT - SafeAreaBottomBarHeight - 98 * ViewRateBaseOnIP6)];
-    }else {
-        [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)];
-        [self.listView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + self.topView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topView.frame.size.height - STATUS_BAR_HEIGHT - 98 * ViewRateBaseOnIP6)];
-    }
+    [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
+    [self.listView setFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT)];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 #pragma mark - UI
 
 - (void)setUI {
@@ -86,6 +88,7 @@
     [self.view addSubview:self.topView];
     if (self.listViewDataArray) {
         [self.view addSubview:self.listView];
+        [self.view bringSubviewToFront:self.topView];
     }
 }
 
@@ -105,8 +108,8 @@
 - (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button
 {
     XCLog(@"ClickModifyPasswordBtn");
-    FindPasswordViewController *findPasswordVC =[[FindPasswordViewController alloc] init];
-    [self.navigationController pushViewController:findPasswordVC animated:YES];
+    XCModifyPwdViewController *modifyVC = [[XCModifyPwdViewController alloc] init];
+    [self.navigationController pushViewController:modifyVC animated:YES];
 }
 
 #pragma mark - UICollectionViewDataSource&&UICollectionViewDelegate
@@ -184,7 +187,7 @@
     NSLog(@"=====CollectionViewSelect %@",model.urlString);
     
     if (model.urlString && ![model.urlString isEqualToString:@""]) {
-        UIViewController *subVC = [NSClassFromString(model.urlString) new];
+       XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
         [self.navigationController pushViewController:subVC animated:YES];
     }
 }

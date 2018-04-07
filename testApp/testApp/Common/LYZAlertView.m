@@ -10,7 +10,6 @@
 @interface LYZAlertView ()
 
 @property (nonatomic, strong) UIView *centerView ;
-@property (nonatomic, strong) UIView * bgView ;
 
 @property (nonatomic, strong) UILabel * titleLabel;
 @property (nonatomic, strong) UILabel * contentLabel;
@@ -19,9 +18,7 @@
 @property (nonatomic, strong) UIButton * comfirmBtn;
 @property (nonatomic, strong) UIButton * cancelBtn ;
 
-@property (nonatomic, copy) comfirmBlock comfirmblock;
-@property (nonatomic, copy) cancelBlock cancelblock;
-
+@property (nonatomic, copy) confirmBlock confirmblock;
 
 @end
 
@@ -32,10 +29,9 @@
 
 +(instancetype)alterViewWithTitle:(NSString *)title
                           content:(NSString *)content
-                       comfirmStr:(NSString *)comfirmString
+                       confirmStr:(NSString *)confirmString
                         cancelStr:(NSString *)cancelString
-                     comfirmClick:(comfirmBlock)comfirmblock
-                      cancelClick:(cancelBlock)cancelblock
+                     confirmClick:(confirmBlock)confirmblock
 {
 
     LYZAlertView *alterView = [[LYZAlertView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -43,9 +39,8 @@
     alterView.titleStr = title;
     alterView.contentStr = content;
     alterView.cancelStr = cancelString;
-    alterView.comfirmStr = comfirmString;
-    alterView.cancelblock  = cancelblock;
-    alterView.comfirmblock  = comfirmblock;
+    alterView.comfirmStr = confirmString;
+    alterView.confirmblock  = confirmblock;
     
     return alterView;
 }
@@ -55,13 +50,8 @@
     self=[super initWithFrame:frame];
     if (self) {
         
-        //背景蒙版
-        _bgView = [[UIView alloc] initWithFrame:CGRectZero];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCancelButton:)];
-        [_bgView addGestureRecognizer:tap];
-        [_bgView setBackgroundColor:COLOR_RGBA_255(0, 0, 0, 0.6)];
-        [self addSubview:_bgView];
-        
+        [self setBackgroundColor:COLOR_RGBA_255(0, 0, 0, 0.6)];
+
         //提示框
         _centerView = [[UIView alloc] initWithFrame:CGRectZero];
         _centerView.backgroundColor = [UIColor whiteColor];
@@ -110,7 +100,6 @@
 {
     [super layoutSubviews];
     
-    [self.bgView setFrame:self.frame];
     [self.centerView setFrame:CGRectMake(0, 0, 540 * ViewRateBaseOnIP6, 220 * ViewRateBaseOnIP6)];
     self.centerView.center = CGPointMake(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5);
     
@@ -137,14 +126,19 @@
 
 - (void)clickComfirmButton:(UIButton *)button
 {
-    self.comfirmblock(self);
+   self.confirmblock(self);
+   [self removeFromSuperview];
 }
 
 - (void)clickCancelButton:(UIButton *)button
 {
-    self.cancelblock(self);
+   [self removeFromSuperview];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+   [self removeFromSuperview];
+}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method

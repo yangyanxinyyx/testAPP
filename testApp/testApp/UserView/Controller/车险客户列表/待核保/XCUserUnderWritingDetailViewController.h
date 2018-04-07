@@ -10,4 +10,5 @@
 
 @interface XCUserUnderWritingDetailViewController : XCCheckoutDetailBaseTableViewController
 
+
 @end

@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController1.h"
 #import "XCUserCaseListCell.h"
-#define kmyCellID @"myCellID"
-#define kcaseListCelID @"myCaseListCellID"
+#define kCaseListCellID @"caseListCellID"
+#define kHeaderViewID @"headerViewID"
+@interface XCUserCaseBaseTableViewController :BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 
-@interface XCUserCaseBaseTableViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+/**
+ 自定义导航栏
+ */
+@property (nonatomic, strong) BaseNavigationBar *topBar ;
+@property (nonatomic,strong) NSString *navTitle;
+
 @property (nonatomic, strong) UITableView * tableView ;
+@property (nonatomic, strong) NSMutableArray * dataArr ;
 @end

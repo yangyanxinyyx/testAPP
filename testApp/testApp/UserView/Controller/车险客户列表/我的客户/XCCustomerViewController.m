@@ -8,8 +8,11 @@
 
 #import "XCCustomerViewController.h"
 #import "XCCustomerDetailViewController.h"
-@interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate>
-
+@interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
+    CGFloat _addBtnHeigth;
+}
+/** <# 注释 #> */
+@property (nonatomic, strong) UIButton * addCustomerBtn ;
 @end
 
 @implementation XCCustomerViewController
@@ -17,62 +20,54 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"客户列表";
+    _addBtnHeigth = 88 * ViewRateBaseOnIP6;
+    [self createUI];
     
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    CGFloat buttonH = 98;
-    [self.tableView setFrame:CGRectMake(0, 64 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 - (buttonH + 20) * ViewRateBaseOnIP6)];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + _addBtnHeigth + kBottomMargan))];
+    [self.addCustomerBtn setFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), SCREEN_WIDTH, _addBtnHeigth)];
+    
 }
 
 #pragma mark - Action Method
 
 - (void)clickCheckDetailButton
 {
-    XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] init];
-    
+    XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];
     [self.navigationController pushViewController:detailVC animated:YES];
+    
+}
+
+- (void)clickUnderWritingDetailButton
+{
+    
+}
+
+- (void)clickAddCustomerButton:(UIButton *)button
+{
     
 }
 
 
 #pragma mark - privary Method
 
-- (void)showAlertViewWithIndepthPathCell:(NSIndexPath*)indexpath
+- (void)createUI
 {
-    __weak typeof (self)weakSelf = self;
-    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否删除" content:nil comfirmStr:@"是" cancelStr:@"否" comfirmClick:^(LYZAlertView *alertView) {
-        //(TODO)删除数据
-        [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
-    } cancelClick:^(LYZAlertView *alertView) {
-        [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
-    }];
-    
-    [self.view addSubview:alertView];
+    _addCustomerBtn = [UIButton buttonWithType:0];
+    [_addCustomerBtn setTitle:@"新增客户" forState:UIControlStateNormal];
+    [_addCustomerBtn setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
+    [_addCustomerBtn addTarget:self action:@selector(clickAddCustomerButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_addCustomerBtn];
 }
-
-- (void)removeAlertView:(LYZAlertView *)alertView cellIndexpath:(NSIndexPath *)indexpath
-{
-    UITableViewCell *currentCell = [self.tableView cellForRowAtIndexPath:indexpath];
-    
-    if ([alertView superview]) {
-        [alertView removeFromSuperview];
-    }
-}
-
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,37 +77,24 @@
     cell.carNumber = @"粤AAAAAA";
     cell.userName = @"梁艺钟";
     cell.issureTime = @"a123213-321-321-3";
-    
+    cell.isCustomerCell = YES;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSLog(@"=======>Cell Delected Action");
-        [self showAlertViewWithIndepthPathCell:indexPath];
-    }
-}
 
-- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (@available(iOS 11.0, *)) {
-        __weak typeof (self)weakSelf = self;
-        UIContextualAction *action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"删除" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-            NSLog(@"=======>Cell Delected Action");
-            [weakSelf showAlertViewWithIndepthPathCell:indexPath];
-        }];
-        action.backgroundColor = COLOR_RGB_255(0, 77, 162);
-        
-        return [UISwipeActionsConfiguration configurationWithActions:@[action]];
-    }
-    return nil;
-}
 
 #pragma mark - XCCheckoutTableViewCellDelegate
 
+//点击查看按钮
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
     [self clickCheckDetailButton];
+}
+
+//点击核保按钮
+-(void)XCCheckoutCellClickUnderWritingButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
+{
+    [self clickUnderWritingDetailButton];
 }
 
 @end

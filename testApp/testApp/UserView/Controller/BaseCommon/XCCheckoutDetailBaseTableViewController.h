@@ -7,21 +7,35 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController1.h"
 #import "XCCheckoutDetailTextCell.h"
 #import "XCCheckoutDetailTextFiledCell.h"
 #import "XCCheckoutDetailInputCell.h"
 #import "XCCheckoutDetailHeaderView.h"
 #import "FinishTipsView.h"
+#import "LYZAlertView.h"
 #define ktableCellID @"myCellID"
 #define kTextCellID @"textCellID"
 #define kTextFiledCellID @"textFiledCellID"
 #define kTextInputCellID @"inpuitCellID"
 #define kHeaderViewID @"headerViewID"
+#define kFooterViewID @"footerViewID"
 
-@interface XCCheckoutDetailBaseTableViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
-
+@interface XCCheckoutDetailBaseTableViewController : BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
+/**
+ 自定义导航栏
+ */
+@property (nonatomic, strong) BaseNavigationBar *topBar ;
+@property (nonatomic,strong) NSString *navTitle;
 @property (nonatomic, strong) UITableView * tableView ;
 
+
+/**
+ 保单信息Title
+ */
+@property (nonatomic, strong) NSMutableArray * dataTitleArrM ;
 @property (nonatomic, assign) CGFloat bottomHeight ;
+
+- (instancetype)initWithTitle:(NSString *)title;
 
 @end

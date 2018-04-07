@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) UIImageView * bgImageView ;
 @property (nonatomic, strong) UILabel * titleLabel ;
-@property (nonatomic, strong) UIView * innerView ;
+@property (nonatomic, strong) UIView * innerView ; //白色框
 
 @property (nonatomic, strong) UIImageView * iconImageView ;
 @property (nonatomic, strong) UILabel * nameLable ;
@@ -206,11 +206,12 @@
     if (!_innerView) {
         _innerView = [[UIView alloc] init];
         _innerView.backgroundColor = [UIColor whiteColor];
-        _innerView.layer.cornerRadius = 5;
+        _innerView.layer.cornerRadius = 3;
         _innerView.layer.shadowOffset = CGSizeMake(0, 3);
-        _innerView.layer.shadowOpacity = 0.2;
+        _innerView.layer.shadowOpacity = 1;
         _innerView.layer.shadowRadius = 3;
         _innerView.layer.shadowColor = [UIColor colorWithHexString:@"#cecece"].CGColor;
+
     }
     return _innerView;
 }

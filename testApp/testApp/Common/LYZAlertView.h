@@ -12,16 +12,14 @@
 
 @property (nonatomic, copy) NSString * titleStr;
 @property (nonatomic, copy) NSString * contentStr;
-@property (nonatomic, copy) NSString * comfirmStr;
+@property (nonatomic, copy) NSString * confirmStr;
 @property (nonatomic, copy) NSString * cancelStr;
-typedef void (^cancelBlock)(LYZAlertView *alertView);
-typedef void (^comfirmBlock)(LYZAlertView *alertView);
+typedef void (^confirmBlock)(LYZAlertView *alertView);
 
 +(instancetype)alterViewWithTitle:(NSString *)title
                           content:(NSString *)content
-                       comfirmStr:(NSString *)comfirmString
+                       confirmStr:(NSString *)confirmString
                         cancelStr:(NSString *)cancelString
-                     comfirmClick:(comfirmBlock)comfirmblock
-                      cancelClick:(cancelBlock)cancelblock;
+                     confirmClick:(confirmBlock)confirmblock;
 
 @end

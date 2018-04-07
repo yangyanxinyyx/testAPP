@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UITextField * textField ;
+@property (nonatomic, strong) UIView * separtatorLine ;
 
 @end
 
@@ -23,6 +24,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _shouldShowSeparator = NO;
         [self configSubVies];
     }
     return self;
@@ -43,8 +45,15 @@
     
     [_textField sizeToFit];
     labelSize = _textField.frame.size;
-    [_textField setBackgroundColor:COLOR_RGB_255(240, 240, 240)];
+    if (_shouldShowSeparator) {
+        [_textField setBackgroundColor:COLOR_RGB_255(255, 255, 255)];
+    }else {
+        [_textField setBackgroundColor:COLOR_RGB_255(240, 240, 240)];
+    }
     [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
+    if (_shouldShowSeparator) {
+        [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+    }
 }
 #pragma mark - Init Method
 
@@ -80,6 +89,10 @@
     [_textField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
     _textField.delegate = self;
     [self addSubview:_textField];
+    
+    _separtatorLine = [[UIView alloc] init];
+    [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
+    [self addSubview:_separtatorLine];
     
 }
 
