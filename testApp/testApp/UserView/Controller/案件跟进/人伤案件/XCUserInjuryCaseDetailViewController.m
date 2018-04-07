@@ -1,18 +1,19 @@
 //
-//  XCUserInjuryCaseViewController.m
+//  XCUserInjuryCaseDetailViewController.m
 //  testApp
 //
-//  Created by Melody on 2018/3/30.
+//  Created by Melody on 2018/4/7.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCUserInjuryCaseViewController.h"
+#import "XCUserInjuryCaseDetailViewController.h"
 
-@interface XCUserInjuryCaseViewController ()
+@interface XCUserInjuryCaseDetailViewController ()
 
 @end
 
-@implementation XCUserInjuryCaseViewController
+@implementation XCUserInjuryCaseDetailViewController
+
 #pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,5 +44,4 @@
 {
     
 }
-
 @end

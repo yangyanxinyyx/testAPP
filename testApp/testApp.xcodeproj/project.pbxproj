@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */; };
 		A7011E6220760C1200C06D15 /* NSString+MoneyString.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6120760C1200C06D15 /* NSString+MoneyString.m */; };
 		A7011E6620764B8900C06D15 /* XCModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6520764B8900C06D15 /* XCModifyPwdViewController.m */; };
 		A7011E6C2076799A00C06D15 /* XCCheckoutDetailBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7011E6B2076799A00C06D15 /* XCCheckoutDetailBaseModel.m */; };
@@ -27,8 +28,20 @@
 		A7634D152078FD1E00373DBD /* XCUserChargebackListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D142078FD1E00373DBD /* XCUserChargebackListViewController.m */; };
 		A7634D182078FDBA00373DBD /* XCUserChargebackListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */; };
 		A7634D1B2079098900373DBD /* XCUserCaseListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7634D1A2079098900373DBD /* XCUserCaseListModel.m */; };
-		25D6DE6D2075F78600B66778 /* PriceCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D6DE6C2075F78600B66778 /* PriceCustomerModel.m */; };
+		A7634D25207913B900373DBD /* 1@3x (1).png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D1D207913B800373DBD /* 1@3x (1).png */; };
+		A7634D26207913B900373DBD /* 未完成@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D1E207913B800373DBD /* 未完成@2x.png */; };
+		A7634D27207913B900373DBD /* 完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D1F207913B800373DBD /* 完成@3x.png */; };
+		A7634D28207913B900373DBD /* 返回拷贝10@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D20207913B800373DBD /* 返回拷贝10@3x.png */; };
+		A7634D29207913B900373DBD /* 未完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D21207913B800373DBD /* 未完成@3x.png */; };
+		A7634D2A207913B900373DBD /* 完成@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D22207913B900373DBD /* 完成@2x.png */; };
+		A7634D2B207913B900373DBD /* 返回拷贝10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D23207913B900373DBD /* 返回拷贝10@2x.png */; };
+		A7634D2C207913B900373DBD /* 1@3x (2).png in Resources */ = {isa = PBXBuildFile; fileRef = A7634D24207913B900373DBD /* 1@3x (2).png */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
+		A7AABC0420791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC0320791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m */; };
+		A7AABC072079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC062079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m */; };
+		A7AABC0A207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */; };
+		A7AABC0D2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */; };
+		A7AABC11207922FB00FDC2A7 /* XCShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
@@ -237,9 +250,27 @@
 		A7634D172078FDBA00373DBD /* XCUserChargebackListDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserChargebackListDetailViewController.m; sourceTree = "<group>"; };
 		A7634D192079098900373DBD /* XCUserCaseListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseListModel.h; sourceTree = "<group>"; };
 		A7634D1A2079098900373DBD /* XCUserCaseListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseListModel.m; sourceTree = "<group>"; };
+		A7634D1D207913B800373DBD /* 1@3x (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@3x (1).png"; sourceTree = "<group>"; };
+		A7634D1E207913B800373DBD /* 未完成@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未完成@2x.png"; sourceTree = "<group>"; };
+		A7634D1F207913B800373DBD /* 完成@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "完成@3x.png"; sourceTree = "<group>"; };
+		A7634D20207913B800373DBD /* 返回拷贝10@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回拷贝10@3x.png"; sourceTree = "<group>"; };
+		A7634D21207913B800373DBD /* 未完成@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未完成@3x.png"; sourceTree = "<group>"; };
+		A7634D22207913B900373DBD /* 完成@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "完成@2x.png"; sourceTree = "<group>"; };
+		A7634D23207913B900373DBD /* 返回拷贝10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回拷贝10@2x.png"; sourceTree = "<group>"; };
+		A7634D24207913B900373DBD /* 1@3x (2).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1@3x (2).png"; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
+		A7AABC0220791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserInjuryCaseDetailViewController.h; sourceTree = "<group>"; };
+		A7AABC0320791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserInjuryCaseDetailViewController.m; sourceTree = "<group>"; };
+		A7AABC052079204C00FDC2A7 /* XCUserCaseDetailProgressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseDetailProgressCell.h; sourceTree = "<group>"; };
+		A7AABC062079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseDetailProgressCell.m; sourceTree = "<group>"; };
+		A7AABC08207920CF00FDC2A7 /* XCUserCaseDetailTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseDetailTextCell.h; sourceTree = "<group>"; };
+		A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseDetailTextCell.m; sourceTree = "<group>"; };
+		A7AABC0B2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseScrollerViewCell.h; sourceTree = "<group>"; };
+		A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseScrollerViewCell.m; sourceTree = "<group>"; };
+		A7AABC0F207922FB00FDC2A7 /* XCShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopViewController.h; sourceTree = "<group>"; };
+		A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopViewController.m; sourceTree = "<group>"; };
 		A7C8818020662B4A0073568F /* LYZAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZAlertView.h; sourceTree = "<group>"; };
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -608,6 +639,21 @@
 			path = "配送";
 			sourceTree = "<group>";
 		};
+		A7634D1C2079139500373DBD /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A7634D1D207913B800373DBD /* 1@3x (1).png */,
+				A7634D24207913B900373DBD /* 1@3x (2).png */,
+				A7634D23207913B900373DBD /* 返回拷贝10@2x.png */,
+				A7634D20207913B800373DBD /* 返回拷贝10@3x.png */,
+				A7634D22207913B900373DBD /* 完成@2x.png */,
+				A7634D1F207913B800373DBD /* 完成@3x.png */,
+				A7634D1E207913B800373DBD /* 未完成@2x.png */,
+				A7634D21207913B800373DBD /* 未完成@3x.png */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		A79A510720597A0F000D8D0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,6 +669,15 @@
 				A71EFD78205AD7FA00F2F83F /* categary */,
 			);
 			path = Extend;
+			sourceTree = "<group>";
+		};
+		A7AABC0E207922D100FDC2A7 /* 门店 */ = {
+			isa = PBXGroup;
+			children = (
+				A7AABC0F207922FB00FDC2A7 /* XCShopViewController.h */,
+				A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */,
+			);
+			path = "门店";
 			sourceTree = "<group>";
 		};
 		B52118B0BB7070CDBEEBB2CF /* Frameworks */ = {
@@ -671,6 +726,7 @@
 				FC2805AB205D96B800DD0DA9 /* login */,
 				FC2805B6205D96B800DD0DA9 /* CoverMain */,
 				FC2805B7205D96B800DD0DA9 /* GetCar */,
+				A7634D1C2079139500373DBD /* User */,
 				FC2805B8205D96B800DD0DA9 /* New Group2 */,
 				FC2805B9205D96B800DD0DA9 /* New Group3 */,
 				FC2805BA205D96B800DD0DA9 /* resource */,
@@ -938,6 +994,7 @@
 				FC32BD802074656100817156 /* 车险客户列表 */,
 				FC32BD702074656100817156 /* 车务客户列表 */,
 				FC32BD632074656100817156 /* 案件跟进 */,
+				A7AABC0E207922D100FDC2A7 /* 门店 */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -982,6 +1039,8 @@
 			children = (
 				FC32BD652074656100817156 /* XCUserInjuryCaseViewController.h */,
 				FC32BD662074656100817156 /* XCUserInjuryCaseViewController.m */,
+				A7AABC0220791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.h */,
+				A7AABC0320791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m */,
 			);
 			path = "人伤案件";
 			sourceTree = "<group>";
@@ -1168,6 +1227,12 @@
 				FC32BDA72074656100817156 /* XCCheckoutTableViewCell.m */,
 				FC32BDAA2074656100817156 /* XCUserCaseListCell.h */,
 				FC32BDAB2074656100817156 /* XCUserCaseListCell.m */,
+				A7AABC052079204C00FDC2A7 /* XCUserCaseDetailProgressCell.h */,
+				A7AABC062079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m */,
+				A7AABC08207920CF00FDC2A7 /* XCUserCaseDetailTextCell.h */,
+				A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */,
+				A7AABC0B2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.h */,
+				A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */,
 				FC32BDAC2074656100817156 /* 个人中心 */,
 			);
 			path = View;
@@ -1455,12 +1520,16 @@
 				FC2805C2205D96B900DD0DA9 /* login_location@3x.png in Resources */,
 				FC32BDF6207612A300817156 /* 提醒@3x.png in Resources */,
 				FCF8766D206BCF9C00CF6FDE /* 汽车1.jpg in Resources */,
+				A7634D2A207913B900373DBD /* 完成@2x.png in Resources */,
+				A7634D27207913B900373DBD /* 完成@3x.png in Resources */,
 				FCCC0ED3206151D700986A9E /* next@3x.png in Resources */,
 				FC2805BF205D96B900DD0DA9 /* login_code@2x.png in Resources */,
 				FC32BDFF20764D3500817156 /* 禁止@2x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FC2805C4205D96B900DD0DA9 /* login_password@3x.png in Resources */,
+				A7634D28207913B900373DBD /* 返回拷贝10@3x.png in Resources */,
 				FC2805C3205D96B900DD0DA9 /* login_password@2x.png in Resources */,
+				A7634D26207913B900373DBD /* 未完成@2x.png in Resources */,
 				FCCC0EC0206150F600986A9E /* getCar_select@2x.png in Resources */,
 				FC32BDF7207612A300817156 /* 提醒@2x.png in Resources */,
 				FCCC0ED02061519000986A9E /* getCar_select@3x.png in Resources */,
@@ -1472,13 +1541,17 @@
 				FCCC0EC92061519000986A9E /* price_select@3x.png in Resources */,
 				FC32BE0320764D3500817156 /* 暂无订单@2x.png in Resources */,
 				FCCC0EBA206150E400986A9E /* coverMain_nomnal@2x.png in Resources */,
+				A7634D2C207913B900373DBD /* 1@3x (2).png in Resources */,
 				FCCC0ECC2061519000986A9E /* getCar_nomnal@3x.png in Resources */,
+				A7634D25207913B900373DBD /* 1@3x (1).png in Resources */,
 				FCCC0ECA2061519000986A9E /* price_nomnal@3x.png in Resources */,
 				FCCC0ECB2061519000986A9E /* user_nomnal@3x.png in Resources */,
 				FCCC0EB8206150E400986A9E /* price_nomnal@2x.png in Resources */,
+				A7634D29207913B900373DBD /* 未完成@3x.png in Resources */,
 				FC2805C7205D96B900DD0DA9 /* login_username@2x.png in Resources */,
 				FC2805C1205D96B900DD0DA9 /* login_location@2x.png in Resources */,
 				FC32BE0020764D3500817156 /* 搜索@2x.png in Resources */,
+				A7634D2B207913B900373DBD /* 返回拷贝10@2x.png in Resources */,
 				FC32BE0220764D3500817156 /* 暂无订单@3x.png in Resources */,
 				FCF8766F206BCF9C00CF6FDE /* 汽车2.jpg in Resources */,
 				FC2805BD205D96B900DD0DA9 /* back@2x.png in Resources */,
@@ -1581,6 +1654,8 @@
 				FC32BDD82074656200817156 /* XCUserListHeaderView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
 				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
+				A7AABC0A207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m in Sources */,
+				A7AABC11207922FB00FDC2A7 /* XCShopViewController.m in Sources */,
 				FC32BDCE2074656200817156 /* XCUserListModel.m in Sources */,
 				FC32BD462074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
 				FC32BDBC2074656200817156 /* XCUserNoResponsibilityCaseViewController.m in Sources */,
@@ -1623,6 +1698,7 @@
 				FC32BD522074652C00817156 /* PriceInfoCellView.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
+				A7AABC0420791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m in Sources */,
 				FC32BDBA2074656200817156 /* XCUserInjuryCaseViewController.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				FC32BDB82074656200817156 /* UserViewController.m in Sources */,
@@ -1632,6 +1708,7 @@
 				A75E1FA02077DD9D00C81215 /* LYZSelectView.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC32BD512074652C00817156 /* PriceCIQLastYInfoView.m in Sources */,
+				A7AABC0D2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m in Sources */,
 				FC32BD442074652C00817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				FC32BD3E2074652C00817156 /* PriceCarRecordTableViewCell.m in Sources */,
@@ -1690,6 +1767,7 @@
 				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,
 				FC32BD4E2074652C00817156 /* PriceAdjustSureTableViewCell.m in Sources */,
 				FC32BDD12074656200817156 /* XCCheckoutDetailInputCell.m in Sources */,
+				A7AABC072079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,35 +14,32 @@
 
 @implementation XCUserCaseBaseTableViewController
 
+- (instancetype)initWithTitle:(NSString *)title
+{
+    if (self = [super init]) {
+        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+        _topBar = [[BaseNavigationBar alloc] init];
+        _topBar.delegate  = self;
+        _topBar.title = title;
+        self.navTitle = title;
+        [self.view addSubview:_topBar];
+    }
+    return self;
+}
+
 #pragma mark - lifeCycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kmyCellID];
-    [self.tableView registerClass:[XCUserCaseListCell class] forCellReuseIdentifier:kcaseListCelID];
-    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
-    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kfooterViewID];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
-    self.tabBarController.tabBar.hidden = YES;
- 
 }
 
 -(void)viewDidLayoutSubviews
@@ -55,60 +52,32 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
+#pragma mark - BaseNavigationBarDelegate
 
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
 {
-    return 3;
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kmyCellID forIndexPath:indexPath];
-    
-    return cell;
-}
-
+#pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kheaderViewID];
-    if (headerView == nil) {
-        headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:kheaderViewID];
-    }
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
+    [headerView.contentView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     return headerView;
 }
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kfooterViewID];
-    if (footerView == nil) {
-        footerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:kfooterViewID];
-    }
-    return footerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 130 * ViewRateBaseOnIP6;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 20 * ViewRateBaseOnIP6;
-    }else {
-        return 0.1;
-    }
+    return 0 * ViewRateBaseOnIP6;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.1;
-}
-
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter
 
+- (void)setNavTitle:(NSString *)navTitle
+{
+    _navTitle = navTitle;
+    [_topBar setTitle:navTitle];
+}
 @end
