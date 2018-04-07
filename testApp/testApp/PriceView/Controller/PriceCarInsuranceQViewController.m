@@ -11,7 +11,6 @@
 #import "PriceCarRecordTableViewCell.h"
 #import "priceCRQLastYLabelTableViewCell.h"
 #import "PriceCRQLastYInfoTableViewCell.h"
-
 #import "PriceAdjustViewController.h"
 #import "PriceInspectViewController.h"
 #import "PriceInfoViewController.h"
