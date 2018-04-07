@@ -28,6 +28,7 @@
 @property (nonatomic, strong) UIButton *buttonPrice;
 @property (nonatomic, strong) UIView *viewSegment;
 @property (nonatomic, strong) UIView *contenView;
+@property (nonatomic, strong) NSMutableDictionary *networkDic;
 @end
 
 @implementation PriceCarInsuranceQViewController
@@ -41,6 +42,8 @@
     topBar.title = @"车险报价";
     [self.view addSubview:topBar];
     [self createUI];
+    [self requestLastYearPrcie];
+    [self requestPriceRecode];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -49,11 +52,37 @@
     }
 }
 
-
-
 #pragma mark- network
 
+- (void)requestLastYearPrcie{
+    
+    [self.networkDic setObject:self.carID forKey:@"carId"];
+    [self.networkDic setObject:self.customerId forKey:@"CustKey"];
+    [self.networkDic setObject:@"1" forKey:@"appType"];
+    [RequestAPI getLastYearPriceRecord:self.networkDic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        
+        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+        }
+    } fail:^(id error) {
+        
+    }];
+}
 
+//报价记录
+- (void)requestPriceRecode{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.customerId forKey:@"customerId"];
+    [dic setObject:self.carID forKey:@"carId"];
+    [RequestAPI getPriceRecord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+      
+        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+       
+        
+        }
+    } fail:^(id error) {
+        
+    }];
+}
 
 #pragma mark - function
 - (void)touchButtonRevisePrice:(UIButton *)button{
@@ -123,7 +152,6 @@
             cell.labelName.text = @"第三责任险";
             cell.labelNum.text = @"40万";
             return cell;
-            
         }
 
         
@@ -293,5 +321,12 @@
         
     }
     return _buttonPrice;
+}
+
+- (NSMutableDictionary *)networkDic{
+    if (!_networkDic) {
+        _networkDic = [NSMutableDictionary dictionary];
+    }
+    return _networkDic;
 }
 @end
