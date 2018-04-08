@@ -8,7 +8,7 @@
 
 #import "GetCarViewController.h"
 
-@interface GetCarViewController ()
+@interface GetCarViewController ()<BaseNavigationBarDelegate>
 
 @end
 
@@ -16,7 +16,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"接车";
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate  = self;
+    topBar.title = @"接车";
+    [self.view addSubview:topBar];
+
+    self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+
+    [self createUI];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
+{
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)createUI
+{
+    
+
+
+
 }
 
 - (void)didReceiveMemoryWarning {

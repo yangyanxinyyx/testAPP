@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
-
+    
 }
 
 - (void)createUI
@@ -93,8 +93,8 @@
 - (void)pressLoginBtn:(UIButton *)sender
 {
     NSDictionary  *param = @{
-                             @"userCode":@"17350805203",
-                             @"password":@"1"
+                             @"userCode":@"13570229475",
+                             @"password":@"xc123456"
                              };
     [RequestAPI getUserInfo:param header:nil success:^(id response) {
         NSLog(@"%@",response);
@@ -113,20 +113,20 @@
                     [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : @"";
                     [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : @"";
                     [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : @"";
+                    NSDictionary *store = [NSDictionary dictionary];
                     if ( data[@"store"] && [data[@"store"] isKindOfClass:[NSDictionary class]]) {
-                        NSDictionary *temp = data[@"store"];
-                        [UserInfoManager shareInstance].isStore = temp.count > 0 ? YES : NO;
+                        store = data[@"store"];
+                        [UserInfoManager shareInstance].isStore = store.count > 0 ? YES : NO;
                     }
-                    [UserInfoManager shareInstance].storeID = data[@"storeID"] ? data[@"storeID"] : @"";
-                    [UserInfoManager shareInstance].storeName = data[@"storeName"] ? data[@"storeName"] : @"";
-                    [UserInfoManager shareInstance].storeCode = data[@"storeCode"] ? data[@"storeCode"] : @"";
-                    [UserInfoManager shareInstance].tel = data[@"tel"] ? data[@"tel"] : @"";
-                    [UserInfoManager shareInstance].corporateName = data[@"corporateName"] ? data[@"corporateName"] : @"";
-                    [UserInfoManager shareInstance].corporateCellphone = data[@"corporateCellphone"] ? data[@"corporateCellphone"] : @"";
-                    [UserInfoManager shareInstance].address = data[@"address"] ? data[@"address"] : @"";
+                    [UserInfoManager shareInstance].storeID = store[@"id"] ? store[@"id"] : @"";
+                    [UserInfoManager shareInstance].storeName = store[@"storeName"] ? store[@"name"] : @"";
+                    [UserInfoManager shareInstance].storeCode = store[@"storeCode"] ? store[@"code"] : @"";
+                    [UserInfoManager shareInstance].tel = store[@"tel"] ? store[@"tel"] : @"";
+                    [UserInfoManager shareInstance].corporateName = store[@"corporateName"] ? store[@"corporateName"] : @"";
+                    [UserInfoManager shareInstance].corporateCellphone = store[@"corporateCellphone"] ? store[@"corporateCellphone"] : @"";
+                    [UserInfoManager shareInstance].address = store[@"address"] ? store[@"address"] : @"";
                     [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-                    UserInfoManager *manager = [UserInfoManager shareInstance];
-                    NSLog(@"");
+
 //                    UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
 //                    confirmView.delegate = self;
 //                    [self.view addSubview:confirmView];
@@ -226,7 +226,8 @@
                                     [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
                                 }
                             }
-
+                            UserInfoManager *manager = [UserInfoManager shareInstance];
+                            NSLog(@"");
                             UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
                             confirmView.delegate = self;
                             [self.view addSubview:confirmView];
