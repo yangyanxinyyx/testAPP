@@ -42,6 +42,7 @@
 		A7AABC0A207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */; };
 		A7AABC0D2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */; };
 		A7AABC11207922FB00FDC2A7 /* XCShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */; };
+		A7AABC1420792B4100FDC2A7 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
@@ -271,6 +272,8 @@
 		A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseScrollerViewCell.m; sourceTree = "<group>"; };
 		A7AABC0F207922FB00FDC2A7 /* XCShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopViewController.h; sourceTree = "<group>"; };
 		A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopViewController.m; sourceTree = "<group>"; };
+		A7AABC1220792B4100FDC2A7 /* UILabel+createLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+createLabel.h"; sourceTree = "<group>"; };
+		A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+createLabel.m"; sourceTree = "<group>"; };
 		A7C8818020662B4A0073568F /* LYZAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZAlertView.h; sourceTree = "<group>"; };
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -995,6 +998,8 @@
 				FC32BD702074656100817156 /* 车务客户列表 */,
 				FC32BD632074656100817156 /* 案件跟进 */,
 				A7AABC0E207922D100FDC2A7 /* 门店 */,
+				A7AABC1220792B4100FDC2A7 /* UILabel+createLabel.h */,
+				A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1662,6 +1667,7 @@
 				FC32BDD92074656200817156 /* XCUserListView.m in Sources */,
 				FC32BDD22074656200817156 /* XCCheckoutDetailTextCell.m in Sources */,
 				FC32BD372074652C00817156 /* PriceCarInsuranceQViewController.m in Sources */,
+				A7AABC1420792B4100FDC2A7 /* UILabel+createLabel.m in Sources */,
 				FC32BDC92074656200817156 /* XCUserUnderWritingViewController.m in Sources */,
 				FC32BDBD2074656200817156 /* XCUserParticularCaseViewController.m in Sources */,
 				FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */,
