@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, GetCarBtnType) {
+    GetCarBtnTypeGet = 0,
+    GetCarBtnTypePay,
+    GetCarBtnTypeFinish,
+};
+
+@protocol GetCarListCellDelegate <NSObject>
+
+- (void)pressGetCarBtn:(UIButton *)sender;
+
+@end
+
 @interface GetCarListCell : UITableViewCell
 
 @property (nonatomic,strong) UILabel *carNumberLabel;
@@ -19,4 +31,8 @@
 @property (nonatomic,strong) UILabel *timeLabel;
 
 @property (nonatomic,strong) UIButton *getCarBtn;
+
+@property (nonatomic,assign) GetCarBtnType getCarBtnType;
+
+@property (nonatomic,weak) id<GetCarListCellDelegate>delegate;
 @end

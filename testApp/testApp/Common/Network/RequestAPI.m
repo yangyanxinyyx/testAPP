@@ -11,6 +11,7 @@
 #define API_PREFIX @"http://115.29.174.77:8081/XC"
 //#define API_PREFIX @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri="
 
+/****** 首页 ******/
 //登录
 #define LOGIN_API [NSString stringWithFormat:@"%@/api/app/userLogin",API_PREFIX]
 
@@ -29,8 +30,19 @@
 //我的勋章
 #define MYMEDAL_API [NSString stringWithFormat:@"%@/api/web/medaltable/selectMedalTableType",API_PREFIX]
 
+ /****** 接车 ******/
 //业务端获取门店订单列表（接车列表）
 #define GETCARLIST_API [NSString stringWithFormat:@"%@/api/web/order/findOrderByStoreId",API_PREFIX]
+
+//接车
+#define GETCAR_API [NSString stringWithFormat:@"%@/api/web/order/consumingOrder",API_PREFIX]
+
+//接车完成
+#define GETCARFiNISH_API [NSString stringWithFormat:@"%@/api/web/order/consumOverOrder",API_PREFIX]
+
+//接车时获取订单详情
+#define GETCARDETAILINFORMATION_API [NSString stringWithFormat:@"%@/api/web/order/operationGetOrder",API_PREFIX]
+
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
 
@@ -55,6 +67,8 @@
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+    [ProgressControll showProgressNormal];
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     if (header) {
@@ -71,12 +85,14 @@
             NSLog(@"responseObject-->%@",responseObject);
             if (success) {
                 success(responseObject);
+                [ProgressControll dismissProgress];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             //请求失败
             NSLog(@"error-->%@",error);
             if (fail) {
                 fail(error);
+                [ProgressControll dismissProgress];
             }
         }];
     }else{
@@ -88,12 +104,14 @@
             NSLog(@"responseObject-->%@",responseObject);
             if (success) {
                 success(responseObject);
+                [ProgressControll dismissProgress];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             //请求失败
             NSLog(@"error-->%@",error);
             if (fail) {
                 fail(error);
+                [ProgressControll dismissProgress];
             }
         }];
     }
@@ -128,15 +146,6 @@
     }];
 }
 
-+(void)getGetCarList:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
-
-    [self getRequest:GETCARLIST_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
-        success(response);
-    } fail:^(id error) {
-        fail(error);
-    }];
-}
-
 +(void)getCoverAnnouncement:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:COVERANNOUNCEMENT_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
@@ -149,6 +158,42 @@
 +(void)getCoverLoopImage:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:COVERLOOPIMAGE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarList:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARLIST_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCar:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCAR_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarFinish:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARFiNISH_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarDetail:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARDETAILINFORMATION_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

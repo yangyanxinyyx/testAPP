@@ -15,6 +15,7 @@
 #import "UserInfoManager.h"
 #import "BaseNavigationBar.h"
 #import "RequestAPI.h"
+#import "ProgressControll.h"
 
 #pragma mark -  屏幕适配常量
 

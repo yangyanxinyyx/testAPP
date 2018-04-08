@@ -91,24 +91,24 @@
 
 - (void)reloadData
 {
-//    [_carView removeFromSuperview];
-//    [_repairView removeFromSuperview];
-//    NSArray * array = @[
-//                        [UserInfoManager shareInstance].performanceMedal.lastYearCar,
-//                        [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
-//                        [UserInfoManager shareInstance].performanceMedal.nowMonthCar,
-//                        [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking,
-//                        [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
-//                        [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
-//                        ];
-//
-//    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:array];
-//    _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
-//    [_scrollView addSubview:_carView];
-//
-//    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:array];
-//    _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
-//    [_scrollView addSubview:_repairView];
+    [_carView removeFromSuperview];
+    [_repairView removeFromSuperview];
+    NSArray * array = @[
+                        [UserInfoManager shareInstance].performanceMedal.lastYearCar,
+                        [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
+                        [UserInfoManager shareInstance].performanceMedal.nowMonthCar,
+                        [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking,
+                        [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
+                        [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
+                        ];
+
+    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:array];
+    _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
+    [_scrollView addSubview:_carView];
+
+    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:array];
+    _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
+    [_scrollView addSubview:_repairView];
 }
 
 - (void)getLoginUserInfo

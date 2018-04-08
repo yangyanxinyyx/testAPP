@@ -40,6 +40,8 @@
 @property (nonatomic, strong) UIView *priceButtonView;
 @property (nonatomic, strong) UIButton *buttonPrice;
 @property (nonatomic, strong) UIButton *buttonInfoEntry;
+@property (nonatomic, strong) NSString *carID;
+@property (nonatomic, strong) NSString *customerId;
 
 @end
 
@@ -48,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
+    [self pressCustomerVehicleEnquiries];
 }
 
 #pragma mark -network
@@ -76,7 +79,14 @@
               _insuranceView.labelContent.text = [jqInsuranceTime stringValue];
             }
             _salesmanView.labelContent.text = [data objectForKey:@"salesmanName"];
-            
+            NSNumber *carIDNumber = [data objectForKey:@"carId"];
+            if (![carIDNumber isKindOfClass:[NSNull class]]) {
+                self.carID = [NSString stringWithFormat:@"%ld",[carIDNumber longValue]];
+            }
+            NSNumber *customerIdNumber = [data objectForKey:@"customerId"];
+            if (![customerIdNumber isKindOfClass:[NSNull class]]) {
+                self.customerId = [NSString stringWithFormat:@"%ld",[customerIdNumber longValue]];
+            }
         }
 
     } fail:^(id error) {
@@ -98,7 +108,12 @@
 }
 
 - (void)touchButtonPrice:(UIButton *)button{
+    if (!self.carID) {
+        return;
+    }
     PriceCarInsuranceQViewController *priceCarVC = [[PriceCarInsuranceQViewController alloc] init];
+    priceCarVC.carID = self.carID;
+    priceCarVC.customerId = self.customerId;
     [self.navigationController pushViewController:priceCarVC animated:YES];
 }
 
@@ -185,6 +200,7 @@
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
+        _textField.text = @"粤A984W9";
     }
     return _textField;
 }

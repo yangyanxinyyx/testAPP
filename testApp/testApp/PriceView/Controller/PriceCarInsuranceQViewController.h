@@ -9,5 +9,6 @@
 #import "BaseViewController1.h"
 
 @interface PriceCarInsuranceQViewController : BaseViewController1
-
+@property (nonatomic, strong) NSString *carID;
+@property (nonatomic, strong) NSString *customerId;
 @end
