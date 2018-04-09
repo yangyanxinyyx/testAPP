@@ -24,7 +24,7 @@
 
 - (void)createUI
 {
-    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + kNavMargan, SCREEN_WIDTH, 190 * kScaleHeight)];
+    UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, 190 * kScaleHeight)];
     [self.view addSubview:topImageView];
     topImageView.backgroundColor = [UIColor redColor];
     topImageView.image = [UIImage imageNamed:@""];
