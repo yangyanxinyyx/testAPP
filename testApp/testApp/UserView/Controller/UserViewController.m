@@ -101,8 +101,31 @@
 - (void)XCUserTopViewMyCommissionButtonClickHandler:(UIButton *)button
 {
     XCLog(@"ClickmyCommissionBtn");
-    XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
-    [self.navigationController pushViewController:myCommissionVC animated:YES];
+    
+        NSDictionary *param = @{
+                                @"user_id":[UserInfoManager shareInstance].userID,
+                                };
+        [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
+            NSLog(@"%@",response);
+            if (isUsableDictionary(response)&&isUsableArray(response[@"data"], 0)) {
+                NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
+                NSArray *dataArr  = response[@"data"];
+                for (NSDictionary *commissionInfo in dataArr) {
+                    XCMyCommissionListModel  * listModel = [XCMyCommissionListModel getMyCommissionListWithDataInfo:commissionInfo];
+                    [modelArr addObject:listModel];
+                }
+                XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+                myCommissionVC.dataArrM = modelArr;
+                [self.navigationController pushViewController:myCommissionVC animated:YES];
+            }
+          
+        } fail:^(id error) {
+            NSLog(@"%@",error);
+        }];
+    
+    
+
+    
 }
 
 - (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button
@@ -200,7 +223,7 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
          NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
         NSInteger listCount = dataArr.count;
-        if (_isStore) {
+        if (!_isStore) {
             if (dataArr.count >= 1) {
                 listCount = dataArr.count - 1;
             }

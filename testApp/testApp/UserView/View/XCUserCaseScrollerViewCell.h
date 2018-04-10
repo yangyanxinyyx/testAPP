@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface XCUserCaseScrollerViewCell : UITableViewCell
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray<UIImage *> * photoArr ;
 @end

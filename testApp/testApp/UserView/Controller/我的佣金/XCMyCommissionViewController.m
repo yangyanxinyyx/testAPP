@@ -8,7 +8,6 @@
 
 #import "XCMyCommissionViewController.h"
 #import "RequestAPI.h"
-#import "XCMyCommissionListCell.h"
 #define kmyCommissionCellID @"myCommissionCellID"
 #define kheaderViewID @"tableHeaderViewID"
 #define kfooterViewID @"tableFooterViewID"
@@ -16,7 +15,6 @@
 @interface XCMyCommissionViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 
 @property (nonatomic, strong) UITableView * tableView ;
-@property (nonatomic, strong) NSMutableArray * dataArrM ;
 @end
 
 @implementation XCMyCommissionViewController
@@ -25,30 +23,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
   
-//    NSDictionary *param = @{
-//                            @"user_id":[UserInfoManager shareInstance].userID,
-//                            };
-//    [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-//        NSLog(@"%@",response);
-//    } fail:^(id error) {
-//        NSLog(@"%@",error);
-//    }];
+
     [self setupNav];
-    self.dataArrM = [[NSMutableArray alloc] init];
-    
-    NSDictionary *dictory = @{
-                                          @"car_commission":@(336),
-                                          @"car_royalties":@(426),
-                                          @"medal_bonus":@(300),
-                                          @"car_performance":@(466319),
-                                          @"creat_time":@"2018-03-30 17:58:05.0"
-                                          };
-    
-    XCMyCommissionListModel *model = [XCMyCommissionListModel getMyCommissionListWithDataInfo:dictory];
-    
-    [self.dataArrM addObject:model];
-    [self.dataArrM addObject:model];
-    [self.dataArrM addObject:model];
+//    self.dataArrM = [[NSMutableArray alloc] init];
+//
+//    NSDictionary *dictory = @{
+//                                          @"car_commission":@(336),
+//                                          @"car_royalties":@(426),
+//                                          @"medal_bonus":@(300),
+//                                          @"car_performance":@(466319),
+//                                          @"creat_time":@"2018-03-30 17:58:05.0"
+//                                          };
+//
+//    XCMyCommissionListModel *model = [XCMyCommissionListModel getMyCommissionListWithDataInfo:dictory];
+//
+//    [self.dataArrM addObject:model];
+//    [self.dataArrM addObject:model];
+//    [self.dataArrM addObject:model];
 
     [self setUI];
 
@@ -148,6 +139,14 @@
         [cell setupCellDataWithModel:model];
     }
     return cell;
+}
+
+#pragma mark - Setter&&Getter
+
+- (void)setDataArrM:(NSMutableArray<XCMyCommissionListModel *> *)dataArrM
+{
+    _dataArrM = dataArrM;
+    [self.tableView reloadData];
 }
 
 @end

@@ -10,4 +10,8 @@
 
 @interface XCUserCaseDetailProgressCell : UITableViewCell
 
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * processStrArr ;
+
+@property (nonatomic, assign) BOOL isFinish;
 @end

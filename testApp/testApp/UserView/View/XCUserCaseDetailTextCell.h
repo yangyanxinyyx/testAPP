@@ -10,4 +10,8 @@
 
 @interface XCUserCaseDetailTextCell : UITableViewCell
 
+/** 第二种类型 */
+@property (nonatomic, assign) BOOL isMutableTextType ;
+
+
 @end

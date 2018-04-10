@@ -7,7 +7,7 @@
 //
 
 #import "XCUserInjuryCaseViewController.h"
-
+#import "XCUserInjuryCaseDetailViewController.h"
 @interface XCUserInjuryCaseViewController ()
 
 @end
@@ -41,7 +41,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    XCUserInjuryCaseDetailViewController *injuryCaseDetailVC = [[XCUserInjuryCaseDetailViewController alloc] initWithTitle:@"人伤案件跟进"];
+    [self.navigationController pushViewController:injuryCaseDetailVC animated:YES];
 }
 
 @end

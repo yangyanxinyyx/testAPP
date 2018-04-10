@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController1.h"
+#import "XCMyCommissionListCell.h"
+
 @interface XCMyCommissionViewController : BaseViewController1
+
+@property (nonatomic, strong) NSMutableArray<XCMyCommissionListModel *> * dataArrM ;
 
 @end
