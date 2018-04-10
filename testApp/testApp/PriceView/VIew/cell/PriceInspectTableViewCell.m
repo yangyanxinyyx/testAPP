@@ -52,7 +52,7 @@
 }
 
 - (void)inspectPrice:(UIButton *)button{
-    [self.delegate inspectPriceDelegate];
+    [self.delegate inspectPriceDelegateWith:button.tag];
 }
 
 - (void)awakeFromNib {

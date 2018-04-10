@@ -74,6 +74,7 @@
     if (!_CIQChangeView) {
         _CIQChangeView = [[priceCIQChangeView alloc] initWithFrame:CGRectMake(0, 20 * ViewRateBaseOnIP6, SCREEN_WIDTH, 160 * ViewRateBaseOnIP6)];
         _CIQChangeView.delegate = self;
+        [_CIQChangeView setleftTitle:@"门店信息" rightTitle:@"服务信息"];
     }
     return _CIQChangeView;
 }

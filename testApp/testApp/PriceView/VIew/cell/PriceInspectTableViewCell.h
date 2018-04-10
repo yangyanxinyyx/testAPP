@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol PriceInspectTableViewCellDelegate <NSObject>
-- (void)inspectPriceDelegate;
+- (void)inspectPriceDelegateWith:(NSInteger)tag;
 @end
 @interface PriceInspectTableViewCell : UITableViewCell
 @property (nonatomic, strong)UILabel *labelName;

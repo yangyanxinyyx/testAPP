@@ -32,6 +32,8 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+
 #pragma mark- tableView delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -44,7 +46,13 @@
         cell = [[PriceInspectTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.delegate = self;
-    cell.labelName.text = @"PICC人保";
+    if (indexPath.row == 0) {
+        cell.labelName.text = @"PICC人保";
+    } else {
+        cell.labelName.text = @"平安保险";
+    }
+    cell.buttoninspect.tag = indexPath.row;
+   
     return cell;
 }
 
@@ -52,8 +60,14 @@
     return 120 * ViewRateBaseOnIP6;
 }
 #pragma mark - cell Delegate
-- (void)inspectPriceDelegate{
+- (void)inspectPriceDelegateWith:(NSInteger)tag{
     PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
+    if (tag == 0) {
+        priceInfoVC.quoteGroup = @"2";
+    } else{
+        priceInfoVC.quoteGroup = @"4";
+    }
+   
     [self.navigationController pushViewController:priceInfoVC animated:YES];
 }
 #pragma mark - UI

@@ -65,26 +65,33 @@
         
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
             NSDictionary *data = response[@"data"];
+
             _nameView.labelContent.text = [data objectForKey:@"customerName"];
-            _birthdayView.labelContent.text = [data objectForKey:@""];
+            _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
             _sexView.labelContent.text = [data objectForKey:@"sex"];
             _addressView.labelContent.text = [data objectForKey:@"address"];
             _brandView.labelContent.text = [data objectForKey:@"brand"];
             _chassisView.labelContent.text = [data objectForKey:@"vinNO"];
             _engineView.labelContent.text = [data objectForKey:@"engineNo"];
             _modelsView.labelContent.text = [data objectForKey:@"model"];
-            _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
-            NSNumber *jqInsuranceTime = [data objectForKey:@"jqInsuranceTime"] ;
-            if (![jqInsuranceTime isKindOfClass:[NSNull class]]) {
-              _insuranceView.labelContent.text = [jqInsuranceTime stringValue];
+            if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
+                _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
             }
-            _salesmanView.labelContent.text = [data objectForKey:@"salesmanName"];
+    
+            if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
+              _insuranceView.labelContent.text = [data objectForKey:@"jqInsuranceTime"];
+            }
+            NSNumber *salesmanName = [data objectForKey:@"salesmanName"];
+            if (![salesmanName isKindOfClass:[NSNull class]] ) {
+                _salesmanView.labelContent.text = [data objectForKey:@"salesmanName"];
+            }
+            
             NSNumber *carIDNumber = [data objectForKey:@"carId"];
-            if (![carIDNumber isKindOfClass:[NSNull class]]) {
+            if (![carIDNumber isKindOfClass:[NSNull class]] && [carIDNumber stringValue].length != 0) {
                 self.carID = [NSString stringWithFormat:@"%ld",[carIDNumber longValue]];
             }
             NSNumber *customerIdNumber = [data objectForKey:@"customerId"];
-            if (![customerIdNumber isKindOfClass:[NSNull class]]) {
+            if (![customerIdNumber isKindOfClass:[NSNull class]] && [customerIdNumber stringValue].length != 0) {
                 self.customerId = [NSString stringWithFormat:@"%ld",[customerIdNumber longValue]];
             }
         }
@@ -200,7 +207,7 @@
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
-        _textField.text = @"粤A984W9";
+        _textField.text = @"粤AH05K9";
     }
     return _textField;
 }

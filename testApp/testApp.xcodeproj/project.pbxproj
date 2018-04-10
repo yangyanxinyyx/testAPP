@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
+		25B7326E207A6E8F00069075 /* XCShopInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -213,6 +215,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
+		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
+		25B7326C207A6E8F00069075 /* XCShopInputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopInputTableViewCell.h; sourceTree = "<group>"; };
+		25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopInputTableViewCell.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -564,6 +570,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		259A83EC207BACFA006693FB /* 上年续保记录 */ = {
+			isa = PBXGroup;
+			children = (
+				259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */,
+				259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */,
+			);
+			path = "上年续保记录";
+			sourceTree = "<group>";
+		};
+		25B7326B207A6E5200069075 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				25B7326C207A6E8F00069075 /* XCShopInputTableViewCell.h */,
+				25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1009,6 +1033,7 @@
 		FC32BEDC2079AA2000817156 /* 门店 */ = {
 			isa = PBXGroup;
 			children = (
+				25B7326B207A6E5200069075 /* cell */,
 				FC32BEDD2079AA2000817156 /* XCShopViewController.h */,
 				FC32BEDE2079AA2000817156 /* XCShopViewController.m */,
 			);
@@ -1129,6 +1154,7 @@
 		FC32BF612079AA5800817156 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				259A83EC207BACFA006693FB /* 上年续保记录 */,
 				FC32BF622079AA5800817156 /* 报价记录 */,
 				FC32BF652079AA5800817156 /* 报价首页 */,
 			);
@@ -1702,6 +1728,7 @@
 				FC32BF242079AA2000817156 /* XCUserRepairDetailViewController.m in Sources */,
 				FC32BFA12079AA5900817156 /* PriceCarInsuranceQViewController.m in Sources */,
 				FC32BF322079AA2000817156 /* XCCustomerFollowViewController.m in Sources */,
+				25B7326E207A6E8F00069075 /* XCShopInputTableViewCell.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
 				FC32BFA02079AA5900817156 /* PriceAdjustViewController.m in Sources */,
 				FC32BF2B2079AA2000817156 /* XCUserWaitingToPayingViewController.m in Sources */,
@@ -1714,6 +1741,7 @@
 				FC32BF232079AA2000817156 /* XCUserAnnualReviewViewController.m in Sources */,
 				FC32BF212079AA2000817156 /* XCUserParticularCaseViewController.m in Sources */,
 				FC32BF222079AA2000817156 /* XCUserAnnualReviewDetailViewController.m in Sources */,
+				259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */,
 				FC32BF252079AA2000817156 /* XCUserRepairViewController.m in Sources */,
 				FC32BFBD2079AA5900817156 /* PriceCIQLastYInfoView.m in Sources */,
 				FC32BF462079AA2000817156 /* XCCheckoutTableViewCell.m in Sources */,

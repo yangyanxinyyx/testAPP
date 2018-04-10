@@ -35,7 +35,19 @@
     }
 }
 
-
+#pragma mark - Network
+- (void)requestPrecisePrice{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.quoteGroup forKey:@"quoteGroup"];
+    [dic setObject:[UserInfoManager shareInstance].code forKey:@"CustKey"];
+    [dic setObject:self.carId forKey:@"carId"];
+    [dic setObject:self.blType forKey:@"blType"];
+    [RequestAPI getPrecisePrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        
+    } fail:^(id error) {
+        
+    }];
+}
 #pragma mark - UITableView delegate
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     static NSString *priceInforLabel = @"infoLabel";
