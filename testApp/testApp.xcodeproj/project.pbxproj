@@ -7,14 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
-		A7AABC0420791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC0320791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m */; };
-		A7AABC072079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC062079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m */; };
-		A7AABC0A207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */; };
-		A7AABC0D2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */; };
-		A7AABC11207922FB00FDC2A7 /* XCShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */; };
-		A7AABC1420792B4100FDC2A7 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */; };
-
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
@@ -222,22 +216,11 @@
 /* Begin PBXFileReference section */
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
+		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
+		A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+createLabel.h"; path = "testApp/Extend/categary/UILabel+createLabel.h"; sourceTree = SOURCE_ROOT; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
-		A7AABC0220791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserInjuryCaseDetailViewController.h; sourceTree = "<group>"; };
-		A7AABC0320791E9200FDC2A7 /* XCUserInjuryCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserInjuryCaseDetailViewController.m; sourceTree = "<group>"; };
-		A7AABC052079204C00FDC2A7 /* XCUserCaseDetailProgressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseDetailProgressCell.h; sourceTree = "<group>"; };
-		A7AABC062079204C00FDC2A7 /* XCUserCaseDetailProgressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseDetailProgressCell.m; sourceTree = "<group>"; };
-		A7AABC08207920CF00FDC2A7 /* XCUserCaseDetailTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseDetailTextCell.h; sourceTree = "<group>"; };
-		A7AABC09207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseDetailTextCell.m; sourceTree = "<group>"; };
-		A7AABC0B2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseScrollerViewCell.h; sourceTree = "<group>"; };
-		A7AABC0C2079220C00FDC2A7 /* XCUserCaseScrollerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseScrollerViewCell.m; sourceTree = "<group>"; };
-		A7AABC0F207922FB00FDC2A7 /* XCShopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopViewController.h; sourceTree = "<group>"; };
-		A7AABC10207922FB00FDC2A7 /* XCShopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopViewController.m; sourceTree = "<group>"; };
-		A7AABC1220792B4100FDC2A7 /* UILabel+createLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+createLabel.h"; sourceTree = "<group>"; };
-		A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+createLabel.m"; sourceTree = "<group>"; };
-
 		A7C8818020662B4A0073568F /* LYZAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZAlertView.h; sourceTree = "<group>"; };
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +579,8 @@
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
+				A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */,
+				A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */,
 				FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */,
 				FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */,
 				FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */,
@@ -604,6 +589,13 @@
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);
 			path = categary;
+			sourceTree = "<group>";
+		};
+		A72F94B2207A6A1F00100212 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		A79A510720597A0F000D8D0F /* Tool */ = {
@@ -928,17 +920,6 @@
 		FC32BEAC2079AA2000817156 /* 维修 */ = {
 			isa = PBXGroup;
 			children = (
-				A7011E672076789300C06D15 /* 修改密码 */,
-				FC32BD602074656100817156 /* 我的佣金 */,
-				FC32BD572074656100817156 /* BaseCommon */,
-				FC32BD5E2074656100817156 /* UserViewController.h */,
-				FC32BD5F2074656100817156 /* UserViewController.m */,
-				FC32BD802074656100817156 /* 车险客户列表 */,
-				FC32BD702074656100817156 /* 车务客户列表 */,
-				FC32BD632074656100817156 /* 案件跟进 */,
-				A7AABC0E207922D100FDC2A7 /* 门店 */,
-				A7AABC1220792B4100FDC2A7 /* UILabel+createLabel.h */,
-				A7AABC1320792B4100FDC2A7 /* UILabel+createLabel.m */,
 				FC32BEAD2079AA2000817156 /* XCUserRepairDetailViewController.h */,
 				FC32BEAE2079AA2000817156 /* XCUserRepairDetailViewController.m */,
 				FC32BEAF2079AA2000817156 /* XCUserRepairViewController.h */,
@@ -1288,6 +1269,7 @@
 				FC47950E205553E900218362 /* Products */,
 				2880742A08D2B79E4DC7AEE3 /* Pods */,
 				B52118B0BB7070CDBEEBB2CF /* Frameworks */,
+				A72F94B2207A6A1F00100212 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1687,18 +1669,6 @@
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
 				FC32BFA92079AA5900817156 /* PriceCarILasetYTableViewCell.m in Sources */,
 				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
-				A7AABC0A207920CF00FDC2A7 /* XCUserCaseDetailTextCell.m in Sources */,
-				A7AABC11207922FB00FDC2A7 /* XCShopViewController.m in Sources */,
-				FC32BDCE2074656200817156 /* XCUserListModel.m in Sources */,
-				FC32BD462074652C00817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
-				FC32BDBC2074656200817156 /* XCUserNoResponsibilityCaseViewController.m in Sources */,
-				FC32BDD92074656200817156 /* XCUserListView.m in Sources */,
-				FC32BDD22074656200817156 /* XCCheckoutDetailTextCell.m in Sources */,
-				FC32BD372074652C00817156 /* PriceCarInsuranceQViewController.m in Sources */,
-				A7AABC1420792B4100FDC2A7 /* UILabel+createLabel.m in Sources */,
-				FC32BDC92074656200817156 /* XCUserUnderWritingViewController.m in Sources */,
-				FC32BDBD2074656200817156 /* XCUserParticularCaseViewController.m in Sources */,
-				FC32BDB92074656200817156 /* XCMyCommissionViewController.m in Sources */,
 				FC32BF352079AA2000817156 /* XCCustomerViolationPreviewViewController.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
@@ -1781,6 +1751,7 @@
 				FC32BF1C2079AA2000817156 /* XCMyCommissionViewController.m in Sources */,
 				FC32BFB92079AA5900817156 /* PriceUnderwritingTextTableViewCell.m in Sources */,
 				FC32BF282079AA2000817156 /* XCDistributionBillViewController.m in Sources */,
+				A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */,
 				FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */,
 				FC32BF182079AA2000817156 /* XCUserBaseViewController.m in Sources */,
 				FC32BF1E2079AA2000817156 /* XCUserInjuryCaseViewController.m in Sources */,
