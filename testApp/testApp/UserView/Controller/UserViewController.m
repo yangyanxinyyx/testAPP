@@ -39,9 +39,9 @@
     // [self.navigationItem setTitle:@"个人中心"];
     _isStore = NO;
     UserInfoManager *userManager = [UserInfoManager shareInstance];
-    if (userManager.isStore) {
-        _isStore = YES;
-    }
+//    if (userManager.isStore) {
+//        _isStore = YES;
+//    }
     [self initWithListData];
     [self setUI];
     //设置用户数据UI

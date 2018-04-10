@@ -174,9 +174,9 @@ static NSString *identifier = @"listCell";
 
 - (UIView *)topView{
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavMargan+20, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6)];
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, 44)];
         _topView.backgroundColor = [UIColor whiteColor];
-        UIView *segmentView = [[UIView alloc] initWithFrame:CGRectMake(0, 86 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];
+        UIView *segmentView = [[UIView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1 )];
         segmentView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         [_topView addSubview:segmentView];
     }
@@ -185,7 +185,7 @@ static NSString *identifier = @"listCell";
 
 - (UIView *)searchContenView {
     if (!_searchContenView) {
-        _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 56 * ViewRateBaseOnIP6)];
+        _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 28)];
         _searchContenView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         _searchContenView.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
         _searchContenView.layer.masksToBounds = YES;
@@ -195,15 +195,15 @@ static NSString *identifier = @"listCell";
 
 - (UITextField *)textField{
     if (!_textField) {
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6)];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 19)];
         _textField.clearButtonMode = UITextFieldViewModeAlways;
         _textField.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
         _textField.placeholder = @"车牌号查询";
         [_textField setValue:[UIColor colorWithHexString:@"#838383"] forKeyPath:@"_placeholderLabel.textColor"];
-        [_textField setValue:[UIFont boldSystemFontOfSize:26 * ViewRateBaseOnIP6] forKeyPath:@"_placeholderLabel.font"];
+        [_textField setValue:[UIFont boldSystemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
         UIImageView *rightView = [[UIImageView alloc]init];
         rightView.image = [UIImage imageNamed:@"search"];
-        rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
+        rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 19  , 19 );
         rightView.contentMode = UIViewContentModeCenter;
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;

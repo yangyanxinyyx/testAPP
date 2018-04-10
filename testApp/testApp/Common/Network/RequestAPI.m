@@ -64,6 +64,8 @@
 //获取投保价格
 #define INSUREDPRICE_API [NSString stringWithFormat:@"%@/api/web/dict/selectLinesByDictCode",API_PREFIX]
 
+//获取一家保险公司的报价详情
+#define PRECISEPRICE_API [NSString stringWithFormat:@"%@/api/web/bihu/getPrecisePrice",API_PREFIX]
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -265,8 +267,18 @@
     }];
 }
 
+//获取投保价格
 + (void)getInsuredrice:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
     [self getRequest:INSUREDPRICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(paramenter);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//获取一家保险公司的报价详情
++ (void)getPrecisePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:PRECISEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(paramenter);
     } fail:^(id error) {
         fail(error);

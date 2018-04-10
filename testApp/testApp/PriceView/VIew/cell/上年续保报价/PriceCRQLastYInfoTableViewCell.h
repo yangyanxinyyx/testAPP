@@ -11,4 +11,5 @@
 @interface PriceCRQLastYInfoTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UILabel *labelNum;
+- (void)setCellMianPei:(BOOL )isMianPei;
 @end

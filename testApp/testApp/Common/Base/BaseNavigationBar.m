@@ -19,7 +19,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.frame = CGRectMake(0, kNavMargan + 20, SCREEN_WIDTH, 44);
+        self.frame = CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, 44);
         [self createUI];
     }
     return self;
