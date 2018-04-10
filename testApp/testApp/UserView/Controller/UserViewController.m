@@ -223,11 +223,12 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
          NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
         NSInteger listCount = dataArr.count;
-        if (!_isStore) {
-            if (dataArr.count >= 1) {
-                listCount = dataArr.count - 1;
-            }
-        }
+#warning 测试使用 临时注释
+//        if (!_isStore) {
+//            if (dataArr.count >= 1) {
+//                listCount = dataArr.count - 1;
+//            }
+//        }
         self.listViewDataArray = [NSMutableArray arrayWithCapacity:listCount];
         for (int i = 0 ; i < listCount; i++) {
             id object = dataArr[i];

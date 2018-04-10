@@ -15,8 +15,8 @@
 @property (nonatomic, strong) UIView *viewBear;
 @property (nonatomic, strong) UIView *viewLastY;
 @property (nonatomic, strong) UIView *viewPriceRecord;
-@property (nonatomic, strong) UITableView *myTableView;
-@property (nonatomic, strong) UITableView *tableViewlast;
+@property (nonatomic, strong) UITableView *serviceTableView;
+@property (nonatomic, strong) UITableView *storeTableView;
 @property (nonatomic, strong) UIView *viewSegment;
 @end
 
@@ -24,10 +24,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self createUI];
 }
 
+#pragma mark - lifeCycle
 
+#pragma mark - Init Method
+#pragma mark - UI
+- (void)createUI{
+    [self.view addSubview:self.contenView];
+    [self.contenView addSubview:self.viewBear];
+    [self.contenView addSubview:self.CIQChangeView];
+    [self.viewBear addSubview:self.viewLastY];
+    [self.viewBear addSubview:self.viewPriceRecord];
+    [self.viewLastY addSubview:self.storeTableView];
+    [self.viewPriceRecord addSubview:self.serviceTableView];
+    [self.contenView addSubview:self.viewSegment];
+}
+
+#pragma mark - Action Method
+
+#pragma mark - Delegates & Notifications
 
 #pragma mark -priceCIQChangeViewDelegate
 - (void)changeModel:(BOOL)isLaseY{
@@ -51,18 +69,17 @@
     }
     return cell;
 }
-#pragma mark - UI
-- (void)createUI{
-    [self.view addSubview:self.contenView];
-    [self.contenView addSubview:self.viewBear];
-    [self.contenView addSubview:self.CIQChangeView];
-    [self.viewBear addSubview:self.viewLastY];
-    [self.viewBear addSubview:self.viewPriceRecord];
-    [self.viewLastY addSubview:self.tableViewlast];
-    [self.viewPriceRecord addSubview:self.myTableView];
-    [self.contenView addSubview:self.viewSegment];
-}
 
+#pragma mark - Privacy Method
+- (void)configureData
+{
+    NSArray *storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
+                          @"负责人电话:",@"业务员提成:",@"团队经理提成:",
+                          @"所属城市",@"所在地区",@"门店审核状态",
+                          @"营业执照上传,1张",@"门店图片,最多4张"];
+    NSArray *serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
+}
+#pragma mark - Setter&Getter
 - (UIView *)contenView{
     if (!_contenView) {
         _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
@@ -79,36 +96,36 @@
     return _CIQChangeView;
 }
 
-- (UITableView *)myTableView{
-    if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 244 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
-        _myTableView.delegate = self;
-        _myTableView.dataSource = self;
-        _myTableView.backgroundColor = [UIColor whiteColor];
+- (UITableView *)serviceTableView{
+    if (!_serviceTableView) {
+        _serviceTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 244 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
+        _serviceTableView.delegate = self;
+        _serviceTableView.dataSource = self;
+        _serviceTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
-        _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = YES;
-        _myTableView.separatorColor = [UIColor purpleColor];
-        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _serviceTableView.showsVerticalScrollIndicator = NO;
+        _serviceTableView.bounces = YES;
+        _serviceTableView.separatorColor = [UIColor purpleColor];
+        _serviceTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
-    return _myTableView;
+    return _serviceTableView;
 }
 
-- (UITableView *)tableViewlast{
-    if (!_tableViewlast) {
-        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
-        _tableViewlast.delegate = self;
-        _tableViewlast.dataSource = self;
-        _tableViewlast.backgroundColor = [UIColor whiteColor];
+- (UITableView *)storeTableView{
+    if (!_storeTableView) {
+        _storeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
+        _storeTableView.delegate = self;
+        _storeTableView.dataSource = self;
+        _storeTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
-        _tableViewlast.showsVerticalScrollIndicator = NO;
-        _tableViewlast.bounces = YES;
-        _tableViewlast.separatorColor = [UIColor purpleColor];
-        _tableViewlast.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _storeTableView.showsVerticalScrollIndicator = NO;
+        _storeTableView.bounces = YES;
+        _storeTableView.separatorColor = [UIColor purpleColor];
+        _storeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
-    return _tableViewlast;
+    return _storeTableView;
 }
 
 - (UIView *)viewBear{
@@ -142,10 +159,5 @@
     return _viewSegment;
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
