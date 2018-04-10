@@ -175,6 +175,7 @@
 		FC32BFC02079AA5900817156 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BF9F2079AA5800817156 /* SelectTimeView.m */; };
 		FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC12079AA7100817156 /* LYZSelectView.m */; };
 		FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */; };
+		FC32BFDC207B9BF800817156 /* MoneyInputVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -501,6 +502,8 @@
 		FC32BFC22079AA7100817156 /* LYZSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LYZSelectView.h; path = testApp/Common/LYZSelectView.h; sourceTree = SOURCE_ROOT; };
 		FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MoneyString.h"; sourceTree = "<group>"; };
 		FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
+		FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInputVIew.h; sourceTree = "<group>"; };
+		FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInputVIew.m; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1427,6 +1430,8 @@
 				FCF87676206BFF7C00CF6FDE /* GetCarListCell.m */,
 				FC32BE0E2079261100817156 /* GetCarView.h */,
 				FC32BE0F2079261100817156 /* GetCarView.m */,
+				FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */,
+				FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1716,6 +1721,7 @@
 				FC32BFB32079AA5900817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */,
 				FC32BF512079AA2000817156 /* XCDistributionInputCell.m in Sources */,
 				FC32BF492079AA2000817156 /* XCUserCaseDetailTextCell.m in Sources */,
+				FC32BFDC207B9BF800817156 /* MoneyInputVIew.m in Sources */,
 				FC32BF3B2079AA2000817156 /* XCCheckoutModel.m in Sources */,
 				FC32BF272079AA2000817156 /* XCUserViolationViewController.m in Sources */,
 				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,

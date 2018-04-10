@@ -52,10 +52,8 @@
     self.tabBar.tintColor = COLOR_RGB_255(0, 77, 162);
 
     self.viewControllers = [NSArray arrayWithObjects:navVC,navPrice,navGetCar,navUser, nil];
-    self.tabBar.translucent = NO;
+    self.tabBar.translucent = YES;
 
-    [[UINavigationBar appearance] setTranslucent:YES];
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:90/255.0 green:192/255.0 blue:249/255.0 alpha:1]];
 
 
 }

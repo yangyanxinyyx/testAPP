@@ -131,7 +131,7 @@ _Pragma("clang diagnostic pop") \
 #define isIPhoneX           ((SCREEN_WIDTH == 375.f && SCREEN_HEIGHT == 812.f) || isIPhoneXSystemInfo() ? YES : NO)
 #define kBottomMargan        (isIPhoneX ? 34.f : 0.f)
 #define kNavMargan        (isIPhoneX ? 44.f : 0.f)
-#define kHeightForNavigation  (kNavMargan + STATUS_BAR_HEIGHT + 44)
+#define kHeightForNavigation  ( STATUS_BAR_HEIGHT + 44)
 
 inline static BOOL isIPhoneXSystemInfo() {
     struct utsname systemInfo;
