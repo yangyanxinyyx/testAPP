@@ -5,4 +5,5 @@ target:testApp do
 pod 'AFNetworking', '~> 3.0'
 pod 'SDWebImage', '~> 4.3.3'
 pod 'AMap2DMap'
+pod 'YYModel', '~> 1.0.4'
 end

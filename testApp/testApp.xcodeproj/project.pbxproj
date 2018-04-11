@@ -642,6 +642,13 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		A753CC0C207E5E3500AFB66C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A79A510720597A0F000D8D0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1075,6 +1082,7 @@
 		FC32BEDC2079AA2000817156 /* 门店 */ = {
 			isa = PBXGroup;
 			children = (
+				A753CC0C207E5E3500AFB66C /* Model */,
 				FC32BEDD2079AA2000817156 /* XCShopViewController.h */,
 				FC32BEDE2079AA2000817156 /* XCShopViewController.m */,
 				A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */,

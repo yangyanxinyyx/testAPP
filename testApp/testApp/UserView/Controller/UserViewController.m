@@ -94,38 +94,62 @@
 
 #pragma mark - Action Method
 
+- (void)clickMyCommission
+{
+    XCLog(@"ClickmyCommissionBtn");
+    
+    NSDictionary *param = @{
+                            @"user_id":[UserInfoManager shareInstance].userID,
+                            };
+    [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
+        NSLog(@"%@",response);
+        if (isUsableDictionary(response)&&isUsableArray(response[@"data"], 0)) {
+            NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
+            NSArray *dataArr  = response[@"data"];
+            for (NSDictionary *commissionInfo in dataArr) {
+                XCMyCommissionListModel  * listModel = [XCMyCommissionListModel getMyCommissionListWithDataInfo:commissionInfo];
+                [modelArr addObject:listModel];
+            }
+            XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+            myCommissionVC.dataArrM = modelArr;
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            [self.navigationController pushViewController:myCommissionVC animated:YES];
+        }
+        
+    } fail:^(id error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+- (void)clickCellHanderNetWorkDataWithModel:(XCUserListModel *)model
+{
+    __weak typeof (self)weakSelf = self;
+
+    if ([model.title isEqualToString:@"门店"]) {
+        NSDictionary *param = @{
+                                @"user_id":[UserInfoManager shareInstance].storeID,
+                                };
+        [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
+            
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            [weakSelf requestFailureHandler];
+        }];
+    }else {
+        
+    }
+    
+}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - XCUserTopViewDelegate
 
 - (void)XCUserTopViewMyCommissionButtonClickHandler:(UIButton *)button
 {
-    XCLog(@"ClickmyCommissionBtn");
-    
-        NSDictionary *param = @{
-                                @"user_id":[UserInfoManager shareInstance].userID,
-                                };
-        [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-            NSLog(@"%@",response);
-            if (isUsableDictionary(response)&&isUsableArray(response[@"data"], 0)) {
-                NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
-                NSArray *dataArr  = response[@"data"];
-                for (NSDictionary *commissionInfo in dataArr) {
-                    XCMyCommissionListModel  * listModel = [XCMyCommissionListModel getMyCommissionListWithDataInfo:commissionInfo];
-                    [modelArr addObject:listModel];
-                }
-                XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
-                myCommissionVC.dataArrM = modelArr;
-                [self.navigationController pushViewController:myCommissionVC animated:YES];
-            }
-          
-        } fail:^(id error) {
-            NSLog(@"%@",error);
-        }];
-    
-    
-
-    
+    [self clickMyCommission];
 }
 
 - (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button
@@ -209,9 +233,8 @@
     XCUserListModel *model = [[XCUserListModel alloc] initWithItemInfo:listArr[indexPath.row]];
     NSLog(@"=====CollectionViewSelect %@",model.urlString);
     
-    if (model.urlString && ![model.urlString isEqualToString:@""]) {
-       XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
-        [self.navigationController pushViewController:subVC animated:YES];
+    if (model.urlString && ![model.urlString isEqualToString:@" "]) {
+        [self clickCellHanderNetWorkDataWithModel:model];
     }
 }
 
@@ -237,6 +260,12 @@
     }else {
         XCLog(@"Error: class:%@ -initWithData filePath was None",[self class]);
     }
+}
+
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
 }
 
 #pragma mark - Setter&Getter
