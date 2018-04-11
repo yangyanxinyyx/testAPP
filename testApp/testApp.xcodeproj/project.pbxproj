@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
+		A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */; };
 		A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */; };
 		A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */; };
 		A724C851207D0DD500083C86 /* 添加图片@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C850207D0DD500083C86 /* 添加图片@2x.png */; };
@@ -231,6 +232,8 @@
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopAMapViewController.h; sourceTree = "<group>"; };
+		A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopAMapViewController.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A71F118F207CBE4A00D57FEF /* XCShopDetailListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopDetailListCell.h; sourceTree = "<group>"; };
 		A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopDetailListCell.m; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 			children = (
 				FC32BEDD2079AA2000817156 /* XCShopViewController.h */,
 				FC32BEDE2079AA2000817156 /* XCShopViewController.m */,
+				A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */,
+				A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */,
 			);
 			path = "门店";
 			sourceTree = "<group>";
@@ -1745,6 +1750,7 @@
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				FC32BF302079AA2000817156 /* XCCustomerAnnualReviewViewController.m in Sources */,
 				FC32BF2C2079AA2000817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */,
+				A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */,
 				A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */,
 				FC32BF4B2079AA2000817156 /* XCUserCaseScrollerViewCell.m in Sources */,
 				FC32BF332079AA2000817156 /* XCCustomerRepairViewController.m in Sources */,
