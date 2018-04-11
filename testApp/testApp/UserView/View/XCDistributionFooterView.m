@@ -14,7 +14,10 @@
 @end
 
 @implementation XCDistributionFooterView
-
++ (CGFloat)getFooterViewHeight
+{
+    return (60 + 88 + 60) * ViewRateBaseOnIP6;
+}
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
     
     self = [super initWithReuseIdentifier:reuseIdentifier];

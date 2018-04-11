@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 @protocol XCShopDetailListCell <NSObject>
 - (void)XCShopDetailListCellClickEditedButton:(UIButton *)button;
-
 @end
+
 @interface XCShopDetailListCell : UICollectionViewCell
 
 @end

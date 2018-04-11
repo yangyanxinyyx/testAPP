@@ -19,6 +19,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.userInteractionEnabled = YES;
         self.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [self configSubVies];

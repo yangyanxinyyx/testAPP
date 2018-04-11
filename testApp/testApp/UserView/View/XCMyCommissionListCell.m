@@ -58,6 +58,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
         [self configSubVies];
     }

@@ -21,9 +21,11 @@
 @end
 
 @implementation XCDistributionPicketCell
-
++(CGFloat)getCellHeight
+{
+    return 88 * ViewRateBaseOnIP6;
+}
 #pragma mark - lifeCycle
-
 
 - (void)layoutSubviews
 {
@@ -39,7 +41,11 @@
     labelSize = _valueLabel.frame.size;
     [_valueLabel setFrame:CGRectMake(CGRectGetMinX(_extendImageView.frame) - 16 * ViewRateBaseOnIP6 - labelSize.width , (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
     if (_shouldShowSeparator) {
-        [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        if (_isCenterSeparator) {
+            [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
+        }else {
+            [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        }
     }
     
 }
@@ -61,7 +67,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _shouldShowSeparator = YES;
+        _isCenterSeparator = NO;
         [self configSubVies];
     }
     return self;

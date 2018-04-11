@@ -27,11 +27,10 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _imageViewArrM = [[NSMutableArray alloc] init];
         [self configSubVies];
         [_titleLabel setText:@"刘某人伤案件理赔进度"];
-        
         UIImage *image = [UIImage imageNamed:@"未完成"];
         self.photoArr = @[image,image,image,image,image,image,image,image,image,image];
     }

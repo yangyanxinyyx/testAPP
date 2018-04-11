@@ -14,6 +14,10 @@
 
 @property (nonatomic, copy) NSString * titleValue;
 
+/** 默认为NO */
+@property (nonatomic, assign) BOOL  isCenterSeparator ;
 //显示分割线 默认为YES
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
+
++(CGFloat)getCellHeight;
 @end

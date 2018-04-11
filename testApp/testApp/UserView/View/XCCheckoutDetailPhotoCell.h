@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol XCCheckoutDetailPhotoCellDelegate <NSObject>
 
-- (void)XCCheckoutDetailPhotoCellClickAddPhotosBtn:(UIButton *)button;
+- (void)XCCheckoutDetailPhotoCellClickAddPhotosBtn:(UIImageView *)imageView;
 
 - (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index;
 
@@ -17,6 +17,11 @@
 
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
 @property (nonatomic, strong) NSString * title ;
-/** <# 注释 #> */
 @property (nonatomic, strong) NSArray * photoArr ;
+
+@property (nonatomic, assign) NSInteger  maxPhoto ;
+
+/** <# 类型描述  #> */
+@property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
++ (CGFloat)getCellHeight;
 @end

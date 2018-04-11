@@ -17,7 +17,10 @@
 @end
 
 @implementation XCCheckoutDetailTextFiledCell
-
++(CGFloat)getCellHeight
+{
+    return 88 *ViewRateBaseOnIP6;
+}
 #pragma mark - lifeCycle
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -25,6 +28,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _shouldShowSeparator = NO;
+        _isCenterSeparator = NO;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
     }
     return self;
@@ -45,14 +50,14 @@
     
     [_textField sizeToFit];
     labelSize = _textField.frame.size;
-    if (_shouldShowSeparator) {
-        [_textField setBackgroundColor:COLOR_RGB_255(255, 255, 255)];
-    }else {
-        [_textField setBackgroundColor:COLOR_RGB_255(240, 240, 240)];
-    }
+    
     [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
     if (_shouldShowSeparator) {
-        [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        if (_isCenterSeparator) {
+             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
+        }else {
+            [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        }
     }
 }
 #pragma mark - Init Method
@@ -118,6 +123,13 @@
     NSString *newString = [NSString stringWithFormat:@"   %@",_titlePlaceholder];
     [_textField setPlaceholder:newString];
     [_textField sizeToFit];
+}
+
+- (void)setTextFiledBGColor:(UIColor *)textFiledBGColor
+{
+    if (_textField) {
+        [_textField setBackgroundColor:textFiledBGColor];
+    }
 }
 
 @end

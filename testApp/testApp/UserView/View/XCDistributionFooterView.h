@@ -18,4 +18,6 @@
 @property (nonatomic, copy) NSString *title ;
 @property (nonatomic, weak) id<XCDistributionFooterViewDelegate> delegate;
 
++ (CGFloat)getFooterViewHeight;
+
 @end
