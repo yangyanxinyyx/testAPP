@@ -63,11 +63,16 @@
 - (void)inspectPriceDelegateWith:(NSInteger)tag{
     PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
     if (tag == 0) {
-        priceInfoVC.quoteGroup = @"2";
-    } else{
         priceInfoVC.quoteGroup = @"4";
+    } else{
+        priceInfoVC.quoteGroup = @"2";
     }
-   
+    if (self.blType) {
+      priceInfoVC.blType = self.blType;
+    } else{
+        priceInfoVC.blType = @"0";
+    }
+    
     [self.navigationController pushViewController:priceInfoVC animated:YES];
 }
 #pragma mark - UI

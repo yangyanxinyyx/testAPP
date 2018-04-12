@@ -47,7 +47,7 @@
     topBar.title = @"车险报价";
     [self.view addSubview:topBar];
     [self createUI];
-    [self requestLastYearPrcie];
+//    [self requestLastYearPrcie];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -184,6 +184,22 @@
             
             
         } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (_requestCount == 3) {
+                    _requestCount = 0;
+                    FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
+                        
+                    }];
+                    [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
+                    return ;
+                }
+                _requestCount ++;
+                [self requestLastYearPrcie];
+            });
+            
+        }
+    } fail:^(id error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             if (_requestCount == 3) {
                 _requestCount = 0;
                 FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
@@ -194,8 +210,7 @@
             }
             _requestCount ++;
             [self requestLastYearPrcie];
-        }
-    } fail:^(id error) {
+        });
     }];
 }
 
@@ -206,8 +221,8 @@
     [dic setObject:self.carID forKey:@"carId"];
     [RequestAPI getPriceRecord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
-        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-       
+        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+            NSLog(@"%@",response[@"data"]);
         
         }
     } fail:^(id error) {
@@ -216,11 +231,13 @@
 }
 
 #pragma mark - function
+//调整报价
 - (void)touchButtonRevisePrice:(UIButton *)button{
     PriceAdjustViewController *priceAdjuestVC = [[PriceAdjustViewController alloc]init];
     [self.navigationController pushViewController:priceAdjuestVC animated:YES];
 }
 
+//报价
 - (void)touchButtonPrice:(UIButton *)button{
     PriceInspectViewController *priceInsVC = [[PriceInspectViewController alloc] init];
     [self.navigationController pushViewController:priceInsVC animated:YES];
@@ -343,6 +360,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.myTableView) {
         PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
+        priceInfoVC.quoteGroup = @"6";
+        priceInfoVC.blType = @"0";
         [self.navigationController pushViewController:priceInfoVC animated:YES];
     }
 }

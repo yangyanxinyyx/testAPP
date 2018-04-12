@@ -57,7 +57,7 @@
 - (void)getData{
 }
 
-- (void)pressCustomerVehicleEnquiries{
+- (void) pressCustomerVehicleEnquiries{
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.textField.text forKey:@"criteria"];
@@ -94,6 +94,23 @@
             if (![customerIdNumber isKindOfClass:[NSNull class]] && [customerIdNumber stringValue].length != 0) {
                 self.customerId = [NSString stringWithFormat:@"%ld",[customerIdNumber longValue]];
             }
+            
+            NSNumber *carID = [data objectForKey:@"carId"];
+            if (![carID isKindOfClass:[NSNull class]]) {
+                [UserInfoManager shareInstance].carID = [NSString stringWithFormat:@"%ld",[carID longValue]];
+            }
+            
+            NSNumber *customerId = [data objectForKey:@"customerId"];
+            if (![customerId isKindOfClass:[NSNull class]]){
+                [UserInfoManager shareInstance].customerId = [NSString stringWithFormat:@"%ld",[customerId longValue]];
+            }
+            
+            NSNumber *customerName = [data objectForKey:@"customerName"];
+            if (![customerName isKindOfClass:[NSNull class]]){
+                [UserInfoManager shareInstance].customerName = [data objectForKey:@"customerName"];
+            }
+            
+            
         }
 
     } fail:^(id error) {
@@ -207,7 +224,8 @@
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
-        _textField.text = @"粤AH05K9";
+//        _textField.text = @"粤AH05K9";
+        _textField.text = @"粤A785XQ";
     }
     return _textField;
 }

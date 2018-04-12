@@ -47,6 +47,8 @@
 //首页轮播图
 +(void)getCoverLoopImage:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
++(void)getSavePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+
 #pragma mark - 个人中心
 
 //我的佣金

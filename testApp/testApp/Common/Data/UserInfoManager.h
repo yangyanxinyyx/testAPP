@@ -52,6 +52,9 @@
 @property (nonatomic,strong) NSString *needModifyPwsNextLogin;
 @property (nonatomic,strong) NSString *noModifyPsw;
 @property (nonatomic,strong) NSString *phone;
+@property (nonatomic,strong) NSString *carID;
+@property (nonatomic,strong) NSString *customerId;
+@property (nonatomic,strong) NSString *customerName;
 
 @property (nonatomic,assign) BOOL isStore;         //是否是门店 下面的属性是门店才有的
 

@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
+		25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701658207D07ED007177F5 /* PriceInfoModel.m */; };
+		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		25B7326E207A6E8F00069075 /* XCShopInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */; };
+		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
+		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -217,10 +220,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25701657207D07ED007177F5 /* PriceInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoModel.h; sourceTree = "<group>"; };
+		25701658207D07ED007177F5 /* PriceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoModel.m; sourceTree = "<group>"; };
+		2570165C207DE560007177F5 /* SelectStateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectStateView.h; sourceTree = "<group>"; };
+		2570165D207DE560007177F5 /* SelectStateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectStateView.m; sourceTree = "<group>"; };
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
 		25B7326C207A6E8F00069075 /* XCShopInputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopInputTableViewCell.h; sourceTree = "<group>"; };
 		25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopInputTableViewCell.m; sourceTree = "<group>"; };
+		25EA236E207E5ADF00A60866 /* priceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceModel.h; sourceTree = "<group>"; };
+		25EA236F207E5ADF00A60866 /* priceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceModel.m; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
@@ -576,6 +585,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25701656207D07D3007177F5 /* 报价详情 */ = {
+			isa = PBXGroup;
+			children = (
+				25701657207D07ED007177F5 /* PriceInfoModel.h */,
+				25701658207D07ED007177F5 /* PriceInfoModel.m */,
+			);
+			path = "报价详情";
+			sourceTree = "<group>";
+		};
 		259A83EC207BACFA006693FB /* 上年续保记录 */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +610,28 @@
 				25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		25EA236D207E5AC000A60866 /* 调整报价 */ = {
+			isa = PBXGroup;
+			children = (
+				25EA236E207E5ADF00A60866 /* priceModel.h */,
+				25EA236F207E5ADF00A60866 /* priceModel.m */,
+			);
+			path = "调整报价";
+			sourceTree = "<group>";
+		};
+		25EA2371207F446000A60866 /* 报价详情 */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BF722079AA5800817156 /* PriceInfoAddTableViewCell.h */,
+				FC32BF732079AA5800817156 /* PriceInfoAddTableViewCell.m */,
+				FC32BF742079AA5800817156 /* PriceInfolabelTableViewCell.h */,
+				FC32BF752079AA5800817156 /* PriceInfolabelTableViewCell.m */,
+				FC32BF762079AA5800817156 /* PriceInfoSaveTableViewCell.h */,
+				FC32BF772079AA5800817156 /* PriceInfoSaveTableViewCell.m */,
+			);
+			path = "报价详情";
 			sourceTree = "<group>";
 		};
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
@@ -1169,6 +1209,8 @@
 		FC32BF612079AA5800817156 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				25EA236D207E5AC000A60866 /* 调整报价 */,
+				25701656207D07D3007177F5 /* 报价详情 */,
 				259A83EC207BACFA006693FB /* 上年续保记录 */,
 				FC32BF622079AA5800817156 /* 报价记录 */,
 				FC32BF652079AA5800817156 /* 报价首页 */,
@@ -1208,6 +1250,8 @@
 				FC32BF9D2079AA5800817156 /* SelectSheetView.m */,
 				FC32BF9E2079AA5800817156 /* SelectTimeView.h */,
 				FC32BF9F2079AA5800817156 /* SelectTimeView.m */,
+				2570165C207DE560007177F5 /* SelectStateView.h */,
+				2570165D207DE560007177F5 /* SelectStateView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -1215,18 +1259,13 @@
 		FC32BF6B2079AA5800817156 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				25EA2371207F446000A60866 /* 报价详情 */,
 				FC32BF6C2079AA5800817156 /* PriceCarILasetYTableViewCell.h */,
 				FC32BF6D2079AA5800817156 /* PriceCarILasetYTableViewCell.m */,
 				FC32BF6E2079AA5800817156 /* PriceCarRecordTableViewCell.h */,
 				FC32BF6F2079AA5800817156 /* PriceCarRecordTableViewCell.m */,
 				FC32BF702079AA5800817156 /* PriceCommerceInsTableViewCell.h */,
 				FC32BF712079AA5800817156 /* PriceCommerceInsTableViewCell.m */,
-				FC32BF722079AA5800817156 /* PriceInfoAddTableViewCell.h */,
-				FC32BF732079AA5800817156 /* PriceInfoAddTableViewCell.m */,
-				FC32BF742079AA5800817156 /* PriceInfolabelTableViewCell.h */,
-				FC32BF752079AA5800817156 /* PriceInfolabelTableViewCell.m */,
-				FC32BF762079AA5800817156 /* PriceInfoSaveTableViewCell.h */,
-				FC32BF772079AA5800817156 /* PriceInfoSaveTableViewCell.m */,
 				FC32BF782079AA5800817156 /* PriceInspectTableViewCell.h */,
 				FC32BF792079AA5800817156 /* PriceInspectTableViewCell.m */,
 				FC32BF7A2079AA5800817156 /* 上年续保报价 */,
@@ -1756,6 +1795,7 @@
 				FC32BF402079AA2000817156 /* XCCheckoutBaseFooterView.m in Sources */,
 				FC32BF3D2079AA2000817156 /* XCUserCaseListModel.m in Sources */,
 				FC32BDF02076021900817156 /* CoverLoopimageModel.m in Sources */,
+				25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */,
 				FC32BF4F2079AA2000817156 /* XCUserTopView.m in Sources */,
 				FC32BF232079AA2000817156 /* XCUserAnnualReviewViewController.m in Sources */,
 				FC32BF212079AA2000817156 /* XCUserParticularCaseViewController.m in Sources */,
@@ -1773,6 +1813,7 @@
 				FC32BF342079AA2000817156 /* XCCustomerViewController.m in Sources */,
 				FC32BFAC2079AA5900817156 /* PriceInfoAddTableViewCell.m in Sources */,
 				FC32BF2E2079AA2000817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
+				25EA2370207E5ADF00A60866 /* priceModel.m in Sources */,
 				FC32BF292079AA2000817156 /* XCDistributionPolicyViewController.m in Sources */,
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
 				FC32BFAA2079AA5900817156 /* PriceCarRecordTableViewCell.m in Sources */,
@@ -1805,6 +1846,7 @@
 				FC32BFAE2079AA5900817156 /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC32BFB62079AA5900817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
 				FC32BF382079AA2000817156 /* XCShopViewController.m in Sources */,
+				2570165E207DE560007177F5 /* SelectStateView.m in Sources */,
 				FC32BFA52079AA5900817156 /* PriceUnderwritingViewController.m in Sources */,
 				FC32BFBE2079AA5900817156 /* PriceInfoCellView.m in Sources */,
 				FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */,
