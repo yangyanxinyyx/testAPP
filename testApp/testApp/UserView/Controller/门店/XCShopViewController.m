@@ -5,29 +5,101 @@
 //  Created by Melody on 2018/4/8.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
+#define kaddPhotoCellID @"addPhotoCellID"
 
 #import "XCShopViewController.h"
 #import "BaseNavigationBar.h"
 #import "priceCIQChangeView.h"
-@interface XCShopViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate>
+#import "XCCheckoutDetailPhotoCell.h"
+#import "LYZAlertView.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "XCShopAMapViewController.h"
+
+@interface XCShopViewController ()<UITableViewDelegate,
+UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
+XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
+UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UIView *contenView;
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
 @property (nonatomic, strong) UIView *viewLastY;
 @property (nonatomic, strong) UIView *viewPriceRecord;
-@property (nonatomic, strong) UITableView *myTableView;
-@property (nonatomic, strong) UITableView *tableViewlast;
+@property (nonatomic, strong) UITableView *serviceTableView;
+@property (nonatomic, strong) UITableView *storeTableView;
 @property (nonatomic, strong) UIView *viewSegment;
+
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * storeTitleArr;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * placeHolderArr ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * serviceTitleArr ;
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
+/** <# 注释 #> */
+@property (nonatomic, strong) UIImage * lincesPhoto ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
 @end
 
 @implementation XCShopViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _storePhotoArrM = [[NSMutableArray alloc] init];
+    [self configureData];
     [self createUI];
 }
 
+#pragma mark - lifeCycle
 
+#pragma mark - Init Method
+#pragma mark - UI
+- (void)createUI{
+    [self.view addSubview:self.contenView];
+    [self.contenView addSubview:self.viewBear];
+    [self.contenView addSubview:self.CIQChangeView];
+    [self.viewBear addSubview:self.viewLastY];
+    [self.viewBear addSubview:self.viewPriceRecord];
+    [self.viewLastY addSubview:self.storeTableView];
+    [self.viewPriceRecord addSubview:self.serviceTableView];
+    [self.contenView addSubview:self.viewSegment];
+}
+
+#pragma mark - Action Method
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.serviceTableView) {
+        switch (indexPath.row) {
+            case 0:{ //洗车项目
+                
+            }
+                break;
+            case 1: { //美容项目
+                
+            }
+                break;
+            case 2: { //保养项目
+                
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    else if (tableView == self.storeTableView) {
+        if (indexPath.row == 6) {
+            // 跳转地图
+            XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
+            [self.navigationController pushViewController:mapVC animated:YES];
+        }
+        
+    }
+}
+
+#pragma mark - Delegates & Notifications
 
 #pragma mark -priceCIQChangeViewDelegate
 - (void)changeModel:(BOOL)isLaseY{
@@ -38,34 +110,228 @@
     }
 }
 
+#pragma mark - XCDistributionFooterViewDelegate
+
+- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
+{
+    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:nil content:@"是否确认要提交审核" confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+        
+        NSDictionary *parma = [self.storeModel getUpdateStoreDictionary];
+        [RequestAPI postUpdateStore:parma header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            
+        } fail:^(id error) {
+            
+        }];
+    }];
+    [self.view addSubview:alterView];
+}
+
+#pragma  mark - XCCheckoutDetailPhotoCellDelegate
+
+- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image
+                                               index:(NSInteger)index
+                                                cell:(XCCheckoutDetailPhotoCell *)cell
+{
+    
+}
+- (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView
+                                                    cell:(XCCheckoutDetailPhotoCell *)cell
+{
+    self.currentPhotoCell = cell;
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
+    //设置选取的照片是否可编辑
+    pickerController.allowsEditing = YES;
+    pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
+    //照片的选取样式还有以下两种
+    //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册
+    //UIImagePickerControllerSourceTypeCamera//调取摄像头
+    pickerController.delegate = self;
+    [self presentViewController:pickerController animated:YES completion:nil];
+}
+
+#pragma mark - navigationDelegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    NSURL *imageAssetUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
+    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+    __weak __typeof(self) weakSelf = self;
+    [assetLibrary assetForURL:imageAssetUrl resultBlock:^(ALAsset *asset)  {
+        ALAssetRepresentation* representation = [asset defaultRepresentation];
+        // 创建一个buffer保存图片数据
+        uint8_t *buffer = (Byte*)malloc(representation.size);
+        NSUInteger length = [representation getBytes:buffer fromOffset: 0.0  length:representation.size error:nil];
+        // 将buffer转换为NSData object，然后释放buffer内存
+        NSData *imageData = [[NSData alloc] initWithBytesNoCopy:buffer length:representation.size freeWhenDone:YES];
+        UIImage *image = [UIImage imageWithData:imageData scale:1.0];
+        
+        if ([weakSelf.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+            weakSelf.lincesPhoto = image;
+            [weakSelf.currentPhotoCell setPhotoArr:@[weakSelf.lincesPhoto]];
+            [weakSelf.currentPhotoCell updateLocalPhotoArr:@[weakSelf.lincesPhoto]];
+        }
+        else if ([weakSelf.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
+            [weakSelf.storePhotoArrM addObject:image];
+            [weakSelf.currentPhotoCell updateLocalPhotoArr:weakSelf.storePhotoArrM];
+        }
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    } failureBlock:^(NSError *error) {
+        //失败的处理
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    if (tableView == self.storeTableView) {
+        return self.storeTitleArr.count;
+    }else { //服务信息
+        return self.serviceTitleArr.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifer = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
+    
+    if (tableView == self.storeTableView) {
+        NSString *title = self.storeTitleArr[indexPath.row];
+        if ([self isPhotoCellWithIndex:indexPath]) {
+            XCCheckoutDetailPhotoCell *photoCell = (XCCheckoutDetailPhotoCell *)[tableView dequeueReusableCellWithIdentifier:kaddPhotoCellID];
+            photoCell.delegate = self;
+            [photoCell setTitle:title];
+            [photoCell setMaxPhoto:1];
+            if (indexPath.row == 10) {
+                [photoCell setMaxPhoto:4];
+            }
+            [photoCell setupCellWithShopModel:self.storeModel];
+            return photoCell;
+        }else if ([self isPicketCellWithIndex:indexPath]) {
+            NSString *holderStr = self.placeHolderArr[indexPath.row];
+            XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
+            picketCell.title = title;
+            [picketCell setTitleValue:holderStr];
+            [picketCell setupCellWithShopModel:self.storeModel];
+            return picketCell;
+        }else {
+            NSString *holderStr = self.placeHolderArr[indexPath.row];
+            XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID];
+            textFiledCell.title = title;
+            [textFiledCell setTextFiledBGColor:[UIColor whiteColor]];
+            [textFiledCell setTitlePlaceholder:holderStr];
+            if (self.storeModel) {
+                [textFiledCell setupCellWithShopModel:self.storeModel];
+            }
+            return textFiledCell;
+        }
+    }else  {
+        NSString *title = nil;
+        if (self.serviceTitleArr.count > indexPath.row) {
+            title = self.serviceTitleArr[indexPath.row];
+        }
+        XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
+        picketCell.title = title;
+        if (picketCell == nil) {
+            picketCell =[[XCDistributionPicketCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPicketCellID];
+            picketCell.title = title;
+        }
+        return picketCell;
     }
-    return cell;
+  
 }
-#pragma mark - UI
-- (void)createUI{
-    [self.view addSubview:self.contenView];
-    [self.contenView addSubview:self.viewBear];
-    [self.contenView addSubview:self.CIQChangeView];
-    [self.viewBear addSubview:self.viewLastY];
-    [self.viewBear addSubview:self.viewPriceRecord];
-    [self.viewLastY addSubview:self.tableViewlast];
-    [self.viewPriceRecord addSubview:self.myTableView];
-    [self.contenView addSubview:self.viewSegment];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
+    [headerView.contentView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    return headerView;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (tableView == self.storeTableView) {
+        XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
+        [footerView setTitle:@"提交审核"];
+        footerView.delegate = self;
+        return footerView;
+    }
+    UITableViewHeaderFooterView *fotterView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
+    [fotterView.contentView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    return fotterView;
+    
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.storeTableView) {
+        if ([self isPhotoCellWithIndex:indexPath]) {
+            return [XCCheckoutDetailPhotoCell getCellHeight];
+        }else if ([self isPicketCellWithIndex:indexPath]) {
+            return [XCDistributionPicketCell getCellHeight];
+        }else {
+            return [XCCheckoutDetailTextFiledCell getCellHeight];
+        }
+    }
+    return 88 * ViewRateBaseOnIP6;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (tableView == self.storeTableView) {
+        return [XCDistributionFooterView getFooterViewHeight];
+    }
+    return 1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return  20 * ViewRateBaseOnIP6;
+}
+
+#pragma mark - Privacy Method
+- (void)configureData
+{
+    self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
+                          @"负责人电话:",@"业务员提成:",@"团队经理提成:",
+                          @"所属城市",@"所在地区",@"门店审核状态",
+                          @"营业执照上传,1张",@"门店图片,最多4张"];
+    self.placeHolderArr = @[@"请输入名称",@"请输入联系方式",@"请输入负责人姓名",
+                            @"请输入电话",@"请输入百分比",@"请输入百分比",
+                            @"广州市",@"天河区",@"审核中"];
+    
+    self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
+}
+
+- (BOOL)isPicketCellWithIndex:(NSIndexPath *)indexpath
+{
+    if ( indexpath.row == 6|| indexpath.row == 7 ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isPhotoCellWithIndex:(NSIndexPath *)indexpath
+{
+    if ( indexpath.row == 9|| indexpath.row == 10 ) {
+        return YES;
+    }
+    return NO;
+}
+
+#pragma mark - Setter&Getter
+
+- (void)setStoreModel:(XCShopModel *)storeModel
+{
+    if (!storeModel) {
+        return;
+    }
+    _storeModel = storeModel;
+    
+    
 }
 
 - (UIView *)contenView{
     if (!_contenView) {
-        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
     }
     return _contenView;
 }
@@ -79,36 +345,41 @@
     return _CIQChangeView;
 }
 
-- (UITableView *)myTableView{
-    if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 244 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
-        _myTableView.delegate = self;
-        _myTableView.dataSource = self;
-        _myTableView.backgroundColor = [UIColor whiteColor];
+- (UITableView *)serviceTableView{
+    if (!_serviceTableView) {
+        _serviceTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.contenView.frame.size.height - self.CIQChangeView.frame.size.height - 20 * ViewRateBaseOnIP6 ) style:UITableViewStyleGrouped];
+        _serviceTableView.delegate = self;
+        _serviceTableView.dataSource = self;
+        _serviceTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
-        _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = YES;
-        _myTableView.separatorColor = [UIColor purpleColor];
-        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+        _serviceTableView.showsVerticalScrollIndicator = NO;
+        _serviceTableView.bounces = YES;
+        _serviceTableView.separatorColor = [UIColor purpleColor];
+        _serviceTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_serviceTableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
+        [_serviceTableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
     }
-    return _myTableView;
+    return _serviceTableView;
 }
 
-- (UITableView *)tableViewlast{
-    if (!_tableViewlast) {
-        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
-        _tableViewlast.delegate = self;
-        _tableViewlast.dataSource = self;
-        _tableViewlast.backgroundColor = [UIColor whiteColor];
+- (UITableView *)storeTableView{
+    if (!_storeTableView) {
+        _storeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.contenView.frame.size.height - self.CIQChangeView.frame.size.height - 20 * ViewRateBaseOnIP6) style:UITableViewStyleGrouped];
+        _storeTableView.delegate = self;
+        _storeTableView.dataSource = self;
+        _storeTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
-        _tableViewlast.showsVerticalScrollIndicator = NO;
-        _tableViewlast.bounces = YES;
-        _tableViewlast.separatorColor = [UIColor purpleColor];
-        _tableViewlast.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-    }
-    return _tableViewlast;
+        _storeTableView.showsVerticalScrollIndicator = NO;
+        _storeTableView.bounces = YES;
+        _storeTableView.separatorColor = [UIColor purpleColor];
+        _storeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_storeTableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
+        [_storeTableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
+        [_storeTableView registerClass:[XCCheckoutDetailPhotoCell class] forCellReuseIdentifier:kaddPhotoCellID];
+        [_storeTableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
+        [_storeTableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID
+         ];    }
+    return _storeTableView;
 }
 
 - (UIView *)viewBear{
@@ -140,12 +411,6 @@
         _viewSegment.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
     }
     return _viewSegment;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

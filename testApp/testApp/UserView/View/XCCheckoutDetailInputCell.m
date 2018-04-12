@@ -44,6 +44,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.userInteractionEnabled = YES;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
     }
     return self;

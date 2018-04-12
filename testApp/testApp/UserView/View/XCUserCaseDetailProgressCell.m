@@ -23,6 +23,7 @@
     if (self) {
         _processStrArr = @[@"服务完成",@"案件处理中..."];
         [self configSubVies];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

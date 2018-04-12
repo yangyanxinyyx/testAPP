@@ -43,8 +43,18 @@
 //接车时获取订单详情
 #define GETCARDETAILINFORMATION_API [NSString stringWithFormat:@"%@/api/web/order/operationGetOrder",API_PREFIX]
 
+
+// =================== modify by Liangyz 个人中心
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
+//门店信息
+#define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
+//门店服务
+#define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreService",API_PREFIX]
+//修改门店详情
+#define SHOPUPDATESTORE_API [NSString stringWithFormat:@"%@/api/web/store/updateStore",API_PREFIX]
+// ===================
+
 
 //客户车辆查询
 #define CUSTOMERVEHICLEENQUIRIES_API [NSString stringWithFormat:@"%@/api/web/car/findOrAddCustomerAndCar",API_PREFIX]
@@ -214,15 +224,6 @@
     }];
 }
 
-+(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
-
-//    NSString *str= @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/web/commission/selectCommission";
-    [self getRequest:MYCOMISSION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
-        success(response);
-    } fail:^(id error) {
-        fail(error);
-    }];
-}
 
 #pragma mark 报价
 //车牌号查询
@@ -268,6 +269,7 @@
     } fail:^(id error) {
         fail(error);
     }];
+ 
 }
 
 //获取投保价格
@@ -296,4 +298,37 @@
         fail(error);
     }];
 }
+
+#pragma mark - 个人中心
++(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    
+    //    NSString *str= @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/web/commission/selectCommission";
+    [self getRequest:MYCOMISSION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+#pragma mark 门店
+
++(void)getShopsInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SHOPSDETAIL_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)postUpdateStore:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:SHOPUPDATESTORE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+
 @end

@@ -29,7 +29,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-    
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _labelArrM = [[NSMutableArray alloc] init];
         _isMutableTextType = NO;
         [self configSubVies];

@@ -14,6 +14,8 @@
 #define kcheckCellID @"checkCell"
 #define kheaderViewID @"headerViewID"
 #define kfooterViewID @"basefooterViewID"
+#import "XCShopModel.h"
+
 @interface XCCheckoutBaseTableViewController : BaseViewController1<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 /**
  自定义导航栏
@@ -24,6 +26,8 @@
 @property (nonatomic, strong) UITableView * tableView ;
 @property (nonatomic, strong) NSMutableArray * dataArr ;
 
+/** 门店页面用的model  */
+@property (nonatomic, strong) XCShopModel * storeModel ;
 - (instancetype)initWithTitle:(NSString *)title;
 
 

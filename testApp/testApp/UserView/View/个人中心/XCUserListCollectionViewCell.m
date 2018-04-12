@@ -16,6 +16,7 @@
 @implementation XCUserListCollectionViewCell
 
 #pragma mark - Init Method
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
