@@ -8,6 +8,13 @@
 
 #import "XCUserBaseViewController.h"
 
-@interface XCShopAMapViewController : XCUserBaseViewController
+@interface XCShopAMapViewController : BaseViewController1<BaseNavigationBarDelegate>
+/**
+ 自定义导航栏
+ */
+@property (nonatomic, strong) BaseNavigationBar *topBar ;
+@property (nonatomic,strong) NSString *navTitle;
+
+- (instancetype)initWithTitle:(NSString *)title;
 
 @end

@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XCShopModel.h"
 @protocol XCCheckoutDetailTextFiledCellDelegate <NSObject>
-
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString;
-
 @end
 
 @interface XCCheckoutDetailTextFiledCell : UITableViewCell
@@ -26,6 +24,7 @@
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
 /** 设置TextFiled背景颜色 默认为灰色 */
 @property (nonatomic, strong) UIColor * textFiledBGColor ;
-+(CGFloat)getCellHeight;
 
++(CGFloat)getCellHeight;
+- (void)setupCellWithShopModel:(XCShopModel *)model;
 @end

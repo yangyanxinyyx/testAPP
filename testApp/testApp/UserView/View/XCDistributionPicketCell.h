@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class XCShopModel;
 @interface XCDistributionPicketCell : UITableViewCell
 
 @property (nonatomic, copy) NSString * title;
@@ -20,4 +20,6 @@
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
 
 +(CGFloat)getCellHeight;
+- (void)setupCellWithShopModel:(XCShopModel *)model;
+
 @end

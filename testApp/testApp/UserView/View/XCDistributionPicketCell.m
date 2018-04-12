@@ -7,7 +7,7 @@
 //
 
 #import "XCDistributionPicketCell.h"
-
+#import "XCShopModel.h"
 @interface XCDistributionPicketCell()
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * titleLabel ;
@@ -100,6 +100,14 @@
 
 #pragma mark - Action Method
 
+- (void)setupCellWithShopModel:(XCShopModel *)model
+{
+    if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
+        [self.valueLabel setText:model.city];
+    }else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
+        [self.valueLabel setText:model.area];
+    }
+}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method

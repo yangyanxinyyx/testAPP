@@ -19,6 +19,7 @@
 #define kCellID @"myCellID"
 #define kHeaderViewID @"myHeaderID"
 #define kFooterViewID @"myFooterID"
+#import "XCShopModel.h"
 @interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     BOOL _isStore;
@@ -128,13 +129,18 @@
 
     if ([model.title isEqualToString:@"门店"]) {
         NSDictionary *param = @{
-                                @"user_id":[UserInfoManager shareInstance].storeID,
+                                @"id":[UserInfoManager shareInstance].storeID,
                                 };
-        [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-            
-            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
-            [weakSelf.navigationController pushViewController:subVC animated:YES];
-        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
+                XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+                subVC.storeModel = shopModel;
+                [weakSelf.navigationController pushViewController:subVC animated:YES];
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            }else {
+                [weakSelf requestFailureHandler];
+            }
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
         }];

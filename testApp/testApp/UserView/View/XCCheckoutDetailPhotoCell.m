@@ -8,6 +8,8 @@
 
 #import "XCCheckoutDetailPhotoCell.h"
 #import "UILabel+createLabel.h"
+#import "XCShopModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface XCCheckoutDetailPhotoCell ()
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * titleLabel ;
@@ -37,7 +39,10 @@
     }
     return self;
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"tap");
+}
 - (void)configSubVies
 {
     _titleLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
@@ -48,6 +53,7 @@
     [_addPhotoImageView setBackgroundColor:COLOR_RGB_255(234, 234, 234)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAddImageView:)];
     [_addPhotoImageView addGestureRecognizer:tap];
+    [_addPhotoImageView setUserInteractionEnabled:YES];
     _scrollview = [[UIScrollView alloc] init];
     _scrollview.userInteractionEnabled = YES;
     
@@ -99,21 +105,30 @@
 
 - (void)clickAddImageView:(UIImageView * )addImageView
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickAddPhotosBtn:)]) {
-        [self.delegate XCCheckoutDetailPhotoCellClickAddPhotosBtn:addImageView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickAddPhotosImageView:cell:)]) {
+        [self.delegate XCCheckoutDetailPhotoCellClickAddPhotosImageView:addImageView cell:self];
     }
 }
 
 - (void)clickImageView:(UIImageView *)imageView
 {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoImageView:index:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoImageView:index:cell:)]) {
        NSInteger index =   [_scrollview.subviews indexOfObject:imageView];
         if (index ) {
-            [self.delegate XCCheckoutDetailPhotoCellClickphotoImageView:imageView.image index:index];
+            [self.delegate XCCheckoutDetailPhotoCellClickphotoImageView:imageView.image index:index cell:self];
         }
     }
-    
+}
+
+- (void)setupCellWithShopModel:(XCShopModel *)model
+{
+    if ([self.title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(model.licenseUrl, @"")) {
+        NSURL *licenseURL = [NSURL URLWithString:model.licenseUrl];
+        if (licenseURL) {
+            self.photoArr = @[licenseURL];
+        }
+    }
 }
 
 #pragma mark - Delegates & Notifications
@@ -135,8 +150,9 @@
         CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
         
         for (int i = 0 ; i < photoArr.count; i++) {
-            UIImage *image = photoArr[i];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            NSURL *imageURL = photoArr[i];
+            UIImageView *imageView = [[UIImageView alloc]init];
+            [imageView sd_setImageWithURL:imageURL];
             [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
@@ -144,6 +160,30 @@
         }
         [_addPhotoImageView setFrame:CGRectMake(photoArr.count * imageViewW, 0, imageViewW, imageViewW)];
         [_scrollview addSubview:_addPhotoImageView];
+        [self layoutSubviews];
+    }
+}
+
+-(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr
+{
+    if (photoArr.count > 0) {
+        [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
+        
+        for (int i = 0 ; i < photoArr.count; i++) {
+            UIImage *image = photoArr[i];
+            UIImageView *imageView = [[UIImageView alloc]init];
+            imageView.image = image;
+            [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
+            [imageView addGestureRecognizer:tap];
+            [_scrollview addSubview:imageView];
+        }
+        [_addPhotoImageView setFrame:CGRectMake(photoArr.count * imageViewW, 0, imageViewW, imageViewW)];
+        if (_scrollview.subviews.count < _maxPhoto) {
+            [_scrollview addSubview:_addPhotoImageView];
+        }
+        [self layoutSubviews];
     }
 }
 

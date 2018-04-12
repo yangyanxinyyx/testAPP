@@ -63,7 +63,25 @@
 #pragma mark - Init Method
 
 #pragma mark - Action Method
-
+- (void)setupCellWithShopModel:(XCShopModel *)model
+{
+    //门店
+    if ([self.title isEqualToString:@"门店名称:"] && isUsableNSString(model.name,@"")) {
+        [_textField setText:model.name];
+    }else if ([self.title isEqualToString:@"联系方式:"] && isUsableNSString(model.tel, @"")) {
+        [_textField setText:model.tel];
+    }else if ([self.title isEqualToString:@"负责人:"] && isUsableNSString(model.corporateName, @"")) {
+        [_textField setText:model.corporateName];
+    }else if ([self.title isEqualToString:@"负责人电话:"] && isUsableNSString(model.corporateCellphone, @"")) {
+        [_textField setText:model.corporateCellphone];
+    }else if ([self.title isEqualToString:@"业务员提成:"]&&isUsableNSString(model.salesmanCommission, @"")) {
+        [_textField setText:model.salesmanCommission];
+    }else if ([self.title isEqualToString:@"团队经理提成:"]) {
+        [_textField setText:model.salesmanCommission];
+    }else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
+        [_textField setText:model.storeStatus];
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     

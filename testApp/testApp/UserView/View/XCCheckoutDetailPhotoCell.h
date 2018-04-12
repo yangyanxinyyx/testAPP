@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XCShopModel;
+@class XCCheckoutDetailPhotoCell;
 @protocol XCCheckoutDetailPhotoCellDelegate <NSObject>
-
-- (void)XCCheckoutDetailPhotoCellClickAddPhotosBtn:(UIImageView *)imageView;
-
-- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index;
-
+- (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell;
+- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell;
 @end
 
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
@@ -24,4 +23,7 @@
 /** <# 类型描述  #> */
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
 + (CGFloat)getCellHeight;
+- (void)setupCellWithShopModel:(XCShopModel *)model;
+-(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr;
+
 @end

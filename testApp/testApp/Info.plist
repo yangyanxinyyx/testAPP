@@ -31,6 +31,8 @@
 	<string>LaunchScreen</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>使用应用期间允许访问位置信息</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>允许打开相册权限</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

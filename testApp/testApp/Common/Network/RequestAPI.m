@@ -47,11 +47,12 @@
 // =================== modify by Liangyz 个人中心
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
-
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
 //门店服务
 #define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreService",API_PREFIX]
+//修改门店详情
+#define SHOPUPDATESTORE_API [NSString stringWithFormat:@"%@/api/web/store/updateStore",API_PREFIX]
 // ===================
 
 
@@ -302,6 +303,15 @@
 +(void)getShopsInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SHOPSDETAIL_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)postUpdateStore:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:SHOPUPDATESTORE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
