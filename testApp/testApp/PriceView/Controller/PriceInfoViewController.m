@@ -514,8 +514,13 @@
         if (!infoSaveCell) {
             infoSaveCell = [[PriceInfoSaveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoSave];
         }
-        [infoSaveCell setCellState:NO];
         infoSaveCell.delegate = self;
+        if ([self.route isEqualToString:@"1"]) {
+            [infoSaveCell setCellState:YES];
+        } else {
+            [infoSaveCell setCellState:NO];
+        }
+        
         return infoSaveCell;
     }
     

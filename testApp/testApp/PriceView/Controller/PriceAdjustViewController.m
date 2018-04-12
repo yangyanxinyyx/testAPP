@@ -376,6 +376,7 @@
                 PriceInspectViewController *insVC = [[PriceInspectViewController alloc] init];
                 PriceInfoModel *blModel = [self.dataArray objectAtIndex:7];
                 insVC.blType = blModel.model.value;
+                insVC.route = @"0";
                 [self.navigationController pushViewController:insVC animated:YES];
             }];
             [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
@@ -498,6 +499,7 @@
             selectView.delegate = self;
             [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         } else {
+   
             NSMutableArray *array = [NSMutableArray array];
             for (priceModel *model in self.arrayhh) {
                 [array addObject:model.content];
@@ -514,11 +516,24 @@
             selectView.delegate = self;
             [[UIApplication sharedApplication].keyWindow addSubview:selectView];
             return;
+        } else if (count == 10){
+            PriceInfoModel *model = [self.dataArray objectAtIndex:1];
+            if ([model.isToubao isEqualToString:@"不投保"]) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"请先投保车损险" complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:@[@"不投保",@"投保"]];
+                selectView.tag = count;
+                selectView.delegate = self;
+                [[UIApplication sharedApplication].keyWindow addSubview:selectView];
+            }
+        } else {
+            SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:@[@"不投保",@"投保"]];
+            selectView.tag = count;
+            selectView.delegate = self;
+            [[UIApplication sharedApplication].keyWindow addSubview:selectView];
+            
         }
-        SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:@[@"不投保",@"投保"]];
-        selectView.tag = count;
-        selectView.delegate = self;
-        [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         
     }
     

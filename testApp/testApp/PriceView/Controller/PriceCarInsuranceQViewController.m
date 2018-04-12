@@ -240,6 +240,7 @@
 //报价
 - (void)touchButtonPrice:(UIButton *)button{
     PriceInspectViewController *priceInsVC = [[PriceInspectViewController alloc] init];
+    priceInsVC.route = @"1";
     [self.navigationController pushViewController:priceInsVC animated:YES];
 }
 
