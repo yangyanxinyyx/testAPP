@@ -1387,10 +1387,10 @@
 		FCF87673206BFF4C00CF6FDE /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				FC47955320556EAB00218362 /* GetCarViewController.h */,
-				FC47955420556EAB00218362 /* GetCarViewController.m */,
 				FCF86B9B2069580100CF6FDE /* GetCarListViewController.h */,
 				FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */,
+				FC47955320556EAB00218362 /* GetCarViewController.h */,
+				FC47955420556EAB00218362 /* GetCarViewController.m */,
 				FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */,
 				FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */,
 			);
