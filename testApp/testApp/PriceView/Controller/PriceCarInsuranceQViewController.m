@@ -14,7 +14,7 @@
 #import "PriceAdjustViewController.h"
 #import "PriceInspectViewController.h"
 #import "PriceInfoViewController.h"
-
+#import "CarLastYearRecodemodel.h"
 @interface PriceCarInsuranceQViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -28,6 +28,10 @@
 @property (nonatomic, strong) UIView *viewSegment;
 @property (nonatomic, strong) UIView *contenView;
 @property (nonatomic, strong) NSMutableDictionary *networkDic;
+@property (nonatomic, assign) NSInteger requestCount; //请求次数
+@property (nonatomic, strong) NSMutableArray *arrayLasetData;
+@property (nonatomic, strong) NSMutableArray *arrayPriceRecodeData;
+@property (nonatomic, assign) BOOL isFirstRequestPriceRecode;
 @end
 
 @implementation PriceCarInsuranceQViewController
@@ -35,14 +39,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _requestCount = 0;
+    _isFirstRequestPriceRecode = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate = self;
     topBar.title = @"车险报价";
     [self.view addSubview:topBar];
     [self createUI];
-    [self requestLastYearPrcie];
-    [self requestPriceRecode];
+//    [self requestLastYearPrcie];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -54,16 +59,158 @@
 #pragma mark- network
 
 - (void)requestLastYearPrcie{
-    
     [self.networkDic setObject:self.carID forKey:@"carId"];
-    [self.networkDic setObject:self.customerId forKey:@"CustKey"];
+    [self.networkDic setObject:[UserInfoManager shareInstance].code forKey:@"CustKey"];
     [self.networkDic setObject:@"1" forKey:@"appType"];
     [RequestAPI getLastYearPriceRecord:self.networkDic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *data = response[@"data"];
+            CarLastYearRecodemodel *chesunModel = [[CarLastYearRecodemodel alloc] init];
+            chesunModel.name = @"机动车损险";
+            NSNumber *bujimianChesun = [data objectForKey:@"bujimianChesun"];
+            if (![bujimianChesun isKindOfClass:[NSNull class]]) {
+                chesunModel.bujimianpei = [bujimianChesun intValue];
+            }
+            NSNumber *chesuntoubao = [data objectForKey:@"chesun"];
+            if (![chesuntoubao isKindOfClass:[NSNull class]]) {
+                chesunModel.toubao = [chesuntoubao doubleValue];
+            }
+            [self.arrayLasetData addObject:chesunModel];
+            
+            CarLastYearRecodemodel *daoqiangModel = [[CarLastYearRecodemodel alloc] init];
+            daoqiangModel.name = @"全车盗抢险";
+            NSNumber *bujimianDaoqiang = [data objectForKey:@"bujimianDaoqiang"];
+            if (![bujimianDaoqiang isKindOfClass:[NSNull class]]) {
+                daoqiangModel.bujimianpei = [bujimianDaoqiang intValue];
+            }
+            NSNumber *daoqiang = [data objectForKey:@"daoqiang"];
+            if (![daoqiang isKindOfClass:[NSNull class]]) {
+                daoqiangModel.toubao = [daoqiang doubleValue];
+            }
+            [self.arrayLasetData addObject:daoqiangModel];
+            
+            CarLastYearRecodemodel *sanzheModel = [[CarLastYearRecodemodel alloc] init];
+            sanzheModel.name = @"第三责任险";
+            NSNumber *bujimianSanzhe = [data objectForKey:@"bujimianSanzhe"];
+            if (![bujimianSanzhe isKindOfClass:[NSNull class]]) {
+                sanzheModel.bujimianpei = [bujimianSanzhe intValue];
+            }
+            NSNumber *sanzhe = [data objectForKey:@"sanzhe"];
+            if (![sanzhe isKindOfClass:[NSNull class]]) {
+                sanzheModel.toubao = [sanzhe doubleValue];
+            }
+            [self.arrayLasetData addObject:sanzheModel];
+            
+            CarLastYearRecodemodel *sijiModel = [[CarLastYearRecodemodel alloc] init];
+            sijiModel.name = @"司机责任险";
+            NSNumber *bujimianSiji = [data objectForKey:@"bujimianSiji"];
+            if (![bujimianSiji isKindOfClass:[NSNull class]]) {
+                sijiModel.bujimianpei = [bujimianSiji intValue];
+            }
+            NSNumber *sijibao = [data objectForKey:@"siji"];
+            if (![sijibao isKindOfClass:[NSNull class]]) {
+                sijiModel.toubao = [sijibao doubleValue];
+            }
+            [self.arrayLasetData addObject:sijiModel];
+            
+            CarLastYearRecodemodel *chengkeModel = [[CarLastYearRecodemodel alloc] init];
+            chengkeModel.name = @"乘客责任险";
+            NSNumber *bujimianChengke = [data objectForKey:@"bujimianChengke"];
+            if (![bujimianChengke isKindOfClass:[NSNull class]]) {
+                chengkeModel.bujimianpei = [bujimianChengke intValue];
+            }
+            NSNumber *chengke = [data objectForKey:@"chengke"];
+            if (![chengke isKindOfClass:[NSNull class]]) {
+                chengkeModel.toubao = [chengke doubleValue];
+            }
+            [self.arrayLasetData addObject:chengkeModel];
+            
+            CarLastYearRecodemodel *huahenModel = [[CarLastYearRecodemodel alloc] init];
+            huahenModel.name = @"划痕损失险";
+            NSNumber *bujimianHuahen = [data objectForKey:@"bujimianHuahen"];
+            if (![bujimianHuahen isKindOfClass:[NSNull class]]) {
+                huahenModel.bujimianpei = [bujimianHuahen intValue];
+            }
+            NSNumber *huahen = [data objectForKey:@"huahen"];
+            if (![huahen isKindOfClass:[NSNull class]]) {
+                huahenModel.toubao = [huahen doubleValue];
+            }
+            [self.arrayLasetData addObject:huahenModel];
+            
+            CarLastYearRecodemodel *sheshuiModel = [[CarLastYearRecodemodel alloc] init];
+            sheshuiModel.name = @"涉水损失险 ";
+            NSNumber *bujimianSheshui = [data objectForKey:@"bujimianSheshui"];
+            if (![bujimianSheshui isKindOfClass:[NSNull class]]) {
+                sheshuiModel.bujimianpei = [bujimianSheshui intValue];
+            }
+            NSNumber *sheshui = [data objectForKey:@"sheshui"];
+            if (![sheshui isKindOfClass:[NSNull class]]) {
+                sheshuiModel.toubao = [sheshui doubleValue];
+            }
+            [self.arrayLasetData addObject:sheshuiModel];
+            
+            CarLastYearRecodemodel *ziranModel = [[CarLastYearRecodemodel alloc] init];
+            ziranModel.name = @"自燃损失险";
+            NSNumber *bujimianZiran = [data objectForKey:@"bujimianZiran"];
+            if (![bujimianZiran isKindOfClass:[NSNull class]]) {
+                ziranModel.bujimianpei = [bujimianZiran intValue];
+            }
+            NSNumber *ziran = [data objectForKey:@"ziran"];
+            if (![ziran isKindOfClass:[NSNull class]]) {
+                ziranModel.toubao = [ziran doubleValue];
+            }
+            [self.arrayLasetData addObject:ziranModel];
+            
+            CarLastYearRecodemodel *boliModel = [[CarLastYearRecodemodel alloc] init];
+            boliModel.name = @"玻璃破碎险";
+            boliModel.bujimianpei = 0;
+            NSNumber *boli = [data objectForKey:@"boli"];
+            if (![boli isKindOfClass:[NSNull class]]) {
+                boliModel.toubao = [boli doubleValue];
+            }
+            [self.arrayLasetData addObject:boliModel];
+            
+            CarLastYearRecodemodel *hcsanfangModel = [[CarLastYearRecodemodel alloc] init];
+            hcsanfangModel.name = @"无法找到三方";
+            hcsanfangModel.bujimianpei = 0;
+            NSNumber *hcsanfang = [data objectForKey:@"hcsanfang"];
+            if (![hcsanfang isKindOfClass:[NSNull class]]) {
+                hcsanfangModel.toubao = [hcsanfang doubleValue];
+            }
+            [self.arrayLasetData addObject:hcsanfangModel];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableViewlast reloadData];
+            });
+            
+            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (_requestCount == 3) {
+                    _requestCount = 0;
+                    FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
+                        
+                    }];
+                    [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
+                    return ;
+                }
+                _requestCount ++;
+                [self requestLastYearPrcie];
+            });
+            
         }
     } fail:^(id error) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (_requestCount == 3) {
+                _requestCount = 0;
+                FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
+                    
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
+                return ;
+            }
+            _requestCount ++;
+            [self requestLastYearPrcie];
+        });
     }];
 }
 
@@ -73,9 +220,9 @@
     [dic setObject:self.customerId forKey:@"customerId"];
     [dic setObject:self.carID forKey:@"carId"];
     [RequestAPI getPriceRecord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-      
-        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-       
+        
+        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+            NSLog(@"%@",response[@"data"]);
         
         }
     } fail:^(id error) {
@@ -84,11 +231,13 @@
 }
 
 #pragma mark - function
+//调整报价
 - (void)touchButtonRevisePrice:(UIButton *)button{
     PriceAdjustViewController *priceAdjuestVC = [[PriceAdjustViewController alloc]init];
     [self.navigationController pushViewController:priceAdjuestVC animated:YES];
 }
 
+//报价
 - (void)touchButtonPrice:(UIButton *)button{
     PriceInspectViewController *priceInsVC = [[PriceInspectViewController alloc] init];
     [self.navigationController pushViewController:priceInsVC animated:YES];
@@ -99,14 +248,20 @@
     if (isLaseY) {
         self.viewBear.frame = CGRectMake(0, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     } else {
+        
         self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
+        if (!_isFirstRequestPriceRecode) {
+            _isFirstRequestPriceRecode = YES;
+            [self requestPriceRecode];
+        }
+        
     }
 }
 
 #pragma mark - tableview delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == self.tableViewlast) {
-        return 4;
+        return self.arrayLasetData.count;
     } else {
         return 1;
     }
@@ -134,24 +289,40 @@
         
         return cell;
     } else {
-        if (indexPath.row == 0) {
-            static NSString *identifierLabel = @"identifierLabel";
-            priceCRQLastYLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierLabel];
-            if (!cell) {
-                cell = [[priceCRQLastYLabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierLabel];
-            }
-            cell.labelName.text = @"交强险";
-            cell.labelInfo.text = @"投保";
-            return cell;
-        } else {
-            static NSString *identifier = @"identifierInfo";
-            PriceCRQLastYInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (!cell) {
-                cell = [[PriceCRQLastYInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];            }
-            cell.labelName.text = @"第三责任险";
-            cell.labelNum.text = @"40万";
-            return cell;
+        static NSString *identifier = @"identifierInfo";
+        PriceCRQLastYInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[PriceCRQLastYInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            
         }
+        CarLastYearRecodemodel *lastModel = [self.arrayLasetData objectAtIndex:indexPath.row];
+        
+        cell.labelName.text = lastModel.name;
+        if ([lastModel.name isEqualToString:@"玻璃破碎险"]) {
+            if (lastModel.toubao == 0) {
+                cell.labelNum.text = @"不投保";
+            } else if (lastModel.toubao == 1){
+                cell.labelNum.text = @"国产";
+            } else {
+                cell.labelNum.text = @"进口";
+            }
+        } else{
+            if (lastModel.toubao == 0) {
+                cell.labelNum.text = @"不投保";
+            } else if (lastModel.toubao == 1){
+                cell.labelNum.text = @"不投保";
+            } else {
+                cell.labelNum.text = [NSString stringWithFormat:@"%.0f万",lastModel.toubao];
+            }
+        }
+        if (lastModel.bujimianpei == 0) {
+            [cell setCellMianPei:NO];
+        } else {
+            [cell setCellMianPei:YES];
+        }
+        
+        return cell;
+        
 
         
     }
@@ -172,11 +343,7 @@
     if (tableView == self.myTableView) {
         return 120 * ViewRateBaseOnIP6;
     } else {
-        if (indexPath.row == 0) {
-            return 75 * ViewRateBaseOnIP6;
-        } else {
-            return 60 * ViewRateBaseOnIP6;
-        }
+        return 60 * ViewRateBaseOnIP6;
     }
     
 }
@@ -193,6 +360,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.myTableView) {
         PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
+        priceInfoVC.quoteGroup = @"6";
+        priceInfoVC.blType = @"0";
         [self.navigationController pushViewController:priceInfoVC animated:YES];
     }
 }
@@ -327,5 +496,19 @@
         _networkDic = [NSMutableDictionary dictionary];
     }
     return _networkDic;
+}
+
+- (NSMutableArray *)arrayLasetData{
+    if (!_arrayLasetData) {
+        _arrayLasetData = [NSMutableArray array];
+    }
+    return _arrayLasetData;
+}
+
+-(NSMutableArray *)arrayPriceRecodeData{
+    if (!_arrayPriceRecodeData) {
+        _arrayPriceRecodeData = [NSMutableArray array];
+    }
+    return _arrayPriceRecodeData;
 }
 @end

@@ -12,4 +12,5 @@
 @end
 @interface priceCIQChangeView : UIView
 @property (nonatomic, weak) id <priceCIQChangeViewDelegate>delegate;
+- (void)setleftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle;
 @end

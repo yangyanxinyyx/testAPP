@@ -7,9 +7,7 @@
 //
 
 #import "BaseViewController1.h"
-
-
-
 @interface PriceInfoViewController : BaseViewController1
-
+@property (nonatomic, strong) NSString *quoteGroup;
+@property (nonatomic, strong) NSString *blType;
 @end

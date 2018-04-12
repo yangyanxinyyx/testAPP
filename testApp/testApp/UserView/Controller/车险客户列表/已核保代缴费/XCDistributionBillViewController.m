@@ -138,7 +138,6 @@ XCDistributionFooterViewDelegate>
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
-    
     return headerView;
 }
 

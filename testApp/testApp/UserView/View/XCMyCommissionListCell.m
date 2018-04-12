@@ -58,6 +58,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
         [self configSubVies];
     }
@@ -135,11 +136,11 @@
 - (void)configSubVies
 {
     UIColor *fontColor = COLOR_RGB_255(68, 68, 68);
-    UIColor *orangeColor = COLOR_RGB_255(254, 173, 53);
+    UIColor *orangeColor = COLOR_RGB_255(0, 77, 162);
     
     _timeView = [[UIView alloc] init];
     [_timeView setBackgroundColor:COLOR_RGB_255(255, 255, 255)];
-    _createTimeLable = [self createTextLabelWithTitleColor:COLOR_RGB_255(131, 131, 131) FontSize:24 title:@"2018年02月"];
+    _createTimeLable = [self createTextLabelWithTitleColor:COLOR_RGB_255(165, 165, 165) FontSize:24 title:@"2018年02月"];
     
     _carListView = [[UIView alloc] init];
     [_carListView setBackgroundColor:COLOR_RGB_255(255, 255, 255)];
@@ -249,7 +250,6 @@
 {
     UILabel * label = [[UILabel alloc] init];
     [label setText:title];
-//    [label setFont:[UIFont systemFontOfSize:size * ViewRateBaseOnIP6]];
     UIFont *font = [UIFont fontWithName:@"PingFang-SC-Medium" size:size * ViewRateBaseOnIP6];
     [label setFont:font];
     [label setTextColor:textColor];

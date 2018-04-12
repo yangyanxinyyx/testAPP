@@ -28,6 +28,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
         [_caseNameLabel setText:@"刘某案件..."];
         [_caseProcessLabel setText:@"处理中"];

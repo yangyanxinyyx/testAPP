@@ -17,7 +17,10 @@
 @end
 
 @implementation XCCheckoutDetailTextFiledCell
-
++(CGFloat)getCellHeight
+{
+    return 88 *ViewRateBaseOnIP6;
+}
 #pragma mark - lifeCycle
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -25,6 +28,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _shouldShowSeparator = NO;
+        _isCenterSeparator = NO;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
     }
     return self;
@@ -45,20 +50,38 @@
     
     [_textField sizeToFit];
     labelSize = _textField.frame.size;
-    if (_shouldShowSeparator) {
-        [_textField setBackgroundColor:COLOR_RGB_255(255, 255, 255)];
-    }else {
-        [_textField setBackgroundColor:COLOR_RGB_255(240, 240, 240)];
-    }
+    
     [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
     if (_shouldShowSeparator) {
-        [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        if (_isCenterSeparator) {
+             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
+        }else {
+            [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
+        }
     }
 }
 #pragma mark - Init Method
 
 #pragma mark - Action Method
-
+- (void)setupCellWithShopModel:(XCShopModel *)model
+{
+    //门店
+    if ([self.title isEqualToString:@"门店名称:"] && isUsableNSString(model.name,@"")) {
+        [_textField setText:model.name];
+    }else if ([self.title isEqualToString:@"联系方式:"] && isUsableNSString(model.tel, @"")) {
+        [_textField setText:model.tel];
+    }else if ([self.title isEqualToString:@"负责人:"] && isUsableNSString(model.corporateName, @"")) {
+        [_textField setText:model.corporateName];
+    }else if ([self.title isEqualToString:@"负责人电话:"] && isUsableNSString(model.corporateCellphone, @"")) {
+        [_textField setText:model.corporateCellphone];
+    }else if ([self.title isEqualToString:@"业务员提成:"]&&isUsableNSString(model.salesmanCommission, @"")) {
+        [_textField setText:model.salesmanCommission];
+    }else if ([self.title isEqualToString:@"团队经理提成:"]) {
+        [_textField setText:model.salesmanCommission];
+    }else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
+        [_textField setText:model.storeStatus];
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -118,6 +141,13 @@
     NSString *newString = [NSString stringWithFormat:@"   %@",_titlePlaceholder];
     [_textField setPlaceholder:newString];
     [_textField sizeToFit];
+}
+
+- (void)setTextFiledBGColor:(UIColor *)textFiledBGColor
+{
+    if (_textField) {
+        [_textField setBackgroundColor:textFiledBGColor];
+    }
 }
 
 @end

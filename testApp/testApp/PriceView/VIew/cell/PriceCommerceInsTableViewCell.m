@@ -40,7 +40,7 @@
     self.labelInsure.textAlignment = NSTextAlignmentCenter;
     
     
-    self.labelAnnotate.frame = CGRectMake(449 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6, 47 * ViewRateBaseOnIP6, 23 * ViewRateBaseOnIP6);
+    self.labelAnnotate.frame = CGRectMake(449 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 23 * ViewRateBaseOnIP6);
     self.labelAnnotate.backgroundColor = [UIColor clearColor];
     self.labelAnnotate.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
     self.labelAnnotate.textAlignment = NSTextAlignmentLeft;
@@ -55,6 +55,9 @@
     
 }
 
+- (void)hiddenFranchise:(BOOL)isHidden{
+    self.labelInsure.hidden = isHidden;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

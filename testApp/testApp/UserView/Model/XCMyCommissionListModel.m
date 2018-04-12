@@ -24,12 +24,24 @@
     NSString *createTime = data[@"creat_time"];
     XCMyCommissionListModel *model = [[XCMyCommissionListModel alloc] init];
     
-    model.serviceCommission = serviceCommission;
-    model.carCommission = carCommission;
-    model.carRoyalties = carRoyalties;
-    model.medalBonus = medalBonus;
-    model.carPerformance = carPerformance;
-    model.servicePerformance = servicePerformance;
+    if (isUsable(serviceCommission, [NSNumber class])) {
+        model.serviceCommission = serviceCommission;
+    }
+    if (isUsable(carCommission, [NSNumber class])) {
+        model.carCommission = carCommission;
+    }
+    if (isUsable(carRoyalties, [NSNumber class])) {
+        model.carRoyalties = carRoyalties;
+    }
+    if (isUsable(medalBonus, [NSNumber class])) {
+        model.medalBonus = medalBonus;
+    }
+    if (isUsable(carPerformance, [NSNumber class])) {
+        model.carPerformance = carPerformance;
+    }
+    if (isUsable(servicePerformance, [NSNumber class])) {
+        model.servicePerformance = servicePerformance;
+    }
     model.createTime = createTime?createTime:@"";
     return model;
 }

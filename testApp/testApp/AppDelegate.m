@@ -12,7 +12,7 @@
 #import "GetCarViewController.h"
 #import "UserViewController.h"
 #import "BaseTabbarController.h"
-
+#import <AMapFoundationKit/AMapFoundationKit.h>
 @interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
@@ -25,7 +25,8 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
+    
+    [AMapServices sharedServices].apiKey = @"91e9c42063d5aa4636e6a31c7a196183";
 
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;

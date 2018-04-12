@@ -7,16 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XCShopModel;
+@class XCCheckoutDetailPhotoCell;
 @protocol XCCheckoutDetailPhotoCellDelegate <NSObject>
-
-- (void)XCCheckoutDetailPhotoCellClickAddPhotosBtn:(UIButton *)button;
-
-- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index;
-
+- (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell;
+- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell;
 @end
 
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
 @property (nonatomic, strong) NSString * title ;
-/** <# 注释 #> */
 @property (nonatomic, strong) NSArray * photoArr ;
+
+@property (nonatomic, assign) NSInteger  maxPhoto ;
+
+/** <# 类型描述  #> */
+@property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
++ (CGFloat)getCellHeight;
+- (void)setupCellWithShopModel:(XCShopModel *)model;
+-(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr;
+
 @end

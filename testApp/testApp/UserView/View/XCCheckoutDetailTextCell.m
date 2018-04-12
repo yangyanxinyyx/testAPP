@@ -24,6 +24,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         _shouldShowSeparator = NO;
         [self configSubVies];
     }

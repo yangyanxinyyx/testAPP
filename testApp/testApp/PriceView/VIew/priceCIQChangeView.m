@@ -28,6 +28,11 @@
     return self;
 }
 
+- (void)setleftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle{
+    [_buttonLastY setTitle:leftTitle forState:UIControlStateNormal];
+    [_buttonPriceRecord setTitle:rightTitle forState:UIControlStateNormal];
+}
+
 - (UIButton *)buttonLastY{
     if (!_buttonLastY) {
         _buttonLastY = [UIButton buttonWithType:UIButtonTypeCustom];
