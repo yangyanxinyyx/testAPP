@@ -31,7 +31,15 @@
     topBar.title = @"报价详情";
     [self.view addSubview:topBar];
     [self createUI];
-    [self requestPrecisePrice];
+    if (self.arrayRecodeData.count > 0) {
+        [self.dataArray addObjectsFromArray:self.arrayRecodeData];
+        [self.arrayRecodeData removeAllObjects];
+        [self.myTableView reloadData];
+        self.route = @"1";
+    } else {
+      [self requestPrecisePrice];
+    }
+    
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -310,6 +318,10 @@
             
             
             [self.myTableView reloadData];
+        } else {
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            
         }
     } fail:^(id error) {
         NSLog(@"%@",error);
@@ -320,7 +332,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.quoteGroup forKey:@"poSource"];
     [dic setObject:[UserInfoManager shareInstance].customerId forKey:@"customerId"];
-    [dic setObject:[UserInfoManager shareInstance].customerName forKey:@"customerName"];
+    [dic setObject: [NSString stringWithCString:[[UserInfoManager shareInstance].customerName UTF8String] encoding:NSUTF8StringEncoding] forKey:@"customerName"];
     [dic setObject:[UserInfoManager shareInstance].carID forKey:@"carId"];
     [dic setObject:@"test1" forKey:@"offerName"];
     [dic setObject:[NSString stringWithFormat:@"%f",_syBaoFei] forKey:@"offerTciPrice"];
@@ -390,11 +402,22 @@
 
 
     [RequestAPI getSavePrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        if (response[@"data"]) {
-            NSLog(@"==>%@",response[@"data"]);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (response[@"result"]) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"保存成功" complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"保存失败:%@",response[@"errormsg"]] complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
+        });
+        
     } fail:^(id error) {
-        NSLog(@"==>%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"保存失败:%@",error] complete:nil];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+        });
+        
     }];
 }
 #pragma mark - UITableView delegate

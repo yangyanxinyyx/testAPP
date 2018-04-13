@@ -11,4 +11,5 @@
 @property (nonatomic, strong) NSString *quoteGroup;
 @property (nonatomic, strong) NSString *blType;
 @property (nonatomic, strong) NSString *route;
+@property (nonatomic, strong) NSMutableArray *arrayRecodeData;
 @end
