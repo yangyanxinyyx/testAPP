@@ -7,15 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
+		250784C42081A28600B573F3 /* InputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 250784C32081A28600B573F3 /* InputTextView.m */; };
 		25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701658207D07ED007177F5 /* PriceInfoModel.m */; };
 		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
-		25B7326E207A6E8F00069075 /* XCShopInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */; };
 		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
-		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
-
-		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */; };
 		A71EABA6207F68E900347693 /* red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA3207F68E800347693 /* red@3x.png */; };
 		A71EABA7207F68E900347693 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA4207F68E800347693 /* red.png */; };
@@ -36,7 +32,6 @@
 		A724C867207D0EE900083C86 /* 未完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C866207D0EE900083C86 /* 未完成@3x.png */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
-
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -242,19 +237,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		250784C22081A28600B573F3 /* InputTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputTextView.h; sourceTree = "<group>"; };
+		250784C32081A28600B573F3 /* InputTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputTextView.m; sourceTree = "<group>"; };
 		25701657207D07ED007177F5 /* PriceInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoModel.h; sourceTree = "<group>"; };
 		25701658207D07ED007177F5 /* PriceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoModel.m; sourceTree = "<group>"; };
 		2570165C207DE560007177F5 /* SelectStateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectStateView.h; sourceTree = "<group>"; };
 		2570165D207DE560007177F5 /* SelectStateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectStateView.m; sourceTree = "<group>"; };
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
-
-		25B7326C207A6E8F00069075 /* XCShopInputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopInputTableViewCell.h; sourceTree = "<group>"; };
-		25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopInputTableViewCell.m; sourceTree = "<group>"; };
 		25EA236E207E5ADF00A60866 /* priceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceModel.h; sourceTree = "<group>"; };
 		25EA236F207E5ADF00A60866 /* priceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceModel.m; sourceTree = "<group>"; };
-
-
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopAMapViewController.h; sourceTree = "<group>"; };
 		A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopAMapViewController.m; sourceTree = "<group>"; };
@@ -649,16 +641,6 @@
 			path = "上年续保记录";
 			sourceTree = "<group>";
 		};
-
-		25B7326B207A6E5200069075 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-				25B7326C207A6E8F00069075 /* XCShopInputTableViewCell.h */,
-				25B7326D207A6E8F00069075 /* XCShopInputTableViewCell.m */,
-			);
-			path = cell;
-			sourceTree = "<group>";
-		};
 		25EA236D207E5AC000A60866 /* 调整报价 */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,8 +663,6 @@
 			path = "报价详情";
 			sourceTree = "<group>";
 		};
-
-
 		2880742A08D2B79E4DC7AEE3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1321,6 +1301,8 @@
 				FC32BF9F2079AA5800817156 /* SelectTimeView.m */,
 				2570165C207DE560007177F5 /* SelectStateView.h */,
 				2570165D207DE560007177F5 /* SelectStateView.m */,
+				250784C22081A28600B573F3 /* InputTextView.h */,
+				250784C32081A28600B573F3 /* InputTextView.m */,
 			);
 			path = VIew;
 			sourceTree = "<group>";
@@ -1932,6 +1914,7 @@
 				FC32BFB62079AA5900817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
 				FC32BF382079AA2000817156 /* XCShopViewController.m in Sources */,
 				2570165E207DE560007177F5 /* SelectStateView.m in Sources */,
+				250784C42081A28600B573F3 /* InputTextView.m in Sources */,
 				FC32BFA52079AA5900817156 /* PriceUnderwritingViewController.m in Sources */,
 				FC32BFBE2079AA5900817156 /* PriceInfoCellView.m in Sources */,
 				FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */,
@@ -2102,8 +2085,9 @@
 			baseConfigurationReference = 3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2120,6 +2104,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = outPutTeam.testApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2129,8 +2114,9 @@
 			baseConfigurationReference = DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2147,6 +2133,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = outPutTeam.testApp1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
