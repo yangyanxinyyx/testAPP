@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "XCShopModel.h"
+//#import "XCCheckoutDetailBaseModel.h"
 @protocol XCCheckoutDetailTextFiledCellDelegate <NSObject>
-- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString;
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString title:(NSString *)title;
 @end
 
 @interface XCCheckoutDetailTextFiledCell : UITableViewCell
@@ -31,6 +32,8 @@
 /** <# 注释 #> */
 @property (nonatomic, assign) BOOL isTwoInputType ;
 +(CGFloat)getCellHeight;
+
+//- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
 
 - (void)setupCellWithShopModel:(XCShopModel *)model;
 @end

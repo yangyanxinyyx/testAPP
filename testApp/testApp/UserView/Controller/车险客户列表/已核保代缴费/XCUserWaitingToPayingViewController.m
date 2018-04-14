@@ -8,6 +8,8 @@
 
 #import "XCUserWaitingToPayingViewController.h"
 #import "XCUserWaitingToPayingDetailViewController.h"
+#import "XCCheckoutDetailBaseModel.h"
+
 @interface XCUserWaitingToPayingViewController ()<XCCheckoutTableViewCellDelegate>
 
 @end
@@ -17,23 +19,8 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Action Method
-
-- (void)clickCheckDetailButton
-{
-    XCUserWaitingToPayingDetailViewController *detailVC = [[XCUserWaitingToPayingDetailViewController alloc] initWithTitle:@"已核保代缴费详情"];
-
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
 
 #pragma mark - privary Method
 
@@ -65,6 +52,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return self.dataArr.count;
     return 3;
 }
 
@@ -74,6 +62,8 @@
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.delegate = self;
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+//    cell.baseModel = baseModel;
     cell.carNumber = @"粤AAAAAA";
     cell.userName = @"梁艺钟";
     cell.issureTime = @"a123213-321-321-3";
@@ -107,7 +97,14 @@
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickCheckDetailButton];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+    XCUserWaitingToPayingDetailViewController *detailVC = [[XCUserWaitingToPayingDetailViewController alloc] initWithTitle:@"已核保代缴费详情"];
+//    detailVC.model = baseModel;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
 }
 
 

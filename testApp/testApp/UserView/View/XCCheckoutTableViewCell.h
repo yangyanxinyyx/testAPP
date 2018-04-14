@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class XCCheckoutDetailBaseModel;
 @class XCCheckoutTableViewCell;
 @protocol XCCheckoutTableViewCellDelegate <NSObject>
 
@@ -24,7 +25,8 @@
 @property (nonatomic, copy) NSString * issureTime;
 
 @property (nonatomic, weak) id <XCCheckoutTableViewCellDelegate> delegate;
-
+/** 车险客户列表Model */
+@property (nonatomic, strong) XCCheckoutDetailBaseModel * baseModel ;
 /** 我的客户Cell */
 @property (nonatomic, assign) BOOL  isCustomerCell;
 

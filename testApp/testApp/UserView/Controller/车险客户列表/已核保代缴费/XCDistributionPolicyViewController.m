@@ -11,38 +11,16 @@
 #import "XCDistributionFooterView.h"
 #import "XCDistributionInputCell.h"
 #import "LYZSelectView.h"
+#import "XCDistributionBillModel.h"
 
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom)
 @interface XCDistributionPolicyViewController ()<UITableViewDelegate,UITableViewDataSource,
-XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
+XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 @property (nonatomic, assign) BOOL isSelectDistribution ;
 @property (nonatomic, strong) NSArray * titleArr ;
-
-
-//@property (nonatomic, strong) UIButton * confirmBtn ;
-///** 商业险金额 */
-//@property (nonatomic, strong) UILabel * bussinessLabel ;
-///** 交强险金额 */
-//@property (nonatomic, strong) UILabel * commonLabel ;
-///** 保单金额 */
-//@property (nonatomic, strong) UITextField * ploicyBillTextField ;
-///** 刷卡日期 */
-//@property (nonatomic, strong) UILabel * dateOfPayByCardLabel ;
-///** 礼包（购买/赠送） */
-//@property (nonatomic, strong) UILabel * giftTypeLabel ;
-///** 购买金额 */
-//@property (nonatomic, strong) UITextField * purchaseValueLabel ;
-///** 是否配送打钩 */
-//@property (nonatomic, strong) UIImageView * tickDistributionImageView ;
-///** 客户名称 */
-//@property (nonatomic, strong) UITextField * customerNameTextFiled ;
-///** 联系电话 */
-//@property (nonatomic, strong) UITextField * customerPhoneTextFiled ;
-///** 配送地址 */
-//@property (nonatomic, strong) UITextField * customerAddressTextFiled ;
-///** 配送备注 */
-//@property (nonatomic, strong) UITextField * customerCommentTextFiled ;
+/** <# 注释 #> */
+@property (nonatomic, strong) XCDistributionBillModel * billModel ;
 
 @end
 
@@ -54,6 +32,8 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _isSelectDistribution = NO;
+    _billModel = [[XCDistributionBillModel alloc] init];
+    _billModel.isShipmentBaodan = @"N";
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -87,7 +67,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     //index 为4、5、6、10 为选择框;2、6、8、9、11、12、13为输入框 7 勾选框
     self.titleArr = @[@"商业险金额:",@"交强险金额:",@"保单金额:",
                       @"刷卡日期:",@"礼包(购买/赠送)",@"礼包选择",
-                      @"购买金额",@"是否配送"];
+                      @"购买金额:",@"是否配送"];
  
     [self.dataArrM addObject:self.titleArr];
     
@@ -118,17 +98,26 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof (self)weakSelf = self;
+
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 3)||(indexPath.section == 1 && indexPath.row == 2)) {
-            
-        }else {
+            //选择时间
+        }
+        else if(indexPath.section == 0 && indexPath.row == 4){
+            NSArray * arr = @[@"赠送",@"购买",@"无"];
+            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                weakSelf.billModel.packageGiveOrBuy = selectStr;
+            }];
+            [weakSelf.view addSubview:alterView];
+        }
+        else if (indexPath.section == 0 && indexPath.row == 5) {
             NSArray * arr = @[@"礼包一",@"礼包二",@"礼包三"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
-                NSLog(@"选中%@",selectStr);
-                
+//                weakSelf.billModel.packageId = selectStr;
             }];
-            [self.view addSubview:alterView];
+            [weakSelf.view addSubview:alterView];
         }
     }
 }
@@ -178,7 +167,6 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
             inputCell.userInteractionEnabled = YES;
             inputCell.delegate =self;
             inputCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
         return inputCell;
     }
     
@@ -186,7 +174,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     textFiledCell.title = titleName;
     textFiledCell.shouldShowSeparator = YES;
     textFiledCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    textFiledCell.delegate = self;
     if ([titleName isEqualToString:@"保单金额:"]||[titleName isEqualToString:@"购买金额:"]||[titleName isEqualToString:@"收款金额:"]) {
         textFiledCell.titlePlaceholder = @"请输入金额";
     }else if([titleName isEqualToString:@"客户名称:"] ) {
@@ -252,9 +240,64 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
 
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
-    NSLog(@"点击确认提交");
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
-    [self.view addSubview:tipsView];
+    
+    BOOL configureSuccess = YES;
+    NSString *errString = @"保单信息错误";
+    if (_billModel.policyId) {
+        errString = @"保单信息错误";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_billModel.phone,@"")) {
+        errString = @"联系电话为空";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_billModel.shipmentTime,@"")) {
+        errString = @"预约配送时间为空";
+        configureSuccess = NO;
+    }
+    if ([_billModel.receiveMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+        errString = @"收款金额为0";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_billModel.address, @"")) {
+        errString = @"配送地址为空";
+        configureSuccess = NO;
+    }
+    if ([_billModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+        errString = @"保单金额为0";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_billModel.payDate,@"")) {
+        errString = @"刷卡日期为空";
+        configureSuccess = NO;
+    }
+    if (configureSuccess) {
+        NSLog(@"点击确认提交");
+        __weak typeof (self)weakSelf = self;
+
+        NSDictionary *param = [_billModel yy_modelToJSONObject];
+        [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            
+                if ([response[@"data"] isEqualToString:@"true"]) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
+                    [weakSelf.view addSubview:tipsView];
+                }else {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+                    [weakSelf.view addSubview:tipsView];
+                }
+             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+            [weakSelf.view addSubview:tipsView];
+        }];
+        
+    
+    }else {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
+        [self.view addSubview:tipsView];
+    }
+
+  
     
 }
 #pragma  mark - XCDistributionInputCellDelegate
@@ -268,13 +311,49 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate>
     NSArray *moneyArr = @[@"收款金额:"];
     NSArray *addressArr = @[@"配送地址:",@"配送备注:"];
     [self.dataArrM addObject:self.titleArr];
+    _billModel.isShipmentBaodan = @"N";
     if (_isSelectDistribution) {
         [self.dataArrM addObject:customerArr];
         [self.dataArrM addObject:moneyArr];
         [self.dataArrM addObject:addressArr];
+        _billModel.isShipmentBaodan = @"Y";
     }
     [self.tableView reloadData];
+    
 }
+
+
+
+#pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString title:(NSString *)title
+{
+    if ([title isEqualToString:@"保单金额:"]) {
+        double price = [textFiledString doubleValue];
+        _billModel.policyTotalAmount = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"购买金额:"]) {
+        double price = [textFiledString doubleValue];
+        _billModel.packageBuyPrice = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        double price = [textFiledString doubleValue];
+        _billModel.receiveMoney = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"客户名称:"]) {
+        _billModel.receiverName = textFiledString;
+    }
+    else if ([title isEqualToString:@"联系电话:"]) {
+        _billModel.phone = textFiledString;
+    }
+    else if ([title isEqualToString:@"配送地址:"]) {
+        _billModel.address = textFiledString;
+    }
+    else if ([title isEqualToString:@"配送备注:"]) {
+        _billModel.remark = textFiledString;
+    }
+}
+
 #pragma mark - Privacy Method
 
 - (BOOL)isTextCellTypeWithIndex:(NSIndexPath *)indexPath

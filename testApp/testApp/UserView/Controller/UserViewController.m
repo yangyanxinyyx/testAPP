@@ -19,7 +19,7 @@
 #define kCellID @"myCellID"
 #define kHeaderViewID @"myHeaderID"
 #define kFooterViewID @"myFooterID"
-#import "XCShopModel.h"
+#import "UserViewController+ListCellNetworkHandler.h"
 @interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     BOOL _isStore;
@@ -97,13 +97,14 @@
 
 - (void)clickMyCommission
 {
-    XCLog(@"ClickmyCommissionBtn");
+    XCLog(@"===========>ClickmyCommissionBtn");
     
     NSDictionary *param = @{
                             @"user_id":[UserInfoManager shareInstance].userID,
                             };
+    __weak typeof (self)weakSelf = self;
     [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-        NSLog(@"%@",response);
+//        NSLog(@"%@",response);
         if (isUsableDictionary(response)&&isUsableArray(response[@"data"], 0)) {
             NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
             NSArray *dataArr  = response[@"data"];
@@ -113,43 +114,20 @@
             }
             XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
             myCommissionVC.dataArrM = modelArr;
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-            [self.navigationController pushViewController:myCommissionVC animated:YES];
+            [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
+
         }
-        
+         XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+        [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         NSLog(@"%@",error);
+        [weakSelf requestFailureHandler];
     }];
     
 }
 
-- (void)clickCellHanderNetWorkDataWithModel:(XCUserListModel *)model
-{
-    __weak typeof (self)weakSelf = self;
 
-    if ([model.title isEqualToString:@"门店"]) {
-        NSDictionary *param = @{
-                                @"id":[UserInfoManager shareInstance].storeID,
-                                };
-        [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            if (response[@"data"]) {
-                XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
-                XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
-                subVC.storeModel = shopModel;
-                [weakSelf.navigationController pushViewController:subVC animated:YES];
-                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-            }else {
-                [weakSelf requestFailureHandler];
-            }
-        } fail:^(id error) {
-            [weakSelf requestFailureHandler];
-            
-        }];
-    }else {
-        
-    }
-    
-}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - XCUserTopViewDelegate
@@ -242,6 +220,7 @@
     
     if (model.urlString && ![model.urlString isEqualToString:@" "]) {
         [self clickCellHanderNetWorkDataWithModel:model];
+        
     }
 }
 

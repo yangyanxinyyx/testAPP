@@ -7,6 +7,7 @@
 //
 
 #import "XCCheckoutTableViewCell.h"
+#import "XCCheckoutDetailBaseModel.h"
 #import <UIKit/UIKit.h>
 
 @interface XCCheckoutTableViewCell ()
@@ -194,5 +195,21 @@
     [self layoutSubviews];
 }
 
+- (void)setBaseModel:(XCCheckoutDetailBaseModel *)baseModel
+{
+    if (!baseModel) {
+        return;
+    }
+    if (isUsableNSString(baseModel.plateNo, @"")) {
+        [_carNumberLabel setText:baseModel.plateNo];
+    }
+    if (isUsableNSString(baseModel.onwerName, @"")) {
+        [_carNumberLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
+    }
+    if (isUsableNSString(baseModel.recordDate, @"")) {
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: %@",baseModel.recordDate]];
+    }
+    
+}
 
 @end

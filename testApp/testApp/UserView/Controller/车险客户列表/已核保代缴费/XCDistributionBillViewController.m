@@ -9,13 +9,14 @@
 #import "XCDistributionBillViewController.h"
 #import "XCDistributionPicketCell.h"
 #import "XCDistributionFooterView.h"
-
+#import "XCDistributionPaymentBillModel.h"
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom)
 
 @interface XCDistributionBillViewController ()<UITableViewDelegate,UITableViewDataSource,
-XCDistributionFooterViewDelegate>
+XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 @property (nonatomic, strong) NSArray * titleArr ;
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCDistributionPaymentBillModel * payModel ;
 @end
 
 @implementation XCDistributionBillViewController
@@ -24,6 +25,7 @@ XCDistributionFooterViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _payModel = [[XCDistributionPaymentBillModel alloc] init];
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -73,6 +75,26 @@ XCDistributionFooterViewDelegate>
 
 #pragma mark - Action Method
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    __weak typeof (self)weakSelf = self;
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
+        if ((indexPath.section == 0 && indexPath.row == 5)) {
+            //选择时间
+        }
+        else if(indexPath.section == 0 && indexPath.row == 4){
+            NSArray * arr = @[@"礼包一",@"礼包二",@"礼包三"];
+            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                weakSelf.payModel.packageId = selectStr;
+            }];
+            [weakSelf.view addSubview:alterView];
+        }
+    }
+}
+
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Table view data source
@@ -102,6 +124,7 @@ XCDistributionFooterViewDelegate>
     textFiledCell.title = titleName;
     textFiledCell.shouldShowSeparator = YES;
     textFiledCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    textFiledCell.delegate = self;
     
     switch (indexPath.row) {
         case 2:
@@ -163,14 +186,107 @@ XCDistributionFooterViewDelegate>
     return (60 + 88 + 60) * ViewRateBaseOnIP6;
 }
 
+#pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString title:(NSString *)title
+{
+    if ([title isEqualToString:@"保单金额:"]) {
+        double price = [textFiledString doubleValue];
+        _payModel.receiveMoney = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"缴费单通知号:"]) {
+        _payModel.payNoticeNo =  textFiledString;
+    }
+    else if ([title isEqualToString:@"购买金额:"]) {
+        double price = [textFiledString doubleValue];
+        _payModel.packageBuyPrice = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"客户名称:"]) {
+        _payModel.receiverName =  textFiledString;
+    }
+    else if ([title isEqualToString:@"联系电话:"]) {
+        _payModel.phone =  textFiledString;
+    }
+    else if ([title isEqualToString:@"预借款金额:"]) {
+        double price = [textFiledString doubleValue];
+        _payModel.borrowMoney = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        double price = [textFiledString doubleValue];
+        _payModel.receiveMoney = [NSNumber numberWithDouble:price];
+    }
+    else if ([title isEqualToString:@"配送地址:"]) {
+        _payModel.address =  textFiledString;
+    }
+    else if ([title isEqualToString:@"配送备注:"]) {
+        _payModel.remark =  textFiledString;
+    }
+}
+
 #pragma  mark - XCDistributionFooterViewDelegate
 
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
-    NSLog(@"点击确认提交");
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
-    [self.view addSubview:tipsView];
-    
+    BOOL configureSuccess = YES;
+    NSString *errString = @"保单信息错误";
+    if (_payModel.policyId) {
+        errString = @"保单信息错误";
+        configureSuccess = NO;
+    }
+    if ([_payModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+        errString = @"保单金额为0";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_payModel.payNoticeNo,@"")) {
+        errString = @"缴费通知单号为空";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_payModel.receiverName,@"")) {
+        errString = @"收件客户名称为空";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_payModel.phone, @"")) {
+        errString = @"联系电话";
+        configureSuccess = NO;
+    }
+    if ([_payModel.borrowMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+        errString = @"预借款金额为0";
+        configureSuccess = NO;
+    }
+    if ([_payModel.receiveMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+        errString = @"收款金额为0";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_payModel.address, @"")) {
+        errString = @"配送地址为空";
+        configureSuccess = NO;
+    }
+
+    if (configureSuccess) {
+        NSLog(@"点击确认提交");
+        __weak typeof (self)weakSelf = self;
+        
+        NSDictionary *param = [_payModel yy_modelToJSONObject];
+        [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if ([response[@"data"] isEqualToString:@"true"]) {
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
+                [weakSelf.view addSubview:tipsView];
+            }else {
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+                [weakSelf.view addSubview:tipsView];
+            }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+            [weakSelf.view addSubview:tipsView];
+        }];
+        
+        
+    }else {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
+        [self.view addSubview:tipsView];
+    }
+
 }
 
 #pragma mark - Privacy Method

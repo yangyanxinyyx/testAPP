@@ -8,6 +8,8 @@
 
 #import "XCUserWaitingToWriteListViewController.h"
 #import "XCUserWaitingToWriteListDetailViewController.h"
+#import "XCCheckoutDetailBaseModel.h"
+
 @interface XCUserWaitingToWriteListViewController ()<XCCheckoutTableViewCellDelegate>
 
 @end
@@ -17,46 +19,30 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Action Method
 
-- (void)clickCheckDetailButton
-{
-    XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    
-}
-
-
 #pragma mark - privary Method
-
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+ return self.dataArr.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.delegate = self;
-    cell.carNumber = @"粤AAAAAA";
-    cell.userName = @"梁艺钟";
-    cell.issureTime = @"a123213-321-321-3";
-    
+    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+    cell.baseModel = baseModel;
+//    cell.carNumber = @"粤AAAAAA";
+//    cell.userName = @"梁艺钟";
+//    cell.issureTime = @"a123213-321-321-3";
+//
     return cell;
 }
 
@@ -64,7 +50,12 @@
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickCheckDetailButton];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+    XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
+    detailVC.model = baseModel;
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
 }
 
 @end

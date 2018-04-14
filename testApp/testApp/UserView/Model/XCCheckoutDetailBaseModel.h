@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//待核保详细Model
 @interface XCCheckoutDetailBaseModel : NSObject
 
 /** 保单id */
