@@ -8,6 +8,7 @@
 
 #import "XCCheckoutTableViewCell.h"
 #import "XCCheckoutDetailBaseModel.h"
+#import "XCCustomerListModel.h"
 #import <UIKit/UIKit.h>
 
 @interface XCCheckoutTableViewCell ()
@@ -18,6 +19,9 @@
 @property (nonatomic, strong) UIButton * checkButton ;
 @property (nonatomic, strong) UIButton * underWritingButton ;
 @property (nonatomic, strong) UIView * separpatorLine ;
+
+/** 我的客户Model */
+@property (nonatomic, strong) XCCustomerListModel * customerModel ;
 @end
 
 @implementation XCCheckoutTableViewCell
@@ -66,10 +70,10 @@
     self.checkButton = ({
         UIButton *checkButton = [UIButton buttonWithType:0];
         [checkButton setTitle:@"查看" forState:UIControlStateNormal];
-        checkButton.titleLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
-        [checkButton setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+        checkButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
+        [checkButton setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
         checkButton.layer.cornerRadius = 3;
-        checkButton.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
+        checkButton.layer.borderColor = COLOR_RGB_255(1,77,163).CGColor;
         checkButton.layer.borderWidth = 0.5;
         [checkButton addTarget:self action:@selector(checkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:checkButton];
@@ -78,10 +82,10 @@
     
     _underWritingButton = [UIButton buttonWithType:0];
     [_underWritingButton setTitle:@"核保" forState:UIControlStateNormal];
-    _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
-    [_underWritingButton setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+    _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
+    [_underWritingButton setTitleColor:COLOR_RGB_255(1,77, 163) forState:UIControlStateNormal];
     _underWritingButton.layer.cornerRadius = 3;
-    _underWritingButton.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
+    _underWritingButton.layer.borderColor = COLOR_RGB_255(1,77, 163).CGColor;
     _underWritingButton.layer.borderWidth = 0.5;
     [_underWritingButton addTarget:self action:@selector(clickUnderWritingButton:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_underWritingButton];
@@ -98,15 +102,15 @@
     
     CGFloat leftMargin = 30 * ViewRateBaseOnIP6;
     [self.carNumberLabel sizeToFit];
-    [self.carNumberLabel setFrame:CGRectMake(leftMargin, 29 * ViewRateBaseOnIP6, self.carNumberLabel.frame.size.width, 28 * ViewRateBaseOnIP6)];
+    [self.carNumberLabel setFrame:CGRectMake(leftMargin, 29 * ViewRateBaseOnIP6, 450 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6)];
     [self.userNameLabel sizeToFit];
     [self.userNameLabel setFrame:CGRectMake(leftMargin, self.carNumberLabel.frame.origin.y + self.carNumberLabel.frame.size.height + 18 * ViewRateBaseOnIP6, self.userNameLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     [self.issueTimeLabel sizeToFit];
     [self.issueTimeLabel setFrame:CGRectMake(leftMargin, self.userNameLabel.frame.origin.y + self.userNameLabel.frame.size.height + 12 * ViewRateBaseOnIP6, self.issueTimeLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     
-    CGFloat buttonW = 160 * ViewRateBaseOnIP6;
-    CGFloat buttonH = 60 * ViewRateBaseOnIP6;
-#warning 等待新的UI图重新布局
+    CGFloat buttonW = 110 * ViewRateBaseOnIP6;
+    CGFloat buttonH = 50 * ViewRateBaseOnIP6;
+
     if (_isCustomerCell) {
         [self.underWritingButton setFrame:CGRectMake(self.frame.size.width - (31 * ViewRateBaseOnIP6 + buttonW) * 2,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];        
         
@@ -144,6 +148,15 @@
     }else {
         XCLog(@"CLass:%@ - (void)clickUnderWritingButton:Failure ",[self class]);
     }
+}
+
+- (void)setupCellWithMYCustomerListModel:(XCCustomerListModel *)model
+{
+    _customerModel = model;
+    NSString *titleStr = [NSString stringWithFormat:@"%@ %@ (%@)",model.customerName,model.plateNo,model.brand];
+    [_carNumberLabel setText:titleStr];
+    [_userNameLabel setText:[NSString stringWithFormat:@"跟进时间: %@",model.nextFollowTime]];
+    [_issueTimeLabel setText:[NSString stringWithFormat:@"联系方式: %@",model.phoneNo]];
 }
 
 #pragma mark - Delegates & Notifications

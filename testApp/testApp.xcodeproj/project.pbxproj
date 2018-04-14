@@ -21,6 +21,8 @@
 		A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5AB2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m */; };
 		A720C5B02081ECF0006B0C33 /* XCDistributionBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */; };
 		A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B22081EFE5006B0C33 /* XCDistributionPaymentBillModel.m */; };
+		A720C5B720826423006B0C33 /* XCCustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B620826423006B0C33 /* XCCustomerListModel.m */; };
+		A720C5BA2082684D006B0C33 /* XCCustomerDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */; };
 		A724C851207D0DD500083C86 /* 添加图片@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C850207D0DD500083C86 /* 添加图片@2x.png */; };
 		A724C853207D0DE300083C86 /* 添加图片@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C852207D0DE300083C86 /* 添加图片@3x.png */; };
 		A724C855207D0DFF00083C86 /* 添加符号@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C854207D0DFF00083C86 /* 添加符号@3x.png */; };
@@ -270,6 +272,10 @@
 		A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCDistributionBillModel.m; sourceTree = "<group>"; };
 		A720C5B12081EFE5006B0C33 /* XCDistributionPaymentBillModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCDistributionPaymentBillModel.h; sourceTree = "<group>"; };
 		A720C5B22081EFE5006B0C33 /* XCDistributionPaymentBillModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCDistributionPaymentBillModel.m; sourceTree = "<group>"; };
+		A720C5B520826423006B0C33 /* XCCustomerListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerListModel.h; sourceTree = "<group>"; };
+		A720C5B620826423006B0C33 /* XCCustomerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerListModel.m; sourceTree = "<group>"; };
+		A720C5B82082684D006B0C33 /* XCCustomerDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerDetailModel.h; sourceTree = "<group>"; };
+		A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerDetailModel.m; sourceTree = "<group>"; };
 		A724C850207D0DD500083C86 /* 添加图片@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@2x.png"; sourceTree = "<group>"; };
 		A724C852207D0DE300083C86 /* 添加图片@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@3x.png"; sourceTree = "<group>"; };
 		A724C854207D0DFF00083C86 /* 添加符号@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加符号@3x.png"; sourceTree = "<group>"; };
@@ -716,6 +722,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A720C5B420826145006B0C33 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A720C5B520826423006B0C33 /* XCCustomerListModel.h */,
+				A720C5B620826423006B0C33 /* XCCustomerListModel.m */,
+				A720C5B82082684D006B0C33 /* XCCustomerDetailModel.h */,
+				A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A72F94B2207A6A1F00100212 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1160,7 @@
 		FC32BECA2079AA2000817156 /* 我的客户 */ = {
 			isa = PBXGroup;
 			children = (
+				A720C5B420826145006B0C33 /* Model */,
 				FC32BECB2079AA2000817156 /* XCCustomerAnnualReviewViewController.h */,
 				FC32BECC2079AA2000817156 /* XCCustomerAnnualReviewViewController.m */,
 				FC32BECD2079AA2000817156 /* XCCustomerDetailViewController.h */,
@@ -1857,6 +1875,7 @@
 				FCFAF951205A7011001E9796 /* BaseTabbarController.m in Sources */,
 				FC32BF302079AA2000817156 /* XCCustomerAnnualReviewViewController.m in Sources */,
 				FC32BF2C2079AA2000817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */,
+				A720C5B720826423006B0C33 /* XCCustomerListModel.m in Sources */,
 				A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */,
 				A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */,
 				FC32BF4B2079AA2000817156 /* XCUserCaseScrollerViewCell.m in Sources */,
@@ -1948,6 +1967,7 @@
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC32BF502079AA2000817156 /* XCDistributionFooterView.m in Sources */,
 				FC32BF3A2079AA2000817156 /* XCCheckoutDetailPolicyModel.m in Sources */,
+				A720C5BA2082684D006B0C33 /* XCCustomerDetailModel.m in Sources */,
 				A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */,
 				FC32BFA42079AA5900817156 /* PriceInspectViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,

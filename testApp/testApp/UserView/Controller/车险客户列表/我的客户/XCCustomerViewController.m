@@ -8,11 +8,19 @@
 
 #import "XCCustomerViewController.h"
 #import "XCCustomerDetailViewController.h"
+#import "XCCustomerListModel.h"
+#import <MJRefresh/MJRefresh.h>
+#import "XCCustomerDetailModel.h"
 @interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
     CGFloat _addBtnHeigth;
 }
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * addCustomerBtn ;
+
+/** <# 注释 #> */
+@property (nonatomic, assign) int  pageIndex;
+
+@property (nonatomic, assign) int pageCount ;
 @end
 
 @implementation XCCustomerViewController
@@ -21,7 +29,73 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _addBtnHeigth = 88 * ViewRateBaseOnIP6;
+    _pageIndex = 1;
     [self createUI];
+    __weak typeof (self)weakSelf = self;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        NSDictionary *param = @{
+                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageSize":[NSNumber numberWithInt:6]
+                                };
+        weakSelf.pageIndex = 1;
+        [weakSelf.tableView.mj_header beginRefreshing];
+        [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                if (response[@"data"][@"dataSet"]) {
+                    NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                    NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                    for (NSDictionary *dataInfo in origionDataArr) {
+                        XCCustomerListModel *baseModel = [XCCustomerListModel yy_modelWithJSON:dataInfo];
+                        if (baseModel) {
+                            [dataArrM addObject:baseModel];
+                        }
+                    }
+                    weakSelf.dataArr = dataArrM;
+                    [weakSelf.tableView reloadData];
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                }
+                NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+                _pageCount = [pageCountNum intValue];
+            }
+            [weakSelf.tableView.mj_header endRefreshing];
+        } fail:^(id error) {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        
+        weakSelf.pageIndex ++;
+        NSDictionary *param = @{
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
+                                @"PageSize":[NSNumber numberWithInt:6]
+                                };
+        [weakSelf.tableView.mj_footer beginRefreshing];
+        if (weakSelf.pageIndex < weakSelf.pageCount) {
+            [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (response[@"data"]) {
+                    if (response[@"data"][@"dataSet"]) {
+                        NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                        for (NSDictionary *dataInfo in origionDataArr) {
+                            XCCustomerListModel *baseModel = [XCCustomerListModel yy_modelWithJSON:dataInfo];
+                            if (baseModel) {
+                                [weakSelf.dataArr addObject:baseModel];
+                            }
+                        }
+                        [weakSelf.tableView reloadData];
+                        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    }
+                }
+                [weakSelf.tableView.mj_footer endRefreshing];
+            } fail:^(id error) {
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }];
+        }else {
+            [weakSelf.tableView.mj_footer endRefreshing];
+        }
+        
+      
+    }];
     
 }
 
@@ -35,12 +109,16 @@
 
 #pragma mark - Action Method
 
-- (void)clickCheckDetailButton
+- (void)markPageCount:(int)pageCount
 {
-    XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];
-    [self.navigationController pushViewController:detailVC animated:YES];
-    
+    _pageCount = pageCount;
 }
+
+//- (void)clickCheckDetailButton
+//{
+//
+//
+//}
 
 - (void)clickUnderWritingDetailButton
 {
@@ -64,19 +142,28 @@
     [self.view addSubview:_addCustomerBtn];
 }
 
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     cell.delegate = self;
-    cell.carNumber = @"粤AAAAAA";
-    cell.userName = @"梁艺钟";
-    cell.issureTime = @"a123213-321-321-3";
+    XCCustomerListModel *model = self.dataArr[indexPath.row];
+    [cell setupCellWithMYCustomerListModel:model];
+//    cell.carNumber = @"粤AAAAAA";
+//    cell.userName = @"梁艺钟";
+//    cell.issureTime = @"a123213-321-321-3";
     cell.isCustomerCell = YES;
     return cell;
 }
@@ -88,7 +175,35 @@
 //点击查看按钮
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickCheckDetailButton];
+//    [self clickCheckDetailButton];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    XCCustomerListModel *model = self.dataArr[indexPath.row];
+
+    NSDictionary *param = @{
+                            @"carId":model.carId,
+                            @"customerId":model.customerId
+                            };
+    __weak typeof (self)weakSelf = self;
+    [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        BOOL configureSucess  = NO;
+        if (response[@"data"]) {
+            
+//            XCCustomerDetailModel *detailModel = [XCCustomerDetailModel ]
+            XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
+            
+            XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];
+            detailVC.model = detailModel;
+            [weakSelf.navigationController pushViewController:detailVC animated:YES];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            configureSucess = YES;
+        }
+        if (!configureSucess) {
+            [weakSelf requestFailureHandler];
+        }
+    } fail:^(id error) {
+        [weakSelf requestFailureHandler];
+    }];
+    
 }
 
 //点击核保按钮

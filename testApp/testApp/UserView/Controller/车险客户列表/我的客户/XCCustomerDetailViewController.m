@@ -76,8 +76,8 @@
 - (void)configureData
 {
     self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"客户名称:",@"客户来源:",@"性别:",
-                                                                 @"生日:",@"区域:",@"地址",
-                                                                 @"身份证",@"车牌号:",@"车品牌:",
+                                                            @"生日:",@"区域:",@"地址:",
+                                                            @"身份证:",@"车牌号:",@"车品牌:",
                                                                  @"初登日期:",@"车架号:",@"发动机号:",
                                                                  @"车型代码:",@"联系方式:"]];
 }
@@ -113,6 +113,7 @@
 
 #pragma mark - Setter&Getter
 
+
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -125,7 +126,8 @@
     NSString *title = self.dataArrM[indexPath.row];
     XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
     [cell setTitle:title];
-    [cell setTitlePlaceholder:@"刘某某"];
+    [cell setupCellWithCustomerDetailModel:self.model];
+//    [cell setTitlePlaceholder:@"刘某某"];
     return cell;
 }
 
