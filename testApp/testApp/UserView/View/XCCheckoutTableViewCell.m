@@ -70,10 +70,11 @@
     self.checkButton = ({
         UIButton *checkButton = [UIButton buttonWithType:0];
         [checkButton setTitle:@"查看" forState:UIControlStateNormal];
-        checkButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
-        [checkButton setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
+        checkButton.titleLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
+        [checkButton setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+
         checkButton.layer.cornerRadius = 3;
-        checkButton.layer.borderColor = COLOR_RGB_255(1,77,163).CGColor;
+        checkButton.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
         checkButton.layer.borderWidth = 0.5;
         [checkButton addTarget:self action:@selector(checkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:checkButton];
@@ -82,10 +83,10 @@
     
     _underWritingButton = [UIButton buttonWithType:0];
     [_underWritingButton setTitle:@"核保" forState:UIControlStateNormal];
-    _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
-    [_underWritingButton setTitleColor:COLOR_RGB_255(1,77, 163) forState:UIControlStateNormal];
+    _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
+    [_underWritingButton setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
     _underWritingButton.layer.cornerRadius = 3;
-    _underWritingButton.layer.borderColor = COLOR_RGB_255(1,77, 163).CGColor;
+        _underWritingButton.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
     _underWritingButton.layer.borderWidth = 0.5;
     [_underWritingButton addTarget:self action:@selector(clickUnderWritingButton:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_underWritingButton];
@@ -108,16 +109,25 @@
     [self.issueTimeLabel sizeToFit];
     [self.issueTimeLabel setFrame:CGRectMake(leftMargin, self.userNameLabel.frame.origin.y + self.userNameLabel.frame.size.height + 12 * ViewRateBaseOnIP6, self.issueTimeLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     
-    CGFloat buttonW = 110 * ViewRateBaseOnIP6;
-    CGFloat buttonH = 50 * ViewRateBaseOnIP6;
+    
+    CGFloat buttonW = 160 * ViewRateBaseOnIP6;
+    CGFloat buttonH = 60 * ViewRateBaseOnIP6;
 
     if (_isCustomerCell) {
+         buttonW = 110 * ViewRateBaseOnIP6;
+         buttonH = 50 * ViewRateBaseOnIP6;
         [self.underWritingButton setFrame:CGRectMake(self.frame.size.width - (31 * ViewRateBaseOnIP6 + buttonW) * 2,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];        
         
-        [self.checkButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.checkButton.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+        self.checkButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
+        [self.checkButton setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
+        self.checkButton.layer.borderColor = COLOR_RGB_255(1,77,163).CGColor;
         [self.checkButton setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
         [self.checkButton setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 - buttonW,(self.frame.size.height - buttonH) * 0.5   , buttonW, buttonH)];
+        
+        
+        _underWritingButton.titleLabel.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
+        [_underWritingButton setTitleColor:COLOR_RGB_255(1,77, 163) forState:UIControlStateNormal];
+        _underWritingButton.layer.borderColor = COLOR_RGB_255(1,77, 163).CGColor;
         
     }else {
         [self.underWritingButton setFrame:CGRectZero];

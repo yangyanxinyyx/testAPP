@@ -55,6 +55,7 @@
 }
 
 #pragma mark - Action Method
+
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model
 {
     if ([self.title isEqualToString:@"投保人:"] && isUsableNSString(model.onwerName,@"")) {
