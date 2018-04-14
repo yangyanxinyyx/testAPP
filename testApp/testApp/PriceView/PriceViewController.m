@@ -118,7 +118,7 @@
     }];
 }
 
-#pragma mark- UI
+#pragma mark - function
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.textField endEditing:YES];
 }
@@ -145,6 +145,8 @@
     PriceCustomerInformEntryViewController *priceCustomerVC = [[PriceCustomerInformEntryViewController alloc] init];
     [self.navigationController pushViewController:priceCustomerVC animated:YES];
 }
+
+#pragma mark- UI
 
 - (void)createUI{
     [self.view addSubview:self.contentView];
