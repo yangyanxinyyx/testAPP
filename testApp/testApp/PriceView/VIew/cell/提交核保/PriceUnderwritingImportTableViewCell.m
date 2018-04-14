@@ -8,7 +8,7 @@
 
 #import "PriceUnderwritingImportTableViewCell.h"
 @interface PriceUnderwritingImportTableViewCell()<UITextViewDelegate>
-@property (nonatomic, strong) UILabel *labelName;
+
 @end
 @implementation PriceUnderwritingImportTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

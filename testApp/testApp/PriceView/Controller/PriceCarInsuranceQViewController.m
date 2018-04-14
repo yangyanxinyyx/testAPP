@@ -51,7 +51,7 @@
     topBar.title = @"车险报价";
     [self.view addSubview:topBar];
     [self createUI];
-//    [self requestLastYearPrcie];
+    [self requestLastYearPrcie];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -236,7 +236,7 @@
                 if (![jqIsSelect isKindOfClass:[NSNull class]]) {
                     jqModel.isToubao = [data objectForKey:@"jqIsSelect"];
                 }
-                NSNumber *jqBaoFei = [data objectForKey:@"jqBaoFei"];
+                NSNumber *jqBaoFei = [data objectForKey:@"offerTciPrice"];
                 if (![jqBaoFei isKindOfClass:[NSNull class]]) {
                     jqModel.number = [jqBaoFei doubleValue];
                 }
@@ -650,6 +650,7 @@
         PriceRecodeModel *recodeModel = [self.arrayRecodeData objectAtIndex:indexPath.row];
         priceInfoVC.quoteGroup = recodeModel.quoteGroup;
         priceInfoVC.blType = recodeModel.blType;
+        priceInfoVC.syBaoFei = recodeModel.offerTotalPrice;
         NSMutableArray *dataArray = [self.arrayPriceRecodeData objectAtIndex:indexPath.row];
         priceInfoVC.arrayRecodeData = dataArray;
         [self.navigationController pushViewController:priceInfoVC animated:YES];
