@@ -78,6 +78,10 @@
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter
-
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    [_titleLabel  setText:_title];
+}
 
 @end

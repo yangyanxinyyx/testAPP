@@ -8,49 +8,82 @@
 
 #import <Foundation/Foundation.h>
 
+//待核保详细Model
 @interface XCCheckoutDetailBaseModel : NSObject
 
+/** 保单id */
+@property (nonatomic, assign) long BillID;
+
+//基本信息
 /** 投保人 */
-@property (nonatomic, copy) NSString * userName;
+@property (nonatomic, copy) NSString * onwerName;
 
 /** 身份证 */
-@property (nonatomic, copy) NSString * userIDCard;
+@property (nonatomic, copy) NSString * onwerIdentify;
 
 /** 车牌号 */
-@property (nonatomic, copy) NSString * carNumber;
+@property (nonatomic, copy) NSString * plateNo;
 
 /** 车架号 */
-@property (nonatomic, copy) NSString * carTypeNumber;
+@property (nonatomic, copy) NSString * vinNo;
 
 /** 初登日期 */
-@property (nonatomic, copy) NSString * firstDate;
+@property (nonatomic, copy) NSString * recordDate;
 
 /** 发动机号 */
-@property (nonatomic, copy) NSString * carEngineNumber;
+@property (nonatomic, copy) NSString * engineNo;
 
 /** 车型名称 */
-@property (nonatomic, copy) NSString * carOfType;
+@property (nonatomic, copy) NSString * model;
+
+/** 车型代码 */
+@property (nonatomic, copy) NSString * model2;
 
 /** (商业)起保日期 */
-@property (nonatomic, copy) NSString * carBussinessPolicyStartDate;
+@property (nonatomic, copy) NSString * syEffectDate;
 
 /** (交强)起保日期 */
-@property (nonatomic, copy) NSString * carCommonPolicyStartDate;
+@property (nonatomic, copy) NSString * jqEffectDate;
 
 /** 保险公司 */
-@property (nonatomic, copy) NSString * insuranceCompany;
+@property (nonatomic, copy) NSString * insurerName;
 
 /** 缴费通知单号 */
-@property (nonatomic, copy) NSString * paymentMenu;
+@property (nonatomic, copy) NSString * payNoticeNo;
 
-/** 交强险金额 */
-@property (nonatomic, copy) NSString * carCommonPolicyMoney;
+/** 交强险(业务员)金额 */
+@property (nonatomic, copy) NSString * jqMoney;
 
-/** 商业险金额 */
-@property (nonatomic, copy) NSString * carBunissionPolicyMoney;
+/** 商业险(业务员)金额 */
+@property (nonatomic, copy) NSString * syMoney;
 
-/** 是否续保 */
-@property (nonatomic, assign) BOOL  isContinue ;
+/** 交强险(出单员)金额 */
+@property (nonatomic, copy) NSString * jqMoneyExport;
+
+/** 商业险(出单员)金额 */
+@property (nonatomic, copy) NSString * syMoneyExport;
+
+/** 出单员名称 */
+@property (nonatomic, copy) NSString * exportmanName;
+
+/** 是否续保 Y N */
+@property (nonatomic, copy) NSString * isContinue ;
+
+// 保单信息
+/** 交强险 */
+@property (nonatomic, copy) NSString * jqValue;
+
+/** 机动车损险 */
+@property (nonatomic, copy) NSString * csValue;
+
+/** 第三责任损险 */
+@property (nonatomic, copy) NSString * szValue;
+
+/** 车上(司机)险 */
+@property (nonatomic, copy) NSString * cssjValue;
+
+/** 车上(乘客)险 */
+@property (nonatomic, copy) NSString * csckValue;
 
 
 @end

@@ -7,14 +7,18 @@
 //
 
 #import "XCUserBaseViewController.h"
+#import <CoreLocation/CoreLocation.h>
+@protocol XCShopAMapViewControllerDelegate <NSObject>
+- (void)XCShopAMapViewControllerDidConfirmAddressCity:(NSString *)city area:(NSString *)area coordinate:(CLLocationCoordinate2D)coordiante;
 
+@end
 @interface XCShopAMapViewController : BaseViewController1<BaseNavigationBarDelegate>
 /**
  自定义导航栏
  */
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
-
+@property (nonatomic, weak) id<XCShopAMapViewControllerDelegate> delegate ;
 - (instancetype)initWithTitle:(NSString *)title;
 
 @end

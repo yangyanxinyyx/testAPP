@@ -7,7 +7,7 @@
 //
 
 #import "XCCheckoutDetailBaseTableViewController.h"
-
+@class XCCheckoutDetailBaseModel;
 @interface XCUserWaitingToWriteListDetailViewController : XCCheckoutDetailBaseTableViewController
-
+@property (nonatomic, strong) XCCheckoutDetailBaseModel * model ;
 @end
