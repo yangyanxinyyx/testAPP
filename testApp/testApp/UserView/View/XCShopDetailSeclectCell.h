@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface XCShopDetailSeclectCell : UITableViewCell
-
+/** <# 注释 #> */
+@property (nonatomic, copy) NSString * title ;
 @end

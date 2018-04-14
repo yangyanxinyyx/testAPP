@@ -26,8 +26,12 @@
 		A724C863207D0EBB00083C86 /* 精致洗车图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C862207D0EBB00083C86 /* 精致洗车图@3x.png */; };
 		A724C865207D0EE400083C86 /* 未完成@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C864207D0EE300083C86 /* 未完成@2x.png */; };
 		A724C867207D0EE900083C86 /* 未完成@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C866207D0EE900083C86 /* 未完成@3x.png */; };
+		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
+		A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */; };
+		A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */; };
+		A75D30572081276F0012898A /* XCShopServiceEditedServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -258,10 +262,18 @@
 		A724C862207D0EBB00083C86 /* 精致洗车图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "精致洗车图@3x.png"; sourceTree = "<group>"; };
 		A724C864207D0EE300083C86 /* 未完成@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未完成@2x.png"; sourceTree = "<group>"; };
 		A724C866207D0EE900083C86 /* 未完成@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未完成@3x.png"; sourceTree = "<group>"; };
+		A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceModel.h; sourceTree = "<group>"; };
+		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
 		A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+createLabel.h"; path = "testApp/Extend/categary/UILabel+createLabel.h"; sourceTree = SOURCE_ROOT; };
 		A753CC0D207E6AF000AFB66C /* XCShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopModel.h; sourceTree = "<group>"; };
 		A753CC0E207E6AF000AFB66C /* XCShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopModel.m; sourceTree = "<group>"; };
+		A75D304F2081022E0012898A /* XCShopServiceDetailListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceDetailListViewController.h; sourceTree = "<group>"; };
+		A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceDetailListViewController.m; sourceTree = "<group>"; };
+		A75D305220811FF70012898A /* XCShopServiceAddServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceAddServiceViewController.h; sourceTree = "<group>"; };
+		A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceAddServiceViewController.m; sourceTree = "<group>"; };
+		A75D30552081276F0012898A /* XCShopServiceEditedServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceEditedServiceViewController.h; sourceTree = "<group>"; };
+		A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceEditedServiceViewController.m; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
@@ -656,6 +668,8 @@
 			children = (
 				A753CC0D207E6AF000AFB66C /* XCShopModel.h */,
 				A753CC0E207E6AF000AFB66C /* XCShopModel.m */,
+				A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */,
+				A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1101,6 +1115,12 @@
 				FC32BEDE2079AA2000817156 /* XCShopViewController.m */,
 				A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */,
 				A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */,
+				A75D304F2081022E0012898A /* XCShopServiceDetailListViewController.h */,
+				A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */,
+				A75D305220811FF70012898A /* XCShopServiceAddServiceViewController.h */,
+				A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */,
+				A75D30552081276F0012898A /* XCShopServiceEditedServiceViewController.h */,
+				A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */,
 			);
 			path = "门店";
 			sourceTree = "<group>";
@@ -1803,6 +1823,7 @@
 				FC32BFAF2079AA5900817156 /* PriceInspectTableViewCell.m in Sources */,
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
 				FC32BF422079AA2000817156 /* XCCheckoutDetailInputCell.m in Sources */,
+				A75D30572081276F0012898A /* XCShopServiceEditedServiceViewController.m in Sources */,
 				FC32BF522079AA2000817156 /* XCDistributionPicketCell.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				FC32BF242079AA2000817156 /* XCUserRepairDetailViewController.m in Sources */,
@@ -1826,6 +1847,7 @@
 				FC32BF462079AA2000817156 /* XCCheckoutTableViewCell.m in Sources */,
 				FC32BE1320792AD900817156 /* GetCarDetailModel.m in Sources */,
 				FC32BF4C2079AA2000817156 /* XCUserListCollectionViewCell.m in Sources */,
+				A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */,
 				FC32BF172079AA2000817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */,
 				FC32BF2F2079AA2000817156 /* XCUserUnderWritingViewController.m in Sources */,
 				FC32BF1B2079AA2000817156 /* XCModifyPwdViewController.m in Sources */,
@@ -1833,6 +1855,7 @@
 				FC32BF342079AA2000817156 /* XCCustomerViewController.m in Sources */,
 				FC32BFAC2079AA5900817156 /* PriceInfoAddTableViewCell.m in Sources */,
 				FC32BF2E2079AA2000817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
+				A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */,
 				FC32BF292079AA2000817156 /* XCDistributionPolicyViewController.m in Sources */,
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
 				FC32BFAA2079AA5900817156 /* PriceCarRecordTableViewCell.m in Sources */,
@@ -1848,6 +1871,7 @@
 				FC32BF282079AA2000817156 /* XCDistributionBillViewController.m in Sources */,
 				A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */,
 				FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */,
+				A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */,
 				FC32BF182079AA2000817156 /* XCUserBaseViewController.m in Sources */,
 				FC32BF1E2079AA2000817156 /* XCUserInjuryCaseViewController.m in Sources */,
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,

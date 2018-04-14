@@ -10,7 +10,6 @@
 #import "XCUserUnderWritingDetailViewController.h"
 @interface XCUserUnderWritingViewController ()<XCCheckoutTableViewCellDelegate>
 
-@property (nonatomic, strong) NSMutableArray * dataArr ;
 @end
 
 @implementation XCUserUnderWritingViewController

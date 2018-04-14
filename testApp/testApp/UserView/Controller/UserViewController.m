@@ -143,6 +143,7 @@
             }
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
+            
         }];
     }else {
         

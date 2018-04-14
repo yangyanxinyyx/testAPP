@@ -13,12 +13,14 @@
 #import "XCCheckoutDetailPhotoCell.h"
 #import "LYZAlertView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CoreLocation/CoreLocation.h>
 #import "XCShopAMapViewController.h"
-
+#import "XCShopServiceModel.h"
+#import "XCShopServiceDetailListViewController.h"
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
-UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewControllerDelegate>
 @property (nonatomic, strong) UIView *contenView;
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -28,18 +30,22 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UITableView *storeTableView;
 @property (nonatomic, strong) UIView *viewSegment;
 
-/** <# 注释 #> */
+/** 门店信息tableViewTitle数据 */
 @property (nonatomic, strong) NSArray * storeTitleArr;
-/** <# 注释 #> */
+/** 预设 */
 @property (nonatomic, strong) NSArray * placeHolderArr ;
-/** <# 注释 #> */
+/** 服务tableViewTitle数据 */
 @property (nonatomic, strong) NSArray * serviceTitleArr ;
-/** <# 注释 #> */
+/** 选中当前的Cell */
 @property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
-/** <# 注释 #> */
+/** 证书图片保存 */
 @property (nonatomic, strong) UIImage * lincesPhoto ;
-/** <# 注释 #> */
+/** 4张图片保存 */
 @property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
+
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray <XCShopServiceModel *>* services;
+
 @end
 
 @implementation XCShopViewController
@@ -48,6 +54,7 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
     [super viewDidLoad];
     
     _storePhotoArrM = [[NSMutableArray alloc] init];
+    _services = [[NSMutableArray alloc] init];
     [self configureData];
     [self createUI];
 }
@@ -72,17 +79,21 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.serviceTableView) {
+        
         switch (indexPath.row) {
             case 0:{ //洗车项目
-                
+                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
+                [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
             case 1: { //美容项目
-                
+                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
+                [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
             case 2: { //保养项目
-                
+                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
+                [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
             default:
@@ -93,6 +104,7 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
         if (indexPath.row == 6) {
             // 跳转地图
             XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
+            mapVC.delegate = self;
             [self.navigationController pushViewController:mapVC animated:YES];
         }
         
@@ -106,6 +118,24 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
     if (isLaseY) {
         self.viewBear.frame = CGRectMake(0, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     } else {
+        NSDictionary *param = @{
+                                @"storeId":[UserInfoManager shareInstance].storeID,
+                                };
+        __weak typeof (self)weakSelf = self;
+        [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                [_services removeAllObjects];
+                NSArray *serviceArr= response[@"data"];
+                for (NSDictionary *dataInfo in serviceArr) {
+                    XCShopServiceModel *model = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    [self.services addObject:model];
+                }
+                
+            }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            [weakSelf requestFailureHandler];
+        }];
         self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     }
 }
@@ -183,6 +213,27 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - XCShopAMapViewControllerDelegate
+
+-(void)XCShopAMapViewControllerDidConfirmAddressCity:(NSString *)city area:(NSString *)area coordinate:(CLLocationCoordinate2D)coordiante
+{
+    if (isUsableNSString(city, @"")) {
+        [self.storeModel setCity:city];
+    }
+    if (isUsableNSString(area,@"")) {
+        [self.storeModel setArea:area];
+    }
+    if (coordiante.latitude != 0.0 && coordiante.longitude != 0.0) {
+        [self.storeModel setLatitude:[NSString stringWithFormat:@"%f",coordiante.latitude]];
+        [self.storeModel setLongitude:[NSString stringWithFormat:@"%f",coordiante.longitude]];
+    }
+    NSIndexPath * cityIndexpath = [NSIndexPath indexPathForRow:6 inSection:0];
+    NSIndexPath * areaIndexpath = [NSIndexPath indexPathForRow:7 inSection:0];
+    
+    
+    [self.storeTableView reloadRowsAtIndexPaths:@[cityIndexpath,areaIndexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - UITableViewDelegate
@@ -317,6 +368,11 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate>
     return NO;
 }
 
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
 #pragma mark - Setter&Getter
 
 - (void)setStoreModel:(XCShopModel *)storeModel

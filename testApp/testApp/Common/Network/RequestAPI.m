@@ -318,5 +318,15 @@
     }];
 }
 
++(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    
+    [self getRequest:SHOPSSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
 
 @end

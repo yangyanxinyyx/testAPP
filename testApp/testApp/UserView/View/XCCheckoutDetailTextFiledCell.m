@@ -14,6 +14,11 @@
 @property (nonatomic, strong) UITextField * textField ;
 @property (nonatomic, strong) UIView * separtatorLine ;
 
+/** <# 注释 #> */
+@property (nonatomic, strong) UILabel * secondTitlelabel ;
+/** <# 注释 #> */
+@property (nonatomic, strong) UITextField * secondTextField ;
+
 @end
 
 @implementation XCCheckoutDetailTextFiledCell
@@ -29,6 +34,7 @@
     if (self) {
         _shouldShowSeparator = NO;
         _isCenterSeparator = NO;
+        _isTwoInputType = NO;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
     }
@@ -46,12 +52,32 @@
     [_titleLabel sizeToFit];
     CGSize labelSize = _titleLabel.frame.size;
     CGFloat labeH = 25 * ViewRateBaseOnIP6;
-    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
+  
     
-    [_textField sizeToFit];
-    labelSize = _textField.frame.size;
+    _secondTitlelabel.hidden = NO;
+    _secondTextField.hidden = NO;
+    if (_isTwoInputType) {
+        _secondTitlelabel.hidden = YES;
+        _secondTextField.hidden = YES;
+        [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width, labeH)];
+        [_textField sizeToFit];
+        labelSize = _textField.frame.size;
+        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 26 * ViewRateBaseOnIP6 ) * 0.5, (110 + 151) * ViewRateBaseOnIP6 , 26 * ViewRateBaseOnIP6)];
+        
+        [_secondTitlelabel sizeToFit];
+        labelSize = _secondTitlelabel.frame.size;
+        [_secondTitlelabel setFrame:CGRectMake(CGRectGetMinX(_textField.frame), (self.bounds.size.height - labeH) * 0.5, labelSize.width, labeH)];
+        [_secondTextField sizeToFit];
+        labelSize = _secondTextField.frame.size;
+        [_secondTextField setFrame:CGRectMake(CGRectGetMaxX(_secondTitlelabel.frame ) + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 26 * ViewRateBaseOnIP6 ) * 0.5, SCREEN_WIDTH - (CGRectGetMaxX(_secondTitlelabel.frame) + 16 * ViewRateBaseOnIP6)- 30 * ViewRateBaseOnIP6 , 26 * ViewRateBaseOnIP6)];
+        
+    }else {
+        [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
+        [_textField sizeToFit];
+        labelSize = _textField.frame.size;
+        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
+    }
     
-    [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
     if (_shouldShowSeparator) {
         if (_isCenterSeparator) {
              [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
@@ -59,6 +85,8 @@
             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
         }
     }
+   
+    
 }
 #pragma mark - Init Method
 
@@ -117,6 +145,17 @@
     [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
     [self addSubview:_separtatorLine];
     
+    _secondTitlelabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_secondTitlelabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
+    [_secondTitlelabel setTextColor:COLOR_RGB_255(68, 68, 68)];
+    [self addSubview:_secondTitlelabel];
+    
+    _secondTextField = [[UITextField alloc] init];
+    [_secondTextField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
+    _secondTextField.delegate = self;
+    [_secondTextField setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:_secondTextField];
+    
 }
 
 #pragma mark - Setter&Getter
@@ -141,6 +180,19 @@
     NSString *newString = [NSString stringWithFormat:@"   %@",_titlePlaceholder];
     [_textField setPlaceholder:newString];
     [_textField sizeToFit];
+}
+
+- (void)setSecondTitle:(NSString *)secondTitle
+{
+    _secondTitle = secondTitle;
+    [_secondTitlelabel setText:_secondTitle];
+}
+
+- (void)setSecondTitlePlaceholder:(NSString *)secondTitlePlaceholder
+{
+    _secondTitlePlaceholder = secondTitlePlaceholder;
+    [_secondTextField setPlaceholder:_secondTitlePlaceholder];
+    [_secondTextField sizeToFit];
 }
 
 - (void)setTextFiledBGColor:(UIColor *)textFiledBGColor

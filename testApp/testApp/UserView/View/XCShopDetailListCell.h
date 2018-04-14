@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol XCShopDetailListCell <NSObject>
+@class XCShopServiceModel;
+@protocol XCShopDetailListCellDelegate <NSObject>
 - (void)XCShopDetailListCellClickEditedButton:(UIButton *)button;
 @end
 
 @interface XCShopDetailListCell : UICollectionViewCell
+/** <# 注释 #> */
+@property (nonatomic, weak) id<XCShopDetailListCellDelegate> delegate ;
+- (void)setupCellWithModel:(XCShopServiceModel *)model;
 
 @end
