@@ -38,7 +38,6 @@
     self.labelNumber.frame = CGRectMake(200 * ViewRateBaseOnIP6, 32 * ViewRateBaseOnIP6, SCREEN_WIDTH - 230 * ViewRateBaseOnIP6, 22 * ViewRateBaseOnIP6);
     self.labelNumber.textAlignment = NSTextAlignmentRight;
     self.labelNumber.backgroundColor = [UIColor clearColor];
-    self.labelNumber.textColor = [UIColor colorWithHexString:@"#444444"];
     self.labelNumber.font = [UIFont systemFontOfSize:22 * ViewRateBaseOnIP6];
 }
 

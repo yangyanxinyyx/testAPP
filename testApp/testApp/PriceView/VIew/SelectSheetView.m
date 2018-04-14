@@ -21,9 +21,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor darkGrayColor];
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
-       
         [self addSubview:self.touchView];
-        [self addSubview:self.buttonCancle];
     }
     return self;
 }
@@ -64,8 +62,9 @@
     labelText.text = @"请选择";
     [self.topView setBackgroundColor:[UIColor whiteColor]];
     [self.topView addSubview:labelText];
+    [self.topView addSubview:self.buttonCancle];
     [self addSubview:self.topView];
-    self.touchView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (80*ViewRateBaseOnIP6 * dataArray.count+88*ViewRateBaseOnIP6));
+    self.touchView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (80*ViewRateBaseOnIP6 * dataArray.count+88 * ViewRateBaseOnIP6));
 }
 
 - (void)tapGestCell:(UITapGestureRecognizer *)tapGest{
@@ -95,9 +94,10 @@
 - (UIButton *)buttonCancle{
     if (!_buttonCancle) {
         _buttonCancle = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buttonCancle.frame = CGRectMake(SCREEN_WIDTH - 60, 30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
+        _buttonCancle.frame = CGRectMake(SCREEN_WIDTH - 60, 0 , 88 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
         [_buttonCancle addTarget:self action:@selector(touchCancle:) forControlEvents:UIControlEventTouchDown];
         [_buttonCancle setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        _buttonCancle.backgroundColor = [UIColor redColor];
     }
     return _buttonCancle;
 }

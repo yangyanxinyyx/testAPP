@@ -16,5 +16,6 @@
 
 @interface PriceInfoSaveTableViewCell : UITableViewCell
 @property (nonatomic, weak)id <PriceInfoSaveTableViewCellDelegate> delegate;
+- (void)setCellState:(BOOL)isSave;
 
 @end

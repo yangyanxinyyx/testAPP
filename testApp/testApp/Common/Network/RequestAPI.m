@@ -76,6 +76,9 @@
 
 //获取一家保险公司的报价详情
 #define PRECISEPRICE_API [NSString stringWithFormat:@"%@/api/web/bihu/getPrecisePrice",API_PREFIX]
+
+//保存报价
+#define SAVEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/addOffer",API_PREFIX]
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -272,7 +275,7 @@
 //获取投保价格
 + (void)getInsuredrice:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
     [self getRequest:INSUREDPRICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
-        success(paramenter);
+        success(response);
     } fail:^(id error) {
         fail(error);
     }];
@@ -281,7 +284,16 @@
 //获取一家保险公司的报价详情
 + (void)getPrecisePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
     [self getRequest:PRECISEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
-        success(paramenter);
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//保存报价
++ (void)getSavePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+    [self getRequest:SAVEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
     } fail:^(id error) {
         fail(error);
     }];

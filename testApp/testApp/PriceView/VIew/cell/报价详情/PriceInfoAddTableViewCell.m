@@ -27,7 +27,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.imageViewAdd.frame = CGRectMake(356 * ViewRateBaseOnIP6, 25 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
-    self.imageViewAdd.image = [UIImage imageNamed:@""];
+    self.imageViewAdd.image = [UIImage imageNamed:@"add"];
 }
 - (void)drawRect:(CGRect)rect
 {

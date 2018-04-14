@@ -8,8 +8,8 @@
 
 #import "XCModifyPwdViewController.h"
 
-@interface XCModifyPwdViewController ()<BaseNavigationBarDelegate>
-
+@interface XCModifyPwdViewController ()<BaseNavigationBarDelegate,UITextFieldDelegate>
+@property (nonatomic,strong) NSMutableArray *textFieldArray;
 @end
 
 @implementation XCModifyPwdViewController
@@ -53,6 +53,8 @@
         accoutTextField.leftView=imageView;
         accoutTextField.leftViewMode = UITextFieldViewModeAlways;
         accoutTextField.font = [UIFont systemFontOfSize:14];
+        accoutTextField.tag = i;
+        [self.textFieldArray addObject:accoutTextField];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, kHeightForNavigation + 44 * (i + 1), SCREEN_WIDTH - 30, 1)];
         line.backgroundColor = COLOR_RGBA_255(229, 229, 229, 1);
@@ -75,10 +77,52 @@
 
 - (void)pressConfirmBtn:(UIButton *)sender
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
-    [self.view addSubview:tipsView];
+    UITextField *textFieldPassword = [self.textFieldArray objectAtIndex:0];
+    UITextField *textFieldNewPassword = [self.textFieldArray objectAtIndex:1];
+    for (UITextField *textField in self.textFieldArray) {
+        [textField endEditing:YES];
+    }
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[UserInfoManager shareInstance].userID forKey:@"id"];
+    [dic setObject:textFieldPassword.text forKey:@"password"];
+    [dic setObject:textFieldNewPassword.text forKey:@"newPassword"];
+    [RequestAPI updatePassWord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"result"]) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
+            [self.view addSubview:tipsView];
+        } else {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败,请联系客服" complete:nil];
+            [self.view addSubview:tipsView];
+        }
+    } fail:^(id error) {
+
+    }];
+    
+    
+  
 }
 #pragma mark - Delegates & Notifications
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    for (UITextField *textField in self.textFieldArray) {
+        [textField endEditing:YES];
+    }
+}
+
+#pragma mark - textFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [textField endEditing:YES];
+    
+    if (textField.tag == 2) {
+        UITextField *textFieldNewPassword = [self.textFieldArray objectAtIndex:1];
+        if (![textField.text isEqualToString:textFieldNewPassword.text]) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"确认密码错误" complete:nil];
+            textField.text = @"";
+            [[UIApplication sharedApplication].keyWindow addSubview:tipsView];
+        }
+    }
+    
+    
+}
 
 #pragma  mark - BaseNavigationBarDelegate
 
@@ -92,4 +136,10 @@
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter
+- (NSMutableArray *)textFieldArray{
+    if (!_textFieldArray) {
+        _textFieldArray = [NSMutableArray array];
+    }
+    return _textFieldArray;
+}
 @end

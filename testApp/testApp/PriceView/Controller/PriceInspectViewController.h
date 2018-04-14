@@ -9,5 +9,6 @@
 #import "BaseViewController1.h"
 
 @interface PriceInspectViewController : BaseViewController1
-
+@property (nonatomic, strong) NSString *blType;
+@property (nonatomic, strong) NSString *route;
 @end
