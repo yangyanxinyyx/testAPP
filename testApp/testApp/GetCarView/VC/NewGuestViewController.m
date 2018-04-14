@@ -7,6 +7,7 @@
 //
 
 #import "NewGuestViewController.h"
+#import "UserInfoInputView.h"
 
 @interface NewGuestViewController ()<BaseNavigationBarDelegate>
 
@@ -34,9 +35,8 @@
 
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
 
-    []
+    [self createUI];
 
-    // Do any additional setup after loading the view.
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
@@ -46,11 +46,36 @@
     }
 }
 
-- (void)createUI
-{
-    for (int i=0; i<; <#increment#>) {
-        <#statements#>
+- (void)createUI{
+    if (_isOrder) {
+        NSArray *array = @[@"客户名称",@"车  牌  号",@"车  型  号",@"联系电话",@"项目类别",@"项目费用",@"消费时间"];
+        for (int i=0; i<7; i++) {
+            if (i<4) {
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField];
+                [self.view addSubview:inputView];
+            }else if (i == 4){
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeSelect];
+                [self.view addSubview:inputView];
+            }else if (i == 5){
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField];
+                [self.view addSubview:inputView];
+            }else if (i == 6){
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeDate];
+                [self.view addSubview:inputView];
+            }
+        }
     }
+
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15, 412, SCREEN_WIDTH - 30, 44)];
+    [btn setTitle:@"提交" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(pressConmit) forControlEvents:UIControlEventTouchUpInside];
+    btn.backgroundColor = COLOR_RGB_255(0, 77, 162);
+    [self.view addSubview:btn];
+}
+
+- (void)pressConmit
+{
 
 }
 
