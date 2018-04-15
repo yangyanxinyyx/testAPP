@@ -22,6 +22,9 @@ static NSString *identifier = @"listCell";
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *searchContenView;
 @property (nonatomic, strong) UITextField *textField;
+
+@property (nonatomic, strong) UIButton *orderBtn;
+@property (nonatomic, strong) UIButton *fixBtn;
 @end
 
 @implementation GetCarListViewController
@@ -46,12 +49,15 @@ static NSString *identifier = @"listCell";
         return;
     }
 
-    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44) style:UITableViewStylePlain];
+    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44 - 30 -44) style:UITableViewStylePlain];
     _tab.delegate = self;
     _tab.dataSource = self;
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tab.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [self.view addSubview:_tab];
+
+    [self.view addSubview:self.orderBtn];
+    [self.view addSubview:self.fixBtn];
 
 }
 
@@ -87,6 +93,7 @@ static NSString *identifier = @"listCell";
                     }
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tab reloadData];
+                        [self showFixBtn:_dataSource.count > 0 ? NO : YES];
                     });
                 }
             }else{
@@ -99,6 +106,19 @@ static NSString *identifier = @"listCell";
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [self.view addSubview:tipsView];
     }];
+}
+
+- (void)showFixBtn:(BOOL)show
+{
+    if (show) {
+        self.fixBtn.hidden = NO;
+        self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
+
+    }else{
+        self.fixBtn.hidden = YES;
+        self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
+    }
+
 }
 
 #pragma mark - tableView
@@ -144,6 +164,16 @@ static NSString *identifier = @"listCell";
         GetCarViewController *VC = [[GetCarViewController alloc] init];
         [self.navigationController pushViewController:VC animated:YES];
     }
+}
+
+- (void)pressOrderBtn{
+
+
+}
+
+- (void)pressFixBtn{
+
+    
 }
 
 #pragma mark - getter&setter
@@ -209,6 +239,36 @@ static NSString *identifier = @"listCell";
         _textField.rightViewMode = UITextFieldViewModeAlways;
     }
     return _textField;
+}
+
+- (UIButton *)orderBtn
+{
+    if (!_orderBtn) {
+        _orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44)];
+        [_orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _orderBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [_orderBtn addTarget:self action:@selector(pressOrderBtn) forControlEvents:UIControlEventTouchUpInside];
+        _orderBtn.layer.cornerRadius = 5;
+        _orderBtn.layer.masksToBounds = YES;
+        [_orderBtn setTitle:@"新增订单" forState:UIControlStateNormal];
+        _orderBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+    }
+    return _orderBtn;
+}
+
+- (UIButton *)fixBtn
+{
+    if (!_fixBtn) {
+        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
+        [_fixBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _fixBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [_fixBtn addTarget:self action:@selector(pressFixBtn) forControlEvents:UIControlEventTouchUpInside];
+        _fixBtn.layer.cornerRadius = 5;
+        _fixBtn.layer.masksToBounds = YES;
+        [_fixBtn setTitle:@"新增维修" forState:UIControlStateNormal];
+        _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+    }
+    return _fixBtn;
 }
 
 - (void)didReceiveMemoryWarning {

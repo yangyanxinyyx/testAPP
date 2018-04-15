@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class XCCheckoutDetailBaseModel;
+@class XCCustomerDetailModel;
 @interface XCCheckoutDetailTextCell : UITableViewCell
 
 @property (nonatomic, strong) NSString * title ;
@@ -18,5 +19,5 @@
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
 
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
-
+- (void)setupCellWithCustomerDetailModel:(XCCustomerDetailModel *)model;
 @end

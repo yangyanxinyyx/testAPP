@@ -8,6 +8,7 @@
 
 #import "XCCheckoutDetailTextCell.h"
 #import "XCCheckoutDetailBaseModel.h"
+#import "XCCustomerDetailModel.h"
 @interface XCCheckoutDetailTextCell()
 
 @property (nonatomic, strong) UILabel * titleLabel ;
@@ -54,6 +55,7 @@
 }
 
 #pragma mark - Action Method
+
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model
 {
     if ([self.title isEqualToString:@"投保人:"] && isUsableNSString(model.onwerName,@"")) {
@@ -127,7 +129,48 @@
     }
 }
 
-
+- (void)setupCellWithCustomerDetailModel:(XCCustomerDetailModel *)model
+{
+    if ([self.title isEqualToString:@"客户名称:"] && isUsableNSString(model.customerName,@"")) {
+        [_placeholderLabel setText:model.customerName];
+    }
+    else if ([self.title isEqualToString:@"客户来源:"] && isUsableNSString(model.source,@"")) {
+        [_placeholderLabel setText:model.source];
+    }
+    else if ([self.title isEqualToString:@"性别:"] && isUsableNSString(model.sex,@"")) {
+        [_placeholderLabel setText:model.sex];
+    }
+    else if ([self.title isEqualToString:@"生日:"] && isUsableNSString(model.birthday,@"")) {
+        [_placeholderLabel setText:model.birthday];
+    }
+    else if ([self.title isEqualToString:@"区域:"] && isUsableNSString(model.area,@"")) {
+        [_placeholderLabel setText:model.area];
+    }
+    else if ([self.title isEqualToString:@"地址:"] && isUsableNSString(model.address,@"")) {
+        [_placeholderLabel setText:model.address];
+    }
+    else if ([self.title isEqualToString:@"身份证:"] && isUsableNSString(model.identity,@"")) {
+        [_placeholderLabel setText:model.identity];
+    }
+    else if ([self.title isEqualToString:@"车牌号:"] && isUsableNSString(model.brand,@"")) {
+        [_placeholderLabel setText:model.brand];
+    }
+    else if ([self.title isEqualToString:@"初登日期:"] && isUsableNSString(model.recordDate,@"")) {
+        [_placeholderLabel setText:model.recordDate];
+    }
+    else if ([self.title isEqualToString:@"车架号:"] && isUsableNSString(model.vinNo,@"")) {
+        [_placeholderLabel setText:model.vinNo];
+    }
+    else if ([self.title isEqualToString:@"发动机号:"] && isUsableNSString(model.engineNo,@"")) {
+        [_placeholderLabel setText:model.engineNo];
+    }
+    else if ([self.title isEqualToString:@"车型代码:"] && isUsableNSString(model.model,@"")) {
+        [_placeholderLabel setText:model.vinNo];
+    }
+    else if ([self.title isEqualToString:@"联系方式:"] && isUsableNSString(model.phoneNo,@"")) {
+        [_placeholderLabel setText:model.phoneNo];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

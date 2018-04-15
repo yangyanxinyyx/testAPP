@@ -128,6 +128,7 @@
     return 0.1;
 }
 
+
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter
@@ -142,7 +143,9 @@
 {
     _bottomHeight = bottomHeight;
     CGFloat tableViewH = SCREEN_HEIGHT - (kHeightForNavigation +  _bottomHeight + kBottomMargan) ;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, tableViewH)];}
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, tableViewH)];
+    
+}
 
 
 

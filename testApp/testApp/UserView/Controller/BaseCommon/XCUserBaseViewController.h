@@ -25,7 +25,7 @@
 #define kHeaderViewID @"headerViewID"
 #define kFooterViewID @"footerViewID"
 
-@interface XCUserBaseViewController : BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
+@interface XCUserBaseViewController : BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,UIScrollViewDelegate>
 
 /** 自定义导航栏 */
 @property (nonatomic, strong) BaseNavigationBar *topBar ;

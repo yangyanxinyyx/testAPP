@@ -10,4 +10,6 @@
 
 @interface NewGuestViewController : BaseViewController1
 
+- (instancetype)initWithType:(BOOL)isOrder;
+
 @end

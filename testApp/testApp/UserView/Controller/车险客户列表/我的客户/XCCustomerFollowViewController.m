@@ -7,8 +7,11 @@
 //
 
 #import "XCCustomerFollowViewController.h"
-
+#import "SelectTimeView.h"
+#import "PriceUnderwritingImportTableViewCell.h"
+#define kimportTableCellID @"importTableCellID"
 @interface XCCustomerFollowViewController ()<XCDistributionFooterViewDelegate>
+@property (nonatomic, strong) SelectTimeView * SelectTimeV ;
 
 @end
 
@@ -21,6 +24,7 @@
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
     [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
+    [self.tableView registerClass:[PriceUnderwritingImportTableViewCell class] forCellReuseIdentifier:kimportTableCellID];
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
@@ -35,10 +39,38 @@
 }
 - (void)initUI
 {
-    
+    __weak typeof (self)weakSelf = self;
+    _SelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _SelectTimeV.hidden = YES;
+    self.SelectTimeV.block = ^(NSString *string ) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        XCDistributionPicketCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+        [cell setTitleValue:string];
+//        weakSelf.billModel.shipmentTime = string;
+    };
 }
 #pragma mark - Action Method
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    __weak typeof (self)weakSelf = self;
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
+        if ((indexPath.section == 0 && indexPath.row == 0)) {
+            NSArray * arr = @[@"无责事故案件",@"代垫付案件",@"人伤案件",@"特俗案件",@"其他案件"];
+            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+//                weakSelf.billModel.packageGiveOrBuy = selectStr;
+                [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
+            }];
+            [weakSelf.view addSubview:alterView];
+        }
+        else if ((indexPath.section == 0 && indexPath.row == 1)) {
+            [self.SelectTimeV inputSelectTiemView:YES];
+        }
+       
+    }
+}
 #pragma mark - Delegates & Notifications
 #pragma mark - XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
@@ -57,13 +89,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *title = self.dataArrM[indexPath.row];
-    XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID forIndexPath:indexPath];
-    if (indexPath.row == self.dataArrM.count - 1) {
-        cell.shouldShowSeparator = NO;
-    }
-    [cell setTitle:title];
     
-    return cell;
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        PriceUnderwritingImportTableViewCell *cell = (PriceUnderwritingImportTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kimportTableCellID forIndexPath:indexPath];
+        return cell;
+    }else {
+        XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID forIndexPath:indexPath];
+        if (indexPath.row == self.dataArrM.count - 1) {
+            cell.shouldShowSeparator = NO;
+        }
+        [cell setTitle:title];
+        return cell;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -76,6 +113,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 2) {
+        return 233 * ViewRateBaseOnIP6;
+    }
     return 88 * ViewRateBaseOnIP6;
 }
 

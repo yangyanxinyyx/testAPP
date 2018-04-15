@@ -7,6 +7,8 @@
 //
 
 #import "XCUserBaseViewController.h"
-
+#import "XCCustomerDetailModel.h"
 @interface XCCustomerDetailViewController : XCUserBaseViewController
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCustomerDetailModel * model ;
 @end
