@@ -10,5 +10,5 @@
 
 @interface SelectTimeView : UIView
 @property (nonatomic, copy)void (^block)(NSString*);
-- (void)inputSelectTiemView:(BOOL)isInput;
+
 @end

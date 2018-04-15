@@ -61,6 +61,7 @@
         [self.buttonSelect setBackgroundImage:[UIImage imageNamed:@"unSelect"] forState:UIControlStateNormal];
     }
     _isSelect = !_isSelect;
+    [self.delegate getRenewalStatus:_isSelect];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

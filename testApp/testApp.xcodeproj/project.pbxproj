@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2504C52D208345FA00A86022 /* InsuranceCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2504C52C208345FA00A86022 /* InsuranceCompanyModel.m */; };
 		250784C42081A28600B573F3 /* InputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 250784C32081A28600B573F3 /* InputTextView.m */; };
 		25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701658207D07ED007177F5 /* PriceInfoModel.m */; };
 		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
@@ -251,6 +252,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2504C52B208345FA00A86022 /* InsuranceCompanyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsuranceCompanyModel.h; sourceTree = "<group>"; };
+		2504C52C208345FA00A86022 /* InsuranceCompanyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsuranceCompanyModel.m; sourceTree = "<group>"; };
 		250784C22081A28600B573F3 /* InputTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputTextView.h; sourceTree = "<group>"; };
 		250784C32081A28600B573F3 /* InputTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputTextView.m; sourceTree = "<group>"; };
 		25701657207D07ED007177F5 /* PriceInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceInfoModel.h; sourceTree = "<group>"; };
@@ -663,6 +666,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2504C52A2083459E00A86022 /* 提交核保 */ = {
+			isa = PBXGroup;
+			children = (
+				2504C52B208345FA00A86022 /* InsuranceCompanyModel.h */,
+				2504C52C208345FA00A86022 /* InsuranceCompanyModel.m */,
+			);
+			path = "提交核保";
+			sourceTree = "<group>";
+		};
 		25701656207D07D3007177F5 /* 报价详情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1340,6 +1352,7 @@
 		FC32BF612079AA5800817156 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2504C52A2083459E00A86022 /* 提交核保 */,
 				25EA236D207E5AC000A60866 /* 调整报价 */,
 				25701656207D07D3007177F5 /* 报价详情 */,
 				259A83EC207BACFA006693FB /* 上年续保记录 */,
@@ -1892,6 +1905,7 @@
 				A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
+				2504C52D208345FA00A86022 /* InsuranceCompanyModel.m in Sources */,
 				FC32BF2A2079AA2000817156 /* XCUserWaitingToPayingDetailViewController.m in Sources */,
 				FC32BE102079261100817156 /* GetCarView.m in Sources */,
 				FC32BF392079AA2000817156 /* XCCheckoutDetailBaseModel.m in Sources */,

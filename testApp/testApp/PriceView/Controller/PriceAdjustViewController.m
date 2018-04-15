@@ -63,78 +63,152 @@
 #pragma mark -data
 - (void)setData{
     
-    PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
-    jqModel.name = @"交强险";
-    jqModel.isToubao = @"投保";
-    [self.dataArray addObject:jqModel];
+    if (!self.passArray || self.passArray.count == 0) {
+        PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
+        jqModel.name = @"交强险";
+        jqModel.isToubao = @"Y";
+        [self.dataArray addObject:jqModel];
+        
+        PriceInfoModel *csModel = [[PriceInfoModel alloc] init];
+        csModel.name = @"机动车损险";
+        csModel.isToubao = @"Y";
+        csModel.isMianpei = @"N";
+        [self.dataArray addObject:csModel];
     
-    PriceInfoModel *csModel = [[PriceInfoModel alloc] init];
-    csModel.name = @"机动车损险";
-    csModel.isToubao = @"不投保";
-    csModel.isMianpei = @"N";
-    [self.dataArray addObject:csModel];
+        
+        PriceInfoModel *szModel = [[PriceInfoModel alloc] init];
+        szModel.name = @"第三责任险";
+        szModel.isToubao = @"Y";
+        szModel.isMianpei = @"N";
+        szModel.model = [self.arraysz firstObject];
+        [self.dataArray addObject:szModel];
+        
+        PriceInfoModel *sjModel = [[PriceInfoModel alloc] init];
+        sjModel.name = @"司机责任险";
+        sjModel.isToubao = @"Y";
+        sjModel.isMianpei = @"N";
+        sjModel.model = [self.arraysj firstObject];
+        [self.dataArray addObject:sjModel];
+        
+        PriceInfoModel *ckModel = [[PriceInfoModel alloc] init];
+        ckModel.name = @"乘客责任险";
+        ckModel.isToubao = @"Y";
+        ckModel.isMianpei = @"N";
+        ckModel.model = [self.arrayck firstObject];
+        [self.dataArray addObject:ckModel];
+        
+        PriceInfoModel *hhModel = [[PriceInfoModel alloc] init];
+        hhModel.name = @"划痕险";
+        hhModel.isToubao = @"Y";
+        hhModel.isMianpei = @"N";
+        hhModel.model = [self.arrayhh firstObject];
+        [self.dataArray addObject:hhModel];
+        
+        PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
+        dqModel.name = @"盗抢险";
+        dqModel.isToubao = @"N";
+        dqModel.isMianpei = @"N";
+        [self.dataArray addObject:dqModel];
+        
+        PriceInfoModel *ssModel = [[PriceInfoModel alloc] init];
+        ssModel.name = @"涉水险";
+        ssModel.isToubao = @"N";
+        ssModel.isMianpei = @"N";
+        [self.dataArray addObject:ssModel];
     
-    PriceInfoModel *szModel = [[PriceInfoModel alloc] init];
-    szModel.name = @"第三责任险";
-    szModel.isToubao = @"投保";
-    szModel.isMianpei = @"N";
-    szModel.model = [self.arraysz firstObject];
-    [self.dataArray addObject:szModel];
     
-    PriceInfoModel *sjModel = [[PriceInfoModel alloc] init];
-    sjModel.name = @"司机责任险";
-    sjModel.isToubao = @"投保";
-    sjModel.isMianpei = @"N";
-    sjModel.model = [self.arraysj firstObject];
-    [self.dataArray addObject:sjModel];
-    
-    PriceInfoModel *ckModel = [[PriceInfoModel alloc] init];
-    ckModel.name = @"乘客责任险";
-    ckModel.isToubao = @"投保";
-    ckModel.isMianpei = @"N";
-    ckModel.model = [self.arrayck firstObject];
-    [self.dataArray addObject:ckModel];
-    
-    PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
-    dqModel.name = @"盗抢险";
-    dqModel.isToubao = @"不投保";
-    dqModel.isMianpei = @"N";
-    [self.dataArray addObject:dqModel];
-    
-    PriceInfoModel *ssModel = [[PriceInfoModel alloc] init];
-    ssModel.name = @"涉水险";
-    ssModel.isToubao = @"不投保";
-    ssModel.isMianpei = @"N";
-    [self.dataArray addObject:ssModel];
-    
-    PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
-    blModel.name = @"玻璃险";
-    blModel.isToubao = @"不投保";
-    blModel.isMianpei = @"N";
-    priceModel *modelBL = [[priceModel alloc] init];
-    modelBL.content = @"不投保";
-    modelBL.value = @"0";
-    blModel.model = modelBL;
-    [self.dataArray addObject:blModel];
-    
-    PriceInfoModel *hhModel = [[PriceInfoModel alloc] init];
-    hhModel.name = @"划痕险";
-    hhModel.isToubao = @"投保";
-    hhModel.isMianpei = @"N";
-    hhModel.model = [self.arrayhh firstObject];
-    [self.dataArray addObject:hhModel];
-    
-    PriceInfoModel *zrModel = [[PriceInfoModel alloc] init];
-    zrModel.name = @"自然损失险";
-    zrModel.isToubao = @"不投保";
-    zrModel.isMianpei = @"N";
-    [self.dataArray addObject:zrModel];
-    
-    PriceInfoModel *wsModel = [[PriceInfoModel alloc] init];
-    wsModel.name = @"无法找到第三方";
-    wsModel.isToubao = @"不投保";
-    wsModel.isMianpei = @"N";
-    [self.dataArray addObject:wsModel];
+        
+        PriceInfoModel *zrModel = [[PriceInfoModel alloc] init];
+        zrModel.name = @"自燃损失险";
+        zrModel.isToubao = @"N";
+        zrModel.isMianpei = @"N";
+        [self.dataArray addObject:zrModel];
+        
+        PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
+        blModel.name = @"玻璃险";
+        blModel.isToubao = @"N";
+        blModel.isMianpei = @"N";
+        priceModel *modelBL = [[priceModel alloc] init];
+        modelBL.content = @"不投保";
+        modelBL.value = @"0";
+        blModel.model = modelBL;
+        [self.dataArray addObject:blModel];
+        
+        PriceInfoModel *wsModel = [[PriceInfoModel alloc] init];
+        wsModel.name = @"无法找到第三方";
+        wsModel.isToubao = @"N";
+        wsModel.isMianpei = @"N";
+        [self.dataArray addObject:wsModel];
+    } else {
+        
+        
+        //    PriceInfoModel *jqModel = [self.passArray objectAtIndex:0];
+        //    if ([jqModel.isMianpei isEqualToString:@"Y"]) {
+        //        jqModel.isMianpei = @"1";
+        //    } else {
+        //        jqModel.isMianpei = @"0";
+        //    }
+        
+        PriceInfoModel *szModel = [self.passArray objectAtIndex:3];
+        if (![szModel.isToubao isEqualToString:@"N"] && ![szModel.isToubao isEqualToString:@"Y"]) {
+            for (priceModel *priceM in self.arraysz) {
+                if ([priceM.value doubleValue] == [szModel.isToubao doubleValue]) {
+                    szModel.model = priceM;
+                }
+            }
+        } else {
+            szModel.model = [self.arraysz firstObject];
+        }
+        
+        
+        PriceInfoModel *sjModel = [self.passArray objectAtIndex:4];
+        if (![sjModel.isToubao isEqualToString:@"N"] && ![sjModel.isToubao isEqualToString:@"Y"]) {
+            for (priceModel *priceM in self.arraysj) {
+                if ([priceM.value doubleValue] == [sjModel.isToubao doubleValue]) {
+                    sjModel.model = priceM;
+                }
+            }
+            
+        } else {
+            sjModel.model = [self.arraysj firstObject];
+        }
+        
+        
+        PriceInfoModel *ckModel = [self.passArray objectAtIndex:5];
+        if (![ckModel.isToubao isEqualToString:@"N"] && ![ckModel.isToubao isEqualToString:@"Y"]) {
+            for (priceModel *priceM in self.arrayck) {
+                if ([priceM.value doubleValue] == [ckModel.isToubao doubleValue]) {
+                    ckModel.model = priceM;
+                }
+            }
+        } else {
+            ckModel.model = [self.arrayck firstObject];
+        }
+        
+        PriceInfoModel *hhModel = [self.passArray objectAtIndex:6];
+        if (![hhModel.isToubao isEqualToString:@"N"] && ![hhModel.isToubao isEqualToString:@"Y"]) {
+            for (priceModel *priceM in self.arrayhh) {
+                if ([priceM.value doubleValue] == [hhModel.isToubao doubleValue]) {
+                    hhModel.model = priceM;
+                }
+            }
+        } else {
+            hhModel.model = [self.arrayhh firstObject];
+        }
+        
+        PriceInfoModel *blModel = [self.passArray objectAtIndex:9];
+        priceModel *blPriceModel = [[priceModel alloc] init];
+        if ([blModel.isToubao isEqualToString:@"0"]) {
+            blPriceModel.content = @"不投保";
+        } else if ([blModel.isToubao isEqualToString:@"1"]) {
+            blPriceModel.content = @"国产玻璃";
+        } else {
+            blPriceModel.content = @"进口玻璃";
+        }
+        blPriceModel.value = blModel.isToubao;
+        blModel.model = blPriceModel;
+        [self.dataArray addObjectsFromArray:self.passArray];
+    }
     
 }
 
@@ -230,6 +304,7 @@
 - (void)reloadTableView{
     if (isRequsthh && isRequstsj && isRequstck && isRequstsz) {
         [self setData];
+        
         [self.myTableView reloadData];
     }
 }
@@ -293,48 +368,9 @@
     //        [dic setObject:@"0" forKey:@"chengke"];
     //    }
     [dic setObject:ckModel.model.value forKey:@"chengke"];
+
     
-    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:5];
-    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
-        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
-    }
-    if ([dqModel.isToubao isEqualToString:@"投保"]) {
-        [dic setObject:@"1" forKey:@"daoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"daoqiang"];
-    }
-//    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
-    
-    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:6];
-    if ([ssModel.isMianpei isEqualToString:@"Y"]) {
-        [dic setObject:@"1" forKey:@"bujimianSheshui"];
-    } else {
-        [dic setObject:@"0" forKey:@"bujimianSheshui"];
-    }
-    if ([ssModel.isToubao isEqualToString:@"投保"]) {
-        [dic setObject:@"1" forKey:@"sheshui"];
-    } else {
-        [dic setObject:@"0" forKey:@"sheshui"];
-    }
-    //    [dic setObject:ssModel.model.value forKey:@"sheshui"];
-    
-    PriceInfoModel *blModel = [self.dataArray objectAtIndex:7];
-//    if ([blModel.isMianpei isEqualToString:@"Y"]) {
-//        [dic setObject:@"1" forKey:@"bujimianSheshui"];
-//    } else {
-//        [dic setObject:@"0" forKey:@"bujimianSheshui"];
-//    }
-    
-    if ([blModel.isToubao isEqualToString:@"投保"]) {
-        [dic setObject:@"1" forKey:@"boli"];
-    } else {
-        [dic setObject:@"0" forKey:@"boli"];
-    }
-    [dic setObject:blModel.model.value forKey:@"boli"];
-    
-    PriceInfoModel *hhModel = [self.dataArray objectAtIndex:8];
+    PriceInfoModel *hhModel = [self.dataArray objectAtIndex:5];
     if ([hhModel.isMianpei isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"bujimianHuahen"];
     } else {
@@ -347,7 +383,34 @@
 //    }
     [dic setObject:hhModel.model.value forKey:@"huahen"];
     
-    PriceInfoModel *zrModel = [self.dataArray objectAtIndex:9];
+    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:6];
+    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
+    }
+    if ([dqModel.isToubao isEqualToString:@"投保"]) {
+        [dic setObject:@"1" forKey:@"daoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"daoqiang"];
+    }
+    //    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
+    
+    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:7];
+    if ([ssModel.isMianpei isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"bujimianSheshui"];
+    } else {
+        [dic setObject:@"0" forKey:@"bujimianSheshui"];
+    }
+    if ([ssModel.isToubao isEqualToString:@"投保"]) {
+        [dic setObject:@"1" forKey:@"sheshui"];
+    } else {
+        [dic setObject:@"0" forKey:@"sheshui"];
+    }
+    //    [dic setObject:ssModel.model.value forKey:@"sheshui"];
+    
+    
+    PriceInfoModel *zrModel = [self.dataArray objectAtIndex:8];
     if ([zrModel.isMianpei isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"bujimianZiran"];
     } else {
@@ -359,6 +422,20 @@
         [dic setObject:@"0" forKey:@"ziran"];
     }
     //    [dic setObject:ssModel.model.value forKey:@"sheshui"];
+    
+    PriceInfoModel *blModel = [self.dataArray objectAtIndex:9];
+    //    if ([blModel.isMianpei isEqualToString:@"Y"]) {
+    //        [dic setObject:@"1" forKey:@"bujimianSheshui"];
+    //    } else {
+    //        [dic setObject:@"0" forKey:@"bujimianSheshui"];
+    //    }
+    
+    if ([blModel.isToubao isEqualToString:@"投保"]) {
+        [dic setObject:@"1" forKey:@"boli"];
+    } else {
+        [dic setObject:@"0" forKey:@"boli"];
+    }
+    [dic setObject:blModel.model.value forKey:@"boli"];
     
     PriceInfoModel *wsModel = [self.dataArray objectAtIndex:10];
     if ([wsModel.isToubao isEqualToString:@"投保"]) {
@@ -392,8 +469,7 @@
 }
 #pragma mark - view delegate
 - (void)didSelectCell:(NSString *)data count:(NSInteger)count priceCount:(NSInteger)priceCount{
-    if ((count >= 2 && count <= 4) || count == 8){
-       
+    if (count >= 2 && count <= 5){
         PriceInfoModel *modle = [self.dataArray objectAtIndex:count];
         priceModel *priceM;
         if (count == 2) {
@@ -409,12 +485,15 @@
             isChange = YES;
         }
         if (priceCount == 0) {
+            modle.isToubao = @"N";
             modle.isMianpei = @"N";
+        } else {
+            modle.isToubao = @"Y";
         }
         modle.model = priceM;
         [self.myTableView reloadData];
     } else {
-        if (count == 7) {
+        if (count == 9) {
             PriceInfoModel *modle = [self.dataArray objectAtIndex:count];
             if (![modle.model.content isEqualToString:data]) {
                 isChange = YES;
@@ -422,20 +501,31 @@
             modle.model.content = data;
             if ([data isEqualToString:@"不投保"]) {
                 modle.model.value = @"0";
+                modle.isToubao = @"N";
+                modle.isMianpei = @"N";
             } else if ([data isEqualToString:@"国产玻璃"]){
                 modle.model.value = @"1";
+                modle.isToubao = @"Y";
             } else {
                 modle.model.value = @"2";
+                modle.isToubao = @"Y";
             }
             
             [self.myTableView reloadData];
             return;
         }
         PriceInfoModel *model = [self.dataArray objectAtIndex:count];
-        if (![model.isToubao isEqualToString:data]) {
-            isChange = YES;
+        if ([data isEqualToString:@"投保"]) {
+            if ([model.isToubao isEqualToString:@"N"]) {
+                isChange = YES;
+            }
+            model.isToubao = @"Y";
+        } else {
+            if ([model.isToubao isEqualToString:@"Y"]) {
+                isChange = YES;
+            }
+            model.isToubao = @"N";
         }
-        model.isToubao = data;
         if ([data isEqualToString:@"不投保"]) {
             model.isMianpei = @"N";
         }
@@ -453,10 +543,17 @@
 - (void)getFranchiseState:(BOOL)state count:(NSInteger)count{
     
     PriceInfoModel *modle = [self.dataArray objectAtIndex:count];
-    if ([modle.isToubao isEqualToString:@"投保"]) {
-        if ([modle.model.content isEqualToString:@"不投保"]) {
-            return;
+    if ([modle.isToubao isEqualToString:@"Y"]) {
+        if ((count >= 2 && count <= 5) || count == 9){
+            if ([modle.model.content isEqualToString:@"不投保"]) {
+                return;
+            }
+        } else {
+            if ([modle.isToubao isEqualToString:@"N"]) {
+                return;
+            }
         }
+        
         isChange = YES;
         if (state) {
             modle.isMianpei = @"Y";
@@ -470,7 +567,7 @@
 }
 
 - (void)openToubao:(BOOL)state count:(NSInteger)count{
-    if ((count >= 2 && count <= 4) || count == 8){
+    if (count >= 2 && count <= 5){
         if (count == 2) {
             NSMutableArray *array = [NSMutableArray array];
             for (priceModel *model in self.arraysz) {
@@ -510,7 +607,7 @@
             [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         }
     } else {
-        if (count == 7) {
+        if (count == 9) {
             SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:@[@"不投保",@"国产玻璃",@"进口玻璃"]];
             selectView.tag = count;
             selectView.delegate = self;
@@ -562,7 +659,11 @@
         if (indexPath.section == 0 ) {
             PriceInfoModel *model = [self.dataArray objectAtIndex:indexPath.row];
             cell.labelName.text = model.name;
-            cell.labelTag.text = model.isToubao;
+            if ([model.isToubao isEqualToString:@"Y"]) {
+                cell.labelTag.text = @"投保";
+            }else {
+                cell.labelTag.text = @"不投保";
+            }
             [cell hiddenFranchiseView:YES];
             cell.tag = indexPath.row;
             [cell selectToubaoState:NO];
@@ -572,17 +673,21 @@
             cell.tag = indexPath.row + 1;
             PriceInfoModel *model = [self.dataArray objectAtIndex:indexPath.row + 1];
             cell.labelName.text = model.name;
-            if ((indexPath.row >= 1 && indexPath.row <=3) || indexPath.row == 7) {
+            if (indexPath.row >= 1 && indexPath.row < 5) {
                 cell.labelTag.text = model.model.content;
             } else {
-                if (indexPath.row == 6) {
+                if (indexPath.row == 8) {
                     cell.labelTag.text = model.model.content;
                 } else {
-                   cell.labelTag.text = model.isToubao;
+                    if ([model.isToubao isEqualToString:@"Y"]) {
+                        cell.labelTag.text = @"投保";
+                    }else {
+                        cell.labelTag.text = @"不投保";
+                    }
                 }
             }
             
-            if (indexPath.row == 6 || indexPath.row == 9) {
+            if (indexPath.row == 8 || indexPath.row == 9) {
                 [cell hiddenFranchiseView:YES];
             } else{
                 [cell hiddenFranchiseView:NO];

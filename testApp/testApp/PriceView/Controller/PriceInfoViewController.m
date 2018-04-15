@@ -625,7 +625,7 @@
 
 #pragma mark- cell Delegate
 - (void)savePriveInfoDelegate{
-    NSLog(@"保存");
+
     InputTextView *inputView = [[InputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     inputView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:inputView];
@@ -634,6 +634,8 @@
 
 - (void)submitNuclearInsDelegate{
     PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
+    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%0.2f", _syBaoFei];
+    priceUnderVC.dataArray = self.allDataArray;
     [self.navigationController pushViewController:priceUnderVC animated:YES];
     
 }
