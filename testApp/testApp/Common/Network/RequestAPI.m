@@ -70,6 +70,10 @@
 //获取车务详情
 #define GETCARTRANSACTION_API [NSString stringWithFormat:@"%@/api/web/carTransaction/getCarTransaction",API_PREFIX]
 
+//获取三大案件列表
+#define SELECTTHREECASEAPPLYLIST_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/selectThreeCaseApplyList",API_PREFIX]
+//获取三大案件详情
+#define GETTHREECASEAPPLY_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/getThreeCaseApply",API_PREFIX]
 //====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
@@ -412,6 +416,24 @@
 +(void)getCarTransaction:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:GETCARTRANSACTION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getThreeCaseApplyList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTTHREECASEAPPLYLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getThreeCaseApply:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETTHREECASEAPPLY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

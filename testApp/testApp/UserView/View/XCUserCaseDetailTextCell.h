@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "XCCarTransactioDetailModel.h"
+#import "XCUserCaseDetailModel.h"
 @interface XCUserCaseDetailTextCell : UITableViewCell
-/** <# 注释 #> */
+/** 标题 */
 @property (nonatomic, copy) NSString * titleStr ;
 /** 动态内容数组 */
 @property (nonatomic, strong) NSMutableArray * labelArrM ;
+
 /** 第二种类型 */
 @property (nonatomic, assign) BOOL isMutableTextType ;
-
+/** 长文字设置 */
+@property (nonatomic, copy) NSString * longString;
 
 /**
  年审初配置
@@ -30,5 +33,9 @@
  */
 - (void)setupCellWithRepairCarTranDetailModel:(XCCarTransactioDetailModel *)model;
 
+- (void)setupCellWithCaseDetailModel:(XCUserCaseDetailModel *)model;
+
+
 + (CGFloat)getCellHeight;
++ (CGFloat)getCaseCellHeightWithClip:(BOOL)clip;
 @end

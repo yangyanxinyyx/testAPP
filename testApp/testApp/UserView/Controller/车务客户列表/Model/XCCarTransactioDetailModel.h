@@ -76,7 +76,7 @@
 @property (nonatomic, copy) NSString * weizhangCity;
 
 //违章
-//缺少违章费用 、 违章条款
+//违章费用 、代缴费用
 
 //维修
 //接车时间、地址、预计完成时间、维修项目

@@ -7,7 +7,8 @@
 //
 
 #import "XCUserCaseBaseTableViewController.h"
-
+#import "XCUserCaseDetailModel.h"
 @interface XCUserInjuryCaseDetailViewController : XCUserCaseBaseTableViewController
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCUserCaseDetailModel * detailModel ;
 @end

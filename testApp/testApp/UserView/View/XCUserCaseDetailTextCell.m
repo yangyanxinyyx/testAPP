@@ -23,6 +23,7 @@
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * titleValueArr ;
 
+
 @end
 
 @implementation XCUserCaseDetailTextCell
@@ -30,6 +31,15 @@
 + (CGFloat)getCellHeight
 {
     return (20 + 557) * ViewRateBaseOnIP6;
+}
+
++ (CGFloat)getCaseCellHeightWithClip:(BOOL)clip
+{
+    if(clip) {
+        return 392 * ViewRateBaseOnIP6;
+    }else {
+        return (392 + 24 + 24) * ViewRateBaseOnIP6;
+    }
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -309,6 +319,55 @@
     }
 }
 
+- (void)setupCellWithCaseDetailModel:(XCUserCaseDetailModel *)model clipName:(BOOL)clip
+{
+ 
+    
+    NSString *contacts = @"";
+    NSString *phone = @"";
+    NSString *occurTime = @"";
+    NSString *createTime = @"";
+    NSString *name = @""; //选择门店
+#warning 缺少咨询电话
+    NSString *namePhone = @"";
+    if (isUsableNSString(model.contacts, @"")) {
+        contacts = model.contacts;
+    }
+    if (isUsableNSString(model.phone, @"")) {
+        phone = model.phone;
+    }
+    if (isUsableNSString(model.occurTime, @"")) {
+        occurTime = model.occurTime;
+    }
+    if (isUsableNSString(model.createTime, @"")) {
+        createTime = model.createTime;
+    }
+    if (isUsableNSString(model.name, @"")) {
+        name = model.name;
+    }
+    NSArray *baseTitleNameArr;
+    if (clip) {
+        baseTitleNameArr = @[@"联系人:",@"联系电话:",@"案发时间:",
+                                       @"提交时间:",@"咨询电话:"];
+        self.titleValueArr = @[contacts,phone,occurTime,
+                               createTime,namePhone];
+    }else {
+        baseTitleNameArr = @[@"联系人:",@"联系电话:",@"案发时间:",
+                                       @"提交时间:",@"选择门店:",@"咨询电话:"];
+        self.titleValueArr = @[contacts,phone,occurTime,
+                               createTime,name,namePhone];
+    }
+   
+    
+    for (int i = 0 ; i < _labelArrM.count; i++) {
+        NSString * title = baseTitleNameArr[i];
+        UILabel *label = _labelArrM[i];
+        [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+    }
+    
+}
+
+
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
@@ -339,6 +398,12 @@
 {
     _titleStr = titleStr;
     [_titleLabel setText:_titleStr];
+}
+
+- (void)setLongString:(NSString *)longString
+{
+    _longString = longString;
+     [_mutableTextLabel setText:longString];
 }
 
 -(void)setLabelArrM:(NSMutableArray *)labelArrM
