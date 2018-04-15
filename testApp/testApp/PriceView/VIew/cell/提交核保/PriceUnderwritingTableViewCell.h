@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PriceUnderwritingTableViewCellDelegate <NSObject>
+@optional
+- (void)getUnderwritingTextField:(UITextField *)textField;
+@end
 @interface PriceUnderwritingTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UILabel *labelInfo;
+@property (nonatomic, strong) UITextField *textFieldInfo;
+@property (nonatomic, weak) id <PriceUnderwritingTableViewCellDelegate>delegate;
+- (void)setTextFieldInfoHidden:(BOOL)isHidden;
 @end

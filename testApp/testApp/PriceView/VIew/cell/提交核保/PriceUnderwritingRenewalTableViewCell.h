@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol PriceUnderwritingRenewalTableViewCellDelegate <NSObject>
+- (void)getRenewalStatus:(BOOL)status;
+@end
 @interface PriceUnderwritingRenewalTableViewCell : UITableViewCell
-
+@property (nonatomic, weak) id<PriceUnderwritingRenewalTableViewCellDelegate>delegate;
 @end

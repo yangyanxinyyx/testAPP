@@ -87,6 +87,10 @@
 
 //保存报价
 #define SAVEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/addOffer",API_PREFIX]
+
+//核保 api/web/policy/insertPolicy
+#define UNDERWRITING_API [NSString stringWithFormat:@"%@/api/web/policy/insertPolicy",API_PREFIX]
+
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -301,6 +305,15 @@
 //保存报价
 + (void)getSavePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
     [self getRequest:SAVEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+// 核保
++ (void)getUnderwriting:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+    [self getRequest:UNDERWRITING_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

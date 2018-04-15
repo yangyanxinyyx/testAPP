@@ -73,6 +73,9 @@
     if (_block) {
         _block(view.tag);
     }
+    [UIView animateWithDuration:0.25 animations:^{
+        self.hidden = YES;
+    }];
     
 }
 - (UIView *)touchView{

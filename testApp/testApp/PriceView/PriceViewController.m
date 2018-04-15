@@ -71,7 +71,7 @@
             _sexView.labelContent.text = [data objectForKey:@"sex"];
             _addressView.labelContent.text = [data objectForKey:@"address"];
             _brandView.labelContent.text = [data objectForKey:@"brand"];
-            _chassisView.labelContent.text = [data objectForKey:@"vinNO"];
+            _chassisView.labelContent.text = [data objectForKey:@"vinNo"];
             _engineView.labelContent.text = [data objectForKey:@"engineNo"];
             _modelsView.labelContent.text = [data objectForKey:@"model"];
             if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
@@ -109,7 +109,10 @@
             if (![customerName isKindOfClass:[NSNull class]]){
                 [UserInfoManager shareInstance].customerName = [data objectForKey:@"customerName"];
             }
-            
+            NSNumber *identity = [data objectForKey:@"identity"];
+            if (![identity isKindOfClass:[NSNull class]]){
+                [UserInfoManager shareInstance].identity = [data objectForKey:@"identity"];
+            }
             
         }
 

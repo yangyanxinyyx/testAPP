@@ -68,7 +68,7 @@
         
         self.buttonSave.hidden = NO;
         self.buttonSave.frame = CGRectMake(55 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6);
-        self.buttonSubmit.frame = CGRectMake(395 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
+        self.buttonSubmit.frame = CGRectMake(395 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6);
         self.buttonSave.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
         self.buttonSave.layer.masksToBounds = YES;
         self.buttonSave.backgroundColor = [UIColor whiteColor];

@@ -9,5 +9,5 @@
 #import "BaseViewController1.h"
 
 @interface PriceAdjustViewController : BaseViewController1
-
+@property (nonatomic, strong) NSMutableArray *passArray;
 @end
