@@ -8,6 +8,7 @@
 
 #import "XCUserCaseScrollerViewCell.h"
 #import "UILabel+createLabel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface XCUserCaseScrollerViewCell ()
 /** <# 注释 #> */
 @property (nonatomic, strong) UIView * topView ;
@@ -22,7 +23,10 @@
 @end
 
 @implementation XCUserCaseScrollerViewCell
-
++ (CGFloat)getCellHeight
+{
+    return (88 + 140 +30 ) * ViewRateBaseOnIP6;
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -31,8 +35,8 @@
         _imageViewArrM = [[NSMutableArray alloc] init];
         [self configSubVies];
         [_titleLabel setText:@"刘某人伤案件理赔进度"];
-        UIImage *image = [UIImage imageNamed:@"未完成"];
-        self.photoArr = @[image,image,image,image,image,image,image,image,image,image];
+//        UIImage *image = [UIImage imageNamed:@"未完成"];
+//        self.photoArr = @[image,image,image,image,image,image,image,image,image,image];
     }
     return self;
 }
@@ -88,28 +92,37 @@
 }
 
 #pragma mark - Setter&Getter
-- (void)setPhotoArr:(NSArray<UIImage *> *)photoArr
+
+- (void)setTitleStr:(NSString *)titleStr
 {
-    if (photoArr.count > 0) {
+    _titleStr = titleStr;
+    [_titleLabel setText:_titleStr];
+}
+
+- (void)setPhotoURLArr:(NSArray<NSURL *> *)photoURLArr
+{
+    if (photoURLArr.count > 0) {
         CGFloat imageViewW = 140 * ViewRateBaseOnIP6;
         CGFloat rigthMargin = 16 * ViewRateBaseOnIP6;
-        [_scrollView setContentSize:CGSizeMake((imageViewW + rigthMargin) * photoArr.count ,imageViewW)];
-        _photoArr = photoArr;
+        [_scrollView setContentSize:CGSizeMake((imageViewW + rigthMargin) * photoURLArr.count ,imageViewW)];
+        _photoURLArr = photoURLArr;
         if (_scrollView.subviews.count > 0) {
             for (UIView *view in _scrollView.subviews) {
                 [view removeFromSuperview];
             }
         }
-        for (int i = 0 ; i < photoArr.count; i++) {
-            UIImage *image = photoArr[i];
+         UIImage *image = [UIImage imageNamed:@"未完成"];
+        for (int i = 0 ; i < photoURLArr.count; i++) {
+            NSURL *imageURL = photoURLArr[i];
+            UIImageView *imageView = [[UIImageView alloc] init];
             
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+            [imageView sd_setImageWithURL:imageURL placeholderImage:image];
             imageView.userInteractionEnabled = YES;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
             [imageView addGestureRecognizer:tap];
             [_scrollView addSubview:imageView];
         }
-        
     }
 }
+
 @end

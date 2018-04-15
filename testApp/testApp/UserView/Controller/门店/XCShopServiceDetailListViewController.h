@@ -15,8 +15,9 @@
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
 
+///** <# 注释 #> */
+//@property (nonatomic, strong) XCShopServiceModel * currentModel ;
 /** <# 注释 #> */
-@property (nonatomic, strong) XCShopServiceModel * currentModel ;
-
+@property (nonatomic, strong) NSArray * dataArr ;
 - (instancetype)initWithTitle:(NSString *)title;
 @end

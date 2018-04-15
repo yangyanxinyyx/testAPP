@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface XCCarTransactionModel : NSObject
-/** 车务ID */
+/** 车务ID Long*/
 @property (nonatomic, strong) NSNumber * carTransID;
 
 /** 客户名称 */
@@ -18,6 +18,8 @@
 /** 车牌号 */
 @property (nonatomic, copy) NSString * plateOn;
 
+/** 创建时间 */
+@property (nonatomic, copy) NSString * createTime;
 
 
 @end

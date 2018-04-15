@@ -34,10 +34,10 @@
 @property (nonatomic, copy) NSString * engineNo;
 
 /** 车型名称 */
-@property (nonatomic, copy) NSString * model;
+@property (nonatomic, copy) NSString * brand;
 
 /** 车型代码 */
-@property (nonatomic, copy) NSString * model2;
+@property (nonatomic, copy) NSString * model;
 
 /** (商业)起保日期 */
 @property (nonatomic, copy) NSString * syEffectDate;

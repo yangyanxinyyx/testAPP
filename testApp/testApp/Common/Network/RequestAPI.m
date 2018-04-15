@@ -63,8 +63,13 @@
 #define SUBMITPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
 //获取客户列表
 #define SELECTCUSTOMERLIST_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerList",API_PREFIX]
-//获取客户详情
+//获取客户详情列表
 #define SELECTCUSTOMERPARTICULARS_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerParticulars",API_PREFIX]
+//获取车务客户详情列表
+#define SELECTCARTRANSACTIONLIST_API [NSString stringWithFormat:@"%@/api/web/carTransaction/selectCarTransactionList",API_PREFIX]
+//获取车务详情
+#define GETCARTRANSACTION_API [NSString stringWithFormat:@"%@/api/web/carTransaction/getCarTransaction",API_PREFIX]
+
 //====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
@@ -395,6 +400,23 @@
     }];
 }
 
++(void)getelectCarTransactionList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTCARTRANSACTIONLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCarTransaction:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETCARTRANSACTION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 
 #pragma mark 门店
 

@@ -17,10 +17,9 @@
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * addCustomerBtn ;
 
-/** <# 注释 #> */
-@property (nonatomic, assign) int  pageIndex;
 
-@property (nonatomic, assign) int pageCount ;
+
+
 @end
 
 @implementation XCCustomerViewController
@@ -29,16 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _addBtnHeigth = 88 * ViewRateBaseOnIP6;
-    _pageIndex = 1;
+    self.pageIndex = 1;
     [self createUI];
     __weak typeof (self)weakSelf = self;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
                                 @"PageIndex":[NSNumber numberWithInt:1],
-                                @"PageSize":[NSNumber numberWithInt:6]
+                                @"PageSize":[NSNumber numberWithInt:10]
                                 };
         weakSelf.pageIndex = 1;
-        [weakSelf.tableView.mj_header beginRefreshing];
+        [weakSelf.tableView.mj_footer setState:MJRefreshStateIdle];
         [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             if (response[@"data"]) {
                 if (response[@"data"][@"dataSet"]) {
@@ -55,7 +54,7 @@
                     [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                 }
                 NSNumber *pageCountNum = response[@"data"][@"pageCount"];
-                _pageCount = [pageCountNum intValue];
+                self.pageCount = [pageCountNum intValue];
             }
             [weakSelf.tableView.mj_header endRefreshing];
         } fail:^(id error) {
@@ -63,15 +62,14 @@
         }];
     }];
     
-    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
         
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
                                 @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:6]
                                 };
-        [weakSelf.tableView.mj_footer beginRefreshing];
-        if (weakSelf.pageIndex < weakSelf.pageCount) {
+        if (weakSelf.pageIndex <= weakSelf.pageCount) {
             [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
                 if (response[@"data"]) {
                     if (response[@"data"][@"dataSet"]) {
@@ -83,15 +81,23 @@
                             }
                         }
                         [weakSelf.tableView reloadData];
-                        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                      
                     }
                 }
+                  [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                 [weakSelf.tableView.mj_footer endRefreshing];
             } fail:^(id error) {
+                weakSelf.pageIndex --;
                 [weakSelf.tableView.mj_footer endRefreshing];
             }];
         }else {
-            [weakSelf.tableView.mj_footer endRefreshing];
+            weakSelf.pageIndex --;
+            if (weakSelf.pageIndex == weakSelf.pageCount) {
+                [weakSelf.tableView.mj_footer setState:MJRefreshStateNoMoreData];
+            }else {
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }
+            
         }
         
       
@@ -109,10 +115,6 @@
 
 #pragma mark - Action Method
 
-- (void)markPageCount:(int)pageCount
-{
-    _pageCount = pageCount;
-}
 
 //- (void)clickCheckDetailButton
 //{

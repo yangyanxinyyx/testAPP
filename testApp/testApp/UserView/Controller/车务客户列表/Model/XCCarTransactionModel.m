@@ -1,17 +1,17 @@
 //
-//  XCCheckoutDetailBaseModel.m
+//  XCCarTransactionModel.m
 //  testApp
 //
-//  Created by Melody on 2018/4/5.
+//  Created by Melody on 2018/4/15.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCCheckoutDetailBaseModel.h"
+#import "XCCarTransactionModel.h"
 
-@implementation XCCheckoutDetailBaseModel
+@implementation XCCarTransactionModel
 //返回一个 Dict，将 Model 属性名对映射到 JSON 的 Key。
 + (NSDictionary *)modelCustomPropertyMapper {
-    return @{@"BillID" : @"id",
+    return @{@"carTransID" : @"id",
              };
 }
 @end

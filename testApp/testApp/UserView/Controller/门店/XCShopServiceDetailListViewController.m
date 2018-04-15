@@ -82,14 +82,15 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataArr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    XCShopServiceModel *model = self.dataArr[indexPath.row];
     XCShopDetailListCell *cell = (XCShopDetailListCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kDetailListCellID forIndexPath:indexPath];
     cell.delegate = self;
-    [cell setupCellWithModel:self.currentModel];
+    [cell setupCellWithModel:model];
     
     return cell;
 }
@@ -98,10 +99,7 @@
 
 - (void)configureData
 {
-    self.currentModel = [[XCShopServiceModel alloc] init];
-    _currentModel.serviceName = @"标准清洗";
-    _currentModel.vipPrice = @"40";
-    _currentModel.price = @"45";
+
 }
 
 - (void)createUI

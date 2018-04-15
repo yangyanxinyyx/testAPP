@@ -15,15 +15,22 @@
 @property (nonatomic, strong) UILabel * titleLabel ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIView * topLine ;
-/** <# 注释 #> */
-@property (nonatomic, strong) NSMutableArray * labelArrM ;
+
 
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * mutableTextLabel ;
 
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * titleValueArr ;
+
 @end
 
 @implementation XCUserCaseDetailTextCell
+
++ (CGFloat)getCellHeight
+{
+    return (20 + 557) * ViewRateBaseOnIP6;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -100,6 +107,208 @@
 
 #pragma mark - Action Method
 
+- (void)setupCellWithCarTransactionDetailModel:(XCCarTransactioDetailModel *)model
+{
+    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
+                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"联系电话:",@"年审到期时间:",@"备注:"];
+    
+    NSString * name = @"";
+    NSString * plateNo = @"";
+    NSString * brand = @"";
+    NSString * vinNo = @"";
+    NSString * engineNo = @"";
+    NSString * Carmodel = @"";
+    NSString * phone = @"";
+    NSString * time = @"";
+    NSString * remark = @"";
+    
+    
+    if (isUsableNSString(model.customerName, @"")) {
+        name = model.customerName;
+    }
+    if (isUsableNSString(model.plateNo, @"")) {
+        plateNo = model.plateNo;
+    }
+    if (isUsableNSString(model.brand, @"")) {
+        brand = model.brand;
+    }
+    if (isUsableNSString(model.vinNo, @"")) {
+        vinNo = model.vinNo;
+    }
+    if (isUsableNSString(model.engineNo,@"")) {
+        engineNo = model.engineNo;
+    }
+    if (isUsableNSString(model.model, @"")) {
+        Carmodel = model.model;
+    }
+    if (isUsableNSString(model.phone, @"")) {
+        phone = model.phone;
+    }
+    if (isUsableNSString(model.motTestTime, @"")) {
+        time = model.motTestTime;
+    }
+    if (isUsableNSString(model.remark, @"")) {
+        remark = model.remark;
+    }
+    self.titleValueArr = @[name,plateNo,brand,vinNo,engineNo,Carmodel,phone,time,remark];
+
+    for (int i = 0 ; i < _labelArrM.count; i++) {
+        NSString * title = baseTitleNameArr[i];
+        UILabel *label = _labelArrM[i];
+        [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+    }
+    
+}
+
+- (void)setupCellWithViolationCarTranDetailModel:(XCCarTransactioDetailModel *)model
+{
+    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
+                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"违章地点:",@"违章城市:",@"违章分数:",
+                                  @"违章条款:",@"违章费用:",@"代办费用:",
+                                  @"总费用:",@"备注:"];
+    
+    NSString * name = @"";
+    NSString * plateNo = @"";
+    NSString * brand = @"";
+    NSString * vinNo = @"";
+    NSString * engineNo = @"";
+    NSString * Carmodel = @"";
+    NSString * weizhangArea = @"";
+    NSString * weizhangCity = @"";
+    NSString * buckleScores = @"0";
+    NSString * weizhangClause = @"";
+    //违章费用
+    NSString * weizhangPayment = @"0";
+    //代办费用
+    NSString * daibanpayment = @"0";
+    NSString * orderPrice = @"0";
+    NSString * remark = @"";
+    
+    
+    if (isUsableNSString(model.customerName, @"")) {
+        name = model.customerName;
+    }
+    if (isUsableNSString(model.plateNo, @"")) {
+        plateNo = model.plateNo;
+    }
+    if (isUsableNSString(model.brand, @"")) {
+        brand = model.brand;
+    }
+    if (isUsableNSString(model.vinNo, @"")) {
+        vinNo = model.vinNo;
+    }
+    if (isUsableNSString(model.engineNo,@"")) {
+        engineNo = model.engineNo;
+    }
+    if (isUsableNSString(model.model, @"")) {
+        Carmodel = model.model;
+    }
+    if (isUsableNSString(model.weizhangArea, @"")) {
+        weizhangArea = model.weizhangArea;
+    }
+    if (isUsableNSString(model.weizhangCity, @"")) {
+        weizhangCity = model.weizhangCity;
+    }
+    if (isUsable(model.buckleScores, [NSNumber class])) {
+        buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
+    }
+    if (isUsableNSString(model.weizhangClause, @"")) {
+        weizhangClause = model.weizhangClause;
+    }
+    //违章费用
+//    if (isUsable(model.weizhan, [NSNumber class])) {
+//        buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
+//    }
+    //代办费用
+    //    if (isUsable(model.weizhan, [NSNumber class])) {
+    //        buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
+    //    }
+    if (isUsable(model.orderPrice, [NSNumber class])) {
+        orderPrice = [NSString stringWithFormat:@"¥%@",model.orderPrice];
+    }
+    if (isUsableNSString(model.remark, @"")) {
+        remark = model.remark;
+    }
+    self.titleValueArr = @[name,plateNo,brand,
+                           vinNo,engineNo,Carmodel,
+                           weizhangArea,weizhangCity,buckleScores,
+                           weizhangClause,weizhangPayment,daibanpayment,
+                           orderPrice,remark];
+    
+    for (int i = 0 ; i < _labelArrM.count; i++) {
+        NSString * title = baseTitleNameArr[i];
+        UILabel *label = _labelArrM[i];
+        [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+    }
+}
+
+- (void)setupCellWithRepairCarTranDetailModel:(XCCarTransactioDetailModel *)model
+{
+    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
+                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"联系电话:",@"接车时间:",@"联系地址:",
+                                  @"预计完成时间:",@"维修项目:",@"备注:"];
+    
+    NSString * name = @"";
+    NSString * plateNo = @"";
+    NSString * brand = @"";
+    NSString * vinNo = @"";
+    NSString * engineNo = @"";
+    NSString * Carmodel = @"";
+    NSString * phone = @"";
+    NSString * takeCarTime = @"";
+    NSString * address = @"";
+    NSString * yujiTime = @"";
+    NSString * weixiuProject = @"";
+    NSString * remark = @"";
+    
+    
+    if (isUsableNSString(model.customerName, @"")) {
+        name = model.customerName;
+    }
+    if (isUsableNSString(model.plateNo, @"")) {
+        plateNo = model.plateNo;
+    }
+    if (isUsableNSString(model.brand, @"")) {
+        brand = model.brand;
+    }
+    if (isUsableNSString(model.vinNo, @"")) {
+        vinNo = model.vinNo;
+    }
+    if (isUsableNSString(model.engineNo,@"")) {
+        engineNo = model.engineNo;
+    }
+    if (isUsableNSString(model.model, @"")) {
+        Carmodel = model.model;
+    }
+    if (isUsableNSString(model.phone, @"")) {
+        phone = model.phone;
+    }
+    //接车时间
+//    if (isUsableNSString(model.phone, @"")) {
+//        time = model.motTestTime;
+//    }
+    //接车地址 、 预计完成时间、维修项目
+    //    if (isUsableNSString(model.phone, @"")) {
+    //        time = model.motTestTime;
+    //    }
+    if (isUsableNSString(model.remark, @"")) {
+        remark = model.remark;
+    }
+    self.titleValueArr = @[name,plateNo,brand,
+                           vinNo,engineNo,Carmodel,
+                           phone,takeCarTime,address,
+                           yujiTime,weixiuProject,remark];
+    
+    for (int i = 0 ; i < _labelArrM.count; i++) {
+        NSString * title = baseTitleNameArr[i];
+        UILabel *label = _labelArrM[i];
+        [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+    }
+}
+
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
@@ -125,11 +334,14 @@
     
 }
 
-
-
 #pragma mark - Setter&Getter
+- (void)setTitleStr:(NSString *)titleStr
+{
+    _titleStr = titleStr;
+    [_titleLabel setText:_titleStr];
+}
 
-- (void)setLabelArrM:(NSArray *)labelArr
+-(void)setLabelArrM:(NSMutableArray *)labelArrM
 {
     if (_labelArrM.count > 0) {
         for (UILabel * label in _labelArrM) {
@@ -141,8 +353,8 @@
         }
         [_labelArrM removeAllObjects];
     }
-    for (int i = 0 ; i < labelArr.count; i++) {
-        NSString *title = labelArr[i];
+    for (int i = 0 ; i < labelArrM.count; i++) {
+        NSString *title = labelArrM[i];
         UILabel *label = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(51, 51, 51)];
         [label setText:title];
         
@@ -150,5 +362,6 @@
         [_labelArrM addObject:label];
     }
 }
+
 
 @end

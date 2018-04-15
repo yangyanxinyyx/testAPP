@@ -7,7 +7,9 @@
 //
 
 #import "XCCheckoutDetailBaseTableViewController.h"
+#import "XCCarTransactioDetailModel.h"
 
 @interface XCUserViolationDetailViewController : XCCheckoutDetailBaseTableViewController
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCarTransactioDetailModel * carTranDetailModel ;
 @end

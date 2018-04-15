@@ -9,6 +9,7 @@
 #import "XCCheckoutTableViewCell.h"
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCustomerListModel.h"
+#import "XCCarTransactionModel.h"
 #import <UIKit/UIKit.h>
 
 @interface XCCheckoutTableViewCell ()
@@ -22,6 +23,10 @@
 
 /** 我的客户Model */
 @property (nonatomic, strong) XCCustomerListModel * customerModel ;
+
+/** 车务客户Model */
+@property (nonatomic, strong) XCCarTransactionModel * carTarModel ;
+
 @end
 
 @implementation XCCheckoutTableViewCell
@@ -167,6 +172,14 @@
     [_carNumberLabel setText:titleStr];
     [_userNameLabel setText:[NSString stringWithFormat:@"跟进时间: %@",model.nextFollowTime]];
     [_issueTimeLabel setText:[NSString stringWithFormat:@"联系方式: %@",model.phoneNo]];
+}
+
+- (void)setupCellWithCarTransactionListModel:(XCCarTransactionModel *)model
+{
+    _carTarModel = model;
+    [_carNumberLabel setText:model.plateOn];
+    [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.customerName]];
+    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
 }
 
 #pragma mark - Delegates & Notifications

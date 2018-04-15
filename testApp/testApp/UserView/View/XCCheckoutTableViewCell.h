@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XCCheckoutDetailBaseModel;
 @class XCCustomerListModel;
+@class XCCarTransactionModel;
 @class XCCheckoutTableViewCell;
 @protocol XCCheckoutTableViewCellDelegate <NSObject>
 
@@ -33,4 +34,7 @@
 @property (nonatomic, assign) BOOL  isCustomerCell;
 
 - (void)setupCellWithMYCustomerListModel:(XCCustomerListModel *)model;
+
+- (void)setupCellWithCarTransactionListModel:(XCCarTransactionModel *)model;
+
 @end
