@@ -51,12 +51,12 @@
                     }
                     weakSelf.dataArr = dataArrM;
                     [weakSelf.tableView reloadData];
-                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                 }
                 NSNumber *pageCountNum = response[@"data"][@"pageCount"];
                 self.pageCount = [pageCountNum intValue];
             }
             [weakSelf.tableView.mj_header endRefreshing];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             [weakSelf.tableView.mj_header endRefreshing];
         }];
@@ -139,6 +139,8 @@
 {
     _addCustomerBtn = [UIButton buttonWithType:0];
     [_addCustomerBtn setTitle:@"新增客户" forState:UIControlStateNormal];
+    UIImage *image = [UIImage imageNamed:@"添加符号"];
+    [_addCustomerBtn setImage:image forState:UIControlStateNormal];
     [_addCustomerBtn setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
     [_addCustomerBtn addTarget:self action:@selector(clickAddCustomerButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addCustomerBtn];

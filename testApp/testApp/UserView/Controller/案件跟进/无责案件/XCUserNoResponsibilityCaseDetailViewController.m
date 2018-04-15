@@ -1,27 +1,26 @@
 //
-//  XCUserInjuryCaseDetailViewController.m
+//  XCUserNoResponsibilityCaseDetailViewController.m
 //  testApp
 //
-//  Created by Melody on 2018/4/7.
+//  Created by Melody on 2018/4/16.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCUserInjuryCaseDetailViewController.h"
+#import "XCUserNoResponsibilityCaseDetailViewController.h"
 #import "XCUserCaseDetailTextCell.h"
 #import "XCUserCaseScrollerViewCell.h"
 #import "XCUserCaseDetailProgressCell.h"
 #define kProcessCellID @"processCellID"
 #define kCaseTextCellID @"CaseTextCellID"
 #define kScrollViewCellID @"ScrollViewCellID"
-@interface XCUserInjuryCaseDetailViewController ()
+@interface XCUserNoResponsibilityCaseDetailViewController ()
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataTitleArrM ;
 /** <# 注释 #> */
 @property (nonatomic, strong) NSMutableArray * imageURLArrM ;
 @end
 
-@implementation XCUserInjuryCaseDetailViewController
-
+@implementation XCUserNoResponsibilityCaseDetailViewController
 #pragma mark - Init
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,10 +46,9 @@
 
 - (void)configureData
 {
-//    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
-//                            @"提交时间:",@"选择门店:",@"咨询电话:"];
-    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
-                            @"提交时间:",@"咨询电话:"];
+        self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
+                                @"提交时间:",@"选择门店:",@"咨询电话:"];
+ 
 }
 
 - (void)initUI
@@ -85,7 +83,7 @@
     else if (indexPath.section == 0 && indexPath.row == 1) {
         //基本信息Cell
         XCUserCaseDetailTextCell *detailTextCell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kCaseTextCellID forIndexPath:indexPath];
-            [detailTextCell setTitleStr:[NSString stringWithFormat:@"%@%@理赔进度",_detailModel.customerName,self.navTitle]];
+        [detailTextCell setTitleStr:[NSString stringWithFormat:@"%@%@理赔进度",_detailModel.customerName,self.navTitle]];
         [detailTextCell setLabelArrM:self.dataTitleArrM];
         if(_detailModel) {
             [detailTextCell setupCellWithCaseDetailModel:_detailModel];
@@ -112,18 +110,17 @@
     //        cell.isMutableTextType = NO;
     //    }
     //    return cell;
-  
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        CGFloat height;
+    CGFloat height;
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }
     else if (indexPath.row == 1) {
-//        return (392 + 24 + 24) * ViewRateBaseOnIP6;
-      return [XCUserCaseDetailTextCell getCaseCellHeightWithClip:YES];
+        return [XCUserCaseDetailTextCell getCaseCellHeightWithClip:NO];
     }
     else if (indexPath.row == 2) {
         NSString *longString = @"";
@@ -136,21 +133,21 @@
     }else {
         return (20 + 88 + 140 + 30) * ViewRateBaseOnIP6;
     }
-//        if (indexPath.row %2 == 0) {
-//            NSString *longString = @"描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中......";
-//
-//            height = [self getHeightLineWithString:longString withWidth:645 * ViewRateBaseOnIP6 withFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6]];
-//            height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2 + height;
-//        }else {
-//            CGFloat count = 22;
-//            if (count > 0) {
-//             height  = ((20 + 88) + (30 + 24))* ViewRateBaseOnIP6  + (24 + 24) * ViewRateBaseOnIP6  * (count - 1) + 30 * ViewRateBaseOnIP6 ;
-//            }else {
-//                height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2;
-//
-//            }
-//        }
-//        return height;
+    //        if (indexPath.row %2 == 0) {
+    //            NSString *longString = @"描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中......";
+    //
+    //            height = [self getHeightLineWithString:longString withWidth:645 * ViewRateBaseOnIP6 withFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6]];
+    //            height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2 + height;
+    //        }else {
+    //            CGFloat count = 22;
+    //            if (count > 0) {
+    //             height  = ((20 + 88) + (30 + 24))* ViewRateBaseOnIP6  + (24 + 24) * ViewRateBaseOnIP6  * (count - 1) + 30 * ViewRateBaseOnIP6 ;
+    //            }else {
+    //                height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2;
+    //
+    //            }
+    //        }
+    //        return height;
     
 }
 

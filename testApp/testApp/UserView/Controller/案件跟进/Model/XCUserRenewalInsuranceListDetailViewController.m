@@ -1,19 +1,19 @@
 //
-//  XCUserWaitingToWriteListDetailViewController.m
+//  XCUserRenewalInsuranceListDetailViewController.m
 //  testApp
 //
-//  Created by Melody on 2018/3/28.
+//  Created by Melody on 2018/4/16.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCUserWaitingToWriteListDetailViewController.h"
+#import "XCUserRenewalInsuranceListDetailViewController.h"
 #import "XCCheckoutDetailBaseModel.h"
 
-@interface XCUserWaitingToWriteListDetailViewController ()
+@interface XCUserRenewalInsuranceListDetailViewController ()
 
 @end
 
-@implementation XCUserWaitingToWriteListDetailViewController
+@implementation XCUserRenewalInsuranceListDetailViewController
 
 #pragma mark - lifeCycle
 
@@ -87,19 +87,6 @@
     NSArray *titleArr = self.dataTitleArrM[indexPath.section];
     NSString *title = titleArr[indexPath.row];
     
-    //    if (indexPath.section == 0 && (indexPath.row == 12 - 1 || indexPath.row == 15 - 1 || indexPath.row == 16 - 1)) {
-    //        NSString *placetext ;
-    //        if (indexPath.row == 12 - 1) {
-    //            placetext = @"输入单号";
-    //        }else if (indexPath.row == 15 - 1  || indexPath.row == 16 - 1) {
-    //            placetext = @"输入金额";
-    //        }
-    //        XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
-    //        [textFiledCell setTitle:title];
-    //        [textFiledCell setTitlePlaceholder:placetext];
-    //        return textFiledCell;
-    //    }
-    //    else
     if (indexPath.section == 0 && indexPath.row == 18 - 1){
         BOOL mark = NO;
         if ([self.model.isContinue isEqualToString:@"Y"])
@@ -116,7 +103,6 @@
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
         [cell setupCellWithDetailPolicyModel:self.model];
-//                [cell setTitlePlaceholder:@"刘某某"];
         return cell;
     }
 }

@@ -73,7 +73,7 @@
     
     XCUserCaseListModel *model =self.dataArr[indexPath.row];
     XCUserCaseListCell *cell = (XCUserCaseListCell *)[tableView dequeueReusableCellWithIdentifier:kCaseListCellID forIndexPath:indexPath];
-    [cell setupCellWithCaseListModel:model caseTypeStr:@"无责案件"];
+    [cell setupCellWithCaseListModel:model caseTypeStr:self.navTitle];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }

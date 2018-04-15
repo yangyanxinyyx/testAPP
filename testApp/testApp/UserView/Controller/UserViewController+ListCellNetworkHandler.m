@@ -41,16 +41,19 @@
                         }
                     }
                     XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+                    NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+                    NSNumber *pageIndexNum = response[@"data"][@"pageIndex"];
+                    subVC.pageIndex = [pageIndexNum intValue];
+                    subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
                     [weakSelf.navigationController pushViewController:subVC animated:YES];
-                
                     configureSucess = YES;
                 }
             }
             if (!configureSucess) {
                 [weakSelf requestFailureHandler];
             }
-                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
         }];
@@ -80,13 +83,13 @@
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
                     [weakSelf.navigationController pushViewController:subVC animated:YES];
-                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                     configureSucess = YES;
                 }
             }
             if (!configureSucess) {
                 [weakSelf requestFailureHandler];
             }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
         }];
@@ -153,13 +156,13 @@
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
                     [weakSelf.navigationController pushViewController:subVC animated:YES];
-                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                     configureSucess = YES;
                 }
             }
             if (!configureSucess) {
                 [weakSelf requestFailureHandler];
             }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
         }];
@@ -174,10 +177,10 @@
                 XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                 subVC.storeModel = shopModel;
                 [weakSelf.navigationController pushViewController:subVC animated:YES];
-                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
             }else {
                 [weakSelf requestFailureHandler];
             }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             [weakSelf requestFailureHandler];
         }];
@@ -244,7 +247,7 @@
     else if ([model.title isEqualToString:@"无责案件"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"特俗案件"]) {
+    else if ([model.title isEqualToString:@"特殊案件"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"代垫付案件"]) {

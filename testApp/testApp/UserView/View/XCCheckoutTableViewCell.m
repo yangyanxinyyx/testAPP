@@ -233,17 +233,19 @@
 
 - (void)setBaseModel:(XCCheckoutDetailBaseModel *)baseModel
 {
-    if (!baseModel) {
-        return;
-    }
+    _baseModel = baseModel;
     if (isUsableNSString(baseModel.plateNo, @"")) {
         [_carNumberLabel setText:baseModel.plateNo];
     }
-    if (isUsableNSString(baseModel.onwerName, @"")) {
+    if (isUsableNSString(baseModel.onwerName,@"")) {
         [_carNumberLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
+    }else {
+        [_carNumberLabel setText:[NSString stringWithFormat:@"车主: "]];
     }
     if (isUsableNSString(baseModel.recordDate, @"")) {
         [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: %@",baseModel.recordDate]];
+    }else {
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: "]];
     }
     
 }

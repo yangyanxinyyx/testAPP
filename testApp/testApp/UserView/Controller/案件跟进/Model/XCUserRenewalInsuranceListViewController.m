@@ -1,20 +1,20 @@
 //
-//  XCUserWaitingToWriteListViewController.m
+//  XCUserRenewalInsuranceListViewController.m
 //  testApp
 //
-//  Created by Melody on 2018/3/28.
+//  Created by Melody on 2018/4/16.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
-#import "XCUserWaitingToWriteListViewController.h"
-#import "XCUserWaitingToWriteListDetailViewController.h"
+#import "XCUserRenewalInsuranceListViewController.h"
+#import "XCUserRenewalInsuranceListDetailViewController.h"
 #import "XCCheckoutDetailBaseModel.h"
 
-@interface XCUserWaitingToWriteListViewController ()<XCCheckoutTableViewCellDelegate>
+@interface XCUserRenewalInsuranceListViewController ()<XCCheckoutTableViewCellDelegate>
 
 @end
 
-@implementation XCUserWaitingToWriteListViewController
+@implementation XCUserRenewalInsuranceListViewController
 
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
@@ -99,8 +99,8 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
- return self.dataArr.count;
-//    return 3;
+    return self.dataArr.count;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,12 +109,11 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.delegate = self;
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    if(baseModel) {
-        cell.baseModel = baseModel;
-    }
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
+    cell.baseModel = baseModel;
+    //    cell.carNumber = @"粤AAAAAA";
+    //    cell.userName = @"梁艺钟";
+    //    cell.issureTime = @"a123213-321-321-3";
+    //
     return cell;
 }
 
@@ -124,7 +123,7 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
+    XCUserRenewalInsuranceListDetailViewController *detailVC = [[XCUserRenewalInsuranceListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
     detailVC.model = baseModel;
     [self.navigationController pushViewController:detailVC animated:YES];
     
