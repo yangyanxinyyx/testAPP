@@ -8,6 +8,8 @@
 
 #import "XCShopDetailListCell.h"
 #import "UILabel+createLabel.h"
+#import "XCShopServiceModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface XCShopDetailListCell ()
 /** <# 注释 #> */
 @property (nonatomic, strong) UIImageView * iconImageView ;
@@ -82,7 +84,34 @@
 }
 
 #pragma mark - Action Method
-
+- (void)setupCellWithModel:(XCShopServiceModel *)model
+{
+    if (isUsableNSString(model.url1, @"")) {
+        NSURL *imageURL = [[NSURL alloc] initWithString:model.url1];
+        if (imageURL) {
+            [_iconImageView sd_setImageWithURL:imageURL];
+        }
+    }
+    if (isUsableNSString(model.serviceName, @"")) {
+        [_serviceNameLabel setText:model.serviceName];
+    }
+    if (isUsableNSString(model.vipPrice, @"")) {
+        
+        [_priceLabel setText:[NSString stringWithFormat:@"¥ %@",model.vipPrice]];
+    }
+    if (isUsableNSString(model.price, @"")) {
+        
+        NSString *titleStr = @"原价 ";
+        NSMutableAttributedString * ma_price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@¥%@",titleStr,model.price]];
+        [ma_price addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6] range:NSMakeRange(0, titleStr.length + model.price.length)];
+        [ma_price addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(165, 165, 165) range:NSMakeRange(0, titleStr.length + model.price.length)];
+        [ma_price addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange( titleStr.length+1, model.price.length)];
+       _onSalePriceLabel.attributedText = ma_price;
+//        [_onSalePriceLabel setText:model.price];
+    }
+    
+    
+}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method

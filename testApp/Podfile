@@ -7,4 +7,5 @@ pod 'SDWebImage', '~> 4.3.3'
 pod 'AMap2DMap-NO-IDFA'
 pod 'AMapSearch-NO-IDFA'
 pod 'YYModel', '~> 1.0.4'
+pod 'MJRefresh'
 end

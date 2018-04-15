@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, InputViewType) {
 
 @property (nonatomic,strong) UITextField *textField;
 @property (nonatomic,strong) UILabel *dateLabel;
-@property (nonatomic,strong) UIButton *selectBtn
+@property (nonatomic,strong) UIButton *selectBtn;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type;
 

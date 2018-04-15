@@ -68,11 +68,12 @@
         priceInfoVC.quoteGroup = @"2";
     }
     if (self.blType) {
-      priceInfoVC.blType = self.blType;
+        priceInfoVC.blType = self.blType;
+        
     } else{
         priceInfoVC.blType = @"0";
     }
-    
+    priceInfoVC.route = self.route;
     [self.navigationController pushViewController:priceInfoVC animated:YES];
 }
 #pragma mark - UI

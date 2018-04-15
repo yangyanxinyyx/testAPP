@@ -24,6 +24,9 @@
 //首页公告
 #define COVERANNOUNCEMENT_API [NSString stringWithFormat:@"%@/api/web/notice/findNoticeByEmployee",API_PREFIX]
 
+//公告详情
+#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/selectNoticeInfoContent",API_PREFIX]
+
 //首页轮播图
 #define COVERLOOPIMAGE_API [NSString stringWithFormat:@"%@/api/web/pictrue/findByType",API_PREFIX]
 
@@ -45,8 +48,16 @@
 
 
 // =================== modify by Liangyz 个人中心
+//====个人中心====
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
+//====车险客户列表====
+//获取 待核保、已核保代缴费、已缴费待打单、财务审核、配送、退单、续保列表
+#define MYPOLICYBYCONDINATION_API [NSString stringWithFormat:@"%@/api/web/policy/selectMyPolicyByCondiction",API_PREFIX]
+#define MYPOLICYREVOKBYSALEMAN_API [NSString stringWithFormat:@"%@/api/web/policy/updatePolicyRevokeBySalesman",API_PREFIX]
+#define SUBMITPOLICYPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPolicyPaymentList",API_PREFIX]
+#define SUBMITPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
+//====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
 //门店服务
@@ -78,7 +89,7 @@
 #define PRECISEPRICE_API [NSString stringWithFormat:@"%@/api/web/bihu/getPrecisePrice",API_PREFIX]
 
 //保存报价
-#define SAVEPRICE_API [NSString stringWithFormat:@"%@api/web/offer/addOffer",API_PREFIX]
+#define SAVEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/addOffer",API_PREFIX]
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -164,6 +175,15 @@
 +(void)getCoverAnnouncement:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:COVERANNOUNCEMENT_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCoverWeb:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:COVERWEB_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
@@ -310,6 +330,45 @@
     }];
 }
 
+#pragma mark 车险客户列表
+
++(void)getMyPolicyInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:MYPOLICYBYCONDINATION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)postPolicyRevokeBySaleMan:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:MYPOLICYREVOKBYSALEMAN_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++ (void)postSubmitPolicyPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SUBMITPOLICYPAYMENTLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)postSubmitPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SUBMITPAYMENTLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+
 #pragma mark 门店
 
 +(void)getShopsInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
@@ -324,6 +383,16 @@
 +(void)postUpdateStore:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
 {
     [self getRequest:SHOPUPDATESTORE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    
+    [self getRequest:SHOPSSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

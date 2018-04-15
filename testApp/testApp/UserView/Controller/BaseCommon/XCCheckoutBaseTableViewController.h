@@ -15,6 +15,7 @@
 #define kheaderViewID @"headerViewID"
 #define kfooterViewID @"basefooterViewID"
 #import "XCShopModel.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface XCCheckoutBaseTableViewController : BaseViewController1<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 /**
@@ -25,6 +26,12 @@
 
 @property (nonatomic, strong) UITableView * tableView ;
 @property (nonatomic, strong) NSMutableArray * dataArr ;
+
+/** <# 类型描述  #> */
+@property (nonatomic, assign) NSInteger  index;
+
+/** <# 类型描述  #> */
+@property (nonatomic, assign) NSInteger  totalPage ;
 
 /** 门店页面用的model  */
 @property (nonatomic, strong) XCShopModel * storeModel ;

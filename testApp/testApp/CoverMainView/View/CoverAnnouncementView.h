@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CoverAnnouncementViewDelegate <NSObject>
+
+- (void)pressToPushWebWithID:(NSNumber *)webId;
+
+@end
+
 @interface CoverAnnouncementView : UIView
+
+@property (nonatomic,weak) id<CoverAnnouncementViewDelegate>delegate;
 
 @end

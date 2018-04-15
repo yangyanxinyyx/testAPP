@@ -14,11 +14,13 @@
 #import "PriceUnderwritingViewController.h"
 #import "PriceAdjustViewController.h"
 #import "PriceInfoModel.h"
-@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate,BaseNavigationBarDelegate>
+#import "InputTextView.h"
+@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate,BaseNavigationBarDelegate,InputTextViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *allDataArray;
-@property (nonatomic, assign) double syBaoFei;
+@property (nonatomic, strong) NSString *offerName;
+
 @end
 
 @implementation PriceInfoViewController
@@ -31,7 +33,15 @@
     topBar.title = @"报价详情";
     [self.view addSubview:topBar];
     [self createUI];
-    [self requestPrecisePrice];
+    if (self.arrayRecodeData.count > 0) {
+        [self.dataArray addObjectsFromArray:self.arrayRecodeData];
+        [self.arrayRecodeData removeAllObjects];
+        [self.myTableView reloadData];
+        self.route = @"1";
+    } else {
+      [self requestPrecisePrice];
+    }
+    
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -310,6 +320,10 @@
             
             
             [self.myTableView reloadData];
+        } else {
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            
         }
     } fail:^(id error) {
         NSLog(@"%@",error);
@@ -320,9 +334,9 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.quoteGroup forKey:@"poSource"];
     [dic setObject:[UserInfoManager shareInstance].customerId forKey:@"customerId"];
-    [dic setObject:[UserInfoManager shareInstance].customerName forKey:@"customerName"];
+    [dic setObject: [NSString stringWithCString:[[UserInfoManager shareInstance].customerName UTF8String] encoding:NSUTF8StringEncoding] forKey:@"customerName"];
     [dic setObject:[UserInfoManager shareInstance].carID forKey:@"carId"];
-    [dic setObject:@"test1" forKey:@"offerName"];
+    [dic setObject:_offerName forKey:@"offerName"];
     [dic setObject:[NSString stringWithFormat:@"%f",_syBaoFei] forKey:@"offerTciPrice"];
     
     
@@ -390,11 +404,22 @@
 
 
     [RequestAPI getSavePrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        if (response[@"data"]) {
-            NSLog(@"==>%@",response[@"data"]);
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (response[@"result"]) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"保存成功" complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"保存失败:%@",response[@"errormsg"]] complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
+        });
+        
     } fail:^(id error) {
-        NSLog(@"==>%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"保存失败:%@",error] complete:nil];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+        });
+        
     }];
 }
 #pragma mark - UITableView delegate
@@ -411,10 +436,9 @@
         PriceInfoModel *model = [self.dataArray objectAtIndex:0];
         if (indexPath.row == 0) {
             infoLableCell.labelTag.text = @"交强险";
-            infoLableCell.labelInfo.text = @"投保";
-            infoLableCell.labelNumber.text = [NSString stringWithFormat:@"%.0f",model.number];
+            infoLableCell.labelNumber.text = @"投保";
         } else{
-            infoLableCell.labelTag.text = @"合计";
+            infoLableCell.labelTag.text = @"保费";
             infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %.2f",model.number];
         }
         
@@ -452,18 +476,18 @@
                 }
                 if ([model.name isEqualToString:@"玻璃险"]) {
                     if (model.priceValue == 1) {
-                        commerceInsCell.labelAnnotate.text = @"国产玻璃";
+                        commerceInsCell.labelNumber.text = @"国产玻璃";
                     } else {
-                        commerceInsCell.labelAnnotate.text = @"进口玻璃";
+                        commerceInsCell.labelNumber.text = @"进口玻璃";
                     }
                     
                 } else {
-                   commerceInsCell.labelAnnotate.text = @"投保";
+                   commerceInsCell.labelNumber.text = [NSString stringWithFormat:@"%.0f",model.priceValue];;
                 }
+                commerceInsCell.labelAnnotate.text = @"投保";
                 
-                commerceInsCell.labelNumber.text = [NSString stringWithFormat:@"%.0f",model.number];;
                 return commerceInsCell;
-            } else if (indexPath.row == self.dataArray.count-1){
+            } else if (indexPath.row == self.dataArray.count-1 ){
                 PriceInfoAddTableViewCell *infoAddCell = [tableView dequeueReusableCellWithIdentifier:priceInfoAdd];
                 if (!infoAddCell) {
                     infoAddCell = [[PriceInfoAddTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoAdd];
@@ -477,10 +501,16 @@
                 double totality = 0;
                 for (int i = 1; i < self.dataArray.count; i++) {
                     PriceInfoModel *inforModel = [self.dataArray objectAtIndex:i];
-                    totality = totality + inforModel.number ;
+                    totality = totality + inforModel.priceValue ;
                 }
-                infoLableCell.labelTag.text = @"合计";
-                infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %.2f",totality];
+                if (indexPath.row == self.dataArray.count) {
+                    infoLableCell.labelTag.text = @"合计";
+                    infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %.2f",totality];
+                } else {
+                    infoLableCell.labelTag.text = @"保费";
+                    infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %.2f",_syBaoFei];
+                }
+                
                 return infoLableCell;
             }
         }
@@ -491,31 +521,24 @@
         if (!infoLableCell) {
             infoLableCell = [[PriceInfolabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInforLabel];
         }
-        if (indexPath.row == 0) {
-            double totality = 0;
-            for (int i = 0; i < self.dataArray.count; i++) {
-                PriceInfoModel *inforModel = [self.dataArray objectAtIndex:i];
-                totality = totality + inforModel.number ;
-            }
-            infoLableCell.labelTag.text = @"总计";
-            infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %f",totality];
-            infoLableCell.labelNumber.textColor = [UIColor colorWithHexString:@"#444444"];
-        } else {
-            PriceInfoModel *infoModel = [self.dataArray objectAtIndex:0];
-            double totality = infoModel.number + _syBaoFei;
-            infoLableCell.labelTag.text = @"合计";
-            infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %f",totality];
-            infoLableCell.labelNumber.textColor = [UIColor colorWithHexString:@"#838383"];
-        }
-        
+        PriceInfoModel *infoModel = [self.dataArray objectAtIndex:0];
+        double totality = infoModel.number + _syBaoFei;
+        infoLableCell.labelTag.text = @"合计";
+        infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %2f",totality];
+        infoLableCell.labelNumber.textColor = [UIColor colorWithHexString:@"#838383"];
         return infoLableCell;
     }  else {
         PriceInfoSaveTableViewCell *infoSaveCell = [tableView dequeueReusableCellWithIdentifier:priceInfoSave];
         if (!infoSaveCell) {
             infoSaveCell = [[PriceInfoSaveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoSave];
         }
-        [infoSaveCell setCellState:NO];
         infoSaveCell.delegate = self;
+        if ([self.route isEqualToString:@"1"]) {
+            [infoSaveCell setCellState:YES];
+        } else {
+            [infoSaveCell setCellState:NO];
+        }
+        
         return infoSaveCell;
     }
     
@@ -546,10 +569,10 @@
     if (self.dataArray.count == 0) {
         return 0;
     }
-    if (section == 0 || section == 2) {
+    if (section == 0) {
         return 2;
     } else if (section == 1) {
-        return self.dataArray.count + 1;
+        return self.dataArray.count + 2;
     } else {
         return 1;
     }
@@ -594,7 +617,7 @@
 
 //点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1 && indexPath.row == self.dataArray.count) {
+    if (indexPath.section == 1 && indexPath.row == self.dataArray.count-1) {
         PriceAdjustViewController *adjustVC = [[PriceAdjustViewController alloc] init];
         [self.navigationController pushViewController:adjustVC animated:YES];
     }
@@ -603,12 +626,27 @@
 #pragma mark- cell Delegate
 - (void)savePriveInfoDelegate{
     NSLog(@"保存");
-    [self requestSavePrice];
+    InputTextView *inputView = [[InputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    inputView.delegate = self;
+    [[UIApplication sharedApplication].keyWindow addSubview:inputView];
+    
 }
 
 - (void)submitNuclearInsDelegate{
     PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
     [self.navigationController pushViewController:priceUnderVC animated:YES];
+    
+}
+
+#pragma mark - viewDelegate
+- (void)inputTextFieldWithText:(NSString *)text{
+    if (text) {
+        _offerName = text;
+       [self requestSavePrice];
+    } else {
+        FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"请确认输入报价名称" complete:nil];
+        [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+    }
     
 }
 

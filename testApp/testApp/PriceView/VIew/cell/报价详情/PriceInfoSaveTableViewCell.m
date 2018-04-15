@@ -55,16 +55,18 @@
         self.viewBase.frame = CGRectMake(0, 0, SCREEN_WIDTH, 252 * ViewRateBaseOnIP6);
         self.viewBase.backgroundColor = [UIColor clearColor];
         self.buttonSubmit.frame = CGRectMake(0, 154 * ViewRateBaseOnIP6, SCREEN_WIDTH, 98 * ViewRateBaseOnIP6);
-        self.buttonSave.frame = CGRectMake(0 , 154 * ViewRateBaseOnIP6, 180 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6);
-        self.buttonSave.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:77.0f/255.0f blue:162.0f/255.0f alpha:1.0f];
-        [self.buttonSave setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.buttonSave setTitle:@"保存" forState:UIControlStateNormal];
-        self.buttonSave.layer.cornerRadius = 5 * ViewRateBaseOnIP6;
-        self.buttonSave.layer.masksToBounds = YES;
+//        self.buttonSave.frame = CGRectMake(0 , 154 * ViewRateBaseOnIP6, 180 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6);
+//        self.buttonSave.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:77.0f/255.0f blue:162.0f/255.0f alpha:1.0f];
+//        [self.buttonSave setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [self.buttonSave setTitle:@"保存" forState:UIControlStateNormal];
+//        self.buttonSave.layer.cornerRadius = 5 * ViewRateBaseOnIP6;
+//        self.buttonSave.layer.masksToBounds = YES;
+        self.buttonSave.hidden = YES;
     } else {
         self.viewBase.frame = CGRectMake(0 , 154 * ViewRateBaseOnIP6, SCREEN_WIDTH, 98 * ViewRateBaseOnIP6);
         self.viewBase.backgroundColor = [UIColor whiteColor];
         
+        self.buttonSave.hidden = NO;
         self.buttonSave.frame = CGRectMake(55 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6);
         self.buttonSubmit.frame = CGRectMake(395 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
         self.buttonSave.layer.cornerRadius = 10 * ViewRateBaseOnIP6;

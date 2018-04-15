@@ -134,8 +134,4 @@
     return 40 * ViewRateBaseOnIP6;
 }
 
-
-
-
-
 @end

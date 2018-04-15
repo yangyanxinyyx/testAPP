@@ -9,6 +9,8 @@
 #import "XCUserWaitingToPayingDetailViewController.h"
 #import "XCDistributionPolicyViewController.h"
 #import "XCDistributionBillViewController.h"
+#import "XCCheckoutDetailBaseModel.h"
+
 @interface XCUserWaitingToPayingDetailViewController ()
 @property (nonatomic, strong) UIButton  * distributionPolicyBtn ;
 @property (nonatomic, strong) UIButton * distributionBillBtn ;
@@ -21,7 +23,7 @@
     // Do any additional setup after loading the view.
 
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
+//    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
     [self.tableView registerClass:[XCCheckoutDetailInputCell class] forCellReuseIdentifier:kTextInputCellID];
     [self.tableView registerClass:[XCCheckoutDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
     [self initUI];
@@ -49,6 +51,7 @@
 //点击配送保单
 - (void)clickDistributionPolicyBtn:(UIButton *)button
 {
+
     XCDistributionPolicyViewController *policyVC = [[XCDistributionPolicyViewController alloc] initWithTitle:@"配送保单"];
     [self.navigationController pushViewController:policyVC animated:YES];
 }
@@ -106,6 +109,18 @@
     
     
 }
+
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
+- (void)requestSuccessHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"撤销成功" complete:nil];
+    [self.view addSubview:tipsView];
+}
+
 #pragma mark - Setter&Getter
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
@@ -126,26 +141,35 @@
     
     NSArray *titleArr = self.dataTitleArrM[indexPath.section];
     NSString *title = titleArr[indexPath.row];
-    if (indexPath.section == 0 && (indexPath.row == 12 - 1 || indexPath.row == 15 - 1 || indexPath.row == 16 - 1)) {
-        NSString *placetext ;
-        if (indexPath.row == 12 - 1) {
-            placetext = @"输入单号";
-        }else if (indexPath.row == 15 - 1  || indexPath.row == 16 - 1) {
-            placetext = @"输入金额";
-        }
-        XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
-        [textFiledCell setTitle:title];
-        [textFiledCell setTitlePlaceholder:placetext];
-        return textFiledCell;
-    }else if (indexPath.section == 0 && indexPath.row == 18 - 1){
-        XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];
-        [inputCell setTitle:title];
-        
-        return inputCell;
+//    if (indexPath.section == 0 && (indexPath.row == 12 - 1 || indexPath.row == 15 - 1 || indexPath.row == 16 - 1)) {
+//        NSString *placetext ;
+//        if (indexPath.row == 12 - 1) {
+//            placetext = @"输入单号";
+//        }else if (indexPath.row == 15 - 1  || indexPath.row == 16 - 1) {
+//            placetext = @"输入金额";
+//        }
+//        XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
+//        [textFiledCell setTitle:title];
+//        [textFiledCell setTitlePlaceholder:placetext];
+//        return textFiledCell;
+//    }else
+        if (indexPath.section == 0 && indexPath.row == 18 - 1){
+            BOOL mark = NO;
+            if ([self.model.isContinue isEqualToString:@"Y"])
+            {
+                mark = YES;
+            }
+            XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];
+            [inputCell setTitle:title];
+            [inputCell setIsContinue:mark];
+            inputCell.userInteractionEnabled = NO;
+            
+            return inputCell;
     }else {
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
-        [cell setTitlePlaceholder:@"刘某某"];
+        [cell setupCellWithDetailPolicyModel:self.model];
+//        [cell setTitlePlaceholder:@"刘某某"];
         return cell;
     }
 }

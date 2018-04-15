@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class XCCheckoutDetailBaseModel;
 @interface XCCheckoutDetailTextCell : UITableViewCell
 
 @property (nonatomic, strong) NSString * title ;
@@ -16,5 +16,7 @@
 
 //显示分割线 默认为NO
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
+
+- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
 
 @end

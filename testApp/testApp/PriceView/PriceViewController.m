@@ -57,7 +57,7 @@
 - (void)getData{
 }
 
-- (void) pressCustomerVehicleEnquiries{
+- (void)pressCustomerVehicleEnquiries{
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.textField.text forKey:@"criteria"];

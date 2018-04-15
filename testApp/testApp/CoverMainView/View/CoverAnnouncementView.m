@@ -7,6 +7,7 @@
 //
 
 #import "CoverAnnouncementView.h"
+#import "CoverAnnouncementModel.h"
 
 @interface CoverAnnouncementView ()
 
@@ -35,16 +36,12 @@
 
 - (void)createUI{
 
-    self.titleArray = @[@"000"
-                        ,@"111"
-                        ,@"222"
-                        ,@"333"
-                        ,@"444"
-                        ,@"555"
-                        ,@"666"
-                        ,@"777"
-                        ,@"888"
-                        ,@"999"];
+    NSMutableArray *array = [NSMutableArray array];
+    for (CoverAnnouncementModel *model in [UserInfoManager shareInstance].coverMainModel.announcementDatas) {
+        [array addObject:model.title];
+    }
+
+    self.titleArray = array;
 
     self.index = 0;
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(16, 10, 18, 18)];
@@ -66,19 +63,24 @@
     self.timer = [NSTimer timerWithTimeInterval:5 target:self selector:@selector(nextPage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    [self addSubview:btn];
+    btn.backgroundColor = [UIColor clearColor];
+    [btn addTarget:self action:@selector(pressToPush) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void)setIndex:(NSInteger)index
 {
     _index = index;
-    if (index == 10) {
+    if (index == self.titleArray.count) {
         _index = 0;
     }
 }
 
 - (NSInteger )index
 {
-    if (_index == 9) {
+    if (_index == self.titleArray.count - 1) {
         return 0;
     }else{
         return _index;
@@ -99,6 +101,19 @@
         self.tempLabel.frame = CGRectMake(40, 40, SCREEN_WIDTH-40, 40);
 
     }];
+}
+
+- (void)pressToPush
+{
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pressToPushWebWithID:)]) {
+        CoverAnnouncementModel *model = [UserInfoManager shareInstance].coverMainModel.announcementDatas[_index];
+        NSNumber *webID = model.announcementId;
+
+
+        [self.delegate pressToPushWebWithID:webID];
+    }
+
 }
 
 - (void)dealloc
