@@ -21,6 +21,7 @@
     
     //车险客户列表
     if ([self isPolicyTypeVCWithModel:model]) {
+
         NSDictionary *param = @{
                                 @"policyStatus":model.title,
                                 };

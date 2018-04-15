@@ -16,6 +16,7 @@
 		A71EABA6207F68E900347693 /* red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA3207F68E800347693 /* red@3x.png */; };
 		A71EABA7207F68E900347693 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA4207F68E800347693 /* red.png */; };
 		A71EABA8207F68E900347693 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA5207F68E900347693 /* red@2x.png */; };
+		A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */; };
 		A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */; };
 		A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */; };
 		A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5A82081AC8B006B0C33 /* XCCheckoutBaseModel.m */; };
@@ -262,6 +263,8 @@
 		A71EABA3207F68E800347693 /* red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@3x.png"; sourceTree = "<group>"; };
 		A71EABA4207F68E800347693 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		A71EABA5207F68E900347693 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
+		A71EF1262082F3EF001B75ED /* XCCarTransactionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCarTransactionModel.h; sourceTree = "<group>"; };
+		A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCarTransactionModel.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A71F118F207CBE4A00D57FEF /* XCShopDetailListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopDetailListCell.h; sourceTree = "<group>"; };
 		A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopDetailListCell.m; sourceTree = "<group>"; };
@@ -699,6 +702,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A71EF1252082F3BC001B75ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A71EF1262082F3EF001B75ED /* XCCarTransactionModel.h */,
+				A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
@@ -1080,6 +1092,7 @@
 		FC32BEA72079AA2000817156 /* 年审 */ = {
 			isa = PBXGroup;
 			children = (
+				A71EF1252082F3BC001B75ED /* Model */,
 				FC32BEA82079AA2000817156 /* XCUserAnnualReviewDetailViewController.h */,
 				FC32BEA92079AA2000817156 /* XCUserAnnualReviewDetailViewController.m */,
 				FC32BEAA2079AA2000817156 /* XCUserAnnualReviewViewController.h */,
@@ -1968,6 +1981,7 @@
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,
+				A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */,
 				FC32BFB02079AA5900817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC32BF502079AA2000817156 /* XCDistributionFooterView.m in Sources */,

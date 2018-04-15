@@ -8,6 +8,8 @@
 
 #import "XCUserAnnualReviewViewController.h"
 #import "XCUserAnnualReviewDetailViewController.h"
+#import "XCCheckoutDetailBaseModel.h"
+
 @interface XCUserAnnualReviewViewController ()<XCCheckoutTableViewCellDelegate>
 
 @end
@@ -26,7 +28,7 @@
 
 #pragma mark - Action Method
 
-- (void)clickCheckDetailButton
+- (void)clickCheckDetailButtonWithCell:(XCCheckoutTableViewCell *)cell
 {
     XCUserAnnualReviewDetailViewController *annualDetailVC = [[XCUserAnnualReviewDetailViewController alloc] initWithTitle:@"年审详情"];
     [self.navigationController pushViewController:annualDetailVC animated:YES];
@@ -40,16 +42,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+   return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     cell.delegate = self;
-    cell.carNumber = @"粤AAAAAA";
-    cell.userName = @"梁艺钟";
-    cell.issureTime = @"a123213-321-321-3";
+    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+    cell.baseModel = baseModel;
+//    cell.carNumber = @"粤AAAAAA";
+//    cell.userName = @"梁艺钟";
+//    cell.issureTime = @"a123213-321-321-3";
     
     return cell;
 }
@@ -58,6 +62,6 @@
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickCheckDetailButton];
+    [self clickCheckDetailButtonWithCell:cell];
 }
 @end
