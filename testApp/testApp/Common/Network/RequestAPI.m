@@ -24,6 +24,9 @@
 //首页公告
 #define COVERANNOUNCEMENT_API [NSString stringWithFormat:@"%@/api/web/notice/findNoticeByEmployee",API_PREFIX]
 
+//公告详情
+#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/selectNoticeInfoContent",API_PREFIX]
+
 //首页轮播图
 #define COVERLOOPIMAGE_API [NSString stringWithFormat:@"%@/api/web/pictrue/findByType",API_PREFIX]
 
@@ -181,6 +184,15 @@
 +(void)getCoverAnnouncement:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:COVERANNOUNCEMENT_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCoverWeb:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:COVERWEB_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

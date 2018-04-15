@@ -211,14 +211,13 @@
                 NSDictionary  *param = @{
                                          @"type":@"业务端首页轮播图"
                                          };
-                [RequestAPI getCoverAnnouncement:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
                     NSLog(@"%@",response);
                     if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
                         if ([response[@"result"] integerValue] == 1) {
                             NSLog(@"获取轮播图成功");
-                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-                                NSDictionary *data = response[@"data"];
-                                NSArray *dataSet = data[@"dataSet"];
+                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                                NSArray *dataSet =  response[@"data"];
                                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                                 for (NSDictionary *dicData in dataSet) {
                                     CoverLoopimageModel *loopimage = [[CoverLoopimageModel alloc] init];

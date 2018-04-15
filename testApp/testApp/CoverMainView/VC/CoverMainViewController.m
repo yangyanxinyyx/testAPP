@@ -12,8 +12,9 @@
 #import "CoverPerformanceView.h"
 #import "YXScrollView.h"
 #import "CoverAnnouncementView.h"
+#import "CoverWebViewController.h"
 
-@interface CoverMainViewController ()<UIScrollViewDelegate>
+@interface CoverMainViewController ()<UIScrollViewDelegate,CoverAnnouncementViewDelegate>
 @property (nonatomic,strong) UIScrollView *scrollView;
 
 @property (nonatomic,strong) CoverPerformanceView *carView;
@@ -54,12 +55,11 @@
     }];
     self.imageScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 190 * kScaleHeight);
     self.imageScrollView.time = 3;
-    //self.imageScrollView.pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
 
     [_scrollView addSubview:_imageScrollView];
 
-    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-    [_scrollView addSubview:_announcementView];
+//    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+//    [_scrollView addSubview:_announcementView];
 
     _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:@[@"3213",@"31223",@"3123",@"3",@"2",@"1"]];
     _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
@@ -91,8 +91,25 @@
 
 - (void)reloadData
 {
+    [_imageScrollView removeFromSuperview];
     [_carView removeFromSuperview];
     [_repairView removeFromSuperview];
+
+//    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:nil];
+    NSArray *imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"汽车1.jpg"],[UIImage imageNamed:@"汽车2.jpg"],[UIImage imageNamed:@"汽车3.jpg"], nil];
+
+    self.imageScrollView = [[YXScrollView alloc] initWithImageArray:imageArray imageClick:^(NSInteger index) {
+        NSLog(@"点了图片%ld",index);
+    }];
+    self.imageScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 190 * kScaleHeight);
+    self.imageScrollView.time = 3;
+
+    [_scrollView addSubview:_imageScrollView];
+
+    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    _announcementView.delegate = self;
+    [_scrollView addSubview:_announcementView];
+
     NSArray * array = @[
                         [UserInfoManager shareInstance].performanceMedal.lastYearCar,
                         [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
@@ -156,6 +173,12 @@
 
 }
 
+- (void)pressToPushWebWithID:(NSNumber *)webId
+{
+    CoverWebViewController *webVC = [[CoverWebViewController alloc] init];
+    webVC.webId = webId;
+    [self.navigationController pushViewController:webVC animated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {

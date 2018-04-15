@@ -31,6 +31,8 @@
         manager.performanceMedal = [[PerformanceMedal alloc] init];
         manager.userMedal = [[UserMedal alloc] init];
         manager.coverMainModel = [[CoverMainModel alloc] init];
+        manager.coverMainModel.announcementDatas = [NSMutableArray array];
+        manager.coverMainModel.loopImageDatas = [NSMutableArray array];
     });
 
     return manager;
