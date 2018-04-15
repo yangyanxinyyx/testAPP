@@ -132,7 +132,7 @@
 - (void)pressBtn:(UIButton *)sender
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(pressGetCarBtn:)]) {
-        [self.delegate pressGetCarBtn:sender];
+        [self.delegate pressGetCarBtn:self];
     }
 }
 

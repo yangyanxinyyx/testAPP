@@ -25,7 +25,7 @@
 #define COVERANNOUNCEMENT_API [NSString stringWithFormat:@"%@/api/web/notice/findNoticeByEmployee",API_PREFIX]
 
 //公告详情
-#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/selectNoticeInfoContent",API_PREFIX]
+#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/getNotice",API_PREFIX]
 
 //首页轮播图
 #define COVERLOOPIMAGE_API [NSString stringWithFormat:@"%@/api/web/pictrue/findByType",API_PREFIX]
