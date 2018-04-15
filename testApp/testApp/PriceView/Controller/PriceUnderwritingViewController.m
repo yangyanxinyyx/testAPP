@@ -46,6 +46,9 @@
     }
 }
 
+#pragma mark - getNetWork
+
+
 
 #pragma mark- cell delegate
 - (void)textViewChangeWithTextView:(UITextView *)textView{
@@ -205,7 +208,7 @@
     if (indexPath.row == 5) {
         [_selectTimeV inputSelectTiemView:YES];
         _selectTimeV.block = ^(NSString *timeStr) {
-            
+            NSLog(@"==>%@",timeStr);
         };
     }
     if (indexPath.row == 6) {

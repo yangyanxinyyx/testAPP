@@ -51,12 +51,20 @@
 //====个人中心====
 //我的佣金
 #define MYCOMISSION_API [NSString stringWithFormat:@"%@/api/web/commission/selectCommission",API_PREFIX]
+
 //====车险客户列表====
 //获取 待核保、已核保代缴费、已缴费待打单、财务审核、配送、退单、续保列表
 #define MYPOLICYBYCONDINATION_API [NSString stringWithFormat:@"%@/api/web/policy/selectMyPolicyByCondiction",API_PREFIX]
+//撤销核保
 #define MYPOLICYREVOKBYSALEMAN_API [NSString stringWithFormat:@"%@/api/web/policy/updatePolicyRevokeBySalesman",API_PREFIX]
+//提交配送保单
 #define SUBMITPOLICYPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPolicyPaymentList",API_PREFIX]
+//提交配送缴费单
 #define SUBMITPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
+//获取客户列表
+#define SELECTCUSTOMERLIST_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerList",API_PREFIX]
+//获取客户详情
+#define SELECTCUSTOMERPARTICULARS_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerParticulars",API_PREFIX]
 //====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
@@ -64,6 +72,7 @@
 #define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreService",API_PREFIX]
 //修改门店详情
 #define SHOPUPDATESTORE_API [NSString stringWithFormat:@"%@/api/web/store/updateStore",API_PREFIX]
+
 // ===================
 
 
@@ -361,7 +370,25 @@
 
 +(void)postSubmitPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
-    [self getRequest:SUBMITPAYMENTLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+    [self getRequest:SELECTCUSTOMERLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCustomerList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTCUSTOMERLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCustomerParticularsList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTCUSTOMERPARTICULARS_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

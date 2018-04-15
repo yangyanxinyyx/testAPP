@@ -12,7 +12,7 @@
 #import "XCDistributionInputCell.h"
 #import "LYZSelectView.h"
 #import "XCDistributionBillModel.h"
-
+#import "SelectTimeView.h"
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom)
 @interface XCDistributionPolicyViewController ()<UITableViewDelegate,UITableViewDataSource,
 XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetailTextFiledCellDelegate>
@@ -21,6 +21,9 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 @property (nonatomic, strong) NSArray * titleArr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) XCDistributionBillModel * billModel ;
+
+@property (nonatomic, strong) SelectTimeView * CardSelectTimeV ;
+@property (nonatomic, strong) SelectTimeView * DistributonSelectTimeV ;
 
 @end
 
@@ -91,7 +94,29 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    
+    _CardSelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _CardSelectTimeV.hidden = YES;
+    __weak typeof (self)weakSelf = self;
+
+    self.CardSelectTimeV.block = ^(NSString *string ) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+        XCDistributionPicketCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+        [cell setTitleValue:string];
+        weakSelf.billModel.payDate = string;
+    };
+    
+    _DistributonSelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _DistributonSelectTimeV.hidden = YES;
+    self.DistributonSelectTimeV.block = ^(NSString *string ) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+        XCDistributionPicketCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
+        [cell setTitleValue:string];
+        weakSelf.billModel.shipmentTime = string;
+    };
     [self.view addSubview:self.tableView];
+    [self.view addSubview:_CardSelectTimeV];
+    [self.view addSubview:_DistributonSelectTimeV];
 }
 
 #pragma mark - Action Method
@@ -102,13 +127,18 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
-        if ((indexPath.section == 0 && indexPath.row == 3)||(indexPath.section == 1 && indexPath.row == 2)) {
-            //选择时间
+        if ((indexPath.section == 0 && indexPath.row == 3)) {
+            //刷卡日期
+            [self.CardSelectTimeV inputSelectTiemView:YES];
+        }
+        else if ((indexPath.section == 1 && indexPath.row == 2)) {
+            [self.DistributonSelectTimeV inputSelectTiemView:YES];
         }
         else if(indexPath.section == 0 && indexPath.row == 4){
             NSArray * arr = @[@"赠送",@"购买",@"无"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 weakSelf.billModel.packageGiveOrBuy = selectStr;
+                [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
             }];
             [weakSelf.view addSubview:alterView];
         }
@@ -116,6 +146,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             NSArray * arr = @[@"礼包一",@"礼包二",@"礼包三"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
 //                weakSelf.billModel.packageId = selectStr;
+                [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
             }];
             [weakSelf.view addSubview:alterView];
         }
@@ -403,6 +434,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         CGRect frame = weakSelf.tableView.frame;
         frame.size.height = ktableViewH -  keyboardEndFrame.size.height;
         weakSelf.tableView.frame = frame;
+        [weakSelf scrollViewToBottom:YES];
     }];
     
 }
@@ -419,6 +451,14 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     
 }
 
+- (void)scrollViewToBottom:(BOOL)animated
+{
+    if (self.tableView.contentSize.height > self.tableView.frame.size.height)
+    {
+        CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+        [self.tableView setContentOffset:offset animated:animated];
+    }
+}
 #pragma mark - Setter&Getter
 
 

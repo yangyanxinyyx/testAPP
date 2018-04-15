@@ -9,6 +9,7 @@
 #import "UserViewController+ListCellNetworkHandler.h"
 #import "XCShopModel.h"
 #import "XCUserListModel.h"
+#import "XCCustomerListModel.h"
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCheckoutBaseTableViewController.h"
 
@@ -32,6 +33,37 @@
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
                     for (NSDictionary *dataInfo in origionDataArr) {
                         XCCheckoutDetailBaseModel *baseModel = [XCCheckoutDetailBaseModel yy_modelWithJSON:dataInfo];
+                        if (baseModel) {
+                            [dataArrM addObject:baseModel];
+                        }
+                    }
+                    XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+                    subVC.dataArr = dataArrM;
+                    [weakSelf.navigationController pushViewController:subVC animated:YES];
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    configureSucess = YES;
+                }
+            }
+            if (!configureSucess) {
+                [weakSelf requestFailureHandler];
+            }
+        } fail:^(id error) {
+            [weakSelf requestFailureHandler];
+        }];
+    }
+    else if ([model.title isEqualToString:@"我的客户"]) {
+        NSDictionary *param = @{
+                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageSize":[NSNumber numberWithInt:6]
+                                };
+        [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            BOOL configureSucess  = NO;
+            if (response[@"data"]) {
+                if (response[@"data"][@"dataSet"]) {
+                    NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                    NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                    for (NSDictionary *dataInfo in origionDataArr) {
+                        XCCustomerListModel *baseModel = [XCCustomerListModel yy_modelWithJSON:dataInfo];
                         if (baseModel) {
                             [dataArrM addObject:baseModel];
                         }
@@ -92,7 +124,7 @@
     else if ([model.title isEqualToString:@"已缴费待打单"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"财务审核"]) {
+    else if ([model.title isEqualToString:@"财务审核中"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"配送"]) {

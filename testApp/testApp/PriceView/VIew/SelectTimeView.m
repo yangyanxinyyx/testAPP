@@ -241,22 +241,21 @@
 #pragma mark -UIPickerView的代理
 
 // 滚动UIPickerView就会调用
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    NSLog(@"==>zoule");
     if (component == 0) {
         
-        yearIndex = row;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+//        yearIndex = row;
+        dispatch_async(dispatch_get_main_queue(), ^{
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
             [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
-            
         });
         
     }else if (component == 1) {
         
-        monthIndex = row;
+//        monthIndex = row;
         
         [pickerView reloadComponent:2];
         
@@ -275,8 +274,7 @@
         }
         [pickerView selectRow:dayIndex inComponent:2 animated:YES];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+        dispatch_async(dispatch_get_main_queue(), ^{
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
             [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
@@ -288,22 +286,20 @@
         });
     }else {
         
-        dayIndex = row;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
+//        dayIndex = row;
+        dispatch_async(dispatch_get_main_queue(), ^{
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
             [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
-            
         });
+ 
     }
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
     return 88 * ViewRateBaseOnIP6;
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
         //设置分割线的颜色
         for(UIView *singleLine in pickerView.subviews)
         {
@@ -319,13 +315,16 @@
     
     
     if (component == 0) {
+        yearIndex = row;
         [genderLabel setTitle:self.yearArray[row] forState:UIControlStateNormal];
         genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, -80 * ViewRateBaseOnIP6, 0, 0);
         
     }else if (component == 1) {
+        monthIndex = row;
         [genderLabel setTitle:self.monthArray[row] forState:UIControlStateNormal];
         
     }else {
+        dayIndex = row;
         [genderLabel setTitle:self.dayArray[row] forState:UIControlStateNormal];
         genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -120 * ViewRateBaseOnIP6);
     }

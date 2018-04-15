@@ -70,6 +70,14 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+#pragma mark - scrollerViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [scrollView endEditing:YES];
+}
+
+
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter

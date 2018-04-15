@@ -10,6 +10,10 @@
 
 @interface XCDistributionPolicyViewController : XCUserBaseViewController
 
+/** 商业险金额 */
+@property (nonatomic, strong) NSString * syMoney ;
 
+/** 交强险金额 */
+@property (nonatomic, strong) NSString * jqMoney ;
 
 @end

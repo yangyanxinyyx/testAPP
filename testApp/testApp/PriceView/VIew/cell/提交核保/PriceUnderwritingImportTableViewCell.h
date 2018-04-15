@@ -14,6 +14,7 @@
 @end
 
 @interface PriceUnderwritingImportTableViewCell : UITableViewCell
+@property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UITextView * textView;
 @property (nonatomic, weak) id <PriceUnderwritingImportTableViewCellDelegate> delegate;
 @end
