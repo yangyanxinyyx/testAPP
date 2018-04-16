@@ -8,19 +8,24 @@
 
 #import "UserInfoInputView.h"
 #import "DatePickerView.h"
+#import "SelectStateView.h"
+#import "UIButton+ImageTitleSpacing.h"
+#import "SelectTimeView.h"
 
 @interface UserInfoInputView ()<UITextFieldDelegate>
 
-
+@property (nonatomic,strong) id param;
 
 @end
 
 @implementation UserInfoInputView
 
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param
 {
     if (self = [super initWithFrame:frame]) {
+        self.param = param;
         [self createUIWithTitle:title type:type];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -46,8 +51,18 @@
         _textField.delegate = self;
         _textField.font = [UIFont systemFontOfSize:14];
     }else if (type == InputViewTypeSelect){
-        _selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 84, 0, 84, 44)];
-        [_selectBtn setTitle:@"精致洗车" forState:UIControlStateNormal];
+        _selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 44)];
+        NSString *str = nil;
+
+        NSArray *array = (NSArray *)self.param;
+        str = array[0];
+
+
+        [_selectBtn setTitle:str forState:UIControlStateNormal];
+        [_selectBtn setTitleColor:COLOR_RGB_255(164, 164, 164) forState:UIControlStateNormal];
+        _selectBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_selectBtn setImage:[UIImage imageNamed:@"next.png"] forState:UIControlStateNormal];
+        [_selectBtn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleRight imageTitleSpace:5];
         [self addSubview:_selectBtn];
         [_selectBtn addTarget:self action:@selector(pressSelectbtn:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -71,25 +86,27 @@
 
 - (void)tapView{
 
-//    UIViewController *VC = nil;
-//    for (UIView* next = [self superview];next; next = next.superview){
-//        UIResponder* nextResponder = [next nextResponder];
-//        if ([nextResponder isKindOfClass:[UINavigationController class]]) {
-//            VC = (UIViewController*)nextResponder;
-//        }
-//    }
-
-    DatePickerView *picker = [[DatePickerView alloc] init];
-    picker.block = ^(NSString *date) {
-        self.dateLabel.text = date;
+    SelectTimeView *busSelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[UIApplication sharedApplication].keyWindow addSubview:busSelectTimeV];
+    busSelectTimeV.block = ^(NSString *timeStr) {
+       self.dateLabel.text = timeStr;
     };
-
 
 }
 
 - (void)pressSelectbtn:(UIButton *)sender
 {
-    
+    if (self.param) {
+        NSArray *array = (NSArray *)self.param;
+        SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:array WithCompletionHandler:^(NSString *content) {
+            if (content) {
+                [_selectBtn setTitle:content forState:UIControlStateNormal];
+                [_selectBtn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleRight imageTitleSpace:5];
+            }
+        }];
+        [[UIApplication sharedApplication].keyWindow addSubview:selectView];
+    }
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

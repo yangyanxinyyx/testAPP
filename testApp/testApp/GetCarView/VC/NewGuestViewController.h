@@ -10,6 +10,7 @@
 
 @interface NewGuestViewController : BaseViewController1
 
-- (instancetype)initWithType:(BOOL)isOrder;
+@property (nonatomic,strong) NSArray *serviceArray;
+- (instancetype)initWithIsOrder:(BOOL)isOrder;
 
 @end

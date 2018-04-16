@@ -17,7 +17,7 @@
 
 @implementation NewGuestViewController
 
-- (instancetype)initWithType:(BOOL)isOrder
+- (instancetype)initWithIsOrder:(BOOL)isOrder
 {
     if (self = [super init]) {
         self.isOrder = isOrder;
@@ -51,16 +51,31 @@
         NSArray *array = @[@"客户名称",@"车  牌  号",@"车  型  号",@"联系电话",@"项目类别",@"项目费用",@"消费时间"];
         for (int i=0; i<7; i++) {
             if (i<4) {
-                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField];
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation + 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil];
                 [self.view addSubview:inputView];
             }else if (i == 4){
-                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeSelect];
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeSelect param:self.serviceArray];
                 [self.view addSubview:inputView];
             }else if (i == 5){
-                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField];
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil];
                 [self.view addSubview:inputView];
             }else if (i == 6){
-                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeDate];
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeDate param:nil];
+                [self.view addSubview:inputView];
+            }
+        }
+    }else{
+        NSArray *array = @[@"客户名称",@"车  牌  号",@"车  型  号",@"联系电话",@"公  里  数",@"项目类别",@"项目费用",@"消费时间"];
+        for (int i=0; i<8; i ++) {
+            if (i == 5) {
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeSelect param:self.serviceArray];
+                [self.view addSubview:inputView];
+            }else if (i == 7){
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeDate param:nil];
+                [self.view addSubview:inputView];
+            }
+            else{
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil];
                 [self.view addSubview:inputView];
             }
         }

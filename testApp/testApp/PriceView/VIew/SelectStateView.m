@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSMutableArray *arrayData;
 @property (nonatomic, strong) NSString *content;
+@property (nonatomic, copy) void (^sureCallback)(NSString *content);
 @end
 @implementation SelectStateView
 - (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray{
@@ -57,6 +58,49 @@
     }
     return self;
 }
+
+- (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray WithCompletionHandler:(void (^)(NSString *))complete
+{
+    if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
+        _content = [dataArray firstObject];
+        pickerRow = 0;
+        [self.arrayData addObjectsFromArray:dataArray];
+        _conteView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 546 * ViewRateBaseOnIP6, SCREEN_WIDTH, 546 * ViewRateBaseOnIP6)];
+        [self addSubview:_conteView];
+        topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6)];
+        topView.backgroundColor = RGBACOLOR(242, 242, 242, 1.0);
+        [_conteView addSubview:topView];
+
+        UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelBtn.frame = CGRectMake(25 * ViewRateBaseOnIP6, 0, 72 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+        [cancelBtn.titleLabel setFont:[UIFont systemFontOfSize:32*ViewRateBaseOnIP6]];
+        [topView addSubview:cancelBtn];
+
+        UIButton *yesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        yesBtn.frame = CGRectMake(SCREEN_WIDTH - 97 * ViewRateBaseOnIP6, 0,72 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
+        [yesBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [yesBtn setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+        [yesBtn.titleLabel setFont:[UIFont systemFontOfSize:32*ViewRateBaseOnIP6]] ;
+        [topView addSubview:yesBtn];
+
+        [cancelBtn addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchDown];
+        [yesBtn addTarget:self action:@selector(clickYes:) forControlEvents:UIControlEventTouchDown];
+
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(300 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6, 150 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
+        label.text = @"请选择";
+        label.textColor = [UIColor colorWithHexString:@"#444444"];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:34 * ViewRateBaseOnIP6];
+        [topView addSubview:label];
+        [_conteView addSubview:self.pickerView];
+        self.sureCallback = complete;
+    }
+    return self;
+}
+
 - (UIPickerView *)pickerView{
     if (!_pickerView) {
         _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 88 * ViewRateBaseOnIP6, SCREEN_WIDTH, 458 * ViewRateBaseOnIP6)];
@@ -94,7 +138,13 @@
 }
 
 - (void)clickYes:(UIButton *)button{
-    [self.delegate didSelectCell:_content count:self.tag priceCount:pickerRow];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectCell:count:priceCount:)]) {
+        [self.delegate didSelectCell:_content count:self.tag priceCount:pickerRow];
+    }
+
+    if (self.sureCallback) {
+        self.sureCallback(_content);
+    }
     [self removeFromSuperview];
 }
 

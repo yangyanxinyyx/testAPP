@@ -46,6 +46,9 @@
 //接车时获取订单详情
 #define GETCARDETAILINFORMATION_API [NSString stringWithFormat:@"%@/api/web/order/operationGetOrder",API_PREFIX]
 
+//获取门店内服务
+#define GETCARSERVICE_API [NSString stringWithFormat:@"%@/api/web/service/getServiceByStoreId",API_PREFIX]
+
 
 // =================== modify by Liangyz 个人中心
 //====个人中心====
@@ -242,6 +245,15 @@
 +(void)getGetCarDetail:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:GETCARDETAILINFORMATION_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
