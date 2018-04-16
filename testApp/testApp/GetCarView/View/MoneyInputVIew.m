@@ -10,8 +10,8 @@
 
 @interface MoneyInputVIew ()
 
-@property (nonatomic,strong) NSString *insuranceMoney;
-@property (nonatomic,strong) NSString *selfMoney;
+@property (nonatomic,strong) UITextField *insurancetTF;
+@property (nonatomic,strong) UITextField *selfTF;
 
 @end
 
@@ -29,37 +29,48 @@
         backGround.layer.masksToBounds = YES;
         backGround.backgroundColor = [UIColor whiteColor];
 
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(106, 20, 60, 14)];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 270, 15)];
+        title.textAlignment = NSTextAlignmentCenter;
         title.text = @"金额输入";
         title.font = [UIFont systemFontOfSize:15];
         title.textColor = COLOR_RGB_255(68, 68, 68);
         [backGround addSubview:title];
 
-        UILabel *insuranceTitle = [[UILabel alloc] initWithFrame:CGRectMake(34, 61, 53, 43)];
+        UILabel *insuranceTitle = [[UILabel alloc] initWithFrame:CGRectMake(34, 56, 56, 25)];
         insuranceTitle.text = @"保险金额";
         insuranceTitle.font = [UIFont systemFontOfSize:13];
         insuranceTitle.textColor = COLOR_RGB_255(131, 131, 131);
         [backGround addSubview:insuranceTitle];
 
-        UILabel *selfTitle = [[UILabel alloc] initWithFrame:CGRectMake(34, 101, 53, 43)];
+        UILabel *selfTitle = [[UILabel alloc] initWithFrame:CGRectMake(34, 96, 56, 25)];
         selfTitle.text = @"自费金额";
         selfTitle.font = [UIFont systemFontOfSize:13];
         selfTitle.textColor = COLOR_RGB_255(131, 131, 131);
         [backGround addSubview:selfTitle];
 
-        UITextField *insurancetTF = [[UITextField alloc] initWithFrame:CGRectMake(97, 55, 140, 25)];
-        insurancetTF.delegate = self;
-        insurancetTF.placeholder = @"输入金额";
-        insurancetTF.keyboardType = UIKeyboardTypePhonePad;
-        insurancetTF.tag = 0;
-        [backGround addSubview:insurancetTF];
+        _insurancetTF = [[UITextField alloc] initWithFrame:CGRectMake(97, 55, 140, 25)];
+        _insurancetTF.font = [UIFont systemFontOfSize:12];
+        _insurancetTF.delegate = self;
+        _insurancetTF.placeholder = @"输入金额";
+        _insurancetTF.keyboardType = UIKeyboardTypeNumberPad;
+        _insurancetTF.tag = 0;
+        [backGround addSubview:_insurancetTF];
+        _insurancetTF.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 0)];
+        _insurancetTF.leftViewMode = UITextFieldViewModeAlways;
+        _insurancetTF.backgroundColor = COLOR_RGB_255(240, 240, 240);
+        [_insurancetTF setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
 
-        UITextField *selfTF = [[UITextField alloc] initWithFrame:CGRectMake(97, 95, 140, 25)];
-        selfTF.delegate = self;
-        selfTF.placeholder = @"输入金额";
-        selfTF.keyboardType = UIKeyboardTypePhonePad;
-        selfTF.tag = 1;
-        [backGround addSubview:selfTF];
+        _selfTF = [[UITextField alloc] initWithFrame:CGRectMake(97, 95, 140, 25)];
+        _selfTF.delegate = self;
+        _selfTF.placeholder = @"输入金额";
+        _selfTF.keyboardType = UIKeyboardTypeNumberPad;
+        _selfTF.tag = 1;
+        _selfTF.leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 0)];
+        _selfTF.leftViewMode = UITextFieldViewModeAlways;
+        [backGround addSubview:_selfTF];
+        _selfTF.backgroundColor = COLOR_RGB_255(240, 240, 240);
+        _selfTF.font = [UIFont systemFontOfSize:12];
+        [_selfTF setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];
 
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(33, 150, 90, 30)];
         cancelBtn.backgroundColor = COLOR_RGB_255(218, 218, 218);
@@ -86,15 +97,23 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField.tag == 0) {
-        _insuranceMoney = textField.text;
-    }else{
-        _selfMoney = textField.text;
-    }
 
     [textField endEditing:YES];
 
     return  YES;
+
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self endEditing:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMKEYBOARD] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+
 
 }
 
@@ -105,15 +124,47 @@
 
 - (void)pressConfirmBtn
 {
-    if (!_insuranceMoney && !_selfMoney) {
+    if (!_insurancetTF.text && !_selfTF.text) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入金额" complete:nil];
         [self addSubview:tipsView];
         return;
     }
 
-    if (self.delefate && [self.delefate respondsToSelector:@selector(MoneyDidInputWithInsurance:selfMoney:)]) {
-        [self.delefate MoneyDidInputWithInsurance:_insuranceMoney selfMoney:_selfMoney];
-    }
+    NSDictionary *param = @{@"id":_orderId,
+                            @"insurance":[NSNumber numberWithInt:[_insurancetTF.text intValue]],
+                            @"weixiuZifei":[NSNumber numberWithInt:[_selfTF.text intValue] ]
+                            };
+    [RequestAPI getGetCarFinish:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (isUsableDictionary(response)) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"接车金额输入成功");
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"金额输入成功!" complete:^{
+
+                        if (self.delegate && [self.delegate respondsToSelector:@selector(reloadGetCarListWithPlateNO)]) {
+                            [self.delegate reloadGetCarListWithPlateNO];
+                        }
+                        [self removeFromSuperview];
+                    }];
+
+                    [self addSubview:tipsView];
+                });
+
+            }else{
+                NSLog(@"接车金额失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"接车金额错误" complete:nil];
+                [self addSubview:tipsView];
+            }
+        }
+
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self addSubview:tipsView];
+    }];
+
+
 }
 
 /*

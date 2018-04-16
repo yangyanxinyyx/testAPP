@@ -223,6 +223,8 @@
 		FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */; };
 		FCE4E703208274B500E04A6B /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FF208274B400E04A6B /* DatePickerView.m */; };
 		FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E70520827BA500E04A6B /* CoverWebViewController.m */; };
+		FCE4E70C2083AD3700E04A6B /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70A2083AD3600E04A6B /* down@3x.png */; };
+		FCE4E70D2083AD3700E04A6B /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70B2083AD3700E04A6B /* down@2x.png */; };
 		FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */; };
 		FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */; };
 		FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF87668206BCF1500CF6FDE /* YXScrollView.m */; };
@@ -620,6 +622,8 @@
 		FCE4E701208274B500E04A6B /* UserInfoInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoInputView.h; path = testApp/Common/UserInfoInputView.h; sourceTree = SOURCE_ROOT; };
 		FCE4E70420827BA500E04A6B /* CoverWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverWebViewController.h; sourceTree = "<group>"; };
 		FCE4E70520827BA500E04A6B /* CoverWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverWebViewController.m; sourceTree = "<group>"; };
+		FCE4E70A2083AD3600E04A6B /* down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@3x.png"; sourceTree = "<group>"; };
+		FCE4E70B2083AD3700E04A6B /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
 		FCF86B9B2069580100CF6FDE /* GetCarListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarListViewController.h; sourceTree = "<group>"; };
 		FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarListViewController.m; sourceTree = "<group>"; };
 		FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewGuestViewController.h; sourceTree = "<group>"; };
@@ -891,6 +895,8 @@
 		FC32BE172079A9BC00817156 /* CoverMain */ = {
 			isa = PBXGroup;
 			children = (
+				FCE4E70B2083AD3700E04A6B /* down@2x.png */,
+				FCE4E70A2083AD3600E04A6B /* down@3x.png */,
 				FC32BE182079A9BC00817156 /* coverMain_nomnal@2x.png */,
 				FC32BE192079A9BC00817156 /* coverMain_nomnal@3x.png */,
 				FC32BE1A2079A9BC00817156 /* coverMain_select@2x.png */,
@@ -1739,6 +1745,7 @@
 			files = (
 				FC32BE6E2079A9BD00817156 /* login_code@2x.png in Resources */,
 				FC32BE7B2079A9BD00817156 /* 背景@2x.png in Resources */,
+				FCE4E70C2083AD3700E04A6B /* down@3x.png in Resources */,
 				FC32BE832079A9BD00817156 /* 返回拷贝10@3x.png in Resources */,
 				FC32BE7A2079A9BD00817156 /* 个人中心@2x.png in Resources */,
 				FC32BE7E2079A9BD00817156 /* 完成@2x.png in Resources */,
@@ -1768,6 +1775,7 @@
 				FC32BE552079A9BD00817156 /* getCar_nomnal@2x.png in Resources */,
 				FC32BE772079A9BD00817156 /* login_username@3x.png in Resources */,
 				FC32BE5A2079A9BD00817156 /* price_nomnal@3x.png in Resources */,
+				FCE4E70D2083AD3700E04A6B /* down@2x.png in Resources */,
 				FC32BE642079A9BD00817156 /* 汽车2.jpg in Resources */,
 				FC32BE522079A9BD00817156 /* coverMain_nomnal@3x.png in Resources */,
 				FC32BE782079A9BD00817156 /* next@2x.png in Resources */,

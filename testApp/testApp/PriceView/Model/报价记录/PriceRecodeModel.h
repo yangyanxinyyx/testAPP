@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *offerTime;
 @property (nonatomic, strong) NSString *quoteGroup;
 @property (nonatomic, strong) NSString *blType;
+@property (nonatomic, assign) NSString *priceRecodeID;
 
 @property (nonatomic, assign) double offerVciPrice; //商业险金额
 @property (nonatomic, assign) double offerTotalPrice; //总金额

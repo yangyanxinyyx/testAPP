@@ -43,6 +43,8 @@
 @property (nonatomic, strong) NSString *carID;
 @property (nonatomic, strong) NSString *customerId;
 
+@property (nonatomic, strong) UIView *backView;
+
 @end
 
 @implementation PriceViewController
@@ -64,8 +66,8 @@
     [RequestAPI getCustomerVehicleEnquiries:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+            _contentView.hidden = NO;
             NSDictionary *data = response[@"data"];
-
             _nameView.labelContent.text = [data objectForKey:@"customerName"];
             _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
             _sexView.labelContent.text = [data objectForKey:@"sex"];
@@ -152,6 +154,7 @@
 #pragma mark- UI
 
 - (void)createUI{
+    [self.view addSubview:self.backView];
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.topView];
     [self.contentView addSubview:self.myScrollView];
@@ -173,12 +176,22 @@
     [self.priceButtonView addSubview:self.buttonPrice];
     [self.priceButtonView addSubview:self.buttonInfoEntry];
 }
+- (UIView *)backView{
+    if (!_backView) {
+        _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 20 + kNavMargan, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
+        _backView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+    }
+    return _backView;
+}
 - (UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
+        _contentView.backgroundColor = [UIColor whiteColor];
+        _contentView.hidden = YES;
     }
     return _contentView;
 }
+
 - (UIScrollView *)myScrollView{
     if (!_myScrollView) {
         _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 88 * ViewRateBaseOnIP6 , SCREEN_WIDTH, SCREEN_HEIGHT -(88 * ViewRateBaseOnIP6 + 20) - SCREEN_TABBAR_HEIGHT)];

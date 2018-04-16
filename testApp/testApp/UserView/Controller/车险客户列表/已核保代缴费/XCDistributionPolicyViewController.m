@@ -134,6 +134,9 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         else if ((indexPath.section == 1 && indexPath.row == 2)) {
 //            [self.DistributonSelectTimeV inputSelectTiemView:YES];
         }
+        else if ((indexPath.section == 1 && indexPath.row == 2)) {
+            //[self.DistributonSelectTimeV inputSelectTiemView:YES];
+        }
         else if(indexPath.section == 0 && indexPath.row == 4){
             NSArray * arr = @[@"赠送",@"购买",@"无"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {

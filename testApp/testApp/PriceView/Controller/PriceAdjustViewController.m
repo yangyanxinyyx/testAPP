@@ -46,7 +46,7 @@
     isRequstsj = NO;
     isRequstck = NO;
     isRequsthh = NO;
-    isChange = NO;
+    isChange = YES;
     [self requestPriceContentPolicyck];
     [self requestPriceContentPolicyhh];
     [self requestPriceContentPolicysj];
@@ -148,11 +148,19 @@
         //    } else {
         //        jqModel.isMianpei = @"0";
         //    }
-        
-        PriceInfoModel *szModel = [self.passArray objectAtIndex:3];
+#pragma mark 数据转化
+        PriceInfoModel *szModel = [self.passArray objectAtIndex:2];
         if (![szModel.isToubao isEqualToString:@"N"] && ![szModel.isToubao isEqualToString:@"Y"]) {
             for (priceModel *priceM in self.arraysz) {
                 if ([priceM.value doubleValue] == [szModel.isToubao doubleValue]) {
+                    szModel.model = priceM;
+                }
+               
+                
+            }
+        } else if ([szModel.isToubao isEqualToString:@"Y"] && szModel.priceValue){
+            for (priceModel *priceM in self.arraysz) {
+                if ([priceM.value doubleValue] == szModel.priceValue) {
                     szModel.model = priceM;
                 }
             }
@@ -161,7 +169,7 @@
         }
         
         
-        PriceInfoModel *sjModel = [self.passArray objectAtIndex:4];
+        PriceInfoModel *sjModel = [self.passArray objectAtIndex:3];
         if (![sjModel.isToubao isEqualToString:@"N"] && ![sjModel.isToubao isEqualToString:@"Y"]) {
             for (priceModel *priceM in self.arraysj) {
                 if ([priceM.value doubleValue] == [sjModel.isToubao doubleValue]) {
@@ -169,15 +177,27 @@
                 }
             }
             
+        } else if ([sjModel.isToubao isEqualToString:@"Y"] && sjModel.priceValue){
+            for (priceModel *priceM in self.arraysj) {
+                if ([priceM.value doubleValue] == sjModel.priceValue) {
+                    sjModel.model = priceM;
+                }
+            }
         } else {
             sjModel.model = [self.arraysj firstObject];
         }
         
         
-        PriceInfoModel *ckModel = [self.passArray objectAtIndex:5];
+        PriceInfoModel *ckModel = [self.passArray objectAtIndex:4];
         if (![ckModel.isToubao isEqualToString:@"N"] && ![ckModel.isToubao isEqualToString:@"Y"]) {
             for (priceModel *priceM in self.arrayck) {
                 if ([priceM.value doubleValue] == [ckModel.isToubao doubleValue]) {
+                    ckModel.model = priceM;
+                }
+            }
+        } else if ([ckModel.isToubao isEqualToString:@"Y"] && ckModel.priceValue){
+            for (priceModel *priceM in self.arrayck) {
+                if ([priceM.value doubleValue] == ckModel.priceValue) {
                     ckModel.model = priceM;
                 }
             }
@@ -185,10 +205,16 @@
             ckModel.model = [self.arrayck firstObject];
         }
         
-        PriceInfoModel *hhModel = [self.passArray objectAtIndex:6];
+        PriceInfoModel *hhModel = [self.passArray objectAtIndex:5];
         if (![hhModel.isToubao isEqualToString:@"N"] && ![hhModel.isToubao isEqualToString:@"Y"]) {
             for (priceModel *priceM in self.arrayhh) {
                 if ([priceM.value doubleValue] == [hhModel.isToubao doubleValue]) {
+                    hhModel.model = priceM;
+                }
+            }
+        } else if ([hhModel.isToubao isEqualToString:@"Y"] && hhModel.priceValue){
+            for (priceModel *priceM in self.arrayhh) {
+                if ([priceM.value doubleValue] == hhModel.priceValue) {
                     hhModel.model = priceM;
                 }
             }
@@ -383,20 +409,9 @@
 //    }
     [dic setObject:hhModel.model.value forKey:@"huahen"];
     
-    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:6];
-    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
-        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
-    }
-    if ([dqModel.isToubao isEqualToString:@"投保"]) {
-        [dic setObject:@"1" forKey:@"daoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"daoqiang"];
-    }
-    //    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
+
     
-    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:7];
+    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:6];
     if ([ssModel.isMianpei isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"bujimianSheshui"];
     } else {
@@ -409,6 +424,18 @@
     }
     //    [dic setObject:ssModel.model.value forKey:@"sheshui"];
     
+    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:7];
+    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
+    }
+    if ([dqModel.isToubao isEqualToString:@"投保"]) {
+        [dic setObject:@"1" forKey:@"daoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"daoqiang"];
+    }
+    //    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
     
     PriceInfoModel *zrModel = [self.dataArray objectAtIndex:8];
     if ([zrModel.isMianpei isEqualToString:@"Y"]) {
@@ -432,10 +459,17 @@
     
     if ([blModel.isToubao isEqualToString:@"投保"]) {
         [dic setObject:@"1" forKey:@"boli"];
-    } else {
+    } else  {
         [dic setObject:@"0" forKey:@"boli"];
     }
-    [dic setObject:blModel.model.value forKey:@"boli"];
+    if ([blModel.isToubao isEqualToString:@"Y"]){
+        [dic setObject:[NSString stringWithFormat:@"%f",blModel.priceValue] forKey:@"boli"];
+
+        
+    } else {
+       [dic setObject:blModel.model.value forKey:@"boli"];
+    }
+    
     
     PriceInfoModel *wsModel = [self.dataArray objectAtIndex:10];
     if ([wsModel.isToubao isEqualToString:@"投保"]) {
@@ -449,22 +483,33 @@
     [RequestAPI getPriceOffer:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if (response[@"data"]) {
             isChange = NO;
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"报价成功" complete:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 PriceInspectViewController *insVC = [[PriceInspectViewController alloc] init];
-                PriceInfoModel *blModel = [self.dataArray objectAtIndex:7];
-                insVC.blType = blModel.model.value;
+                PriceInfoModel *blModel = [self.dataArray objectAtIndex:9];
+                if (blModel.priceValue) {
+                    insVC.blType = [NSString stringWithFormat:@"%d",(int)blModel.priceValue];
+                } else {
+                  insVC.blType = blModel.model.value;
+                }
                 insVC.route = @"0";
                 [self.navigationController pushViewController:insVC animated:YES];
-            }];
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            });
         } else {
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"报价失败%@",response[@"erromsg"]] complete:^{
-            }];
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"报价失败%@",response[@"erromsg"]] complete:^{
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+                
+            });
             
         }
     } fail:^(id error) {
-        NSLog(@"==>%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"报价失败%@",error] complete:^{
+            }];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            
+        });
     }];
 }
 #pragma mark - view delegate

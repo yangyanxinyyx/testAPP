@@ -8,6 +8,17 @@
 
 #import "BaseViewController1.h"
 
+@protocol GetCarViewControllerDelegate <NSObject>
+
+- (void)reloadGetCarListWithPlateNO;
+
+@end
+
 @interface GetCarViewController : BaseViewController1
+
+@property (nonatomic,weak)id<GetCarViewControllerDelegate>delegate;
+
+@property (nonatomic,strong) NSNumber *orderID;
+@property (nonatomic,assign) BOOL isFix;
 
 @end

@@ -103,7 +103,6 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         if ((indexPath.section == 0 && indexPath.row == 5)) {
             //选择时间
 //            [self.DistributonSelectTimeV inputSelectTiemView:YES];
-
         }
         else if(indexPath.section == 0 && indexPath.row == 4){
             NSArray * arr = @[@"礼包一",@"礼包二",@"礼包三"];

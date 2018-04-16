@@ -28,17 +28,19 @@
     _web.scrollView.bounces = NO;
     _web.scrollView.showsVerticalScrollIndicator = NO;
 
-    NSDictionary *param = @{@"notice_info_id":_webId};
+    NSDictionary *param = @{@"id":_webId};
+
     [RequestAPI getCoverWeb:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         NSLog(@"%@",response);
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
             if ([response[@"result"] integerValue] == 1) {
-                NSLog(@"获取轮播图成功");
+                NSLog(@"公告详情成功");
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *data = response[@"data"];
-                   
+                   NSString *htmlStr = data[@"content"] ? [NSString stringWithFormat:@"%@",data[@"content"]]:@"";
+                    [_web loadHTMLString:htmlStr baseURL:nil];
                 }
-
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
 
 
             }else if (([response[@"result"] integerValue] == 0)){
@@ -52,15 +54,6 @@
         [self.view addSubview:tipsView];
     }];
 
-//    //先将拿到的id截取前三位
-//    NSString *str1 = _webId;
-//    str1 = [str1 substringToIndex:3];
-//
-//    NSString *urlStr = [NSString stringWithFormat:@"http://m.pcauto.com.cn/x/%@/%@.html",str1,_webId];
-//    NSURL *url = [NSURL URLWithString:urlStr];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    [_web loadRequest:request];
-//    NSLog(@"%@",urlStr);
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel

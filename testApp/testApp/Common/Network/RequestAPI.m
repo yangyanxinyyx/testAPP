@@ -25,7 +25,7 @@
 #define COVERANNOUNCEMENT_API [NSString stringWithFormat:@"%@/api/web/notice/findNoticeByEmployee",API_PREFIX]
 
 //公告详情
-#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/selectNoticeInfoContent",API_PREFIX]
+#define COVERWEB_API [NSString stringWithFormat:@"%@/api/web/notice/getNotice",API_PREFIX]
 
 //首页轮播图
 #define COVERLOOPIMAGE_API [NSString stringWithFormat:@"%@/api/web/pictrue/findByType",API_PREFIX]
@@ -75,7 +75,7 @@
 
 // ===================
 
-
+// === 报价 ====
 //客户车辆查询
 #define CUSTOMERVEHICLEENQUIRIES_API [NSString stringWithFormat:@"%@/api/web/car/findOrAddCustomerAndCar",API_PREFIX]
 
@@ -100,6 +100,8 @@
 //保存报价
 #define SAVEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/addOffer",API_PREFIX]
 
+//删除报价
+#define DELETEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/deleteOffer",API_PREFIX]
 //核保 api/web/policy/insertPolicy
 #define UNDERWRITING_API [NSString stringWithFormat:@"%@/api/web/policy/insertPolicy",API_PREFIX]
 
@@ -326,6 +328,15 @@
 //保存报价
 + (void)getSavePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
     [self getRequest:SAVEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//删除报价
++(void)getDeletePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+    [self getRequest:DELETEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

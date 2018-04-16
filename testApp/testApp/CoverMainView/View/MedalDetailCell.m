@@ -64,7 +64,7 @@
         [self.contentView addSubview:_label7];
 
         self.imageArrow = [[UIImageView alloc] init];
-        _imageArrow.backgroundColor = [UIColor redColor];
+        _imageArrow.image = [UIImage imageNamed:@"down.png"];
         [self.contentView addSubview:_imageArrow];
 
         self.line2 = [[UIView alloc] init];
@@ -109,17 +109,17 @@
 - (void)setIsOpen:(BOOL)isOpen
 {
     _isOpen = isOpen;
-//    if (isOpen) {
-//        [UIView beginAnimations:@"rotate" context:nil];
-//        [UIView setAnimationDuration:0.3f];
-//        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, -3.141593 );
-//        [UIView commitAnimations];
-//    }else{
-//        [UIView beginAnimations:@"rotate" context:nil];
-//        [UIView setAnimationDuration:0.3f];
-//        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, 3.141593 );
-//        [UIView commitAnimations];
-//    }
+    if (isOpen) {
+        [UIView beginAnimations:@"rotate" context:nil];
+        [UIView setAnimationDuration:0.3f];
+        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, -3.141593 );
+        [UIView commitAnimations];
+    }else{
+        [UIView beginAnimations:@"rotate" context:nil];
+        [UIView setAnimationDuration:0.3f];
+        self.imageArrow.transform = CGAffineTransformRotate( self.imageArrow.transform, 3.141593 );
+        [UIView commitAnimations];
+    }
 }
 
 - (void)awakeFromNib {

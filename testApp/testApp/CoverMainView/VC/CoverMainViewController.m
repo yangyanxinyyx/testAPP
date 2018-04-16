@@ -13,6 +13,8 @@
 #import "YXScrollView.h"
 #import "CoverAnnouncementView.h"
 #import "CoverWebViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "CoverLoopimageModel.h"
 
 @interface CoverMainViewController ()<UIScrollViewDelegate,CoverAnnouncementViewDelegate>
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -95,8 +97,15 @@
     [_carView removeFromSuperview];
     [_repairView removeFromSuperview];
 
-//    UIImage *thumbnailImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:nil];
-    NSArray *imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"汽车1.jpg"],[UIImage imageNamed:@"汽车2.jpg"],[UIImage imageNamed:@"汽车3.jpg"], nil];
+
+    NSMutableArray *muImageArray = [NSMutableArray array];
+    for (CoverLoopimageModel *model in [UserInfoManager shareInstance].coverMainModel.loopImageDatas) {
+        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.url]];
+        UIImage *image = [UIImage imageWithData:data];
+        [muImageArray addObject:image];
+    }
+
+    NSArray *imageArray = muImageArray;
 
     self.imageScrollView = [[YXScrollView alloc] initWithImageArray:imageArray imageClick:^(NSInteger index) {
         NSLog(@"点了图片%ld",index);
@@ -118,12 +127,20 @@
                         [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
                         [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
                         ];
+    NSArray * array2 = @[
+                        [UserInfoManager shareInstance].performanceMedal.lastYearInsurance,
+                        [UserInfoManager shareInstance].performanceMedal.lastMonthInsurance,
+                        [UserInfoManager shareInstance].performanceMedal.nowMonthInsurance,
+                        [UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking,
+                        [UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking,
+                        [UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking,
+                        ];
 
     _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:array];
     _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
     [_scrollView addSubview:_carView];
 
-    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:array];
+    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:array2];
     _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
     [_scrollView addSubview:_repairView];
 }
@@ -152,6 +169,20 @@
                     [UserInfoManager shareInstance].userMedal.presonFirst = data[@"medal_type_month_one"]?[NSString stringWithFormat:@"%@",data[@"medal_type_month_one"]]:@"";
                     [UserInfoManager shareInstance].userMedal.presonSecond = data[@"medal_type_month_two"]?[NSString stringWithFormat:@"%@",data[@"medal_type_month_two"]]:@"";
                     [UserInfoManager shareInstance].userMedal.presonThird = data[@"medal_type_month_three"]?[NSString stringWithFormat:@"%@",data[@"medal_type_month_three"]]:@"";
+
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_one_bonus = data[@"medal_type_year_one_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_two_bonus = data[@"medal_type_year_two_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_three_bonus = data[@"medal_type_year_three_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_one_performance = data[@"medal_type_year_one_performance"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_two_performance = data[@"medal_type_year_two_performance"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_year_three_performance = data[@"medal_type_year_three_performance"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_one_bonus = data[@"medal_type_month_one_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_two_bonus = data[@"medal_type_month_two_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_three_bonus = data[@"medal_type_month_three_bonus"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_one_performance = data[@"medal_type_month_one_performance"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_two_performance = data[@"medal_type_month_two_performance"];
+                    [UserInfoManager shareInstance].userMedal.medal_type_month_three_performance = data[@"medal_type_month_three_performance"];
+
                     [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                     UserInfoManager *manager = [UserInfoManager shareInstance];
                     NSLog(@"");

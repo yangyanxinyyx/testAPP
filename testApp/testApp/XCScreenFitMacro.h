@@ -78,6 +78,14 @@
 #define COLOR_RGBA_255(r, g, b, a)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
 #pragma mark -  自定义的函数宏
 
+//自定义键盘宏
+#define NUMKEYBOARD @"0123456789"
+#define LETTERKEYBOARD @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+#define LETTERNUMKEYBOARD @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+
+
+
 /* 备注说明：
  * 当UIViewController 调用 viewDidLoad 时,它的所有子视图的safeAreaInsets属性都等于UIEdgeInsetsZero,
  * 在viewSafeAreaInsetsDidChange,方法调用前 是无法通过当前视图控制器的子视图获取到safeAreaInsets的.
