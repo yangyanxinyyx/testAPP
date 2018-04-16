@@ -10,21 +10,26 @@
 #import "GetCarListCell.h"
 #import "GetCarModel.h"
 #import "GetCarViewController.h"
+#import "MoneyInputVIew.h"
+#import <MJRefresh/MJRefresh.h>
+#import "LYZAlertView.h"
 static NSString *identifier = @"listCell";
 
-@interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GetCarListCellDelegate>
+@interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GetCarListCellDelegate,GetCarViewControllerDelegate,MoneyInputVIewDelegate>
 
 @property(nonatomic,strong)UITableView *tab;
 @property(nonatomic,strong)NSMutableArray *dataSource;
 
 @property (nonatomic,strong) UIView *forbidTipsView;
-
+@property (nonatomic,strong) UIView *noFoundTipsView;
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIView *searchContenView;
 @property (nonatomic, strong) UITextField *textField;
 
 @property (nonatomic, strong) UIButton *orderBtn;
 @property (nonatomic, strong) UIButton *fixBtn;
+
+@property (nonatomic, assign) NSInteger page;
 @end
 
 @implementation GetCarListViewController
@@ -34,7 +39,8 @@ static NSString *identifier = @"listCell";
 
     self.dataSource = [NSMutableArray array];
     [self createUI];
-    [self requestDataWithPage:@(1) selectNumber:@"粤A984W9"];
+    [self requestDataWithPage:@(1) selectNumber:nil];
+    _page = 2;
 }
 
 - (void)createUI
@@ -55,6 +61,10 @@ static NSString *identifier = @"listCell";
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tab.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [self.view addSubview:_tab];
+    _tab.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    _tab.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+
+
 
     [self.view addSubview:self.orderBtn];
     [self.view addSubview:self.fixBtn];
@@ -64,16 +74,17 @@ static NSString *identifier = @"listCell";
 - (void)requestDataWithPage:(NSNumber *)page selectNumber:(NSString *)selectNumber
 {
     NSDictionary *param = nil;
+    __block NSNumber *pageSize = @(10);
     if (selectNumber) {
         param = @{@"storeId":[UserInfoManager shareInstance].storeID,
                   @"plateNo":selectNumber,
                   @"PageIndex":page,
-                  @"PageSize":@(10)
+                  @"PageSize":pageSize
                   };
     }else{
         param = @{@"storeId":[UserInfoManager shareInstance].storeID,
                   @"PageIndex":page,
-                  @"PageSize":@(10)
+                  @"PageSize":pageSize
                   };
     }
 
@@ -91,10 +102,16 @@ static NSString *identifier = @"listCell";
                         [model setValuesForKeysWithDictionary:dicData];
                         [_dataSource addObject:model];
                     }
+
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tab reloadData];
                         [self showFixBtn:_dataSource.count > 0 ? NO : YES];
                     });
+                    if (dataSet.count < [pageSize integerValue]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.tab.mj_footer endRefreshingWithNoMoreData];
+                        });
+                    }
                 }
             }else{
                 NSLog(@"获取接车列表失败");
@@ -108,15 +125,33 @@ static NSString *identifier = @"listCell";
     }];
 }
 
+-(void)refresh
+{
+    [_dataSource removeAllObjects];
+    [self.tab.mj_footer resetNoMoreData];
+    _page = 2;
+    [self requestDataWithPage:@(1) selectNumber:_textField.text];
+    [self.tab.mj_header endRefreshing];
+}
+-(void)loadMore
+{
+    [self requestDataWithPage:@(self.page) selectNumber:_textField.text];
+    self.page ++;
+    [self.tab.mj_footer endRefreshing];
+
+}
+
 - (void)showFixBtn:(BOOL)show
 {
     if (show) {
         self.fixBtn.hidden = NO;
         self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
+        _noFoundTipsView.hidden = NO;
 
     }else{
         self.fixBtn.hidden = YES;
         self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
+        _noFoundTipsView.hidden = YES;
     }
 
 }
@@ -139,6 +174,7 @@ static NSString *identifier = @"listCell";
     cell.delegate = self;
     if (cell == nil) {
         cell = [[GetCarListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        cell.delegate = self;
     }
     GetCarModel *model =_dataSource[indexPath.row];
 
@@ -157,13 +193,62 @@ static NSString *identifier = @"listCell";
     return cell;
 }
 
-- (void)pressGetCarBtn:(UIButton *)sender
+- (void)pressGetCarBtn:(GetCarListCell *)cell
 {
-    GetCarListCell *cell = (GetCarListCell *)sender.superview;
+    NSIndexPath *indexPath = [_tab indexPathForCell:cell];
+    GetCarModel *model = _dataSource[indexPath.row];
     if (cell.getCarBtnType == GetCarBtnTypeGet) {
         GetCarViewController *VC = [[GetCarViewController alloc] init];
+        VC.delegate = self;
+        VC.orderID = model.orderID;
+        VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
         [self.navigationController pushViewController:VC animated:YES];
+    }else if (cell.getCarBtnType == GetCarBtnTypePay){
+        if ([model.orderCategory isEqualToString:@"维修"]) {
+            MoneyInputVIew *moneyInput = [[MoneyInputVIew alloc] init];
+            moneyInput.orderId = model.orderID;
+            moneyInput.delegate = self;
+            [self.view addSubview:moneyInput];
+        }else{
+            LYZAlertView *alert = [LYZAlertView alterViewWithTitle:@"是否完成?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+                NSDictionary *param = @{@"id":model.orderID};
+                [RequestAPI getGetCarFinish:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    if (isUsableDictionary(response)) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"交易成功");
+                            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易完成!" complete:^{
+                                    [self reloadGetCarListWithPlateNO];
+                                }];
+
+                                [self.view addSubview:tipsView];
+                            });
+
+                        }else{
+                            NSLog(@"交易失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
+            }];
+            [self.view addSubview:alert];
+        }
     }
+}
+
+- (void)reloadGetCarListWithPlateNO
+{
+    _page = 2;
+    [self.tab.mj_footer resetNoMoreData];
+    [_dataSource removeAllObjects];
+    [self requestDataWithPage:@(1) selectNumber:nil];
 }
 
 - (void)pressOrderBtn{
@@ -174,6 +259,27 @@ static NSString *identifier = @"listCell";
 - (void)pressFixBtn{
 
     
+}
+
+#pragma mark textfieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    textField.text = [textField.text uppercaseString];
+    _page = 2;
+    [_dataSource removeAllObjects];
+    [self requestDataWithPage:@(1) selectNumber:textField.text];
+    return YES;
+
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    return YES;
 }
 
 #pragma mark - getter&setter
@@ -200,6 +306,30 @@ static NSString *identifier = @"listCell";
 
     }
     return _forbidTipsView;
+}
+
+- (UIView *)noFoundTipsView
+{
+    if (!_noFoundTipsView) {
+        _noFoundTipsView = [[UIView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44)];
+        _noFoundTipsView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+        _noFoundTipsView.hidden = YES;
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        imageView.image = [UIImage imageNamed:@"暂无订单.png"];
+        imageView.center = CGPointMake(SCREEN_WIDTH/2, _noFoundTipsView.bounds.size.height/2);
+        [_noFoundTipsView addSubview:imageView];
+
+
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
+        label.font = [UIFont systemFontOfSize:11];
+        label.text = @"无订单信息!";
+        label.textColor = COLOR_RGB_255(165, 165, 165);
+        [_noFoundTipsView addSubview:label];
+
+
+    }
+    return _noFoundTipsView;
 }
 
 - (UIView *)topView{
@@ -231,6 +361,10 @@ static NSString *identifier = @"listCell";
         _textField.placeholder = @"车牌号查询";
         [_textField setValue:[UIColor colorWithHexString:@"#838383"] forKeyPath:@"_placeholderLabel.textColor"];
         [_textField setValue:[UIFont boldSystemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
+        _textField.delegate = self;
+
+//        _textField.text = @"粤A984W9";
+
         UIImageView *rightView = [[UIImageView alloc]init];
         rightView.image = [UIImage imageNamed:@"search"];
         rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 19  , 19 );

@@ -7,7 +7,9 @@
 //
 
 #import "PriceUnderwritingTableViewCell.h"
+@interface PriceUnderwritingTableViewCell()<UITextFieldDelegate>
 
+@end
 @implementation PriceUnderwritingTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -16,8 +18,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.labelName = [[UILabel alloc] init];
         self.labelInfo = [[UILabel alloc] init];
+        self.textFieldInfo = [[UITextField alloc] init];
         [self.contentView addSubview:self.labelName];
         [self.contentView addSubview:self.labelInfo];
+        [self.contentView addSubview:self.textFieldInfo];
         
     }
     return self;
@@ -36,12 +40,18 @@
     self.labelInfo.textAlignment = NSTextAlignmentLeft;
     self.labelInfo.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
     
+    self.textFieldInfo.frame = CGRectMake(163 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 400 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6);
     
-    
-    
-    
+    self.textFieldInfo.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
+    self.textFieldInfo.textAlignment = NSTextAlignmentLeft;
+    self.textFieldInfo.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
+    self.textFieldInfo.placeholder = @"请输入身份证";
+    self.textFieldInfo.delegate = self;
 }
-
+- (void)setTextFieldInfoHidden:(BOOL)isHidden{
+    self.textFieldInfo.hidden = isHidden;
+    self.labelInfo.hidden = !isHidden;
+}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -52,7 +62,9 @@
     CGContextStrokeRect(context, CGRectMake(30 * ViewRateBaseOnIP6, rect.size.height, rect.size.width - 60 * ViewRateBaseOnIP6, 1 * ViewRateBaseOnIP6));
 }
 
-
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.delegate getUnderwritingTextField:textField];
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GetCarListCell;
 
 typedef NS_ENUM(NSInteger, GetCarBtnType) {
     GetCarBtnTypeGet = 0,
@@ -16,7 +17,7 @@ typedef NS_ENUM(NSInteger, GetCarBtnType) {
 
 @protocol GetCarListCellDelegate <NSObject>
 
-- (void)pressGetCarBtn:(UIButton *)sender;
+- (void)pressGetCarBtn:(GetCarListCell *)cell;
 
 @end
 

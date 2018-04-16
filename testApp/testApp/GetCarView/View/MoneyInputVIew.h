@@ -10,12 +10,14 @@
 
 @protocol MoneyInputVIewDelegate <NSObject>
 
--(void)MoneyDidInputWithInsurance:(NSString *)insurance selfMoney:(NSString *)selfMoney;
+-(void)reloadGetCarListWithPlateNO;
 
 @end
 
 @interface MoneyInputVIew : UIView<UITextFieldDelegate>
 
-@property (nonatomic,weak) id<MoneyInputVIewDelegate>delefate;
+@property (nonatomic,weak) id<MoneyInputVIewDelegate>delegate;
+
+@property (nonatomic,strong) NSNumber *orderId;
 
 @end

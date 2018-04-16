@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController1.h"
-
+#import "PriceInfoModel.h"
 @interface PriceUnderwritingViewController : BaseViewController1
-
+@property (nonatomic, strong) NSString *bussiseNum;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 @end

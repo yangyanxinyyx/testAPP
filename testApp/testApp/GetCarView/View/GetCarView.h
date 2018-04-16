@@ -11,6 +11,6 @@
 
 @interface GetCarView : UIView<UIScrollViewDelegate>
 
-- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model;
+- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix;
 
 @end

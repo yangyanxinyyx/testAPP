@@ -69,117 +69,220 @@
     [RequestAPI getLastYearPriceRecord:self.networkDic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
             NSDictionary *data = response[@"data"];
-            CarLastYearRecodemodel *chesunModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
+            jqModel.name = @"交强险";
+            jqModel.isToubao = @"Y";
+            jqModel.isMianpei = @"Y";
+            [self.arrayLasetData addObject:jqModel];
+            
+            PriceInfoModel *chesunModel = [[PriceInfoModel alloc] init];
             chesunModel.name = @"机动车损险";
             NSNumber *bujimianChesun = [data objectForKey:@"bujimianChesun"];
             if (![bujimianChesun isKindOfClass:[NSNull class]]) {
-                chesunModel.bujimianpei = [bujimianChesun intValue];
+                NSInteger bujimianChesunValue = [bujimianChesun intValue];
+                if (bujimianChesunValue == 0) {
+                    chesunModel.isMianpei = @"N";
+                } else {
+                    chesunModel.isMianpei = @"Y";
+                }
+                
             }
             NSNumber *chesuntoubao = [data objectForKey:@"chesun"];
             if (![chesuntoubao isKindOfClass:[NSNull class]]) {
-                chesunModel.toubao = [chesuntoubao doubleValue];
+                if ([chesuntoubao doubleValue] == 0) {
+                    chesunModel.isToubao = @"N";
+                } else if ([chesuntoubao doubleValue] == 1) {
+                    chesunModel.isToubao = @"Y";
+                } else {
+                    chesunModel.isToubao = [NSString stringWithFormat:@"%0.2f",[chesuntoubao doubleValue]];
+                }
+                
             }
             [self.arrayLasetData addObject:chesunModel];
             
-            CarLastYearRecodemodel *daoqiangModel = [[CarLastYearRecodemodel alloc] init];
-            daoqiangModel.name = @"全车盗抢险";
-            NSNumber *bujimianDaoqiang = [data objectForKey:@"bujimianDaoqiang"];
-            if (![bujimianDaoqiang isKindOfClass:[NSNull class]]) {
-                daoqiangModel.bujimianpei = [bujimianDaoqiang intValue];
-            }
-            NSNumber *daoqiang = [data objectForKey:@"daoqiang"];
-            if (![daoqiang isKindOfClass:[NSNull class]]) {
-                daoqiangModel.toubao = [daoqiang doubleValue];
-            }
-            [self.arrayLasetData addObject:daoqiangModel];
             
-            CarLastYearRecodemodel *sanzheModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *sanzheModel = [[PriceInfoModel alloc] init];
             sanzheModel.name = @"第三责任险";
             NSNumber *bujimianSanzhe = [data objectForKey:@"bujimianSanzhe"];
             if (![bujimianSanzhe isKindOfClass:[NSNull class]]) {
-                sanzheModel.bujimianpei = [bujimianSanzhe intValue];
+                if ([bujimianSanzhe intValue] == 0) {
+                    sanzheModel.isMianpei = @"N";
+                } else {
+                    sanzheModel.isMianpei = @"Y";
+                }
             }
             NSNumber *sanzhe = [data objectForKey:@"sanzhe"];
             if (![sanzhe isKindOfClass:[NSNull class]]) {
-                sanzheModel.toubao = [sanzhe doubleValue];
+                if ([sanzhe doubleValue] == 0) {
+                    sanzheModel.isToubao = @"N";
+                } else if ([sanzhe doubleValue] == 1) {
+                    sanzheModel.isToubao = @"Y";
+                } else {
+                    sanzheModel.isToubao = [NSString stringWithFormat:@"%0.2f",[sanzhe doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:sanzheModel];
             
-            CarLastYearRecodemodel *sijiModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *sijiModel = [[PriceInfoModel alloc] init];
             sijiModel.name = @"司机责任险";
             NSNumber *bujimianSiji = [data objectForKey:@"bujimianSiji"];
             if (![bujimianSiji isKindOfClass:[NSNull class]]) {
-                sijiModel.bujimianpei = [bujimianSiji intValue];
+                if ([bujimianSiji intValue] == 0) {
+                    sijiModel.isMianpei = @"N";
+                } else {
+                    sijiModel.isMianpei = @"Y";
+                }
             }
             NSNumber *sijibao = [data objectForKey:@"siji"];
             if (![sijibao isKindOfClass:[NSNull class]]) {
-                sijiModel.toubao = [sijibao doubleValue];
+                if ([sijibao doubleValue] == 0) {
+                    sijiModel.isToubao = @"N";
+                } else if ([sijibao doubleValue] == 1) {
+                    sijiModel.isToubao = @"Y";
+                } else {
+                    sijiModel.isToubao = [NSString stringWithFormat:@"%0.2f",[sijibao doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:sijiModel];
             
-            CarLastYearRecodemodel *chengkeModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *chengkeModel = [[PriceInfoModel alloc] init];
             chengkeModel.name = @"乘客责任险";
             NSNumber *bujimianChengke = [data objectForKey:@"bujimianChengke"];
             if (![bujimianChengke isKindOfClass:[NSNull class]]) {
-                chengkeModel.bujimianpei = [bujimianChengke intValue];
+                if ([bujimianChengke intValue] == 0) {
+                    chengkeModel.isMianpei = @"N";
+                } else {
+                    chengkeModel.isMianpei = @"Y";
+                }
             }
             NSNumber *chengke = [data objectForKey:@"chengke"];
             if (![chengke isKindOfClass:[NSNull class]]) {
-                chengkeModel.toubao = [chengke doubleValue];
+                if ([chengke doubleValue] == 0) {
+                    chengkeModel.isToubao = @"N";
+                } else if ([sijibao doubleValue] == 1) {
+                    chengkeModel.isToubao = @"Y";
+                } else {
+                    chengkeModel.isToubao = [NSString stringWithFormat:@"%0.2f",[chengke doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:chengkeModel];
             
-            CarLastYearRecodemodel *huahenModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *huahenModel = [[PriceInfoModel alloc] init];
             huahenModel.name = @"划痕损失险";
             NSNumber *bujimianHuahen = [data objectForKey:@"bujimianHuahen"];
             if (![bujimianHuahen isKindOfClass:[NSNull class]]) {
-                huahenModel.bujimianpei = [bujimianHuahen intValue];
+                if ([bujimianHuahen intValue] == 0) {
+                    huahenModel.isMianpei = @"N";
+                } else {
+                    huahenModel.isMianpei = @"Y";
+                }
             }
             NSNumber *huahen = [data objectForKey:@"huahen"];
             if (![huahen isKindOfClass:[NSNull class]]) {
-                huahenModel.toubao = [huahen doubleValue];
+                if ([huahen doubleValue] == 0) {
+                    huahenModel.isToubao = @"N";
+                } else if ([huahen doubleValue] == 1) {
+                    huahenModel.isToubao = @"Y";
+                } else {
+                    huahenModel.isToubao = [NSString stringWithFormat:@"%0.2f",[huahen doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:huahenModel];
             
-            CarLastYearRecodemodel *sheshuiModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *daoqiangModel = [[PriceInfoModel alloc] init];
+            daoqiangModel.name = @"全车盗抢险";
+            NSNumber *bujimianDaoqiang = [data objectForKey:@"bujimianDaoqiang"];
+            if (![bujimianDaoqiang isKindOfClass:[NSNull class]]) {
+                if ([bujimianDaoqiang intValue] == 0) {
+                    daoqiangModel.isMianpei = @"N";
+                } else {
+                    daoqiangModel.isMianpei = @"Y";
+                }
+                
+            }
+            NSNumber *daoqiang = [data objectForKey:@"daoqiang"];
+            if (![daoqiang isKindOfClass:[NSNull class]]) {
+                if ([daoqiang doubleValue] == 0) {
+                    daoqiangModel.isToubao = @"N";
+                } else if ([daoqiang doubleValue] == 1) {
+                    daoqiangModel.isToubao = @"Y";
+                } else {
+                    daoqiangModel.isToubao = [NSString stringWithFormat:@"%0.2f",[daoqiang doubleValue]];
+                }
+            }
+            [self.arrayLasetData addObject:daoqiangModel];
+            
+            PriceInfoModel *sheshuiModel = [[PriceInfoModel alloc] init];
             sheshuiModel.name = @"涉水损失险 ";
             NSNumber *bujimianSheshui = [data objectForKey:@"bujimianSheshui"];
             if (![bujimianSheshui isKindOfClass:[NSNull class]]) {
-                sheshuiModel.bujimianpei = [bujimianSheshui intValue];
+                if ([bujimianSheshui intValue] == 0) {
+                    sheshuiModel.isMianpei = @"N";
+                } else {
+                    sheshuiModel.isMianpei = @"Y";
+                }
             }
             NSNumber *sheshui = [data objectForKey:@"sheshui"];
             if (![sheshui isKindOfClass:[NSNull class]]) {
-                sheshuiModel.toubao = [sheshui doubleValue];
+                if ([sheshui doubleValue] == 0) {
+                    sheshuiModel.isToubao = @"N";
+                } else if ([sheshui doubleValue] == 1) {
+                    sheshuiModel.isToubao = @"Y";
+                } else {
+                    sheshuiModel.isToubao = [NSString stringWithFormat:@"%0.2f",[sheshui doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:sheshuiModel];
             
-            CarLastYearRecodemodel *ziranModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *ziranModel = [[PriceInfoModel alloc] init];
             ziranModel.name = @"自燃损失险";
             NSNumber *bujimianZiran = [data objectForKey:@"bujimianZiran"];
             if (![bujimianZiran isKindOfClass:[NSNull class]]) {
-                ziranModel.bujimianpei = [bujimianZiran intValue];
+                if ([bujimianZiran intValue] == 0) {
+                    ziranModel.isMianpei = @"N";
+                } else {
+                    ziranModel.isMianpei = @"Y";
+                }
             }
             NSNumber *ziran = [data objectForKey:@"ziran"];
             if (![ziran isKindOfClass:[NSNull class]]) {
-                ziranModel.toubao = [ziran doubleValue];
+                if ([ziran doubleValue] == 0) {
+                    ziranModel.isToubao = @"N";
+                } else if ([ziran doubleValue] == 1) {
+                    ziranModel.isToubao = @"Y";
+                } else {
+                    ziranModel.isToubao = [NSString stringWithFormat:@"%0.2f",[ziran doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:ziranModel];
             
-            CarLastYearRecodemodel *boliModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *boliModel = [[PriceInfoModel alloc] init];
             boliModel.name = @"玻璃破碎险";
-            boliModel.bujimianpei = 0;
+            boliModel.isMianpei = @"N";
             NSNumber *boli = [data objectForKey:@"boli"];
             if (![boli isKindOfClass:[NSNull class]]) {
-                boliModel.toubao = [boli doubleValue];
+                if ([boli doubleValue] == 0) {
+                    boliModel.isToubao = @"0";
+                } else if ([boli doubleValue] == 1) {
+                    boliModel.isToubao = @"1";
+                } else {
+                    boliModel.isToubao = @"2";
+                }
             }
             [self.arrayLasetData addObject:boliModel];
             
-            CarLastYearRecodemodel *hcsanfangModel = [[CarLastYearRecodemodel alloc] init];
+            PriceInfoModel *hcsanfangModel = [[PriceInfoModel alloc] init];
             hcsanfangModel.name = @"无法找到三方";
-            hcsanfangModel.bujimianpei = 0;
+            hcsanfangModel.isMianpei = @"N";
             NSNumber *hcsanfang = [data objectForKey:@"hcsanfang"];
             if (![hcsanfang isKindOfClass:[NSNull class]]) {
-                hcsanfangModel.toubao = [hcsanfang doubleValue];
+                if ([hcsanfang doubleValue] == 0) {
+                    hcsanfangModel.isToubao = @"N";
+                } else if ([hcsanfang doubleValue] == 1) {
+                    hcsanfangModel.isToubao = @"Y";
+                } else {
+                    hcsanfangModel.isToubao = [NSString stringWithFormat:@"%0.2f",[hcsanfang doubleValue]];
+                }
             }
             [self.arrayLasetData addObject:hcsanfangModel];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -519,6 +622,7 @@
 //调整报价
 - (void)touchButtonRevisePrice:(UIButton *)button{
     PriceAdjustViewController *priceAdjuestVC = [[PriceAdjustViewController alloc]init];
+    priceAdjuestVC.passArray = self.arrayLasetData;
     [self.navigationController pushViewController:priceAdjuestVC animated:YES];
 }
 
@@ -586,30 +690,30 @@
             cell = [[PriceCRQLastYInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
             
         }
-        CarLastYearRecodemodel *lastModel = [self.arrayLasetData objectAtIndex:indexPath.row];
+        PriceInfoModel *lastModel = [self.arrayLasetData objectAtIndex:indexPath.row];
         
         cell.labelName.text = lastModel.name;
         if ([lastModel.name isEqualToString:@"玻璃破碎险"]) {
-            if (lastModel.toubao == 0) {
+            if ([lastModel.isToubao isEqualToString:@"0"]) {
                 cell.labelNum.text = @"不投保";
-            } else if (lastModel.toubao == 1){
+            } else if ([lastModel.isToubao isEqualToString:@"1"]){
                 cell.labelNum.text = @"国产";
             } else {
                 cell.labelNum.text = @"进口";
             }
         } else{
-            if (lastModel.toubao == 0) {
+            if ([lastModel.isToubao isEqualToString:@"N"]) {
                 cell.labelNum.text = @"不投保";
-            } else if (lastModel.toubao == 1){
-                cell.labelNum.text = @"不投保";
+            } else if ([lastModel.isToubao isEqualToString:@"Y"]){
+                cell.labelNum.text = @"投保";
             } else {
-                cell.labelNum.text = [NSString stringWithFormat:@"%.0f万",lastModel.toubao];
+                cell.labelNum.text = [NSString stringWithFormat:@"%@万",lastModel.isToubao];
             }
         }
-        if (lastModel.bujimianpei == 0) {
-            [cell setCellMianPei:NO];
-        } else {
+        if ([lastModel.isMianpei isEqualToString:@"Y"]) {
             [cell setCellMianPei:YES];
+        } else {
+            [cell setCellMianPei:NO];
         }
         return cell;
     }

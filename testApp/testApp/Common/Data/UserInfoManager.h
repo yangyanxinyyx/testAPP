@@ -22,6 +22,18 @@
 @property (nonatomic,strong) NSString *presonFirst;
 @property (nonatomic,strong) NSString *presonSecond;
 @property (nonatomic,strong) NSString *presonThird;
+@property (nonatomic,strong) NSNumber *medal_type_year_one_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_year_two_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_year_three_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_year_one_performance;
+@property (nonatomic,strong) NSNumber *medal_type_year_two_performance;
+@property (nonatomic,strong) NSNumber *medal_type_year_three_performance;
+@property (nonatomic,strong) NSNumber *medal_type_month_one_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_month_two_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_month_three_bonus;
+@property (nonatomic,strong) NSNumber *medal_type_month_one_performance;
+@property (nonatomic,strong) NSNumber *medal_type_month_two_performance;
+@property (nonatomic,strong) NSNumber *medal_type_month_three_performance;
 
 @end
 
@@ -34,6 +46,13 @@
 @property (nonatomic,strong) NSString *lastYearCarRanking;
 @property (nonatomic,strong) NSString *lastMonthCarRanking;
 @property (nonatomic,strong) NSString *nowMonthCarRanking;
+
+@property (nonatomic,strong) NSString *lastYearInsurance;
+@property (nonatomic,strong) NSString *lastMonthInsurance;
+@property (nonatomic,strong) NSString *nowMonthInsurance;
+@property (nonatomic,strong) NSString *lastYearInsuranceRanking;
+@property (nonatomic,strong) NSString *lastMonthInsuranceRanking;
+@property (nonatomic,strong) NSString *nowMonthInsuranceRanking;
 
 @end
 
@@ -55,6 +74,7 @@
 @property (nonatomic,strong) NSString *carID;
 @property (nonatomic,strong) NSString *customerId;
 @property (nonatomic,strong) NSString *customerName;
+@property (nonatomic,strong) NSString *identity; //身份号码
 
 @property (nonatomic,assign) BOOL isStore;         //是否是门店 下面的属性是门店才有的
 

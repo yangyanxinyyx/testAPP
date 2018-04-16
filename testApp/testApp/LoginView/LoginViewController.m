@@ -92,10 +92,18 @@
 
 - (void)pressLoginBtn:(UIButton *)sender
 {
-    NSDictionary  *param = @{
-                             @"userCode":@"13570229475",
-                             @"password":@"xc123456"
-                             };
+    self.accoutTextField.text = @"13570229475";
+    self.passwordTextField.text = @"xc123456";
+    if (!self.accoutTextField.text || !self.passwordTextField.text) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入账号密码" complete:nil];
+        [self.view addSubview:tipsView];
+        return;
+    }
+
+        NSDictionary  *param = @{
+                                 @"userCode":self.accoutTextField.text,
+                                 @"password":self.passwordTextField.text
+                                 };
     [RequestAPI getUserInfo:param header:nil success:^(id response) {
         NSLog(@"%@",response);
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
@@ -151,6 +159,14 @@
                                 [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
                                 [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
                                 [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
+
+                                [UserInfoManager shareInstance].performanceMedal.lastYearInsurance = data[@"last_year_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthInsurance = data[@"last_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthInsurance = data[@"now_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking = data[@"last_year_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking = data[@"last_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking = data[@"now_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance_ranking"]]:@"";
+
                                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                                 UserInfoManager *manager = [UserInfoManager shareInstance];
                                 [self loadCoverModel];
@@ -287,6 +303,15 @@
 {
     [self.view endEditing:YES];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:LETTERNUMKEYBOARD] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

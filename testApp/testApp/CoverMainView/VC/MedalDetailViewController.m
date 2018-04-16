@@ -70,50 +70,50 @@ static NSString *identifier = @"listCell";
             if (indexPath.row == 0) {
                 cell.label1.text = @"年冠军勋章";
                 cell.label2.text = @"业绩年度第一名";
-                cell.label3.text = @"奖金300元";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_year_one_bonus];
                 cell.label5.text = @"1、个人在公司年度业绩排名第一名";
-                cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金300元/次，可重复领取";
+                cell.label6.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_year_one_performance];
+                cell.label7.text = [NSString stringWithFormat:@"3、奖金%@元/次，可重复领取",[UserInfoManager shareInstance].userMedal.medal_type_year_one_bonus];
                 
             }else if (indexPath.row == 1){
                 cell.label1.text = @"年亚军勋章";
                 cell.label2.text = @"业绩年度第二名";
-                cell.label3.text = @"奖金200元";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_year_two_bonus];
                 cell.label5.text = @"1、个人在公司年度业绩排名第二名";
-                cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金200元/次，可重复领取";
+                cell.label6.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_year_two_performance];
+                cell.label7.text = [NSString stringWithFormat:@"3、奖金%@元/次，可重复领取",[UserInfoManager shareInstance].userMedal.medal_type_year_two_bonus];
             }else{
                 cell.label1.text = @"年季军勋章";
                 cell.label2.text = @"业绩年度第三名";
-                cell.label3.text = @"奖金100元";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_year_three_bonus];
                 cell.label5.text = @"1、个人在公司年度业绩排名第三名";
-                cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金100元/次，可重复领取";
+                cell.label6.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_year_three_performance];
+                cell.label7.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_year_three_bonus];
             }
 
         }else{
             if (indexPath.row == 0) {
                 cell.label1.text = @"月冠军勋章";
                 cell.label2.text = @"业绩月度第一名";
-                cell.label3.text = @"奖金300元";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_one_bonus];
                 cell.label5.text = @"1、个人在公司月度业绩排名第一名";
-                cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金300元/次，可重复领取";
+                cell.label6.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_month_one_performance];
+                cell.label7.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_one_bonus];
 
             }else if (indexPath.row == 1){
                 cell.label1.text = @"月亚军勋章";
                 cell.label2.text = @"业绩月度第二名";
-                cell.label3.text = @"奖金200元";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_two_bonus];
                 cell.label5.text = @"1、个人在公司月度业绩排名第二名";
-                cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金200元/次，可重复领取";
+                cell.label6.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_month_two_performance];
+                cell.label7.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_two_bonus];
             }else{
                 cell.label1.text = @"月季军勋章";
                 cell.label2.text = @"业绩月度第三名";
-                cell.label3.text = @"奖金100元";
-                cell.label5.text = @"1、个人在公司月度业绩排名第三名";
+                cell.label3.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_three_bonus];
+                cell.label5.text = [NSString stringWithFormat:@"2、业绩最低要求%@起",[UserInfoManager shareInstance].userMedal.medal_type_month_three_performance];
                 cell.label6.text = @"2、业绩最低要求5万起";
-                cell.label7.text = @"3、奖金100元/次，可重复领取";
+                cell.label7.text = [NSString stringWithFormat:@"奖金%@元",[UserInfoManager shareInstance].userMedal.medal_type_month_three_bonus];
             }
         }
 
@@ -127,7 +127,9 @@ static NSString *identifier = @"listCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.tableView.frame = CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, 204*_openArray.count + 120*(3-_openArray.count));
+    CGFloat height = SCREEN_HEIGHT - kHeightForNavigation;
+    height = height < 204*_openArray.count + 120*(3-_openArray.count) ? height : 204*_openArray.count + 120*(3-_openArray.count);
+    self.tableView.frame = CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, height);
     if ([self.openArray containsObject:indexPath]) {
         return 204;
     }else{
