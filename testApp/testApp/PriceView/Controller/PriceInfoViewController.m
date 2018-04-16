@@ -36,7 +36,10 @@
     if (self.arrayRecodeData.count > 0) {
         [self.dataArray addObjectsFromArray:self.arrayRecodeData];
         [self.arrayRecodeData removeAllObjects];
+        [self.allDataArray addObjectsFromArray:self.arrayAllRecodeData];
+        [self.arrayAllRecodeData removeAllObjects];
         [self.myTableView reloadData];
+        
         self.route = @"1";
     } else {
       [self requestPrecisePrice];
@@ -146,6 +149,7 @@
             if ([szModel.isToubao isEqualToString:@"Y"]) {
                [self.dataArray addObject:szModel];
             }
+            
             [self.allDataArray addObject:szModel];
             
             
@@ -317,12 +321,17 @@
             if (![bussice isKindOfClass:[NSNull class]]) {
                 _syBaoFei = [bussice doubleValue];
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.myTableView reloadData];
+            });
             
             
-            [self.myTableView reloadData];
         } else {
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            });
+            
             
         }
     } fail:^(id error) {
@@ -351,35 +360,36 @@
     [dic setObject:[NSString stringWithFormat:@"%f",csModel.priceValue] forKey:@"csValue"];
     [dic setObject:csModel.isMianpei forKey:@"csWithout"];
     
-    //盗抢
-    PriceInfoModel *dqModel = [self.allDataArray objectAtIndex:2];
-    [dic setObject:dqModel.isToubao forKey:@"dqIsSelect"];
-    [dic setObject:[NSString stringWithFormat:@"%f",dqModel.priceValue] forKey:@"dqValue"];
-    [dic setObject:dqModel.isMianpei forKey:@"dqWithout"];
     
     //第三者
-    PriceInfoModel *szModel = [self.allDataArray objectAtIndex:3];
+    PriceInfoModel *szModel = [self.allDataArray objectAtIndex:2];
     [dic setObject:szModel.isToubao forKey:@"szIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",szModel.priceValue] forKey:@"szValue"];
     [dic setObject:szModel.isMianpei forKey:@"szWithout"];
     
     //车上司机
-    PriceInfoModel *sjModel = [self.allDataArray objectAtIndex:4];
+    PriceInfoModel *sjModel = [self.allDataArray objectAtIndex:3];
     [dic setObject:sjModel.isToubao forKey:@"cssjIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",sjModel.priceValue] forKey:@"cssjValue"];
     [dic setObject:sjModel.isMianpei forKey:@"cssjWithout"];
     
     //车上乘客
-    PriceInfoModel *ckModel = [self.allDataArray objectAtIndex:5];
+    PriceInfoModel *ckModel = [self.allDataArray objectAtIndex:4];
     [dic setObject:ckModel.isToubao forKey:@"csckIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",ckModel.priceValue] forKey:@"csckValue"];
     [dic setObject:ckModel.isMianpei forKey:@"csckWithout"];
     
     //车身划痕
-    PriceInfoModel *hhModel = [self.allDataArray objectAtIndex:6];
+    PriceInfoModel *hhModel = [self.allDataArray objectAtIndex:5];
     [dic setObject:hhModel.isToubao forKey:@"cshhIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",hhModel.priceValue] forKey:@"cshhValue"];
     [dic setObject:hhModel.isMianpei forKey:@"cshhWithout"];
+    
+    //盗抢
+    PriceInfoModel *dqModel = [self.allDataArray objectAtIndex:6];
+    [dic setObject:dqModel.isToubao forKey:@"dqIsSelect"];
+    [dic setObject:[NSString stringWithFormat:@"%f",dqModel.priceValue] forKey:@"dqValue"];
+    [dic setObject:dqModel.isMianpei forKey:@"dqWithout"];
     
     //玻璃
     PriceInfoModel *blModel = [self.allDataArray objectAtIndex:7];
@@ -619,6 +629,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1 && indexPath.row == self.dataArray.count-1) {
         PriceAdjustViewController *adjustVC = [[PriceAdjustViewController alloc] init];
+        adjustVC.passArray = self.allDataArray;
         [self.navigationController pushViewController:adjustVC animated:YES];
     }
 }
@@ -635,7 +646,8 @@
 - (void)submitNuclearInsDelegate{
     PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
     priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%0.2f", _syBaoFei];
-    priceUnderVC.dataArray = self.allDataArray;
+    priceUnderVC.dataArray = [self.allDataArray copy];
+    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%f",_syBaoFei];
     [self.navigationController pushViewController:priceUnderVC animated:YES];
     
 }

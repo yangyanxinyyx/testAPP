@@ -46,8 +46,12 @@
     
     // 创建通知
     _notification = [NSNotification notificationWithName:@"InfoNotification" object:nil userInfo:nil];
-  
+    [self setStatus];
     [self createUI];
+}
+
+- (void)setStatus{
+    _isContinue = @"N";
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -55,6 +59,14 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+#pragma mark method
+- (void)setFinishTVWithTitle:(NSString *)titile{
+    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:titile complete:nil];
+    [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+}
+
+
 
 #pragma mark - getNetWork
 //获取出单机构
@@ -126,29 +138,60 @@
     [dic setObject:[UserInfoManager shareInstance].customerName forKey:@"customerName"];
     [dic setObject:[UserInfoManager shareInstance].carID forKey:@"carId"];
     [dic setObject:_onwerIdentify forKey:@"onwerIdentify"];
+    NSString *string ;
     if (_syEffectDate) {
         [dic setObject:_syEffectDate forKey:@"syEffectDate"];
+    } else {
+        string = @"请填写商业险起保时间";
+        [self setFinishTVWithTitle:string];
+        return;
     }
+    
     if (_jqEffectDate) {
         [dic setObject:_jqEffectDate forKey:@"jqEffectDate"];
+    } else {
+        string = @"请填写交强险起保时间";
+        [self setFinishTVWithTitle:string];
+        return;
     }
+    
     if (_isContinue) {
         [dic setObject:_isContinue forKey:@"isContinue"];
     }
+    
     if (_exportUnitName) {
         [dic setObject:_exportUnitName forKey:@"exportUnitName"];
+    } else {
+        string = @"请选择出单机构";
+        [self setFinishTVWithTitle:string];
+        return;
     }
     
     if (_insurerId) {
         [dic setObject:_insurerId forKey:@"insurerId"];
+    } else {
+        string = @"请选择保险公司";
+        [self setFinishTVWithTitle:string];
+        return;
     }
+    
     
     if (_insurerName) {
         [dic setObject:_insurerName forKey:@"insurerName"];
+    } else {
+        string = @"请填写商业险金额";
+        [self setFinishTVWithTitle:string];
+        return;
     }
+    
     if (_bussiseNum) {
         [dic setObject:self.bussiseNum forKey:@"syMoney"];
+    } else {
+        string = @"请填写交强险金额";
+        [self setFinishTVWithTitle:string];
+        return;
     }
+    
     if (_remark) {
         [dic setObject:_remark forKey:@"remark"];
     } else {
@@ -168,58 +211,59 @@
     [dic setObject:[NSString stringWithFormat:@"%f",csModel.priceValue] forKey:@"csValue"];
     [dic setObject:csModel.isMianpei forKey:@"csWithout"];
     
-    //盗抢
-    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:2];
-    [dic setObject:dqModel.isToubao forKey:@"dqIsSelect"];
-    [dic setObject:[NSString stringWithFormat:@"%f",dqModel.priceValue] forKey:@"dqValue"];
-    [dic setObject:dqModel.isMianpei forKey:@"dqWithout"];
-    
     //第三者
-    PriceInfoModel *szModel = [self.dataArray objectAtIndex:3];
+    PriceInfoModel *szModel = [self.dataArray objectAtIndex:2];
     [dic setObject:szModel.isToubao forKey:@"szIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",szModel.priceValue] forKey:@"szValue"];
     [dic setObject:szModel.isMianpei forKey:@"szWithout"];
     
     //车上司机
-    PriceInfoModel *sjModel = [self.dataArray objectAtIndex:4];
+    PriceInfoModel *sjModel = [self.dataArray objectAtIndex:3];
     [dic setObject:sjModel.isToubao forKey:@"cssjIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",sjModel.priceValue] forKey:@"cssjValue"];
     [dic setObject:sjModel.isMianpei forKey:@"cssjWithout"];
     
     //车上乘客
-    PriceInfoModel *ckModel = [self.dataArray objectAtIndex:5];
+    PriceInfoModel *ckModel = [self.dataArray objectAtIndex:4];
     [dic setObject:ckModel.isToubao forKey:@"csckIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",ckModel.priceValue] forKey:@"csckValue"];
     [dic setObject:ckModel.isMianpei forKey:@"csckWithout"];
     
     //车身划痕
-    PriceInfoModel *hhModel = [self.dataArray objectAtIndex:6];
+    PriceInfoModel *hhModel = [self.dataArray objectAtIndex:5];
     [dic setObject:hhModel.isToubao forKey:@"cshhIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",hhModel.priceValue] forKey:@"cshhValue"];
     [dic setObject:hhModel.isMianpei forKey:@"cshhWithout"];
     
-    //玻璃
-    PriceInfoModel *blModel = [self.dataArray objectAtIndex:7];
-    [dic setObject:blModel.isToubao forKey:@"blpsIsSelect"];
-    [dic setObject:[NSString stringWithFormat:@"%f", blModel.priceValue] forKey:@"blpsValue"];
-    
+    //盗抢
+    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:6];
+    [dic setObject:dqModel.isToubao forKey:@"dqIsSelect"];
+    [dic setObject:[NSString stringWithFormat:@"%f",dqModel.priceValue] forKey:@"dqValue"];
+    [dic setObject:dqModel.isMianpei forKey:@"dqWithout"];
+
     //发动机涉水险
-    PriceInfoModel *fdjssModel = [self.dataArray objectAtIndex:8];
+    PriceInfoModel *fdjssModel = [self.dataArray objectAtIndex:7];
     [dic setObject:fdjssModel.isToubao forKey:@"fdjssIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",fdjssModel.priceValue] forKey:@"fdjssValue"];
     [dic setObject:fdjssModel.isMianpei forKey:@"fdjssWithout"];
     
-    //无法找到第三方
-    PriceInfoModel *wsModel = [self.dataArray objectAtIndex:9];
-    [dic setObject:wsModel.isToubao forKey:@"wfzddsfIsSelect"];
     
     //自燃险
-    PriceInfoModel *zrModel = [self.dataArray objectAtIndex:10];
+    PriceInfoModel *zrModel = [self.dataArray objectAtIndex:8];
     [dic setObject:zrModel.isToubao forKey:@"zrxIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",zrModel.priceValue] forKey:@"zrxValue"];
     [dic setObject:zrModel.isMianpei forKey:@"zrxWithout"];
     
-
+    //玻璃
+    PriceInfoModel *blModel = [self.dataArray objectAtIndex:9];
+    [dic setObject:blModel.isToubao forKey:@"blpsIsSelect"];
+    [dic setObject:[NSString stringWithFormat:@"%f", blModel.priceValue] forKey:@"blpsValue"];
+    
+    //无法找到第三方
+    PriceInfoModel *wsModel = [self.dataArray objectAtIndex:10];
+    [dic setObject:wsModel.isToubao forKey:@"wfzddsfIsSelect"];
+    
+    
     [RequestAPI getUnderwriting:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if ([response[@"reult"] isEqualToString:@"1"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -448,7 +492,7 @@
         busSelectTimeV.block = ^(NSString *timeStr) {
             PriceUnderwritingChooseTableViewCell *cell = [weakSelf.myTableView cellForRowAtIndexPath:indexPath];
             cell.labelTag.text = timeStr;
-            _jqEffectDate = timeStr;
+            _syEffectDate = timeStr;
         };
     }
     if (indexPath.row == 5) {
@@ -457,6 +501,7 @@
         jqSelectTimeV.block = ^(NSString *timeStr) {
             PriceUnderwritingChooseTableViewCell *cell = [weakSelf.myTableView cellForRowAtIndexPath:indexPath];
             cell.labelTag.text = timeStr;
+            _jqEffectDate = timeStr;
 
         };
     }

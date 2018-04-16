@@ -15,4 +15,5 @@
 @property (nonatomic, strong) NSString *isToubao;
 @property (nonatomic, strong) priceModel *model;
 @property (nonatomic, assign) double priceValue;
+
 @end
