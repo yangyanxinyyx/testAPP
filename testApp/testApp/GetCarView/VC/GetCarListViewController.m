@@ -12,6 +12,7 @@
 #import "GetCarViewController.h"
 #import "MoneyInputVIew.h"
 #import <MJRefresh/MJRefresh.h>
+#import "LYZAlertView.h"
 static NSString *identifier = @"listCell";
 
 @interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GetCarListCellDelegate,GetCarViewControllerDelegate,MoneyInputVIewDelegate>
@@ -73,7 +74,7 @@ static NSString *identifier = @"listCell";
 - (void)requestDataWithPage:(NSNumber *)page selectNumber:(NSString *)selectNumber
 {
     NSDictionary *param = nil;
-    __block NSNumber *pageSize = @(4);
+    __block NSNumber *pageSize = @(10);
     if (selectNumber) {
         param = @{@"storeId":[UserInfoManager shareInstance].storeID,
                   @"plateNo":selectNumber,
@@ -203,10 +204,42 @@ static NSString *identifier = @"listCell";
         VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
         [self.navigationController pushViewController:VC animated:YES];
     }else if (cell.getCarBtnType == GetCarBtnTypePay){
-        MoneyInputVIew *moneyInput = [[MoneyInputVIew alloc] init];
-        moneyInput.orderId = model.orderID;
-        moneyInput.delegate = self;
-        [self.view addSubview:moneyInput];
+        if ([model.orderCategory isEqualToString:@"维修"]) {
+            MoneyInputVIew *moneyInput = [[MoneyInputVIew alloc] init];
+            moneyInput.orderId = model.orderID;
+            moneyInput.delegate = self;
+            [self.view addSubview:moneyInput];
+        }else{
+            LYZAlertView *alert = [LYZAlertView alterViewWithTitle:@"是否完成?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+                NSDictionary *param = @{@"id":model.orderID};
+                [RequestAPI getGetCarFinish:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    if (isUsableDictionary(response)) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"交易成功");
+                            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易完成!" complete:^{
+                                    [self reloadGetCarListWithPlateNO];
+                                }];
+
+                                [self.view addSubview:tipsView];
+                            });
+
+                        }else{
+                            NSLog(@"交易失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
+            }];
+            [self.view addSubview:alert];
+        }
     }
 }
 
@@ -330,7 +363,7 @@ static NSString *identifier = @"listCell";
         [_textField setValue:[UIFont boldSystemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
         _textField.delegate = self;
 
-        _textField.text = @"粤A984W9";
+//        _textField.text = @"粤A984W9";
 
         UIImageView *rightView = [[UIImageView alloc]init];
         rightView.image = [UIImage imageNamed:@"search"];
