@@ -129,10 +129,10 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 3)) {
             //刷卡日期
-            [self.CardSelectTimeV inputSelectTiemView:YES];
+//            [self.CardSelectTimeV inputSelectTiemView:YES];
         }
         else if ((indexPath.section == 1 && indexPath.row == 2)) {
-            [self.DistributonSelectTimeV inputSelectTiemView:YES];
+//            [self.DistributonSelectTimeV inputSelectTiemView:YES];
         }
         else if(indexPath.section == 0 && indexPath.row == 4){
             NSArray * arr = @[@"赠送",@"购买",@"无"];

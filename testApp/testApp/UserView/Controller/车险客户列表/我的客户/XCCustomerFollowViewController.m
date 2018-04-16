@@ -66,7 +66,7 @@
             [weakSelf.view addSubview:alterView];
         }
         else if ((indexPath.section == 0 && indexPath.row == 1)) {
-            [self.SelectTimeV inputSelectTiemView:YES];
+//            [self.SelectTimeV inputSelectTiemView:YES];
         }
        
     }

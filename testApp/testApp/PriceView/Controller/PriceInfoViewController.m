@@ -635,7 +635,10 @@
 - (void)submitNuclearInsDelegate{
     PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
     priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%0.2f", _syBaoFei];
-    priceUnderVC.dataArray = self.allDataArray;
+    if (self.allDataArray.count == 0 || !self.allDataArray) {
+        priceUnderVC.dataArray = self.dataArray;
+    }
+    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%f",_syBaoFei];
     [self.navigationController pushViewController:priceUnderVC animated:YES];
     
 }
