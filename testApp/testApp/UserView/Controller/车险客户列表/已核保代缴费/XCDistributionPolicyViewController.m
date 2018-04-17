@@ -107,21 +107,26 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 3)) {
             //刷卡日期
-            SelectTimeView *selectView = [[SelectTimeView alloc] init];
+            [weakSelf.tableView endEditing:YES];
+            SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
             selectView.block = ^(NSString *string) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 strongSelf.billModel.payDate = string;
+                [(XCDistributionPicketCell *)cell setTitleValue:string];
             };
-            [self.view addSubview:selectView];
+           [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         }
         else if ((indexPath.section == 1 && indexPath.row == 2)) {
             //配送时间
-            SelectTimeView *selectView = [[SelectTimeView alloc] init];
+            [weakSelf.tableView endEditing:YES];
+            SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
             selectView.block = ^(NSString *string) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 strongSelf.billModel.shipmentTime = string;
+                [(XCDistributionPicketCell *)cell setTitleValue:string];
             };
-            [self.view addSubview:selectView];        }
+            [[UIApplication sharedApplication].keyWindow addSubview:selectView];
+        }
         else if(indexPath.section == 0 && indexPath.row == 4){
             NSArray * arr = @[@"赠送",@"购买",@"无"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
@@ -144,12 +149,18 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 NSNumber *selectID = [NSNumber numberWithLong:999999];
+                NSNumber *packageBuy = [NSNumber numberWithLong:999999];
+
                 for (XCUserPackageModel *model in strongSelf.packageArr) {
                     if ([model.name isEqualToString:selectStr]) {
                         selectID = model.packageID;
                     }
                 }
+                if (!isUsable(selectID, [NSNumber class])) {
+                    selectID = [NSNumber numberWithLong:999999];
+                }
                 strongSelf.billModel.packageId = selectID;
+                strongSelf.billModel.packageBuyPrice = packageBuy;
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
             }];
             [weakSelf.view addSubview:alterView];
@@ -296,6 +307,10 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         errString = @"保单信息错误";
         configureSuccess = NO;
     }
+    if (!isUsableNSString(_billModel.receiverName,@"")) {
+        errString = @"收件客户名称为空";
+        configureSuccess = NO;
+    }
     if (!isUsableNSString(_billModel.phone,@"")) {
         errString = @"联系电话为空";
         configureSuccess = NO;
@@ -312,12 +327,27 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         errString = @"配送地址为空";
         configureSuccess = NO;
     }
-    if ([_billModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-        errString = @"保单金额为0";
-        configureSuccess = NO;
+    if (!isUsableNSString(_billModel.remark, @"")) {
+        _billModel.address = @"";
     }
+//    if ([_billModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
+//        errString = @"保单金额为0";
+//        configureSuccess = NO;
+//    }
     if (!isUsableNSString(_billModel.payDate,@"")) {
         errString = @"刷卡日期为空";
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_billModel.packageGiveOrBuy,@"")) {
+        errString = @"请选择礼包";
+        configureSuccess = NO;
+    }
+    if (!isUsable(_billModel.packageBuyPrice, [NSNumber class])) {
+        errString = @"礼包数据错误";
+        configureSuccess = NO;
+    }
+    if (!isUsable(_billModel.packageId, [NSNumber class])) {
+        errString = @"礼包数据错误";
         configureSuccess = NO;
     }
     if (configureSuccess) {
@@ -326,7 +356,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             
-                if ([response[@"data"] isEqualToString:@"true"]) {
+                if (response[@"data"]) {
                     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }else {
@@ -394,7 +424,9 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         _billModel.receiverName = textField.text;
     }
     else if ([title isEqualToString:@"联系电话:"]) {
-         textField.text = [textField.text substringToIndex:11];
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
         _billModel.phone = textField.text;
     }
     else if ([title isEqualToString:@"配送地址:"]) {
@@ -481,6 +513,15 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 
 #pragma mark - Setter&Getter
 
+- (void)setPolicyId:(NSNumber *)policyId
+{
+    if (isUsable(policyId, [NSNumber class])) {
+        if (!_billModel) {
+            _billModel = [[XCDistributionBillModel alloc] init];
+        }
+        _billModel.policyId = policyId;
+    }
+}
 
 
 @end

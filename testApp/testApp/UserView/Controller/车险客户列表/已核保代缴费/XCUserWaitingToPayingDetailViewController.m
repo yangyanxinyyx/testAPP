@@ -87,17 +87,59 @@
     if (isUsable(self.model.syMoney, [NSNumber class]) && [self.model.syMoney doubleValue]!= 0) {
         jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
     }
+    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
+    }
     XCDistributionPolicyViewController *policyVC = [[XCDistributionPolicyViewController alloc] initWithTitle:@"配送保单"];
     policyVC.jqMoney = jqMoneyStr;
     policyVC.syMoney = syMoneyStr;
     policyVC.packageArr = packArrM;
+    policyVC.policyId = self.model.BillID;
     [self.navigationController pushViewController:policyVC animated:YES];
 }
 
 #pragma mark 点击配送缴费单
 - (void)clickDistributionBillBtn:(UIButton *)button
 {
+    //加载礼包
+    __weak __typeof(self) weakSelf = self;
+    //车险客户列表
+    NSDictionary *param = @{
+                            @"ticketId":[UserInfoManager shareInstance].ticketID ,
+                            };
+    __block NSMutableArray *packArrM = [[NSMutableArray alloc] init];
+    
+    [RequestAPI getValidPackage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"data"]) {
+            NSArray *dataArr = response[@"data"];
+            for (NSDictionary *dataInfo in dataArr) {
+                XCUserPackageModel *packageModel = [XCUserPackageModel yy_modelWithJSON:dataInfo];
+                if (packageModel) {
+                    [packArrM addObject:packageModel];
+                }
+            }
+        }
+        
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+    }];
+    
+    
+    NSString *jqMoneyStr = @"¥0.00";
+    NSString *syMoneyStr = @"¥0.00";
+    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
+    }
+    if (isUsable(self.model.syMoney, [NSNumber class]) && [self.model.syMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
+    }
+    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
+    }
     XCDistributionBillViewController *billVC = [[XCDistributionBillViewController alloc] initWithTitle:@"配送缴费单"];
+    billVC.jqMoney = jqMoneyStr;
+    billVC.syMoney = syMoneyStr;
+    billVC.packageArr = packArrM;
     [self.navigationController pushViewController:billVC animated:YES];
 }
 

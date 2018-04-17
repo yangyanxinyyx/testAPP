@@ -34,9 +34,10 @@
     [super viewDidLayoutSubviews];
 
     CGFloat bottomHeight = 140 * ViewRateBaseOnIP6;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
-    [_customerFollowUpBtn setFrame:CGRectMake(289 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 200 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6)];
-    [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 30 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 200 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6)];
+    [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
+    [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 40 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     
 }
 
@@ -86,18 +87,18 @@
 {
     _customerFollowUpBtn = [UIButton buttonWithType:0];
     [_customerFollowUpBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
-    [_customerFollowUpBtn.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+    [_customerFollowUpBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];
     [_customerFollowUpBtn setTitle:@"客户跟进" forState:UIControlStateNormal];
     _customerFollowUpBtn.layer.cornerRadius = 3;
     _customerFollowUpBtn.layer.borderWidth = 1;
     [_customerFollowUpBtn.layer setBorderColor: COLOR_RGB_255(104, 153, 232).CGColor];
-    [_customerFollowUpBtn setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
     [_customerFollowUpBtn addTarget:self action:@selector(clickCustomerFollowUpBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     
     _subscribeBtn = [UIButton buttonWithType:0];
     [_subscribeBtn setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
-    [_subscribeBtn.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+    [_subscribeBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];
     _subscribeBtn.layer.cornerRadius = 3;
     _subscribeBtn.layer.borderWidth = 1;
     _subscribeBtn.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;

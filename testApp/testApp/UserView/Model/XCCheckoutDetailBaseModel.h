@@ -12,7 +12,7 @@
 @interface XCCheckoutDetailBaseModel : NSObject
 
 /** 保单id */
-@property (nonatomic, assign) long BillID;
+@property (nonatomic, strong) NSNumber * BillID;
 
 //基本信息
 /** 投保人 */

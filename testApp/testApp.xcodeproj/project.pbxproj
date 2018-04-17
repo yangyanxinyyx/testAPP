@@ -329,7 +329,6 @@
 		A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseDetailViewController.m; sourceTree = "<group>"; };
 		A72148BD2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseDetailViewController.h; sourceTree = "<group>"; };
 		A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseDetailViewController.m; sourceTree = "<group>"; };
-		A723D6C120862791007FDDB9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "testApp/Extend/categary/UIButton+ImageTitleSpacing.h"; sourceTree = SOURCE_ROOT; };
 		A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserPackageModel.h; sourceTree = "<group>"; };
 		A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserPackageModel.m; sourceTree = "<group>"; };
 		A724C850207D0DD500083C86 /* 添加图片@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@2x.png"; sourceTree = "<group>"; };
@@ -1688,7 +1687,6 @@
 		FC47955920556EE300218362 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				A723D6C120862791007FDDB9 /* UIButton+ImageTitleSpacing.h */,
 				FC2805E2205E5E6C00DD0DA9 /* Data */,
 				FC2805E1205E5E6100DD0DA9 /* Network */,
 				FC2805E0205E5E4100DD0DA9 /* Base */,

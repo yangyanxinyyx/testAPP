@@ -17,6 +17,7 @@
 #import "XCShopAMapViewController.h"
 #import "XCShopServiceModel.h"
 #import "XCShopServiceDetailListViewController.h"
+#import "ProgressControll.h"
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
@@ -194,6 +195,8 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
                                                     cell:(XCCheckoutDetailPhotoCell *)cell
 {
     self.currentPhotoCell = cell;
+    [ProgressControll showProgressNormal];
+
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
     //设置选取的照片是否可编辑
     pickerController.allowsEditing = YES;
@@ -203,6 +206,8 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
     //UIImagePickerControllerSourceTypeCamera//调取摄像头
     pickerController.delegate = self;
     [self presentViewController:pickerController animated:YES completion:nil];
+    [ProgressControll dismissProgress];
+
 }
 
 #pragma mark - navigationDelegate

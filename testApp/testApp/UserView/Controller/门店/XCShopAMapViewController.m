@@ -124,7 +124,6 @@
         [button sizeToFit];
         [button addTarget:self action:@selector(mapViewCalloutClickButton:) forControlEvents:UIControlEventTouchUpInside];
         annotationView.leftCalloutAccessoryView =button;
-//        [annotationView.leftCalloutAccessoryView addSubview:button];
         
         return annotationView;
     }

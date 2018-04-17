@@ -11,6 +11,9 @@
 #import "XCDistributionFooterView.h"
 #import "XCDistributionPaymentBillModel.h"
 #import "SelectTimeView.h"
+#import "XCUserPackageModel.h"
+#import "NSString+MoneyString.h"
+
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom)
 
 @interface XCDistributionBillViewController ()<UITableViewDelegate,UITableViewDataSource,
@@ -19,7 +22,6 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) XCDistributionPaymentBillModel * payModel ;
 
-@property (nonatomic, strong) SelectTimeView * DistributonSelectTimeV ;
 
 @end
 
@@ -30,6 +32,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _payModel = [[XCDistributionPaymentBillModel alloc] init];
+    
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -75,19 +78,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     
-    __weak typeof (self)weakSelf = self;
-
-    _DistributonSelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _DistributonSelectTimeV.hidden = YES;
-    self.DistributonSelectTimeV.block = ^(NSString *string ) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:5 inSection:0];
-        XCDistributionPicketCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-        [cell setTitleValue:string];
-        weakSelf.payModel.shipmentTime = string;
-    };
-    
     [self.view addSubview:self.tableView];
-    [self.view addSubview:_DistributonSelectTimeV];
 
 }
 
@@ -101,13 +92,40 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 5)) {
-            //选择时间
-//            [self.DistributonSelectTimeV inputSelectTiemView:YES];
+            //配送时间
+            [weakSelf.tableView endEditing:YES];
+            SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            selectView.block = ^(NSString *string) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                strongSelf.payModel.shipmentTime = string;
+                [(XCDistributionPicketCell *)cell setTitleValue:string];
+            };
+            [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         }
         else if(indexPath.section == 0 && indexPath.row == 4){
-            NSArray * arr = @[@"礼包一",@"礼包二",@"礼包三"];
-            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
-                weakSelf.payModel.packageId = selectStr;
+            NSMutableArray *arrM = [[NSMutableArray alloc] init];
+            if (_packageArr) {
+                for (XCUserPackageModel *model in _packageArr) {
+                    [arrM addObject:model.name];
+                }
+            }else {
+                [arrM addObject:@""];
+            }
+            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                NSNumber *selectID = [NSNumber numberWithLong:999999];
+                NSNumber *packageBuy = [NSNumber numberWithLong:999999];
+                
+                for (XCUserPackageModel *model in strongSelf.packageArr) {
+                    if ([model.name isEqualToString:selectStr]) {
+                        selectID = model.packageID;
+                    }
+                }
+                if (!isUsable(selectID, [NSNumber class])) {
+                    selectID = [NSNumber numberWithLong:999999];
+                }
+                strongSelf.payModel.packageId = selectID;
+                strongSelf.payModel.packageBuyPrice = packageBuy;
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
             }];
             [weakSelf.view addSubview:alterView];
@@ -145,13 +163,15 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     textFiledCell.shouldShowSeparator = YES;
     textFiledCell.selectionStyle = UITableViewCellSelectionStyleNone;
     textFiledCell.delegate = self;
-    
+    textFiledCell.isNumField = NO;
     switch (indexPath.row) {
         case 2:
         case 6:
         case 9:
         case 10: {
             textFiledCell.titlePlaceholder = @"请输入金额";
+            textFiledCell.isNumField = YES;
+            textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         }
             break;
         case 3: {
@@ -163,6 +183,8 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         }
             break;
         case 8: {
+            textFiledCell.isNumField = YES;
+            textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             textFiledCell.titlePlaceholder = @"请输入联系电话";
         }
             break;
@@ -208,38 +230,41 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
 
-- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString title:(NSString *)title
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
     if ([title isEqualToString:@"保单金额:"]) {
-        double price = [textFiledString doubleValue];
+        double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
     }
     else if ([title isEqualToString:@"缴费单通知号:"]) {
-        _payModel.payNoticeNo =  textFiledString;
+        _payModel.payNoticeNo =  textField.text;
     }
     else if ([title isEqualToString:@"购买金额:"]) {
-        double price = [textFiledString doubleValue];
+        double price = [textField.text doubleValue];
         _payModel.packageBuyPrice = [NSNumber numberWithDouble:price];
     }
     else if ([title isEqualToString:@"客户名称:"]) {
-        _payModel.receiverName =  textFiledString;
+        _payModel.receiverName =  textField.text;
     }
     else if ([title isEqualToString:@"联系电话:"]) {
-        _payModel.phone =  textFiledString;
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+        _payModel.phone =  textField.text;
     }
     else if ([title isEqualToString:@"预借款金额:"]) {
-        double price = [textFiledString doubleValue];
+        double price = [textField.text doubleValue];
         _payModel.borrowMoney = [NSNumber numberWithDouble:price];
     }
     else if ([title isEqualToString:@"收款金额:"]) {
-        double price = [textFiledString doubleValue];
+        double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
     }
     else if ([title isEqualToString:@"配送地址:"]) {
-        _payModel.address =  textFiledString;
+        _payModel.address =  textField.text;
     }
     else if ([title isEqualToString:@"配送备注:"]) {
-        _payModel.remark =  textFiledString;
+        _payModel.remark =  textField.text;
     }
 }
 
@@ -288,7 +313,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            if ([response[@"data"] isEqualToString:@"true"]) {
+            if (response[@"data"]) {
                 FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
                 [weakSelf.view addSubview:tipsView];
             }else {
