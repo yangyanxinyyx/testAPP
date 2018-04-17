@@ -12,4 +12,5 @@
 
 + (NSString *)stringWithMoneyNumber:(double)money;
 
+
 @end

@@ -38,6 +38,7 @@
 		A72148B92083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148B82083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m */; };
 		A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */; };
 		A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */; };
+		A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */; };
 		A724C851207D0DD500083C86 /* 添加图片@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C850207D0DD500083C86 /* 添加图片@2x.png */; };
 		A724C853207D0DE300083C86 /* 添加图片@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C852207D0DE300083C86 /* 添加图片@3x.png */; };
 		A724C855207D0DFF00083C86 /* 添加符号@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C854207D0DFF00083C86 /* 添加符号@3x.png */; };
@@ -325,6 +326,9 @@
 		A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseDetailViewController.m; sourceTree = "<group>"; };
 		A72148BD2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseDetailViewController.h; sourceTree = "<group>"; };
 		A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseDetailViewController.m; sourceTree = "<group>"; };
+		A723D6C120862791007FDDB9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "testApp/Extend/categary/UIButton+ImageTitleSpacing.h"; sourceTree = SOURCE_ROOT; };
+		A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserPackageModel.h; sourceTree = "<group>"; };
+		A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserPackageModel.m; sourceTree = "<group>"; };
 		A724C850207D0DD500083C86 /* 添加图片@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@2x.png"; sourceTree = "<group>"; };
 		A724C852207D0DE300083C86 /* 添加图片@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@3x.png"; sourceTree = "<group>"; };
 		A724C854207D0DFF00083C86 /* 添加符号@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加符号@3x.png"; sourceTree = "<group>"; };
@@ -793,6 +797,8 @@
 				A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */,
 				A720C5B12081EFE5006B0C33 /* XCDistributionPaymentBillModel.h */,
 				A720C5B22081EFE5006B0C33 /* XCDistributionPaymentBillModel.m */,
+				A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */,
+				A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1092,8 +1098,8 @@
 			children = (
 				FC32BE852079AA2000817156 /* Controller */,
 				FC32BEDF2079AA2000817156 /* Model */,
-				FC32BEEC2079AA2000817156 /* userListViewData.plist */,
 				FC32BEED2079AA2000817156 /* View */,
+				FC32BEEC2079AA2000817156 /* userListViewData.plist */,
 			);
 			path = UserView;
 			sourceTree = "<group>";
@@ -1682,6 +1688,7 @@
 		FC47955920556EE300218362 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				A723D6C120862791007FDDB9 /* UIButton+ImageTitleSpacing.h */,
 				FC2805E2205E5E6C00DD0DA9 /* Data */,
 				FC2805E1205E5E6100DD0DA9 /* Network */,
 				FC2805E0205E5E4100DD0DA9 /* Base */,
@@ -2139,6 +2146,7 @@
 				FC32BFA42079AA5900817156 /* PriceInspectViewController.m in Sources */,
 				FC2805D6205D96DF00DD0DA9 /* UserInfoConfirmView.m in Sources */,
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
+				A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */,
 				FC32BF312079AA2000817156 /* XCCustomerDetailViewController.m in Sources */,
 				FC32BFAE2079AA5900817156 /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC32BFB62079AA5900817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,

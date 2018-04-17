@@ -10,6 +10,8 @@
 #import "XCDistributionPolicyViewController.h"
 #import "XCDistributionBillViewController.h"
 #import "XCCheckoutDetailBaseModel.h"
+#import "XCUserPackageModel.h"
+#import "NSString+MoneyString.h"
 
 @interface XCUserWaitingToPayingDetailViewController ()
 @property (nonatomic, strong) UIButton  * distributionPolicyBtn ;
@@ -40,22 +42,59 @@
 {
     [super viewDidLayoutSubviews];
     
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+
     self.bottomHeight = 140 * ViewRateBaseOnIP6;
-    [_distributionPolicyBtn setFrame:CGRectMake(289 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 200 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6)];
-    [_distributionBillBtn setFrame:CGRectMake(CGRectGetMaxX(_distributionPolicyBtn.frame) + 30 * ViewRateBaseOnIP6, _distributionPolicyBtn.frame.origin.y, 200 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6)];
+    [_distributionPolicyBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
+    [_distributionBillBtn setFrame:CGRectMake(CGRectGetMaxX(_distributionPolicyBtn.frame) + 40 * ViewRateBaseOnIP6, _distributionPolicyBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
 
 }
 
 #pragma mark - Action Method
 
-//点击配送保单
+#pragma mark 点击配送保单
 - (void)clickDistributionPolicyBtn:(UIButton *)button
 {
+    //加载礼包
+    __weak __typeof(self) weakSelf = self;
+    //车险客户列表
+        NSDictionary *param = @{
+                                @"ticketId":[UserInfoManager shareInstance].ticketID ,
+                                };
+      __block NSMutableArray *packArrM = [[NSMutableArray alloc] init];
 
+        [RequestAPI getValidPackage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                NSArray *dataArr = response[@"data"];
+                for (NSDictionary *dataInfo in dataArr) {
+                    XCUserPackageModel *packageModel = [XCUserPackageModel yy_modelWithJSON:dataInfo];
+                    if (packageModel) {
+                        [packArrM addObject:packageModel];
+                    }
+                }
+            }
+
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+        }];
+
+    
+    NSString *jqMoneyStr = @"¥0.00";
+    NSString *syMoneyStr = @"¥0.00";
+    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
+    }
+    if (isUsable(self.model.syMoney, [NSNumber class]) && [self.model.syMoney doubleValue]!= 0) {
+        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
+    }
     XCDistributionPolicyViewController *policyVC = [[XCDistributionPolicyViewController alloc] initWithTitle:@"配送保单"];
+    policyVC.jqMoney = jqMoneyStr;
+    policyVC.syMoney = syMoneyStr;
+    policyVC.packageArr = packArrM;
     [self.navigationController pushViewController:policyVC animated:YES];
 }
-//点击配送缴费单
+
+#pragma mark 点击配送缴费单
 - (void)clickDistributionBillBtn:(UIButton *)button
 {
     XCDistributionBillViewController *billVC = [[XCDistributionBillViewController alloc] initWithTitle:@"配送缴费单"];
@@ -83,20 +122,19 @@
 
 - (void)initUI
 {
-    
     _distributionPolicyBtn = [UIButton buttonWithType:0];
     [_distributionPolicyBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
-    [_distributionPolicyBtn.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+    [_distributionPolicyBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];
     [_distributionPolicyBtn setTitle:@"配送保单" forState:UIControlStateNormal];
     _distributionPolicyBtn.layer.cornerRadius = 3;
     _distributionPolicyBtn.layer.borderWidth = 1;
     [_distributionPolicyBtn.layer setBorderColor: COLOR_RGB_255(104, 153, 232).CGColor];
-    [_distributionPolicyBtn setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [_distributionPolicyBtn setBackgroundColor:[UIColor whiteColor]];
     [_distributionPolicyBtn addTarget:self action:@selector(clickDistributionPolicyBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     _distributionBillBtn = [UIButton buttonWithType:0];
     [_distributionBillBtn setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
-    [_distributionBillBtn.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
+    [_distributionBillBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];
     _distributionBillBtn.layer.cornerRadius = 3;
     _distributionBillBtn.layer.borderWidth = 1;
     _distributionBillBtn.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
@@ -106,7 +144,7 @@
     
     [self.view addSubview:_distributionPolicyBtn];
     [self.view addSubview:_distributionBillBtn];
-    
+
     
 }
 
@@ -141,19 +179,8 @@
     
     NSArray *titleArr = self.dataTitleArrM[indexPath.section];
     NSString *title = titleArr[indexPath.row];
-//    if (indexPath.section == 0 && (indexPath.row == 12 - 1 || indexPath.row == 15 - 1 || indexPath.row == 16 - 1)) {
-//        NSString *placetext ;
-//        if (indexPath.row == 12 - 1) {
-//            placetext = @"输入单号";
-//        }else if (indexPath.row == 15 - 1  || indexPath.row == 16 - 1) {
-//            placetext = @"输入金额";
-//        }
-//        XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
-//        [textFiledCell setTitle:title];
-//        [textFiledCell setTitlePlaceholder:placetext];
-//        return textFiledCell;
-//    }else
-        if (indexPath.section == 0 && indexPath.row == 18 - 1){
+
+    if (indexPath.section == 0 && indexPath.row == 18 - 1){
             BOOL mark = NO;
             if ([self.model.isContinue isEqualToString:@"Y"])
             {
@@ -169,7 +196,6 @@
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
         [cell setupCellWithDetailPolicyModel:self.model];
-//        [cell setTitlePlaceholder:@"刘某某"];
         return cell;
     }
 }

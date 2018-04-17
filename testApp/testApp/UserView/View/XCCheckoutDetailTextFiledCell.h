@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "XCShopModel.h"
-//#import "XCCheckoutDetailBaseModel.h"
+
 @protocol XCCheckoutDetailTextFiledCellDelegate <NSObject>
-- (void)XCCheckoutDetailTextFiledSubmitTextField:(NSString *)textFiledString title:(NSString *)title;
+
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title;
+
 @end
 
 @interface XCCheckoutDetailTextFiledCell : UITableViewCell
@@ -18,19 +20,23 @@
 @property (nonatomic, weak) id<XCCheckoutDetailTextFiledCellDelegate> delegate;
 
 @property (nonatomic, copy) NSString * title ;
+@property (nonatomic, strong) UITextField * textField ;
 @property (nonatomic, copy) NSString * titlePlaceholder ;
 
 @property (nonatomic, copy) NSString * secondTitle ;
 @property (nonatomic, copy) NSString * secondTitlePlaceholder ;
 
-/** 默认为NO */
+/** 居中的分割线默认为NO */
 @property (nonatomic, assign) BOOL  isCenterSeparator ;
 //显示分割线 默认为NO
 @property (nonatomic, assign) BOOL shouldShowSeparator ;
 /** 设置TextFiled背景颜色 默认为灰色 */
 @property (nonatomic, strong) UIColor * textFiledBGColor ;
-/** <# 注释 #> */
+/** 一行 两个输入方法样式 */
 @property (nonatomic, assign) BOOL isTwoInputType ;
+/** 是否数字键盘 默认NO*/
+@property (nonatomic, assign) BOOL  isNumField ;
+
 +(CGFloat)getCellHeight;
 
 //- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;

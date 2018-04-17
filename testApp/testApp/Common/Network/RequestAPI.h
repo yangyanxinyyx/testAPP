@@ -84,7 +84,7 @@
 @interface RequestAPI (UserCenter_API)
 //我的佣金
 +(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
-
+//获取车险列表
 +(void)getMyPolicyInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
 //撤销核保
@@ -96,6 +96,9 @@
 //提交配送缴费单
 +(void)postSubmitPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
+//已核保代缴费-配送保单-查询礼包
++(void)getValidPackage:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
+
 //获取客户列表
 +(void)getCustomerList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
@@ -104,11 +107,13 @@
 
 //获取车务（年审，违章，维修）客户列表
 +(void)getelectCarTransactionList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
+
 //获取车务详情
 +(void)getCarTransaction:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
 //获取三大案件列表
 +(void)getThreeCaseApplyList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
+
 //获取三大案件详情
 +(void)getThreeCaseApply:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 

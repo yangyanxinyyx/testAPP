@@ -64,6 +64,8 @@
 #define SUBMITPOLICYPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPolicyPaymentList",API_PREFIX]
 //提交配送缴费单
 #define SUBMITPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
+//查询礼包
+#define FINDVALIDPACKAGE_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
 //获取客户列表
 #define SELECTCUSTOMERLIST_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerList",API_PREFIX]
 //获取客户详情列表
@@ -76,7 +78,7 @@
 //获取三大案件列表
 #define SELECTTHREECASEAPPLYLIST_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/selectThreeCaseApplyList",API_PREFIX]
 //获取三大案件详情
-#define GETTHREECASEAPPLY_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/getThreeCaseApply",API_PREFIX]
+#define GETTHREECASEAPPLY_API [NSString stringWithFormat:@"%@/api/web/package/findValidPackage",API_PREFIX]
 //====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
@@ -374,9 +376,9 @@
 }
 
 #pragma mark - 个人中心
+//我的佣金
 +(void)getMyCommission:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
     
-    //    NSString *str= @"http://result.eolinker.com/qF97Lij3d32eb485319da0d5792df72fa4b2b1fabecfefb?uri=/api/web/commission/selectCommission";
     [self getRequest:MYCOMISSION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
@@ -385,7 +387,7 @@
 }
 
 #pragma mark 车险客户列表
-
+//获取车险列表
 +(void)getMyPolicyInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:MYPOLICYBYCONDINATION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -394,7 +396,7 @@
         fail(error);
     }];
 }
-
+//撤销核保
 +(void)postPolicyRevokeBySaleMan:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:MYPOLICYREVOKBYSALEMAN_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -403,7 +405,7 @@
         fail(error);
     }];
 }
-
+//提交配送保单
 + (void)postSubmitPolicyPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SUBMITPOLICYPAYMENTLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -412,16 +414,25 @@
         fail(error);
     }];
 }
-
+//提交配送缴费单
 +(void)postSubmitPaymentList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
-    [self getRequest:SELECTCUSTOMERLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+    [self getRequest:SUBMITPAYMENTLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
     }];
 }
-
+//已核保代缴费-配送保单-查询礼包
++(void)getValidPackage:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETTHREECASEAPPLY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//获取客户列表
 +(void)getCustomerList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SELECTCUSTOMERLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -430,7 +441,7 @@
         fail(error);
     }];
 }
-
+//获取客户详细信息
 +(void)getCustomerParticularsList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SELECTCUSTOMERPARTICULARS_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -439,7 +450,7 @@
         fail(error);
     }];
 }
-
+//获取车务（年审，违章，维修）客户列表
 +(void)getelectCarTransactionList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SELECTCARTRANSACTIONLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -448,7 +459,7 @@
         fail(error);
     }];
 }
-
+//获取车务详情
 +(void)getCarTransaction:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:GETCARTRANSACTION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -457,7 +468,7 @@
         fail(error);
     }];
 }
-
+//获取三大案件列表
 +(void)getThreeCaseApplyList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SELECTTHREECASEAPPLYLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -466,7 +477,7 @@
         fail(error);
     }];
 }
-
+//获取三大案件详情
 +(void)getThreeCaseApply:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:GETTHREECASEAPPLY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -477,7 +488,7 @@
 }
 
 #pragma mark 门店
-
+//获取门店详情
 +(void)getShopsInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:SHOPSDETAIL_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -486,7 +497,7 @@
         fail(error);
     }];
 }
-
+//修改门店详情
 +(void)postUpdateStore:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
 {
     [self getRequest:SHOPUPDATESTORE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -495,7 +506,7 @@
         fail(error);
     }];
 }
-
+//获取门店服务信息
 +(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     

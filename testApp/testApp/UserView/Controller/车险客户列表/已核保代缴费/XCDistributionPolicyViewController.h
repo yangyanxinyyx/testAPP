@@ -16,4 +16,7 @@
 /** 交强险金额 */
 @property (nonatomic, strong) NSString * jqMoney ;
 
+/** 礼包数据 */
+@property (nonatomic, strong) NSArray * packageArr ;
+
 @end

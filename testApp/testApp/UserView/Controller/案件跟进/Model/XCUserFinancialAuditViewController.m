@@ -37,7 +37,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XCCheckoutDetailBaseModel *baseModel = nil;
-    if (self.dataArr.count >= indexPath.row) {
+    if (self.dataArr.count >= indexPath.row && self.dataArr.count > 0) {
+
         baseModel =  self.dataArr[indexPath.row];
     }
     XCUserFinancialAuditDetailViewController *detailVC = [[XCUserFinancialAuditDetailViewController alloc] initWithTitle:@"财务审核详情"];

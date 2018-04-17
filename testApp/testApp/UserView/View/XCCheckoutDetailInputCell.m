@@ -26,7 +26,7 @@
 
     CGSize labelSize = _titleLabel.frame.size;
     [_titleLabel sizeToFit];
-    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,24 * ViewRateBaseOnIP6)];
+    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - 24 * ViewRateBaseOnIP6) * 0.5, labelSize.width,24 * ViewRateBaseOnIP6)];
     
     CGFloat imageViewH = 40 * ViewRateBaseOnIP6;
     [_continueView setFrame:CGRectMake(_titleLabel.frame.origin.x + labelSize.width + 25 * ViewRateBaseOnIP6, (self.bounds.size.height - imageViewH ) * 0.5, imageViewH, imageViewH)];
