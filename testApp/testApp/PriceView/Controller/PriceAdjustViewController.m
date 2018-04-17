@@ -224,14 +224,14 @@
         
         PriceInfoModel *blModel = [self.passArray objectAtIndex:9];
         priceModel *blPriceModel = [[priceModel alloc] init];
-        if ([blModel.isToubao isEqualToString:@"0"]) {
+        if (blModel.priceValue == 0 ) {
             blPriceModel.content = @"不投保";
-        } else if ([blModel.isToubao isEqualToString:@"1"]) {
+        } else if (blModel.priceValue == 1) {
             blPriceModel.content = @"国产玻璃";
         } else {
             blPriceModel.content = @"进口玻璃";
         }
-        blPriceModel.value = blModel.isToubao;
+        blPriceModel.value = [NSString stringWithFormat:@"%d",(int)blModel.priceValue];
         blModel.model = blPriceModel;
         [self.dataArray addObjectsFromArray:self.passArray];
     }

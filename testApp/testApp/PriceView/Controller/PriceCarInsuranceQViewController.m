@@ -270,11 +270,13 @@
             if (![boli isKindOfClass:[NSNull class]]) {
                 if ([boli doubleValue] == 0) {
                     boliModel.isToubao = @"0";
+                    
                 } else if ([boli doubleValue] == 1) {
                     boliModel.isToubao = @"1";
                 } else {
                     boliModel.isToubao = @"2";
                 }
+                boliModel.priceValue = [boli doubleValue];
             }
             [self.arrayLasetData addObject:boliModel];
             
