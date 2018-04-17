@@ -17,6 +17,11 @@
 #import "CarLastYearRecodemodel.h"
 #import "PriceInfoModel.h"
 #import "PriceRecodeModel.h"
+#import "LYZAlertView.h"
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 @interface PriceCarInsuranceQViewController ()<UITableViewDelegate,UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate>
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -35,6 +40,8 @@
 @property (nonatomic, strong) NSMutableArray *arrayPriceRecodeData;
 @property (nonatomic, assign) BOOL isFirstRequestPriceRecode;
 @property (nonatomic, strong) NSMutableArray *arrayRecodeData;
+@property (nonatomic, strong) NSMutableArray *arrayAllRecodeData;
+@property (strong, nonatomic) NSIndexPath* editingIndexPath;  //当前左滑cell的index，在代理方法中设置
 
 @end
 
@@ -333,6 +340,7 @@
 
             for (NSDictionary *data in response[@"data"]) {
                 NSMutableArray *dataArray = [NSMutableArray array];
+                NSMutableArray *allDataArray = [NSMutableArray array];
                 PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
                 jqModel.name = @"交强险";
                 NSNumber *jqIsSelect = [data objectForKey:@"jqIsSelect"];
@@ -344,7 +352,7 @@
                     jqModel.number = [jqBaoFei doubleValue];
                 }
                 [dataArray addObject:jqModel];
-                
+                [allDataArray addObject:jqModel];
                 
                 
                 //车损险
@@ -369,33 +377,7 @@
                 if ([csModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:csModel];
                 }
-                
-                
-                
-                //盗抢险
-                PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
-                dqModel.name = @"盗抢险";
-                NSNumber *dqIsSelect = [data objectForKey:@"dqIsSelect"];
-                if (![dqIsSelect isKindOfClass:[NSNull class]]) {
-                    dqModel.isToubao = [data objectForKey:@"dqIsSelect"];
-                }
-                NSNumber *dqBaoFei = [data objectForKey:@"dqBaoFei"];
-                if (![dqBaoFei isKindOfClass:[NSNull class]]) {
-                    dqModel.number = [dqBaoFei doubleValue];
-                }
-                NSNumber *dqWithout = [data objectForKey:@"dqWithout"];
-                if (![dqWithout isKindOfClass:[NSNull class]]) {
-                    dqModel.isMianpei = [data objectForKey:@"dqWithout"];
-                }
-                NSNumber *dqValue = [data objectForKey:@"dqValue"];
-                if (![dqValue isKindOfClass:[NSNull class]]) {
-                    dqModel.priceValue = [dqValue doubleValue];
-                }
-                if ([dqModel.isToubao isEqualToString:@"Y"]) {
-                    [dataArray addObject:dqModel];
-                }
-                
-                
+                [allDataArray addObject:csModel];
                 
                 //第三者险
                 PriceInfoModel *szModel = [[PriceInfoModel alloc] init];
@@ -419,6 +401,7 @@
                 if ([szModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:szModel];
                 }
+                [allDataArray addObject:szModel];
                 
                 
                 
@@ -444,7 +427,7 @@
                 if ([cssjModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:cssjModel];
                 }
-                
+                [allDataArray addObject:cssjModel];
                 
                 
                 //车上乘客险
@@ -469,6 +452,7 @@
                 if ([csckModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:csckModel];
                 }
+                [allDataArray addObject:csckModel];
                 
                 
                 
@@ -494,30 +478,31 @@
                 if ([cshhModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:cshhModel];
                 }
+                [allDataArray addObject:cshhModel];
                 
-                
-                
-                
-                // 玻璃险
-                PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
-                blModel.name = @"玻璃险";
-                NSNumber *blpsIsSelect = [data objectForKey:@"blpsIsSelect"];
-                if (![blpsIsSelect isKindOfClass:[NSNull class]]) {
-                    blModel.isToubao = [data objectForKey:@"blpsIsSelect"];
+                //盗抢险
+                PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
+                dqModel.name = @"盗抢险";
+                NSNumber *dqIsSelect = [data objectForKey:@"dqIsSelect"];
+                if (![dqIsSelect isKindOfClass:[NSNull class]]) {
+                    dqModel.isToubao = [data objectForKey:@"dqIsSelect"];
                 }
-                NSNumber *blpsBaoFei = [data objectForKey:@"blpsBaoFei"];
-                if (![blpsBaoFei isKindOfClass:[NSNull class]]) {
-                    blModel.number = [blpsBaoFei doubleValue];
+                NSNumber *dqBaoFei = [data objectForKey:@"dqBaoFei"];
+                if (![dqBaoFei isKindOfClass:[NSNull class]]) {
+                    dqModel.number = [dqBaoFei doubleValue];
                 }
-                NSNumber *blValue = [data objectForKey:@"blpsValue"];
-                if (![blValue isKindOfClass:[NSNull class]]) {
-                    blModel.priceValue = [blValue doubleValue];
+                NSNumber *dqWithout = [data objectForKey:@"dqWithout"];
+                if (![dqWithout isKindOfClass:[NSNull class]]) {
+                    dqModel.isMianpei = [data objectForKey:@"dqWithout"];
                 }
-                if ([blModel.isToubao isEqualToString:@"Y"]) {
-                    [dataArray addObject:blModel];
+                NSNumber *dqValue = [data objectForKey:@"dqValue"];
+                if (![dqValue isKindOfClass:[NSNull class]]) {
+                    dqModel.priceValue = [dqValue doubleValue];
                 }
-                
-                
+                if ([dqModel.isToubao isEqualToString:@"Y"]) {
+                    [dataArray addObject:dqModel];
+                }
+                [allDataArray addObject:dqModel];
                 
                 //发动机涉水险
                 PriceInfoModel *fdjsModel = [[PriceInfoModel alloc] init];
@@ -541,25 +526,7 @@
                 if ([fdjsModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:fdjsModel];
                 }
-                
-                
-                
-                //无第三方险
-                PriceInfoModel *wfModel = [[PriceInfoModel alloc] init];
-                wfModel.name = @"无第三方险";
-                NSNumber *wfzddsfIsSelect = [data objectForKey:@"wfzddsfIsSelect"];
-                if (![wfzddsfIsSelect isKindOfClass:[NSNull class]]) {
-                    wfModel.isToubao = [data objectForKey:@"wfzddsfIsSelect"];
-                }
-                NSNumber *wfzddsfBaoFei = [data objectForKey:@"wfzddsfBaoFei"];
-                if (![wfzddsfBaoFei isKindOfClass:[NSNull class]]) {
-                    wfModel.number = [wfzddsfBaoFei doubleValue];
-                }
-                if ([wfModel.isToubao isEqualToString:@"Y"]) {
-                    [dataArray addObject:wfModel];
-                }
-                
-                
+                [allDataArray addObject:fdjsModel];
                 
                 //自燃险
                 PriceInfoModel *zrModel = [[PriceInfoModel alloc] init];
@@ -583,6 +550,44 @@
                 if ([zrModel.isToubao isEqualToString:@"Y"]) {
                     [dataArray addObject:zrModel];
                 }
+                [allDataArray addObject:zrModel];
+                
+                // 玻璃险
+                PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
+                blModel.name = @"玻璃险";
+                NSNumber *blpsIsSelect = [data objectForKey:@"blpsIsSelect"];
+                if (![blpsIsSelect isKindOfClass:[NSNull class]]) {
+                    blModel.isToubao = [data objectForKey:@"blpsIsSelect"];
+                }
+                NSNumber *blpsBaoFei = [data objectForKey:@"blpsBaoFei"];
+                if (![blpsBaoFei isKindOfClass:[NSNull class]]) {
+                    blModel.number = [blpsBaoFei doubleValue];
+                }
+                NSNumber *blValue = [data objectForKey:@"blpsValue"];
+                if (![blValue isKindOfClass:[NSNull class]]) {
+                    blModel.priceValue = [blValue doubleValue];
+                }
+                if ([blModel.isToubao isEqualToString:@"Y"]) {
+                    [dataArray addObject:blModel];
+                }
+                [allDataArray addObject:blModel];
+                
+                //无第三方险
+                PriceInfoModel *wfModel = [[PriceInfoModel alloc] init];
+                wfModel.name = @"无第三方险";
+                NSNumber *wfzddsfIsSelect = [data objectForKey:@"wfzddsfIsSelect"];
+                if (![wfzddsfIsSelect isKindOfClass:[NSNull class]]) {
+                    wfModel.isToubao = [data objectForKey:@"wfzddsfIsSelect"];
+                }
+                NSNumber *wfzddsfBaoFei = [data objectForKey:@"wfzddsfBaoFei"];
+                if (![wfzddsfBaoFei isKindOfClass:[NSNull class]]) {
+                    wfModel.number = [wfzddsfBaoFei doubleValue];
+                }
+                if ([wfModel.isToubao isEqualToString:@"Y"]) {
+                    [dataArray addObject:wfModel];
+                }
+                [allDataArray addObject:wfModel];
+               
                 //                NSNumber *bussice = [data objectForKey:@"syBaoFei"];
                 //                if (![bussice isKindOfClass:[NSNull class]]) {
                 //                    _syBaoFei = [bussice doubleValue];
@@ -607,8 +612,14 @@
                     recodeModel.blType = [data objectForKey:@"blpsValue"];;
                 }
                 
+                NSNumber *priceRecodeID = [data objectForKey:@"id"];
+                if (![priceRecodeID isKindOfClass:[NSNull class]]) {
+                    recodeModel.priceRecodeID = [NSString stringWithFormat:@"%ld",[priceRecodeID longValue]] ;
+                }
+                
                 [self.arrayRecodeData addObject:recodeModel];
                 [self.arrayPriceRecodeData addObject:dataArray];
+                [self.arrayAllRecodeData addObject:allDataArray];
             }
             [self.myTableView reloadData];
             
@@ -662,14 +673,6 @@
     
 }
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-////    if (tableView == self.myTableView) {
-////        return 1;
-////    } else {
-////        return 1;
-////    }
-//
-//}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == self.myTableView) {
         static NSString *identifier = @"identifier";
@@ -749,6 +752,7 @@
 
 // 点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"%@",indexPath);
     if (tableView == self.myTableView) {
         PriceInfoViewController *priceInfoVC = [[PriceInfoViewController alloc] init];
         PriceRecodeModel *recodeModel = [self.arrayRecodeData objectAtIndex:indexPath.row];
@@ -756,10 +760,150 @@
         priceInfoVC.blType = recodeModel.blType;
         priceInfoVC.syBaoFei = recodeModel.offerTotalPrice;
         NSMutableArray *dataArray = [self.arrayPriceRecodeData objectAtIndex:indexPath.row];
-        priceInfoVC.arrayRecodeData = dataArray;
+        NSMutableArray *copyDataArray = [NSMutableArray array];
+        [copyDataArray addObjectsFromArray:dataArray];
+        priceInfoVC.arrayRecodeData = copyDataArray;
+        NSMutableArray *allDataArray = [self.arrayAllRecodeData objectAtIndex:indexPath.row];
+        NSMutableArray *copyAllDataArray = [NSMutableArray array];
+        [copyAllDataArray addObjectsFromArray:allDataArray];
+        priceInfoVC.arrayAllRecodeData = copyAllDataArray;
         [self.navigationController pushViewController:priceInfoVC animated:YES];
     }
 }
+
+
+//
+// =================== modify by Liangyz 删除功能03
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == self.myTableView) {
+        return YES;
+    } else{
+      return NO;
+    }
+}
+
+//控制编辑模式 (控制删除啊 还是插入)
+-(UITableViewCellEditingStyle )tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return UITableViewCellEditingStyleDelete;
+}
+//控制删除  插入
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //判断当前是什么模式
+    //如果是删除模式
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self showAlertViewWithIndepthPathCell:indexPath];
+        
+
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.editingIndexPath = indexPath;
+    [self.view setNeedsLayout];   // 触发-(void)viewDidLayoutSubviews
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.editingIndexPath = nil;
+}
+
+- (void)viewDidLayoutSubviews{
+    
+    if (self.editingIndexPath)
+    {
+        [self configSwipeButtons];
+    }
+
+
+}
+- (void)configSwipeButtons{
+    UIButton *deleteButton = nil;
+    // 获取选项按钮的reference
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0"))
+    {
+        // iOS 11层级 (Xcode 9编译): UITableView -> UISwipeActionPullView
+        for (UIView *subview in self.myTableView.subviews)
+        {
+
+            if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")])
+            {
+                // 和iOS 10的按钮顺序相反
+                [subview setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+                deleteButton = subview.subviews[0];
+                [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+
+                [self configDeleteButton:deleteButton];
+            }
+        }
+    }
+    else
+    {
+//         iOS 8-10层级: UITableView -> UITableViewCell -> UITableViewCellDeleteConfirmationView
+        PriceCarRecordTableViewCell *tableCell = [self.myTableView cellForRowAtIndexPath:self.editingIndexPath];
+        for (UIView *subview in tableCell.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")])
+            {
+                deleteButton = subview.subviews[0];
+                [self configDeleteButton:deleteButton];
+                [subview setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+
+            }
+        }
+    }
+
+}
+
+
+- (void)configDeleteButton:(UIButton*)deleteButton
+{
+    if (deleteButton)
+    {
+        [deleteButton setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+        [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+
+    }
+}
+
+// ===================
+// =================== modify by Liangyz 删除功能 05
+- (void)showAlertViewWithIndepthPathCell:(NSIndexPath*)indexpath
+{
+    __weak typeof (self)weakSelf = self;
+    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否删除" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+        //(TODO)删除数据
+        [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
+    }];
+    [self.view addSubview:alertView];
+}
+
+- (void)removeAlertView:(LYZAlertView *)alertView cellIndexpath:(NSIndexPath *)indexpath
+{
+    __weak typeof (self)weakSelf = self;
+    PriceRecodeModel *model = [self.arrayRecodeData objectAtIndex:indexpath.row];
+    [RequestAPI getDeletePrice:@{@"id":model.priceRecodeID} header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"result"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.arrayRecodeData removeObjectAtIndex:indexpath.row];
+                [weakSelf.arrayPriceRecodeData removeObjectAtIndex:indexpath.row];
+                [weakSelf.arrayAllRecodeData removeObjectAtIndex:indexpath.row];
+                
+                //1删数组种的数据 2.在删掉cell
+                [weakSelf.myTableView deleteRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationRight];
+                if ([alertView superview]) {
+                    [alertView removeFromSuperview];
+                }
+            });
+        }
+    } fail:^(id error) {
+        
+    }];
+    
+}
+
 
 #pragma mark - UI
 - (void)createUI{
@@ -916,5 +1060,12 @@
         _arrayRecodeData = [NSMutableArray array];
     }
     return _arrayRecodeData;
+}
+
+- (NSMutableArray *)arrayAllRecodeData{
+    if (!_arrayAllRecodeData) {
+        _arrayAllRecodeData = [NSMutableArray array];
+    }
+    return _arrayAllRecodeData;
 }
 @end

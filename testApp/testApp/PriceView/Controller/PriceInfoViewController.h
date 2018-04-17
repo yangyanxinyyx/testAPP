@@ -13,4 +13,5 @@
 @property (nonatomic, strong) NSString *route;
 @property (nonatomic, assign) double syBaoFei;
 @property (nonatomic, strong) NSMutableArray *arrayRecodeData;
+@property (nonatomic, strong) NSMutableArray *arrayAllRecodeData;
 @end

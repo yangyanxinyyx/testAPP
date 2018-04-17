@@ -12,6 +12,9 @@
 - (void)didSelectCell:(NSString *)data count:(NSInteger)count priceCount:(NSInteger)priceCount;
 @end
 @interface SelectStateView : UIView
+
 @property (nonatomic,weak)id<SelectStateViewDelegate>delegate;
+
 - (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray;
+- (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray WithCompletionHandler:(void (^)(NSString *))complete;
 @end

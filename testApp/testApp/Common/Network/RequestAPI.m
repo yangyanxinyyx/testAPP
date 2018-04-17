@@ -46,6 +46,9 @@
 //接车时获取订单详情
 #define GETCARDETAILINFORMATION_API [NSString stringWithFormat:@"%@/api/web/order/operationGetOrder",API_PREFIX]
 
+//获取门店内服务
+#define GETCARSERVICE_API [NSString stringWithFormat:@"%@/api/web/service/getServiceByStoreId",API_PREFIX]
+
 
 // =================== modify by Liangyz 个人中心
 //====个人中心====
@@ -84,7 +87,7 @@
 
 // ===================
 
-
+// === 报价 ====
 //客户车辆查询
 #define CUSTOMERVEHICLEENQUIRIES_API [NSString stringWithFormat:@"%@/api/web/car/findOrAddCustomerAndCar",API_PREFIX]
 
@@ -109,6 +112,8 @@
 //保存报价
 #define SAVEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/addOffer",API_PREFIX]
 
+//删除报价
+#define DELETEPRICE_API [NSString stringWithFormat:@"%@/api/web/offer/deleteOffer",API_PREFIX]
 //核保 api/web/policy/insertPolicy
 #define UNDERWRITING_API [NSString stringWithFormat:@"%@/api/web/policy/insertPolicy",API_PREFIX]
 
@@ -257,6 +262,15 @@
     }];
 }
 
++(void)getGetCarService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
 +(void)updatePassWord:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:UPDATEPASSWORD_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -335,6 +349,15 @@
 //保存报价
 + (void)getSavePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
     [self getRequest:SAVEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//删除报价
++(void)getDeletePrice:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+    [self getRequest:DELETEPRICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

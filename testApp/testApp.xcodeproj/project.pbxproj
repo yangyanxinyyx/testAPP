@@ -234,7 +234,6 @@
 		FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0E2067791F00468032 /* MedalDetailCell.m */; };
 		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */; };
-		FCE4E703208274B500E04A6B /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FF208274B400E04A6B /* DatePickerView.m */; };
 		FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E70520827BA500E04A6B /* CoverWebViewController.m */; };
 		FCE4E70C2083AD3700E04A6B /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70A2083AD3600E04A6B /* down@3x.png */; };
 		FCE4E70D2083AD3700E04A6B /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70B2083AD3700E04A6B /* down@2x.png */; };
@@ -370,7 +369,6 @@
 		FC2805D2205D96DF00DD0DA9 /* UserInfoConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoConfirmView.h; sourceTree = "<group>"; };
 		FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoConfirmView.m; sourceTree = "<group>"; };
 		FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
-		FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC2805E3205E5EB000DD0DA9 /* RequestAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAPI.h; sourceTree = "<group>"; };
 		FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAPI.m; sourceTree = "<group>"; };
 		FC32BDEB207601FC00817156 /* CoverAnnouncementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverAnnouncementModel.h; sourceTree = "<group>"; };
@@ -628,6 +626,7 @@
 		FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
 		FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInputVIew.h; sourceTree = "<group>"; };
 		FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInputVIew.m; sourceTree = "<group>"; };
+		FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "../../../../../InterPhoto/Utilities/UIButton/UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -656,8 +655,6 @@
 		FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
 		FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoInputView.m; path = testApp/Common/UserInfoInputView.m; sourceTree = SOURCE_ROOT; };
-		FCE4E6FF208274B400E04A6B /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickerView.m; path = testApp/Common/DatePickerView.m; sourceTree = SOURCE_ROOT; };
-		FCE4E700208274B500E04A6B /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickerView.h; path = testApp/Common/DatePickerView.h; sourceTree = SOURCE_ROOT; };
 		FCE4E701208274B500E04A6B /* UserInfoInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoInputView.h; path = testApp/Common/UserInfoInputView.h; sourceTree = SOURCE_ROOT; };
 		FCE4E70420827BA500E04A6B /* CoverWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverWebViewController.h; sourceTree = "<group>"; };
 		FCE4E70520827BA500E04A6B /* CoverWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverWebViewController.m; sourceTree = "<group>"; };
@@ -781,8 +778,8 @@
 				A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */,
 				FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */,
 				FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */,
-				FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */,
 				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
+				FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);
@@ -948,12 +945,6 @@
 		FC2805E0205E5E4100DD0DA9 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FCE4E700208274B500E04A6B /* DatePickerView.h */,
-				FCE4E6FF208274B400E04A6B /* DatePickerView.m */,
-				FCE4E701208274B500E04A6B /* UserInfoInputView.h */,
-				FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */,
-				FC32BFC22079AA7100817156 /* LYZSelectView.h */,
-				FC32BFC12079AA7100817156 /* LYZSelectView.m */,
 				FC4F7D012067748100468032 /* BaseViewController1.h */,
 				FC4F7D022067748100468032 /* BaseViewController1.m */,
 				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
@@ -1698,6 +1689,10 @@
 				FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */,
 				A7C8818020662B4A0073568F /* LYZAlertView.h */,
 				A7C8818120662B4A0073568F /* LYZAlertView.m */,
+				FCE4E701208274B500E04A6B /* UserInfoInputView.h */,
+				FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */,
+				FC32BFC22079AA7100817156 /* LYZSelectView.h */,
+				FC32BFC12079AA7100817156 /* LYZSelectView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2132,7 +2127,6 @@
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
-				FCE4E703208274B500E04A6B /* DatePickerView.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,
 				A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */,
