@@ -13,6 +13,7 @@
     NSInteger monthIndex;
     NSInteger dayIndex;
     UIView *topView;
+    UIButton *yesBtn;
 }
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSMutableArray *yearArray;
@@ -79,7 +80,7 @@
         [cancelBtn.titleLabel setFont:[UIFont systemFontOfSize:32*ViewRateBaseOnIP6]];
         [topView addSubview:cancelBtn];
         
-        UIButton *yesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        yesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         yesBtn.frame = CGRectMake(SCREEN_WIDTH - 97 * ViewRateBaseOnIP6, 0,72 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
         [yesBtn setTitle:@"完成" forState:UIControlStateNormal];
         [yesBtn setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
@@ -89,12 +90,11 @@
         [cancelBtn addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchDown];
         [yesBtn addTarget:self action:@selector(clickYes:) forControlEvents:UIControlEventTouchDown];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(300 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6, 150 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
         label.text = @"请选择";
         label.textColor = [UIColor colorWithHexString:@"#444444"];
-        label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont systemFontOfSize:34 * ViewRateBaseOnIP6];
-        [topView addSubview:label];
+        [self addSubview:label];
         
 //        [self click:^(UIView *view) {
 //
@@ -121,30 +121,30 @@
         // 获取不同时间字段的信息
         NSDateComponents *comp = [calendar components: unitFlags fromDate:[NSDate date]];
         
-        NSInteger yIndex = [self.yearArray indexOfObject:[NSString stringWithFormat:@"%02ld年", comp.year]];
-        NSInteger mIdex = [self.monthArray indexOfObject:[NSString stringWithFormat:@"%02ld月", comp.month]];
-        NSInteger dIndex = [self.dayArray indexOfObject:[NSString stringWithFormat:@"%02ld日", comp.day]];
+        yearIndex = [self.yearArray indexOfObject:[NSString stringWithFormat:@"%ld年", comp.year]];
+        monthIndex = [self.monthArray indexOfObject:[NSString stringWithFormat:@"%02ld月", comp.month]];
+        dayIndex = [self.dayArray indexOfObject:[NSString stringWithFormat:@"%02ld日", comp.day]];
         
-        [_pickerView selectRow:yIndex inComponent:0 animated:YES];
-        [_pickerView selectRow:mIdex inComponent:1 animated:YES];
-        [_pickerView selectRow:dIndex inComponent:2 animated:YES];
+        [_pickerView selectRow:yearIndex inComponent:0 animated:YES];
+        [_pickerView selectRow:monthIndex inComponent:1 animated:YES];
+        [_pickerView selectRow:dayIndex inComponent:2 animated:YES];
         
-        [self pickerView:_pickerView didSelectRow:yIndex inComponent:0];
-        [self pickerView:_pickerView didSelectRow:mIdex inComponent:1];
-        [self pickerView:_pickerView didSelectRow:dIndex inComponent:2];
+        [self pickerView:_pickerView didSelectRow:yearIndex inComponent:0];
+        [self pickerView:_pickerView didSelectRow:monthIndex inComponent:1];
+        [self pickerView:_pickerView didSelectRow:dayIndex inComponent:2];
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             UIButton *button = (UIButton *)[_pickerView viewForRow:yearIndex forComponent:0];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
             button = (UIButton *)[_pickerView viewForRow:monthIndex forComponent:1];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
             button = (UIButton *)[_pickerView viewForRow:dayIndex forComponent:2];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
@@ -174,7 +174,9 @@
         
         
         timeStr = [timeStr stringByReplacingOccurrencesOfString:@"年" withString:@"-"];
+        
         timeStr = [timeStr stringByReplacingOccurrencesOfString:@"月" withString:@"-"];
+        
         timeStr = [timeStr stringByReplacingOccurrencesOfString:@"日" withString:@""];
         
         _block(timeStr);
@@ -240,16 +242,25 @@
 
 // 滚动UIPickerView就会调用
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    NSLog(@"==>zoule");
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        yesBtn.userInteractionEnabled = YES;
+    });
     if (component == 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        
+        yearIndex = row;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
+            
         });
         
     }else if (component == 1) {
+        
+        monthIndex = row;
+        
         [pickerView reloadComponent:2];
         
         
@@ -267,24 +278,27 @@
         }
         [pickerView selectRow:dayIndex inComponent:2 animated:YES];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
+            
             button = (UIButton *)[pickerView viewForRow:dayIndex forComponent:2];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
             
         });
     }else {
         
-//        dayIndex = row;
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dayIndex = row;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
             UIButton *button = (UIButton *)[pickerView viewForRow:row forComponent:component];
-            [button setTitleColor:[UIColor colorWithHexString:@"#4494f0"] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithHexString:@"4494f0"] forState:UIControlStateNormal];
             [button.titleLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
+            
         });
- 
     }
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -292,41 +306,36 @@
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-  
+    dispatch_async(dispatch_get_main_queue(), ^{
+        yesBtn.userInteractionEnabled = NO;
+    });
+        //设置分割线的颜色
+        for(UIView *singleLine in pickerView.subviews)
+        {
+            if (singleLine.frame.size.height < 1)
+            {
+            }
+        }
+    
     //设置文字的属性
     UIButton *genderLabel = [[UIButton alloc] init];
-    [genderLabel setTitleColor:[UIColor colorWithHexString:@"#cccccc"] forState:UIControlStateNormal];
+    [genderLabel setTitleColor:[UIColor colorWithHexString:@"cccccc"] forState:UIControlStateNormal];
     [genderLabel.titleLabel setFont:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]];
     
+    
     if (component == 0) {
-        yearIndex = row;
         [genderLabel setTitle:self.yearArray[row] forState:UIControlStateNormal];
         genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, -80 * ViewRateBaseOnIP6, 0, 0);
         
     }else if (component == 1) {
-        monthIndex = row;
         [genderLabel setTitle:self.monthArray[row] forState:UIControlStateNormal];
         
     }else {
-        dayIndex = row;
         [genderLabel setTitle:self.dayArray[row] forState:UIControlStateNormal];
         genderLabel.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -120 * ViewRateBaseOnIP6);
     }
     
     return genderLabel;
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [UIView animateWithDuration:0.25 animations:^{
-        
-        topView.frame = CGRectMake(0, SCREEN_HEIGHT - 546 * ViewRateBaseOnIP6, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6);
-        _pickerView.frame = CGRectMake(0, SCREEN_HEIGHT - 466 * ViewRateBaseOnIP6, SCREEN_WIDTH, 466 * ViewRateBaseOnIP6);
-        
-    } completion:^(BOOL finished) {
-        
-        [self removeFromSuperview];
-        self.hidden = YES;
-    }];
 }
 
 

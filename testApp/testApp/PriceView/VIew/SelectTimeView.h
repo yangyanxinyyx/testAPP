@@ -10,5 +10,4 @@
 
 @interface SelectTimeView : UIView
 @property (nonatomic, copy)void (^block)(NSString*);
-
 @end
