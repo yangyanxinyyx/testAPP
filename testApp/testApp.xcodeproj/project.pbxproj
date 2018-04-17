@@ -276,6 +276,7 @@
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
 		25EA236E207E5ADF00A60866 /* priceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceModel.h; sourceTree = "<group>"; };
 		25EA236F207E5ADF00A60866 /* priceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = priceModel.m; sourceTree = "<group>"; };
+		25FC5B13208590990016FC04 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopAMapViewController.h; sourceTree = "<group>"; };
 		A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopAMapViewController.m; sourceTree = "<group>"; };
@@ -626,7 +627,6 @@
 		FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
 		FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInputVIew.h; sourceTree = "<group>"; };
 		FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInputVIew.m; sourceTree = "<group>"; };
-		FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "../../../../../InterPhoto/Utilities/UIButton/UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -778,8 +778,8 @@
 				A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */,
 				FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */,
 				FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */,
+				25FC5B13208590990016FC04 /* UIButton+ImageTitleSpacing.h */,
 				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
-				FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);

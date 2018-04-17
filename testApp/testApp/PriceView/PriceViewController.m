@@ -52,7 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
-    [self pressCustomerVehicleEnquiries];
+//    [self pressCustomerVehicleEnquiries];
 }
 
 #pragma mark -network
@@ -66,60 +66,72 @@
     [RequestAPI getCustomerVehicleEnquiries:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-            _contentView.hidden = NO;
-            NSDictionary *data = response[@"data"];
-            _nameView.labelContent.text = [data objectForKey:@"customerName"];
-            _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
-            _sexView.labelContent.text = [data objectForKey:@"sex"];
-            _addressView.labelContent.text = [data objectForKey:@"address"];
-            _brandView.labelContent.text = [data objectForKey:@"brand"];
-            _chassisView.labelContent.text = [data objectForKey:@"vinNo"];
-            _engineView.labelContent.text = [data objectForKey:@"engineNo"];
-            _modelsView.labelContent.text = [data objectForKey:@"model"];
-            if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
-                _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
-            }
-    
-            if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
-              _insuranceView.labelContent.text = [data objectForKey:@"jqInsuranceTime"];
-            }
-            NSNumber *salesmanName = [data objectForKey:@"salesmanName"];
-            if (![salesmanName isKindOfClass:[NSNull class]] ) {
-                _salesmanView.labelContent.text = [data objectForKey:@"salesmanName"];
-            }
-            
-            NSNumber *carIDNumber = [data objectForKey:@"carId"];
-            if (![carIDNumber isKindOfClass:[NSNull class]] && [carIDNumber stringValue].length != 0) {
-                self.carID = [NSString stringWithFormat:@"%ld",[carIDNumber longValue]];
-            }
-            NSNumber *customerIdNumber = [data objectForKey:@"customerId"];
-            if (![customerIdNumber isKindOfClass:[NSNull class]] && [customerIdNumber stringValue].length != 0) {
-                self.customerId = [NSString stringWithFormat:@"%ld",[customerIdNumber longValue]];
-            }
-            
-            NSNumber *carID = [data objectForKey:@"carId"];
-            if (![carID isKindOfClass:[NSNull class]]) {
-                [UserInfoManager shareInstance].carID = [NSString stringWithFormat:@"%ld",[carID longValue]];
-            }
-            
-            NSNumber *customerId = [data objectForKey:@"customerId"];
-            if (![customerId isKindOfClass:[NSNull class]]){
-                [UserInfoManager shareInstance].customerId = [NSString stringWithFormat:@"%ld",[customerId longValue]];
-            }
-            
-            NSNumber *customerName = [data objectForKey:@"customerName"];
-            if (![customerName isKindOfClass:[NSNull class]]){
-                [UserInfoManager shareInstance].customerName = [data objectForKey:@"customerName"];
-            }
-            NSNumber *identity = [data objectForKey:@"identity"];
-            if (![identity isKindOfClass:[NSNull class]]){
-                [UserInfoManager shareInstance].identity = [data objectForKey:@"identity"];
-            }
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#004da2"];
+                _buttonPrice.userInteractionEnabled = YES;
+                _infoView.hidden = NO;
+                NSDictionary *data = response[@"data"];
+                _nameView.labelContent.text = [data objectForKey:@"customerName"];
+                _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
+                _sexView.labelContent.text = [data objectForKey:@"sex"];
+                _addressView.labelContent.text = [data objectForKey:@"address"];
+                _brandView.labelContent.text = [data objectForKey:@"brand"];
+                _chassisView.labelContent.text = [data objectForKey:@"vinNo"];
+                _engineView.labelContent.text = [data objectForKey:@"engineNo"];
+                _modelsView.labelContent.text = [data objectForKey:@"model"];
+                if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
+                    _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
+                }
+                
+                if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
+                    _insuranceView.labelContent.text = [data objectForKey:@"jqInsuranceTime"];
+                }
+                NSNumber *salesmanName = [data objectForKey:@"salesmanName"];
+                if (![salesmanName isKindOfClass:[NSNull class]] ) {
+                    _salesmanView.labelContent.text = [data objectForKey:@"salesmanName"];
+                }
+                
+                NSNumber *carIDNumber = [data objectForKey:@"carId"];
+                if (![carIDNumber isKindOfClass:[NSNull class]] && [carIDNumber stringValue].length != 0) {
+                    self.carID = [NSString stringWithFormat:@"%ld",[carIDNumber longValue]];
+                }
+                NSNumber *customerIdNumber = [data objectForKey:@"customerId"];
+                if (![customerIdNumber isKindOfClass:[NSNull class]] && [customerIdNumber stringValue].length != 0) {
+                    self.customerId = [NSString stringWithFormat:@"%ld",[customerIdNumber longValue]];
+                }
+                
+                NSNumber *carID = [data objectForKey:@"carId"];
+                if (![carID isKindOfClass:[NSNull class]]) {
+                    [UserInfoManager shareInstance].carID = [NSString stringWithFormat:@"%ld",[carID longValue]];
+                }
+                
+                NSNumber *customerId = [data objectForKey:@"customerId"];
+                if (![customerId isKindOfClass:[NSNull class]]){
+                    [UserInfoManager shareInstance].customerId = [NSString stringWithFormat:@"%ld",[customerId longValue]];
+                }
+                
+                NSNumber *customerName = [data objectForKey:@"customerName"];
+                if (![customerName isKindOfClass:[NSNull class]]){
+                    [UserInfoManager shareInstance].customerName = [data objectForKey:@"customerName"];
+                }
+                NSNumber *identity = [data objectForKey:@"identity"];
+                if (![identity isKindOfClass:[NSNull class]]){
+                    [UserInfoManager shareInstance].identity = [data objectForKey:@"identity"];
+                }
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            });
         }
 
     } fail:^(id error) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:error complete:nil];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+        });
     }];
 }
 
@@ -154,13 +166,14 @@
 #pragma mark- UI
 
 - (void)createUI{
-    [self.view addSubview:self.backView];
+    
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.topView];
     [self.contentView addSubview:self.myScrollView];
     [self.topView addSubview:self.searchContenView];
     [self.searchContenView addSubview:self.textField];
     [self.myScrollView addSubview:self.priceButtonView];
+    [self.myScrollView addSubview:self.backView];
     [self.myScrollView addSubview:self.infoView];
     [self.infoView addSubview:self.nameView];
     [self.infoView addSubview:self.birthdayView];
@@ -176,18 +189,12 @@
     [self.priceButtonView addSubview:self.buttonPrice];
     [self.priceButtonView addSubview:self.buttonInfoEntry];
 }
-- (UIView *)backView{
-    if (!_backView) {
-        _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 20 + kNavMargan, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
-        _backView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
-    }
-    return _backView;
-}
+
 - (UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
         _contentView.backgroundColor = [UIColor whiteColor];
-        _contentView.hidden = YES;
+
     }
     return _contentView;
 }
@@ -247,11 +254,29 @@
     }
     return _textField;
 }
-
+- (UIView *)backView{
+    if (!_backView) {
+        _backView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavMargan, SCREEN_WIDTH, 652 * ViewRateBaseOnIP6)];
+        _backView.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 437 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6)];
+        imageView.image = [UIImage imageNamed:@"noClient"];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 * ViewRateBaseOnIP6, 558 * ViewRateBaseOnIP6, SCREEN_WIDTH, 23 * ViewRateBaseOnIP6)];
+        label.text = @"无客户信息";
+        label.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:23 * ViewRateBaseOnIP6];
+        [_backView addSubview:imageView];
+        [_backView addSubview:label];
+        
+        
+    }
+    return _backView;
+}
 - (UIView *)infoView{
     if (!_infoView) {
         _infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 652 * ViewRateBaseOnIP6)];
         _infoView.backgroundColor = [UIColor whiteColor];
+        _infoView.hidden = YES;
     }
     return _infoView;
 }
@@ -340,7 +365,7 @@
 - (UIView *)priceButtonView{
     if (!_priceButtonView) {
         _priceButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, CGRectGetHeight(self.myScrollView.frame))];
-        _priceButtonView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        _priceButtonView.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
     }
     return _priceButtonView;
 }
@@ -352,7 +377,8 @@
         [_buttonPrice.titleLabel setFont:[UIFont systemFontOfSize:34 * ViewRateBaseOnIP6]];
         _buttonPrice.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
         _buttonPrice.layer.masksToBounds = YES;
-        _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#004da2"];
+        _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+        _buttonPrice.userInteractionEnabled = NO;
         [_buttonPrice addTarget:self action:@selector(touchButtonPrice:) forControlEvents:UIControlEventTouchDown];
     }
     return _buttonPrice;
