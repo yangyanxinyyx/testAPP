@@ -126,7 +126,7 @@
         //基本信息Cell
         XCUserCaseDetailTextCell *detailTextCell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kDetailTextCellID forIndexPath:indexPath];
         [detailTextCell setTitleStr:@"基本信息"];
-        [detailTextCell setLabelArrM:self.dataTitleArrM];
+        [detailTextCell setLabelTitleArrM:self.dataTitleArrM];
         [detailTextCell setupCellWithCarTransactionDetailModel:_carTranDetailModel];
         return detailTextCell;
     }

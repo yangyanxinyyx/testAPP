@@ -7,16 +7,21 @@
 //
 
 #import "XCUserDistributionViewController.h"
-
+#import "XCUserDistributionDetailViewController.h"
+#import "XCFinanicalAuditListCell.h"
+#import "XCCheckoutDetailBaseModel.h"
+#define kFinaListCellID @"FinaListCellID"
 @interface XCUserDistributionViewController ()
 
 @end
 
 @implementation XCUserDistributionViewController
 
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.tableView registerClass:[XCFinanicalAuditListCell class] forCellReuseIdentifier:kFinaListCellID];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,40 +29,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Init Method
+
+#pragma mark - Action Method
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XCCheckoutDetailBaseModel *baseModel = nil;
+    if (self.dataArr.count >= indexPath.row) {
+        baseModel =  self.dataArr[indexPath.row];
+    }
+    XCUserDistributionDetailViewController *detailVC = [[XCUserDistributionDetailViewController alloc] initWithTitle:@"配送详情"];
+    if (baseModel) {
+        detailVC.detailModel = baseModel;
+    }
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
+}
+#pragma mark - Delegates & Notifications
+
+
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+    //    return self.dataArr.count;
+    return 12;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XCUserCaseListModel *model =self.dataArr[indexPath.row];
-    XCUserCaseListCell *cell = (XCUserCaseListCell *)[tableView dequeueReusableCellWithIdentifier:kCaseListCellID forIndexPath:indexPath];
-    [cell setupCellWithCaseListModel:model caseTypeStr:@"无责案件"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    //    XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
+    XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
+    [cell setTimeTitleStr:@"创建时间"];
+    //    [cell setupCellWithCaseListModel:model];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 160 * ViewRateBaseOnIP6;
+    return 180 * ViewRateBaseOnIP6;
 }
 
 #pragma mark - Privacy Method
-- (void)requestFailureHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
-}
-- (void)requestSuccessHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"撤销成功" complete:nil];
-    [self.view addSubview:tipsView];
-}
+
 #pragma mark - Setter&Getter
 
 @end

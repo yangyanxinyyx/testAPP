@@ -242,10 +242,14 @@
     }else {
         [_carNumberLabel setText:[NSString stringWithFormat:@"车主: "]];
     }
+    NSString *timeTitle  = @"出单时间";
+    if (_timeTitleStr) {
+        timeTitle = _timeTitleStr;
+    }
     if (isUsableNSString(baseModel.recordDate, @"")) {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: %@",baseModel.recordDate]];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
     }else {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: "]];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
     }
     
 }

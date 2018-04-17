@@ -150,6 +150,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
+    [cell setTimeTitleStr:@"创建时间"];
     cell.delegate = self;
     XCCarTransactionModel*carTranModel = self.dataArr[indexPath.row];
     [cell setupCellWithCarTransactionListModel:carTranModel];

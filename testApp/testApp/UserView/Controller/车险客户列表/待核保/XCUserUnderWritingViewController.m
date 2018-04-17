@@ -118,6 +118,7 @@
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.delegate = self;
+    [cell setTimeTitleStr:@"提交时间"];
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     if(baseModel){
         cell.baseModel = baseModel;

@@ -107,6 +107,7 @@
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setTimeTitleStr:@"创建时间"];
     cell.delegate = self;
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     if(baseModel) {

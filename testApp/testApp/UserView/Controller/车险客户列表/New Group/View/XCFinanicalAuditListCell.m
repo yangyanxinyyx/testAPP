@@ -33,10 +33,10 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
-        [_carNumLabel setText:@""];
-        [_carNameLabel setText:@""];
-        [_processLabel setText:@""];
-        [_timeLabel setText:@""];
+        [_carNumLabel setText:@"1111111"];
+        [_carNameLabel setText:@"111"];
+        [_processLabel setText:@"111"];
+        [_timeLabel setText:@"1111"];
         [_detailLabel setText:@"查看详情"];
         
     }
@@ -114,15 +114,19 @@
 {
     _model = model;
     
-//    if (isUsableNSString(model.customerName, @"")) {
-//        [_caseNameLabel setText:[NSString stringWithFormat:@"%@%@",model.customerName,caseTypeStr]];
-//    }
-//    if(isUsableNSString(model.status, @"")) {
-//        [_caseProcessLabel setText:model.status];
-//    }
-//    if (isUsableNSString(model.occurTime, @"")) {
-//        [_caseTimeLabel setText:model.occurTime];
-//    }
+    if (isUsableNSString(model.plateNo, @"")) {
+        [_carNumLabel setText:[NSString stringWithFormat:@"%@",model.plateNo]];
+    }
+    if(isUsableNSString(model.onwerName, @"")) {
+        [_carNameLabel setText:model.onwerName];
+    }
+    NSString *titleStr = @"创建时间";
+    if (_timeTitleStr) {
+        titleStr =_timeTitleStr;
+    }
+    if (isUsableNSString(model.recordDate, @"")) {
+        [_timeLabel setText:[NSString stringWithFormat:@"%@ :%@",titleStr,model.recordDate]];
+    }
 }
 #pragma mark - Delegates & Notifications
 

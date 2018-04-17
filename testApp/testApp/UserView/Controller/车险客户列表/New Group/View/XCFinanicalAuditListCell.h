@@ -10,7 +10,8 @@
 #import "XCCheckoutDetailBaseModel.h"
 
 @interface XCFinanicalAuditListCell : UITableViewCell
-
+/** <# 注释 #> */
+@property (nonatomic, copy) NSString * timeTitleStr ;
 - (void)setupCellWithCaseListModel:(XCCheckoutDetailBaseModel *)model;
 
 @end

@@ -86,9 +86,9 @@
         //基本信息Cell
         XCUserCaseDetailTextCell *detailTextCell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kCaseTextCellID forIndexPath:indexPath];
             [detailTextCell setTitleStr:[NSString stringWithFormat:@"%@%@理赔进度",_detailModel.customerName,self.navTitle]];
-        [detailTextCell setLabelArrM:self.dataTitleArrM];
+        [detailTextCell setLabelTitleArrM:self.dataTitleArrM];
         if(_detailModel) {
-            [detailTextCell setupCellWithCaseDetailModel:_detailModel];
+            [detailTextCell setupCellWithCaseDetailModel:_detailModel clipName:YES];
         }
         return detailTextCell;
     }

@@ -7,7 +7,8 @@
 //
 
 #import "XCUserCaseBaseTableViewController.h"
-
+#import "XCCheckoutDetailBaseModel.h"
 @interface XCUserFinancialAuditDetailViewController : XCUserCaseBaseTableViewController
+@property (nonatomic, strong) XCCheckoutDetailBaseModel * detailModel ;
 
 @end
