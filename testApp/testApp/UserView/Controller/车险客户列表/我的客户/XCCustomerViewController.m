@@ -11,6 +11,7 @@
 #import "XCCustomerListModel.h"
 #import <MJRefresh/MJRefresh.h>
 #import "XCCustomerDetailModel.h"
+#import "XCCustomerADDViewController.h"
 @interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
     CGFloat _addBtnHeigth;
 }
@@ -129,7 +130,8 @@
 
 - (void)clickAddCustomerButton:(UIButton *)button
 {
-    
+    XCCustomerADDViewController *customerADDVC = [[XCCustomerADDViewController alloc] initWithTitle:@"新增客户"];
+    [self.navigationController pushViewController:customerADDVC animated:YES];
 }
 
 
