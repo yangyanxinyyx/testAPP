@@ -11,8 +11,6 @@
 
 @interface XCUserWaitingToWriteListDetailViewController ()
 
-@property (nonatomic, strong) UIButton * commitBtn ;
-
 @end
 
 @implementation XCUserWaitingToWriteListDetailViewController
@@ -24,7 +22,6 @@
     // Do any additional setup after loading the view.
     
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-    //    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
     [self.tableView registerClass:[XCCheckoutDetailInputCell class] forCellReuseIdentifier:kTextInputCellID];
     
     [self initUI];
@@ -41,33 +38,10 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    CGFloat buttonH = 98 * ViewRateBaseOnIP6;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + buttonH))];
-    [_commitBtn setFrame:CGRectMake(0,  CGRectGetMaxY(self.tableView.frame), SCREEN_WIDTH, buttonH)];
-    
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation ))];
 }
 
 #pragma mark - Action Method
-
-- (void)commitUnderWriting:(UIButton *)button
-{
-    __weak typeof (self)weakSelf = self;
-    
-    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否撤销" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
-        NSDictionary *param = @{
-                                @"id":[NSNumber numberWithLong:weakSelf.model.BillID],
-                                };
-        [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            
-            [weakSelf requestSuccessHandler];
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-        } fail:^(id error) {
-            [weakSelf requestFailureHandler];
-        }];
-    }];
-    
-    [self.view addSubview:alertView];
-}
 
 #pragma mark - Delegates & Notifications
 
@@ -75,7 +49,6 @@
 
 - (void)configureData
 {
-    // 12 15 16 有输入
     NSArray *baseTitleNameArr = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
                                   @"车型名称:",@"车型代码:",@"(商业)起保日期:",
@@ -90,26 +63,9 @@
 
 - (void)initUI
 {
-    self.bottomHeight = 98 * ViewRateBaseOnIP6;
     
-    _commitBtn = [UIButton buttonWithType:0];
-    [_commitBtn setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-    [_commitBtn setTitle:@"撤销核保" forState:UIControlStateNormal];
-    [_commitBtn.titleLabel setFont:[UIFont systemFontOfSize:36 * ViewRateBaseOnIP6]];
-    [_commitBtn addTarget:self action:@selector(commitUnderWriting:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_commitBtn];
 }
 
-- (void)requestFailureHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
-}
-- (void)requestSuccessHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"撤销成功" complete:nil];
-    [self.view addSubview:tipsView];
-}
 #pragma mark - Setter&Getter
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
@@ -160,7 +116,7 @@
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
         [cell setupCellWithDetailPolicyModel:self.model];
-        //        [cell setTitlePlaceholder:@"刘某某"];
+//                [cell setTitlePlaceholder:@"刘某某"];
         return cell;
     }
 }

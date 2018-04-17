@@ -44,7 +44,8 @@
     
     self.locationBtn = [UIButton buttonWithType:0];
     [self.locationBtn setTitle:@"我的位置" forState:UIControlStateNormal];
-    [self.locationBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [self.locationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.locationBtn setBackgroundColor:[UIColor orangeColor]];
     [self.locationBtn addTarget:self action:@selector(localMyPosition:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.locationBtn];
 
@@ -118,8 +119,10 @@
         
         UIButton *button = [UIButton buttonWithType:0];
         [button setTitle:@"确定" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor orangeColor]];
+        [button sizeToFit];
         [button addTarget:self action:@selector(mapViewCalloutClickButton:) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(0, 0, 200, 60)];
         annotationView.leftCalloutAccessoryView =button;
 //        [annotationView.leftCalloutAccessoryView addSubview:button];
         

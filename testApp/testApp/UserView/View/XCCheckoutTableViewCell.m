@@ -9,6 +9,7 @@
 #import "XCCheckoutTableViewCell.h"
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCustomerListModel.h"
+#import "XCCarTransactionModel.h"
 #import <UIKit/UIKit.h>
 
 @interface XCCheckoutTableViewCell ()
@@ -22,6 +23,10 @@
 
 /** 我的客户Model */
 @property (nonatomic, strong) XCCustomerListModel * customerModel ;
+
+/** 车务客户Model */
+@property (nonatomic, strong) XCCarTransactionModel * carTarModel ;
+
 @end
 
 @implementation XCCheckoutTableViewCell
@@ -169,6 +174,14 @@
     [_issueTimeLabel setText:[NSString stringWithFormat:@"联系方式: %@",model.phoneNo]];
 }
 
+- (void)setupCellWithCarTransactionListModel:(XCCarTransactionModel *)model
+{
+    _carTarModel = model;
+    [_carNumberLabel setText:model.plateOn];
+    [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.customerName]];
+    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
+}
+
 #pragma mark - Delegates & Notifications
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -220,17 +233,23 @@
 
 - (void)setBaseModel:(XCCheckoutDetailBaseModel *)baseModel
 {
-    if (!baseModel) {
-        return;
-    }
+    _baseModel = baseModel;
     if (isUsableNSString(baseModel.plateNo, @"")) {
         [_carNumberLabel setText:baseModel.plateNo];
     }
-    if (isUsableNSString(baseModel.onwerName, @"")) {
+    if (isUsableNSString(baseModel.onwerName,@"")) {
         [_carNumberLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
+    }else {
+        [_carNumberLabel setText:[NSString stringWithFormat:@"车主: "]];
+    }
+    NSString *timeTitle  = @"出单时间";
+    if (_timeTitleStr) {
+        timeTitle = _timeTitleStr;
     }
     if (isUsableNSString(baseModel.recordDate, @"")) {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"出单时间: %@",baseModel.recordDate]];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
+    }else {
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
     }
     
 }

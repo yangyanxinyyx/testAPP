@@ -17,6 +17,7 @@
 		A71EABA6207F68E900347693 /* red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA3207F68E800347693 /* red@3x.png */; };
 		A71EABA7207F68E900347693 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA4207F68E800347693 /* red.png */; };
 		A71EABA8207F68E900347693 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA5207F68E900347693 /* red@2x.png */; };
+		A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */; };
 		A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */; };
 		A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */; };
 		A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5A82081AC8B006B0C33 /* XCCheckoutBaseModel.m */; };
@@ -25,6 +26,18 @@
 		A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B22081EFE5006B0C33 /* XCDistributionPaymentBillModel.m */; };
 		A720C5B720826423006B0C33 /* XCCustomerListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B620826423006B0C33 /* XCCustomerListModel.m */; };
 		A720C5BA2082684D006B0C33 /* XCCustomerDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */; };
+		A721489820831F6E009E6DDC /* XCCarTransactioDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A721489720831F6E009E6DDC /* XCCarTransactioDetailModel.m */; };
+		A721489C20839659009E6DDC /* XCUserCaseDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A721489B20839659009E6DDC /* XCUserCaseDetailModel.m */; };
+		A72148A32083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148A22083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m */; };
+		A72148A62083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148A52083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.m */; };
+		A72148A92083B4E1009E6DDC /* XCUserDistributionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148A82083B4E1009E6DDC /* XCUserDistributionViewController.m */; };
+		A72148AC2083B578009E6DDC /* XCUserDistributionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148AB2083B578009E6DDC /* XCUserDistributionDetailViewController.m */; };
+		A72148AF2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148AE2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m */; };
+		A72148B22083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148B12083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m */; };
+		A72148B62083B844009E6DDC /* XCFinanicalAuditListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148B52083B844009E6DDC /* XCFinanicalAuditListCell.m */; };
+		A72148B92083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148B82083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m */; };
+		A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */; };
+		A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */; };
 		A724C851207D0DD500083C86 /* 添加图片@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C850207D0DD500083C86 /* 添加图片@2x.png */; };
 		A724C853207D0DE300083C86 /* 添加图片@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C852207D0DE300083C86 /* 添加图片@3x.png */; };
 		A724C855207D0DFF00083C86 /* 添加符号@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C854207D0DFF00083C86 /* 添加符号@3x.png */; };
@@ -221,7 +234,6 @@
 		FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0E2067791F00468032 /* MedalDetailCell.m */; };
 		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */; };
-		FCE4E703208274B500E04A6B /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FF208274B400E04A6B /* DatePickerView.m */; };
 		FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E70520827BA500E04A6B /* CoverWebViewController.m */; };
 		FCE4E70C2083AD3700E04A6B /* down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70A2083AD3600E04A6B /* down@3x.png */; };
 		FCE4E70D2083AD3700E04A6B /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE4E70B2083AD3700E04A6B /* down@2x.png */; };
@@ -270,6 +282,8 @@
 		A71EABA3207F68E800347693 /* red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@3x.png"; sourceTree = "<group>"; };
 		A71EABA4207F68E800347693 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		A71EABA5207F68E900347693 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
+		A71EF1262082F3EF001B75ED /* XCCarTransactionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCarTransactionModel.h; sourceTree = "<group>"; };
+		A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCarTransactionModel.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
 		A71F118F207CBE4A00D57FEF /* XCShopDetailListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopDetailListCell.h; sourceTree = "<group>"; };
 		A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopDetailListCell.m; sourceTree = "<group>"; };
@@ -287,6 +301,30 @@
 		A720C5B620826423006B0C33 /* XCCustomerListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerListModel.m; sourceTree = "<group>"; };
 		A720C5B82082684D006B0C33 /* XCCustomerDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerDetailModel.h; sourceTree = "<group>"; };
 		A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerDetailModel.m; sourceTree = "<group>"; };
+		A721489620831F6E009E6DDC /* XCCarTransactioDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCarTransactioDetailModel.h; sourceTree = "<group>"; };
+		A721489720831F6E009E6DDC /* XCCarTransactioDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCarTransactioDetailModel.m; sourceTree = "<group>"; };
+		A721489A20839659009E6DDC /* XCUserCaseDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserCaseDetailModel.h; sourceTree = "<group>"; };
+		A721489B20839659009E6DDC /* XCUserCaseDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserCaseDetailModel.m; sourceTree = "<group>"; };
+		A72148A12083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserRenewalInsuranceListViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserRenewalInsuranceListViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148A22083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserRenewalInsuranceListViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserRenewalInsuranceListViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148A42083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserRenewalInsuranceListDetailViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserRenewalInsuranceListDetailViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148A52083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserRenewalInsuranceListDetailViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserRenewalInsuranceListDetailViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148A72083B4E1009E6DDC /* XCUserDistributionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserDistributionViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserDistributionViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148A82083B4E1009E6DDC /* XCUserDistributionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserDistributionViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserDistributionViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148AA2083B578009E6DDC /* XCUserDistributionDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserDistributionDetailViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserDistributionDetailViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148AB2083B578009E6DDC /* XCUserDistributionDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserDistributionDetailViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserDistributionDetailViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148AD2083B5A3009E6DDC /* XCUserFinancialAuditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserFinancialAuditViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserFinancialAuditViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148AE2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserFinancialAuditViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserFinancialAuditViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148B02083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XCUserFinancialAuditDetailViewController.h; path = "testApp/UserView/Controller/案件跟进/Model/XCUserFinancialAuditDetailViewController.h"; sourceTree = SOURCE_ROOT; };
+		A72148B12083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = XCUserFinancialAuditDetailViewController.m; path = "testApp/UserView/Controller/案件跟进/Model/XCUserFinancialAuditDetailViewController.m"; sourceTree = SOURCE_ROOT; };
+		A72148B42083B844009E6DDC /* XCFinanicalAuditListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCFinanicalAuditListCell.h; sourceTree = "<group>"; };
+		A72148B52083B844009E6DDC /* XCFinanicalAuditListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCFinanicalAuditListCell.m; sourceTree = "<group>"; };
+		A72148B72083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserBePaymentCaseDetailViewController.h; sourceTree = "<group>"; };
+		A72148B82083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserBePaymentCaseDetailViewController.m; sourceTree = "<group>"; };
+		A72148BA2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserNoResponsibilityCaseDetailViewController.h; sourceTree = "<group>"; };
+		A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseDetailViewController.m; sourceTree = "<group>"; };
+		A72148BD2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseDetailViewController.h; sourceTree = "<group>"; };
+		A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseDetailViewController.m; sourceTree = "<group>"; };
 		A724C850207D0DD500083C86 /* 添加图片@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@2x.png"; sourceTree = "<group>"; };
 		A724C852207D0DE300083C86 /* 添加图片@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加图片@3x.png"; sourceTree = "<group>"; };
 		A724C854207D0DFF00083C86 /* 添加符号@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加符号@3x.png"; sourceTree = "<group>"; };
@@ -331,7 +369,6 @@
 		FC2805D2205D96DF00DD0DA9 /* UserInfoConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoConfirmView.h; sourceTree = "<group>"; };
 		FC2805D3205D96DF00DD0DA9 /* UserInfoConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoConfirmView.m; sourceTree = "<group>"; };
 		FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImageTitleSpacing.m"; sourceTree = "<group>"; };
-		FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC2805E3205E5EB000DD0DA9 /* RequestAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RequestAPI.h; sourceTree = "<group>"; };
 		FC2805E4205E5EB000DD0DA9 /* RequestAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RequestAPI.m; sourceTree = "<group>"; };
 		FC32BDEB207601FC00817156 /* CoverAnnouncementModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverAnnouncementModel.h; sourceTree = "<group>"; };
@@ -589,6 +626,7 @@
 		FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MoneyString.m"; sourceTree = "<group>"; };
 		FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInputVIew.h; sourceTree = "<group>"; };
 		FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInputVIew.m; sourceTree = "<group>"; };
+		FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "../../../../../InterPhoto/Utilities/UIButton/UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -617,8 +655,6 @@
 		FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
 		FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoInputView.m; path = testApp/Common/UserInfoInputView.m; sourceTree = SOURCE_ROOT; };
-		FCE4E6FF208274B400E04A6B /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickerView.m; path = testApp/Common/DatePickerView.m; sourceTree = SOURCE_ROOT; };
-		FCE4E700208274B500E04A6B /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickerView.h; path = testApp/Common/DatePickerView.h; sourceTree = SOURCE_ROOT; };
 		FCE4E701208274B500E04A6B /* UserInfoInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfoInputView.h; path = testApp/Common/UserInfoInputView.h; sourceTree = SOURCE_ROOT; };
 		FCE4E70420827BA500E04A6B /* CoverWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoverWebViewController.h; sourceTree = "<group>"; };
 		FCE4E70520827BA500E04A6B /* CoverWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoverWebViewController.m; sourceTree = "<group>"; };
@@ -724,6 +760,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A71EF1252082F3BC001B75ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A71EF1262082F3EF001B75ED /* XCCarTransactionModel.h */,
+				A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */,
+				A721489620831F6E009E6DDC /* XCCarTransactioDetailModel.h */,
+				A721489720831F6E009E6DDC /* XCCarTransactioDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,8 +778,8 @@
 				A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */,
 				FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */,
 				FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */,
-				FC2805DE205E260300DD0DA9 /* UIButton+ImageTitleSpacing.h */,
 				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
+				FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
 			);
@@ -759,6 +806,63 @@
 				A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A72148992083823A009E6DDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BEE82079AA2000817156 /* XCUserCaseListModel.h */,
+				FC32BEE92079AA2000817156 /* XCUserCaseListModel.m */,
+				A721489A20839659009E6DDC /* XCUserCaseDetailModel.h */,
+				A721489B20839659009E6DDC /* XCUserCaseDetailModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A721489E2083AF2C009E6DDC /* 财务审核中 */ = {
+			isa = PBXGroup;
+			children = (
+				A72148B32083B814009E6DDC /* View */,
+				A72148AD2083B5A3009E6DDC /* XCUserFinancialAuditViewController.h */,
+				A72148AE2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m */,
+				A72148B02083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.h */,
+				A72148B12083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m */,
+			);
+			name = "财务审核中";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A721489F2083AF66009E6DDC /* 配送 */ = {
+			isa = PBXGroup;
+			children = (
+				A72148A72083B4E1009E6DDC /* XCUserDistributionViewController.h */,
+				A72148A82083B4E1009E6DDC /* XCUserDistributionViewController.m */,
+				A72148AA2083B578009E6DDC /* XCUserDistributionDetailViewController.h */,
+				A72148AB2083B578009E6DDC /* XCUserDistributionDetailViewController.m */,
+			);
+			name = "配送";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A72148A02083B044009E6DDC /* 续保列表 */ = {
+			isa = PBXGroup;
+			children = (
+				A72148A12083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.h */,
+				A72148A22083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m */,
+				A72148A42083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.h */,
+				A72148A52083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.m */,
+			);
+			name = "续保列表";
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A72148B32083B814009E6DDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A72148B42083B844009E6DDC /* XCFinanicalAuditListCell.h */,
+				A72148B52083B844009E6DDC /* XCFinanicalAuditListCell.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A72F94B2207A6A1F00100212 /* Recovered References */ = {
@@ -841,12 +945,6 @@
 		FC2805E0205E5E4100DD0DA9 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				FCE4E700208274B500E04A6B /* DatePickerView.h */,
-				FCE4E6FF208274B400E04A6B /* DatePickerView.m */,
-				FCE4E701208274B500E04A6B /* UserInfoInputView.h */,
-				FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */,
-				FC32BFC22079AA7100817156 /* LYZSelectView.h */,
-				FC32BFC12079AA7100817156 /* LYZSelectView.m */,
 				FC4F7D012067748100468032 /* BaseViewController1.h */,
 				FC4F7D022067748100468032 /* BaseViewController1.m */,
 				FCFAF94F205A7011001E9796 /* BaseTabbarController.h */,
@@ -1054,6 +1152,7 @@
 		FC32BE972079AA2000817156 /* 案件跟进 */ = {
 			isa = PBXGroup;
 			children = (
+				A72148992083823A009E6DDC /* Model */,
 				FC32BE982079AA2000817156 /* 人伤案件 */,
 				FC32BE9D2079AA2000817156 /* 代垫付案件 */,
 				FC32BEA02079AA2000817156 /* 无责案件 */,
@@ -1078,6 +1177,8 @@
 			children = (
 				FC32BE9E2079AA2000817156 /* XCUserBePaymentCaseViewController.h */,
 				FC32BE9F2079AA2000817156 /* XCUserBePaymentCaseViewController.m */,
+				A72148B72083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.h */,
+				A72148B82083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m */,
 			);
 			path = "代垫付案件";
 			sourceTree = "<group>";
@@ -1087,6 +1188,8 @@
 			children = (
 				FC32BEA12079AA2000817156 /* XCUserNoResponsibilityCaseViewController.h */,
 				FC32BEA22079AA2000817156 /* XCUserNoResponsibilityCaseViewController.m */,
+				A72148BA2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.h */,
+				A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */,
 			);
 			path = "无责案件";
 			sourceTree = "<group>";
@@ -1096,6 +1199,8 @@
 			children = (
 				FC32BEA42079AA2000817156 /* XCUserParticularCaseViewController.h */,
 				FC32BEA52079AA2000817156 /* XCUserParticularCaseViewController.m */,
+				A72148BD2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.h */,
+				A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */,
 			);
 			path = "特殊案件";
 			sourceTree = "<group>";
@@ -1103,6 +1208,7 @@
 		FC32BEA62079AA2000817156 /* 车务客户列表 */ = {
 			isa = PBXGroup;
 			children = (
+				A71EF1252082F3BC001B75ED /* Model */,
 				FC32BEA72079AA2000817156 /* 年审 */,
 				FC32BEAC2079AA2000817156 /* 维修 */,
 				FC32BEB12079AA2000817156 /* 违章 */,
@@ -1146,6 +1252,9 @@
 		FC32BEB62079AA2000817156 /* 车险客户列表 */ = {
 			isa = PBXGroup;
 			children = (
+				A72148A02083B044009E6DDC /* 续保列表 */,
+				A721489F2083AF66009E6DDC /* 配送 */,
+				A721489E2083AF2C009E6DDC /* 财务审核中 */,
 				FC32BEC52079AA2000817156 /* 待核保 */,
 				FC32BEB72079AA2000817156 /* 已核保代缴费 */,
 				FC32BEC02079AA2000817156 /* 已缴费待打单 */,
@@ -1253,8 +1362,6 @@
 				FC32BEE32079AA2000817156 /* XCCheckoutDetailPolicyModel.m */,
 				FC32BEE62079AA2000817156 /* XCMyCommissionListModel.h */,
 				FC32BEE72079AA2000817156 /* XCMyCommissionListModel.m */,
-				FC32BEE82079AA2000817156 /* XCUserCaseListModel.h */,
-				FC32BEE92079AA2000817156 /* XCUserCaseListModel.m */,
 				FC32BEEA2079AA2000817156 /* XCUserListModel.h */,
 				FC32BEEB2079AA2000817156 /* XCUserListModel.m */,
 			);
@@ -1582,6 +1689,10 @@
 				FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */,
 				A7C8818020662B4A0073568F /* LYZAlertView.h */,
 				A7C8818120662B4A0073568F /* LYZAlertView.m */,
+				FCE4E701208274B500E04A6B /* UserInfoInputView.h */,
+				FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */,
+				FC32BFC22079AA7100817156 /* LYZSelectView.h */,
+				FC32BFC12079AA7100817156 /* LYZSelectView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1896,6 +2007,8 @@
 				FC32BF1F2079AA2000817156 /* XCUserBePaymentCaseViewController.m in Sources */,
 				FC32BFB72079AA5900817156 /* PriceUnderwritingSureTableViewCell.m in Sources */,
 				FC32BF482079AA2000817156 /* XCUserCaseDetailProgressCell.m in Sources */,
+				A721489820831F6E009E6DDC /* XCCarTransactioDetailModel.m in Sources */,
+				A72148AC2083B578009E6DDC /* XCUserDistributionDetailViewController.m in Sources */,
 				FC32BF192079AA2000817156 /* XCUserCaseBaseTableViewController.m in Sources */,
 				FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */,
 				FC2805D4205D96DF00DD0DA9 /* FindPasswordViewController.m in Sources */,
@@ -1909,6 +2022,7 @@
 				FC32BF2A2079AA2000817156 /* XCUserWaitingToPayingDetailViewController.m in Sources */,
 				FC32BE102079261100817156 /* GetCarView.m in Sources */,
 				FC32BF392079AA2000817156 /* XCCheckoutDetailBaseModel.m in Sources */,
+				A72148A62083B159009E6DDC /* XCUserRenewalInsuranceListDetailViewController.m in Sources */,
 				FC32BF262079AA2000817156 /* XCUserViolationDetailViewController.m in Sources */,
 				FC32BFB52079AA5900817156 /* PriceUnderwritingImportTableViewCell.m in Sources */,
 				FC32BF2D2079AA2000817156 /* XCUserWaitingToWriteListViewController.m in Sources */,
@@ -1923,13 +2037,17 @@
 				A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */,
 				FC32BF4B2079AA2000817156 /* XCUserCaseScrollerViewCell.m in Sources */,
 				FC32BF332079AA2000817156 /* XCCustomerRepairViewController.m in Sources */,
+				A72148B92083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m in Sources */,
 				FC32BFB42079AA5900817156 /* PriceUnderwritingChooseTableViewCell.m in Sources */,
 				FC32BF4A2079AA2000817156 /* XCUserCaseListCell.m in Sources */,
 				FC32BFA62079AA5900817156 /* PriceRecodeModel.m in Sources */,
+				A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */,
 				FC32BF4E2079AA2000817156 /* XCUserListView.m in Sources */,
+				A72148A92083B4E1009E6DDC /* XCUserDistributionViewController.m in Sources */,
 				FC32BE08207909C300817156 /* ProgressCircleView.m in Sources */,
 				FC32BF432079AA2000817156 /* XCCheckoutDetailPhotoCell.m in Sources */,
 				FC32BFAD2079AA5900817156 /* PriceInfolabelTableViewCell.m in Sources */,
+				A72148B22083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				FC32BFAB2079AA5900817156 /* PriceCommerceInsTableViewCell.m in Sources */,
 				FC32BF412079AA2000817156 /* XCCheckoutDetailHeaderView.m in Sources */,
@@ -1958,6 +2076,7 @@
 				FC32BF2B2079AA2000817156 /* XCUserWaitingToPayingViewController.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				FC32BF1A2079AA2000817156 /* UserViewController.m in Sources */,
+				A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */,
 				A720C5B02081ECF0006B0C33 /* XCDistributionBillModel.m in Sources */,
 				FC32BF402079AA2000817156 /* XCCheckoutBaseFooterView.m in Sources */,
 				FC32BF3D2079AA2000817156 /* XCUserCaseListModel.m in Sources */,
@@ -1970,6 +2089,7 @@
 				259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */,
 				FC32BF252079AA2000817156 /* XCUserRepairViewController.m in Sources */,
 				FC32BFBD2079AA5900817156 /* PriceCIQLastYInfoView.m in Sources */,
+				A72148B62083B844009E6DDC /* XCFinanicalAuditListCell.m in Sources */,
 				FC32BF462079AA2000817156 /* XCCheckoutTableViewCell.m in Sources */,
 				FC32BE1320792AD900817156 /* GetCarDetailModel.m in Sources */,
 				FC32BF4C2079AA2000817156 /* XCUserListCollectionViewCell.m in Sources */,
@@ -1980,6 +2100,7 @@
 				FC32BE09207909C300817156 /* ProgressControll.m in Sources */,
 				FC32BF342079AA2000817156 /* XCCustomerViewController.m in Sources */,
 				FC32BFAC2079AA5900817156 /* PriceInfoAddTableViewCell.m in Sources */,
+				A721489C20839659009E6DDC /* XCUserCaseDetailModel.m in Sources */,
 				FC32BF2E2079AA2000817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
 				A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */,
 				25EA2370207E5ADF00A60866 /* priceModel.m in Sources */,
@@ -1987,6 +2108,7 @@
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
 				FC32BFAA2079AA5900817156 /* PriceCarRecordTableViewCell.m in Sources */,
 				FC32BF362079AA2000817156 /* XCUserChargebackListDetailViewController.m in Sources */,
+				A72148A32083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m in Sources */,
 				FC32BFB22079AA5900817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
 				A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */,
 				FC32BFBC2079AA5900817156 /* priceCIQChangeView.m in Sources */,
@@ -2005,9 +2127,9 @@
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
-				FCE4E703208274B500E04A6B /* DatePickerView.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,
+				A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */,
 				FC32BFB02079AA5900817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */,
 				FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */,
 				FC32BF502079AA2000817156 /* XCDistributionFooterView.m in Sources */,
@@ -2034,6 +2156,7 @@
 				FC32BFBB2079AA5900817156 /* PriceAdjustTableViewCell.m in Sources */,
 				A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */,
 				FC32BFA72079AA5900817156 /* PriceCustomerModel.m in Sources */,
+				A72148AF2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m in Sources */,
 				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,
 				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,
 				A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */,

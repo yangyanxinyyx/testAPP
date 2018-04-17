@@ -16,7 +16,10 @@
 @end
 
 @implementation XCUserCaseDetailProgressCell
-
++ (CGFloat)getCellHeight
+{
+    return 120 * ViewRateBaseOnIP6;
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -31,7 +34,7 @@
 - (void)configSubVies
 {
     _iconImageView = [[UIImageView alloc] init];
-    _processLabel = [self createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(0, 0, 255)];
+    _processLabel = [self createLabelWithTextFontSize:36 textColor:COLOR_RGB_255(1, 77, 163)];
     
     [self addSubview:_iconImageView];
     [self addSubview:_processLabel];
@@ -45,7 +48,12 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    CGSize size = CGSizeMake(56 * ViewRateBaseOnIP6, 56 * ViewRateBaseOnIP6);
+    CGFloat leftMargin = 30 * ViewRateBaseOnIP6;
+    [_iconImageView setFrame:CGRectMake(leftMargin , (self.bounds.size.height - size.height ) * 0.5, size.width, size.height)];
+    [_processLabel sizeToFit];
+    size = _processLabel.frame.size;
+    [_processLabel setFrame:CGRectMake(CGRectGetMaxX(_iconImageView.frame) + 40 * ViewRateBaseOnIP6, (self.bounds.size.height - 34 * ViewRateBaseOnIP6) * 0.5, size.width, 34 * ViewRateBaseOnIP6)];
     
 }
 
@@ -82,6 +90,12 @@
 {
     _isFinish = isFinish;
     [self updateProcessType];
+}
+
+- (void)setProcessStr:(NSString *)processStr
+{
+    _processStr = processStr;
+    [_processLabel setText:processStr];
 }
 
 - (void)setProcessStrArr:(NSArray *)processStrArr

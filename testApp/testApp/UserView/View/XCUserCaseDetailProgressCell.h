@@ -10,8 +10,12 @@
 
 @interface XCUserCaseDetailProgressCell : UITableViewCell
 
+/** 标题 */
+@property (nonatomic, strong) NSString * processStr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * processStrArr ;
 
 @property (nonatomic, assign) BOOL isFinish;
+
++ (CGFloat)getCellHeight;
 @end

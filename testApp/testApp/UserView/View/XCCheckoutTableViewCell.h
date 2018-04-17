@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XCCheckoutDetailBaseModel;
 @class XCCustomerListModel;
+@class XCCarTransactionModel;
 @class XCCheckoutTableViewCell;
 @protocol XCCheckoutTableViewCellDelegate <NSObject>
 
@@ -25,12 +26,19 @@
 /** 标记出单时间 */
 @property (nonatomic, copy) NSString * issureTime;
 
+/** 自定义时间wei'zhi标题 */
+@property (nonatomic, copy) NSString * timeTitleStr ;
+
 @property (nonatomic, weak) id <XCCheckoutTableViewCellDelegate> delegate;
 /** 车险客户列表Model */
 @property (nonatomic, strong) XCCheckoutDetailBaseModel * baseModel ;
 
-/** 我的客户Cell */
+/** 我的客户Cell  默认NO*/
 @property (nonatomic, assign) BOOL  isCustomerCell;
 
+
 - (void)setupCellWithMYCustomerListModel:(XCCustomerListModel *)model;
+
+- (void)setupCellWithCarTransactionListModel:(XCCarTransactionModel *)model;
+
 @end

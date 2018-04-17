@@ -76,11 +76,11 @@
     else if ([self.title isEqualToString:@"发动机号:"] && isUsableNSString(model.engineNo,@"")) {
         [_placeholderLabel setText:model.engineNo];
     }
-    else if ([self.title isEqualToString:@"车型名称:"] && isUsableNSString(model.model,@"")) {
-        [_placeholderLabel setText:model.model];
+    else if ([self.title isEqualToString:@"车型名称:"] && isUsableNSString(model.brand,@"")) {
+        [_placeholderLabel setText:model.brand];
     }
-    else if ([self.title isEqualToString:@"车型代码:"] && isUsableNSString(model.model2,@"")) {
-        [_placeholderLabel setText:model.model2];
+    else if ([self.title isEqualToString:@"车型代码:"] && isUsableNSString(model.model,@"")) {
+        [_placeholderLabel setText:model.model];
     }
     else if ([self.title isEqualToString:@"(商业)起保日期:"] && isUsableNSString(model.syEffectDate,@"")) {
         [_placeholderLabel setText:model.syEffectDate];

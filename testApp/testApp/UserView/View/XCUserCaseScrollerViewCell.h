@@ -10,5 +10,9 @@
 
 @interface XCUserCaseScrollerViewCell : UITableViewCell
 /** <# 注释 #> */
-@property (nonatomic, strong) NSArray<UIImage *> * photoArr ;
+@property (nonatomic, copy) NSString * titleStr ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray<NSURL *> * photoURLArr ;
+
++ (CGFloat)getCellHeight;
 @end

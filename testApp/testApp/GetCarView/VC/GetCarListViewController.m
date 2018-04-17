@@ -13,6 +13,7 @@
 #import "MoneyInputVIew.h"
 #import <MJRefresh/MJRefresh.h>
 #import "LYZAlertView.h"
+#import "NewGuestViewController.h"
 static NSString *identifier = @"listCell";
 
 @interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GetCarListCellDelegate,GetCarViewControllerDelegate,MoneyInputVIewDelegate>
@@ -30,6 +31,8 @@ static NSString *identifier = @"listCell";
 @property (nonatomic, strong) UIButton *fixBtn;
 
 @property (nonatomic, assign) NSInteger page;
+
+@property (nonatomic, strong) NSMutableArray *serviceArray;
 @end
 
 @implementation GetCarListViewController
@@ -38,8 +41,33 @@ static NSString *identifier = @"listCell";
     [super viewDidLoad];
 
     self.dataSource = [NSMutableArray array];
+    self.serviceArray = [NSMutableArray array];
+
     [self createUI];
-    [self requestDataWithPage:@(1) selectNumber:nil];
+
+    NSDictionary *param = @{@"storeId":[UserInfoManager shareInstance].storeID};
+    [RequestAPI getGetCarService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (isUsableDictionary(response)) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"获取服务列表成功");
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                    NSArray *data = response[@"data"];
+                    for (NSDictionary *dic in data) {
+                        [self.serviceArray addObject: dic[@"name"]];
+                    }
+                }
+                [self requestDataWithPage:@(1) selectNumber:nil];
+            }else{
+                NSLog(@"获取服务列表失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取服务列表错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
+
     _page = 2;
 }
 
@@ -145,11 +173,13 @@ static NSString *identifier = @"listCell";
 {
     if (show) {
         self.fixBtn.hidden = NO;
+        self.orderBtn.hidden = NO;
         self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
         _noFoundTipsView.hidden = NO;
 
     }else{
         self.fixBtn.hidden = YES;
+        self.orderBtn.hidden = NO;
         self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
         _noFoundTipsView.hidden = YES;
     }
@@ -253,12 +283,15 @@ static NSString *identifier = @"listCell";
 
 - (void)pressOrderBtn{
 
-
+    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:YES];
+    VC.serviceArray = self.serviceArray;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)pressFixBtn{
 
-    
+    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 #pragma mark textfieldDelegate
@@ -386,6 +419,7 @@ static NSString *identifier = @"listCell";
         _orderBtn.layer.masksToBounds = YES;
         [_orderBtn setTitle:@"新增订单" forState:UIControlStateNormal];
         _orderBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+        _orderBtn.hidden = YES;
     }
     return _orderBtn;
 }
@@ -401,6 +435,7 @@ static NSString *identifier = @"listCell";
         _fixBtn.layer.masksToBounds = YES;
         [_fixBtn setTitle:@"新增维修" forState:UIControlStateNormal];
         _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+        _fixBtn.hidden = YES;
     }
     return _fixBtn;
 }

@@ -44,7 +44,7 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
 @property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
 
 /** <# 注释 #> */
-@property (nonatomic, strong) NSMutableArray <XCShopServiceModel *>* services;
+@property (nonatomic, strong) NSArray * services;
 
 @end
 
@@ -82,17 +82,44 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
         
         switch (indexPath.row) {
             case 0:{ //洗车项目
+                NSArray *arr = self.services[indexPath.row];
+                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+                for (NSDictionary *dataInfo in arr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    if (serviceModel) {
+                        [serviceDataArrM addObject:serviceModel];
+                    }
+                }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
+                serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
             case 1: { //美容项目
+                NSArray *arr = self.services[indexPath.row];
+                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+                for (NSDictionary *dataInfo in arr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    if (serviceModel) {
+                        [serviceDataArrM addObject:serviceModel];
+                    }
+                }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
+                serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
             case 2: { //保养项目
+                NSArray *arr = self.services[indexPath.row];
+                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+                for (NSDictionary *dataInfo in arr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    if (serviceModel) {
+                        [serviceDataArrM addObject:serviceModel];
+                    }
+                }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
+                serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
@@ -124,13 +151,12 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
         __weak typeof (self)weakSelf = self;
         [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             if (response[@"data"]) {
-                [_services removeAllObjects];
-                NSArray *serviceArr= response[@"data"];
-                for (NSDictionary *dataInfo in serviceArr) {
-                    XCShopServiceModel *model = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    [self.services addObject:model];
-                }
-                
+                NSDictionary *dataInfo = response[@"data"];
+                NSArray *xcServicesArr = dataInfo[@"xcServiceList"];
+                NSArray *mrServicesArr = dataInfo[@"mrServiceList"];
+                NSArray *byServicesArr = dataInfo[@"byServiceList"];
+                self.services = [[NSMutableArray alloc] initWithArray:@[xcServicesArr,mrServicesArr,byServicesArr]];
+        
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {

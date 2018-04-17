@@ -22,6 +22,10 @@
 @property (nonatomic, strong) UITableView * tableView ;
 @property (nonatomic, strong) NSMutableArray * dataArr ;
 
+/** 记录加载index */
+@property (nonatomic, assign) int  pageIndex;
+//下拉刷新获取总页数
+@property (nonatomic, assign) int pageCount ;
 - (instancetype)initWithTitle:(NSString *)title;
 
 @end

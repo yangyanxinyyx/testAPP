@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XCUserCaseListModel.h"
 @interface XCUserCaseListCell : UITableViewCell
+
+- (void)setupCellWithCaseListModel:(XCUserCaseListModel *)model caseTypeStr:(NSString *)caseTypeStr;
 
 @end

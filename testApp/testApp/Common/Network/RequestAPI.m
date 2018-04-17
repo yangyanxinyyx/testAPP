@@ -46,6 +46,9 @@
 //接车时获取订单详情
 #define GETCARDETAILINFORMATION_API [NSString stringWithFormat:@"%@/api/web/order/operationGetOrder",API_PREFIX]
 
+//获取门店内服务
+#define GETCARSERVICE_API [NSString stringWithFormat:@"%@/api/web/service/getServiceByStoreId",API_PREFIX]
+
 
 // =================== modify by Liangyz 个人中心
 //====个人中心====
@@ -63,8 +66,17 @@
 #define SUBMITPAYMENTLIST_API [NSString stringWithFormat:@"%@/api/web/policy/submitPaymentList",API_PREFIX]
 //获取客户列表
 #define SELECTCUSTOMERLIST_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerList",API_PREFIX]
-//获取客户详情
+//获取客户详情列表
 #define SELECTCUSTOMERPARTICULARS_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerParticulars",API_PREFIX]
+//获取车务客户详情列表
+#define SELECTCARTRANSACTIONLIST_API [NSString stringWithFormat:@"%@/api/web/carTransaction/selectCarTransactionList",API_PREFIX]
+//获取车务详情
+#define GETCARTRANSACTION_API [NSString stringWithFormat:@"%@/api/web/carTransaction/getCarTransaction",API_PREFIX]
+
+//获取三大案件列表
+#define SELECTTHREECASEAPPLYLIST_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/selectThreeCaseApplyList",API_PREFIX]
+//获取三大案件详情
+#define GETTHREECASEAPPLY_API [NSString stringWithFormat:@"%@/api/web/threeCaseApply/getThreeCaseApply",API_PREFIX]
 //====门店====
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
@@ -250,6 +262,15 @@
     }];
 }
 
++(void)getGetCarService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
 +(void)updatePassWord:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:UPDATEPASSWORD_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -419,6 +440,41 @@
     }];
 }
 
++(void)getelectCarTransactionList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTCARTRANSACTIONLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getCarTransaction:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETCARTRANSACTION_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getThreeCaseApplyList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTTHREECASEAPPLYLIST_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getThreeCaseApply:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETTHREECASEAPPLY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 
 #pragma mark 门店
 
