@@ -14,7 +14,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-       
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.labelName = [[UILabel alloc] init];
         self.labelInfo = [[UILabel alloc] init];
@@ -65,8 +65,13 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.delegate getUnderwritingTextField:textField];
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+}
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    [self.textFieldInfo resignFirstResponder];
     
 }
 

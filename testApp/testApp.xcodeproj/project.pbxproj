@@ -11,6 +11,7 @@
 		250784C42081A28600B573F3 /* InputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 250784C32081A28600B573F3 /* InputTextView.m */; };
 		25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701658207D07ED007177F5 /* PriceInfoModel.m */; };
 		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
+		25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769AC520863A6900BBDBF3 /* SelectTimeView.m */; };
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
 		A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */; };
@@ -216,7 +217,6 @@
 		FC32BFBD2079AA5900817156 /* PriceCIQLastYInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BF992079AA5800817156 /* PriceCIQLastYInfoView.m */; };
 		FC32BFBE2079AA5900817156 /* PriceInfoCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BF9B2079AA5800817156 /* PriceInfoCellView.m */; };
 		FC32BFBF2079AA5900817156 /* SelectSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BF9D2079AA5800817156 /* SelectSheetView.m */; };
-		FC32BFC02079AA5900817156 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BF9F2079AA5800817156 /* SelectTimeView.m */; };
 		FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC12079AA7100817156 /* LYZSelectView.m */; };
 		FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */; };
 		FC32BFDC207B9BF800817156 /* MoneyInputVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */; };
@@ -272,6 +272,8 @@
 		25701658207D07ED007177F5 /* PriceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoModel.m; sourceTree = "<group>"; };
 		2570165C207DE560007177F5 /* SelectStateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectStateView.h; sourceTree = "<group>"; };
 		2570165D207DE560007177F5 /* SelectStateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectStateView.m; sourceTree = "<group>"; };
+		25769AC520863A6900BBDBF3 /* SelectTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
+		25769AC620863A6900BBDBF3 /* SelectTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
 		25EA236E207E5ADF00A60866 /* priceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceModel.h; sourceTree = "<group>"; };
@@ -619,8 +621,6 @@
 		FC32BF9B2079AA5800817156 /* PriceInfoCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceInfoCellView.m; sourceTree = "<group>"; };
 		FC32BF9C2079AA5800817156 /* SelectSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSheetView.h; sourceTree = "<group>"; };
 		FC32BF9D2079AA5800817156 /* SelectSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSheetView.m; sourceTree = "<group>"; };
-		FC32BF9E2079AA5800817156 /* SelectTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
-		FC32BF9F2079AA5800817156 /* SelectTimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
 		FC32BFC12079AA7100817156 /* LYZSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LYZSelectView.m; path = testApp/Common/LYZSelectView.m; sourceTree = SOURCE_ROOT; };
 		FC32BFC22079AA7100817156 /* LYZSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LYZSelectView.h; path = testApp/Common/LYZSelectView.h; sourceTree = SOURCE_ROOT; };
 		FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MoneyString.h"; sourceTree = "<group>"; };
@@ -1497,10 +1497,10 @@
 				FC32BF992079AA5800817156 /* PriceCIQLastYInfoView.m */,
 				FC32BF9A2079AA5800817156 /* PriceInfoCellView.h */,
 				FC32BF9B2079AA5800817156 /* PriceInfoCellView.m */,
+				25769AC620863A6900BBDBF3 /* SelectTimeView.h */,
+				25769AC520863A6900BBDBF3 /* SelectTimeView.m */,
 				FC32BF9C2079AA5800817156 /* SelectSheetView.h */,
 				FC32BF9D2079AA5800817156 /* SelectSheetView.m */,
-				FC32BF9E2079AA5800817156 /* SelectTimeView.h */,
-				FC32BF9F2079AA5800817156 /* SelectTimeView.m */,
 				2570165C207DE560007177F5 /* SelectStateView.h */,
 				2570165D207DE560007177F5 /* SelectStateView.m */,
 				250784C22081A28600B573F3 /* InputTextView.h */,
@@ -2152,6 +2152,7 @@
 				FC32BF1D2079AA2000817156 /* XCUserInjuryCaseDetailViewController.m in Sources */,
 				FCF87672206BD9C600CF6FDE /* GetCarModel.m in Sources */,
 				FC32BFBA2079AA5900817156 /* PriceAdjustSureTableViewCell.m in Sources */,
+				25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */,
 				FC32BF472079AA2000817156 /* XCMyCommissionListCell.m in Sources */,
 				FC32BFBB2079AA5900817156 /* PriceAdjustTableViewCell.m in Sources */,
 				A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */,
@@ -2162,7 +2163,6 @@
 				A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */,
 				FC32BF162079AA2000817156 /* XCCheckoutBaseTableViewController.m in Sources */,
 				FC32BFA32079AA5900817156 /* PriceInfoViewController.m in Sources */,
-				FC32BFC02079AA5900817156 /* SelectTimeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

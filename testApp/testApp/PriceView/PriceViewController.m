@@ -52,7 +52,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
-//    [self pressCustomerVehicleEnquiries];
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
 }
 
 #pragma mark -network
@@ -136,10 +143,6 @@
 }
 
 #pragma mark - function
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.textField endEditing:YES];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField.text.length > 0) {
         [self pressCustomerVehicleEnquiries];
