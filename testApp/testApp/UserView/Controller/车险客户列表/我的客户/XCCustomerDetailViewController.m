@@ -34,7 +34,7 @@
     [super viewDidLayoutSubviews];
 
     CGFloat bottomHeight = 140 * ViewRateBaseOnIP6;
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
     [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 40 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
@@ -45,7 +45,10 @@
 
 - (void)clickCustomerFollowUpBtn:(UIButton *)button
 {
+
     XCCustomerFollowViewController *followVC = [[XCCustomerFollowViewController alloc] initWithTitle:@"客户跟进"];
+    followVC.customerID = self.model.customerId;
+    followVC.customerName = self.model.customerName;
     [self.navigationController pushViewController:followVC animated:YES];
 }
 
@@ -54,8 +57,29 @@
     NSArray *dataArr = @[@"维修预约",@"年审预约",@"违章预约"];
     __weak typeof (self)weakSelf = self;
     LYZSelectView *alterView = [LYZSelectView alterViewWithArray:dataArr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
-        
         if ([selectStr isEqualToString:@"维修预约"]) {
+            
+//            __weak __typeof(self) weakSelf = self;
+//            NSDictionary *param = @{
+//                                    @"customerId":self.customerID,
+//                                    @"customerName":self.customerName,
+//                                    @"content":self.contentStr,
+//                                    @"operate":self.operateStr,
+//                                    @"nextFollowTime":self.nextFollowTimeStr
+//                                    };
+//            [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//                if (response[@"result"]) {
+//                    [strongSelf requestSuccessHandler];
+//                }else {
+//                    [strongSelf requestFailureHandler];
+//                }
+//                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//            } fail:^(id error) {
+//                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//                [strongSelf requestFailureHandler];
+//            }];
+         
             XCCustomerRepairViewController *repairVC = [[XCCustomerRepairViewController alloc] initWithTitle:@"维修预约"];
             [weakSelf.navigationController pushViewController:repairVC animated:YES];
         }else if([selectStr isEqualToString:@"年审预约"]) {
@@ -91,7 +115,7 @@
     [_customerFollowUpBtn setTitle:@"客户跟进" forState:UIControlStateNormal];
     _customerFollowUpBtn.layer.cornerRadius = 3;
     _customerFollowUpBtn.layer.borderWidth = 1;
-    [_customerFollowUpBtn.layer setBorderColor: COLOR_RGB_255(104, 153, 232).CGColor];
+    [_customerFollowUpBtn.layer setBorderColor:[UIColor whiteColor].CGColor];
     [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
     [_customerFollowUpBtn addTarget:self action:@selector(clickCustomerFollowUpBtn:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -110,7 +134,16 @@
     [self.view addSubview:_subscribeBtn];
     
 }
-
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
+- (void)requestSuccessHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
+    [self.view addSubview:tipsView];
+}
 
 #pragma mark - Setter&Getter
 

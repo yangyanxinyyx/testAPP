@@ -7,7 +7,10 @@
 //
 
 #import "XCUserBaseViewController.h"
-
+#import "XCCustomerDetailModel.h"
 @interface XCCustomerRepairViewController : XCUserBaseViewController
+
+@property (nonatomic, strong) XCCustomerDetailModel * model ;
+
 
 @end

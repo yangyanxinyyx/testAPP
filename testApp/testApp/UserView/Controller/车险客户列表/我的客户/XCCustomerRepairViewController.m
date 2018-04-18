@@ -7,9 +7,12 @@
 //
 
 #import "XCCustomerRepairViewController.h"
-
+#import <AMapFoundationKit/AMapFoundationKit.h>
 @interface XCCustomerRepairViewController ()<XCDistributionFooterViewDelegate>
-
+///** <# 注释 #> */
+//@property (nonatomic, copy) NSString * <# 属性名 #> ;
+///**  */
+//@property (nonatomic, strong)  * <# 属性名 #> ;
 @end
 
 @implementation XCCustomerRepairViewController

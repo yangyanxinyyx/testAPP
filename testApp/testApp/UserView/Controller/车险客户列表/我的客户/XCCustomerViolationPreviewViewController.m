@@ -24,10 +24,17 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
-    
+
+
 }
 
 #pragma mark - Init Method
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+}
 
 - (void)configureData
 {

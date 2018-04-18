@@ -10,6 +10,8 @@
 
 @interface XCCustomerDetailModel : NSObject
 
+/** 客户ID */
+@property (nonatomic, strong) NSNumber * customerId;
 /** 客户详情 */
 @property (nonatomic, copy) NSString * customerName;
 
