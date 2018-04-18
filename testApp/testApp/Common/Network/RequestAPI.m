@@ -70,6 +70,25 @@
 #define SELECTCUSTOMERLIST_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerList",API_PREFIX]
 //获取客户详情列表
 #define SELECTCUSTOMERPARTICULARS_API [NSString stringWithFormat:@"%@/api/web/customers/selectCustomerParticulars",API_PREFIX]
+//获取客户跟进--操作类型
+#define SELECTLINESBYDICTCODE_API [NSString stringWithFormat:@"%@/api/web/dict/selectLinesByDictCode",API_PREFIX]
+
+//提交客户跟进
+#define INSERTCUSTOMERFOLLOWREC_API [NSString stringWithFormat:@"%@/api/web/customers/insertCustomerFollowRec",API_PREFIX]
+
+//预约维修
+#define ADDORDERBYMAINTAIN_API [NSString stringWithFormat:@"%@/api/web/order/addOrderByMaintain",API_PREFIX]
+//查询违章
+#define GETWZMESSAGEBYCARID_API [NSString stringWithFormat:@"%@/api/web/weizhang/getWZMessageByCarId",API_PREFIX]
+//预约违章
+#define ADDORDERBYAUDITANDRULES_API [NSString stringWithFormat:@"%@/api/web/order/addOrderByAuditAndRules",API_PREFIX]
+//获取年审类型和费用
+#define GETCARVERIFICATIONMONEY_API [NSString stringWithFormat:@"%@/api/web/order/getCarVerificationMoney",API_PREFIX]
+//提交年审
+
+//查询门店列表
+#define APPFINDSTORE_API [NSString stringWithFormat:@"%@/api/web/order/getCarVerificationMoney",API_PREFIX]
+
 //获取车务客户详情列表
 #define SELECTCARTRANSACTIONLIST_API [NSString stringWithFormat:@"%@/api/web/carTransaction/selectCarTransactionList",API_PREFIX]
 //获取车务详情
@@ -450,6 +469,83 @@
         fail(error);
     }];
 }
+
+//客户跟进--获取选择操作类型
++(void)getSelectLinesByDictCode:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SELECTLINESBYDICTCODE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//客户跟进--提交
++(void)postCustomerFollowRec:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:INSERTCUSTOMERFOLLOWREC_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//预约维修
++(void)addOrderByMaintain:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:ADDORDERBYMAINTAIN_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+//违章查询
++(void)getWZMessageByCarId:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETWZMESSAGEBYCARID_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//预约违章接口
++(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:ADDORDERBYAUDITANDRULES_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//获取年审类型和费用
++(void)getCarVerificationMoney:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:GETCARVERIFICATIONMONEY_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+////预约年审接口
+//+(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+//{
+//    [self getRequest:GETCARVERIFICATIONMONEY isPOST:YES paramenter:paramenter header:header success:^(id response) {
+//        success(response);
+//    } fail:^(id error) {
+//        fail(error);
+//    }];
+//}
+//查询门店列表
++(void)appFindStore:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:APPFINDSTORE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
 //获取车务（年审，违章，维修）客户列表
 +(void)getelectCarTransactionList:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {

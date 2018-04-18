@@ -196,7 +196,7 @@
             
 //            XCCustomerDetailModel *detailModel = [XCCustomerDetailModel ]
             XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
-            
+            detailModel.customerId = model.customerId;
             XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];
             detailVC.model = detailModel;
             [weakSelf.navigationController pushViewController:detailVC animated:YES];

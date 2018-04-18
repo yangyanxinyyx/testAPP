@@ -10,4 +10,12 @@
 
 @interface XCCustomerFollowViewController : XCUserBaseViewController
 
+/** 客户id */
+@property (nonatomic, strong) NSNumber * customerID ;
+/** 客户名称 */
+@property (nonatomic, copy) NSString * customerName;
+
+/** 操作类型数据 */
+@property (nonatomic, strong) NSArray * selectArr ;
+
 @end

@@ -108,7 +108,7 @@
     
     CGFloat leftMargin = 30 * ViewRateBaseOnIP6;
     [self.carNumberLabel sizeToFit];
-    [self.carNumberLabel setFrame:CGRectMake(leftMargin, 29 * ViewRateBaseOnIP6, 450 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6)];
+    [self.carNumberLabel setFrame:CGRectMake(leftMargin, 29 * ViewRateBaseOnIP6, 430 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6)];
     [self.userNameLabel sizeToFit];
     [self.userNameLabel setFrame:CGRectMake(leftMargin, self.carNumberLabel.frame.origin.y + self.carNumberLabel.frame.size.height + 18 * ViewRateBaseOnIP6, self.userNameLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     [self.issueTimeLabel sizeToFit];
@@ -170,8 +170,16 @@
     _customerModel = model;
     NSString *titleStr = [NSString stringWithFormat:@"%@ %@ (%@)",model.customerName,model.plateNo,model.brand];
     [_carNumberLabel setText:titleStr];
-    [_userNameLabel setText:[NSString stringWithFormat:@"跟进时间: %@",model.nextFollowTime]];
-    [_issueTimeLabel setText:[NSString stringWithFormat:@"联系方式: %@",model.phoneNo]];
+    NSString *nextFollowTime = @"跟进时间: ";
+    if (isUsableNSString(model.nextFollowTime, @"")) {
+        nextFollowTime = [NSString stringWithFormat:@"跟进时间: %@",model.nextFollowTime];
+    }
+    [_userNameLabel setText:nextFollowTime];
+    NSString *phoneNoStr = @"联系方式: ";
+    if (isUsableNSString(model.phoneNo, @"")) {
+        phoneNoStr = [NSString stringWithFormat:@"联系方式: %@",model.phoneNo];
+    }
+    [_issueTimeLabel setText:phoneNoStr];
 }
 
 - (void)setupCellWithCarTransactionListModel:(XCCarTransactionModel *)model
