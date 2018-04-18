@@ -18,6 +18,7 @@
 #import "PriceInfoModel.h"
 #import "PriceRecodeModel.h"
 #import "LYZAlertView.h"
+#import <MJRefresh/MJRefresh.h>
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
@@ -70,6 +71,7 @@
 #pragma mark- network
 
 - (void)requestLastYearPrcie{
+    
     [self.networkDic setObject:self.carID forKey:@"carId"];
     [self.networkDic setObject:[UserInfoManager shareInstance].code forKey:@"CustKey"];
     [self.networkDic setObject:@"1" forKey:@"appType"];
@@ -924,7 +926,7 @@
 
 - (UIView *)contenView{
     if (!_contenView) {
-        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _contenView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
     }
     return _contenView;
 }
@@ -956,7 +958,7 @@
 
 - (UITableView *)tableViewlast{
     if (!_tableViewlast) {
-        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
+        _tableViewlast = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 800 * ViewRateBaseOnIP6 - 64 ) style:UITableViewStylePlain];
         _tableViewlast.delegate = self;
         _tableViewlast.dataSource = self;
         _tableViewlast.backgroundColor = [UIColor whiteColor];

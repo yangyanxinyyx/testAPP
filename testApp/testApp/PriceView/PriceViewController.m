@@ -195,7 +195,7 @@
 
 - (UIView *)contentView{
     if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
+        _contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation - 44, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_TABBAR_HEIGHT - 20)];
         _contentView.backgroundColor = [UIColor whiteColor];
 
     }
@@ -261,9 +261,9 @@
     if (!_backView) {
         _backView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavMargan, SCREEN_WIDTH, 652 * ViewRateBaseOnIP6)];
         _backView.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 437 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 400 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6)];
         imageView.image = [UIImage imageNamed:@"noClient"];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 * ViewRateBaseOnIP6, 558 * ViewRateBaseOnIP6, SCREEN_WIDTH, 23 * ViewRateBaseOnIP6)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0 * ViewRateBaseOnIP6, 520 * ViewRateBaseOnIP6, SCREEN_WIDTH, 23 * ViewRateBaseOnIP6)];
         label.text = @"无客户信息";
         label.textColor = [UIColor colorWithHexString:@"#a5a5a5"];
         label.textAlignment = NSTextAlignmentCenter;

@@ -792,15 +792,15 @@
 }
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
-        _myTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
         _myTableView.bounces = YES;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _myTableView.separatorColor = [UIColor clearColor];
+        _myTableView.separatorColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        [_myTableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     }
     return _myTableView;
 }
