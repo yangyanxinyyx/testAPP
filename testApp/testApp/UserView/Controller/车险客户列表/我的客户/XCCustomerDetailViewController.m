@@ -11,9 +11,15 @@
 #import "XCCustomerAnnualReviewViewController.h"
 #import "XCCustomerViolationPreviewViewController.h"
 #import "XCCustomerFollowViewController.h"
+#import <AMapLocationKit/AMapLocationKit.h>
 @interface XCCustomerDetailViewController ()
 @property (nonatomic, strong) UIButton  * customerFollowUpBtn ;
 @property (nonatomic, strong) UIButton * subscribeBtn ;
+/** <# 注释 #> */
+@property (nonatomic, strong) AMapLocationManager * locationManager ;
+
+/** 用户定位 */
+@property (nonatomic, strong) CLLocation *location ;
 @end
 
 @implementation XCCustomerDetailViewController
@@ -27,6 +33,24 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
+    self.locationManager = [[AMapLocationManager alloc] init];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    self.locationManager.locationTimeout = 3;
+    
+    [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        NSLog(@"location:%@", location);
+        self.location = location;
+    }];
+
 }
 
 - (void)viewDidLayoutSubviews
@@ -34,6 +58,7 @@
     [super viewDidLayoutSubviews];
 
     CGFloat bottomHeight = 140 * ViewRateBaseOnIP6;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
     [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
@@ -58,30 +83,12 @@
     __weak typeof (self)weakSelf = self;
     LYZSelectView *alterView = [LYZSelectView alterViewWithArray:dataArr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
         if ([selectStr isEqualToString:@"维修预约"]) {
-            
-//            __weak __typeof(self) weakSelf = self;
-//            NSDictionary *param = @{
-//                                    @"customerId":self.customerID,
-//                                    @"customerName":self.customerName,
-//                                    @"content":self.contentStr,
-//                                    @"operate":self.operateStr,
-//                                    @"nextFollowTime":self.nextFollowTimeStr
-//                                    };
-//            [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-//                __strong __typeof__(weakSelf)strongSelf = weakSelf;
-//                if (response[@"result"]) {
-//                    [strongSelf requestSuccessHandler];
-//                }else {
-//                    [strongSelf requestFailureHandler];
-//                }
-//                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-//            } fail:^(id error) {
-//                __strong __typeof__(weakSelf)strongSelf = weakSelf;
-//                [strongSelf requestFailureHandler];
-//            }];
-         
-            XCCustomerRepairViewController *repairVC = [[XCCustomerRepairViewController alloc] initWithTitle:@"维修预约"];
-            [weakSelf.navigationController pushViewController:repairVC animated:YES];
+            if (self.location) {
+                XCCustomerRepairViewController *repairVC = [[XCCustomerRepairViewController alloc] initWithTitle:@"维修预约"];
+                repairVC.location = self.location;
+                repairVC.model = self.model;
+                [self.navigationController pushViewController:repairVC animated:YES];
+            }
         }else if([selectStr isEqualToString:@"年审预约"]) {
             XCCustomerAnnualReviewViewController *annualReviewVC = [[XCCustomerAnnualReviewViewController alloc] initWithTitle:@"年审预约"];
             [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
@@ -167,7 +174,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40 * ViewRateBaseOnIP6;
+    return (30 + 25) * ViewRateBaseOnIP6;
 }
 
 @end

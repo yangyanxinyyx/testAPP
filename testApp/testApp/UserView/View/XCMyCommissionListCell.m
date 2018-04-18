@@ -256,6 +256,7 @@
     return label;
 }
 
+//设置下划线
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
 {
     if (top) {

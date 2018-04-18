@@ -87,7 +87,7 @@
 //提交年审
 
 //查询门店列表
-#define APPFINDSTORE_API [NSString stringWithFormat:@"%@/api/web/order/getCarVerificationMoney",API_PREFIX]
+#define APPFINDSTORE_API [NSString stringWithFormat:@"%@/api/web/store/appFindStore",API_PREFIX]
 
 //获取车务客户详情列表
 #define SELECTCARTRANSACTIONLIST_API [NSString stringWithFormat:@"%@/api/web/carTransaction/selectCarTransactionList",API_PREFIX]

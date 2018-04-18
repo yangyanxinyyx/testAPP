@@ -8,9 +8,11 @@
 
 #import "XCUserBaseViewController.h"
 #import "XCCustomerDetailModel.h"
+#import <AMapLocationKit/AMapLocationKit.h>
 @interface XCCustomerRepairViewController : XCUserBaseViewController
 
 @property (nonatomic, strong) XCCustomerDetailModel * model ;
-
+/** <# 注释 #> */
+@property (nonatomic, assign) CLLocation * location ;
 
 @end

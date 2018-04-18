@@ -16,6 +16,9 @@
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
 		A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */; };
+		A71AA9622087A2A700E78990 /* XCCustomerShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9612087A2A700E78990 /* XCCustomerShopModel.m */; };
+		A71AA9652087A83A00E78990 /* XCCustomerShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */; };
+		A71AA9682087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */; };
 		A71EABA6207F68E900347693 /* red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA3207F68E800347693 /* red@3x.png */; };
 		A71EABA7207F68E900347693 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA4207F68E800347693 /* red.png */; };
 		A71EABA8207F68E900347693 /* red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A71EABA5207F68E900347693 /* red@2x.png */; };
@@ -286,6 +289,12 @@
 		3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A7117AE1207E0D3200B0512D /* XCShopAMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopAMapViewController.h; sourceTree = "<group>"; };
 		A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopAMapViewController.m; sourceTree = "<group>"; };
+		A71AA9602087A2A700E78990 /* XCCustomerShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerShopModel.h; sourceTree = "<group>"; };
+		A71AA9612087A2A700E78990 /* XCCustomerShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerShopModel.m; sourceTree = "<group>"; };
+		A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerShopListView.h; sourceTree = "<group>"; };
+		A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerShopListView.m; sourceTree = "<group>"; };
+		A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerShopSrcollerViewCell.h; sourceTree = "<group>"; };
+		A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerShopSrcollerViewCell.m; sourceTree = "<group>"; };
 		A71EABA3207F68E800347693 /* red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@3x.png"; sourceTree = "<group>"; };
 		A71EABA4207F68E800347693 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		A71EABA5207F68E900347693 /* red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red@2x.png"; sourceTree = "<group>"; };
@@ -812,6 +821,8 @@
 				A720C5B620826423006B0C33 /* XCCustomerListModel.m */,
 				A720C5B82082684D006B0C33 /* XCCustomerDetailModel.h */,
 				A720C5B92082684D006B0C33 /* XCCustomerDetailModel.m */,
+				A71AA9602087A2A700E78990 /* XCCustomerShopModel.h */,
+				A71AA9612087A2A700E78990 /* XCCustomerShopModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1328,6 +1339,10 @@
 				FC32BED62079AA2000817156 /* XCCustomerViolationPreviewViewController.m */,
 				25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */,
 				25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */,
+				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
+				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
+				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
+				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";
@@ -2082,6 +2097,7 @@
 				FC32BFA12079AA5900817156 /* PriceCarInsuranceQViewController.m in Sources */,
 				FC32BF322079AA2000817156 /* XCCustomerFollowViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
+				A71AA9682087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m in Sources */,
 				FC32BFA02079AA5900817156 /* PriceAdjustViewController.m in Sources */,
 				FC32BF2B2079AA2000817156 /* XCUserWaitingToPayingViewController.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
@@ -2093,6 +2109,7 @@
 				FC32BDF02076021900817156 /* CoverLoopimageModel.m in Sources */,
 				25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */,
 				FC32BF4F2079AA2000817156 /* XCUserTopView.m in Sources */,
+				A71AA9622087A2A700E78990 /* XCCustomerShopModel.m in Sources */,
 				FC32BF232079AA2000817156 /* XCUserAnnualReviewViewController.m in Sources */,
 				FC32BF212079AA2000817156 /* XCUserParticularCaseViewController.m in Sources */,
 				FC32BF222079AA2000817156 /* XCUserAnnualReviewDetailViewController.m in Sources */,
@@ -2113,6 +2130,7 @@
 				A721489C20839659009E6DDC /* XCUserCaseDetailModel.m in Sources */,
 				FC32BF2E2079AA2000817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
 				A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */,
+				A71AA9652087A83A00E78990 /* XCCustomerShopListView.m in Sources */,
 				25EA2370207E5ADF00A60866 /* priceModel.m in Sources */,
 				FC32BF292079AA2000817156 /* XCDistributionPolicyViewController.m in Sources */,
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
