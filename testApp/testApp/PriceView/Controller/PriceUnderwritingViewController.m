@@ -553,7 +553,7 @@
 }
 - (UIView *)viewContent{
     if (!_viewContent) {
-        _viewContent = [[UIView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _viewContent = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
         _viewContent.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
     }
     return _viewContent;
@@ -564,7 +564,7 @@
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
-        _myTableView.backgroundColor = [UIColor whiteColor];
+        _myTableView.separatorColor = [UIColor colorWithHexString:@"#f2f2f2"];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
         _myTableView.bounces = NO;
