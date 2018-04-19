@@ -14,14 +14,12 @@ typedef NS_ENUM(NSInteger, InputViewType) {
     InputViewTypeSelect
 };
 
-
-
 @interface UserInfoInputView : UIView
 
 @property (nonatomic,strong) UITextField *textField;
 @property (nonatomic,strong) UILabel *dateLabel;
 @property (nonatomic,strong) UIButton *selectBtn;
 
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param;
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param WithCompletionHandler:(void (^)(NSString *))complete;
 
 @end

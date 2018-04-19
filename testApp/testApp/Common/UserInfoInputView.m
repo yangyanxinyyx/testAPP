@@ -13,19 +13,22 @@
 #import "SelectTimeView.h"
 
 @interface UserInfoInputView ()<UITextFieldDelegate>
+@property (nonatomic, copy) void (^sureCallback)(NSString *content);
 
 @property (nonatomic,strong) id param;
-
+@property (nonatomic,strong) NSString *title;
 @end
 
 @implementation UserInfoInputView
 
-- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param WithCompletionHandler:(void (^)(NSString *))complete
 {
     if (self = [super initWithFrame:frame]) {
         self.param = param;
         [self createUIWithTitle:title type:type];
         self.backgroundColor = [UIColor whiteColor];
+        self.sureCallback = complete;
+        self.title = title;
     }
     return self;
 }
@@ -90,6 +93,9 @@
     [[UIApplication sharedApplication].keyWindow addSubview:busSelectTimeV];
     busSelectTimeV.block = ^(NSString *timeStr) {
        self.dateLabel.text = timeStr;
+        if (self.sureCallback) {
+            self.sureCallback(timeStr);
+        }
     };
 
 }
@@ -102,6 +108,9 @@
             if (content) {
                 [_selectBtn setTitle:content forState:UIControlStateNormal];
                 [_selectBtn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleRight imageTitleSpace:5];
+                if (self.sureCallback) {
+                    self.sureCallback(content);
+                }
             }
         }];
         [[UIApplication sharedApplication].keyWindow addSubview:selectView];
@@ -112,13 +121,29 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
 
-    return YES;
+    if (self.sureCallback) {
+        self.sureCallback(textField.text);
+    }
 
+    return YES;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self endEditing:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+
+    if ([self.title isEqualToString:@"项目费用"] || [self.title isEqualToString:@"联系电话"] || [self.title isEqualToString:@"保单金额"] || [self.title isEqualToString:@"自费金额"] || [self.title isEqualToString:@""] ) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMKEYBOARD] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }
+
+    return YES;
+
+
 }
 
 /*

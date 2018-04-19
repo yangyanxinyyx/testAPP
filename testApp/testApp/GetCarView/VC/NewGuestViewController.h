@@ -7,9 +7,11 @@
 //
 
 #import "BaseViewController1.h"
+#import "AddOrderModel.h"
 
 @interface NewGuestViewController : BaseViewController1
 
+@property (nonatomic,strong) AddOrderModel *currentModel;
 @property (nonatomic,strong) NSArray *serviceArray;
 - (instancetype)initWithIsOrder:(BOOL)isOrder;
 

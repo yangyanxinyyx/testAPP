@@ -49,6 +49,12 @@
 //获取门店内服务
 #define GETCARSERVICE_API [NSString stringWithFormat:@"%@/api/web/service/getServiceByStoreId",API_PREFIX]
 
+//新增维修
+#define GETCARADDORDER_API [NSString stringWithFormat:@"%@/api/web/order/insertOrder",API_PREFIX]
+
+//车牌号查询
+#define GETCARSELECTPLATENO_API [NSString stringWithFormat:@"%@//api/web/car/selectPlateNoList",API_PREFIX]
+
 
 // =================== modify by Liangyz 个人中心
 //====个人中心====
@@ -256,6 +262,24 @@
 +(void)getGetCarService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
 
     [self getRequest:GETCARSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarAddOrder:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARADDORDER_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getGetCarSelectPlateNO:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETCARSELECTPLATENO_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

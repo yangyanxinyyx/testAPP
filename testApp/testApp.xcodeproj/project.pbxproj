@@ -207,6 +207,13 @@
 		FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC12079AA7100817156 /* LYZSelectView.m */; };
 		FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFC52079AAAD00817156 /* NSString+MoneyString.m */; };
 		FC32BFDC207B9BF800817156 /* MoneyInputVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */; };
+		FC33AA8120863FB10081D30A /* AddOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33AA8020863FB10081D30A /* AddOrderViewController.m */; };
+		FC33AA842086529A0081D30A /* AddOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33AA832086529A0081D30A /* AddOrderListCell.m */; };
+		FC33AA892086563F0081D30A /* 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33AA852086563F0081D30A /* 未选中@2x.png */; };
+		FC33AA8A208656400081D30A /* 未选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33AA862086563F0081D30A /* 未选中@3x.png */; };
+		FC33AA8B208656400081D30A /* 选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33AA872086563F0081D30A /* 选中@3x.png */; };
+		FC33AA8C208656400081D30A /* 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC33AA882086563F0081D30A /* 选中@2x.png */; };
+		FC33AA8F20865E340081D30A /* AddOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC33AA8E20865E340081D30A /* AddOrderModel.m */; };
 		FC479512205553E900218362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC479511205553E900218362 /* AppDelegate.m */; };
 		FC47951A205553E900218362 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC479519205553E900218362 /* Assets.xcassets */; };
 		FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC47951B205553E900218362 /* LaunchScreen.storyboard */; };
@@ -588,6 +595,16 @@
 		FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyInputVIew.h; sourceTree = "<group>"; };
 		FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyInputVIew.m; sourceTree = "<group>"; };
 		FC33AA542084FB630081D30A /* UIButton+ImageTitleSpacing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+ImageTitleSpacing.h"; path = "../../../../../InterPhoto/Utilities/UIButton/UIButton+ImageTitleSpacing.h"; sourceTree = "<group>"; };
+		FC33AA7F20863FB10081D30A /* AddOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddOrderViewController.h; sourceTree = "<group>"; };
+		FC33AA8020863FB10081D30A /* AddOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddOrderViewController.m; sourceTree = "<group>"; };
+		FC33AA822086529A0081D30A /* AddOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddOrderListCell.h; sourceTree = "<group>"; };
+		FC33AA832086529A0081D30A /* AddOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddOrderListCell.m; sourceTree = "<group>"; };
+		FC33AA852086563F0081D30A /* 未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选中@2x.png"; sourceTree = "<group>"; };
+		FC33AA862086563F0081D30A /* 未选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未选中@3x.png"; sourceTree = "<group>"; };
+		FC33AA872086563F0081D30A /* 选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选中@3x.png"; sourceTree = "<group>"; };
+		FC33AA882086563F0081D30A /* 选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选中@2x.png"; sourceTree = "<group>"; };
+		FC33AA8D20865E340081D30A /* AddOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddOrderModel.h; sourceTree = "<group>"; };
+		FC33AA8E20865E340081D30A /* AddOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddOrderModel.m; sourceTree = "<group>"; };
 		FC47950D205553E900218362 /* testApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC479510205553E900218362 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC479511205553E900218362 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -922,6 +939,10 @@
 				FC32BE312079A9BC00817156 /* 暂无订单@3x.png */,
 				FC32BE322079A9BC00817156 /* 禁止@2x.png */,
 				FC32BE332079A9BC00817156 /* 禁止@3x.png */,
+				FC33AA852086563F0081D30A /* 未选中@2x.png */,
+				FC33AA862086563F0081D30A /* 未选中@3x.png */,
+				FC33AA882086563F0081D30A /* 选中@2x.png */,
+				FC33AA872086563F0081D30A /* 选中@3x.png */,
 			);
 			path = GetCar;
 			sourceTree = "<group>";
@@ -1599,6 +1620,8 @@
 				FCF87671206BD9C600CF6FDE /* GetCarModel.m */,
 				FC32BE1120792AD900817156 /* GetCarDetailModel.h */,
 				FC32BE1220792AD900817156 /* GetCarDetailModel.m */,
+				FC33AA8D20865E340081D30A /* AddOrderModel.h */,
+				FC33AA8E20865E340081D30A /* AddOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1610,6 +1633,8 @@
 				FC47955420556EAB00218362 /* GetCarViewController.m */,
 				FCF86B9B2069580100CF6FDE /* GetCarListViewController.h */,
 				FCF86B9C2069580200CF6FDE /* GetCarListViewController.m */,
+				FC33AA7F20863FB10081D30A /* AddOrderViewController.h */,
+				FC33AA8020863FB10081D30A /* AddOrderViewController.m */,
 				FCF86B9E2069589300CF6FDE /* NewGuestViewController.h */,
 				FCF86B9F2069589300CF6FDE /* NewGuestViewController.m */,
 			);
@@ -1625,6 +1650,8 @@
 				FC32BE0F2079261100817156 /* GetCarView.m */,
 				FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */,
 				FC32BFDB207B9BF800817156 /* MoneyInputVIew.m */,
+				FC33AA822086529A0081D30A /* AddOrderListCell.h */,
+				FC33AA832086529A0081D30A /* AddOrderListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1749,6 +1776,7 @@
 				FC32BE742079A9BD00817156 /* login_preson@2x.png in Resources */,
 				FC32BE5D2079A9BD00817156 /* user_nomnal@2x.png in Resources */,
 				A724C853207D0DE300083C86 /* 添加图片@3x.png in Resources */,
+				FC33AA8B208656400081D30A /* 选中@3x.png in Resources */,
 				FC32BE5F2079A9BD00817156 /* user_select@2x.png in Resources */,
 				FC32BE562079A9BD00817156 /* getCar_nomnal@3x.png in Resources */,
 				FC32BE592079A9BD00817156 /* price_nomnal@2x.png in Resources */,
@@ -1763,6 +1791,7 @@
 				FC32BE6B2079A9BD00817156 /* 禁止@3x.png in Resources */,
 				A724C861207D0E9B00083C86 /* 快速洗车图@3x.png in Resources */,
 				FC32BE722079A9BD00817156 /* login_password@2x.png in Resources */,
+				FC33AA892086563F0081D30A /* 未选中@2x.png in Resources */,
 				A724C863207D0EBB00083C86 /* 精致洗车图@3x.png in Resources */,
 				FC32BE752079A9BD00817156 /* login_preson@3x.png in Resources */,
 				A724C855207D0DFF00083C86 /* 添加符号@3x.png in Resources */,
@@ -1785,6 +1814,8 @@
 				FC32BE5E2079A9BD00817156 /* user_nomnal@3x.png in Resources */,
 				A71EABA6207F68E900347693 /* red@3x.png in Resources */,
 				FC32BE6D2079A9BD00817156 /* loading@2x.png in Resources */,
+				FC33AA8A208656400081D30A /* 未选中@3x.png in Resources */,
+				FC33AA8C208656400081D30A /* 选中@2x.png in Resources */,
 				FC32BE512079A9BD00817156 /* coverMain_nomnal@2x.png in Resources */,
 				A724C867207D0EE900083C86 /* 未完成@3x.png in Resources */,
 				FC32BE622079A9BD00817156 /* 提醒@3x.png in Resources */,
@@ -1938,6 +1969,7 @@
 				FC32BF272079AA2000817156 /* XCUserViolationViewController.m in Sources */,
 				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
+				FC33AA8120863FB10081D30A /* AddOrderViewController.m in Sources */,
 				FC32BFAF2079AA5900817156 /* PriceInspectTableViewCell.m in Sources */,
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
 				FC32BF422079AA2000817156 /* XCCheckoutDetailInputCell.m in Sources */,
@@ -1994,6 +2026,7 @@
 				A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */,
 				FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */,
 				A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */,
+				FC33AA8F20865E340081D30A /* AddOrderModel.m in Sources */,
 				FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */,
 				FC32BF182079AA2000817156 /* XCUserBaseViewController.m in Sources */,
 				FC32BF1E2079AA2000817156 /* XCUserInjuryCaseViewController.m in Sources */,
@@ -2015,6 +2048,7 @@
 				FC32BFAE2079AA5900817156 /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC32BFB62079AA5900817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
 				FC32BF382079AA2000817156 /* XCShopViewController.m in Sources */,
+				FC33AA842086529A0081D30A /* AddOrderListCell.m in Sources */,
 				2570165E207DE560007177F5 /* SelectStateView.m in Sources */,
 				250784C42081A28600B573F3 /* InputTextView.m in Sources */,
 				FC32BFA52079AA5900817156 /* PriceUnderwritingViewController.m in Sources */,
