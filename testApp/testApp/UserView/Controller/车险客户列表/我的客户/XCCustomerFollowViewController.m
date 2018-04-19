@@ -10,8 +10,14 @@
 #import "SelectTimeView.h"
 #import "PriceUnderwritingImportTableViewCell.h"
 #define kimportTableCellID @"importTableCellID"
-@interface XCCustomerFollowViewController ()<XCDistributionFooterViewDelegate>
-@property (nonatomic, strong) SelectTimeView * SelectTimeV ;
+@interface XCCustomerFollowViewController ()<XCDistributionFooterViewDelegate,PriceUnderwritingImportTableViewCellDelegate>
+
+/** 操作类型记录 */
+@property (nonatomic, copy) NSString * operateStr ;
+/** 下次跟进时间记录     */
+@property (nonatomic, copy) NSString * nextFollowTimeStr ;
+/** 跟进内容 非必须选 */
+@property (nonatomic, copy) NSString * contentStr ;
 
 @end
 
@@ -29,6 +35,10 @@
     [self configureData];
     [self.tableView reloadData];
     
+    self.operateStr = @"";
+    self.nextFollowTimeStr = @"";
+    self.contentStr = @"";
+    
 }
 
 #pragma mark - Init Method
@@ -39,34 +49,32 @@
 }
 - (void)initUI
 {
-    __weak typeof (self)weakSelf = self;
-    _SelectTimeV = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _SelectTimeV.hidden = YES;
-    self.SelectTimeV.block = ^(NSString *string ) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-        XCDistributionPicketCell *cell = [weakSelf.tableView cellForRowAtIndexPath:indexPath];
-        [cell setTitleValue:string];
-//        weakSelf.billModel.shipmentTime = string;
-    };
+
 }
 #pragma mark - Action Method
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak typeof (self)weakSelf = self;
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 0)) {
-            NSArray * arr = @[@"无责事故案件",@"代垫付案件",@"人伤案件",@"特俗案件",@"其他案件"];
+            NSArray * arr = @[@"人伤案件",@"无责事故案件",@"特殊案件",@"代垫付案件"];
+            __weak __typeof(self) weakSelf = self;
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
-//                weakSelf.billModel.packageGiveOrBuy = selectStr;
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
+                weakSelf.operateStr = selectStr;
             }];
             [weakSelf.view addSubview:alterView];
         }
         else if ((indexPath.section == 0 && indexPath.row == 1)) {
-           // [self.SelectTimeV inputSelectTiemView:YES];
+            __weak __typeof(self) weakSelf = self;
+            SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            selectView.block = ^(NSString *string) {
+                [(XCDistributionPicketCell *)cell setTitleValue:string];
+                weakSelf.nextFollowTimeStr = string;
+            };
+            [self.view addSubview:selectView];
         }
        
     }
@@ -75,10 +83,37 @@
 #pragma mark - XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
+    __weak __typeof(self) weakSelf = self;
+    NSDictionary *param = @{
+                            @"customerId":self.customerID,
+                            @"customerName":self.customerName,
+                            @"content":self.contentStr,
+                            @"operate":self.operateStr,
+                            @"nextFollowTime":self.nextFollowTimeStr
+                            };
+    [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (response[@"result"]) {
+            [strongSelf requestSuccessHandler];
+        }else {
+            [strongSelf requestFailureHandler];
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        [strongSelf requestFailureHandler];
+    }];
+    
     FinishTipsView *alterView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:^{
         
     }];
     [self.view addSubview:alterView];
+}
+
+#pragma mark - PriceUnderwritingImportTableViewCellDelegate
+- (void)textViewENDWithTextView:(UITextView *)textView
+{
+    self.contentStr = textView.text;
 }
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
@@ -92,6 +127,8 @@
     
     if (indexPath.section == 0 && indexPath.row == 2) {
         PriceUnderwritingImportTableViewCell *cell = (PriceUnderwritingImportTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kimportTableCellID forIndexPath:indexPath];
+        cell.textView.text = @"内容描述...";
+        cell.delegate = self;
         return cell;
     }else {
         XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID forIndexPath:indexPath];
@@ -127,8 +164,36 @@
 }
 
 #pragma mark - Privacy Method
-
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
+- (void)requestSuccessHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
+    [self.view addSubview:tipsView];
+}
 #pragma mark - Setter&Getter
 
-
+////获取操作类型
+//NSDictionary *param = @{
+//                        @"dictCode":[UserInfoManager shareInstance].ticketID ,
+//                        };
+//__block NSMutableArray *packArrM = [[NSMutableArray alloc] init];
+//
+//[RequestAPI getValidPackage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//    if (response[@"data"]) {
+//        NSArray *dataArr = response[@"data"];
+//        for (NSDictionary *dataInfo in dataArr) {
+//            XCUserPackageModel *packageModel = [XCUserPackageModel yy_modelWithJSON:dataInfo];
+//            if (packageModel) {
+//                [packArrM addObject:packageModel];
+//            }
+//        }
+//    }
+//
+//    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//} fail:^(id error) {
+//}];
 @end

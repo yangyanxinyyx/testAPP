@@ -30,8 +30,10 @@
 /** <# 类型描述  #> */
 @property (nonatomic, assign) NSInteger  index;
 
-/** <# 类型描述  #> */
-@property (nonatomic, assign) NSInteger  totalPage ;
+/** <# 注释 #> */
+@property (nonatomic, assign) int  pageIndex;
+//下拉刷新获取总页数
+@property (nonatomic, assign) int pageCount ;
 
 /** 门店页面用的model  */
 @property (nonatomic, strong) XCShopModel * storeModel ;

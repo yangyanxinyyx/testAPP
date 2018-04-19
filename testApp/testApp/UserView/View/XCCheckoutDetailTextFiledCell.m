@@ -11,7 +11,6 @@
 @interface XCCheckoutDetailTextFiledCell ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel * titleLabel ;
-@property (nonatomic, strong) UITextField * textField ;
 @property (nonatomic, strong) UIView * separtatorLine ;
 
 /** <# 注释 #> */
@@ -35,6 +34,7 @@
         _shouldShowSeparator = NO;
         _isCenterSeparator = NO;
         _isTwoInputType = NO;
+        _isNumField = NO;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
     }
@@ -75,7 +75,7 @@
         [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
         [_textField sizeToFit];
         labelSize = _textField.frame.size;
-        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, 300 * ViewRateBaseOnIP6 , 44 * ViewRateBaseOnIP6)];
+        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, self.bounds.size.width - (CGRectGetMaxX(_titleLabel.frame) + 16 + 16 * ViewRateBaseOnIP6) , 44 * ViewRateBaseOnIP6)];
     }
     
     if (_shouldShowSeparator) {
@@ -141,12 +141,31 @@
 
 #pragma mark - TextFieldDelegate
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [textField setText:@""];
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (self.delegate && [self.delegate respondsToSelector:(@selector(XCCheckoutDetailTextFiledSubmitTextField:))]) {
-        [self.delegate XCCheckoutDetailTextFiledSubmitTextField:textField.text title:_titleLabel.text];
+    if (self.delegate && [self.delegate respondsToSelector:(@selector(XCCheckoutDetailTextFiledSubmitTextField:title:))]) {
+        [self.delegate XCCheckoutDetailTextFiledSubmitTextField:textField title:_titleLabel.text];
     }
 }
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet *cs;
+    if(_isNumField) {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basicTest = [string isEqualToString:filtered];
+        if(!basicTest)  {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 
 #pragma mark - Privacy Method
 

@@ -102,31 +102,6 @@
             [self.allDataArray addObject:csModel];
             
             
-            //盗抢险
-            PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
-            dqModel.name = @"盗抢险";
-            NSNumber *dqIsSelect = [data objectForKey:@"dqIsSelect"];
-            if (![dqIsSelect isKindOfClass:[NSNull class]]) {
-                dqModel.isToubao = [data objectForKey:@"dqIsSelect"];
-            }
-            NSNumber *dqBaoFei = [data objectForKey:@"dqBaoFei"];
-            if (![dqBaoFei isKindOfClass:[NSNull class]]) {
-                dqModel.number = [dqBaoFei doubleValue];
-            }
-            NSNumber *dqWithout = [data objectForKey:@"dqWithout"];
-            if (![dqWithout isKindOfClass:[NSNull class]]) {
-                dqModel.isMianpei = [data objectForKey:@"dqWithout"];
-            }
-            NSNumber *dqValue = [data objectForKey:@"dqValue"];
-            if (![dqValue isKindOfClass:[NSNull class]]) {
-                dqModel.priceValue = [dqValue doubleValue];
-            }
-            if ([dqModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:dqModel];
-            }
-            [self.allDataArray addObject:dqModel];
-            
-            
             //第三者险
             PriceInfoModel *szModel = [[PriceInfoModel alloc] init];
             szModel.name = @"三者险";
@@ -227,28 +202,29 @@
             }
             [self.allDataArray addObject:cshhModel];
             
-            
-            
-            // 玻璃险
-            PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
-            blModel.name = @"玻璃险";
-            NSNumber *blpsIsSelect = [data objectForKey:@"blpsIsSelect"];
-            if (![blpsIsSelect isKindOfClass:[NSNull class]]) {
-                blModel.isToubao = [data objectForKey:@"blpsIsSelect"];
+            //盗抢险
+            PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
+            dqModel.name = @"盗抢险";
+            NSNumber *dqIsSelect = [data objectForKey:@"dqIsSelect"];
+            if (![dqIsSelect isKindOfClass:[NSNull class]]) {
+                dqModel.isToubao = [data objectForKey:@"dqIsSelect"];
             }
-            NSNumber *blpsBaoFei = [data objectForKey:@"blpsBaoFei"];
-            if (![blpsBaoFei isKindOfClass:[NSNull class]]) {
-                blModel.number = [blpsBaoFei doubleValue];
+            NSNumber *dqBaoFei = [data objectForKey:@"dqBaoFei"];
+            if (![dqBaoFei isKindOfClass:[NSNull class]]) {
+                dqModel.number = [dqBaoFei doubleValue];
             }
-            NSNumber *blValue = [data objectForKey:@"blValue"];
-            if (![blValue isKindOfClass:[NSNull class]]) {
-                blModel.priceValue = [blValue doubleValue];
+            NSNumber *dqWithout = [data objectForKey:@"dqWithout"];
+            if (![dqWithout isKindOfClass:[NSNull class]]) {
+                dqModel.isMianpei = [data objectForKey:@"dqWithout"];
             }
-            if ([blModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:blModel];
+            NSNumber *dqValue = [data objectForKey:@"dqValue"];
+            if (![dqValue isKindOfClass:[NSNull class]]) {
+                dqModel.priceValue = [dqValue doubleValue];
             }
-            [self.allDataArray addObject:blModel];
-            
+            if ([dqModel.isToubao isEqualToString:@"Y"]) {
+                [self.dataArray addObject:dqModel];
+            }
+            [self.allDataArray addObject:dqModel];
            
             //发动机涉水险
             PriceInfoModel *fdjsModel = [[PriceInfoModel alloc] init];
@@ -274,24 +250,6 @@
             }
             [self.allDataArray addObject:fdjsModel];
             
-            
-            //无第三方险
-            PriceInfoModel *wfModel = [[PriceInfoModel alloc] init];
-            wfModel.name = @"无第三方险";
-            NSNumber *wfzddsfIsSelect = [data objectForKey:@"wfzddsfIsSelect"];
-            if (![wfzddsfIsSelect isKindOfClass:[NSNull class]]) {
-                wfModel.isToubao = [data objectForKey:@"wfzddsfIsSelect"];
-            }
-            NSNumber *wfzddsfBaoFei = [data objectForKey:@"wfzddsfBaoFei"];
-            if (![wfzddsfBaoFei isKindOfClass:[NSNull class]]) {
-                wfModel.number = [wfzddsfBaoFei doubleValue];
-            }
-            if ([wfModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:wfModel];
-            }
-            [self.allDataArray addObject:wfModel];
-            
-            
             //自燃险
             PriceInfoModel *zrModel = [[PriceInfoModel alloc] init];
             zrModel.name = @"自然险";
@@ -315,6 +273,46 @@
                 [self.dataArray addObject:zrModel];
             }
             [self.allDataArray addObject:zrModel];
+            
+            
+            // 玻璃险
+            PriceInfoModel *blModel = [[PriceInfoModel alloc] init];
+            blModel.name = @"玻璃险";
+            NSNumber *blpsIsSelect = [data objectForKey:@"blpsIsSelect"];
+            if (![blpsIsSelect isKindOfClass:[NSNull class]]) {
+                blModel.isToubao = [data objectForKey:@"blpsIsSelect"];
+            }
+            NSNumber *blpsBaoFei = [data objectForKey:@"blpsBaoFei"];
+            if (![blpsBaoFei isKindOfClass:[NSNull class]]) {
+                blModel.number = [blpsBaoFei doubleValue];
+            }
+            NSNumber *blValue = [data objectForKey:@"blValue"];
+            if (![blValue isKindOfClass:[NSNull class]]) {
+                blModel.priceValue = [blValue doubleValue];
+            }
+            if ([blModel.isToubao isEqualToString:@"Y"]) {
+                [self.dataArray addObject:blModel];
+            }
+            [self.allDataArray addObject:blModel];
+            
+            
+            //无第三方险
+            PriceInfoModel *wfModel = [[PriceInfoModel alloc] init];
+            wfModel.name = @"无第三方险";
+            NSNumber *wfzddsfIsSelect = [data objectForKey:@"wfzddsfIsSelect"];
+            if (![wfzddsfIsSelect isKindOfClass:[NSNull class]]) {
+                wfModel.isToubao = [data objectForKey:@"wfzddsfIsSelect"];
+            }
+            NSNumber *wfzddsfBaoFei = [data objectForKey:@"wfzddsfBaoFei"];
+            if (![wfzddsfBaoFei isKindOfClass:[NSNull class]]) {
+                wfModel.number = [wfzddsfBaoFei doubleValue];
+            }
+            if ([wfModel.isToubao isEqualToString:@"Y"]) {
+                [self.dataArray addObject:wfModel];
+            }
+            [self.allDataArray addObject:wfModel];
+            
+            
             
             
             NSNumber *bussice = [data objectForKey:@"syBaoFei"];
@@ -391,27 +389,28 @@
     [dic setObject:[NSString stringWithFormat:@"%f",dqModel.priceValue] forKey:@"dqValue"];
     [dic setObject:dqModel.isMianpei forKey:@"dqWithout"];
     
-    //玻璃
-    PriceInfoModel *blModel = [self.allDataArray objectAtIndex:7];
-    [dic setObject:blModel.isToubao forKey:@"blpsIsSelect"];
-    [dic setObject:[NSString stringWithFormat:@"%f", blModel.priceValue] forKey:@"blpsValue"];
-    
     //发动机涉水险
-    PriceInfoModel *fdjssModel = [self.allDataArray objectAtIndex:8];
+    PriceInfoModel *fdjssModel = [self.allDataArray objectAtIndex:7];
     [dic setObject:fdjssModel.isToubao forKey:@"fdjssIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",fdjssModel.priceValue] forKey:@"fdjssValue"];
     [dic setObject:fdjssModel.isMianpei forKey:@"fdjssWithout"];
     
-    //无法找到第三方
-    PriceInfoModel *wsModel = [self.allDataArray objectAtIndex:9];
-    [dic setObject:wsModel.isToubao forKey:@"wfzddsfIsSelect"];
-    
     //自燃险
-    PriceInfoModel *zrModel = [self.allDataArray objectAtIndex:10];
+    PriceInfoModel *zrModel = [self.allDataArray objectAtIndex:8];
     [dic setObject:zrModel.isToubao forKey:@"zrxIsSelect"];
     [dic setObject:[NSString stringWithFormat:@"%f",zrModel.priceValue] forKey:@"zrxValue"];
     [dic setObject:zrModel.isMianpei forKey:@"zrxWithout"];
 
+    //玻璃
+    PriceInfoModel *blModel = [self.allDataArray objectAtIndex:9];
+    [dic setObject:blModel.isToubao forKey:@"blpsIsSelect"];
+    [dic setObject:[NSString stringWithFormat:@"%f", blModel.priceValue] forKey:@"blpsValue"];
+    
+    //无法找到第三方
+    PriceInfoModel *wsModel = [self.allDataArray objectAtIndex:10];
+    [dic setObject:wsModel.isToubao forKey:@"wfzddsfIsSelect"];
+    
+  
 
     [RequestAPI getSavePrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -673,7 +672,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor whiteColor];

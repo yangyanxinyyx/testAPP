@@ -78,7 +78,7 @@ static NSString *identifier = @"listCell";
     [self.view addSubview:self.topView];
     [self.topView addSubview:self.searchContenView];
     [self.searchContenView addSubview:self.textField];
-
+    [self.view addSubview:self.noFoundTipsView];
     if (![UserInfoManager shareInstance].isStore) {
         [self.view addSubview:self.forbidTipsView];
         return;
@@ -133,6 +133,7 @@ static NSString *identifier = @"listCell";
                     }
 
                     dispatch_async(dispatch_get_main_queue(), ^{
+
                         [self.tab reloadData];
                         [self showFixBtn:_dataSource.count > 0 ? NO : YES];
                     });
@@ -176,13 +177,15 @@ static NSString *identifier = @"listCell";
 //        self.fixBtn.hidden = NO;
 //        self.orderBtn.hidden = NO;
 //        self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
-        _noFoundTipsView.hidden = NO;
+        self.noFoundTipsView.hidden = NO;
+        _tab.hidden =YES;
 
     }else{
 //        self.fixBtn.hidden = YES;
 //        self.orderBtn.hidden = NO;
 //        self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
-        _noFoundTipsView.hidden = YES;
+        self.noFoundTipsView.hidden = YES;
+        _tab.hidden = NO;
     }
 
 }
@@ -333,6 +336,7 @@ static NSString *identifier = @"listCell";
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
         label.font = [UIFont systemFontOfSize:11];
         label.text = @"业务员不可用!";
+        label.textAlignment = NSTextAlignmentCenter;
         label.textColor = COLOR_RGB_255(165, 165, 165);
         [_forbidTipsView addSubview:label];
 
@@ -357,6 +361,7 @@ static NSString *identifier = @"listCell";
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
         label.font = [UIFont systemFontOfSize:11];
         label.text = @"无订单信息!";
+        label.textAlignment = NSTextAlignmentCenter;
         label.textColor = COLOR_RGB_255(165, 165, 165);
         [_noFoundTipsView addSubview:label];
 

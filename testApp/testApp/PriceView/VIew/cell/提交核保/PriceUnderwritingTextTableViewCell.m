@@ -57,6 +57,7 @@
     [self.delegate textFieldENDWithTextField:textField];
     
 }
+
 - (void)InfoNotificationAction:(NSNotification *)notification{
     [self.textFieldMoney resignFirstResponder];
     

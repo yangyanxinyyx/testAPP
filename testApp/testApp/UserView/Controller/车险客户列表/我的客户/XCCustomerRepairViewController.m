@@ -7,9 +7,12 @@
 //
 
 #import "XCCustomerRepairViewController.h"
-
+#import "XCCustomerShopModel.h"
+#import "SelectTimeView.h"
+#import "XCCustomerShopListView.h"
 @interface XCCustomerRepairViewController ()<XCDistributionFooterViewDelegate>
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray * shopModelArrM ;
 @end
 
 @implementation XCCustomerRepairViewController
@@ -24,7 +27,10 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
+    self.shopModelArrM = [[NSMutableArray alloc] init];
     
+
+  
 }
 
 #pragma mark - Init Method
@@ -38,7 +44,19 @@
     
 }
 #pragma mark - Action Method
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        __weak __typeof(self) weakSelf = self;
+        XCCustomerShopListView *listView = [[XCCustomerShopListView alloc] initWithDataArr:self.shopModelArrM confirmBlock:^(XCCustomerShopModel *model) {
+            
+            NSLog(@"%@",model);
+        }];
+        [self.view addSubview:listView];
+    }
+    
+}
 #pragma mark - Delegates & Notifications
 #pragma mark - XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
@@ -87,7 +105,46 @@
 }
 
 #pragma mark - Privacy Method
-
+- (void)requestFailureHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+    [self.view addSubview:tipsView];
+}
+- (void)requestSuccessHandler
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
+    [self.view addSubview:tipsView];
+}
 #pragma mark - Setter&Getter
+
+- (void)setLocation:(CLLocation *)location
+{
+    _location = location;
+    __weak __typeof(self) weakSelf = self;
+    NSDictionary *param = @{
+                            @"longitude":[NSNumber numberWithDouble:_location.coordinate.longitude],
+                            @"latitude":[NSNumber numberWithDouble:_location.coordinate.latitude],
+                            @"PageSize":[NSNumber numberWithInt:10],
+                            };
+    [RequestAPI appFindStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (response[@"data"]) {
+            if (response[@"data"][@"dataSet"]) {
+                NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                for (NSDictionary *dataInfo in origionDataArr) {
+                    XCCustomerShopModel *shopModel = [XCCustomerShopModel yy_modelWithJSON:dataInfo];
+                    if (shopModel) {
+                        [strongSelf.shopModelArrM addObject:shopModel];
+                    }
+                }
+            }
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        [strongSelf requestFailureHandler];
+    }];
+
+}
 
 @end

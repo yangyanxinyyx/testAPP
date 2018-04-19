@@ -43,7 +43,7 @@
     
     [_titleLabel sizeToFit];
     CGSize labelSize = _titleLabel.frame.size;
-    CGFloat labeH = 25 * ViewRateBaseOnIP6;
+    CGFloat labeH = 24 * ViewRateBaseOnIP6;
     [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
     
     [_placeholderLabel sizeToFit];
@@ -76,11 +76,11 @@
     else if ([self.title isEqualToString:@"发动机号:"] && isUsableNSString(model.engineNo,@"")) {
         [_placeholderLabel setText:model.engineNo];
     }
-    else if ([self.title isEqualToString:@"车型名称:"] && isUsableNSString(model.model,@"")) {
-        [_placeholderLabel setText:model.model];
+    else if ([self.title isEqualToString:@"车型名称:"] && isUsableNSString(model.brand,@"")) {
+        [_placeholderLabel setText:model.brand];
     }
-    else if ([self.title isEqualToString:@"车型代码:"] && isUsableNSString(model.model2,@"")) {
-        [_placeholderLabel setText:model.model2];
+    else if ([self.title isEqualToString:@"车型代码:"] && isUsableNSString(model.model,@"")) {
+        [_placeholderLabel setText:model.model];
     }
     else if ([self.title isEqualToString:@"(商业)起保日期:"] && isUsableNSString(model.syEffectDate,@"")) {
         [_placeholderLabel setText:model.syEffectDate];
@@ -94,38 +94,38 @@
     else if ([self.title isEqualToString:@"缴费通知单号:"] && isUsableNSString(model.payNoticeNo,@"")) {
         [_placeholderLabel setText:model.payNoticeNo];
     }
-    else if ([self.title isEqualToString:@"交强险(业务员)金额:"] && isUsableNSString(model.jqMoney,@"")) {
-        [_placeholderLabel setText:model.jqMoney];
+    else if ([self.title isEqualToString:@"交强险(业务员)金额:"] && isUsable(model.jqMoney, [NSNumber class])) {
+        [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.jqMoney doubleValue]]];
     }
-    else if ([self.title isEqualToString:@"商业险(业务员)金额:"] && isUsableNSString(model.syMoney,@"")) {
-        [_placeholderLabel setText:model.syMoney];
+    else if ([self.title isEqualToString:@"商业险(业务员)金额:"] && isUsable(model.syMoney, [NSNumber class])) {
+      [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.syMoney doubleValue]]];
     }
-    else if ([self.title isEqualToString:@"交强险(出单员)金额:"] && isUsableNSString(model.jqMoneyExport,@"")) {
-        [_placeholderLabel setText:model.jqMoneyExport];
+    else if ([self.title isEqualToString:@"交强险(出单员)金额:"] && isUsable(model.jqMoneyExport, [NSNumber class])) {
+      [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.jqMoneyExport doubleValue]]];
     }
-    else if ([self.title isEqualToString:@"商业险(出单员)金额:"] && isUsableNSString(model.syMoneyExport,@"")) {
-        [_placeholderLabel setText:model.syMoneyExport];
-    }
-    else if ([self.title isEqualToString:@"出单员:"] && isUsableNSString(model.exportmanName,@"")) {
-        [_placeholderLabel setText:model.exportmanName];
-    }
-    else if ([self.title isEqualToString:@"交强险:"] && isUsableNSString(model.jqValue,@"")) {
-        [_placeholderLabel setText:model.jqValue];
-    }
-    else if ([self.title isEqualToString:@"机动车损险:"] && isUsableNSString(model.csValue,@"")) {
-        [_placeholderLabel setText:model.csValue];
+    else if ([self.title isEqualToString:@"商业险(出单员)金额:"] &&  isUsable(model.syMoneyExport, [NSNumber class])) {
+          [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.syMoneyExport doubleValue]]];
     }
     else if ([self.title isEqualToString:@"出单员:"] && isUsableNSString(model.exportmanName,@"")) {
         [_placeholderLabel setText:model.exportmanName];
     }
-    else if ([self.title isEqualToString:@"第三责任险:"] && isUsableNSString(model.szValue,@"")) {
-        [_placeholderLabel setText:model.szValue];
+    else if ([self.title isEqualToString:@"交强险:"] && isUsable(model.jqValue, [NSNumber class])) {
+         [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.jqValue doubleValue]]];
     }
-    else if ([self.title isEqualToString:@"车上(司机)险:"] && isUsableNSString(model.cssjValue,@"")) {
-        [_placeholderLabel setText:model.cssjValue];
+    else if ([self.title isEqualToString:@"机动车损险:"] && isUsable(model.csValue, [NSNumber class])) {
+          [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.csValue doubleValue]]];
     }
-    else if ([self.title isEqualToString:@"车上(乘客)险:"] && isUsableNSString(model.csckValue,@"")) {
-        [_placeholderLabel setText:model.csckValue];
+    else if ([self.title isEqualToString:@"出单员:"] && isUsableNSString(model.exportmanName,@"")) {
+        [_placeholderLabel setText:model.exportmanName];
+    }
+    else if ([self.title isEqualToString:@"第三责任险:"] && isUsable(model.szValue, [NSNumber class])) {
+          [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.szValue doubleValue]]];
+    }
+    else if ([self.title isEqualToString:@"车上(司机)险:"] && isUsable(model.cssjValue, [NSNumber class])) {
+          [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.cssjValue doubleValue]]];
+    }
+    else if ([self.title isEqualToString:@"车上(乘客)险:"] && isUsable(model.csckValue, [NSNumber class])) {
+          [_placeholderLabel setText:[NSString stringWithFormat:@"%2f",[model.csckValue doubleValue]]];
     }
 }
 

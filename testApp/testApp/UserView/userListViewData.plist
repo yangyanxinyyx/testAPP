@@ -37,7 +37,7 @@
 				<key>iconName</key>
 				<string>财务审核中</string>
 				<key>url</key>
-				<string></string>
+				<string>XCUserFinancialAuditViewController</string>
 			</dict>
 			<dict>
 				<key>title</key>
@@ -45,7 +45,7 @@
 				<key>iconName</key>
 				<string>配送</string>
 				<key>url</key>
-				<string></string>
+				<string>XCUserDistributionViewController</string>
 			</dict>
 			<dict>
 				<key>title</key>
@@ -61,7 +61,7 @@
 				<key>iconName</key>
 				<string>续保列表</string>
 				<key>url</key>
-				<string></string>
+				<string>XCUserRenewalInsuranceListViewController</string>
 			</dict>
 			<dict>
 				<key>title</key>

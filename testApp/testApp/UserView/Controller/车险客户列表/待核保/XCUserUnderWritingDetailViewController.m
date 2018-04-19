@@ -54,7 +54,7 @@
    
     LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否撤销" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
         NSDictionary *param = @{
-                                @"id":[NSNumber numberWithLong:weakSelf.model.BillID],
+                                @"id":weakSelf.model.BillID,
                                 };
         [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             
