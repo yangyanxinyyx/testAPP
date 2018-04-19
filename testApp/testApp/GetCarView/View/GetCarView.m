@@ -32,7 +32,7 @@
         scrollView.delegate = self;
 
         NSArray *titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:"];
-        NSArray *titleArray2 = @[model.customerName,model.plateNo,model.model,model.phone];
+        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.model],[NSString stringWithFormat:@"%@",model.phone]];
         for (int i=0 ; i<4; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 40)];
             label.font = [UIFont systemFontOfSize:14];

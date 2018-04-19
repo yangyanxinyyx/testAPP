@@ -14,6 +14,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "LYZAlertView.h"
 #import "NewGuestViewController.h"
+#import "AddOrderViewController.h"
 static NSString *identifier = @"listCell";
 
 @interface GetCarListViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,GetCarListCellDelegate,GetCarViewControllerDelegate,MoneyInputVIewDelegate>
@@ -28,7 +29,7 @@ static NSString *identifier = @"listCell";
 @property (nonatomic, strong) UITextField *textField;
 
 @property (nonatomic, strong) UIButton *orderBtn;
-@property (nonatomic, strong) UIButton *fixBtn;
+//@property (nonatomic, strong) UIButton *fixBtn;
 
 @property (nonatomic, assign) NSInteger page;
 
@@ -77,7 +78,7 @@ static NSString *identifier = @"listCell";
     [self.view addSubview:self.topView];
     [self.topView addSubview:self.searchContenView];
     [self.searchContenView addSubview:self.textField];
-
+    [self.view addSubview:self.noFoundTipsView];
     if (![UserInfoManager shareInstance].isStore) {
         [self.view addSubview:self.forbidTipsView];
         return;
@@ -95,7 +96,7 @@ static NSString *identifier = @"listCell";
 
 
     [self.view addSubview:self.orderBtn];
-    [self.view addSubview:self.fixBtn];
+//    [self.view addSubview:self.fixBtn];
 
 }
 
@@ -132,6 +133,7 @@ static NSString *identifier = @"listCell";
                     }
 
                     dispatch_async(dispatch_get_main_queue(), ^{
+
                         [self.tab reloadData];
                         [self showFixBtn:_dataSource.count > 0 ? NO : YES];
                     });
@@ -172,16 +174,18 @@ static NSString *identifier = @"listCell";
 - (void)showFixBtn:(BOOL)show
 {
     if (show) {
-        self.fixBtn.hidden = NO;
-        self.orderBtn.hidden = NO;
-        self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
-        _noFoundTipsView.hidden = NO;
+//        self.fixBtn.hidden = NO;
+//        self.orderBtn.hidden = NO;
+//        self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
+        self.noFoundTipsView.hidden = NO;
+        _tab.hidden =YES;
 
     }else{
-        self.fixBtn.hidden = YES;
-        self.orderBtn.hidden = NO;
-        self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
-        _noFoundTipsView.hidden = YES;
+//        self.fixBtn.hidden = YES;
+//        self.orderBtn.hidden = NO;
+//        self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
+        self.noFoundTipsView.hidden = YES;
+        _tab.hidden = NO;
     }
 
 }
@@ -282,17 +286,16 @@ static NSString *identifier = @"listCell";
 }
 
 - (void)pressOrderBtn{
-
-    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:YES];
+    AddOrderViewController *VC = [[AddOrderViewController alloc] init];
     VC.serviceArray = self.serviceArray;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-- (void)pressFixBtn{
-
-    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
-    [self.navigationController pushViewController:VC animated:YES];
-}
+//- (void)pressFixBtn{
+//
+//    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
+//    [self.navigationController pushViewController:VC animated:YES];
+//}
 
 #pragma mark textfieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -333,6 +336,7 @@ static NSString *identifier = @"listCell";
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
         label.font = [UIFont systemFontOfSize:11];
         label.text = @"业务员不可用!";
+        label.textAlignment = NSTextAlignmentCenter;
         label.textColor = COLOR_RGB_255(165, 165, 165);
         [_forbidTipsView addSubview:label];
 
@@ -357,6 +361,7 @@ static NSString *identifier = @"listCell";
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
         label.font = [UIFont systemFontOfSize:11];
         label.text = @"无订单信息!";
+        label.textAlignment = NSTextAlignmentCenter;
         label.textColor = COLOR_RGB_255(165, 165, 165);
         [_noFoundTipsView addSubview:label];
 
@@ -419,26 +424,26 @@ static NSString *identifier = @"listCell";
         _orderBtn.layer.masksToBounds = YES;
         [_orderBtn setTitle:@"新增订单" forState:UIControlStateNormal];
         _orderBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
-        _orderBtn.hidden = YES;
+//        _orderBtn.hidden = YES;
     }
     return _orderBtn;
 }
 
-- (UIButton *)fixBtn
-{
-    if (!_fixBtn) {
-        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
-        [_fixBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _fixBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-        [_fixBtn addTarget:self action:@selector(pressFixBtn) forControlEvents:UIControlEventTouchUpInside];
-        _fixBtn.layer.cornerRadius = 5;
-        _fixBtn.layer.masksToBounds = YES;
-        [_fixBtn setTitle:@"新增维修" forState:UIControlStateNormal];
-        _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
-        _fixBtn.hidden = YES;
-    }
-    return _fixBtn;
-}
+//- (UIButton *)fixBtn
+//{
+//    if (!_fixBtn) {
+//        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
+//        [_fixBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        _fixBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+//        [_fixBtn addTarget:self action:@selector(pressFixBtn) forControlEvents:UIControlEventTouchUpInside];
+//        _fixBtn.layer.cornerRadius = 5;
+//        _fixBtn.layer.masksToBounds = YES;
+//        [_fixBtn setTitle:@"新增维修" forState:UIControlStateNormal];
+//        _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+//        _fixBtn.hidden = YES;
+//    }
+//    return _fixBtn;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
