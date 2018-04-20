@@ -821,6 +821,7 @@
 		A720C5AD2081ECD6006B0C33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FC32BEED2079AA2000817156 /* View */,
 				A720C5AE2081ECF0006B0C33 /* XCDistributionBillModel.h */,
 				A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */,
 				A720C5B12081EFE5006B0C33 /* XCDistributionPaymentBillModel.h */,
@@ -1014,7 +1015,6 @@
 			children = (
 				FC32BE852079AA2000817156 /* Controller */,
 				FC32BEDF2079AA2000817156 /* Model */,
-				FC32BEED2079AA2000817156 /* View */,
 				FC32BEEC2079AA2000817156 /* userListViewData.plist */,
 			);
 			path = UserView;

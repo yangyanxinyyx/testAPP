@@ -10,4 +10,6 @@
 
 @interface XCCustomerAnnualReviewViewController : XCUserBaseViewController
 
+/** <# 注释 #> */
+@property (nonatomic, strong) NSArray * dataArr ;
 @end

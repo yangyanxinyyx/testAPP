@@ -90,8 +90,29 @@
                 [self.navigationController pushViewController:repairVC animated:YES];
             }
         }else if([selectStr isEqualToString:@"年审预约"]) {
-            XCCustomerAnnualReviewViewController *annualReviewVC = [[XCCustomerAnnualReviewViewController alloc] initWithTitle:@"年审预约"];
-            [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
+            
+            NSDictionary *param = @{
+                                    @"carId":_model.carId,
+                                    };
+            [RequestAPI getCarVerificationMoney:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                NSString * respnseStr = response[@"errormsg"];
+                if (response[@"data"]) {
+                    NSArray *origionDataArr = response[@"data"];
+                        if (origionDataArr) {
+                            XCCustomerAnnualReviewViewController *annualReviewVC = [[XCCustomerAnnualReviewViewController alloc] initWithTitle:@"年审预约"];
+                            annualReviewVC.dataArr = origionDataArr;
+                            [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
+                        }
+                }else {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+                    [weakSelf.view addSubview:tipsView];
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            } fail:^(id error) {
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                [weakSelf.view addSubview:tipsView];
+            }];
+         
         }else if([selectStr isEqualToString:@"违章预约"]) {
             XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];
             [weakSelf.navigationController pushViewController:violationVC animated:YES];
@@ -122,7 +143,7 @@
     [_customerFollowUpBtn setTitle:@"客户跟进" forState:UIControlStateNormal];
     _customerFollowUpBtn.layer.cornerRadius = 3;
     _customerFollowUpBtn.layer.borderWidth = 1;
-    [_customerFollowUpBtn.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [_customerFollowUpBtn.layer setBorderColor:COLOR_RGB_255(1, 77, 163).CGColor];
     [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
     [_customerFollowUpBtn addTarget:self action:@selector(clickCustomerFollowUpBtn:) forControlEvents:UIControlEventTouchUpInside];
     

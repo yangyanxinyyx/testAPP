@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIImageView * addPhotoImageView ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIView * separtatorLine ;
+
+
 @end
 
 @implementation XCCheckoutDetailPhotoCell
@@ -81,25 +83,42 @@
     [_scrollview setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_titleLabel.frame) + 18 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     [_scrollview setContentSize:CGSizeMake(_maxPhoto * 140 * ViewRateBaseOnIP6, 0)];
     labelSize = CGSizeMake(140 * ViewRateBaseOnIP6, 140 * ViewRateBaseOnIP6);
-    if (_scrollview.subviews.count > 1) {
-        if ((_scrollview.subviews.count - 1) >= _maxPhoto) {
+    
+    
+    if (self.isAnnualType) {
+        if (self.photoArr.count == 1) {
             [_addPhotoImageView setFrame:CGRectZero];
-            for (int i = 0 ; i < (_scrollview.subviews.count - 1); i++) {
-                UIImageView *imageView = _scrollview.subviews[i];
-                [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+            UIImageView *imageView = [_scrollview.subviews firstObject];
+            [imageView setFrame:CGRectMake(0 , 0, labelSize.width, labelSize.height)];
+        }else {
+            if (![_addPhotoImageView superview]) {
+                [_scrollview addSubview:_addPhotoImageView];
+            }
+            [_addPhotoImageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
+        }
+        
+    }else {
+        if (_scrollview.subviews.count > 1) {
+            if ((_scrollview.subviews.count - 1) >= _maxPhoto) {
+                [_addPhotoImageView setFrame:CGRectZero];
+                for (int i = 0 ; i < (_scrollview.subviews.count - 1); i++) {
+                    UIImageView *imageView = _scrollview.subviews[i];
+                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                }
+            }else {
+                for (int i = 0 ; i < _scrollview.subviews.count; i++) {
+                    UIImageView *imageView = _scrollview.subviews[i];
+                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                }
             }
         }else {
-            for (int i = 0 ; i < _scrollview.subviews.count; i++) {
-                UIImageView *imageView = _scrollview.subviews[i];
-                [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+            if (![_addPhotoImageView superview]) {
+                [_scrollview addSubview:_addPhotoImageView];
             }
+            [_addPhotoImageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
         }
-    }else {
-        if (![_addPhotoImageView superview]) {
-            [_scrollview addSubview:_addPhotoImageView];
-        }
-        [_addPhotoImageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
     }
+   
 }
 #pragma mark - Action Method
 
@@ -146,6 +165,7 @@
 -(void)setPhotoArr:(NSArray *)photoArr
 {
     if (photoArr.count > 0) {
+        _photoArr = photoArr;
         [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
         
