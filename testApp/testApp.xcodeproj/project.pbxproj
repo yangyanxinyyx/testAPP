@@ -19,6 +19,8 @@
 		A71AA9622087A2A700E78990 /* XCCustomerShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9612087A2A700E78990 /* XCCustomerShopModel.m */; };
 		A71AA9652087A83A00E78990 /* XCCustomerShopListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */; };
 		A71AA9682087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */; };
+		A71EC30A208A481000DD546C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EC308208A481000DD546C /* UIImage+Resize.m */; };
+		A71EC30D208A481E00DD546C /* NYXImagesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EC30B208A481D00DD546C /* NYXImagesHelper.m */; };
 		A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */; };
 		A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */; };
 		A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */; };
@@ -41,6 +43,10 @@
 		A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */; };
 		A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */; };
 		A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */; };
+		A72600722089F394001C5571 /* XCCheckoutPhotoPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */; };
+		A726007B2089F669001C5571 /* CameraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600762089F669001C5571 /* CameraBaseViewController.m */; };
+		A726007C2089F669001C5571 /* BIAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600772089F669001C5571 /* BIAlertViewController.m */; };
+		A726007D2089F669001C5571 /* CGAffineTransformFun.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600782089F669001C5571 /* CGAffineTransformFun.m */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
@@ -302,6 +308,10 @@
 		A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerShopListView.m; sourceTree = "<group>"; };
 		A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerShopSrcollerViewCell.h; sourceTree = "<group>"; };
 		A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerShopSrcollerViewCell.m; sourceTree = "<group>"; };
+		A71EC308208A481000DD546C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		A71EC309208A481000DD546C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		A71EC30B208A481D00DD546C /* NYXImagesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYXImagesHelper.m; sourceTree = "<group>"; };
+		A71EC30C208A481D00DD546C /* NYXImagesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYXImagesHelper.h; sourceTree = "<group>"; };
 		A71EF1262082F3EF001B75ED /* XCCarTransactionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCarTransactionModel.h; sourceTree = "<group>"; };
 		A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCarTransactionModel.m; sourceTree = "<group>"; };
 		A71EFD7F205ADD5800F2F83F /* XCScreenFitMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCScreenFitMacro.h; sourceTree = "<group>"; };
@@ -347,6 +357,15 @@
 		A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseDetailViewController.m; sourceTree = "<group>"; };
 		A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserPackageModel.h; sourceTree = "<group>"; };
 		A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserPackageModel.m; sourceTree = "<group>"; };
+		A72600702089F394001C5571 /* XCCheckoutPhotoPreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutPhotoPreViewController.h; sourceTree = "<group>"; };
+		A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutPhotoPreViewController.m; sourceTree = "<group>"; };
+		A72600742089F669001C5571 /* CGAffineTransformFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAffineTransformFun.h; sourceTree = "<group>"; };
+		A72600752089F669001C5571 /* BIAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIAlertViewController.h; sourceTree = "<group>"; };
+		A72600762089F669001C5571 /* CameraBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraBaseViewController.m; sourceTree = "<group>"; };
+		A72600772089F669001C5571 /* BIAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIAlertViewController.m; sourceTree = "<group>"; };
+		A72600782089F669001C5571 /* CGAffineTransformFun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAffineTransformFun.m; sourceTree = "<group>"; };
+		A72600792089F669001C5571 /* CameraBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraBaseViewController.h; sourceTree = "<group>"; };
+		A726007A2089F669001C5571 /* CameraUIConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraUIConstant.h; sourceTree = "<group>"; };
 		A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceModel.h; sourceTree = "<group>"; };
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
@@ -806,6 +825,10 @@
 		A71EFD78205AD7FA00F2F83F /* categary */ = {
 			isa = PBXGroup;
 			children = (
+				A71EC30C208A481D00DD546C /* NYXImagesHelper.h */,
+				A71EC30B208A481D00DD546C /* NYXImagesHelper.m */,
+				A71EC309208A481000DD546C /* UIImage+Resize.h */,
+				A71EC308208A481000DD546C /* UIImage+Resize.m */,
 				A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */,
 				A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */,
 				FC32BFC42079AAAD00817156 /* NSString+MoneyString.h */,
@@ -821,7 +844,6 @@
 		A720C5AD2081ECD6006B0C33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FC32BEED2079AA2000817156 /* View */,
 				A720C5AE2081ECF0006B0C33 /* XCDistributionBillModel.h */,
 				A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */,
 				A720C5B12081EFE5006B0C33 /* XCDistributionPaymentBillModel.h */,
@@ -902,6 +924,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A72600732089F669001C5571 /* UIbase */ = {
+			isa = PBXGroup;
+			children = (
+				A72600742089F669001C5571 /* CGAffineTransformFun.h */,
+				A72600752089F669001C5571 /* BIAlertViewController.h */,
+				A72600762089F669001C5571 /* CameraBaseViewController.m */,
+				A72600772089F669001C5571 /* BIAlertViewController.m */,
+				A72600782089F669001C5571 /* CGAffineTransformFun.m */,
+				A72600792089F669001C5571 /* CameraBaseViewController.h */,
+				A726007A2089F669001C5571 /* CameraUIConstant.h */,
+			);
+			path = UIbase;
+			sourceTree = "<group>";
+		};
 		A72F94B2207A6A1F00100212 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +959,7 @@
 		A79A510720597A0F000D8D0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				A72600732089F669001C5571 /* UIbase */,
 				FCF87667206BCF1500CF6FDE /* YXScrollView.h */,
 				FCF87668206BCF1500CF6FDE /* YXScrollView.m */,
 				FC32BE06207909C300817156 /* ProgressCircleView.h */,
@@ -1014,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				FC32BE852079AA2000817156 /* Controller */,
+				FC32BEED2079AA2000817156 /* View */,
 				FC32BEDF2079AA2000817156 /* Model */,
 				FC32BEEC2079AA2000817156 /* userListViewData.plist */,
 			);
@@ -1049,6 +1087,8 @@
 				FC32BE8C2079AA2000817156 /* XCUserBaseViewController.m */,
 				FC32BE8D2079AA2000817156 /* XCUserCaseBaseTableViewController.h */,
 				FC32BE8E2079AA2000817156 /* XCUserCaseBaseTableViewController.m */,
+				A72600702089F394001C5571 /* XCCheckoutPhotoPreViewController.h */,
+				A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */,
 			);
 			path = BaseCommon;
 			sourceTree = "<group>";
@@ -2123,6 +2163,7 @@
 				FCF86BA02069589300CF6FDE /* NewGuestViewController.m in Sources */,
 				FC32BF422079AA2000817156 /* XCCheckoutDetailInputCell.m in Sources */,
 				A75D30572081276F0012898A /* XCShopServiceEditedServiceViewController.m in Sources */,
+				A71EC30A208A481000DD546C /* UIImage+Resize.m in Sources */,
 				FC32BF522079AA2000817156 /* XCDistributionPicketCell.m in Sources */,
 				A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
@@ -2162,12 +2203,16 @@
 				FC32BF342079AA2000817156 /* XCCustomerViewController.m in Sources */,
 				FC32BFAC2079AA5900817156 /* PriceInfoAddTableViewCell.m in Sources */,
 				A721489C20839659009E6DDC /* XCUserCaseDetailModel.m in Sources */,
+				A72600722089F394001C5571 /* XCCheckoutPhotoPreViewController.m in Sources */,
+				A726007B2089F669001C5571 /* CameraBaseViewController.m in Sources */,
 				FC32BF2E2079AA2000817156 /* XCUserUnderWritingDetailViewController.m in Sources */,
 				A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */,
 				A71AA9652087A83A00E78990 /* XCCustomerShopListView.m in Sources */,
 				25EA2370207E5ADF00A60866 /* priceModel.m in Sources */,
 				FC32BF292079AA2000817156 /* XCDistributionPolicyViewController.m in Sources */,
+				A726007C2089F669001C5571 /* BIAlertViewController.m in Sources */,
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
+				A71EC30D208A481E00DD546C /* NYXImagesHelper.m in Sources */,
 				FC32BFAA2079AA5900817156 /* PriceCarRecordTableViewCell.m in Sources */,
 				FC32BF362079AA2000817156 /* XCUserChargebackListDetailViewController.m in Sources */,
 				A72148A32083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m in Sources */,
@@ -2189,6 +2234,7 @@
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
+				A726007D2089F669001C5571 /* CGAffineTransformFun.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,
 				A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */,

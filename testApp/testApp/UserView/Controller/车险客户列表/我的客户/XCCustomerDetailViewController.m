@@ -101,6 +101,7 @@
                         if (origionDataArr) {
                             XCCustomerAnnualReviewViewController *annualReviewVC = [[XCCustomerAnnualReviewViewController alloc] initWithTitle:@"年审预约"];
                             annualReviewVC.dataArr = origionDataArr;
+                            annualReviewVC.model = weakSelf.model;
                             [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
                         }
                 }else {
@@ -114,8 +115,27 @@
             }];
          
         }else if([selectStr isEqualToString:@"违章预约"]) {
-            XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];
-            [weakSelf.navigationController pushViewController:violationVC animated:YES];
+            NSDictionary *param = @{
+                                    @"carId":_model.carId,
+                                    };
+            [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                NSString * respnseStr = response[@"errormsg"];
+                if (response[@"data"]) {
+                    
+                    
+                     XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];
+                    violationVC.model = weakSelf.model;
+                    [weakSelf.navigationController pushViewController:violationVC animated:YES];
+                }else {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+                    [weakSelf.view addSubview:tipsView];
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            } fail:^(id error) {
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                [weakSelf.view addSubview:tipsView];
+            }];
+            
         }
         
     }];

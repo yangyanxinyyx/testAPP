@@ -45,7 +45,9 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    [self.delegate textViewENDWithTextView:textView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textViewENDWithTextView:)]) {
+        [self.delegate textViewENDWithTextView:textView];
+    }
     if (textView.text.length < 1) {
         textView.text = @"请输入...";
         textView.textColor = [UIColor colorWithHexString:@"#838383"];
@@ -53,7 +55,9 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    [self.delegate textViewBeginWithTextView:textView];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textViewBeginWithTextView:)]) {
+        [self.delegate textViewBeginWithTextView:textView];
+    }
     if ([textView.text isEqualToString:@"请输入..."]) {
         textView.text = @"";
         textView.textColor = [UIColor colorWithHexString:@"#444444"];
@@ -61,7 +65,9 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textViewChangeWithTextView:)]) {
     [self.delegate textViewChangeWithTextView:textView];
+    }
 }
 
 - (void)InfoNotificationAction:(NSNotification *)notification{

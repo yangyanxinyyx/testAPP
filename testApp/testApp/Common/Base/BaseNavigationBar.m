@@ -42,7 +42,10 @@
     _titleLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:_titleLabel];
 
-    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-44, 0, 44, 44)];
+//    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-44, 0, 44, 44)];
+    // =================== modify by Liangyz
+    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-44 - 30 * ViewRateBaseOnIP6, 0, 44, 44)];
+    // ===================
     [self addSubview:_finishBtn];
     _finishBtn.backgroundColor = [UIColor clearColor];
     [_finishBtn addTarget:self action:@selector(pressFinishBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -72,6 +75,7 @@
 {
     _finishBtnTitle = finishBtnTitle;
     [_finishBtn setTitle:finishBtnTitle forState:UIControlStateNormal];
+    [_finishBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     _finishBtn.hidden = NO;
 }
 
@@ -94,7 +98,7 @@
 - (void)pressFinishBtn
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(baseNavigationDidPressCancelBtn:)]) {
-        [self.delegate baseNavigationDidPressCancelBtn:NO];
+        [self.delegate baseNavigationDidPressDeleteBtn:NO];
     }
 }
 /*

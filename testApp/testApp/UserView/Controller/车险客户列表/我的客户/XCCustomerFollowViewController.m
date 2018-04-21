@@ -55,7 +55,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [tableView endEditing:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 0)) {

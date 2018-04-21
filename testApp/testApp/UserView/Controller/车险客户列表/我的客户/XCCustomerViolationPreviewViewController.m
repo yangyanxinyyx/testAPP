@@ -68,6 +68,28 @@
     if (indexPath.row == self.dataArrM.count - 1) {
         cell.shouldShowSeparator = NO;
     }
+    NSString *valueStr = @"";
+    if (indexPath.row == 0) {
+        if (self.area) {
+            valueStr = self.area;
+        }
+    }
+    else if (indexPath.row == 1) {
+        if (self.wzcity) {
+            valueStr = self.wzcity;
+        }
+    }
+    else if (indexPath.row == 2) {
+        if (self.fen) {
+            valueStr = self.fen;
+        }
+    }
+    else if (indexPath.row == 3) {
+        if (self.act) {
+            valueStr = self.act;
+        }
+    }
+    [cell setTitlePlaceholder:valueStr];
     [cell setTitle:title];
     
     return cell;

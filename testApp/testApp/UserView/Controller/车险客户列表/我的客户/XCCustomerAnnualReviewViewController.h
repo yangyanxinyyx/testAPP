@@ -7,9 +7,10 @@
 //
 
 #import "XCUserBaseViewController.h"
-
+#import "XCCustomerDetailModel.h"
 @interface XCCustomerAnnualReviewViewController : XCUserBaseViewController
+@property (nonatomic, strong) XCCustomerDetailModel * model ;
 
-/** <# 注释 #> */
+/** 车辆类型选择 */
 @property (nonatomic, strong) NSArray * dataArr ;
 @end
