@@ -7,7 +7,11 @@
 //
 
 #import "XCUserBaseViewController.h"
+#import "XCUserViolationDetailModel.h"
 
 @interface XCCustomerViolationPreviewViewController : XCUserBaseViewController
+
+
+
 
 @end

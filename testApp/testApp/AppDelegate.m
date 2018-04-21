@@ -26,7 +26,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    [AMapServices sharedServices].apiKey = @"91e9c42063d5aa4636e6a31c7a196183";
+    [AMapServices sharedServices].apiKey = @"780fe25c204479d57fd155664e193fa6";
 
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;

@@ -34,7 +34,7 @@
 @property (nonatomic, strong) UIColor * textFiledBGColor ;
 /** 一行 两个输入方法样式 */
 @property (nonatomic, assign) BOOL isTwoInputType ;
-/** 是否数字键盘 默认NO*/
+/** 是否限制输入数字 默认NO*/
 @property (nonatomic, assign) BOOL  isNumField ;
 
 +(CGFloat)getCellHeight;

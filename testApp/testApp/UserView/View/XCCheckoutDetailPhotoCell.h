@@ -20,6 +20,9 @@
 
 @property (nonatomic, assign) NSInteger  maxPhoto ;
 
+/** 判断是否年审预约类型 默认NO */
+@property (nonatomic, assign) BOOL isAnnualType ;
+
 /** <# 类型描述  #> */
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
 + (CGFloat)getCellHeight;

@@ -18,6 +18,7 @@
 #import "XCShopServiceModel.h"
 #import "XCShopServiceDetailListViewController.h"
 #import "ProgressControll.h"
+#import "XCCheckoutPhotoPreViewController.h"
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
@@ -189,7 +190,12 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
                                                index:(NSInteger)index
                                                 cell:(XCCheckoutDetailPhotoCell *)cell
 {
-    
+    if (image) {
+        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] init];
+//        previewVC.sourceImage = image;
+        
+        [self.navigationController pushViewController:previewVC animated:YES];
+    }
 }
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView
                                                     cell:(XCCheckoutDetailPhotoCell *)cell

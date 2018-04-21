@@ -110,7 +110,7 @@
                     
                 }else {
 
-                    [label setFrame:CGRectMake(leftMargin, (startY + topMargin) + (labelTopMargin + 24 * ViewRateBaseOnIP6)  + (labelTopMargin + 24 * ViewRateBaseOnIP6) * (i - 1) , labelSize.width, 24 * ViewRateBaseOnIP6)];
+                    [label setFrame:CGRectMake(leftMargin, (startY + topMargin) + (labelTopMargin + 24 * ViewRateBaseOnIP6)  + (labelTopMargin + 24 * ViewRateBaseOnIP6) * (i - 1) , self.bounds.size.width - leftMargin * 2, 24 * ViewRateBaseOnIP6)];
                 }
             }
             
@@ -179,9 +179,9 @@
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
                                   @"车架号:",@"发动机号:",@"车型代码:",
-                                  @"违章地点:",@"违章城市:",@"违章分数:",
-                                  @"违章条款:",@"违章费用:",@"代办费用:",
-                                  @"总费用:",@"备注:"];
+                                  @"违章地点:",@"违章城市:",@"违章时间:",
+                                  @"违章分数:",@"违章条款:",@"总费用:"
+                                  ,@"备注:"];
     
     NSString * name = @"";
     NSString * plateNo = @"";
@@ -191,13 +191,10 @@
     NSString * Carmodel = @"";
     NSString * weizhangArea = @"";
     NSString * weizhangCity = @"";
-    NSString * buckleScores = @"0";
+    NSString * weizhangDate = @"";
+    NSString * buckleScores = @"0分";
     NSString * weizhangClause = @"";
-    //违章费用
-    NSString * weizhangPayment = @"0";
-    //代办费用
-    NSString * daibanpayment = @"0";
-    NSString * orderPrice = @"0";
+    NSString * orderPrice = @"¥0.00";
     NSString * remark = @"";
     
     
@@ -225,22 +222,18 @@
     if (isUsableNSString(model.weizhangCity, @"")) {
         weizhangCity = model.weizhangCity;
     }
+    if (isUsableNSString(model.weizhangDate, @"")) {
+        weizhangDate = model.weizhangDate;
+    }
     if (isUsable(model.buckleScores, [NSNumber class])) {
         buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
     }
     if (isUsableNSString(model.weizhangClause, @"")) {
         weizhangClause = model.weizhangClause;
     }
-    //违章费用
-//    if (isUsable(model.weizhan, [NSNumber class])) {
-//        buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
-//    }
-    //代办费用
-    //    if (isUsable(model.weizhan, [NSNumber class])) {
-    //        buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
-    //    }
+
     if (isUsable(model.orderPrice, [NSNumber class])) {
-        orderPrice = [NSString stringWithFormat:@"¥%@",model.orderPrice];
+        orderPrice = [NSString stringWithMoneyNumber:[model.orderPrice doubleValue]];
     }
     if (isUsableNSString(model.remark, @"")) {
         remark = model.remark;
@@ -248,8 +241,8 @@
     self.titleValueArr = @[name,plateNo,brand,
                            vinNo,engineNo,Carmodel,
                            weizhangArea,weizhangCity,buckleScores,
-                           weizhangClause,weizhangPayment,daibanpayment,
-                           orderPrice,remark];
+                           weizhangDate,weizhangClause,orderPrice,
+                           remark];
     
     for (int i = 0 ; i < _labelArrM.count; i++) {
         NSString * title = baseTitleNameArr[i];
@@ -262,8 +255,8 @@
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
                                   @"车架号:",@"发动机号:",@"车型代码:",
-                                  @"联系电话:",@"接车时间:",@"联系地址:",
-                                  @"预计完成时间:",@"维修项目:",@"备注:"];
+                                  @"联系电话:",@"预约时间:",@"保险金额:",
+                                  @"自费金额:",@"门店名称:",@"备注:"];
     
     NSString * name = @"";
     NSString * plateNo = @"";
@@ -272,10 +265,10 @@
     NSString * engineNo = @"";
     NSString * Carmodel = @"";
     NSString * phone = @"";
-    NSString * takeCarTime = @"";
-    NSString * address = @"";
-    NSString * yujiTime = @"";
-    NSString * weixiuProject = @"";
+    NSString * appointmentTime = @"";
+    NSString * insurance = @"¥0.00";
+    NSString * weixiuZifei = @"¥0.00";
+    NSString * storeName = @"";
     NSString * remark = @"";
     
     if (isUsableNSString(model.customerName, @"")) {
@@ -299,21 +292,25 @@
     if (isUsableNSString(model.phone, @"")) {
         phone = model.phone;
     }
-    //接车时间
-//    if (isUsableNSString(model.phone, @"")) {
-//        time = model.motTestTime;
-//    }
-    //接车地址 、 预计完成时间、维修项目
-    //    if (isUsableNSString(model.phone, @"")) {
-    //        time = model.motTestTime;
-    //    }
+    if (isUsableNSString(model.appointmentTime, @"")) {
+        appointmentTime = model.appointmentTime;
+    }
+    if (isUsable(model.insurance, [NSNumber class])) {
+        insurance = [NSString stringWithMoneyNumber:[model.insurance doubleValue]];
+    }
+    if (isUsable(model.insurance, [NSNumber class])) {
+        weixiuZifei = [NSString stringWithMoneyNumber:[model.weixiuZifei doubleValue]];
+    }
+    if (isUsableNSString(model.storeName, @"")) {
+        storeName = model.storeName;
+    }
     if (isUsableNSString(model.remark, @"")) {
         remark = model.remark;
     }
     self.titleValueArr = @[name,plateNo,brand,
                            vinNo,engineNo,Carmodel,
-                           phone,takeCarTime,address,
-                           yujiTime,weixiuProject,remark];
+                           phone,appointmentTime,insurance,
+                           weixiuZifei,storeName,remark];
     
     for (int i = 0 ; i < _labelArrM.count; i++) {
         NSString * title = baseTitleNameArr[i];

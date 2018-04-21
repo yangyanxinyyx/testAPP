@@ -355,17 +355,15 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         __weak typeof (self)weakSelf = self;
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            
-                if (response[@"data"]) {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
-                    [weakSelf.view addSubview:tipsView];
-                }else {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
-                    [weakSelf.view addSubview:tipsView];
-                }
-             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            NSString * respnseStr = response[@"errormsg"];
+            if (response[@"result"]) {
+                respnseStr = @"提交成功";
+            }
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+            [weakSelf.view addSubview:tipsView];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
             [weakSelf.view addSubview:tipsView];
         }];
         

@@ -57,4 +57,15 @@
 /** 联系方式 */
 @property (nonatomic, copy) NSString * phoneNo;
 
+
+//预约维修Model用
+/** 门店ID */
+@property (nonatomic, strong) NSNumber * storeId ;
+/** 门店名称 */
+@property (nonatomic, copy) NSString * storeName;
+/** 预约时间 */
+@property (nonatomic, copy) NSString * appointmentTime;
+/** 描述 */
+@property (nonatomic, copy) NSString * remark;
+
 @end

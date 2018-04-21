@@ -53,8 +53,8 @@
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"车品牌:",
                                   @"车架号:",@"发动机号:",@"车型代码:",
-                                  @"联系电话:",@"接车时间:",@"联系地址:",
-                                  @"预计完成时间:",@"维修项目:",@"备注:"];
+                                  @"联系电话:",@"预约时间:",@"保险金额:",
+                                  @"自费金额:",@"门店名称:",@"备注:"];
     self.dataTitleArrM = [[NSMutableArray alloc] initWithArray:baseTitleNameArr];
     
 }
