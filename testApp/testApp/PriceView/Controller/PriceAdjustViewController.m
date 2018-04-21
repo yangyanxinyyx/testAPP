@@ -350,7 +350,7 @@
     } else {
       [dic setObject:@"0" forKey:@"bujimianChesun"];
     }
-    if ([csModel.isToubao isEqualToString:@"投保"]) {
+    if ([csModel.isToubao isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"chesun"];
     } else {
         [dic setObject:@"0" forKey:@"chesun"];
@@ -409,33 +409,34 @@
 //    }
     [dic setObject:hhModel.model.value forKey:@"huahen"];
     
-
     
-    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:6];
+    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:6];
+    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
+    }
+    if ([dqModel.isToubao isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"daoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"daoqiang"];
+    }
+    //    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
+    
+    
+    PriceInfoModel *ssModel = [self.dataArray objectAtIndex:7];
     if ([ssModel.isMianpei isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"bujimianSheshui"];
     } else {
         [dic setObject:@"0" forKey:@"bujimianSheshui"];
     }
-    if ([ssModel.isToubao isEqualToString:@"投保"]) {
+    if ([ssModel.isToubao isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"sheshui"];
     } else {
         [dic setObject:@"0" forKey:@"sheshui"];
     }
     //    [dic setObject:ssModel.model.value forKey:@"sheshui"];
     
-    PriceInfoModel *dqModel = [self.dataArray objectAtIndex:7];
-    if ([dqModel.isMianpei isEqualToString:@"Y"]) {
-        [dic setObject:@"1" forKey:@"bujimianDaoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"bujimianDaoqiang"];
-    }
-    if ([dqModel.isToubao isEqualToString:@"投保"]) {
-        [dic setObject:@"1" forKey:@"daoqiang"];
-    } else {
-        [dic setObject:@"0" forKey:@"daoqiang"];
-    }
-    //    [dic setObject:dqModel.model.value forKey:@"daoqiang"];
     
     PriceInfoModel *zrModel = [self.dataArray objectAtIndex:8];
     if ([zrModel.isMianpei isEqualToString:@"Y"]) {
@@ -443,7 +444,7 @@
     } else {
         [dic setObject:@"0" forKey:@"bujimianZiran"];
     }
-    if ([zrModel.isToubao isEqualToString:@"投保"]) {
+    if ([zrModel.isToubao isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"ziran"];
     } else {
         [dic setObject:@"0" forKey:@"ziran"];
@@ -457,7 +458,7 @@
     //        [dic setObject:@"0" forKey:@"bujimianSheshui"];
     //    }
     
-    if ([blModel.isToubao isEqualToString:@"投保"]) {
+    if ([blModel.isToubao isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"boli"];
     } else  {
         [dic setObject:@"0" forKey:@"boli"];
@@ -472,7 +473,7 @@
     
     
     PriceInfoModel *wsModel = [self.dataArray objectAtIndex:10];
-    if ([wsModel.isToubao isEqualToString:@"投保"]) {
+    if ([wsModel.isToubao isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"hcsanfang"];
     } else {
         [dic setObject:@"0" forKey:@"hcsanfang"];

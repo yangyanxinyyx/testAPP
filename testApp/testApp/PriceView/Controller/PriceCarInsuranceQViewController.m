@@ -44,6 +44,9 @@
 @property (nonatomic, strong) NSMutableArray *arrayAllRecodeData;
 @property (strong, nonatomic) NSIndexPath* editingIndexPath;  //当前左滑cell的index，在代理方法中设置
 
+@property (nonatomic, strong) UIView *viewRequestFailed;
+@property (nonatomic, strong) UIView *viewDataEmpty;
+
 @end
 
 @implementation PriceCarInsuranceQViewController
@@ -77,6 +80,7 @@
     [self.networkDic setObject:@"1" forKey:@"appType"];
     [RequestAPI getLastYearPriceRecord:self.networkDic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+            _viewRequestFailed.hidden = YES;
             NSDictionary *data = response[@"data"];
             PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
             jqModel.name = @"交强险";
@@ -309,6 +313,7 @@
                         
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
+                    _viewRequestFailed.hidden = NO;
                     return ;
                 }
                 _requestCount ++;
@@ -323,6 +328,7 @@
                 FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
                     
                 }];
+                _viewRequestFailed.hidden = NO;
                 [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
                 return ;
             }
@@ -341,7 +347,7 @@
         
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
             NSLog(@"%@",response[@"data"]);
-
+            _viewDataEmpty.hidden = YES;
             for (NSDictionary *data in response[@"data"]) {
                 NSMutableArray *dataArray = [NSMutableArray array];
                 NSMutableArray *allDataArray = [NSMutableArray array];
@@ -625,11 +631,27 @@
                 [self.arrayPriceRecodeData addObject:dataArray];
                 [self.arrayAllRecodeData addObject:allDataArray];
             }
-            [self.myTableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.arrayRecodeData.count == 0) {
+                    _viewDataEmpty.hidden = NO;
+                }
+               [self.myTableView reloadData];
+            });
             
+            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _viewDataEmpty.hidden = NO;
+        
+            });
         }
     } fail:^(id error) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.arrayRecodeData.count == 0) {
+                _viewDataEmpty.hidden = NO;
+            }
+            [self.myTableView reloadData];
+        });
     }];
 }
 
@@ -900,6 +922,9 @@
                 if ([alertView superview]) {
                     [alertView removeFromSuperview];
                 }
+                if (self.arrayRecodeData.count == 0) {
+                    weakSelf.viewDataEmpty.hidden = NO;
+                }
             });
         }
     } fail:^(id error) {
@@ -917,7 +942,9 @@
     [self.viewBear addSubview:self.viewLastY];
     [self.viewBear addSubview:self.viewPriceRecord];
     [self.viewLastY addSubview:self.tableViewlast];
+    [self.viewLastY addSubview:self.viewRequestFailed];
     [self.viewPriceRecord addSubview:self.myTableView];
+    [self.viewPriceRecord addSubview:self.viewDataEmpty];
     [self.viewLastY addSubview:self.buttonPrice];
     [self.viewLastY addSubview:self.buttonRevisePrice];
     [self.viewLastY addSubview:self.viewSegmentation];
@@ -1036,6 +1063,46 @@
         
     }
     return _buttonPrice;
+}
+
+
+- (UIView *)viewRequestFailed{
+    if (!_viewRequestFailed) {
+        _viewRequestFailed = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 777 * ViewRateBaseOnIP6)];
+        _viewRequestFailed.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 112 * ViewRateBaseOnIP6, 112 * ViewRateBaseOnIP6)];
+        imageView.center = _viewRequestFailed.center;
+        imageView.image = [UIImage imageNamed:@"cry"];
+        [_viewRequestFailed addSubview:imageView];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame) + 20 * ViewRateBaseOnIP6, SCREEN_WIDTH, 24 * ViewRateBaseOnIP6)];
+        label.text = @"数据加载失败, 请稍后再试";
+        label.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
+        label.textColor = [UIColor colorWithRed:153 / 255.0 green:153 / 255.0 blue:153 / 255.0 alpha:1.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        [_viewRequestFailed addSubview:label];
+        _viewRequestFailed.hidden = YES;
+    }
+    
+    return _viewRequestFailed;
+}
+
+- (UIView *)viewDataEmpty{
+    if (!_viewDataEmpty) {
+        _viewDataEmpty = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 180 * ViewRateBaseOnIP6)];
+        _viewDataEmpty.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(285 * ViewRateBaseOnIP6, 270 * ViewRateBaseOnIP6, 218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6)];
+        imageView.image = [UIImage imageNamed:@"dataEmpty"];
+        [_viewDataEmpty addSubview:imageView];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame) + 40 * ViewRateBaseOnIP6, SCREEN_WIDTH, 24 * ViewRateBaseOnIP6)];
+        label.text = @"暂时没查到任何数据";
+        label.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
+        label.textColor = [UIColor colorWithRed:153 / 255.0 green:153 / 255.0 blue:153 / 255.0 alpha:1.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        [_viewDataEmpty addSubview:label];
+        _viewDataEmpty.hidden = YES;
+    }
+    
+    return _viewDataEmpty;
 }
 
 - (NSMutableDictionary *)networkDic{
