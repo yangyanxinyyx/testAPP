@@ -50,6 +50,10 @@
 		A7281845208B7105001BD20F /* XCUserViolationDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */; };
 		A7281848208B7321001BD20F /* XCUserViolationDetailClickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */; };
 		A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */; };
+		A7281850208B9B22001BD20F /* unconfirm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728184C208B9B20001BD20F /* unconfirm@3x.png */; };
+		A7281851208B9B22001BD20F /* confirm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728184D208B9B21001BD20F /* confirm@2x.png */; };
+		A7281852208B9B22001BD20F /* unconfirm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728184E208B9B21001BD20F /* unconfirm@2x.png */; };
+		A7281853208B9B22001BD20F /* confirm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728184F208B9B22001BD20F /* confirm@3x.png */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
@@ -375,6 +379,10 @@
 		A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailClickCell.m; sourceTree = "<group>"; };
 		A7281849208B7378001BD20F /* XCUserViolationDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserViolationDetailModel.h; sourceTree = "<group>"; };
 		A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailModel.m; sourceTree = "<group>"; };
+		A728184C208B9B20001BD20F /* unconfirm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unconfirm@3x.png"; sourceTree = "<group>"; };
+		A728184D208B9B21001BD20F /* confirm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "confirm@2x.png"; sourceTree = "<group>"; };
+		A728184E208B9B21001BD20F /* unconfirm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unconfirm@2x.png"; sourceTree = "<group>"; };
+		A728184F208B9B22001BD20F /* confirm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "confirm@3x.png"; sourceTree = "<group>"; };
 		A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceModel.h; sourceTree = "<group>"; };
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
@@ -1657,6 +1665,10 @@
 		FC33AADF2088386A0081D30A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				A728184D208B9B21001BD20F /* confirm@2x.png */,
+				A728184F208B9B22001BD20F /* confirm@3x.png */,
+				A728184E208B9B21001BD20F /* unconfirm@2x.png */,
+				A728184C208B9B20001BD20F /* unconfirm@3x.png */,
 				FC33AAE02088386A0081D30A /* 1@3x (1).png */,
 				FC33AAE12088386A0081D30A /* 1@3x (2).png */,
 				FC33AAE22088386A0081D30A /* red.png */,
@@ -1961,6 +1973,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7281853208B9B22001BD20F /* confirm@3x.png in Resources */,
 				FC33AB0D2088386A0081D30A /* 汽车3.jpg in Resources */,
 				FC33AB272088386A0081D30A /* 1@3x (1).png in Resources */,
 				FC33AB332088386A0081D30A /* 标准洗车图@3x.png in Resources */,
@@ -1992,6 +2005,7 @@
 				FC33AB362088386A0081D30A /* 添加符号@2x.png in Resources */,
 				FC33AB122088386A0081D30A /* 未选中@2x.png in Resources */,
 				FC33AB162088386A0081D30A /* 选中@2x.png in Resources */,
+				A7281850208B9B22001BD20F /* unconfirm@3x.png in Resources */,
 				FC33AB0F2088386A0081D30A /* 搜索@3x.png in Resources */,
 				FC33AB392088386A0081D30A /* 精致洗车图@3x.png in Resources */,
 				FC33AB152088386A0081D30A /* 禁止@3x.png in Resources */,
@@ -2001,6 +2015,7 @@
 				FC33AAF82088386A0081D30A /* coverMain_nomnal@3x.png in Resources */,
 				FC33AB282088386A0081D30A /* 1@3x (2).png in Resources */,
 				FC33AB0C2088386A0081D30A /* 汽车2.jpg in Resources */,
+				A7281852208B9B22001BD20F /* unconfirm@2x.png in Resources */,
 				FC33AAF72088386A0081D30A /* coverMain_nomnal@2x.png in Resources */,
 				FC33AB1E2088386A0081D30A /* login_password@3x.png in Resources */,
 				FC33AB322088386A0081D30A /* 标准洗车图@2x.png in Resources */,
@@ -2033,6 +2048,7 @@
 				FC33AB042088386A0081D30A /* price_select@3x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FC33AB292088386A0081D30A /* red.png in Resources */,
+				A7281851208B9B22001BD20F /* confirm@2x.png in Resources */,
 				FC33AB052088386A0081D30A /* user_nomnal@2x.png in Resources */,
 				FC33AAF92088386A0081D30A /* coverMain_select@2x.png in Resources */,
 			);

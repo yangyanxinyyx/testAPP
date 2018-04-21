@@ -49,13 +49,24 @@
 
 - (void)commitUnderWriting:(UIButton *)button
 {
-    
-    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否撤销" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
-        
+    NSDictionary *param = [self.detailModel yy_modelToJSONObject];
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI submitPolicyAfterRevoke:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+
+        NSString * respnseStr = response[@"errormsg"];
+        if ([response[@"result"] boolValue] == 1) {
+            respnseStr = @"修改成功";
+        }
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+        [strongSelf.view addSubview:tipsView];
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败" complete:nil];
+        [strongSelf.view addSubview:tipsView];
     }];
-    
-    [self.view addSubview:alertView];
-    
+
 }
 
 #pragma mark - Delegates & Notifications

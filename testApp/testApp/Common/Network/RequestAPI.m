@@ -81,6 +81,9 @@
 
 //提交客户跟进
 #define INSERTCUSTOMERFOLLOWREC_API [NSString stringWithFormat:@"%@/api/web/customers/insertCustomerFollowRec",API_PREFIX]
+//退单-修改核保
+#define SUBMITPOLICYAFTERREVOKE_API [NSString stringWithFormat:@"%@/api/web/customers/insertCustomerFollowRec",API_PREFIX]
+
 
 //预约维修
 #define ADDORDERBYMAINTAIN_API [NSString stringWithFormat:@"%@/api/web/order/addOrderByMaintain",API_PREFIX]
@@ -512,6 +515,15 @@
 +(void)postCustomerFollowRec:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:INSERTCUSTOMERFOLLOWREC_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//退单-修改核保
++(void)submitPolicyAfterRevoke:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
+{
+    [self getRequest:SUBMITPOLICYAFTERREVOKE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
