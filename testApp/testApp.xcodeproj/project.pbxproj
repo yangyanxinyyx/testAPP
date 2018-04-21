@@ -47,6 +47,9 @@
 		A726007B2089F669001C5571 /* CameraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600762089F669001C5571 /* CameraBaseViewController.m */; };
 		A726007C2089F669001C5571 /* BIAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600772089F669001C5571 /* BIAlertViewController.m */; };
 		A726007D2089F669001C5571 /* CGAffineTransformFun.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600782089F669001C5571 /* CGAffineTransformFun.m */; };
+		A7281845208B7105001BD20F /* XCUserViolationDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */; };
+		A7281848208B7321001BD20F /* XCUserViolationDetailClickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */; };
+		A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
@@ -366,6 +369,12 @@
 		A72600782089F669001C5571 /* CGAffineTransformFun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAffineTransformFun.m; sourceTree = "<group>"; };
 		A72600792089F669001C5571 /* CameraBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraBaseViewController.h; sourceTree = "<group>"; };
 		A726007A2089F669001C5571 /* CameraUIConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraUIConstant.h; sourceTree = "<group>"; };
+		A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserViolationDetailHeaderView.h; sourceTree = "<group>"; };
+		A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailHeaderView.m; sourceTree = "<group>"; };
+		A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserViolationDetailClickCell.h; sourceTree = "<group>"; };
+		A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailClickCell.m; sourceTree = "<group>"; };
+		A7281849208B7378001BD20F /* XCUserViolationDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserViolationDetailModel.h; sourceTree = "<group>"; };
+		A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailModel.m; sourceTree = "<group>"; };
 		A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceModel.h; sourceTree = "<group>"; };
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
@@ -857,6 +866,8 @@
 		A720C5B420826145006B0C33 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A7281849208B7378001BD20F /* XCUserViolationDetailModel.h */,
+				A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */,
 				A720C5B520826423006B0C33 /* XCCustomerListModel.h */,
 				A720C5B620826423006B0C33 /* XCCustomerListModel.m */,
 				A720C5B82082684D006B0C33 /* XCCustomerDetailModel.h */,
@@ -1286,6 +1297,10 @@
 				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
 				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
 				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
+				A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */,
+				A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */,
+				A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */,
+				A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";
@@ -2177,6 +2192,7 @@
 				FC32BF2B2079AA2000817156 /* XCUserWaitingToPayingViewController.m in Sources */,
 				FC2805DF205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m in Sources */,
 				FC32BF1A2079AA2000817156 /* UserViewController.m in Sources */,
+				A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */,
 				A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */,
 				A720C5B02081ECF0006B0C33 /* XCDistributionBillModel.m in Sources */,
 				FC32BF402079AA2000817156 /* XCCheckoutBaseFooterView.m in Sources */,
@@ -2217,6 +2233,7 @@
 				FC32BF362079AA2000817156 /* XCUserChargebackListDetailViewController.m in Sources */,
 				A72148A32083B11B009E6DDC /* XCUserRenewalInsuranceListViewController.m in Sources */,
 				FC32BFB22079AA5900817156 /* PriceCustomerInformEntrySubmitTableViewCell.m in Sources */,
+				A7281848208B7321001BD20F /* XCUserViolationDetailClickCell.m in Sources */,
 				A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */,
 				FC32BFBC2079AA5900817156 /* priceCIQChangeView.m in Sources */,
 				FC32BFBF2079AA5900817156 /* SelectSheetView.m in Sources */,
@@ -2234,6 +2251,7 @@
 				FC479512205553E900218362 /* AppDelegate.m in Sources */,
 				FC32BDF320760DE500817156 /* CoverAnnouncementView.m in Sources */,
 				FC2805E5205E5EB000DD0DA9 /* RequestAPI.m in Sources */,
+				A7281845208B7105001BD20F /* XCUserViolationDetailHeaderView.m in Sources */,
 				A726007D2089F669001C5571 /* CGAffineTransformFun.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,

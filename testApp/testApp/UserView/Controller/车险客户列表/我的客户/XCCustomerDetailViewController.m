@@ -11,6 +11,7 @@
 #import "XCCustomerAnnualReviewViewController.h"
 #import "XCCustomerViolationPreviewViewController.h"
 #import "XCCustomerFollowViewController.h"
+#import "XCUserViolationDetailModel.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 @interface XCCustomerDetailViewController ()
 @property (nonatomic, strong) UIButton  * customerFollowUpBtn ;
@@ -119,14 +120,26 @@
                                     @"carId":_model.carId,
                                     };
             [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                
                 NSString * respnseStr = response[@"errormsg"];
-                if (response[@"data"]) {
-                    
-                    
+                if (response[@"data"][@"lists"]) {
+                    NSArray *dataArr = response[@"data"][@"lists"];
+                    NSMutableArray *detailModelArrM = [[NSMutableArray alloc] init];
+                    for (NSDictionary *dataInfo in dataArr) {
+                        XCUserViolationDetailModel *model = [XCUserViolationDetailModel yy_modelWithJSON:dataInfo];
+                        model.customerId = weakSelf.model.customerId;
+                        model.customerName = weakSelf.model.customerName;
+                        model.phone = weakSelf.model.phoneNo;
+                        model.contacts = weakSelf.model.customerName;
+                        model.carId = weakSelf.model.carId;
+                        model.plateNo = weakSelf.model.plateNo;
+                        model.remark = weakSelf.model.remark;
+                        [detailModelArrM addObject:model];
+                    }
                      XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];
-                    violationVC.model = weakSelf.model;
+                    violationVC.dataArrM = detailModelArrM;
                     [weakSelf.navigationController pushViewController:violationVC animated:YES];
-                }else {
+                }else{
                     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }

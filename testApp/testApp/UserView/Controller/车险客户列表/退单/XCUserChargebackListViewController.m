@@ -111,7 +111,8 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArr.count;
+//    return self.dataArr.count;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,13 +120,13 @@
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
     [cell setTimeTitleStr:@"创建时间"];
     cell.delegate = self;
-    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    if(baseModel) {
-        cell.baseModel = baseModel;
-    }
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+//    if(baseModel) {
+//        cell.baseModel = baseModel;
+//    }
+    cell.carNumber = @"粤AAAAAA";
+    cell.userName = @"梁艺钟";
+    cell.issureTime = @"a123213-321-321-3";
     return cell;
 }
 

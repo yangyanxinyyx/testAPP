@@ -35,7 +35,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XCCheckoutDetailBaseModel *baseModel = nil;
-    if (self.dataArr.count >= indexPath.row) {
+    if (self.dataArr.count > indexPath.row) {
         baseModel =  self.dataArr[indexPath.row];
     }
     XCUserDistributionDetailViewController *detailVC = [[XCUserDistributionDetailViewController alloc] initWithTitle:@"配送详情"];
