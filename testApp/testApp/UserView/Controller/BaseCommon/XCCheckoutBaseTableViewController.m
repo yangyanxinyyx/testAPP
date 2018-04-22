@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    UIImage *image = [UIImage imageNamed:@"a"];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
     _bgImageView.image = image;
     _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
     [_bgLabel setText:@"暂无查询数据"];
@@ -116,7 +116,7 @@
 //- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 //{
 //    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kfooterViewID];
-// 
+//
 //    return footerView;
 //}
 

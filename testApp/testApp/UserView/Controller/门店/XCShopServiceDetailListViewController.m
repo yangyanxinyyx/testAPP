@@ -11,6 +11,7 @@
 #import "XCShopServiceModel.h"
 #define kDetailListCellID @"DetailListCellID"
 #import "XCShopServiceAddServiceViewController.h"
+#import "XCShopServiceEditedServiceViewController.h"
 @interface XCShopServiceDetailListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,XCShopDetailListCellDelegate>
 
 /** <# 注释 #> */
@@ -62,10 +63,12 @@
 }
 #pragma mark - Delegates & Notifications
 #pragma  mark - XCShopDetailListCellDelegate
-
--(void)XCShopDetailListCellClickEditedButton:(UIButton *)button
+-(void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
 {
     NSLog(@"点击编辑");
+    XCShopServiceEditedServiceViewController *editedVC = [[XCShopServiceEditedServiceViewController alloc] initWithTitle:serviceModel.serviceName];
+    
+    [self.navigationController pushViewController:editedVC animated:YES];
     
 }
 
@@ -122,6 +125,7 @@
     [_addServiceBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,  24 * ViewRateBaseOnIP6, 0, 0)];
     [_addServiceBtn addTarget:self action:@selector(clickAddNewService:) forControlEvents:UIControlEventTouchUpInside];
     UIImage *image = [UIImage imageNamed:@"添加符号"];
+    [_addServiceBtn setBackgroundColor:[UIColor whiteColor]];
     [_addServiceBtn setImage:image forState:UIControlStateNormal];
     
     [self.view addSubview:_collectionView];

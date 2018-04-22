@@ -82,7 +82,7 @@
         button.selected = YES;
         button.userInteractionEnabled = NO ;
         [statusLabel setText:@"处理中"];
-        [statusLabel setTextColor:[UIColor colorWithHexString:@"31bea6"]];
+        [statusLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         requstStr = [NSString stringWithFormat:@"%@",error];

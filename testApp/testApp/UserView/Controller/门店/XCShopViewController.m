@@ -22,7 +22,8 @@
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
-UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewControllerDelegate>
+UINavigationControllerDelegate,UIImagePickerControllerDelegate,
+XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
 @property (nonatomic, strong) UIView *contenView;
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -40,22 +41,39 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
 @property (nonatomic, strong) NSArray * serviceTitleArr ;
 /** 选中当前的Cell */
 @property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
-/** 证书图片保存 */
-@property (nonatomic, strong) UIImage * lincesPhoto ;
+/** 证书图片URLPath */
+@property (nonatomic, copy) NSString * lincesPhotoPath ;
 /** 4张图片保存 */
 @property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
-
-/** <# 注释 #> */
+/** 服务信息数据 */
 @property (nonatomic, strong) NSArray * services;
 
+/** 上传成功图片URL */
+@property (nonatomic, strong) NSMutableArray * networkURLArrM ;
 @end
 
 @implementation XCShopViewController
+- (void)dealloc {
+  
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
+    }
+    unlink([_lincesPhotoPath  UTF8String]);
+    
+    for (NSString *filePath in self.storePhotoArrM) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
+        unlink([filePath  UTF8String]);
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _storePhotoArrM = [[NSMutableArray alloc] init];
+    _networkURLArrM = [[NSMutableArray alloc] init];
     _services = [[NSMutableArray alloc] init];
     [self configureData];
     [self createUI];
@@ -75,8 +93,186 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
     [self.viewPriceRecord addSubview:self.serviceTableView];
     [self.contenView addSubview:self.viewSegment];
 }
-
+- (void)configureData
+{
+    self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
+                           @"负责人电话:",@"业务员提成:",@"团队经理提成:",
+                           @"所属城市",@"所在地区",@"门店审核状态",
+                           @"营业执照上传,1张",@"门店图片,最多4张"];
+    self.placeHolderArr = @[@"请输入名称",@"请输入联系方式",@"请输入负责人姓名",
+                            @"请输入电话",@"请输入百分比",@"请输入百分比",
+                            @"广州市",@"天河区",@"审核中"];
+    self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
+}
 #pragma mark - Action Method
+
+- (void)postModifyShopInfo
+{
+    _storeModel.url1 = @"";
+    _storeModel.url2 = @"";
+    _storeModel.url3 = @"";
+    _storeModel.url4 = @"";
+    
+    for (int i = 0 ; i < self.storePhotoArrM.count; i++) {
+        NSString *filePath = self.storePhotoArrM[i];
+        if (i == 0) {
+            _storeModel.url1 = filePath;
+        }
+        else if (i == 1) {
+            _storeModel.url2 = filePath;
+        }
+        else if (i == 2) {
+            _storeModel.url3 = filePath;
+        }
+        else if (i == 3) {
+            _storeModel.url4 = filePath;
+        }
+    }
+    dispatch_semaphore_t videoTrackSynLoadSemaphore;
+    videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
+    dispatch_time_t maxVideoLoadTrackTimeConsume = dispatch_time(DISPATCH_TIME_NOW, 10.0 * NSEC_PER_SEC);
+    __weak __typeof(self) weakSelf = self;
+    NSDictionary *param = @{
+                            @"id":_storeModel.storeID,
+                            @"tel":_storeModel.tel,
+                            @"name":_storeModel.name,
+                            @"corporateName":_storeModel.corporateName,
+                            @"corporateCellphone":_storeModel.corporateCellphone,
+                            @"address":_storeModel.address,
+                            @"longitude":_storeModel.longitude,
+                            @"latitude":_storeModel.latitude,
+                            @"type":_storeModel.type,
+                            @"city":_storeModel.city,
+                            @"area":_storeModel.area,
+                            @"salesmanCommission":_storeModel.salesmanCommission,
+                            @"managerCommission":_storeModel.managerCommission,
+                            @"licenseUrl":_storeModel.licenseUrl,
+                            @"url1":_storeModel.url1,
+                            @"url2":_storeModel.url2,
+                            @"url3":_storeModel.url3,
+                            @"url4":_storeModel.url4,
+                            };
+    [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = response[@"errormsg"];
+        if ([response[@"result"] boolValue] == 1) {
+            errStr = @"提交成功";
+            [strongSelf.networkURLArrM  removeAllObjects];
+        }
+        [strongSelf showAlterInfoWithNetWork:errStr];
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
+        
+        for (NSString *fileURLPath in _networkURLArrM) {
+            NSDictionary *param = @{
+                                    @"url":fileURLPath,
+                                    };
+            [RequestAPI deletePictureByUrl:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if ([response[@"result"] boolValue] == 1) {
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                dispatch_semaphore_signal(videoTrackSynLoadSemaphore);
+            } fail:^(id error) {
+                dispatch_semaphore_signal(videoTrackSynLoadSemaphore);
+            }];
+            dispatch_semaphore_wait(videoTrackSynLoadSemaphore, maxVideoLoadTrackTimeConsume);
+            
+        }
+        
+    }];
+    
+  
+}
+
+
+- (void)postUpLoadLocalPhoto
+{
+    __weak __typeof(self) weakSelf = self;
+    if (![self isUsefulURLWith:_lincesPhotoPath]) {
+        NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:_lincesPhotoPath]];
+        if (!uploadData) {
+            return;
+        }
+        //上传图片
+        NSDictionary *param = @{
+                                @"file":@[uploadData],
+                                };
+        [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+
+            if (response[@"result"]&&response[@"data"]) {
+                
+                if ([[NSFileManager defaultManager] fileExistsAtPath:strongSelf.lincesPhotoPath]) {
+                    [[NSFileManager defaultManager] removeItemAtPath:strongSelf.lincesPhotoPath error:nil];
+                }
+                unlink([strongSelf.lincesPhotoPath  UTF8String]);
+                NSArray *urlStrArr  = response[@"data"];
+                strongSelf.lincesPhotoPath = [urlStrArr firstObject];
+                [_networkURLArrM addObject:urlStrArr];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:@"提交失败"];
+                return ;
+            }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
+            return ;
+        }];
+    }
+    
+    __block NSMutableArray *uploadDataArrM = [[NSMutableArray alloc] init];
+    __block NSMutableArray *uploadPathArrM = [[NSMutableArray alloc] init];
+    for (NSString *filePath in self.storePhotoArrM) {
+        if (![self isUsefulURLWith:filePath]) {
+            NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+            [uploadDataArrM addObject:uploadData];
+            [uploadPathArrM addObject:filePath];
+        }
+    }
+    if (uploadPathArrM.count > 0) {
+        //上传图片
+        NSDictionary *param = @{
+                                @"file":uploadDataArrM,
+                                };
+        [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            if (response[@"result"]&&response[@"data"]) {
+                for (NSString *filePath in uploadPathArrM) {
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                    }
+                    unlink([filePath  UTF8String]);
+                }
+                strongSelf.storePhotoArrM = [strongSelf getOrigianShopPhotoWithModel:strongSelf.storeModel];
+                NSArray *urlStrArr  = response[@"data"];
+                for (NSString *urlPath in urlStrArr) {
+                    [strongSelf.storePhotoArrM addObject:urlPath];
+                    [strongSelf.networkURLArrM addObject:urlPath];
+
+                }
+                //提交修改门店
+                [strongSelf postModifyShopInfo];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:@"提交失败"];
+                return ;            }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
+            return ;
+        }];
+    }else {
+        [self postModifyShopInfo];
+    }
+   
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,19 +346,21 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
         NSDictionary *param = @{
                                 @"storeId":[UserInfoManager shareInstance].storeID,
                                 };
-        __weak typeof (self)weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             if (response[@"data"]) {
                 NSDictionary *dataInfo = response[@"data"];
                 NSArray *xcServicesArr = dataInfo[@"xcServiceList"];
                 NSArray *mrServicesArr = dataInfo[@"mrServiceList"];
                 NSArray *byServicesArr = dataInfo[@"byServiceList"];
-                self.services = [[NSMutableArray alloc] initWithArray:@[xcServicesArr,mrServicesArr,byServicesArr]];
-        
+                strongSelf.services = [[NSMutableArray alloc] initWithArray:@[xcServicesArr,mrServicesArr,byServicesArr]];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
         }];
         self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     }
@@ -172,31 +370,95 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
 
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
-    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:nil content:@"是否确认要提交审核" confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
-        
-        NSDictionary *parma = [self.storeModel getUpdateStoreDictionary];
-        [RequestAPI postUpdateStore:parma header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            
-        } fail:^(id error) {
-            
+    
+    BOOL configureSuccess = YES;
+
+//    if (![_storeModel.corporateCellphone isAreaCode]) {
+//        [self showAlterInfoWithNetWork:@"请输入正确格式电话"];
+//        configureSuccess = NO;
+//    }
+//    if (![self validateMobile:_storeModel.tel]) {
+//        [self showAlterInfoWithNetWork:@"请输入正确联系方式"];
+//        configureSuccess = NO;
+//    }
+    if (!isUsableNSString(_storeModel.latitude, @"")) {
+        [self showAlterInfoWithNetWork:@"定位信息错误"];
+        configureSuccess = NO;
+    }
+    if (!isUsableNSString(_storeModel.longitude, @"")) {
+        [self showAlterInfoWithNetWork:@"定位信息错误"];
+        configureSuccess = NO;
+    }
+    if (configureSuccess) {
+        __weak __typeof(self) weakSelf = self;
+        LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否修改门店信息" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            [strongSelf postUpLoadLocalPhoto];
         }];
-    }];
-    [self.view addSubview:alterView];
+        [self.view addSubview:alterView];
+    }
 }
 
-#pragma  mark - XCCheckoutDetailPhotoCellDelegate
+#pragma mark - XCCheckoutDetailTextFiledCellDelegate
 
-- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image
-                                               index:(NSInteger)index
-                                                cell:(XCCheckoutDetailPhotoCell *)cell
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
-    if (image) {
-        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] init];
-//        previewVC.sourceImage = image;
+    if ([title isEqualToString:@"门店名称:"]) {
+        _storeModel.name = textField.text;
+    }
+    else if ([title isEqualToString:@"联系方式:"]) {
+            [textField setText:[textField.text areaCodeFormat]];
+        if ([textField.text isAreaCode]) {
+            _storeModel.tel = [textField.text areaCodeFormat];
+
+        }else {
+            [self showAlterInfoWithNetWork:@"请输入正确格式联系方式"];
+        }
+    }
+    else if ([title isEqualToString:@"负责人:"]) {
+        _storeModel.corporateName = textField.text;
+    }
+    else if ([title isEqualToString:@"负责人电话:"]) {
+        if ([self validateMobile:textField.text]) {
+            _storeModel.corporateCellphone = textField.text;
+        }else {
+            [self showAlterInfoWithNetWork:@"请输入正确格式电话"];
+        }
+    }
+    else if ([title isEqualToString:@"业务员提成:"]) {
+        if ([textField.text doubleValue] < 100) {
+            double num = [textField.text doubleValue];
+            NSString *numStr = [NSString stringWithFormat:@"%.2f",num];
+            _storeModel.salesmanCommission = numStr;
+            
+        }else {
+            [self showAlterInfoWithNetWork:@"请输入正确百分比"];
+        }
+    }
+    else if ([title isEqualToString:@"团队经理提成:"]) {
+        if ([textField.text doubleValue] < 100) {
+            double num = [textField.text doubleValue];
+            NSString *numStr = [NSString stringWithFormat:@"%.2f",num];
+            _storeModel.managerCommission = numStr;
+            
+        }else {
+            [self showAlterInfoWithNetWork:@"请输入正确百分比"];
+        }
+    }
+}
+#pragma  mark - XCCheckoutDetailPhotoCellDelegate
+- (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL *)photoURL
+                                             index:(NSInteger)index
+                                              cell:(XCCheckoutDetailPhotoCell *)cell
+{
+    if (photoURL) {
+        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+        previewVC.sourceURL = photoURL;
         
         [self.navigationController pushViewController:previewVC animated:YES];
     }
 }
+
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView
                                                     cell:(XCCheckoutDetailPhotoCell *)cell
 {
@@ -233,13 +495,31 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
         UIImage *image = [UIImage imageWithData:imageData scale:1.0];
         
         if ([weakSelf.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-            weakSelf.lincesPhoto = image;
-            [weakSelf.currentPhotoCell setPhotoArr:@[weakSelf.lincesPhoto]];
-            [weakSelf.currentPhotoCell updateLocalPhotoArr:@[weakSelf.lincesPhoto]];
+            NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *doc_l_path = [NSString stringWithFormat:@"%@/", [docPaths firstObject]];
+            _lincesPhotoPath = [doc_l_path stringByAppendingPathComponent:@"lincePhoto.jpg"];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
+            }
+            unlink([_lincesPhotoPath  UTF8String]);
+            [UIImagePNGRepresentation(image) writeToFile:_lincesPhotoPath atomically:YES];
+            NSURL *lincePhotoURL = [NSURL fileURLWithPath:_lincesPhotoPath];
+            
+            [weakSelf.currentPhotoCell setPhotoArr:@[lincePhotoURL]];
         }
         else if ([weakSelf.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
-            [weakSelf.storePhotoArrM addObject:image];
-            [weakSelf.currentPhotoCell updateLocalPhotoArr:weakSelf.storePhotoArrM];
+          
+            NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *doc_l_path = [NSString stringWithFormat:@"%@/", [docPaths firstObject]];
+            NSString * tmpPath = [doc_l_path stringByAppendingPathComponent:[NSString stringWithFormat:@"shopPhoto%lu.jpg",(unsigned long)weakSelf.storePhotoArrM.count]];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
+            }
+            unlink([tmpPath  UTF8String]);
+            [UIImagePNGRepresentation(image) writeToFile:tmpPath atomically:YES];
+            NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+            [weakSelf.storePhotoArrM addObject:[tmpFileURL path]];
+            [weakSelf.currentPhotoCell setPhotoArr:weakSelf.storePhotoArrM];
         }
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
     } failureBlock:^(NSError *error) {
@@ -269,7 +549,6 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
     NSIndexPath * cityIndexpath = [NSIndexPath indexPathForRow:6 inSection:0];
     NSIndexPath * areaIndexpath = [NSIndexPath indexPathForRow:7 inSection:0];
     
-    
     [self.storeTableView reloadRowsAtIndexPaths:@[cityIndexpath,areaIndexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -291,21 +570,31 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
             photoCell.delegate = self;
             [photoCell setTitle:title];
             [photoCell setMaxPhoto:1];
-            if (indexPath.row == 10) {
-                [photoCell setMaxPhoto:4];
+            photoCell.isAnnualType = YES;
+            if ([title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(_storeModel.licenseUrl, @"")) {
+                if (_lincesPhotoPath) {
+                    [photoCell setPhotoArr:@[_lincesPhotoPath]];
+                }else {
+                    [photoCell setPhotoArr:@[]];
+                }
             }
-            [photoCell setupCellWithShopModel:self.storeModel];
+            if ([title isEqualToString:@"门店图片,最多4张"]) {
+                [photoCell setMaxPhoto:4];
+                photoCell.isAnnualType = NO;
+                [photoCell setPhotoArr:self.storePhotoArrM];
+            }
             return photoCell;
         }else if ([self isPicketCellWithIndex:indexPath]) {
             NSString *holderStr = self.placeHolderArr[indexPath.row];
             XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
             picketCell.title = title;
             [picketCell setTitleValue:holderStr];
-            [picketCell setupCellWithShopModel:self.storeModel];
+//            [picketCell setupCellWithShopModel:self.storeModel];
             return picketCell;
         }else {
             NSString *holderStr = self.placeHolderArr[indexPath.row];
             XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID];
+            textFiledCell.delegate = self;
             textFiledCell.title = title;
             [textFiledCell setTextFiledBGColor:[UIColor whiteColor]];
             [textFiledCell setTitlePlaceholder:holderStr];
@@ -376,17 +665,11 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
 }
 
 #pragma mark - Privacy Method
-- (void)configureData
+
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
 {
-    self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
-                          @"负责人电话:",@"业务员提成:",@"团队经理提成:",
-                          @"所属城市",@"所在地区",@"门店审核状态",
-                          @"营业执照上传,1张",@"门店图片,最多4张"];
-    self.placeHolderArr = @[@"请输入名称",@"请输入联系方式",@"请输入负责人姓名",
-                            @"请输入电话",@"请输入百分比",@"请输入百分比",
-                            @"广州市",@"天河区",@"审核中"];
-    
-    self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
 }
 
 - (BOOL)isPicketCellWithIndex:(NSIndexPath *)indexpath
@@ -405,11 +688,35 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
     return NO;
 }
 
-- (void)requestFailureHandler
+- (BOOL)isUsefulURLWith:(NSString *)photoPath
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
+    BOOL result = NO;
+    if (isUsableNSString(photoPath, @"")) {
+        if ([photoPath hasPrefix:@"http://"]||[photoPath hasPrefix:@"https://"]) {
+            result = YES;
+        }
+    }
+    return result;
 }
+//获取线上图片数组
+- (NSMutableArray *)getOrigianShopPhotoWithModel:(XCShopModel *)storeModel
+{
+    NSMutableArray *photoURLArrM = [[NSMutableArray alloc] init];
+    if ([self isUsefulURLWith:storeModel.url1]) {
+        [photoURLArrM addObject:storeModel.url1];
+    }
+    if ([self isUsefulURLWith:storeModel.url2]) {
+        [photoURLArrM addObject:storeModel.url2];
+    }
+    if ([self isUsefulURLWith:storeModel.url3]) {
+        [photoURLArrM addObject:storeModel.url3];
+    }
+    if ([self isUsefulURLWith:storeModel.url4]) {
+        [photoURLArrM addObject:storeModel.url4];
+    }
+    return photoURLArrM;
+}
+
 #pragma mark - Setter&Getter
 
 - (void)setStoreModel:(XCShopModel *)storeModel
@@ -418,6 +725,12 @@ UINavigationControllerDelegate,UIImagePickerControllerDelegate,XCShopAMapViewCon
         return;
     }
     _storeModel = storeModel;
+    self.storePhotoArrM = [self getOrigianShopPhotoWithModel:_storeModel]; //获取线上图片数组
+    if ([self isUsefulURLWith: _storeModel.licenseUrl]) {
+        self.lincesPhotoPath = _storeModel.licenseUrl;
+    }else {
+        self.lincesPhotoPath = @"";
+    }
     
     
 }

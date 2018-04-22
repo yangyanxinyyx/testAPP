@@ -56,17 +56,17 @@
         [_statusLabel setText:@"未处理"];
         _confirmBtn.userInteractionEnabled = YES;
         _confirmBtn.selected = NO;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"fda100"]];
+        [_statusLabel setTextColor:COLOR_RGB_255(246, 41, 42)];
     }else if ([self.detailModel.handled isEqualToString:@"1"]) {
         [_statusLabel setText:@"已处理"];
         _confirmBtn.userInteractionEnabled = NO;
         _confirmBtn.selected = YES;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"31bea6"]];
+        [_statusLabel setTextColor:COLOR_RGB_255(49, 190, 166)];
     }else if ([self.detailModel.handled isEqualToString:@"2"]) {
         [_statusLabel setText:@"处理中"];
         _confirmBtn.userInteractionEnabled = NO;
         _confirmBtn.selected = YES;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"31bea6"]];
+        [_statusLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
     }
  
 }

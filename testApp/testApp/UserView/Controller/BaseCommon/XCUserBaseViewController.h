@@ -36,5 +36,6 @@
 
 - (instancetype)initWithTitle:(NSString *)title;
 
-
+//手机验证
+- (BOOL)validateMobile:(NSString *)mobile;
 @end

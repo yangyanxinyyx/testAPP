@@ -38,6 +38,13 @@ UIImagePickerControllerDelegate>
 
 #pragma mark - lifeCycle
 
+
+- (void)dealloc {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:_pathToPhoto]) {
+        [[NSFileManager defaultManager] removeItemAtPath:_pathToPhoto error:nil];
+    }
+    unlink([_pathToPhoto  UTF8String]);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -216,14 +223,37 @@ UIImagePickerControllerDelegate>
 
 #pragma mark - XCCheckoutDetailPhotoCellDelegate
 
-- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell
+//- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell
+//{
+//    if (image) {
+//        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+////        previewVC.sourceImage = image;
+//       __block NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
+//        previewVC.sourceURL = fileURL;
+//        __weak __typeof(self) weakSelf = self;
+//        previewVC.deleteHandler = ^{
+//            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//            XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+//            if ([[NSFileManager defaultManager] fileExistsAtPath:_pathToPhoto]) {
+//                [[NSFileManager defaultManager] removeItemAtPath:_pathToPhoto error:nil];
+//            }
+//            unlink([_pathToPhoto  UTF8String]);
+//            [cell setPhotoArr:@[]];
+//
+//        };
+//        [self.navigationController pushViewController:previewVC animated:YES];
+//    }
+//
+//
+//}
+- (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL *)photoURL
+                                             index:(NSInteger)index
+                                              cell:(XCCheckoutDetailPhotoCell *)cell
 {
-    if (image) {
-        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-//        previewVC.sourceImage = image;
-       __block NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
-        previewVC.sourceURL = fileURL;
+    if (photoURL) {
         __weak __typeof(self) weakSelf = self;
+        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+        previewVC.sourceURL = photoURL;
         previewVC.deleteHandler = ^{
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
@@ -232,7 +262,6 @@ UIImagePickerControllerDelegate>
             }
             unlink([_pathToPhoto  UTF8String]);
             [cell setPhotoArr:@[]];
-            
         };
         [self.navigationController pushViewController:previewVC animated:YES];
     }
@@ -275,9 +304,8 @@ UIImagePickerControllerDelegate>
         [UIImagePNGRepresentation(image) writeToFile:_pathToPhoto atomically:YES];
 
         XCCheckoutDetailPhotoCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-        NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
-         [cell setPhotoArr:@[fileURL]];
-        _url1 = [fileURL path];
+//        NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
+         [cell setPhotoArr:@[_pathToPhoto]];
 
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
     } failureBlock:^(NSError *error) {
@@ -321,6 +349,14 @@ UIImagePickerControllerDelegate>
         photoCell.maxPhoto = 1;
         [photoCell setTitle:title];
         photoCell.isAnnualType = YES;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:_pathToPhoto]) {
+//            NSURL *photoUrl = [NSURL fileURLWithPath:_pathToPhoto];
+            [photoCell setPhotoArr:@[_pathToPhoto]];
+
+        }else {
+            [photoCell setPhotoArr:@[]];
+
+        }
         return photoCell;
     }
     XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID forIndexPath:indexPath];
@@ -374,6 +410,20 @@ UIImagePickerControllerDelegate>
     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约成功" complete:nil];
     [self.view addSubview:tipsView];
 }
+- (BOOL)isUsefulURLWith:(NSString *)photoPath
+{
+    BOOL result = NO;
+    if (isUsableNSString(photoPath, @"")) {
+        if ([photoPath hasPrefix:@"http://"]||[photoPath hasPrefix:@"https://"]) {
+            result = YES;
+        }
+    }
+    return result;
+}
 #pragma mark - Setter&Getter
-
+- (void)setModel:(XCCustomerDetailModel *)model
+{
+    _model = model;
+    
+}
 @end

@@ -49,8 +49,8 @@
 @property (nonatomic, copy) NSString * label5;
 
 //提交审核相关
-/** 门店id */
-@property (nonatomic, copy) NSString * storeID;
+/** 门店id long*/
+@property (nonatomic, copy) NSNumber * storeID;
 /** 地址 */
 @property (nonatomic, copy) NSString * address;
 /** 经度 */

@@ -132,26 +132,64 @@
 
 - (void)clickImageView:(UIGestureRecognizer *)tap
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoImageView:index:cell:)]) {
-        NSInteger index =   [_scrollview.subviews indexOfObject:tap.view];
-        UIImageView *imageView = (UIImageView *)tap.view;
-        [self.delegate XCCheckoutDetailPhotoCellClickphotoImageView:imageView.image index:index cell:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoWithURL:index:cell:)]) {
+        NSInteger index =   [_scrollview.subviews indexOfObject:tap.view];        
+        NSString *urlPath = self.photoArr[index];
+        NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
+        [self.delegate XCCheckoutDetailPhotoCellClickphotoWithURL:photoURL index:index cell:self];
     }
 }
 
 - (void)setupCellWithShopModel:(XCShopModel *)model
 {
-    if ([self.title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(model.licenseUrl, @"")) {
-        NSURL *licenseURL = [NSURL URLWithString:model.licenseUrl];
-        if (licenseURL) {
-            self.photoArr = @[licenseURL];
-        }
-    }
+//    if ([self.title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(model.licenseUrl, @"")) {
+//        NSURL *licenseURL = [NSURL URLWithString:model.licenseUrl];
+//        if (licenseURL) {
+//            self.photoArr = @[licenseURL];
+//        }
+//    }
+//    if ([self.title isEqualToString:@"门店图片,最多4张"]) {
+//        NSMutableArray *photoURLArrM = [[NSMutableArray alloc] init];
+//        if ([self isUsefulURLWith:model.url1]) {
+//            [photoURLArrM addObject:model.url1];
+//        }
+//        if ([self isUsefulURLWith:model.url2]) {
+//            [photoURLArrM addObject:model.url2];
+//        }
+//        if ([self isUsefulURLWith:model.url3]) {
+//            [photoURLArrM addObject:model.url3];
+//        }
+//        if ([self isUsefulURLWith:model.url4]) {
+//            [photoURLArrM addObject:model.url4];
+//        }
+//        self.photoArr = photoURLArrM;
+//    }
 }
 
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
+- (BOOL)isUsefulURLWith:(NSString *)photoPath
+{
+    BOOL result = NO;
+    if (isUsableNSString(photoPath, @"")) {
+        if ([photoPath hasPrefix:@"http://"]||[photoPath hasPrefix:@"https://"]) {
+            result = YES;
+        }
+    }
+    return result;
+}
+
+- (NSURL *)getImageURLWithFilePath:(NSString *)filePath
+{
+    NSURL *photoURL = nil;;
+    if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
+        photoURL = [NSURL URLWithString:filePath];
+    }else {
+        photoURL = [NSURL fileURLWithPath:filePath];
+    }
+    return photoURL;
+}
 
 #pragma mark - Setter&Getter
 
@@ -169,12 +207,10 @@
     if (photoArr.count > 0) {
         
         for (int i = 0 ; i < photoArr.count; i++) {
-            NSURL *imageURL = photoArr[i];
+            NSString *filePath = photoArr[i];
+            NSURL *photoURL = [self getImageURLWithFilePath:filePath];
             UIImageView *imageView = [[UIImageView alloc]init];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            UIImage *image = [UIImage imageWithData:imageData];
-//            [imageView sd_setImageWithURL:imageURL];
-            imageView.image = image;
+            [imageView sd_setImageWithURL:photoURL];
             [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];

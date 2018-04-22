@@ -7,7 +7,9 @@
 //
 
 #import "XCUserBaseViewController.h"
+#import "XCShopServiceModel.h"
 
 @interface XCShopServiceEditedServiceViewController : XCUserBaseViewController
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCShopServiceModel * model;
 @end

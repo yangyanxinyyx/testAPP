@@ -143,8 +143,10 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [textField setText:@""];
+    
 }
+
+
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {

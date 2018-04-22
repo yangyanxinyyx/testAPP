@@ -7,6 +7,8 @@
 //
 
 #import "XCShopServiceEditedServiceViewController.h"
+#import "XCUserViolationDetailHeaderView.h"
+#define kdetailHeaderViewID @"detailHeaderViewID"
 
 @interface XCShopServiceEditedServiceViewController ()<XCDistributionFooterViewDelegate>
 
@@ -19,6 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
+    [self.tableView registerClass:[XCUserViolationDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
     [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID ];
     [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
     
@@ -32,7 +35,7 @@
 
 - (void)configureData
 {
-//    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"预约时间",@"类型选择",@"年审费用",@"行驶证拍照"]];
+    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"原价:",@"价格:",@"服务介绍"]];
 }
 - (void)initUI
 {
@@ -87,6 +90,13 @@
     [footerView setTitle:@"保存"];
     footerView.delegate = self;
     return footerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    XCUserViolationDetailHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kHeaderViewID];
+    [headerView setGroupName:self.model.serviceName];
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

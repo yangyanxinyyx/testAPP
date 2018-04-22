@@ -625,13 +625,12 @@
 //    } fail:^(id error) {
 //        fail(error);
 //    }];
-    [ProgressControll showProgressNormal];
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     if (header) {
         [manager.requestSerializer setValue:header forHTTPHeaderField:@"Authorization"];
     }
-    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.requestSerializer.timeoutInterval = 180.0f;
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
                                                          @"text/html",
@@ -650,7 +649,6 @@
             formatter.dateFormat =@"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-            
             //上传的参数(上传图片，以文件流的格式)
             [formData appendPartWithFileData:imageData
                                         name:@"file"
@@ -660,11 +658,14 @@
         
     } progress:^(NSProgress *_Nonnull uploadProgress) {
         //打印下上传进度
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [ProgressControll showProgressWithText:[NSString stringWithFormat:@"上传图片中...%@",uploadProgress]];
+        });
         NSLog(@"downloadProgress-->%@",uploadProgress);
     } success:^(NSURLSessionDataTask *_Nonnull task,id _Nullable responseObject) {
-        success(responseObject);
         
         NSLog(@"responseObject-->%@",responseObject);
+        success(responseObject);
         [ProgressControll dismissProgress];
         //上传成功
     } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {

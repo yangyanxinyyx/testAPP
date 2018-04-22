@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UILabel * priceLabel ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * editedButton ;
+/**  */
+@property (nonatomic, strong) XCShopServiceModel * model ;
 
 @end
 @implementation XCShopDetailListCell
@@ -74,6 +76,7 @@
     [_editedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _editedButton.layer.cornerRadius = 12;
     [_editedButton setBackgroundColor:COLOR_RGB_255(1, 77, 163)];
+    [_editedButton addTarget:self action:@selector(clickEditBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_iconImageView];
     [self addSubview:_serviceNameLabel];
@@ -84,8 +87,17 @@
 }
 
 #pragma mark - Action Method
+
+- (void)clickEditBtn:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopDetailListCellClickEditedButton:serviceModel:)]) {
+        [self.delegate XCShopDetailListCellClickEditedButton:button serviceModel:_model];
+    }
+}
+
 - (void)setupCellWithModel:(XCShopServiceModel *)model
 {
+    _model = model;
     if (isUsableNSString(model.url1, @"")) {
         NSURL *imageURL = [[NSURL alloc] initWithString:model.url1];
         if (imageURL) {
@@ -109,7 +121,6 @@
        _onSalePriceLabel.attributedText = ma_price;
 //        [_onSalePriceLabel setText:model.price];
     }
-    
     
 }
 #pragma mark - Delegates & Notifications

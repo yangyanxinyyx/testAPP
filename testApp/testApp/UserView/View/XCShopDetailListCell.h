@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XCShopServiceModel;
 @protocol XCShopDetailListCellDelegate <NSObject>
-- (void)XCShopDetailListCellClickEditedButton:(UIButton *)button;
+- (void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
 @end
 
 @interface XCShopDetailListCell : UICollectionViewCell
