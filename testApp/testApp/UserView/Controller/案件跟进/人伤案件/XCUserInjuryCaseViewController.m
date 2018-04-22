@@ -10,7 +10,6 @@
 #import "XCUserInjuryCaseDetailViewController.h"
 #import "XCUserCaseListModel.h"
 #import "XCUserCaseDetailModel.h"
-#import <YYModel.h>
 @interface XCUserInjuryCaseViewController ()
 
 @end
@@ -37,7 +36,7 @@
                             @"id":model.caseID,
                             };
     __weak typeof (self)weakSelf = self;
-    [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+    [RequestAPI getThreeCaseApply:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         BOOL configureSucess  = NO;
         if (response[@"data"]) {
             NSDictionary *dataInfo = response[@"data"];

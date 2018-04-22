@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController1.h"
 #import "XCUserCaseListCell.h"
+#import <YYModel/YYModel.h>
 #define kCaseListCellID @"caseListCellID"
 #define kHeaderViewID @"headerViewID"
 @interface XCUserCaseBaseTableViewController :BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>

@@ -133,7 +133,7 @@
 - (void)clickImageView:(UIGestureRecognizer *)tap
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoWithURL:index:cell:)]) {
-        NSInteger index =   [_scrollview.subviews indexOfObject:tap.view];        
+        NSInteger index =  [_scrollview.subviews indexOfObject:tap.view];
         NSString *urlPath = self.photoArr[index];
         NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
         [self.delegate XCCheckoutDetailPhotoCellClickphotoWithURL:photoURL index:index cell:self];
@@ -239,6 +239,7 @@
             imageView.userInteractionEnabled = YES;
             imageView.image = image;
             [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
             [_scrollview addSubview:imageView];

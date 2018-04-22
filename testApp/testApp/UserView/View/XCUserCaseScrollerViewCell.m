@@ -66,18 +66,28 @@
 #pragma mark - Action Method
 - (void)clickImage:(UITapGestureRecognizer *)tap
 {
-    
     NSLog(@"Click%@",tap);
-//    for (UIImageView *imageView in _scrollView.subviews) {
-//
-//
-//    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCUserCaseScrollerViewCellClickphotoWithURL:index:cell:)]) {
+        NSInteger index =  [_scrollView.subviews indexOfObject:tap.view];
+        NSString *urlPath = self.photoURLArr[index];
+        NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
+        [self.delegate XCUserCaseScrollerViewCellClickphotoWithURL:photoURL index:index cell:self];
+    }
     
 }
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
-
+- (NSURL *)getImageURLWithFilePath:(NSString *)filePath
+{
+    NSURL *photoURL = nil;;
+    if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
+        photoURL = [NSURL URLWithString:filePath];
+    }else {
+        photoURL = [NSURL fileURLWithPath:filePath];
+    }
+    return photoURL;
+}
 - (void)configSubVies
 {
     _topView = [[UIView alloc] init];
@@ -115,9 +125,9 @@
         for (int i = 0 ; i < photoURLArr.count; i++) {
             NSURL *imageURL = photoURLArr[i];
             UIImageView *imageView = [[UIImageView alloc] init];
-            
             [imageView sd_setImageWithURL:imageURL placeholderImage:image];
             imageView.userInteractionEnabled = YES;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
             [imageView addGestureRecognizer:tap];
             [_scrollView addSubview:imageView];

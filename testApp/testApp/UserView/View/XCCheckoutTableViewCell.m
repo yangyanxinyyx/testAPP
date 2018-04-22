@@ -246,18 +246,18 @@
         [_carNumberLabel setText:baseModel.plateNo];
     }
     if (isUsableNSString(baseModel.onwerName,@"")) {
-        [_carNumberLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
+        [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
     }else {
-        [_carNumberLabel setText:[NSString stringWithFormat:@"车主: "]];
+        [_userNameLabel setText:[NSString stringWithFormat:@"车主: 未知"]];
     }
     NSString *timeTitle  = @"出单时间";
     if (_timeTitleStr) {
         timeTitle = _timeTitleStr;
     }
-    if (isUsableNSString(baseModel.recordDate, @"")) {
+    if (isUsableNSString(baseModel.recordDate,@"")) {
         [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
     }else {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: 未知",timeTitle]];
     }
     
 }

@@ -155,7 +155,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = response[@"errormsg"];
-        if ([response[@"result"] boolValue] == 1) {
+        if ([response[@"result"] boolValue]) {
             errStr = @"提交成功";
             [strongSelf.networkURLArrM  removeAllObjects];
         }

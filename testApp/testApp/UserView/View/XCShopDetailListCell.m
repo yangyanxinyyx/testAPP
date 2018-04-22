@@ -67,6 +67,7 @@
 -(void)configureSubViews
 {
     _iconImageView = [[UIImageView alloc] init];
+    [_iconImageView setContentMode:UIViewContentModeScaleAspectFit];
     _serviceNameLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
     _priceLabel = [UILabel createLabelWithTextFontSize:32 textColor:COLOR_RGB_255(247, 44, 11)];
     _onSalePriceLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(165, 165, 165)];
@@ -121,6 +122,7 @@
        _onSalePriceLabel.attributedText = ma_price;
 //        [_onSalePriceLabel setText:model.price];
     }
+    [self layoutSubviews];
     
 }
 #pragma mark - Delegates & Notifications

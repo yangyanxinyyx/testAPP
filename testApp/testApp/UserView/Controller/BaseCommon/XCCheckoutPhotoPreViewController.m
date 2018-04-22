@@ -13,8 +13,7 @@
 @interface XCCheckoutPhotoPreViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView * clipView ;
 @property (nonatomic, strong) UIImageView * preView ;
-/** <# 注释 #> */
-@property (nonatomic, strong) UIButton * deleteBtn ;
+
 
 @end
 
@@ -74,7 +73,7 @@
                                        newHeight);
         }
         //    [self.clipView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        UIImage *newImage = [sourceImage resizedImage:prewViewFrame.size interpolationQuality:kCGInterpolationHigh];
+//        UIImage *newImage = [sourceImage resizedImage:prewViewFrame.size interpolationQuality:kCGInterpolationHigh];
         CGFloat clipWidth = self.clipView.frame.size.width ;
         CGFloat clipHeight = self.clipView.frame.size.height;
         //    [self.clipView setFrame:CGRectMake(0, (SCREEN_HEIGHT - clipHeight) * 0.5, clipWidth, clipHeight)];
@@ -113,7 +112,7 @@
         _topBar = [[BaseNavigationBar alloc] init];
         _topBar.delegate  = self;
         _topBar.title = title;
-        [_topBar setFinishBtnTitle:@"删除"];
+//        [_topBar setFinishBtnTitle:@"删除"];
         self.navTitle = title;
         [self.view addSubview:_topBar];
     }
