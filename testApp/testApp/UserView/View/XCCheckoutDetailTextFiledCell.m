@@ -12,11 +12,12 @@
 
 @property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UIView * separtatorLine ;
+@property (nonatomic, strong) UIView * twoSepartatorLine ;
+
 
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * secondTitlelabel ;
 /** <# 注释 #> */
-@property (nonatomic, strong) UITextField * secondTextField ;
 
 @end
 
@@ -31,6 +32,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _isTopShowSeparator = NO;
         _shouldShowSeparator = NO;
         _isCenterSeparator = NO;
         _isTwoInputType = NO;
@@ -54,22 +56,24 @@
     CGFloat labeH = 25 * ViewRateBaseOnIP6;
   
     
-    _secondTitlelabel.hidden = NO;
-    _secondTextField.hidden = NO;
+    _secondTitlelabel.hidden = YES;
+    _secondTextField.hidden = YES;
     if (_isTwoInputType) {
-        _secondTitlelabel.hidden = YES;
-        _secondTextField.hidden = YES;
+        _secondTitlelabel.hidden = NO;
+        _secondTextField.hidden = NO;
         [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width, labeH)];
         [_textField sizeToFit];
         labelSize = _textField.frame.size;
-        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 26 * ViewRateBaseOnIP6 ) * 0.5, (110 + 151) * ViewRateBaseOnIP6 , 26 * ViewRateBaseOnIP6)];
+        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 26 * ViewRateBaseOnIP6 ) * 0.5, 240 * ViewRateBaseOnIP6 , 26 * ViewRateBaseOnIP6)];
         
         [_secondTitlelabel sizeToFit];
         labelSize = _secondTitlelabel.frame.size;
-        [_secondTitlelabel setFrame:CGRectMake(CGRectGetMinX(_textField.frame), (self.bounds.size.height - labeH) * 0.5, labelSize.width, labeH)];
+        [_secondTitlelabel setFrame:CGRectMake(CGRectGetMaxX(_textField.frame), (self.bounds.size.height - labeH) * 0.5, labelSize.width, labeH)];
         [_secondTextField sizeToFit];
         labelSize = _secondTextField.frame.size;
         [_secondTextField setFrame:CGRectMake(CGRectGetMaxX(_secondTitlelabel.frame ) + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 26 * ViewRateBaseOnIP6 ) * 0.5, SCREEN_WIDTH - (CGRectGetMaxX(_secondTitlelabel.frame) + 16 * ViewRateBaseOnIP6)- 30 * ViewRateBaseOnIP6 , 26 * ViewRateBaseOnIP6)];
+        
+        [_twoSepartatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1 , self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
         
     }else {
         [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
@@ -84,6 +88,9 @@
         }else {
             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
         }
+    }
+    if (_isTopShowSeparator) {
+          [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , 0, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
     }
    
     
@@ -187,6 +194,10 @@
     [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
     [self addSubview:_separtatorLine];
     
+    _twoSepartatorLine = [[UIView alloc] init];
+    [_twoSepartatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
+    [self addSubview:_twoSepartatorLine];
+    
     _secondTitlelabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [_secondTitlelabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
     [_secondTitlelabel setTextColor:COLOR_RGB_255(68, 68, 68)];
@@ -228,13 +239,14 @@
 {
     _secondTitle = secondTitle;
     [_secondTitlelabel setText:_secondTitle];
+    [self layoutSubviews];
 }
 
 - (void)setSecondTitlePlaceholder:(NSString *)secondTitlePlaceholder
 {
     _secondTitlePlaceholder = secondTitlePlaceholder;
     [_secondTextField setPlaceholder:_secondTitlePlaceholder];
-    [_secondTextField sizeToFit];
+    [self layoutSubviews];
 }
 
 - (void)setTextFiledBGColor:(UIColor *)textFiledBGColor

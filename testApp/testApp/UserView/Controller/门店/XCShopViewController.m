@@ -289,6 +289,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
+                serviceDetailVC.titleTypeStr = @"洗车";
+                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -303,6 +305,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
+                serviceDetailVC.titleTypeStr = @"美容";
+                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -317,6 +321,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
+                serviceDetailVC.titleTypeStr = @"保养";
+                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -665,7 +671,13 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 
 #pragma mark - Privacy Method
-
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
+{
+    if (isCancel) {
+        [_viewBear removeFromSuperview];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr
 {
     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];

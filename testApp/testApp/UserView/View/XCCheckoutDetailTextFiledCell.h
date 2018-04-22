@@ -24,8 +24,11 @@
 @property (nonatomic, copy) NSString * titlePlaceholder ;
 
 @property (nonatomic, copy) NSString * secondTitle ;
+@property (nonatomic, strong) UITextField * secondTextField ;
 @property (nonatomic, copy) NSString * secondTitlePlaceholder ;
 
+/** 显示顶部分割线 默认NO*/
+@property (nonatomic, assign) BOOL  isTopShowSeparator ;
 /** 居中的分割线默认为NO */
 @property (nonatomic, assign) BOOL  isCenterSeparator ;
 //显示分割线 默认为NO

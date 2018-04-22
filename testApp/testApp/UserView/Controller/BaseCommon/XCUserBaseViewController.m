@@ -137,6 +137,11 @@
         }
     }
 }
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
+}
 
 #pragma mark - Setter&Getter
 

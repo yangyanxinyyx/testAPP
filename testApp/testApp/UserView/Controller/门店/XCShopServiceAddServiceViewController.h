@@ -9,5 +9,6 @@
 #import "XCUserBaseViewController.h"
 
 @interface XCShopServiceAddServiceViewController : XCUserBaseViewController
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSNumber * storeID ;
 @end

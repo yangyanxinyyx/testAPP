@@ -147,6 +147,11 @@
 
 //获取门店服务信息
 +(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
-
+//编辑服务
++(void)updateService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+//查询可添加服务
++(void)queryServiceByStoreId:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+//添加服务
++(void)insertService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
 @end

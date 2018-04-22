@@ -118,7 +118,12 @@
 #define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreService",API_PREFIX]
 //修改门店详情
 #define SHOPUPDATESTORE_API [NSString stringWithFormat:@"%@/api/web/store/updateStore",API_PREFIX]
-
+//编辑服务
+#define UPDATESERVICE_API [NSString stringWithFormat:@"%@/api/web/store/updateService",API_PREFIX]
+//查询可添加服务
+#define QUERYSERVICEBYSTOREID_API [NSString stringWithFormat:@"%@/api/web/service/queryServiceByStoreId",API_PREFIX]
+//添加服务
+#define INSERTSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/insertService",API_PREFIX]
 // ===================
 
 // === 报价 ====
@@ -712,12 +717,37 @@
 +(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     
-    [self getRequest:SHOPSSERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+    [self getRequest:SHOPSSERVICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);
     }];
 }
-
-
+//编辑服务
++(void)updateService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:UPDATESERVICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//查询可添加服务
++(void)queryServiceByStoreId:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:QUERYSERVICEBYSTOREID_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+//添加服务
++(void)insertService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:INSERTSERVICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
 @end

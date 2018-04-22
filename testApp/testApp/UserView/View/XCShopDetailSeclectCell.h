@@ -11,4 +11,7 @@
 @interface XCShopDetailSeclectCell : UITableViewCell
 /** <# 注释 #> */
 @property (nonatomic, copy) NSString * title ;
+
+- (void)setButtonSelect:(BOOL)selecte;
+
 @end

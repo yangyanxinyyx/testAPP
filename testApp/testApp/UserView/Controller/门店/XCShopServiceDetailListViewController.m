@@ -58,15 +58,43 @@
 #pragma mark - Action Method
 - (void)clickAddNewService:(UIButton *)button
 {
-    XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
-    [self.navigationController pushViewController:addService animated:YES];
+    NSDictionary *param = @{
+                            @"storeId":self.storeID,
+                            @"category":self.titleTypeStr,
+                            @"PageSize":@"-1"
+                            };
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI queryServiceByStoreId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (response[@"data"]) {
+            if (response[@"data"][@"dataSet"]) {
+                NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                for (NSDictionary *dataInfo in origionDataArr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    [dataArrM addObject:serviceModel];
+                }
+                XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
+                addService.storeID = strongSelf.storeID;
+                addService.dataArrM = dataArrM;
+                [strongSelf.navigationController pushViewController:addService animated:YES];
+            }
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
+    }];
+    
+  
 }
 #pragma mark - Delegates & Notifications
 #pragma  mark - XCShopDetailListCellDelegate
 -(void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
 {
-    NSLog(@"点击编辑");
     XCShopServiceEditedServiceViewController *editedVC = [[XCShopServiceEditedServiceViewController alloc] initWithTitle:serviceModel.serviceName];
+    editedVC.model = serviceModel;
     
     [self.navigationController pushViewController:editedVC animated:YES];
     
@@ -130,6 +158,12 @@
     
     [self.view addSubview:_collectionView];
     [self.view addSubview:_addServiceBtn];
+}
+
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
 }
 #pragma mark - Setter&Getter
 

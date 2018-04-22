@@ -28,12 +28,15 @@
     [super layoutSubviews];
     
     CGSize labelSize;
+  
     [_titleLabel sizeToFit];
     labelSize = _titleLabel.frame.size;
     [_titleLabel setFrame:CGRectMake(30 *ViewRateBaseOnIP6,(self.bounds.size.height - 27 * ViewRateBaseOnIP6) * 0.5, labelSize.width, 27 * ViewRateBaseOnIP6)];
     labelSize = CGSizeMake(40 * ViewRateBaseOnIP6, 40 *ViewRateBaseOnIP6);
     [_selectButton setFrame:CGRectMake(self.bounds.size.width - labelSize.width - 30 * ViewRateBaseOnIP6, (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width, labelSize.height)];
 }
+
+
 #pragma mark - Init Method
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -53,7 +56,6 @@
     _selectButton = [UIButton buttonWithType:0];
     [_selectButton setImage:unSelectImage forState:UIControlStateNormal];
     [_selectButton setImage:selectImage forState:UIControlStateSelected];
-    [_selectButton addTarget:self action:@selector(clickSelectButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_titleLabel];
     [self addSubview:_selectButton];
@@ -61,18 +63,15 @@
 
 #pragma mark - Action Method
 
-- (void)clickSelectButton:(UIButton *)button
+- (void)setButtonSelect:(BOOL)selecte
 {
-    button.selected = !button.selected;
+    if (selecte) {
+        _selectButton.selected = YES;
+    }else {
+        _selectButton.selected = NO;
+    }
 }
 
-- (BOOL)getSelect
-{
-    if (_selectButton && _selectButton.selected) {
-        return YES;
-    }
-    return NO;
-}
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method

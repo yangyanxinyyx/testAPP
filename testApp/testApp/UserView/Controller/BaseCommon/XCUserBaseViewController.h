@@ -38,4 +38,7 @@
 
 //手机验证
 - (BOOL)validateMobile:(NSString *)mobile;
+//提示框
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr;
+
 @end

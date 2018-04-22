@@ -15,8 +15,10 @@
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
 
-///** <# 注释 #> */
-//@property (nonatomic, strong) XCShopServiceModel * currentModel ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSNumber * storeID ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSString * titleTypeStr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataArr ;
 - (instancetype)initWithTitle:(NSString *)title;
