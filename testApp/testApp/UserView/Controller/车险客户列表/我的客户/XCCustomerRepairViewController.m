@@ -28,9 +28,7 @@
     [self configureData];
     [self.tableView reloadData];
     self.shopModelArrM = [[NSMutableArray alloc] init];
-    
 
-  
 }
 
 #pragma mark - Init Method
@@ -47,25 +45,77 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    __weak __typeof(self) weakSelf = self;
+
     if (indexPath.section == 0 && indexPath.row == 0) {
-        __weak __typeof(self) weakSelf = self;
-        XCCustomerShopListView *listView = [[XCCustomerShopListView alloc] initWithDataArr:self.shopModelArrM confirmBlock:^(XCCustomerShopModel *model) {
-            
+            XCCustomerShopListView *listView = [[XCCustomerShopListView alloc] initWithDataArr:self.shopModelArrM confirmBlock:^(XCCustomerShopModel *model) {
+            weakSelf.model.storeName = model.name;
+            weakSelf.model.storeId = model.shopID;
             NSLog(@"%@",model);
+            
+            [(XCDistributionPicketCell *)cell setTitleValue:model.name];
         }];
         [self.view addSubview:listView];
+    }else if (indexPath.section == 0 && indexPath.row == 1){
+        SelectTimeView *selectTimeView =[[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        selectTimeView.block = ^(NSString *string) {
+            weakSelf.model.appointmentTime = string;
+            [(XCDistributionPicketCell *)cell setTitleValue:string];
+        };
+        [self.view addSubview:selectTimeView];
     }
     
 }
-#pragma mark - Delegates & Notifications
-#pragma mark - XCDistributionFooterViewDelegate
+#pragma mark XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
-    FinishTipsView *alterView = [[FinishTipsView alloc] initWithTitle:@"预约成功" complete:^{
+    BOOL configureSuccess = YES;
+    NSString *errString = @"保单信息错误";
+    if (!isUsable(_model.customerId,[NSNumber class])&& !_model.customerName &&
+        !_model.phoneNo &&!isUsable(_model.carId,[NSNumber class])) {
+        errString = @"保单信息错误";
+        configureSuccess = NO;
+    }
+    if (!isUsable(_model.storeId,[NSNumber class])&& !_model.storeName ) {
+        errString = @"门店信息错误";
+        configureSuccess = NO;
+    }
+    if (!_model.appointmentTime) {
+        errString = @"请选择预约时间";
+        configureSuccess = NO;
+    }
+    if (configureSuccess) {
         
-    }];
-    [self.view addSubview:alterView];
+        __weak typeof (self)weakSelf = self;
+        NSDictionary *param = @{
+                                @"customerId":_model.customerId,
+                                @"customerName":_model.customerName,
+                                @"phone":_model.phoneNo,
+                                @"contacts":_model.customerName,
+                                @"carId":_model.carId,
+                                @"storeId":_model.storeId,
+                                @"storeName":_model.storeName,
+                                @"appointmentTime":_model.appointmentTime,
+                                };
+        [RequestAPI addOrderByMaintain:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            NSString * respnseStr = response[@"errormsg"];
+            if (response[@"result"]) {
+                respnseStr = @"预约成功";
+            }
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+            [weakSelf.view addSubview:tipsView];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+            [weakSelf.view addSubview:tipsView];
+        }];
+    }else {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
+        [self.view addSubview:tipsView];
+    }
 }
+#pragma mark - Delegates & Notifications
+
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

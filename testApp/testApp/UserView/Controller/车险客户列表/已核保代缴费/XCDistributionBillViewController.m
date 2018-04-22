@@ -313,20 +313,17 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            if (response[@"data"]) {
-                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
-                [weakSelf.view addSubview:tipsView];
-            }else {
-                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
-                [weakSelf.view addSubview:tipsView];
+            NSString * respnseStr = response[@"errormsg"];
+            if (response[@"result"]) {
+                respnseStr = @"修改成功";
             }
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+            [weakSelf.view addSubview:tipsView];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败" complete:nil];
             [weakSelf.view addSubview:tipsView];
         }];
-        
-        
     }else {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
         [self.view addSubview:tipsView];

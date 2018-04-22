@@ -115,9 +115,7 @@
 #pragma mark - Setter&Getter
 - (void)setTitle:(NSString *)title
 {
-    if ([_title isEqualToString:title]) {
-        return;
-    }
+
     _title = title;
     [_titleLabel setText:_title];
     [_titleLabel sizeToFit];
@@ -126,9 +124,6 @@
 
 -(void)setTitleValue:(NSString *)titleValue
 {
-    if ([_titleValue isEqualToString:titleValue]) {
-        return;
-    }
     _titleValue = titleValue;
     [_valueLabel setText:_titleValue];
     [_valueLabel sizeToFit];

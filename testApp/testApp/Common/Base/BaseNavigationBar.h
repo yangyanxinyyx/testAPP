@@ -11,6 +11,8 @@
 @protocol BaseNavigationBarDelegate <NSObject>
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel;
+
+- (void)baseNavigationDidPressDeleteBtn:(BOOL)isCancel;
 @end
 
 @interface BaseNavigationBar : UIView

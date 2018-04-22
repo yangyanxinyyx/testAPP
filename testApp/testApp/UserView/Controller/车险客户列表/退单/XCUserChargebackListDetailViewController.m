@@ -83,7 +83,7 @@
     
     _commitBtn = [UIButton buttonWithType:0];
     [_commitBtn setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-    [_commitBtn setTitle:@"撤销核保" forState:UIControlStateNormal];
+    [_commitBtn setTitle:@"修改核保" forState:UIControlStateNormal];
     [_commitBtn.titleLabel setFont:[UIFont systemFontOfSize:36 * ViewRateBaseOnIP6]];
     [_commitBtn addTarget:self action:@selector(commitUnderWriting:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commitBtn];

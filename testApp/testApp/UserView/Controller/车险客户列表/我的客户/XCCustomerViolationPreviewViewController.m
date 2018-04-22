@@ -7,8 +7,11 @@
 //
 
 #import "XCCustomerViolationPreviewViewController.h"
-
-@interface XCCustomerViolationPreviewViewController ()<XCDistributionFooterViewDelegate>
+#import "XCUserViolationDetailHeaderView.h"
+#import "XCUserViolationDetailClickCell.h"
+#define kheaderViewID @"headerViewID"
+#define kClickCellID @"clickCellID"
+@interface XCCustomerViolationPreviewViewController ()<XCUserViolationDetailClickCellDelegate>
 
 @end
 
@@ -19,26 +22,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-    [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
+    [self.tableView registerClass:[XCUserViolationDetailClickCell class] forCellReuseIdentifier:kClickCellID];
+    [self.tableView registerClass:[XCUserViolationDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
     [self initUI];
     [self configureData];
-    [self.tableView reloadData];
-
 
 }
-
-#pragma mark - Init Method
-
-- (void)viewWillLayoutSubviews
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillLayoutSubviews];
-    
+    [super viewWillAppear:animated];
+
 }
+#pragma mark - Init Method
 
 - (void)configureData
 {
-    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"违章地点:",@"违章城市:",@"违章分数:",@"违章条款:"]];
 }
 - (void)initUI
 {
@@ -47,50 +45,47 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
-#pragma mark - XCDistributionFooterViewDelegate
-- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
+#pragma mark - Delegates & Notifications
+- (void)XCUserViolationDetailClickCellClickButton:(UIButton *)button
 {
-    FinishTipsView *alterView = [[FinishTipsView alloc] initWithTitle:@"预约成功" complete:^{
-        
-    }];
-    [self.view addSubview:alterView];
+    //预约
+    button.selected = YES;
+    button.userInteractionEnabled = NO ;
+    [button setTitle:@"处理中" forState:UIControlStateSelected];
 }
-#pragma mark - UITableViewDataSource&&UITableViewDelegate
 
+#pragma mark - UITableViewDataSource&&UITableViewDelegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArrM.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSString *title = self.dataArrM[indexPath.row];
-    XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
-    if (indexPath.row == self.dataArrM.count - 1) {
-        cell.shouldShowSeparator = NO;
-    }
-    [cell setTitle:title];
-    
-    return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
-    [footerView setTitle:@"预约"];
-    footerView.delegate = self;
-    return footerView;
+    XCUserViolationDetailModel *model =  self.dataArrM[indexPath.row];
+    XCUserViolationDetailClickCell *clickCell = [tableView dequeueReusableCellWithIdentifier:kClickCellID];
+    clickCell.delegate = self;
+    clickCell.detailModel = model;
+    
+    return clickCell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    XCUserViolationDetailHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kheaderViewID];
+    [headerView setGroupName:@"违章记录:"];
+    return headerView;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 88 * ViewRateBaseOnIP6;
+    return [XCUserViolationDetailClickCell getCellHeight];
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    CGFloat footerViewHeigth;
-    footerViewHeigth = (60 + 88 + 60) * ViewRateBaseOnIP6;
-    return footerViewHeigth;
+    return [XCUserViolationDetailHeaderView getHeaderViewHeight];
 }
 
 #pragma mark - Privacy Method

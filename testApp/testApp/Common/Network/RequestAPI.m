@@ -105,6 +105,10 @@
 //获取三大案件详情
 #define GETTHREECASEAPPLY_API [NSString stringWithFormat:@"%@/api/web/package/findValidPackage",API_PREFIX]
 //====门店====
+//图片上传
+#define APPUPLOADPICTURE_API [NSString stringWithFormat:@"%@/api/web/pictrue/appUploadPicture",API_PREFIX]
+//图片删除
+#define DELETEPICTUREBYURL_API [NSString stringWithFormat:@"%@/api/web/pictrue/deletePictureByUrl",API_PREFIX]
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
 //门店服务
@@ -533,7 +537,7 @@
         fail(error);
     }];
 }
-//预约违章接口
+//预约违章接口 \预约年审接口
 +(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
     [self getRequest:ADDORDERBYAUDITANDRULES_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
@@ -551,15 +555,7 @@
         fail(error);
     }];
 }
-////预约年审接口
-//+(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
-//{
-//    [self getRequest:GETCARVERIFICATIONMONEY isPOST:YES paramenter:paramenter header:header success:^(id response) {
-//        success(response);
-//    } fail:^(id error) {
-//        fail(error);
-//    }];
-//}
+
 //查询门店列表
 +(void)appFindStore:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {
@@ -608,6 +604,79 @@
 }
 
 #pragma mark 门店
+
+//上传图片
++(void)appUploadPicture:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+//    [self getRequest:APPUPLOADPICTURE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+//        success(response);
+//    } fail:^(id error) {
+//        fail(error);
+//    }];
+    [ProgressControll showProgressNormal];
+
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    if (header) {
+        [manager.requestSerializer setValue:header forHTTPHeaderField:@"Authorization"];
+    }
+    manager.requestSerializer.timeoutInterval = 30.0f;
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",
+                                                         @"text/html",
+                                                         @"image/jpeg",
+                                                         @"image/png",
+                                                         @"application/octet-stream",
+                                                         @"text/json",
+                                                         nil];
+    
+    NSURLSessionDataTask *task = [manager POST:APPUPLOADPICTURE_API parameters:nil  constructingBodyWithBlock:^(id<AFMultipartFormData> _Nonnull formData) {
+        NSArray *filePathArr = paramenter[@"file"];
+        
+        for (int i = 0; i < filePathArr.count; i++) {
+            NSData *imageData = filePathArr[i];
+            NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+            formatter.dateFormat =@"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+            
+            //上传的参数(上传图片，以文件流的格式)
+            [formData appendPartWithFileData:imageData
+                                        name:@"file"
+                                    fileName:fileName
+                                    mimeType:@"image/jpeg"];
+        }
+        
+    } progress:^(NSProgress *_Nonnull uploadProgress) {
+        //打印下上传进度
+        NSLog(@"downloadProgress-->%@",uploadProgress);
+    } success:^(NSURLSessionDataTask *_Nonnull task,id _Nullable responseObject) {
+        success(responseObject);
+        
+        NSLog(@"responseObject-->%@",responseObject);
+        [ProgressControll dismissProgress];
+        //上传成功
+    } failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+        //上传失败
+        NSLog(@"error-->%@",error);
+        fail(error);
+        [ProgressControll dismissProgress];
+
+    }];
+    
+    [task resume];
+
+    
+}
+//删除上传图片
++(void)deletePictureByUrl:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
+{
+    [self getRequest:DELETEPICTUREBYURL_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
 //获取门店详情
 +(void)getShopsInfo:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail
 {

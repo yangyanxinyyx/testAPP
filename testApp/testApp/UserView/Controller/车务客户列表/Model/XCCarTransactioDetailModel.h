@@ -51,6 +51,8 @@
 /** 状态 */
 @property (nonatomic, copy) NSString * status;
 
+
+
 /** 违章时间 */
 @property (nonatomic, copy) NSString * weizhangDate;
 
@@ -59,6 +61,8 @@
 
 /** 违章地点 */
 @property (nonatomic, copy) NSString * weizhangArea;
+
+
 
 /** 总费用 long*/
 @property (nonatomic, strong) NSNumber * orderPrice;
@@ -80,4 +84,9 @@
 
 //维修
 //接车时间、地址、预计完成时间、维修项目
+/** 保险金额 */
+@property (nonatomic, strong) NSNumber * insurance ;
+
+/** 自费金额 */
+@property (nonatomic, strong) NSNumber * weixiuZifei ;
 @end
