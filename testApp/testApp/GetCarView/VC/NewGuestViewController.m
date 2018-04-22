@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSString *car;
 @property (nonatomic,strong) NSString *phoneNO;
 
-@property (nonatomic,strong) NSString *serviceType;
+@property (nonatomic,strong) NSNumber *serviceType;
 @property (nonatomic,strong) NSNumber *serviceMoney;
 @property (nonatomic,strong) NSString *serviceDate;
 
@@ -81,6 +81,14 @@
             }else if (i == 4){
 
                 UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeSelect param:self.serviceArray WithCompletionHandler:^(NSString *content) {
+
+                    for (NSDictionary *dic in self.serviceArray) {
+                        if ([content isEqualToString:dic[@"name"]]) {
+                            self.serviceType = dic[@"id"];
+                        }
+
+                    }
+
                     self.serviceType = content;
                 }];
                 [self.view addSubview:inputView];
@@ -91,7 +99,7 @@
                 [self.view addSubview:inputView];
             }else if (i == 6){
                 UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeDate param:nil WithCompletionHandler:^(NSString *content) {
-                    self.serviceType = content;
+                    self.serviceDate = content;
                 }];
                 [self.view addSubview:inputView];
             }
@@ -129,7 +137,80 @@
 
 - (void)pressConmit
 {
+    if (!self.currentModel) {
+        return;
+    }
+    if (self.isOrder) {
+        if (!self.name || !self.plateNO ||!self.car ||!self.phoneNO ||!self.InsuranceMoney || !self.selfMoney) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"信息填写不完整" complete:nil];
+            [self.view addSubview:tipsView];
+            return;
+        }
+    }else{
+        if (!self.name || !self.plateNO ||!self.car ||!self.phoneNO ||!self.serviceType || !self.serviceMoney || !self.serviceDate) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"信息填写不完整" complete:nil];
+            [self.view addSubview:tipsView];
+            return;
+        }
+    }
 
+    NSDictionary *param = nil;
+    if (self.isOrder) {
+        param = @{
+                    @"customerId" : self.currentModel.customerId,
+                    @"customerName": self.currentModel.customerName,
+                    @"phone": self.phoneNO,
+                    @"carId":  self.currentModel.carId,
+                    @"plateOn":   self.plateNO,
+                    @"serviceId":  self.serviceType,
+                    @"storeId":  [UserInfoManager shareInstance].storeID,
+                    @"orderPrice":  self.serviceMoney,
+                    @"payPrice":  self.serviceMoney,
+                    @"orderTime": self.serviceDate,
+                    @"number": @(2),
+                      };
+
+    }else{
+        param = @{
+                  @"customerId" : self.currentModel.customerId,
+                  @"customerName": self.currentModel.customerName,
+                  @"phone": self.phoneNO,
+                  @"carId":  self.currentModel.carId,
+                  @"plateOn":   self.plateNO,
+                  @"storeId":  [UserInfoManager shareInstance].storeID,
+                  @"orderPrice":  self.InsuranceMoney,
+                  @"payPrice":  self.selfMoney,
+                  @"number": @(1),
+                  };
+    }
+
+
+    [RequestAPI getGetCarAddOrder:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (isUsableDictionary(response)) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"提交成功");
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功!" complete:^{
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }];
+
+                    [self.view addSubview:tipsView];
+                });
+
+            }else{
+                NSLog(@"提交失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交失败" complete:nil];
+                [self.view addSubview:tipsView];
+
+            }
+        }
+
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
