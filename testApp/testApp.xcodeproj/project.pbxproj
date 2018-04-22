@@ -246,6 +246,8 @@
 		FC4F7D032067748100468032 /* BaseViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D022067748100468032 /* BaseViewController1.m */; };
 		FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0B2067762500468032 /* MedalDetailViewController.m */; };
 		FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0E2067791F00468032 /* MedalDetailCell.m */; };
+		FC5B31A7208C887700C13019 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5B31A5208C887700C13019 /* placeholder@2x.png */; };
+		FC5B31A8208C887700C13019 /* placeholder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5B31A6208C887700C13019 /* placeholder@3x.png */; };
 		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */; };
 		FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E70520827BA500E04A6B /* CoverWebViewController.m */; };
@@ -686,6 +688,8 @@
 		FC4F7D0B2067762500468032 /* MedalDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailViewController.m; sourceTree = "<group>"; };
 		FC4F7D0D2067791F00468032 /* MedalDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalDetailCell.h; sourceTree = "<group>"; };
 		FC4F7D0E2067791F00468032 /* MedalDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailCell.m; sourceTree = "<group>"; };
+		FC5B31A5208C887700C13019 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		FC5B31A6208C887700C13019 /* placeholder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@3x.png"; sourceTree = "<group>"; };
 		FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
 		FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoInputView.m; path = testApp/Common/UserInfoInputView.m; sourceTree = SOURCE_ROOT; };
@@ -1529,6 +1533,8 @@
 		FC33AAAB2088386A0081D30A /* CoverMain */ = {
 			isa = PBXGroup;
 			children = (
+				FC5B31A5208C887700C13019 /* placeholder@2x.png */,
+				FC5B31A6208C887700C13019 /* placeholder@3x.png */,
 				FC33AAAC2088386A0081D30A /* coverMain_nomnal@2x.png */,
 				FC33AAAD2088386A0081D30A /* coverMain_nomnal@3x.png */,
 				FC33AAAE2088386A0081D30A /* coverMain_select@2x.png */,
@@ -1957,6 +1963,7 @@
 				FC33AB192088386A0081D30A /* login_code@2x.png in Resources */,
 				FC33AB0A2088386A0081D30A /* 提醒@3x.png in Resources */,
 				FC33AB232088386A0081D30A /* next@2x.png in Resources */,
+				FC5B31A8208C887700C13019 /* placeholder@3x.png in Resources */,
 				FC33AAF52088386A0081D30A /* back@2x.png in Resources */,
 				FC33AAFD2088386A0081D30A /* getCar_nomnal@2x.png in Resources */,
 				FC33AAFE2088386A0081D30A /* getCar_nomnal@3x.png in Resources */,
@@ -1971,6 +1978,7 @@
 				FC33AB352088386A0081D30A /* 添加图片@3x.png in Resources */,
 				FC33AB382088386A0081D30A /* 精致洗车图@2x.png in Resources */,
 				FC33AB0E2088386A0081D30A /* 搜索@2x.png in Resources */,
+				FC5B31A7208C887700C13019 /* placeholder@2x.png in Resources */,
 				FC33AB222088386A0081D30A /* login_username@3x.png in Resources */,
 				FC32BF3F2079AA2000817156 /* userListViewData.plist in Resources */,
 				FC33AB2B2088386A0081D30A /* red@3x.png in Resources */,

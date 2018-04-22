@@ -103,8 +103,12 @@
 - (void)pressSelectbtn:(UIButton *)sender
 {
     if (self.param) {
+        NSMutableArray *muarray = [NSMutableArray array];
         NSArray *array = (NSArray *)self.param;
-        SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:array WithCompletionHandler:^(NSString *content) {
+        for (NSDictionary *dic in array) {
+            [muarray addObject:dic[@"name"]];
+        }
+        SelectStateView *selectView =  [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:muarray WithCompletionHandler:^(NSString *content) {
             if (content) {
                 [_selectBtn setTitle:content forState:UIControlStateNormal];
                 [_selectBtn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleRight imageTitleSpace:5];
