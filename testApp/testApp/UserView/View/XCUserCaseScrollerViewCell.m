@@ -121,11 +121,11 @@
                 [view removeFromSuperview];
             }
         }
-         UIImage *image = [UIImage imageNamed:@"未完成"];
+        UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
         for (int i = 0 ; i < photoURLArr.count; i++) {
             NSURL *imageURL = photoURLArr[i];
             UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView sd_setImageWithURL:imageURL placeholderImage:image];
+            [imageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
             imageView.userInteractionEnabled = YES;
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];

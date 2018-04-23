@@ -99,10 +99,13 @@
 - (void)setupCellWithModel:(XCShopServiceModel *)model
 {
     _model = model;
+    UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+
+    [_iconImageView setImage:placeHolderImage];
     if (isUsableNSString(model.url1, @"")) {
         NSURL *imageURL = [[NSURL alloc] initWithString:model.url1];
         if (imageURL) {
-            [_iconImageView sd_setImageWithURL:imageURL];
+            [_iconImageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
         }
     }
     if (isUsableNSString(model.serviceName, @"")) {

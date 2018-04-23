@@ -149,13 +149,13 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                             @"licenseUrl":_storeModel.licenseUrl,
                             @"url1":_storeModel.url1,
                             @"url2":_storeModel.url2,
-                            @"url3":_storeModel.url3,
-                            @"url4":_storeModel.url4,
+//                            @"url3":_storeModel.url3,
+//                            @"url4":_storeModel.url4,
                             };
     [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = response[@"errormsg"];
-        if ([response[@"result"] boolValue]) {
+        if ([response[@"result"] integerValue] == 1) {
             errStr = @"提交成功";
             [strongSelf.networkURLArrM  removeAllObjects];
         }
@@ -203,7 +203,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
         [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
 
-            if (response[@"result"]&&response[@"data"]) {
+            if ([response[@"result"] integerValue] == 1&&response[@"data"]) {
                 
                 if ([[NSFileManager defaultManager] fileExistsAtPath:strongSelf.lincesPhotoPath]) {
                     [[NSFileManager defaultManager] removeItemAtPath:strongSelf.lincesPhotoPath error:nil];
@@ -241,7 +241,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                                 };
         [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if (response[@"result"]&&response[@"data"]) {
+            if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
                 for (NSString *filePath in uploadPathArrM) {
                     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
@@ -434,8 +434,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     else if ([title isEqualToString:@"业务员提成:"]) {
         if ([textField.text doubleValue] < 100) {
             double num = [textField.text doubleValue];
-            NSString *numStr = [NSString stringWithFormat:@"%.2f",num];
-            _storeModel.salesmanCommission = numStr;
+            NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
+            textField.text = numStr;
+            _storeModel.salesmanCommission = [NSNumber numberWithDouble:num];
             
         }else {
             [self showAlterInfoWithNetWork:@"请输入正确百分比"];
@@ -444,8 +445,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     else if ([title isEqualToString:@"团队经理提成:"]) {
         if ([textField.text doubleValue] < 100) {
             double num = [textField.text doubleValue];
-            NSString *numStr = [NSString stringWithFormat:@"%.2f",num];
-            _storeModel.managerCommission = numStr;
+            NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
+            textField.text = numStr;
+            _storeModel.managerCommission = [NSNumber numberWithDouble:num];
             
         }else {
             [self showAlterInfoWithNetWork:@"请输入正确百分比"];
@@ -595,7 +597,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
             picketCell.title = title;
             [picketCell setTitleValue:holderStr];
-//            [picketCell setupCellWithShopModel:self.storeModel];
+            [picketCell setupCellWithShopModel:self.storeModel];
             return picketCell;
         }else {
             NSString *holderStr = self.placeHolderArr[indexPath.row];

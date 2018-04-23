@@ -83,8 +83,7 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //processCell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kProcessCellID forIndexPath:indexPath];
-        //        NSArray *processArr = @[@"处理完毕",@"服务中..."];
-        //        [processCell setProcessStrArr:processArr];
+
         [processCell setProcessStr:_detailModel.status];
         if ([_detailModel.status isEqualToString:@"处理完毕"]) {
             [processCell setIsFinish:YES];

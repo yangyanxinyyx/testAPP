@@ -13,7 +13,8 @@
 @interface XCCheckoutPhotoPreViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView * clipView ;
 @property (nonatomic, strong) UIImageView * preView ;
-
+/** <# 注释 #> */
+@property (nonatomic, assign) CGRect origianFrame ;
 
 @end
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
+    _origianFrame = CGRectZero;
     self.clipView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation- kBottomMargan)];
     self.preView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self addGestureRecognizerToView];
@@ -30,76 +32,13 @@
     [self.view addSubview:_clipView];
     [_clipView addSubview:_preView];
     
-
+   
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
 
-    
-    if (self.preView.image) {
-        UIImage *sourceImage = self.preView.image;
-        CGFloat puzzleRadio = (float)sourceImage.size.width / sourceImage.size.height;
-        CGFloat screenRadio = (float)SCREEN_WIDTH / SCREEN_HEIGHT;
-        CGFloat newWidth;
-        CGFloat newHeight;
-        if (puzzleRadio > screenRadio) {
-            newWidth = SCREEN_WIDTH;
-            newHeight = newWidth / puzzleRadio;
-        }else {
-            newHeight = SCREEN_HEIGHT;
-            newWidth = newHeight * puzzleRadio;
-        }
-        if (newWidth > SCREEN_WIDTH) {
-            newWidth = SCREEN_WIDTH;
-            newHeight = newWidth / puzzleRadio;
-        }
-        if (newHeight > self.clipView.frame.size.height) {
-            newHeight = self.clipView.frame.size.height;
-            newWidth = newHeight * puzzleRadio;
-        }
-        CGRect prewViewFrame = CGRectZero;
-        
-        if (newWidth == SCREEN_WIDTH) {
-            prewViewFrame = CGRectMake(0 , (SCREEN_HEIGHT - newHeight) * 0.5,
-                                       newWidth,
-                                       newHeight);
-        }else {
-            
-            prewViewFrame = CGRectMake(0 + (self.clipView.frame.size.width - newWidth) * 0.5,
-                                       (SCREEN_HEIGHT - newHeight) * 0.5,
-                                       newWidth,
-                                       newHeight);
-        }
-        //    [self.clipView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//        UIImage *newImage = [sourceImage resizedImage:prewViewFrame.size interpolationQuality:kCGInterpolationHigh];
-        CGFloat clipWidth = self.clipView.frame.size.width ;
-        CGFloat clipHeight = self.clipView.frame.size.height;
-        //    [self.clipView setFrame:CGRectMake(0, (SCREEN_HEIGHT - clipHeight) * 0.5, clipWidth, clipHeight)];
-        CGFloat clipRadio = clipWidth/ clipHeight;
-        
-        CGFloat newOffsetx;
-        CGFloat newOffsety;
-        if (clipRadio > puzzleRadio) {
-            newOffsetx = 0;
-            newWidth = clipWidth;
-            newHeight = newWidth / puzzleRadio;
-            newOffsety = (newHeight - clipHeight) * 0.5;
-        }else {
-            newOffsety = 0;
-            newHeight = clipHeight;
-            newWidth = newHeight * puzzleRadio;
-            newOffsetx = (newWidth - clipWidth) * 0.5;
-        }
-        [self.preView setContentMode:UIViewContentModeScaleAspectFit];
-        [self.preView setFrame:CGRectMake(newOffsetx, newOffsety, newWidth, newHeight)];
-    }
-  
-    
-    //    [self.preView setFrame:CGRectMake(0, 0, prewViewFrame.size.width, prewViewFrame.size.height)];
-    
-    //    [self.preView sizeToFit];
 }
 
 #pragma mark - lifeCycle
@@ -200,14 +139,14 @@
     if (frame.origin.x > 1) {
         frame = CGRectMake(0, frame.origin.y, frame.size.width, frame.size.height);
     }
-    if (frame.origin.x+frame.size.width < SCREEN_WIDTH - 1) {
-        frame = CGRectMake(SCREEN_WIDTH - frame.size.width, frame.origin.y, frame.size.width, frame.size.height);
+    if (frame.origin.x+frame.size.width < _clipView.frame.size.width - 1) {
+        frame = CGRectMake(_clipView.frame.size.width - frame.size.width, frame.origin.y, frame.size.width, frame.size.height);
     }
     if (frame.origin.y > 1) {
         frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
     }
-    if (frame.origin.y+frame.size.height < SCREEN_HEIGHT - 1) {
-        frame = CGRectMake(frame.origin.x, SCREEN_HEIGHT - frame.size.height, frame.size.width, frame.size.height);
+    if (frame.origin.y+frame.size.height < _clipView.frame.size.height - 1) {
+        frame = CGRectMake(frame.origin.x, (_clipView.frame.size.height  - frame.size.height ) * 0.5, frame.size.width, frame.size.height);
     }
     [UIView animateWithDuration:0.3 animations:^{
         self.preView.frame = frame;
@@ -228,20 +167,48 @@
 {
     _sourceURL = sourceURL;
     __weak __typeof(self) weakSelf = self;
-    
-    [self.preView sd_setImageWithURL:sourceURL completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        [weakSelf viewWillLayoutSubviews];
+    UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+    [self.preView sd_setImageWithURL:sourceURL placeholderImage:placeHolderImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
+        UIImage *sourceImage = image;
+        CGSize clipSize = weakSelf.clipView.frame.size;
+        CGFloat puzzleRadio = (float)sourceImage.size.width / sourceImage.size.height;
+        CGFloat screenRadio = (float)clipSize.width / clipSize.height;
+        CGFloat newWidth = 0.0;
+        CGFloat newHeight = 0.0;
+        if (puzzleRadio > screenRadio) {
+            newWidth = clipSize.width ;
+            newHeight = newWidth / puzzleRadio;
+        }else {
+            newHeight = clipSize.height;
+            newWidth = newHeight * puzzleRadio;
+        }
+        if (newWidth > clipSize.width ) {
+            newWidth = clipSize.width ;
+            newHeight = newWidth / puzzleRadio;
+        }
+        if (newHeight > clipSize.height) {
+            newHeight = clipSize.height;
+            newWidth = newHeight * puzzleRadio;
+        }
+        CGRect prewViewFrame = CGRectZero;
+        
+        if (newWidth == clipSize.width) {
+            prewViewFrame = CGRectMake(0 , (clipSize.height - newHeight) * 0.5,
+                                       newWidth,
+                                       newHeight);
+        }else {
+            
+            prewViewFrame = CGRectMake(0 + (clipSize.width - newWidth) * 0.5,
+                                       (clipSize.height - newHeight) * 0.5,
+                                       newWidth,
+                                       newHeight);
+        }
+
+        [weakSelf.preView setContentMode:UIViewContentModeScaleAspectFit];
+        [weakSelf.preView setFrame:prewViewFrame];
+        weakSelf.origianFrame = prewViewFrame;
     }];
-
-
-}
-
-- (void)setSourceImage:(UIImage *)sourceImage
-{
-    if (!sourceImage) {
-        return;
-    }
-
 
 }
 

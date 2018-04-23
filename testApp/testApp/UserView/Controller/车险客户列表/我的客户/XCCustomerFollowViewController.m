@@ -83,6 +83,7 @@
 #pragma mark - XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
+    [self.tableView endEditing:YES];
     __weak __typeof(self) weakSelf = self;
     NSDictionary *param = @{
                             @"customerId":self.customerID,
@@ -91,9 +92,9 @@
                             @"operate":self.operateStr,
                             @"nextFollowTime":self.nextFollowTimeStr
                             };
-    [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+    [RequestAPI postCustomerFollowRec:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if (response[@"result"]) {
+        if ([response[@"result"] integerValue] == 1) {
             [strongSelf requestSuccessHandler];
         }else {
             [strongSelf requestFailureHandler];
@@ -104,10 +105,6 @@
         [strongSelf requestFailureHandler];
     }];
     
-    FinishTipsView *alterView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:^{
-        
-    }];
-    [self.view addSubview:alterView];
 }
 
 #pragma mark - PriceUnderwritingImportTableViewCellDelegate

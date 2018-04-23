@@ -113,15 +113,17 @@
     else if ([self.title isEqualToString:@"负责人电话:"] && isUsableNSString(model.corporateCellphone, @"")) {
         [_textField setText:model.corporateCellphone];
     }
-    else if ([self.title isEqualToString:@"业务员提成:"]&&isUsableNSString(model.salesmanCommission, @"")) {
-        [_textField setText:model.salesmanCommission];
+    else if ([self.title isEqualToString:@"业务员提成:"] && isUsable(model.salesmanCommission, [NSNumber class])) {
+    [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
+        
     }
-    else if ([self.title isEqualToString:@"团队经理提成:"]) {
-        [_textField setText:model.salesmanCommission];
+    else if ([self.title isEqualToString:@"团队经理提成:"] && isUsable(model.managerCommission, [NSNumber class])) {
+              [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];
     }
     else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
         [_textField setText:model.storeStatus];
     }
+    
 }
 
 //- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model

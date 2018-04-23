@@ -18,9 +18,9 @@
 /** 负责人手机号 */
 @property (nonatomic, copy) NSString * corporateCellphone;
 /** 业务员提成佣金比例 */
-@property (nonatomic, copy) NSString * salesmanCommission;
+@property (nonatomic, copy) NSNumber * salesmanCommission;
 /** 业务经理佣金比例 */
-@property (nonatomic, copy) NSString * managerCommission;
+@property (nonatomic, copy) NSNumber * managerCommission;
 /** 所属城市 */
 @property (nonatomic, copy) NSString * city;
 /** 所在地区 */

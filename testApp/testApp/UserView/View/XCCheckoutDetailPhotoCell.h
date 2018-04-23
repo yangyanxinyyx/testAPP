@@ -27,6 +27,5 @@
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
 + (CGFloat)getCellHeight;
 - (void)setupCellWithShopModel:(XCShopModel *)model;
--(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr;
 
 @end

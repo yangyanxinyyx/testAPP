@@ -164,7 +164,7 @@ UIImagePickerControllerDelegate>
     [RequestAPI addOrderByAuditAndRules:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         
-        if (response[@"result"]) {
+        if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"预约成功"];
         }else {
             [strongSelf showAlterInfoWithNetWork:@"预约失败"];
@@ -194,7 +194,7 @@ UIImagePickerControllerDelegate>
                                 };
         [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if (response[@"result"]&&response[@"data"]) {
+            if (([response[@"result"] integerValue] == 1)&&response[@"data"]) {
                 //                [strongSelf requestSuccessHandler];
                 if ([[NSFileManager defaultManager] fileExistsAtPath:strongSelf.lincesPhotoPath]) {
                     [[NSFileManager defaultManager] removeItemAtPath:strongSelf.lincesPhotoPath error:nil];

@@ -82,7 +82,7 @@
     __weak __typeof(self) weakSelf = self;
     [RequestAPI updateService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if ([response[@"result"] boolValue]) {
+        if ([response[@"result"] integerValue] == 1) {
             
             [strongSelf showAlterInfoWithNetWork:@"修改成功"];
         }

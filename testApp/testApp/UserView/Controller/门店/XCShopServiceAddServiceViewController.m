@@ -65,7 +65,7 @@
     [RequestAPI insertService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errorStr = response[@"errormsg"];
-        if ([response[@"result"] boolValue]) {
+        if ([response[@"result"] integerValue] == 1) {
             errorStr = @"提交成功";
         }
         [strongSelf showAlterInfoWithNetWork:errorStr];

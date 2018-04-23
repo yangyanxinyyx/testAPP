@@ -89,7 +89,7 @@
         if (self.photoArr.count == 1) {
             [_addPhotoImageView setFrame:CGRectZero];
             UIImageView *imageView = [_scrollview.subviews firstObject];
-            [imageView setFrame:CGRectMake(0 , 0, labelSize.width, labelSize.height)];
+            [imageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.width)];
         }else {
             if (![_addPhotoImageView superview]) {
                 [_scrollview addSubview:_addPhotoImageView];
@@ -103,12 +103,12 @@
                 [_addPhotoImageView setFrame:CGRectZero];
                 for (int i = 0 ; i < (_scrollview.subviews.count - 1); i++) {
                     UIImageView *imageView = _scrollview.subviews[i];
-                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                    [imageView setFrame:CGRectMake(i * (10 * ViewRateBaseOnIP6 + labelSize.width) , 0, labelSize.width, labelSize.width)];
                 }
             }else {
                 for (int i = 0 ; i < _scrollview.subviews.count; i++) {
                     UIImageView *imageView = _scrollview.subviews[i];
-                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                    [imageView setFrame:CGRectMake(i * (10 * ViewRateBaseOnIP6 + labelSize.width) , 0, labelSize.width, labelSize.width)];
                 }
             }
         }else {
@@ -204,14 +204,16 @@
     _photoArr = photoArr;
     [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
+    UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+
     if (photoArr.count > 0) {
         
         for (int i = 0 ; i < photoArr.count; i++) {
             NSString *filePath = photoArr[i];
             NSURL *photoURL = [self getImageURLWithFilePath:filePath];
             UIImageView *imageView = [[UIImageView alloc]init];
-            [imageView sd_setImageWithURL:photoURL];
-            [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
+            [imageView sd_setImageWithURL:photoURL placeholderImage:placeHolderImage];
+//            [imageView setFrame:CGRectMake(i * (30 * ViewRateBaseOnIP6 + imageViewW) , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
             imageView.userInteractionEnabled = YES;
@@ -227,30 +229,6 @@
     }
 }
 
--(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr
-{
-    if (photoArr.count > 0) {
-        [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
-        
-        for (int i = 0 ; i < photoArr.count; i++) {
-            UIImage *image = photoArr[i];
-            UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.userInteractionEnabled = YES;
-            imageView.image = image;
-            [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
-            [imageView addGestureRecognizer:tap];
-            [_scrollview addSubview:imageView];
-        }
-        [_addPhotoImageView setFrame:CGRectMake(photoArr.count * imageViewW, 0, imageViewW, imageViewW)];
-        if (_scrollview.subviews.count < _maxPhoto) {
-            [_scrollview addSubview:_addPhotoImageView];
-        }
-        [self layoutSubviews];
-    }
-}
 
 -(void)setMaxPhoto:(NSInteger)maxPhoto
 {
