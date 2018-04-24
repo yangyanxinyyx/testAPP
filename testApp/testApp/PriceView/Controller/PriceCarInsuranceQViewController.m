@@ -738,7 +738,7 @@
             } else if ([lastModel.isToubao isEqualToString:@"Y"]){
                 cell.labelNum.text = @"投保";
             } else {
-                cell.labelNum.text = [NSString stringWithFormat:@"%@万",lastModel.isToubao];
+                cell.labelNum.text = [NSString stringWithFormat:@"%@",lastModel.isToubao];
             }
         }
         if ([lastModel.isMianpei isEqualToString:@"Y"]) {
