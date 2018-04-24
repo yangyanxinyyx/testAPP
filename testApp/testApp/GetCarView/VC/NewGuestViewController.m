@@ -89,7 +89,6 @@
 
                     }
 
-                    self.serviceType = content;
                 }];
                 [self.view addSubview:inputView];
             }else if (i == 5){
@@ -140,7 +139,7 @@
     if (!self.currentModel) {
         return;
     }
-    if (self.isOrder) {
+    if (!self.isOrder) {
         if (!self.name || !self.plateNO ||!self.car ||!self.phoneNO ||!self.InsuranceMoney || !self.selfMoney) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"信息填写不完整" complete:nil];
             [self.view addSubview:tipsView];

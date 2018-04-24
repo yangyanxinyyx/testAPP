@@ -40,7 +40,7 @@
         _carLabel.textColor = COLOR_RGB_255(131, 131, 131);
         [self.contentView addSubview:_carLabel];
 
-
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
@@ -52,9 +52,9 @@
 
     _line2.frame = CGRectMake(0, 40, SCREEN_WIDTH, 1);
 
-    _selectImageV.frame = CGRectMake(SCREEN_WIDTH - 35, 10, 20, 20);
+    _selectImageV.frame = CGRectMake(SCREEN_WIDTH - 35, 20, 20, 20);
 
-    _titleLabel.frame = CGRectMake(15, 13, 150, 14);
+    _titleLabel.frame = CGRectMake(15, 23, 150, 14);
 
     _ownerLabel.frame = CGRectMake(15, 55, 150, 13);
 

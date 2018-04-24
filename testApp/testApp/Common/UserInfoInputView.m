@@ -132,9 +132,19 @@
     return YES;
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (self.sureCallback) {
+        self.sureCallback(textField.text);
+    }
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self endEditing:YES];
+    if (self.sureCallback) {
+        self.sureCallback(_textField.text);
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

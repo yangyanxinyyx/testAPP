@@ -33,7 +33,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, 190 * kScaleHeight)];
     [self.view addSubview:imageView];
     imageView.backgroundColor = [UIColor redColor];
-    imageView.image = [UIImage imageNamed:@""];
+    imageView.image = [UIImage imageNamed:@"shouye.png"];
 
     self.accoutTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(imageView.frame), SCREEN_WIDTH-20, 44)];
     [self.view addSubview:_accoutTextField];
@@ -243,7 +243,7 @@
                             }
                             UserInfoManager *manager = [UserInfoManager shareInstance];
                             NSLog(@"");
-                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[UserInfoManager shareInstance].code];
                             confirmView.delegate = self;
                             [self.view addSubview:confirmView];
 

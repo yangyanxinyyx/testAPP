@@ -39,11 +39,18 @@
     [self addSubview:titleLabel];
 
     NSArray *kinds = @[@"冠军",@"亚军",@"季军"];
+    NSArray *images = nil;
+    if ([title isEqualToString:@"个人业绩"]) {
+        images = @[@"个人冠军.png",@"个人亚军.png",@"个人季军.png"];
+    }else{
+        images = @[@"年度冠军.png",@"年度亚军.png",@"年度季军.png"];
+    }
     for (int i=0; i <3; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54, 80, 80)];
         imageView.layer.cornerRadius = 40;
         imageView.layer.masksToBounds = YES;
         imageView.backgroundColor = [UIColor redColor];
+        imageView.image = [UIImage imageNamed:images[i]];
         [self addSubview:imageView];
 
         UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54+60, 80, 12)];

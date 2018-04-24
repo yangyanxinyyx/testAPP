@@ -27,30 +27,45 @@
     [self.view addSubview:topBar];
     _notification = [NSNotification notificationWithName:@"CustomerNotification" object:nil userInfo:nil];
     [self createUI];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
 }
 
-- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
-    if (isCancel) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
 }
+
 #pragma mark - network
 - (void)pressCustomerInformationInput{
     if (self.dictionaryInfo) {
         [RequestAPI getCustomerInformationInput:self.dictionaryInfo header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            
-            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *data = response[@"data"];
-                if (!data) {
-                    NSLog(@"提交成功");
+            NSNumber *result = response[@"result"];
+            if (![result isKindOfClass:[NSNull class]] && [result boolValue] == YES) {
+                NSLog(@"提交成功");
+                dispatch_async(dispatch_get_main_queue(), ^{
                     FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"提交成功,待审核" complete:^{
                         
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-                }
+                });
+                
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:^{
+                        
+                    }];
+                    [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+                });
             }
-        } fail:^(id error) {
             
+        } fail:^(id error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",error] complete:^{
+                    
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            });
         }];
     }
 }
@@ -109,7 +124,7 @@
     if (section == 2) {
         return 1;
     } else {
-     return 7;
+        return 7;
     }
     
 }
@@ -122,7 +137,7 @@
     if (indexPath.section == 2) {
         return 98 * ViewRateBaseOnIP6;
     } else {
-      return 80 * ViewRateBaseOnIP6;
+        return 80 * ViewRateBaseOnIP6;
     }
 }
 
@@ -204,7 +219,7 @@
     if (indexPath.section == 2 && indexPath.row == 0) {
         [self pressCustomerInformationInput];
     }
-
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
@@ -236,5 +251,7 @@
     }
     return _dictionaryInfo;
 }
+
+
 
 @end

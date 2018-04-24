@@ -67,6 +67,8 @@
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
     if (isCancel) {
+        [_viewBear removeFromSuperview];
+        _viewBear = nil;
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -736,7 +738,7 @@
             } else if ([lastModel.isToubao isEqualToString:@"Y"]){
                 cell.labelNum.text = @"投保";
             } else {
-                cell.labelNum.text = [NSString stringWithFormat:@"%@万",lastModel.isToubao];
+                cell.labelNum.text = [NSString stringWithFormat:@"%@",lastModel.isToubao];
             }
         }
         if ([lastModel.isMianpei isEqualToString:@"Y"]) {
