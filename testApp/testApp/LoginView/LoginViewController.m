@@ -243,7 +243,7 @@
                             }
                             UserInfoManager *manager = [UserInfoManager shareInstance];
                             NSLog(@"");
-                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[NSString stringWithFormat:@"%@",[UserInfoManager shareInstance].employeeId]];
+                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[UserInfoManager shareInstance].code];
                             confirmView.delegate = self;
                             [self.view addSubview:confirmView];
 
