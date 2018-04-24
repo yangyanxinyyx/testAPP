@@ -107,17 +107,18 @@
 +(void)getSelectLinesByDictCode:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 //客户跟进--提交
 +(void)postCustomerFollowRec:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
+//退单-修改核保
++(void)submitPolicyAfterRevoke:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
 //预约维修
 +(void)addOrderByMaintain:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 //违章查询
 +(void)getWZMessageByCarId:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
-//预约违章接口
+//预约违章接口/预约年审接口
 +(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 //获取年审类型和费用
 +(void)getCarVerificationMoney:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
-////预约年审接口
-//+(void)addOrderByAuditAndRules:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
+
 //查询门店列表
 +(void)appFindStore:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail;
 
@@ -146,6 +147,11 @@
 
 //获取门店服务信息
 +(void)getStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
-
+//编辑服务
++(void)updateService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+//查询可添加服务
++(void)queryServiceByStoreId:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+//添加服务
++(void)insertService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
 @end

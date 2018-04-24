@@ -8,11 +8,15 @@
 
 #import "XCMyCommissionViewController.h"
 #import "RequestAPI.h"
+#import "UILabel+createLabel.h"
 #define kmyCommissionCellID @"myCommissionCellID"
 #define kheaderViewID @"tableHeaderViewID"
 #define kfooterViewID @"tableFooterViewID"
 
 @interface XCMyCommissionViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
+
+@property (nonatomic, strong) UIImageView * bgImageView ;
+@property (nonatomic, strong) UILabel * bgLabel ;
 
 @property (nonatomic, strong) UITableView * tableView ;
 @end
@@ -22,25 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  
-
     [self setupNav];
-//    self.dataArrM = [[NSMutableArray alloc] init];
-//
-//    NSDictionary *dictory = @{
-//                                          @"car_commission":@(336),
-//                                          @"car_royalties":@(426),
-//                                          @"medal_bonus":@(300),
-//                                          @"car_performance":@(466319),
-//                                          @"creat_time":@"2018-03-30 17:58:05.0"
-//                                          };
-//
-//    XCMyCommissionListModel *model = [XCMyCommissionListModel getMyCommissionListWithDataInfo:dictory];
-//
-//    [self.dataArrM addObject:model];
-//    [self.dataArrM addObject:model];
-//    [self.dataArrM addObject:model];
-
     [self setUI];
 
 }
@@ -48,7 +34,17 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.tableView setFrame:CGRectMake(0, 64 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 )];
+    CGSize labelSize = CGSizeMake(218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6);
+    [_bgImageView setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5,kHeightForNavigation + 342 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
+    [_bgLabel sizeToFit];
+    labelSize = _bgLabel.frame.size;
+    [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
+    if (self.dataArrM.count > 0) {
+        [self.tableView setFrame:CGRectMake(0, 64 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 )];
+    }else {
+        [self.tableView setFrame:CGRectZero];
+    }
+
 }
 
 #pragma mark - InitUI
@@ -59,6 +55,15 @@
     topBar.delegate  = self;
     topBar.title = @"我的佣金";
     [self.view addSubview:topBar];
+    
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
+    _bgImageView.image = image;
+    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
+    [_bgLabel setText:@"暂无查询数据"];
+    [self.view addSubview:_bgImageView];
+    [self.view addSubview:_bgLabel];
+    
 }
 
 - (void)setUI

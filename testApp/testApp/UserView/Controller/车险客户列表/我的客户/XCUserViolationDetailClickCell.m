@@ -41,7 +41,7 @@
         UILabel *label = (UILabel *)[self viewWithTag:200+i];
         [label sizeToFit];
         labelSize = label.frame.size;
-        [label setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_topLine.frame) + 30 *ViewRateBaseOnIP6 + (12 + 26) * ViewRateBaseOnIP6 * i , labelSize.width, 26 * ViewRateBaseOnIP6)];
+        [label setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_topLine.frame) + 30 *ViewRateBaseOnIP6 + (12 + 26) * ViewRateBaseOnIP6 * i , self.bounds.size.width - leftMargin, 26 * ViewRateBaseOnIP6)];
     }
     UILabel *lastLabel = [self viewWithTag:(200+_titleArr.count -1)];
     
@@ -52,7 +52,22 @@
     [_statusLabel setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_middleLine.frame) + 46 * ViewRateBaseOnIP6, labelSize.width, 27 * ViewRateBaseOnIP6)];
     [_confirmBtn setFrame:CGRectMake(self.bounds.size.width - (240 + 30) * ViewRateBaseOnIP6 , CGRectGetMaxY(_middleLine.frame)+ 25 * ViewRateBaseOnIP6, 240 *ViewRateBaseOnIP6, 70 * ViewRateBaseOnIP6)];
     
-    
+    if ([self.detailModel.handled isEqualToString:@"0"]) {
+        [_statusLabel setText:@"未处理"];
+        _confirmBtn.userInteractionEnabled = YES;
+        _confirmBtn.selected = NO;
+        [_statusLabel setTextColor:COLOR_RGB_255(246, 41, 42)];
+    }else if ([self.detailModel.handled isEqualToString:@"1"]) {
+        [_statusLabel setText:@"已处理"];
+        _confirmBtn.userInteractionEnabled = NO;
+        _confirmBtn.selected = YES;
+        [_statusLabel setTextColor:COLOR_RGB_255(49, 190, 166)];
+    }else if ([self.detailModel.handled isEqualToString:@"2"]) {
+        [_statusLabel setText:@"处理中"];
+        _confirmBtn.userInteractionEnabled = NO;
+        _confirmBtn.selected = YES;
+        [_statusLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
+    }
  
 }
 
@@ -93,7 +108,10 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithHexString:@"#999999"]
                  forState:UIControlStateSelected];
-    [button setBackgroundColor:[UIColor colorWithHexString:@"004da2"]];
+    UIImage *confirmImage = [UIImage imageNamed:@"confirm"];
+    UIImage *unconfirmImage = [UIImage imageNamed:@"unconfirm"];
+    [button setBackgroundImage:confirmImage forState:UIControlStateNormal];
+    [button setBackgroundImage:unconfirmImage forState:UIControlStateSelected];
     [button addTarget:self action:@selector(clickConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
     button.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
     _confirmBtn = button;
@@ -106,9 +124,8 @@
 #pragma mark - Action Method
 - (void)clickConfirmButton:(UIButton *)button
 {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCUserViolationDetailClickCellClickButton:statusLabel:)]) {
-        [self.delegate XCUserViolationDetailClickCellClickButton:button statusLabel:_statusLabel];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCUserViolationDetailClickCellClickButton:statusLabel:model:)]) {
+        [self.delegate XCUserViolationDetailClickCellClickButton:button statusLabel:_statusLabel model:self.detailModel];
     }
 }
 #pragma mark - Delegates & Notifications
@@ -145,6 +162,9 @@
     }else {
         _detailModel.weizhangClause = @"";
     }
+    if (!isUsableNSString(_detailModel.remark,@"")) {
+        _detailModel.remark = @"";
+    }
     
     NSArray *titleValue = @[area,city,fen,clause];
     
@@ -152,22 +172,7 @@
         UILabel *label = (UILabel *)[self viewWithTag:200+ i];
         [label setText:titleValue[i]];
     }
-    if ([self.detailModel.handled isEqualToString:@"0"]) {
-        [_statusLabel setText:@"未处理"];
-        _confirmBtn.userInteractionEnabled = YES;
-        _confirmBtn.selected = NO;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"fda100"]];
-    }else if ([self.detailModel.handled isEqualToString:@"1"]) {
-        [_statusLabel setText:@"已处理"];
-        _confirmBtn.userInteractionEnabled = NO;
-        _confirmBtn.selected = YES;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"31bea6"]];
-    }else if ([self.detailModel.handled isEqualToString:@"2"]) {
-        [_statusLabel setText:@"处理中"];
-        _confirmBtn.userInteractionEnabled = NO;
-        _confirmBtn.selected = YES;
-        [_statusLabel setTextColor:[UIColor colorWithHexString:@"31bea6"]];
-    }
+   
 }
 
 @end

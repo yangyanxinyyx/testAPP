@@ -37,5 +37,7 @@
 //查询违章
 /** 状态 */
 @property (nonatomic, strong) NSString * handled ;
+/** <# 注释 #> */
+@property (nonatomic, copy) NSString * type;
 
 @end

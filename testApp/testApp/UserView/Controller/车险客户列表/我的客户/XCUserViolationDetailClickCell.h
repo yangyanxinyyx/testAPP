@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XCUserViolationDetailModel.h"
 @protocol XCUserViolationDetailClickCellDelegate <NSObject>
-- (void)XCUserViolationDetailClickCellClickButton:(UIButton *)button statusLabel:(UILabel *)statusLabel;
+- (void)XCUserViolationDetailClickCellClickButton:(UIButton *)button statusLabel:(UILabel *)statusLabel model:(XCUserViolationDetailModel *)model;
 
 @end
 

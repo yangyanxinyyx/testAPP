@@ -99,7 +99,7 @@
                                 };
         [RequestAPI addOrderByMaintain:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             NSString * respnseStr = response[@"errormsg"];
-            if (response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"预约成功";
             }
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];

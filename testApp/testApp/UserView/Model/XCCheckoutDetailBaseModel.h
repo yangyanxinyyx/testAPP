@@ -97,7 +97,7 @@
 @property (nonatomic, copy) NSString * remark;
 
 // 保单信息
-/** 交强险 */
+/** 交强险 double*/
 @property (nonatomic, copy) NSNumber * jqValue;
 
 /** 机动车损险 */
@@ -112,5 +112,84 @@
 /** 车上(乘客)险 */
 @property (nonatomic, copy) NSNumber * csckValue;
 
+//退单添加
+/** 客户id long*/
+@property (nonatomic, strong) NSNumber * customerId ;
+/** 客户名称 */
+@property (nonatomic, copy) NSString * customerName;
+/** 业务员id long*/
+@property (nonatomic, strong) NSNumber * salesmanId ;
+/** 业务员名称 */
+@property (nonatomic, copy) NSString * salesmanName;
+/** 车id long*/
+@property (nonatomic, strong) NSNumber * carId ;
+/** 分公司ID long*/
+@property (nonatomic, strong)  NSNumber* companyId ;
+/** 出单日期 */
+@property (nonatomic, copy) NSString * exportDate;
+/** 出单机构ID */
+@property (nonatomic, copy) NSString * exportUnitId;
+/** 出单机狗 */
+@property (nonatomic, copy) NSString * exportUnitName;
+/** 保险公司id long*/
+@property (nonatomic, strong) NSNumber * insurerId ;
+/** 退回备注 */
+@property (nonatomic, copy) NSString * rejectRemark;
+/** 是否选择交强险 */
+@property (nonatomic, copy) NSString * jqIsSelect;
 
+/** 是否不计免赔(交强险) */
+@property (nonatomic, copy) NSString * jqWithout;
+/** 是否选择车损险 */
+@property (nonatomic, copy) NSString * csIsSelect;
+/** 是否不计免赔(车损险) */
+@property (nonatomic, copy) NSString * csWithout;
+/** 是否选择盗抢险 */
+@property (nonatomic, copy) NSString * dqIsSelect;
+/** 盗抢险保额 double*/
+@property (nonatomic, copy) NSNumber * dqValue;
+/** 是否不计免赔(盗抢险) */
+@property (nonatomic, copy) NSString * dqWithout;
+/** 是否选择三者险 */
+@property (nonatomic, copy) NSString * szIsSelect;
+/** 是否不计免赔（三者险） */
+@property (nonatomic, copy) NSString * szWithout;
+/** 是否选择车上司机险 */
+@property (nonatomic, copy) NSString * cssjIsSelect;
+/** 是否不计免赔（车上司机险）  */
+@property (nonatomic, copy) NSString * cssjWithout;
+/** 是否选择车上乘客险 */
+@property (nonatomic, copy) NSString * csckIsSelect;
+/** 是否不计免赔（车上乘客险） */
+@property (nonatomic, copy) NSString * csckWithout;
+/** 是否选择车身划痕险 */
+@property (nonatomic, copy) NSString * cshhIsSelect;
+/** 车上划痕险保额 double */
+@property (nonatomic, strong) NSNumber * cshhValue ;
+/** 是否不计免赔（车身划痕险） */
+@property (nonatomic, copy) NSString * cshhWithout;
+/** 是否选择玻璃破碎险 */
+@property (nonatomic, copy) NSString * blpsIsSelect;
+/** 玻璃破碎险保额 */
+@property (nonatomic, copy) NSString * blpsValue;
+/** 是否不计免赔（玻璃破碎险） */
+@property (nonatomic, copy) NSString * blpsWithout;
+/** 是否选择发动机涉水险 */
+@property (nonatomic, copy) NSString * 是否选择发动机涉水险;
+/** 发动机涉水险保额 */
+@property (nonatomic, strong) NSNumber * fdjssValue;
+/** 是否不计免赔（发动机涉水险） */
+@property (nonatomic, copy) NSString * fdjssWithout;
+/** 是否选择无法找到第三方险 */
+@property (nonatomic, copy) NSString * wfzddsfIsSelect;
+/** 无法找到第三方险 double*/
+@property (nonatomic, strong) NSNumber * wfzddsfValue ;
+/** 是否不计免赔（无法找到第三方险) */
+@property (nonatomic, copy) NSString * wfzddsfWithout;
+/** 是否选择自燃险 */
+@property (nonatomic, copy) NSString * zrxIsSelect;
+/** 自燃险保额 double*/
+@property (nonatomic, strong) NSNumber * zrxValue ;
+/** 是否不计免赔（自燃险） */
+@property (nonatomic, copy) NSString * zrxWithout;
 @end

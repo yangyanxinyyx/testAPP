@@ -13,7 +13,7 @@
 #define SCREEN_TABBAR_HEIGHT 44
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
-
+#import "NSString+MoneyString.h"
 
 static inline void XCLog(NSString *log, ...)
 {

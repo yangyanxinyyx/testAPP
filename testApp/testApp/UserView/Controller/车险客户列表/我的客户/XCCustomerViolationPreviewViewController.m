@@ -45,13 +45,53 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
-#pragma mark - Delegates & Notifications
 - (void)XCUserViolationDetailClickCellClickButton:(UIButton *)button
+                                      statusLabel:(UILabel *)statusLabel
+                                            model:(XCUserViolationDetailModel *)model
 {
-    //预约
-    button.selected = YES;
-    button.userInteractionEnabled = NO ;
-    [button setTitle:@"处理中" forState:UIControlStateSelected];
+    
+    NSDictionary *param = @{
+                            @"customerId":model.customerId,
+                            @"customerName":model.customerName,
+                            @"phone":model.phone,
+                            @"contacts":model.contacts,
+                            @"carId":model.carId,
+                            @"plateNo":model.plateNo,
+                            @"type":@"违章",
+                            @"remark":model.remark,
+                            @"buckleScores":model.buckleScores,
+                            @"weizhangDate":model.weizhangDate,
+                            @"weizhangArea":model.weizhangArea,
+                            @"weizhangCity":model.weizhangCity,
+                            @"weizhangClause":model.weizhangClause,
+                            };
+    __weak __typeof(self) weakSelf = self;
+    __block NSString *requstStr = @"未知错误";
+    [RequestAPI addOrderByAuditAndRules:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if ([response[@"result"] boolValue] == 1) {
+            requstStr = @"预约成功";
+        }else {
+           requstStr = response[@"errormsg"] ;
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
+        [strongSelf.view addSubview:tipsView];
+        model.handled = @"2";
+        //预约
+        button.selected = YES;
+        button.userInteractionEnabled = NO ;
+        [statusLabel setText:@"处理中"];
+        [statusLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        requstStr = [NSString stringWithFormat:@"%@",error];
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
+        [strongSelf.view addSubview:tipsView];
+    }];
+    
+  
+
 }
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate

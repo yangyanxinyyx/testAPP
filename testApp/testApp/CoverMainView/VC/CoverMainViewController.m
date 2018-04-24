@@ -50,7 +50,7 @@
     _scrollView.delegate = self;
 
 
-    NSArray *array = [NSArray arrayWithObjects:[UIImage imageNamed:@"汽车1.jpg"],[UIImage imageNamed:@"汽车2.jpg"],[UIImage imageNamed:@"汽车3.jpg"], nil];
+    NSArray *array = [NSArray arrayWithObjects:[UIImage imageNamed:@"placeholder.png"],[UIImage imageNamed:@"placeholder.png"],[UIImage imageNamed:@"placeholder.png"], nil];
 
     self.imageScrollView = [[YXScrollView alloc] initWithImageArray:array imageClick:^(NSInteger index) {
         NSLog(@"点了图片%ld",index);
@@ -93,31 +93,42 @@
 
 - (void)reloadData
 {
-    [_imageScrollView removeFromSuperview];
     [_carView removeFromSuperview];
     [_repairView removeFromSuperview];
 
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSMutableArray *muImageArray = [NSMutableArray array];
+        for (CoverLoopimageModel *model in [UserInfoManager shareInstance].coverMainModel.loopImageDatas) {
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.url]];
+            UIImage *image = [UIImage imageWithData:data];
+            [muImageArray addObject:image];
+        }
 
-    NSMutableArray *muImageArray = [NSMutableArray array];
-    for (CoverLoopimageModel *model in [UserInfoManager shareInstance].coverMainModel.loopImageDatas) {
-        NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.url]];
-        UIImage *image = [UIImage imageWithData:data];
-        [muImageArray addObject:image];
-    }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_imageScrollView removeFromSuperview];
 
-    NSArray *imageArray = muImageArray;
+            NSArray *imageArray = muImageArray;
+            self.imageScrollView = [[YXScrollView alloc] initWithImageArray:imageArray imageClick:^(NSInteger index) {
+                NSLog(@"点了图片%ld",index);
+            }];
+            self.imageScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 190 * kScaleHeight);
+            self.imageScrollView.time = 3;
 
-    self.imageScrollView = [[YXScrollView alloc] initWithImageArray:imageArray imageClick:^(NSInteger index) {
-        NSLog(@"点了图片%ld",index);
-    }];
-    self.imageScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 190 * kScaleHeight);
-    self.imageScrollView.time = 3;
+            [_scrollView addSubview:_imageScrollView];
 
-    [_scrollView addSubview:_imageScrollView];
+            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+            _announcementView.delegate = self;
+            [_scrollView addSubview:_announcementView];
+        });
+    });
 
-    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-    _announcementView.delegate = self;
-    [_scrollView addSubview:_announcementView];
+
+
+
+
+
+
+
 
     NSArray * array = @[
                         [UserInfoManager shareInstance].performanceMedal.lastYearCar,

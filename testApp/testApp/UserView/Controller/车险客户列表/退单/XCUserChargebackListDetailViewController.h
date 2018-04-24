@@ -7,7 +7,8 @@
 //
 
 #import "XCCheckoutDetailBaseTableViewController.h"
-
+#import "XCCheckoutDetailBaseModel.h"
 @interface XCUserChargebackListDetailViewController : XCCheckoutDetailBaseTableViewController
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCheckoutDetailBaseModel * detailModel ;
 @end

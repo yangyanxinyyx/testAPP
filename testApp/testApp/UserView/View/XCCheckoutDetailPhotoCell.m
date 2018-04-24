@@ -89,7 +89,7 @@
         if (self.photoArr.count == 1) {
             [_addPhotoImageView setFrame:CGRectZero];
             UIImageView *imageView = [_scrollview.subviews firstObject];
-            [imageView setFrame:CGRectMake(0 , 0, labelSize.width, labelSize.height)];
+            [imageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.width)];
         }else {
             if (![_addPhotoImageView superview]) {
                 [_scrollview addSubview:_addPhotoImageView];
@@ -103,12 +103,12 @@
                 [_addPhotoImageView setFrame:CGRectZero];
                 for (int i = 0 ; i < (_scrollview.subviews.count - 1); i++) {
                     UIImageView *imageView = _scrollview.subviews[i];
-                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                    [imageView setFrame:CGRectMake(i * (10 * ViewRateBaseOnIP6 + labelSize.width) , 0, labelSize.width, labelSize.width)];
                 }
             }else {
                 for (int i = 0 ; i < _scrollview.subviews.count; i++) {
                     UIImageView *imageView = _scrollview.subviews[i];
-                    [imageView setFrame:CGRectMake(labelSize.width * i, 0, labelSize.width, labelSize.height)];
+                    [imageView setFrame:CGRectMake(i * (10 * ViewRateBaseOnIP6 + labelSize.width) , 0, labelSize.width, labelSize.width)];
                 }
             }
         }else {
@@ -132,26 +132,64 @@
 
 - (void)clickImageView:(UIGestureRecognizer *)tap
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoImageView:index:cell:)]) {
-        NSInteger index =   [_scrollview.subviews indexOfObject:tap.view];
-        UIImageView *imageView = (UIImageView *)tap.view;
-        [self.delegate XCCheckoutDetailPhotoCellClickphotoImageView:imageView.image index:index cell:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoWithURL:index:cell:)]) {
+        NSInteger index =  [_scrollview.subviews indexOfObject:tap.view];
+        NSString *urlPath = self.photoArr[index];
+        NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
+        [self.delegate XCCheckoutDetailPhotoCellClickphotoWithURL:photoURL index:index cell:self];
     }
 }
 
 - (void)setupCellWithShopModel:(XCShopModel *)model
 {
-    if ([self.title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(model.licenseUrl, @"")) {
-        NSURL *licenseURL = [NSURL URLWithString:model.licenseUrl];
-        if (licenseURL) {
-            self.photoArr = @[licenseURL];
-        }
-    }
+//    if ([self.title isEqualToString:@"营业执照上传,1张"]&& isUsableNSString(model.licenseUrl, @"")) {
+//        NSURL *licenseURL = [NSURL URLWithString:model.licenseUrl];
+//        if (licenseURL) {
+//            self.photoArr = @[licenseURL];
+//        }
+//    }
+//    if ([self.title isEqualToString:@"门店图片,最多4张"]) {
+//        NSMutableArray *photoURLArrM = [[NSMutableArray alloc] init];
+//        if ([self isUsefulURLWith:model.url1]) {
+//            [photoURLArrM addObject:model.url1];
+//        }
+//        if ([self isUsefulURLWith:model.url2]) {
+//            [photoURLArrM addObject:model.url2];
+//        }
+//        if ([self isUsefulURLWith:model.url3]) {
+//            [photoURLArrM addObject:model.url3];
+//        }
+//        if ([self isUsefulURLWith:model.url4]) {
+//            [photoURLArrM addObject:model.url4];
+//        }
+//        self.photoArr = photoURLArrM;
+//    }
 }
 
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method
+- (BOOL)isUsefulURLWith:(NSString *)photoPath
+{
+    BOOL result = NO;
+    if (isUsableNSString(photoPath, @"")) {
+        if ([photoPath hasPrefix:@"http://"]||[photoPath hasPrefix:@"https://"]) {
+            result = YES;
+        }
+    }
+    return result;
+}
+
+- (NSURL *)getImageURLWithFilePath:(NSString *)filePath
+{
+    NSURL *photoURL = nil;;
+    if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
+        photoURL = [NSURL URLWithString:filePath];
+    }else {
+        photoURL = [NSURL fileURLWithPath:filePath];
+    }
+    return photoURL;
+}
 
 #pragma mark - Setter&Getter
 
@@ -166,16 +204,16 @@
     _photoArr = photoArr;
     [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
+    UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+
     if (photoArr.count > 0) {
         
         for (int i = 0 ; i < photoArr.count; i++) {
-            NSURL *imageURL = photoArr[i];
+            NSString *filePath = photoArr[i];
+            NSURL *photoURL = [self getImageURLWithFilePath:filePath];
             UIImageView *imageView = [[UIImageView alloc]init];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            UIImage *image = [UIImage imageWithData:imageData];
-//            [imageView sd_setImageWithURL:imageURL];
-            imageView.image = image;
-            [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
+            [imageView sd_setImageWithURL:photoURL placeholderImage:placeHolderImage];
+//            [imageView setFrame:CGRectMake(i * (30 * ViewRateBaseOnIP6 + imageViewW) , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
             imageView.userInteractionEnabled = YES;
@@ -191,29 +229,6 @@
     }
 }
 
--(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr
-{
-    if (photoArr.count > 0) {
-        [_scrollview.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        CGFloat imageViewW  = 60 * ViewRateBaseOnIP6;
-        
-        for (int i = 0 ; i < photoArr.count; i++) {
-            UIImage *image = photoArr[i];
-            UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.userInteractionEnabled = YES;
-            imageView.image = image;
-            [imageView setFrame:CGRectMake(i * imageViewW , 0, imageViewW, imageViewW)];
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
-            [imageView addGestureRecognizer:tap];
-            [_scrollview addSubview:imageView];
-        }
-        [_addPhotoImageView setFrame:CGRectMake(photoArr.count * imageViewW, 0, imageViewW, imageViewW)];
-        if (_scrollview.subviews.count < _maxPhoto) {
-            [_scrollview addSubview:_addPhotoImageView];
-        }
-        [self layoutSubviews];
-    }
-}
 
 -(void)setMaxPhoto:(NSInteger)maxPhoto
 {

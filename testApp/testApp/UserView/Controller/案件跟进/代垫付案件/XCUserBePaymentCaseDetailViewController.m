@@ -13,7 +13,9 @@
 #define kProcessCellID @"processCellID"
 #define kCaseTextCellID @"CaseTextCellID"
 #define kScrollViewCellID @"ScrollViewCellID"
-@interface XCUserBePaymentCaseDetailViewController ()
+#import "XCCheckoutPhotoPreViewController.h"
+
+@interface XCUserBePaymentCaseDetailViewController ()<XCUserCaseScrollerViewCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataTitleArrM ;
 /** <# 注释 #> */
@@ -60,6 +62,16 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
+#pragma mark - XCUserCaseScrollerViewCellDelegate
+- (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
+{
+    if (photoURL) {
+        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+        previewVC.sourceURL = photoURL;
+        
+        [self.navigationController pushViewController:previewVC animated:YES];
+    }
+}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -100,6 +112,7 @@
         return detailTextCell;
     }else {
         XCUserCaseScrollerViewCell *cell = (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kScrollViewCellID forIndexPath:indexPath];
+        cell.delegate = self;
         [cell setTitleStr:@"相关文件:"];
         [cell setPhotoURLArr:_imageURLArrM];
         return cell;

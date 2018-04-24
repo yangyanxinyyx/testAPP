@@ -87,7 +87,7 @@
     [dic setObject:textFieldPassword.text forKey:@"password"];
     [dic setObject:textFieldNewPassword.text forKey:@"newPassword"];
     [RequestAPI updatePassWord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        if (response[@"result"]) {
+        if ([response[@"result"] integerValue] == 1) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
             [self.view addSubview:tipsView];
         } else {

@@ -11,6 +11,9 @@
 #import "XCShopServiceModel.h"
 #define kDetailListCellID @"DetailListCellID"
 #import "XCShopServiceAddServiceViewController.h"
+#import "XCShopServiceEditedServiceViewController.h"
+#import "UILabel+createLabel.h"
+#import <MJRefresh/MJRefresh.h>
 @interface XCShopServiceDetailListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,XCShopDetailListCellDelegate>
 
 /** <# 注释 #> */
@@ -39,17 +42,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+
     [self configureData];
     [self createUI];
-    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        NSDictionary *param = @{
+                                @"storeId":[UserInfoManager shareInstance].storeID,
+                                };
+        __weak __typeof(self) weakSelf = self;
+        [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            if (response[@"data"]) {
+                NSDictionary *dataInfo = response[@"data"];
+                NSArray *arr;
+                if ([self.titleTypeStr isEqualToString:@"洗车"]) {
+                    arr = dataInfo[@"xcServiceList"];
+                }
+                else if ([self.titleTypeStr isEqualToString:@"美容"]) {
+                    arr = dataInfo[@"mrServiceList"];
+                }
+                else if ([self.titleTypeStr isEqualToString:@"保养"]) {
+                    arr = dataInfo[@"byServiceList"];
+                }
+                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+                for (NSDictionary *dataInfo in arr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    if (serviceModel) {
+                        [serviceDataArrM addObject:serviceModel];
+                    }
+                }
+                strongSelf.dataArr = serviceDataArrM;
+                [strongSelf.collectionView reloadData];
+            }
+            [strongSelf.collectionView.mj_header endRefreshing];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
+        }];
+    }];
 }
 
 -(void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
+    CGSize labelSize = CGSizeMake(218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6);
+    [_bgImageView setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5,kHeightForNavigation + 342 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
+    [_bgLabel sizeToFit];
+    labelSize = _bgLabel.frame.size;
+    [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     
-    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
+    if (self.dataArr.count > 0 ) {
+        [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
+    }else {
+        [_collectionView setFrame:CGRectZero];
+    }
     [_addServiceBtn setFrame:CGRectMake(0, CGRectGetMaxY(_collectionView.frame) , SCREEN_WIDTH, 98 * ViewRateBaseOnIP6)];
     
 }
@@ -57,15 +105,44 @@
 #pragma mark - Action Method
 - (void)clickAddNewService:(UIButton *)button
 {
-    XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
-    [self.navigationController pushViewController:addService animated:YES];
+    NSDictionary *param = @{
+                            @"storeId":self.storeID,
+                            @"category":self.titleTypeStr,
+                            @"PageSize":@"-1"
+                            };
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI queryServiceByStoreId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (response[@"data"]) {
+            if (response[@"data"][@"dataSet"]) {
+                NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                for (NSDictionary *dataInfo in origionDataArr) {
+                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    [dataArrM addObject:serviceModel];
+                }
+                XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
+                addService.storeID = strongSelf.storeID;
+                addService.dataArrM = dataArrM;
+                [strongSelf.navigationController pushViewController:addService animated:YES];
+            }
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
+    }];
+    
 }
 #pragma mark - Delegates & Notifications
 #pragma  mark - XCShopDetailListCellDelegate
-
--(void)XCShopDetailListCellClickEditedButton:(UIButton *)button
+-(void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
 {
-    NSLog(@"点击编辑");
+    XCShopServiceEditedServiceViewController *editedVC = [[XCShopServiceEditedServiceViewController alloc] initWithTitle:serviceModel.serviceName];
+    editedVC.model = serviceModel;
+    
+    [self.navigationController pushViewController:editedVC animated:YES];
     
 }
 
@@ -104,6 +181,15 @@
 
 - (void)createUI
 {
+
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
+    _bgImageView.image = image;
+    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
+    [_bgLabel setText:@"暂无查询数据"];
+    [self.view addSubview:_bgImageView];
+    [self.view addSubview:_bgLabel];
+    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 //    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
     layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (336+158) * ViewRateBaseOnIP6);
@@ -121,11 +207,18 @@
     _addServiceBtn.titleLabel.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
     [_addServiceBtn setTitleEdgeInsets:UIEdgeInsetsMake(0,  24 * ViewRateBaseOnIP6, 0, 0)];
     [_addServiceBtn addTarget:self action:@selector(clickAddNewService:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *image = [UIImage imageNamed:@"添加符号"];
-    [_addServiceBtn setImage:image forState:UIControlStateNormal];
+    UIImage *image2 = [UIImage imageNamed:@"添加符号"];
+    [_addServiceBtn setBackgroundColor:[UIColor whiteColor]];
+    [_addServiceBtn setImage:image2 forState:UIControlStateNormal];
     
     [self.view addSubview:_collectionView];
     [self.view addSubview:_addServiceBtn];
+}
+
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
 }
 #pragma mark - Setter&Getter
 

@@ -12,6 +12,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import "XCCustomerDetailModel.h"
 #import "XCCustomerADDViewController.h"
+#import "PriceCarInsuranceQViewController.h"
 @interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
     CGFloat _addBtnHeigth;
 }
@@ -116,18 +117,6 @@
 
 #pragma mark - Action Method
 
-
-//- (void)clickCheckDetailButton
-//{
-//
-//
-//}
-
-- (void)clickUnderWritingDetailButton
-{
-    
-}
-
 - (void)clickAddCustomerButton:(UIButton *)button
 {
     XCCustomerADDViewController *customerADDVC = [[XCCustomerADDViewController alloc] initWithTitle:@"新增客户"];
@@ -141,9 +130,10 @@
 {
     _addCustomerBtn = [UIButton buttonWithType:0];
     [_addCustomerBtn setTitle:@"新增客户" forState:UIControlStateNormal];
-    UIImage *image = [UIImage imageNamed:@"添加符号"];
+    UIImage *image = [UIImage imageNamed:@"NewCustomeradd2"];
     [_addCustomerBtn setImage:image forState:UIControlStateNormal];
     [_addCustomerBtn setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
+    [_addCustomerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 24 * ViewRateBaseOnIP6, 0, 0)];
     [_addCustomerBtn addTarget:self action:@selector(clickAddCustomerButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addCustomerBtn];
 }
@@ -215,7 +205,12 @@
 //点击核保按钮
 -(void)XCCheckoutCellClickUnderWritingButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickUnderWritingDetailButton];
+   NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+    XCCustomerDetailModel *detailModel = self.dataArr[indexPath.row];
+    PriceCarInsuranceQViewController *insuranceQVC = [[PriceCarInsuranceQViewController alloc] init];
+    insuranceQVC.carID = [detailModel.carId stringValue];
+    insuranceQVC.customerId = [detailModel.customerId stringValue];
+    [self.navigationController pushViewController:insuranceQVC animated:YES];
 }
 
 @end

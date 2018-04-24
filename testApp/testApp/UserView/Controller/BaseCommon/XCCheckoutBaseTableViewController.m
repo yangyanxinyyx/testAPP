@@ -5,12 +5,14 @@
 //  Created by Melody on 2018/3/18.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 #import "XCCheckoutBaseTableViewController.h"
+#import "UILabel+createLabel.h"
 @interface XCCheckoutBaseTableViewController ()
-@property (strong, nonatomic) NSIndexPath* editingIndexPath;  //当前左滑cell的index，在代理方法中设置
+/** <# 注释 #> */
+@property (nonatomic, strong) UIImageView * bgImageView ;
+/** <# 注释 #> */
+@property (nonatomic, strong) UILabel * bgLabel ;
 @end
 
 @implementation XCCheckoutBaseTableViewController
@@ -33,6 +35,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
+    _bgImageView.image = image;
+    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
+    [_bgLabel setText:@"暂无查询数据"];
+    [self.view addSubview:_bgImageView];
+    [self.view addSubview:_bgLabel];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[XCCheckoutTableViewCell class] forCellReuseIdentifier:kcheckCellID];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
@@ -49,75 +58,25 @@
 {
     [super viewDidLayoutSubviews];
 
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
-    // =================== modify by Liangyz 删除功能01
-    //    if (self.editingIndexPath)
-    //    {
-    //        [self configSwipeButtons];
-    //    }
-    // ===================
+    CGSize labelSize = CGSizeMake(218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6);
+    [_bgImageView setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5,kHeightForNavigation + 342 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
+    [_bgLabel sizeToFit];
+    labelSize = _bgLabel.frame.size;
+    [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
+    
+    if (self.dataArr.count > 0 ) {
+         [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
+    }else {
+          [self.tableView setFrame:CGRectZero];
+    }
+  
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Action Method
 
 #pragma mark - Privacy Method
-
-//- (void)configSwipeButtons
-//{
-//    UIButton *deleteButton = nil;
-//    // 获取选项按钮的reference
-//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0"))
-//    {
-//        // iOS 11层级 (Xcode 9编译): UITableView -> UISwipeActionPullView
-//        for (UIView *subview in self.tableView.subviews)
-//        {
-//
-//            if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")])
-//            {
-//                // 和iOS 10的按钮顺序相反
-//                [subview setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-//                deleteButton = subview.subviews[0];
-//                [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-//
-//                [self configDeleteButton:deleteButton];
-//            }
-//        }
-//    }
-//    else
-//    {
-//        // iOS 8-10层级: UITableView -> UITableViewCell -> UITableViewCellDeleteConfirmationView
-//        XCCheckoutTableViewCell *tableCell = [self.tableView cellForRowAtIndexPath:self.editingIndexPath];
-//        for (UIView *subview in tableCell.subviews)
-//        {
-//
-//            if ([subview isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")])
-//            {
-//                deleteButton = subview.subviews[0];
-//                [self configDeleteButton:deleteButton];
-//                [subview setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-//
-//            }
-//        }
-//    }
-//
-//}
-//
-
-//- (void)configDeleteButton:(UIButton*)deleteButton
-//{
-//    if (deleteButton)
-//    {
-//        [deleteButton setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
-//        [deleteButton setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
-//
-//    }
-//}
 
 #pragma mark - Setter&Getter
 
@@ -157,7 +116,7 @@
 //- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 //{
 //    UITableViewHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kfooterViewID];
-// 
+//
 //    return footerView;
 //}
 
@@ -175,28 +134,5 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    return 80 * ViewRateBaseOnIP6;
-//}
-
-
-// =================== modify by Liangyz 删除功能03
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return YES;
-//}
-//
-//- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    self.editingIndexPath = indexPath;
-//    [self.view setNeedsLayout];   // 触发-(void)viewDidLayoutSubviews
-//}
-//
-//- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    self.editingIndexPath = nil;
-//}
-// ===================
 
 @end

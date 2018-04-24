@@ -73,11 +73,9 @@
 - (void)updateProcessType
 {
     if (_isFinish) {
-        [_processLabel setText:[_processStrArr firstObject]];
         UIImage *finishImage = [UIImage imageNamed:@"完成"];
         [_iconImageView setImage:finishImage];
     }else {
-        [_processLabel setText:[_processStrArr lastObject]];
         UIImage *unFinishImage = [UIImage imageNamed:@"未完成"];
         [_iconImageView setImage:unFinishImage];
     }

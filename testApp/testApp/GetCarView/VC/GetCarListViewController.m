@@ -54,7 +54,10 @@ static NSString *identifier = @"listCell";
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
                     NSArray *data = response[@"data"];
                     for (NSDictionary *dic in data) {
-                        [self.serviceArray addObject: dic[@"name"]];
+                        NSDictionary *temp = @{@"name":dic[@"name"],
+                                               @"id":dic[@"id"]
+                                               };
+                        [self.serviceArray addObject: temp];
                     }
                 }
                 [self requestDataWithPage:@(1) selectNumber:nil];

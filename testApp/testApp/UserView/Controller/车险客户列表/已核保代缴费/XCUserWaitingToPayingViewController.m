@@ -57,7 +57,7 @@
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
                                 @"policyStatus":self.navTitle,
-                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         if (weakSelf.pageIndex <= weakSelf.pageCount) {

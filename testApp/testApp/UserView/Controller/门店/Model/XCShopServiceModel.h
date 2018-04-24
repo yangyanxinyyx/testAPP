@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface XCShopServiceModel : NSObject
-/** 门店id */
-@property (nonatomic, copy) NSString * storeID;
+/** 门店id long*/
+@property (nonatomic, strong) NSNumber * storeID;
 /** 服务id */
-@property (nonatomic, copy) NSString * serviceId;
+@property (nonatomic, strong) NSNumber * serviceId;
 /** 服务名称 */
 @property (nonatomic, copy) NSString * serviceName;
 /** 服务类型 */
@@ -25,4 +25,7 @@
 @property (nonatomic, copy) NSString * vipPrice;
 /** 图片 */
 @property (nonatomic, copy) NSString * url1;
+
+/** 添加服务用 默认NO*/
+@property (nonatomic, assign) BOOL  isSelect;
 @end

@@ -8,6 +8,7 @@
 
 #import "XCShopServiceAddServiceViewController.h"
 #import "XCShopDetailSeclectCell.h"
+#import "XCShopServiceModel.h"
 #define kDetailSelectID @"DetailSelectID"
 @interface XCShopServiceAddServiceViewController ()<XCDistributionFooterViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -39,26 +40,62 @@
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
 }
 #pragma mark - Action Method
+- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
+{
+    
+    NSMutableArray *addItemsArrM = [[NSMutableArray alloc] init];
+    for (XCShopServiceModel *model  in self.dataArrM) {
+        if (model.isSelect) {
+            if (isUsable(model.serviceId, [NSNumber class])) {
+                [addItemsArrM addObject:model.serviceId];
+            }
+        }
+    }
+    
+    NSDictionary *param = @{
+                            @"storeId":self.storeID,
+                            @"category":addItemsArrM,
+                            };
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI insertService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errorStr = response[@"errormsg"];
+        if ([response[@"result"] integerValue] == 1) {
+            errorStr = @"提交成功";
+        }
+        [strongSelf showAlterInfoWithNetWork:errorStr];
+   [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
+    }];
+    
+    
+    
+}
 
 #pragma mark - Delegates & Notifications
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return self.dataArrM.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    XCShopServiceModel *model = self.dataArrM[indexPath.row];
     XCShopDetailSeclectCell *cell = (XCShopDetailSeclectCell *)[tableView dequeueReusableCellWithIdentifier:kDetailSelectID forIndexPath:indexPath];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    
+    NSString *name = @"未知";
+    if (isUsableNSString(model.serviceName, @"")) {
+        name = model.serviceName;
+    }
+    [cell setTitle:name];
     return cell;
 }
 
@@ -70,8 +107,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XCShopDetailSeclectCell *cell = (XCShopDetailSeclectCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell setTitle:@"外表洗车"];
-    cell.selected = !cell.selected;
+    XCShopServiceModel *model = self.dataArrM[indexPath.row];
+    model.isSelect = !model.isSelect;
+    [cell setButtonSelect:model.isSelect];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -98,15 +136,7 @@
     return (60 + 88 + 60) * ViewRateBaseOnIP6;
 }
 
-#pragma  mark - XCDistributionFooterViewDelegate
 
-- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
-{
-    NSLog(@"点击确认提交");
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
-    [self.view addSubview:tipsView];
-    
-}
 #pragma mark - Privacy Method
 
 #pragma mark - Setter&Getter

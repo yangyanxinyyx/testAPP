@@ -15,9 +15,11 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"InfoNotification" object:nil];
         self.labelName = [[UILabel alloc] init];
+        self.labelName.text = @"备注";
         [self.contentView addSubview:self.labelName];
         
         self.textView = [[UITextView alloc] init];
+        self.textView.text = @"请输入...";
         [self.contentView addSubview:self.textView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -27,15 +29,19 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.labelName.frame  = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6);
+    CGSize labelSIze;
+    [self.labelName sizeToFit];
+    labelSIze = self.labelName.frame.size;
+//    self.labelName.frame  = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6);
+    // =================== modify by Liangyz 不要写死了
+     self.labelName.frame  = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, labelSIze.width, 26 * ViewRateBaseOnIP6);
+    // ===================
     self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
     self.labelName.font = [UIFont systemFontOfSize:26 * ViewRateBaseOnIP6];
-    self.labelName.text = @"备注";
     
     self.textView.frame = CGRectMake(30 * ViewRateBaseOnIP6, 73 * ViewRateBaseOnIP6, 690 * ViewRateBaseOnIP6, 140 *ViewRateBaseOnIP6);
     self.textView.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
     self.textView.delegate = self;
-    self.textView.text = @"请输入...";
     self.textView.textColor = [UIColor colorWithHexString:@"#838383"];
     self.textView.layer.borderWidth = 1 * ViewRateBaseOnIP6;
     self.textView.layer.borderColor = [UIColor colorWithHexString:@"#e5e5e5"].CGColor;

@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UILabel * priceLabel ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * editedButton ;
+/**  */
+@property (nonatomic, strong) XCShopServiceModel * model ;
 
 @end
 @implementation XCShopDetailListCell
@@ -65,6 +67,7 @@
 -(void)configureSubViews
 {
     _iconImageView = [[UIImageView alloc] init];
+    [_iconImageView setContentMode:UIViewContentModeScaleAspectFit];
     _serviceNameLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
     _priceLabel = [UILabel createLabelWithTextFontSize:32 textColor:COLOR_RGB_255(247, 44, 11)];
     _onSalePriceLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(165, 165, 165)];
@@ -74,6 +77,7 @@
     [_editedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _editedButton.layer.cornerRadius = 12;
     [_editedButton setBackgroundColor:COLOR_RGB_255(1, 77, 163)];
+    [_editedButton addTarget:self action:@selector(clickEditBtn:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_iconImageView];
     [self addSubview:_serviceNameLabel];
@@ -84,12 +88,24 @@
 }
 
 #pragma mark - Action Method
+
+- (void)clickEditBtn:(UIButton *)button
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopDetailListCellClickEditedButton:serviceModel:)]) {
+        [self.delegate XCShopDetailListCellClickEditedButton:button serviceModel:_model];
+    }
+}
+
 - (void)setupCellWithModel:(XCShopServiceModel *)model
 {
+    _model = model;
+    UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+
+    [_iconImageView setImage:placeHolderImage];
     if (isUsableNSString(model.url1, @"")) {
         NSURL *imageURL = [[NSURL alloc] initWithString:model.url1];
         if (imageURL) {
-            [_iconImageView sd_setImageWithURL:imageURL];
+            [_iconImageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
         }
     }
     if (isUsableNSString(model.serviceName, @"")) {
@@ -109,7 +125,7 @@
        _onSalePriceLabel.attributedText = ma_price;
 //        [_onSalePriceLabel setText:model.price];
     }
-    
+    [self layoutSubviews];
     
 }
 #pragma mark - Delegates & Notifications
