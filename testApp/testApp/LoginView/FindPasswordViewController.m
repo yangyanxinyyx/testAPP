@@ -27,7 +27,7 @@
     UIImageView *topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, SCREEN_WIDTH, 190 * kScaleHeight)];
     [self.view addSubview:topImageView];
     topImageView.backgroundColor = [UIColor redColor];
-    topImageView.image = [UIImage imageNamed:@""];
+    topImageView.image = [UIImage imageNamed:@"shouye.png"];
 
     NSArray *titles = @[@"请输入手机号码",@"请输入验证码",@"请输入密码",@"请确认密码"];
     NSArray *images = @[@"login_username.png",@"login_code.png",@"login_password.png",@"login_password.png"];

@@ -79,7 +79,7 @@
     }
     if (_dataSource.count > 0) {
         AddOrderModel *model = _dataSource[indexPath.row];
-        cell.title = [NSString stringWithFormat:@"%ld.%@",indexPath.row,model.plateNo];
+        cell.title = [NSString stringWithFormat:@"%ld.%@",indexPath.row+1,model.plateNo];
         cell.own = model.customerName;
         cell.car = model.brand;
         if ([model isEqual:self.currentModel]) {
@@ -101,6 +101,11 @@
 
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 104;
+}
+
 - (void)pressOrderBtn
 {
     NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:YES];
@@ -118,7 +123,7 @@
 
 - (void)requestDataWithselectNumber:(NSString *)plateNO
 {
-    NSDictionary *param = @{@" plateNo":plateNO};
+    NSDictionary *param = @{@"plateNo":plateNO};
     [RequestAPI getGetCarSelectPlateNO:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if (isUsableDictionary(response)) {
             if ([response[@"result"] integerValue] == 1) {
@@ -130,7 +135,9 @@
                     for (NSDictionary *dic in data) {
                         AddOrderModel *model = [[AddOrderModel alloc] init];
                          [model setValuesForKeysWithDictionary:dic];
+
                         [_dataSource addObject:model];
+
                     }
 
                     dispatch_async(dispatch_get_main_queue(), ^{
