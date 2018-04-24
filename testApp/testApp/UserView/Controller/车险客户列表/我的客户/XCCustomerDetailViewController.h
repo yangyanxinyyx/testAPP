@@ -11,4 +11,8 @@
 @interface XCCustomerDetailViewController : XCUserBaseViewController
 /** <# 注释 #> */
 @property (nonatomic, strong) XCCustomerDetailModel * model ;
+
+/** <# 类型描述  #> */
+@property (nonatomic, assign) BOOL shouldClickFllowerBtn ;
+
 @end

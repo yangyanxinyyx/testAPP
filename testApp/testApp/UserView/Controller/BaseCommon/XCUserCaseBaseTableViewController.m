@@ -61,11 +61,12 @@
     [_bgLabel sizeToFit];
     labelSize = _bgLabel.frame.size;
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
-    if (self.dataArr.count > 0 ) {
+#warning 调试暂时注释
+//    if (self.dataArr.count > 0 ) {
         [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
-    }else {
-        [self.tableView setFrame:CGRectZero];
-    }
+//    }else {
+//        [self.tableView setFrame:CGRectZero];
+//    }
 }
 
 #pragma mark - Action Method

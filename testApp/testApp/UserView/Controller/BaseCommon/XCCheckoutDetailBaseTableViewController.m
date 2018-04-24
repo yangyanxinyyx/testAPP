@@ -62,6 +62,12 @@
 
 #pragma mark - Delegates & Notifications
 
+#pragma mark - scrollerViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [scrollView endEditing:YES];
+}
+
 #pragma mark - BaseNavigationBarDelegate
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
@@ -130,7 +136,11 @@
 
 
 #pragma mark - Privacy Method
-
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
+}
 #pragma mark - Setter&Getter
 
 - (void)setNavTitle:(NSString *)navTitle

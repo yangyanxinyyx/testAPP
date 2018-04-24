@@ -39,5 +39,6 @@
 @property (nonatomic, strong) XCShopModel * storeModel ;
 - (instancetype)initWithTitle:(NSString *)title;
 
-
+//提示框
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr;
 @end

@@ -172,15 +172,15 @@
 - (void)initUI
 {
     _customerFollowUpBtn = [UIButton buttonWithType:0];
-    [_customerFollowUpBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+    [_customerFollowUpBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [_customerFollowUpBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];
     [_customerFollowUpBtn setTitle:@"客户跟进" forState:UIControlStateNormal];
     _customerFollowUpBtn.layer.cornerRadius = 3;
     _customerFollowUpBtn.layer.borderWidth = 1;
-    [_customerFollowUpBtn.layer setBorderColor:COLOR_RGB_255(1, 77, 163).CGColor];
-    [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
+//    [_customerFollowUpBtn.layer setBorderColor:[UIColor grayColor].CGColor];
+//    [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
     [_customerFollowUpBtn addTarget:self action:@selector(clickCustomerFollowUpBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_customerFollowUpBtn setEnabled:NO];
     
     _subscribeBtn = [UIButton buttonWithType:0];
     [_subscribeBtn setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
@@ -208,7 +208,21 @@
 }
 
 #pragma mark - Setter&Getter
-
+- (void)setShouldClickFllowerBtn:(BOOL)shouldClickFllowerBtn
+{
+    _shouldClickFllowerBtn = shouldClickFllowerBtn;
+    if (shouldClickFllowerBtn) {
+        [_customerFollowUpBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
+        [_customerFollowUpBtn.layer setBorderColor:COLOR_RGB_255(1, 77, 163).CGColor];
+        [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
+        [_customerFollowUpBtn setEnabled:YES];
+    }else {
+        [_customerFollowUpBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_customerFollowUpBtn.layer setBorderColor:[UIColor grayColor].CGColor];
+        [_customerFollowUpBtn setEnabled:NO];
+        [_customerFollowUpBtn setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    }
+}
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 

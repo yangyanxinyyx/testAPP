@@ -99,8 +99,8 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
- return self.dataArr.count;
-//    return 3;
+// return self.dataArr.count;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,13 +109,13 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setTimeTitleStr:@"创建时间"];
     cell.delegate = self;
-    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    if(baseModel) {
-        cell.baseModel = baseModel;
-    }
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+//    if(baseModel) {
+//        cell.baseModel = baseModel;
+//    }
+    cell.carNumber = @"粤AAAAAA";
+    cell.userName = @"梁艺钟";
+    cell.issureTime = @"a123213-321-321-3";
     return cell;
 }
 
@@ -124,9 +124,9 @@
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
-    detailVC.model = baseModel;
+//    detailVC.model = baseModel;
     [self.navigationController pushViewController:detailVC animated:YES];
     
 }

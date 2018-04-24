@@ -66,27 +66,27 @@
     [_continueView setUserInteractionEnabled:YES];
     UIImage *unContinueImage = [UIImage imageNamed:@"unSelect"];
     _continueView.image = unContinueImage;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeContinueValue:)];
-    [_continueView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeContinueValue:)];
+//    [_continueView addGestureRecognizer:tap];
     [self addSubview:_continueView];
 }
 
 
-- (void)changeContinueValue:(UIButton *)button
-{
-    self.isContinue = !_isContinue;
-    
-    NSString *imageString  = nil;
-    if (_isContinue) {
-        imageString = @"select";
-    }else {
-        imageString = @"unSelect";
-    }
-    UIImage *image = [UIImage imageNamed:imageString];
-    if (image) {
-        [_continueView setImage:image];
-    }
-}
+//- (void)changeContinueValue:(UIButton *)button
+//{
+//    self.isContinue = !_isContinue;
+//
+//    NSString *imageString  = nil;
+//    if (_isContinue) {
+//        imageString = @"select";
+//    }else {
+//        imageString = @"unSelect";
+//    }
+//    UIImage *image = [UIImage imageNamed:imageString];
+//    if (image) {
+//        [_continueView setImage:image];
+//    }
+//}
 
 #pragma mark - Setter&Getter
 
@@ -98,6 +98,21 @@
     _title = title;
     [_titleLabel setText:_title];
     [_titleLabel sizeToFit];
+}
+
+- (void)setIsContinue:(BOOL)isContinue
+{
+    _isContinue = isContinue;
+    NSString *imageString  = nil;
+    if (_isContinue) {
+        imageString = @"select";
+    }else {
+        imageString = @"unSelect";
+    }
+    UIImage *image = [UIImage imageNamed:imageString];
+    if (image) {
+        [_continueView setImage:image];
+    }
 }
 
 @end

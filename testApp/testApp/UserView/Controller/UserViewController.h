@@ -10,4 +10,5 @@
 
 @interface UserViewController : BaseViewController1
 
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr;
 @end

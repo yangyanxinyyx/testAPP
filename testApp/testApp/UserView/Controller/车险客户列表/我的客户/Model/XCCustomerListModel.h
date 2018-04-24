@@ -31,4 +31,6 @@
 /** 车辆id long */
 @property (nonatomic, strong) NSNumber * carId ;
 
+/** 客户跟进状态 状态（新客户、跟进中）*/
+@property (nonatomic, copy) NSString * status;
 @end

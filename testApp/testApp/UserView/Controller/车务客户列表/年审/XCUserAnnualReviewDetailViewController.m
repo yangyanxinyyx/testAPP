@@ -112,8 +112,7 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //进度状态Cell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kDetailProgressCellID forIndexPath:indexPath];
-//        NSArray *processArr = @[@"处理完毕",@"服务中..."];
-//        [processCell setProcessStrArr:processArr];
+
         [processCell setProcessStr:_carTranDetailModel.status];
         if ([_carTranDetailModel.status isEqualToString:@"处理完毕"]) {
             [processCell setIsFinish:YES];

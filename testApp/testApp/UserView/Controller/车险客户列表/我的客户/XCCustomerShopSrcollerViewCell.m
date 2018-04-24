@@ -49,7 +49,7 @@
 {
     
     self.topLine = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.topLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
+    [self.topLine setBackgroundColor:COLOR_RGB_255(229, 229, 229 )];
     self.titleLabel = [UILabel createLabelWithTextFontSize:30 textColor:COLOR_RGB_255(68, 68, 68)];
     self.distrbuteLabel = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(131, 131, 131)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapWithView:)];

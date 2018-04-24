@@ -96,6 +96,9 @@
 /** 备注 */
 @property (nonatomic, copy) NSString * remark;
 
+/** 保单状态 */
+@property (nonatomic, copy) NSString * policyStatus;
+
 // 保单信息
 /** 交强险 double*/
 @property (nonatomic, copy) NSNumber * jqValue;
@@ -192,4 +195,5 @@
 @property (nonatomic, strong) NSNumber * zrxValue ;
 /** 是否不计免赔（自燃险） */
 @property (nonatomic, copy) NSString * zrxWithout;
+
 @end

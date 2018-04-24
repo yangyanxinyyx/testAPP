@@ -19,9 +19,6 @@
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * addCustomerBtn ;
 
-
-
-
 @end
 
 @implementation XCCustomerViewController
@@ -184,11 +181,16 @@
         BOOL configureSucess  = NO;
         if (response[@"data"]) {
             
-//            XCCustomerDetailModel *detailModel = [XCCustomerDetailModel ]
+          
             XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
             detailModel.customerId = model.customerId;
             XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];
             detailVC.model = detailModel;
+            if ([model.status isEqualToString:@"新客户"]||[model.status isEqualToString:@"跟进中"]) {
+                detailVC.shouldClickFllowerBtn = YES;
+            }else {
+                detailVC.shouldClickFllowerBtn = NO;
+            }
             [weakSelf.navigationController pushViewController:detailVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
             configureSucess = YES;

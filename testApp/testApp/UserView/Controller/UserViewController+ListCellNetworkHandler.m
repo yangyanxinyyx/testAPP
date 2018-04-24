@@ -23,14 +23,13 @@
     
     //车险客户列表
     if ([self isPolicyTypeVCWithModel:model]) {
-
         NSDictionary *param = @{
                                 @"policyStatus":model.title,
                                 };
-
         [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            if (response[@"data"]) {
+            NSString *errStr = response[@"errormsg"];
+            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
@@ -51,11 +50,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf requestFailureHandler];
+                [weakSelf showAlterInfoWithNetWork:errStr];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
         }];
     }
     else if ([self isCarTransactionTypeVCWithModel:model]) {
@@ -66,7 +67,8 @@
         
         [RequestAPI getelectCarTransactionList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            if (response[@"data"]) {
+            NSString *errStr = response[@"errormsg"];
+            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
@@ -87,11 +89,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf requestFailureHandler];
+                [weakSelf showAlterInfoWithNetWork:errStr];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
         }];
     }
     else if ([model.title isEqualToString:@"我的客户"]) {
@@ -101,7 +105,8 @@
                                 };
         [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            if (response[@"data"]) {
+            NSString *errStr = response[@"errormsg"];
+            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
@@ -123,11 +128,14 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf requestFailureHandler];
+                [weakSelf showAlterInfoWithNetWork:errStr];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
+            
         }];
     }
     else if ([self isCaseTypeVCWithModel:model]) {
@@ -139,7 +147,8 @@
                                 };
         [RequestAPI getThreeCaseApplyList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            if (response[@"data"]) {
+            NSString *errStr = response[@"errormsg"];
+            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
@@ -160,11 +169,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf requestFailureHandler];
+                [weakSelf showAlterInfoWithNetWork:errStr];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
         }];
     }
     else if ([model.title isEqualToString:@"门店"]) {
@@ -172,28 +183,22 @@
                                 @"id":[UserInfoManager shareInstance].storeID,
                                 };
         [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            if (response[@"data"]) {
+            NSString *errStr = response[@"errormsg"];
+            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
                 XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                 subVC.storeModel = shopModel;
                 [weakSelf.navigationController pushViewController:subVC animated:YES];
             }else {
-                [weakSelf requestFailureHandler];
+                [weakSelf showAlterInfoWithNetWork:errStr];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            [weakSelf requestFailureHandler];
-        }];
-    }else {
-        
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];        }];
     }
     
-}
-
-- (void)requestFailureHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
 }
 
 - (BOOL)isPolicyTypeVCWithModel:(XCUserListModel *)model

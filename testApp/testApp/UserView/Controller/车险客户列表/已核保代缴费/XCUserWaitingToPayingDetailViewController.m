@@ -102,7 +102,6 @@
 - (void)clickDistributionBillBtn:(UIButton *)button
 {
     //加载礼包
-    __weak __typeof(self) weakSelf = self;
     //车险客户列表
     NSDictionary *param = @{
                             @"ticketId":[UserInfoManager shareInstance].ticketID ,

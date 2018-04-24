@@ -149,8 +149,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                             @"licenseUrl":_storeModel.licenseUrl,
                             @"url1":_storeModel.url1,
                             @"url2":_storeModel.url2,
-//                            @"url3":_storeModel.url3,
-//                            @"url4":_storeModel.url4,
+                            @"url3":_storeModel.url3,
+                            @"url4":_storeModel.url4,
                             };
     [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;

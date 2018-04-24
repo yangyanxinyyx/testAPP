@@ -225,7 +225,11 @@
 }
 
 #pragma mark - Privacy Method
-
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
+}
 - (void)initWithListData
 {
     NSString *filePath = [[NSBundle mainBundle]pathForResource:@"userListViewData" ofType:@"plist"];
