@@ -134,6 +134,7 @@
                         model.carId = weakSelf.model.carId;
                         model.plateNo = weakSelf.model.plateNo;
                         model.remark = weakSelf.model.remark;
+                        model.type = @"违章";
                         [detailModelArrM addObject:model];
                     }
                      XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];

@@ -22,6 +22,76 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCUserCaseListCell class] forCellReuseIdentifier:kCaseListCellID];
+    __weak typeof (self)weakSelf = self;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        NSDictionary *param = @{
+                                @"caseType":self.navTitle,
+                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageSize":[NSNumber numberWithInt:10]
+                                };
+        weakSelf.pageIndex = 1;
+        [weakSelf.tableView.mj_footer setState:MJRefreshStateIdle];
+        [RequestAPI getThreeCaseApplyList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                if (response[@"data"][@"dataSet"]) {
+                    NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                    NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                    for (NSDictionary *dataInfo in origionDataArr) {
+                        XCUserCaseListModel *caseModel = [XCUserCaseListModel yy_modelWithJSON:dataInfo];
+                        if (caseModel) {
+                            [dataArrM addObject:caseModel];
+                        }
+                    }
+                    weakSelf.dataArr = dataArrM;
+                    [weakSelf.tableView reloadData];
+                }
+                NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+                self.pageCount = [pageCountNum intValue];
+            }
+            [weakSelf.tableView.mj_header endRefreshing];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
+        weakSelf.pageIndex ++;
+        NSDictionary *param = @{
+                                @"caseType":self.navTitle,
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
+                                @"PageSize":[NSNumber numberWithInt:10]
+                                };
+        if (weakSelf.pageIndex <= weakSelf.pageCount) {
+            [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (response[@"data"]) {
+                    if (response[@"data"][@"dataSet"]) {
+                        NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                        for (NSDictionary *dataInfo in origionDataArr) {
+                            XCUserCaseListModel *caseModel = [XCUserCaseListModel yy_modelWithJSON:dataInfo];
+                            if (caseModel) {
+                                [weakSelf.dataArr addObject:caseModel];
+                            }
+                        }
+                        [weakSelf.tableView reloadData];
+                        
+                    }
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                [weakSelf.tableView.mj_footer endRefreshing];
+            } fail:^(id error) {
+                weakSelf.pageIndex --;
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }];
+        }else {
+            weakSelf.pageIndex --;
+            if (weakSelf.pageIndex == weakSelf.pageCount) {
+                [weakSelf.tableView.mj_footer setState:MJRefreshStateNoMoreData];
+            }else {
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }
+        }
+    }];
 }
 
 #pragma mark - Init Method
@@ -37,7 +107,7 @@
                             @"id":model.caseID,
                             };
     __weak typeof (self)weakSelf = self;
-    [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+    [RequestAPI getThreeCaseApply:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         BOOL configureSucess  = NO;
         if (response[@"data"]) {
             NSDictionary *dataInfo = response[@"data"];

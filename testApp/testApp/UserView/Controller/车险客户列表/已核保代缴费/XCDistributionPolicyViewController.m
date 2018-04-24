@@ -356,7 +356,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             NSString * respnseStr = response[@"errormsg"];
-            if (response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"提交成功";
             }
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];

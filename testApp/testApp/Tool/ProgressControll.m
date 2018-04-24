@@ -59,9 +59,7 @@ static UILabel *textLabel;
 }
 
 + (void)showProgressWithText:(NSString *)text{
-    
-    [self showProgressWithText:text hasBg:YES offsetY:0];
-    
+        [self showProgressWithText:text hasBg:YES offsetY:0];
 }
 
 

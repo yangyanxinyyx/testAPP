@@ -14,10 +14,16 @@
  */
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
+/** 无数据图标 */
+@property (nonatomic, strong) UIImageView * bgImageView ;
+@property (nonatomic, strong) UILabel * bgLabel ;
 
-///** <# 注释 #> */
-//@property (nonatomic, strong) XCShopServiceModel * currentModel ;
+/** 门店ID */
+@property (nonatomic, strong) NSNumber * storeID ;
+/** <# 注释 #> */
+@property (nonatomic, strong) NSString * titleTypeStr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataArr ;
+
 - (instancetype)initWithTitle:(NSString *)title;
 @end

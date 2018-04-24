@@ -67,6 +67,8 @@
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
     if (isCancel) {
+        [_viewBear removeFromSuperview];
+        _viewBear = nil;
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

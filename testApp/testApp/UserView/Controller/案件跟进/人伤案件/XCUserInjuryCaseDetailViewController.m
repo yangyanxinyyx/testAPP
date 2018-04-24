@@ -13,7 +13,8 @@
 #define kProcessCellID @"processCellID"
 #define kCaseTextCellID @"CaseTextCellID"
 #define kScrollViewCellID @"ScrollViewCellID"
-@interface XCUserInjuryCaseDetailViewController ()
+#import "XCCheckoutPhotoPreViewController.h"
+@interface XCUserInjuryCaseDetailViewController ()<XCUserCaseScrollerViewCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataTitleArrM ;
 /** <# 注释 #> */
@@ -60,6 +61,16 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
+#pragma mark - XCUserCaseScrollerViewCellDelegate
+- (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
+{
+    if (photoURL) {
+        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+        previewVC.sourceURL = photoURL;
+        
+        [self.navigationController pushViewController:previewVC animated:YES];
+    }
+}
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,8 +83,7 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //processCell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kProcessCellID forIndexPath:indexPath];
-        //        NSArray *processArr = @[@"处理完毕",@"服务中..."];
-        //        [processCell setProcessStrArr:processArr];
+
         [processCell setProcessStr:_detailModel.status];
         if ([_detailModel.status isEqualToString:@"处理完毕"]) {
             [processCell setIsFinish:YES];
@@ -100,6 +110,7 @@
         return detailTextCell;
     }else {
         XCUserCaseScrollerViewCell *cell = (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kScrollViewCellID forIndexPath:indexPath];
+        cell.delegate = self;
         [cell setTitleStr:@"相关文件:"];
         [cell setPhotoURLArr:_imageURLArrM];
         return cell;

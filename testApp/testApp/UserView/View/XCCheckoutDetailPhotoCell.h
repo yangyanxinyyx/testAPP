@@ -11,7 +11,7 @@
 @class XCCheckoutDetailPhotoCell;
 @protocol XCCheckoutDetailPhotoCellDelegate <NSObject>
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell;
-- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell;
+- (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL  *)photoURL index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell;
 @end
 
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
@@ -27,6 +27,5 @@
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
 + (CGFloat)getCellHeight;
 - (void)setupCellWithShopModel:(XCShopModel *)model;
--(void)updateLocalPhotoArr:(NSArray<UIImage *> *)photoArr;
 
 @end

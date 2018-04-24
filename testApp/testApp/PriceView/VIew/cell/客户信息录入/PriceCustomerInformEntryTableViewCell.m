@@ -37,7 +37,7 @@
     if (!isChangeColor) {
         self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
     }
-    self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 10 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 64 * ViewRateBaseOnIP6);
+    self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
     self.textField.placeholder = @"请输入...";
     
     self.textField.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];

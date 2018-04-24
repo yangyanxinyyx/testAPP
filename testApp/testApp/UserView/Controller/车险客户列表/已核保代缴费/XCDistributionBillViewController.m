@@ -314,7 +314,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             NSString * respnseStr = response[@"errormsg"];
-            if (response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"修改成功";
             }
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
