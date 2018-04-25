@@ -38,7 +38,7 @@
     
     NSString *currentBuildVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSString *defaultsBuildVersion = [[NSUserDefaults standardUserDefaults] objectForKey:BC_AppCurrentBuildVerison];
-    if ([currentBuildVersion isEqualToString:defaultsBuildVersion]) {
+    if (![currentBuildVersion isEqualToString:defaultsBuildVersion]) {
         [[NSUserDefaults standardUserDefaults] setObject:currentBuildVersion forKey:BC_AppCurrentBuildVerison];
         self.imageArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"guide1"],[UIImage imageNamed:@"guide2"],[UIImage imageNamed:@"guide3"],nil];
         self.myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
