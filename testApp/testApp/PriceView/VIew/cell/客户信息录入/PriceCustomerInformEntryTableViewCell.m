@@ -64,11 +64,11 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (textField.tag == 6) {
+    if ([self.labelName.text isEqualToString:@"联系方式:"]) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
-    if (textField.tag == 9) {
+    if ([self.labelName.text isEqualToString:@"身  份  证:"]) {
         textField.keyboardType = UIKeyboardTypeNamePhonePad;
     }
     [self.delegate textFieldBeginEditing:self.textField];
@@ -80,13 +80,13 @@
 }
 
 - (void)textFieldDidChangePhoneNnumber:(UITextField *)sender{
-    if (self.textField.tag == 6) {
+    if ([self.labelName.text isEqualToString:@"联系方式:"]) {
         if (sender.text.length > 11) {
           self.textField.text = [self.textField.text substringToIndex:11];
         }
     }
     
-    if (self.textField.tag == 9) {
+    if ([self.labelName.text isEqualToString:@"身  份  证:"]) {
         if (sender.text.length > 18) {
             self.textField.text = [self.textField.text substringToIndex:18];
         }
