@@ -152,8 +152,9 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
-}
+    if (self.delegate && [self.delegate respondsToSelector:(@selector(XCCheckoutDetailTextFiledBeginEditing:title:))]) {
+        [self.delegate XCCheckoutDetailTextFiledBeginEditing:textField title:_titleLabel.text];
+    }}
 
 
 

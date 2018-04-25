@@ -253,6 +253,7 @@ UIImagePickerControllerDelegate>
         __weak __typeof(self) weakSelf = self;
         XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
         previewVC.sourceURL = photoURL;
+        previewVC.shouldShowDeleteBtn = YES;
         previewVC.deleteHandler = ^{
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];

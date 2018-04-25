@@ -63,10 +63,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //    XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
+        XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
     XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
     [cell setTimeTitleStr:@"创建时间"];
-    //    [cell setupCellWithCaseListModel:model];
+    [cell setupCellWithCaseListModel:model];
     return cell;
 }
 

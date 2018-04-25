@@ -21,7 +21,8 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 @property (nonatomic, strong) NSArray * titleArr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) XCDistributionPaymentBillModel * payModel ;
-
+/** 标记当前选择的Cell */
+@property (nonatomic, strong) NSString * selectedTitle;
 
 @end
 
@@ -149,6 +150,12 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
         textCell.shouldShowSeparator = YES;
         textCell.title = titleName;
+        if ([titleName isEqualToString:@"商业险金额:"]) {
+            [textCell setTitlePlaceholder:self.syMoney];
+        }
+        else if ([titleName isEqualToString:@"交强险金额:"]) {
+            [textCell setTitlePlaceholder:self.jqMoney];
+        }
         textCell.selectionStyle = UITableViewCellSelectionStyleNone;
         return textCell;
     }else if([self isPicketCellTypeWithIndex:indexPath]) {
@@ -229,12 +236,16 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
-
+- (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
+{
+    self.selectedTitle = title;
+}
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
     if ([title isEqualToString:@"保单金额:"]) {
         double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
+        [textField setText: [NSString stringWithMoneyNumber:price]];
     }
     else if ([title isEqualToString:@"缴费单通知号:"]) {
         _payModel.payNoticeNo =  textField.text;
@@ -242,6 +253,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     else if ([title isEqualToString:@"购买金额:"]) {
         double price = [textField.text doubleValue];
         _payModel.packageBuyPrice = [NSNumber numberWithDouble:price];
+        [textField setText: [NSString stringWithMoneyNumber:price]];
     }
     else if ([title isEqualToString:@"客户名称:"]) {
         _payModel.receiverName =  textField.text;
@@ -255,10 +267,12 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     else if ([title isEqualToString:@"预借款金额:"]) {
         double price = [textField.text doubleValue];
         _payModel.borrowMoney = [NSNumber numberWithDouble:price];
+        [textField setText: [NSString stringWithMoneyNumber:price]];
     }
     else if ([title isEqualToString:@"收款金额:"]) {
         double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
+        [textField setText: [NSString stringWithMoneyNumber:price]];
     }
     else if ([title isEqualToString:@"配送地址:"]) {
         _payModel.address =  textField.text;
@@ -348,6 +362,29 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     }
     return NO;
 }
+
+- (BOOL)shouldSetTableViewOffsetWithTitle:(NSString *)title {
+    
+    if ([title isEqualToString:@"客户名称:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"联系电话:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"预借款金额:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"配送地址:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"配送备注:"]) {
+        return YES;
+    }
+    return NO;
+}
 #pragma mark -  ========== 添加键盘通知 ==========
 
 - (void)addObserverKeyboard {
@@ -358,6 +395,11 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 //键盘显示
 - (void)keyboardShow:(NSNotification *)notification {
     
+    if (isUsableNSString(self.selectedTitle, @"")) {
+        if (![self shouldSetTableViewOffsetWithTitle:self.selectedTitle]) {
+            return;
+        }
+    }
     NSValue *keyboardEndFrameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardEndFrame;
     [keyboardEndFrameValue getValue:&keyboardEndFrame];

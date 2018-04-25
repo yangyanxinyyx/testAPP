@@ -201,40 +201,40 @@
 {
     _detailModel = detailModel;
     
-    if (_detailModel.url1) {
+    if (isUsableNSString(_detailModel.url1, @"")) {
         [_imageURLArrM addObject:_detailModel.url1];
     }
-    if (_detailModel.url2) {
+    if (isUsableNSString(_detailModel.url2, @"")) {
         [_imageURLArrM addObject:_detailModel.url2];
     }
-    if (_detailModel.url3) {
+    if (isUsableNSString(_detailModel.url3, @"")) {
         [_imageURLArrM addObject:_detailModel.url3];
     }
-    if (_detailModel.url4) {
+    if (isUsableNSString(_detailModel.url4, @"")) {
         [_imageURLArrM addObject:_detailModel.url4];
     }
-    if (_detailModel.url5) {
+    if (isUsableNSString(_detailModel.url5, @"")) {
         [_imageURLArrM addObject:_detailModel.url5];
     }
-    if (_detailModel.url6) {
+    if (isUsableNSString(_detailModel.url6, @"")) {
         [_imageURLArrM addObject:_detailModel.url6];
     }
-    if (_detailModel.driverPapersUrl1) {
+    if (isUsableNSString(_detailModel.driverPapersUrl1, @"")) {
         [_imageURLArrM addObject:_detailModel.driverPapersUrl1];
     }
-    if (_detailModel.driverPapersUrl2) {
+    if (isUsableNSString(_detailModel.driverPapersUrl2, @"")) {
         [_imageURLArrM addObject:_detailModel.driverPapersUrl2];
     }
-    if (_detailModel.driverPapersUrl3) {
+    if (isUsableNSString(_detailModel.driverPapersUrl3, @"")) {
         [_imageURLArrM addObject:_detailModel.driverPapersUrl3];
     }
-    if (_detailModel.driverPapersUrl4) {
+    if (isUsableNSString(_detailModel.driverPapersUrl4, @"")) {
         [_imageURLArrM addObject:_detailModel.driverPapersUrl4];
     }
-    if (_detailModel.recognizeeIdcard1) {
+    if (isUsableNSString(_detailModel.recognizeeIdcard1, @"") ) {
         [_imageURLArrM addObject:_detailModel.recognizeeIdcard1];
     }
-    if (_detailModel.recognizeeIdcard2) {
+    if (isUsableNSString(_detailModel.recognizeeIdcard2, @"")) {
         [_imageURLArrM addObject:_detailModel.recognizeeIdcard2];
     }
     

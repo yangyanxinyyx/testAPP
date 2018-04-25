@@ -23,7 +23,6 @@
     // Do any additional setup after loading the view.
     
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-//    [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
     [self.tableView registerClass:[XCCheckoutDetailInputCell class] forCellReuseIdentifier:kTextInputCellID];
 
     [self initUI];
@@ -32,10 +31,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)viewDidLayoutSubviews
 {
@@ -50,19 +45,26 @@
 
 - (void)commitUnderWriting:(UIButton *)button
 {
-    __weak typeof (self)weakSelf = self;
-   
+    __weak __typeof(self) weakSelf = self;
     LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否撤销" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
-        NSDictionary *param = @{
-                                @"id":weakSelf.model.BillID,
-                                };
-        [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            
-             [weakSelf requestSuccessHandler];
-             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-        } fail:^(id error) {
-            [weakSelf requestFailureHandler];
-        }];
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (isUsable(strongSelf.model.BillID, [NSNumber class])) {
+            NSDictionary *param = @{
+                                    @"id":strongSelf.model.BillID,
+                                    };
+            [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if ([response[@"result"] boolValue] == 1) {
+                    [strongSelf showAlterInfoWithNetWork:@"提交成功，待审核"];
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            } fail:^(id error) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+                [strongSelf showAlterInfoWithNetWork:errStr];
+            }];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:@"参数错误"];
+        }
     }];
 
     [self.view addSubview:alertView];
@@ -158,6 +160,7 @@
     }else {
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
+        [cell setTitlePlaceholder:@""];
         [cell setupCellWithDetailPolicyModel:self.model];
 //        [cell setTitlePlaceholder:@"刘某某"];
         return cell;

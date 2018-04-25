@@ -375,26 +375,26 @@
                                  @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强保单最终金额:",
                                  @"商业险保险最终金额:",@"交强险保单:",@"商业险保单:",
                                  @"出单员:",@"备注:"];
-    NSString * onwerName = @"";
-    NSString * onwerIdentify = @"";
-    NSString * plateNo = @"";
-    NSString * vinNo = @"";
-    NSString * recordDate = @"";
-    NSString * engineNo = @"";
-    NSString * brand = @"";
-    NSString * carModel = @"";
-    NSString * syEffectDate = @"";
-    NSString * jqEffectDate = @"";
-    NSString * insurerName = @"";
-    NSString * payNoticeNo = @"";
+    NSString * onwerName = @"未知";
+    NSString * onwerIdentify = @"未知";
+    NSString * plateNo = @"未知";
+    NSString * vinNo = @"未知";
+    NSString * recordDate = @"未知";
+    NSString * engineNo = @"未知";
+    NSString * brand = @"未知";
+    NSString * carModel = @"未知";
+    NSString * syEffectDate = @"未知";
+    NSString * jqEffectDate = @"未知";
+    NSString * insurerName = @"未知";
+    NSString * payNoticeNo = @"未知";
     NSString * jqMoney = @"0.00";
     NSString * syMoney = @"0.00";
     NSString * jqMoneyFinal = @"0.00";
     NSString * syMoneyFinal = @"0.00";
-    NSString * jqNumber = @"";
-    NSString * syNumber = @"";
-    NSString * exportmanName = @"";
-    NSString * remark = @"";
+    NSString * jqNumber = @"未知";
+    NSString * syNumber = @"未知";
+    NSString * exportmanName = @"未知";
+    NSString * remark = @"未知";
     if (isUsableNSString(model.onwerName, @"")) {
         onwerName = model.onwerName;
     }
@@ -604,19 +604,19 @@
     NSString * cssjValue = @"¥0.00";
     NSString * csckValue = @"¥0.00";
     if (isUsable(model.jqValue, [NSNumber class])) {
-        jqValue = [NSString stringWithFormat:@"¥%@.00",[NSString stringWithMoneyNumber:[model.jqValue doubleValue]]];
+        jqValue = [NSString stringWithMoneyNumber:[model.jqValue doubleValue]];
     }
     if (isUsable(model.csValue, [NSNumber class])) {
-        csValue = [NSString stringWithFormat:@"¥%@.00",[NSString stringWithMoneyNumber:[model.csValue doubleValue]]];
+        csValue = [NSString stringWithMoneyNumber:[model.csValue doubleValue]];
     }
     if (isUsable(model.szValue, [NSNumber class])) {
-        szValue = [NSString stringWithFormat:@"¥%@.00",[NSString stringWithMoneyNumber:[model.szValue doubleValue]]];
+        szValue = [NSString stringWithMoneyNumber:[model.szValue doubleValue]];
     }
     if (isUsable(model.cssjValue, [NSNumber class])) {
-        cssjValue = [NSString stringWithFormat:@"¥%@.00",[NSString stringWithMoneyNumber:[model.cssjValue doubleValue]]];
+        cssjValue = [NSString stringWithMoneyNumber:[model.cssjValue doubleValue]];
     }
     if (isUsable(model.csckValue, [NSNumber class])) {
-        csckValue = [NSString stringWithFormat:@"¥%@.00",[NSString stringWithMoneyNumber:[model.csckValue doubleValue]]];
+        csckValue = [NSString stringWithMoneyNumber:[model.csckValue doubleValue]];
     }
     self.titleValueArr = @[jqValue,csValue,szValue,cssjValue,csckValue];
     for (int i = 0 ; i < _labelArrM.count; i++) {

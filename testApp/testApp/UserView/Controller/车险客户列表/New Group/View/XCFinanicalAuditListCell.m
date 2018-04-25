@@ -33,10 +33,6 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self configSubVies];
-        [_carNumLabel setText:@"1111111"];
-        [_carNameLabel setText:@"111"];
-        [_processLabel setText:@"111"];
-        [_timeLabel setText:@"1111"];
         [_detailLabel setText:@"查看详情"];
         
     }
@@ -91,6 +87,7 @@
         [_processLabel setTextColor:COLOR_RGB_255(131, 131, 131)];
     }
     [_carNameLabel sizeToFit];
+    labelSize = _carNameLabel.frame.size;
     [_carNameLabel setFrame:CGRectMake(_carNumLabel.frame.origin.x,CGRectGetMaxY(_carNumLabel.frame) + 30 * ViewRateBaseOnIP6, labelSize.width, 21 * ViewRateBaseOnIP6)];
     
     [_timeLabel sizeToFit];
@@ -116,17 +113,25 @@
     
     if (isUsableNSString(model.plateNo, @"")) {
         [_carNumLabel setText:[NSString stringWithFormat:@"%@",model.plateNo]];
+    }else {
+        [_carNumLabel setText:@"未知"];
     }
     if(isUsableNSString(model.onwerName, @"")) {
         [_carNameLabel setText:model.onwerName];
+    }else {
+        [_carNameLabel setText:@"车主: 未知"];
     }
-    NSString *titleStr = @"创建时间";
-    if (_timeTitleStr) {
-        titleStr =_timeTitleStr;
+    NSString *titleStr = @"创建时间: ";
+    if (isUsableNSString(model.recordDate,@"")) {
+        titleStr = [NSString stringWithFormat:@"创建时间: %@",model.recordDate];
     }
-    if (isUsableNSString(model.recordDate, @"")) {
-        [_timeLabel setText:[NSString stringWithFormat:@"%@ :%@",titleStr,model.recordDate]];
+      [_timeLabel setText:titleStr];
+
+#warning 财务审核状态
+    if (isUsableNSString(model.policyStatus, @"")) {
+        [_processLabel setText:model.policyStatus];
     }
+    
 }
 #pragma mark - Delegates & Notifications
 
@@ -138,5 +143,7 @@
     [label setTextColor:textColor];
     return label;
 }
+
+
 #pragma mark - Setter&Getter
 @end

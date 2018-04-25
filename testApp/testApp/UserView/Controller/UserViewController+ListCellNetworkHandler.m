@@ -300,7 +300,7 @@
         return @"会计审核中";
     }
     else if ([title isEqualToString:@"配送"]) {
-        return @"配送";
+        return @"配送中";
     }
     else if ([title isEqualToString:@"退单"]) {
         return @"修改核保";

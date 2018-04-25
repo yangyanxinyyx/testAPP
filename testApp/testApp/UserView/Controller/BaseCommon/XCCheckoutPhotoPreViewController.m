@@ -36,6 +36,15 @@
    
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (_shouldShowDeleteBtn) {
+        [_topBar setFinishBtnTitle:@"删除"];
+    }
+
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -52,7 +61,7 @@
         _topBar = [[BaseNavigationBar alloc] init];
         _topBar.delegate  = self;
         _topBar.title = title;
-        [_topBar setFinishBtnTitle:@"删除"];
+        _shouldShowDeleteBtn = NO;
         self.navTitle = title;
         [self.view addSubview:_topBar];
     }

@@ -530,6 +530,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     if (photoURL) {
         XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
         previewVC.sourceURL = photoURL;
+        previewVC.shouldShowDeleteBtn = YES;
         previewVC.deleteHandler = ^{
             
             if ([[photoURL absoluteString] isEqualToString:_lincesPhotoPath]) {

@@ -19,6 +19,8 @@ typedef void(^myBlock)(void);
  */
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
+/** 是否显示删除 默认NO*/
+@property (nonatomic, assign) BOOL shouldShowDeleteBtn ;
 /** <# 注释 #> */
 @property (nonatomic, copy) myBlock deleteHandler;
 

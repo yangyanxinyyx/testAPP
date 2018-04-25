@@ -10,10 +10,11 @@
 #import "XCUserCaseDetailTextCell.h"
 #import "XCUserCaseDetailProgressCell.h"
 #import "XCUserCaseScrollerViewCell.h"
+#import "XCCheckoutPhotoPreViewController.h"
 #define kDetailTextCellID @"DetailTextCellID"
 #define kDetailProgressCellID @"DetailProgressCellID"
 #define kDetailScrollerCellID @"DetailScrollerCellID"
-@interface XCUserAnnualReviewDetailViewController ()
+@interface XCUserAnnualReviewDetailViewController ()<XCUserCaseScrollerViewCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) NSMutableArray * imageURLArrM ;
 @end
@@ -50,7 +51,13 @@
 #pragma mark - Action Method
 
 #pragma mark - Delegates & Notifications
-
+#pragma marl - XCUserCaseScrollerViewCellDelegate
+- (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
+{
+    XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+    previewVC.sourceURL = photoURL;
+    [self.navigationController pushViewController:previewVC animated:YES];
+}
 #pragma mark - Privacy Method
 
 - (void)configureData
@@ -132,6 +139,7 @@
     else {
         //ScrollerViewCell
         XCUserCaseScrollerViewCell *scrollerCell =  (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kDetailScrollerCellID forIndexPath:indexPath];
+        scrollerCell.delegate = self;
         [scrollerCell setTitleStr:@"相关文件:"];
         [scrollerCell setPhotoURLArr:_imageURLArrM];
         return scrollerCell;
