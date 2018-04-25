@@ -12,6 +12,8 @@
 {
     BOOL isChangeColor;
 }
+@property (nonatomic, strong) UILabel *labelContext;
+
 @end
 
 @implementation PriceCustomerInformEntryTableViewCell
@@ -24,6 +26,8 @@
         [self.contentView addSubview:self.labelName];
         self.textField = [[UITextField alloc] init];
         [self.contentView addSubview:self.textField];
+        self.labelContext = [[UILabel alloc] init];
+        [self.contentView addSubview:self.labelContext];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -37,11 +41,12 @@
     if (!isChangeColor) {
         self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
     }
-    self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+    self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
     self.textField.placeholder = @"请输入...";
     
     self.textField.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
     self.textField.delegate = self;
+    [self.textField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
 }
 - (void)setLabelNameText:(NSString *)text{
     isChangeColor = YES;
@@ -59,8 +64,35 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField.tag == 6) {
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    
+    if (textField.tag == 9) {
+        textField.keyboardType = UIKeyboardTypeNamePhonePad;
+    }
     [self.delegate textFieldBeginEditing:self.textField];
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.delegate textFieldendEditing:self.textField];
+    return YES;
+}
+
+- (void)textFieldDidChangePhoneNnumber:(UITextField *)sender{
+    if (self.textField.tag == 6) {
+        if (sender.text.length > 11) {
+          self.textField.text = [self.textField.text substringToIndex:11];
+        }
+    }
+    
+    if (self.textField.tag == 9) {
+        if (sender.text.length > 18) {
+            self.textField.text = [self.textField.text substringToIndex:18];
+        }
+    }
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.delegate textFieldendEditing:self.textField];
 }

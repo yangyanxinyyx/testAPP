@@ -26,7 +26,7 @@
 - (NSMutableArray *)yearArray{
     if (!_yearArray) {
         _yearArray = [NSMutableArray array];
-        for (int year = 2000; year < 2050; year++) {
+        for (int year = 1800; year < 2100; year++) {
             NSString *str = [NSString stringWithFormat:@"%d年",year];
             [_yearArray addObject:str];
         }

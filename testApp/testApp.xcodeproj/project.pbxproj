@@ -13,6 +13,7 @@
 		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
 		25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769AC520863A6900BBDBF3 /* SelectTimeView.m */; };
 		25769ACD2086476600BBDBF3 /* XCCustomerADDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */; };
+		258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */; };
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
 		A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7117AE2207E0D3200B0512D /* XCShopAMapViewController.m */; };
@@ -323,6 +324,8 @@
 		25769AC620863A6900BBDBF3 /* SelectTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerADDViewController.h; sourceTree = "<group>"; };
 		25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerADDViewController.m; sourceTree = "<group>"; };
+		258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXTestNumber.m; sourceTree = "<group>"; };
+		258EFCB7208F79EA00FB06C0 /* YXTestNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXTestNumber.h; sourceTree = "<group>"; };
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
 		259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarLastYearRecodemodel.m; sourceTree = "<group>"; };
 		25EA236E207E5ADF00A60866 /* priceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priceModel.h; sourceTree = "<group>"; };
@@ -1022,6 +1025,8 @@
 		A79A510720597A0F000D8D0F /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				258EFCB7208F79EA00FB06C0 /* YXTestNumber.h */,
+				258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */,
 				A72600732089F669001C5571 /* UIbase */,
 				FCF87667206BCF1500CF6FDE /* YXScrollView.h */,
 				FCF87668206BCF1500CF6FDE /* YXScrollView.m */,
@@ -2259,6 +2264,7 @@
 				A72148B22083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				FC32BFAB2079AA5900817156 /* PriceCommerceInsTableViewCell.m in Sources */,
+				258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */,
 				FC32BF412079AA2000817156 /* XCCheckoutDetailHeaderView.m in Sources */,
 				FC32BF452079AA2000817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
 				FC32BF4D2079AA2000817156 /* XCUserListHeaderView.m in Sources */,
