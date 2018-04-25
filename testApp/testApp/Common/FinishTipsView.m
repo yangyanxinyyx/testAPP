@@ -38,6 +38,7 @@ typedef void(^Complete)(void);
     _tipsLabel.backgroundColor = [UIColor whiteColor];
     _tipsLabel.layer.cornerRadius = 5;
     _tipsLabel.layer.masksToBounds = YES;
+    _tipsLabel.numberOfLines = 2;
     _tipsLabel.backgroundColor = COLOR_RGBA_255(0, 0, 0, 0.6);
     _tipsLabel.font = [UIFont systemFontOfSize:18];
     _tipsLabel.textColor = [UIColor whiteColor];

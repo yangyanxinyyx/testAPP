@@ -45,6 +45,7 @@
         accoutTextField.placeholder = titles[i];
         accoutTextField.clearButtonMode = UITextFieldViewModeAlways;
         accoutTextField.clearsOnBeginEditing = YES;
+        accoutTextField.secureTextEntry = YES;
         accoutTextField.textAlignment = NSTextAlignmentLeft;
         accoutTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         accoutTextField.returnKeyType = UIReturnKeyDone;
