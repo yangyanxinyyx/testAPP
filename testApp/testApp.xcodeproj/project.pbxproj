@@ -11,6 +11,12 @@
 		250784C42081A28600B573F3 /* InputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 250784C32081A28600B573F3 /* InputTextView.m */; };
 		25701659207D07ED007177F5 /* PriceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25701658207D07ED007177F5 /* PriceInfoModel.m */; };
 		2570165E207DE560007177F5 /* SelectStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2570165D207DE560007177F5 /* SelectStateView.m */; };
+		25712B2820908F37001629AD /* guide1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2220908F37001629AD /* guide1@2x.png */; };
+		25712B2920908F37001629AD /* guide2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2320908F37001629AD /* guide2@2x.png */; };
+		25712B2A20908F37001629AD /* guide2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2420908F37001629AD /* guide2@3x.png */; };
+		25712B2B20908F37001629AD /* guide3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2520908F37001629AD /* guide3@2x.png */; };
+		25712B2C20908F37001629AD /* guide3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2620908F37001629AD /* guide3@3x.png */; };
+		25712B2D20908F37001629AD /* guide1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2720908F37001629AD /* guide1@3x.png */; };
 		25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769AC520863A6900BBDBF3 /* SelectTimeView.m */; };
 		25769ACD2086476600BBDBF3 /* XCCustomerADDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */; };
 		258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */; };
@@ -320,6 +326,12 @@
 		25701658207D07ED007177F5 /* PriceInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceInfoModel.m; sourceTree = "<group>"; };
 		2570165C207DE560007177F5 /* SelectStateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectStateView.h; sourceTree = "<group>"; };
 		2570165D207DE560007177F5 /* SelectStateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectStateView.m; sourceTree = "<group>"; };
+		25712B2220908F37001629AD /* guide1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide1@2x.png"; sourceTree = "<group>"; };
+		25712B2320908F37001629AD /* guide2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide2@2x.png"; sourceTree = "<group>"; };
+		25712B2420908F37001629AD /* guide2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide2@3x.png"; sourceTree = "<group>"; };
+		25712B2520908F37001629AD /* guide3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide3@2x.png"; sourceTree = "<group>"; };
+		25712B2620908F37001629AD /* guide3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide3@3x.png"; sourceTree = "<group>"; };
+		25712B2720908F37001629AD /* guide1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide1@3x.png"; sourceTree = "<group>"; };
 		25769AC520863A6900BBDBF3 /* SelectTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
 		25769AC620863A6900BBDBF3 /* SelectTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
 		25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerADDViewController.h; sourceTree = "<group>"; };
@@ -833,6 +845,19 @@
 				25701658207D07ED007177F5 /* PriceInfoModel.m */,
 			);
 			path = "报价详情";
+			sourceTree = "<group>";
+		};
+		25712B2120908F10001629AD /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				25712B2220908F37001629AD /* guide1@2x.png */,
+				25712B2720908F37001629AD /* guide1@3x.png */,
+				25712B2320908F37001629AD /* guide2@2x.png */,
+				25712B2420908F37001629AD /* guide2@3x.png */,
+				25712B2520908F37001629AD /* guide3@2x.png */,
+				25712B2620908F37001629AD /* guide3@3x.png */,
+			);
+			path = Guide;
 			sourceTree = "<group>";
 		};
 		259A83EC207BACFA006693FB /* 上年续保记录 */ = {
@@ -1764,6 +1789,7 @@
 		FCEF5C82208ED8EC00B387FA /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				25712B2120908F10001629AD /* Guide */,
 				FCEF5C83208ED8EC00B387FA /* back@2x.png */,
 				FCEF5C84208ED8EC00B387FA /* back@3x.png */,
 				FCEF5C85208ED8EC00B387FA /* CoverMain */,
@@ -2055,6 +2081,7 @@
 				FCEF5D03208ED8EC00B387FA /* 个人季军@3x.png in Resources */,
 				FCEF5CE9208ED8EC00B387FA /* back@3x.png in Resources */,
 				FCEF5CEE208ED8EC00B387FA /* down@2x.png in Resources */,
+				25712B2A20908F37001629AD /* guide2@3x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FCEF5CFA208ED8EC00B387FA /* user_nomnal@2x.png in Resources */,
 				FCEF5D30208ED8ED00B387FA /* confirm@3x.png in Resources */,
@@ -2063,6 +2090,7 @@
 				FCEF5CFF208ED8EC00B387FA /* 个人亚军@3x.png in Resources */,
 				FCEF5D2A208ED8ED00B387FA /* placeHolder@3x.png in Resources */,
 				FCEF5D26208ED8ED00B387FA /* login_username@3x.png in Resources */,
+				25712B2920908F37001629AD /* guide2@2x.png in Resources */,
 				FCEF5CFB208ED8EC00B387FA /* user_nomnal@3x.png in Resources */,
 				FCEF5D0D208ED8ED00B387FA /* 汽车2.jpg in Resources */,
 				FCEF5D13208ED8ED00B387FA /* 未选中@2x.png in Resources */,
@@ -2074,10 +2102,12 @@
 				FCEF5D37208ED8ED00B387FA /* 个人中心@2x.png in Resources */,
 				FCEF5D27208ED8ED00B387FA /* next@2x.png in Resources */,
 				FCEF5D28208ED8ED00B387FA /* next@3x.png in Resources */,
+				25712B2B20908F37001629AD /* guide3@2x.png in Resources */,
 				FCEF5D48208ED8ED00B387FA /* 返回拷贝10@3x.png in Resources */,
 				FCEF5D1E208ED8ED00B387FA /* login_code@3x.png in Resources */,
 				FCEF5D35208ED8ED00B387FA /* unconfirm@2x.png in Resources */,
 				FCEF5D33208ED8ED00B387FA /* red@2x.png in Resources */,
+				25712B2820908F37001629AD /* guide1@2x.png in Resources */,
 				FCEF5D34208ED8ED00B387FA /* red@3x.png in Resources */,
 				FCEF5D40208ED8ED00B387FA /* 添加图片@2x.png in Resources */,
 				FCEF5D2E208ED8ED00B387FA /* 1@3x (2).png in Resources */,
@@ -2123,6 +2153,7 @@
 				FCEF5D47208ED8ED00B387FA /* 返回拷贝10@2x.png in Resources */,
 				FCEF5D1D208ED8ED00B387FA /* login_code@2x.png in Resources */,
 				FCEF5D01208ED8EC00B387FA /* 个人冠军@3x.png in Resources */,
+				25712B2D20908F37001629AD /* guide1@3x.png in Resources */,
 				FCEF5D10208ED8ED00B387FA /* 搜索@3x.png in Resources */,
 				FCEF5D3A208ED8ED00B387FA /* 快速洗车图@2x.png in Resources */,
 				FCEF5D32208ED8ED00B387FA /* red.png in Resources */,
@@ -2134,6 +2165,7 @@
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
 				FCEF5D3C208ED8ED00B387FA /* 未完成@2x.png in Resources */,
 				FCEF5D1A208ED8ED00B387FA /* introduce2.png in Resources */,
+				25712B2C20908F37001629AD /* guide3@3x.png in Resources */,
 				FCEF5D3D208ED8ED00B387FA /* 未完成@3x.png in Resources */,
 				FCEF5CEC208ED8EC00B387FA /* coverMain_select@2x.png in Resources */,
 			);
