@@ -7,12 +7,10 @@
 //
 
 #import "BaseViewController1.h"
-typedef void(^myBlock)();
+typedef void(^myBlock)(void);
 
 @interface XCCheckoutPhotoPreViewController : BaseViewController1<BaseNavigationBarDelegate>
 
-/** <# 注释 #> */
-//@property (nonatomic, strong) UIImage * sourceImage ;
 /**  */
 @property (nonatomic, strong) NSURL * sourceURL ;
 

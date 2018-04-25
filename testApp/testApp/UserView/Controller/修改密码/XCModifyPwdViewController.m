@@ -86,6 +86,7 @@
     [dic setObject:[UserInfoManager shareInstance].userID forKey:@"id"];
     [dic setObject:textFieldPassword.text forKey:@"password"];
     [dic setObject:textFieldNewPassword.text forKey:@"newPassword"];
+    __weak __typeof(self) weakSelf = self;
     [RequestAPI updatePassWord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         if ([response[@"result"] integerValue] == 1) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改成功" complete:nil];
@@ -94,12 +95,13 @@
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败,请联系客服" complete:nil];
             [self.view addSubview:tipsView];
         }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
-
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
     }];
-    
-    
-  
+
 }
 #pragma mark - Delegates & Notifications
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -134,7 +136,11 @@
 }
 
 #pragma mark - Privacy Method
-
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+    [self.view addSubview:tipsView];
+}
 #pragma mark - Setter&Getter
 - (NSMutableArray *)textFieldArray{
     if (!_textFieldArray) {

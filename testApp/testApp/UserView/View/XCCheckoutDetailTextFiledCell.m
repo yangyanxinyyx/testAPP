@@ -163,17 +163,35 @@
         [self.delegate XCCheckoutDetailTextFiledSubmitTextField:textField title:_titleLabel.text];
     }
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField endEditing:YES];
+    return YES;
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSCharacterSet *cs;
+    
     if(_isNumField) {
+        if (range.location >10) {
+            return NO;
+        }
+        NSCharacterSet *cs;
         cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         BOOL basicTest = [string isEqualToString:filtered];
         if(!basicTest)  {
             return NO;
         }
+        return YES;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailTextFiledShouldChangeCharactersInRange:replacementString:title:textFiled:)]) {
+        return [self.delegate XCCheckoutDetailTextFiledShouldChangeCharactersInRange:range replacementString:string title:_title textFiled:textField];
+    }
+
+  
     return YES;
 }
 
@@ -190,6 +208,8 @@
     _textField = [[UITextField alloc] init];
     [_textField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
     _textField.delegate = self;
+    _textField.returnKeyType = UIReturnKeyDone;
+    _textField.clearButtonMode = UITextFieldViewModeWhileEditing;  
     [self addSubview:_textField];
     
     _separtatorLine = [[UIView alloc] init];
@@ -208,12 +228,18 @@
     _secondTextField = [[UITextField alloc] init];
     [_secondTextField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
     _secondTextField.delegate = self;
+    _secondTextField.returnKeyType = UIReturnKeyDone;
     [_secondTextField setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:_secondTextField];
     
 }
 
 #pragma mark - Setter&Getter
+
+-(void)setIsNumField:(BOOL)isNumField
+{
+    _isNumField =  isNumField;
+}
 
 - (void)setTitle:(NSString *)title
 {

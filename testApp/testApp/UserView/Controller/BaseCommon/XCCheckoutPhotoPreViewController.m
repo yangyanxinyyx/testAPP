@@ -10,6 +10,7 @@
 #import "CGAffineTransformFun.h"
 #import "UIImage+Resize.h"
 #import <UIImageView+WebCache.h>
+#import "LYZAlertView.h"
 @interface XCCheckoutPhotoPreViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView * clipView ;
 @property (nonatomic, strong) UIImageView * preView ;
@@ -51,7 +52,7 @@
         _topBar = [[BaseNavigationBar alloc] init];
         _topBar.delegate  = self;
         _topBar.title = title;
-//        [_topBar setFinishBtnTitle:@"删除"];
+        [_topBar setFinishBtnTitle:@"删除"];
         self.navTitle = title;
         [self.view addSubview:_topBar];
     }
@@ -71,8 +72,15 @@
 
 - (void)baseNavigationDidPressDeleteBtn:(BOOL)isCancel
 {
-    self.deleteHandler();
-    
+    __weak __typeof(self) weakSelf = self;
+    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"确认要删除吗?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (strongSelf.deleteHandler) {
+            strongSelf.deleteHandler();
+        }
+        [strongSelf.navigationController popViewControllerAnimated:YES];
+    }];
+    [self.view addSubview:alterView];
 }
 
 
@@ -169,8 +177,11 @@
     __weak __typeof(self) weakSelf = self;
     UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
     [self.preView sd_setImageWithURL:sourceURL placeholderImage:placeHolderImage completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
         UIImage *sourceImage = image;
+        if (!sourceImage) {
+            return ;
+        }
         CGSize clipSize = weakSelf.clipView.frame.size;
         CGFloat puzzleRadio = (float)sourceImage.size.width / sourceImage.size.height;
         CGFloat screenRadio = (float)clipSize.width / clipSize.height;
@@ -205,11 +216,10 @@
                                        newHeight);
         }
 
-        [weakSelf.preView setContentMode:UIViewContentModeScaleAspectFit];
-        [weakSelf.preView setFrame:prewViewFrame];
-        weakSelf.origianFrame = prewViewFrame;
+        [strongSelf.preView setContentMode:UIViewContentModeScaleAspectFit];
+        [strongSelf.preView setFrame:prewViewFrame];
+        strongSelf.origianFrame = prewViewFrame;
     }];
-
 }
 
 @end

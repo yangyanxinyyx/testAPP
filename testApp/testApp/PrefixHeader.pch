@@ -14,7 +14,7 @@
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
 #import "NSString+MoneyString.h"
-
+#import "YXTestNumber.h"
 static inline void XCLog(NSString *log, ...)
 {
 #ifdef DEBUG

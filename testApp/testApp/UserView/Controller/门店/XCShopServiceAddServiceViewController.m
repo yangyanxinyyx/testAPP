@@ -76,8 +76,6 @@
         [strongSelf showAlterInfoWithNetWork:errStr];
     }];
     
-    
-    
 }
 
 #pragma mark - Delegates & Notifications

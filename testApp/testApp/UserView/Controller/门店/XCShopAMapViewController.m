@@ -80,6 +80,12 @@
 - (void)localMyPosition:(UIButton *)button
 {
     [_mapView setCenterCoordinate:_mapView.userLocation.coordinate];
+    if (self.selectAnnotion) {
+        [_mapView removeAnnotation:self.selectAnnotion];
+    }
+    self.selectAnnotion = [[MAPointAnnotation alloc] init];
+    self.selectAnnotion.coordinate = _mapView.userLocation.coordinate;
+    [_mapView addAnnotation:self.selectAnnotion];
 }
 
 - (void)longPressAddAnnotation:(UILongPressGestureRecognizer *)longPress
@@ -96,6 +102,7 @@
 
 #pragma mark - Delegates & Notifications
 #pragma mark - MAMapViewDelegate
+
 -(MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[MAPointAnnotation class]])

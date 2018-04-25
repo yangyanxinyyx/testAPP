@@ -22,7 +22,7 @@
 #import "UserViewController+ListCellNetworkHandler.h"
 @interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
-    BOOL _isStore;
+    BOOL _isStore; //判断用户 是否门店ID
 }
 @property (nonatomic, strong) XCUserTopView * topView;
 @property (nonatomic, strong) XCUserListView * listView ;
@@ -36,22 +36,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.title = @"个人中心";
-    // [self.navigationItem setTitle:@"个人中心"];
-    _isStore = NO;
     UserInfoManager *userManager = [UserInfoManager shareInstance];
-//    if (userManager.isStore) {
-//        _isStore = YES;
-//    }
+    _isStore = NO;
+    if (userManager.isStore) {
+        _isStore = YES;
+    }
     [self initWithListData];
     [self setUI];
-    //设置用户数据UI
+    //设置用户头型数据UI
     if (userManager) {
         [self.topView setUserName:userManager.name];
         if (userManager.iconUrl) {
             [self.topView setUserIconUrlString:userManager.iconUrl];
         }
-        
     }
 }
 
@@ -98,14 +95,19 @@
 - (void)clickMyCommission
 {
     XCLog(@"===========>ClickmyCommissionBtn");
-    
     NSDictionary *param = @{
                             @"user_id":[UserInfoManager shareInstance].userID,
                             };
     __weak typeof (self)weakSelf = self;
     [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-//        NSLog(@"%@",response);
-        if (isUsableDictionary(response)&&isUsableArray(response[@"data"], 0)) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr;
+        if (isUsable(response[@"errormsg"], [NSString class])) {
+            errStr = response[@"errormsg"];
+        }else {
+            errStr = @"未知错误";
+        }
+        if (isUsableArray(response[@"data"], 0)) {
             NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
             NSArray *dataArr  = response[@"data"];
             for (NSDictionary *commissionInfo in dataArr) {
@@ -114,19 +116,25 @@
             }
             XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
             myCommissionVC.dataArrM = modelArr;
-            [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
-
-        }
-         XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
-        [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
+            [strongSelf.navigationController pushViewController:myCommissionVC animated:YES];
+        }else {
+            XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+            [strongSelf.navigationController pushViewController:myCommissionVC animated:YES];        }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
-        NSLog(@"%@",error);
-        [weakSelf requestFailureHandler];
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
     }];
     
 }
 
+- (void)clickModifyBtn
+{
+    XCLog(@"ClickModifyPasswordBtn");
+    XCModifyPwdViewController *modifyVC = [[XCModifyPwdViewController alloc] init];
+    [self.navigationController pushViewController:modifyVC animated:YES];
+}
 
 #pragma mark - Delegates & Notifications
 
@@ -139,16 +147,13 @@
 
 - (void)XCUserTopViewModifyPasswordButtonClickHandler:(UIButton *)button
 {
-    XCLog(@"ClickModifyPasswordBtn");
-    XCModifyPwdViewController *modifyVC = [[XCModifyPwdViewController alloc] init];
-    [self.navigationController pushViewController:modifyVC animated:YES];
+    [self clickModifyBtn];
 }
 
 #pragma mark - UICollectionViewDataSource&&UICollectionViewDelegate
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-
     return self.listViewDataArray.count;
 }
 
@@ -170,8 +175,6 @@
     cell.title = model.title;
 //  cell.icon = [UIImage imageWithContentsOfFile:model.iconPath];
     cell.icon = [UIImage imageNamed:model.iconPath];
-    
-    
     return cell;
 }
 
@@ -186,12 +189,10 @@
         }
         return headerView;
     }
-    
     if (kind == UICollectionElementKindSectionFooter) {
         UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID forIndexPath:indexPath];
         return footerView;
     }
-
     return nil;
 }
 
@@ -217,10 +218,8 @@
     NSArray *listArr = groupInfo[@"List"];
     XCUserListModel *model = [[XCUserListModel alloc] initWithItemInfo:listArr[indexPath.row]];
     NSLog(@"=====CollectionViewSelect %@",model.urlString);
-    
-    if (model.urlString && ![model.urlString isEqualToString:@" "]) {
+    if (isUsableNSString(model.urlString, @"")) {
         [self clickCellHanderNetWorkDataWithModel:model];
-        
     }
 }
 
@@ -234,7 +233,7 @@
 {
     NSString *filePath = [[NSBundle mainBundle]pathForResource:@"userListViewData" ofType:@"plist"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-         NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+        NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
         NSInteger listCount = dataArr.count;
 #warning 测试使用 临时注释
 //        if (!_isStore) {

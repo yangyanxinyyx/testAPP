@@ -37,7 +37,7 @@
 - (instancetype)initWithTitle:(NSString *)title;
 
 //手机验证
-- (BOOL)validateMobile:(NSString *)mobile;
+- (BOOL)valiMobile:(NSString *)mobile;
 //提示框
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr;
 

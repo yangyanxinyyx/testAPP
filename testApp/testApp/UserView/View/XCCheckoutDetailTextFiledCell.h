@@ -13,6 +13,7 @@
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title;
 
+- (BOOL)XCCheckoutDetailTextFiledShouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string title:(NSString *)title textFiled:(UITextField *)textFiled;
 @end
 
 @interface XCCheckoutDetailTextFiledCell : UITableViewCell

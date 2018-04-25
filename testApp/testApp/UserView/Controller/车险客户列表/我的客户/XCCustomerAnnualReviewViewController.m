@@ -188,6 +188,8 @@ UIImagePickerControllerDelegate>
         NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:_lincesPhotoPath]];
         if (!uploadData) {
             return;
+        }else {
+            [weakSelf showAlterInfoWithNetWork:@"请添加照片"];
         }
         NSDictionary *param = @{
                                 @"file":@[uploadData],
@@ -259,6 +261,7 @@ UIImagePickerControllerDelegate>
             }
             unlink([_lincesPhotoPath  UTF8String]);
             [cell setPhotoArr:@[]];
+            
         };
         [self.navigationController pushViewController:previewVC animated:YES];
     }
