@@ -19,9 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak typeof (self)weakSelf = self;
+    self.requestKey = @"修改核保";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -55,7 +56,7 @@
         
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -94,13 +95,6 @@
 
 #pragma mark - Action Method
 
-- (void)clickCheckDetailButton
-{
-    XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"退单详情"];
-    [self.navigationController pushViewController:chargebackVC animated:YES];
-    
-}
-
 #pragma mark - privary Method
 
 #pragma mark - Table view data source
@@ -112,7 +106,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
-    [cell setTimeTitleStr:@"创建时间"];
+    [cell setTimeTitleStr:@"退单时间"];
     cell.delegate = self;
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     if(baseModel) {
@@ -122,12 +116,15 @@
     return cell;
 }
 
-
 #pragma mark - XCCheckoutTableViewCellDelegate
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    [self clickCheckDetailButton];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+    XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"退单详情"];
+    chargebackVC.detailModel = baseModel;
+    [self.navigationController pushViewController:chargebackVC animated:YES];
 }
 
 @end

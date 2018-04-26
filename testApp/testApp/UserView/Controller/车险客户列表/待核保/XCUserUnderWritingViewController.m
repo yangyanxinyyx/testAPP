@@ -10,18 +10,18 @@
 #import "XCUserUnderWritingDetailViewController.h"
 #import "XCCheckoutDetailBaseModel.h"
 @interface XCUserUnderWritingViewController ()<XCCheckoutTableViewCellDelegate>
-
+/** <# 注释 #> */
 @end
 
 @implementation XCUserUnderWritingViewController
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.requestKey = @"待核保";
     __weak typeof (self)weakSelf = self;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -55,7 +55,7 @@
         
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };

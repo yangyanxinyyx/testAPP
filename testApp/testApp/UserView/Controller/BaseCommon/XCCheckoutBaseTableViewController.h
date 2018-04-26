@@ -35,6 +35,9 @@
 //下拉刷新获取总页数
 @property (nonatomic, assign) int pageCount ;
 
+//车险客户列表请求key
+@property (nonatomic, strong) NSString * requestKey ;
+
 /** 门店页面用的model  */
 @property (nonatomic, strong) XCShopModel * storeModel ;
 - (instancetype)initWithTitle:(NSString *)title;

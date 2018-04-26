@@ -250,12 +250,14 @@
     }else {
         [_userNameLabel setText:[NSString stringWithFormat:@"车主: 未知"]];
     }
-    NSString *timeTitle  = @"出单时间";
+    NSString *timeTitle  = @"创建时间";
     if (_timeTitleStr) {
         timeTitle = _timeTitleStr;
     }
     if (isUsableNSString(baseModel.recordDate,@"")) {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.recordDate]];
+        NSMutableString *tmpDate = [NSMutableString stringWithString:baseModel.createTime];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,[tmpArr firstObject]]];
     }else {
         [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: 未知",timeTitle]];
     }
