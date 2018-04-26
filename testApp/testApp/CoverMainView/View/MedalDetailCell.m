@@ -27,7 +27,6 @@
         [self.contentView addSubview:_line];
 
         self.imageV = [[UIImageView alloc] init];
-        _imageV.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_imageV];
 
         _label1 = [[UILabel alloc] init];
