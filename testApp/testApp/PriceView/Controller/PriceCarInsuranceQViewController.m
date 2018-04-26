@@ -68,10 +68,8 @@
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     _isFirstRequestPriceRecode = NO;
+
     
-    [self.arrayRecodeData removeAllObjects];
-    [self.arrayPriceRecodeData removeAllObjects];
-    [self.arrayAllRecodeData removeAllObjects];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -694,6 +692,9 @@
         }];
         if (!_isFirstRequestPriceRecode) {
             _isFirstRequestPriceRecode = YES;
+            [self.arrayRecodeData removeAllObjects];
+            [self.arrayPriceRecodeData removeAllObjects];
+            [self.arrayAllRecodeData removeAllObjects];
             [self requestPriceRecode];
         }
         

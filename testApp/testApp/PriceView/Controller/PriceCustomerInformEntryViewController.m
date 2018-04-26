@@ -291,7 +291,7 @@
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
        LYZSelectView *selectView = [LYZSelectView alterViewWithArray:@[@"男",@"女"] confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
             cell.textField.text = selectStr;
-            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"birthday"];
+            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"sex"];
         }];
         [self.view addSubview:selectView];
         
