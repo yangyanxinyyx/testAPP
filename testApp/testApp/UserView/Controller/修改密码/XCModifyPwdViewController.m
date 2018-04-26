@@ -9,6 +9,9 @@
 #import "XCModifyPwdViewController.h"
 
 @interface XCModifyPwdViewController ()<BaseNavigationBarDelegate,UITextFieldDelegate>
+{
+    BOOL isPass;
+}
 @property (nonatomic,strong) NSMutableArray *textFieldArray;
 @end
 
@@ -23,6 +26,7 @@
     [self setupNav];
     self.view.backgroundColor = [UIColor whiteColor];
     [self createUI];
+    isPass = NO;
 }
 
 #pragma mark - Init Method
@@ -78,6 +82,9 @@
 
 - (void)pressConfirmBtn:(UIButton *)sender
 {
+    if (!isPass) {
+        return;
+    }
     UITextField *textFieldPassword = [self.textFieldArray objectAtIndex:0];
     UITextField *textFieldNewPassword = [self.textFieldArray objectAtIndex:1];
     for (UITextField *textField in self.textFieldArray) {
@@ -112,17 +119,50 @@
 }
 
 #pragma mark - textFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    if (textField.tag == 2) {
+         UITextField *textFieldNewPassword = [self.textFieldArray objectAtIndex:1];
+        if (textFieldNewPassword.text.length == 0) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入新密码" complete:nil];
+            textField.text = @"";
+            [[UIApplication sharedApplication].keyWindow addSubview:tipsView];
+        }
+    }
+    return YES;
+}
+
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [textField endEditing:YES];
     
     if (textField.tag == 2) {
         UITextField *textFieldNewPassword = [self.textFieldArray objectAtIndex:1];
         if (![textField.text isEqualToString:textFieldNewPassword.text]) {
+            isPass = YES;
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"确认密码错误" complete:nil];
+            textField.text = @"";
+            [[UIApplication sharedApplication].keyWindow addSubview:tipsView];
+        } else {
+            isPass = YES;
+        }
+    }
+    
+    if (textField.tag == 1) {
+        if (textField.text.length < 6 && textField.text.length > 0) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"密码字数不少于6位" complete:nil];
+            textField.text = @"";
+            [[UIApplication sharedApplication].keyWindow addSubview:tipsView];
+        }
+        
+        if (![YXTestNumber testingPassword:textField.text count:6] && textField.text.length > 0) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"密码必须英文和数字结合" complete:nil];
             textField.text = @"";
             [[UIApplication sharedApplication].keyWindow addSubview:tipsView];
         }
     }
+    
     
     
 }
