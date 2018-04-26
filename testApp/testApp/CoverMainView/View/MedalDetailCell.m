@@ -83,8 +83,6 @@
     _line.frame = CGRectMake(0, 0, SCREEN_WIDTH, 10);
 
     _imageV.frame = CGRectMake(15, 25, 80, 80);
-    _imageV.layer.cornerRadius = 40;
-    _imageV.layer.masksToBounds = YES;
 
     _label1.frame = CGRectMake(109, 25 + 10, 85, 15);
 
