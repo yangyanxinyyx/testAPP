@@ -20,4 +20,6 @@
 
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
 - (void)setupCellWithCustomerDetailModel:(XCCustomerDetailModel *)model;
+- (void)setupCellWithChargeBackModel:(XCCheckoutDetailBaseModel *)model;
+
 @end

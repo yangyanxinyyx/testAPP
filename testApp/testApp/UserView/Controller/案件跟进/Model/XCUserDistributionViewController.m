@@ -22,6 +22,80 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCFinanicalAuditListCell class] forCellReuseIdentifier:kFinaListCellID];
+    self.requestKey = @"配送中";
+
+    __weak typeof (self)weakSelf = self;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        NSDictionary *param = @{
+                                @"policyStatus": self.requestKey ,
+                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageSize":[NSNumber numberWithInt:10]
+                                };
+        weakSelf.pageIndex = 1;
+        [weakSelf.tableView.mj_footer setState:MJRefreshStateIdle];
+        [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                if (response[@"data"][@"dataSet"]) {
+                    NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                    NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                    for (NSDictionary *dataInfo in origionDataArr) {
+                        XCCheckoutDetailBaseModel *baseModel = [XCCheckoutDetailBaseModel yy_modelWithJSON:dataInfo];
+                        if (baseModel) {
+                            [dataArrM addObject:baseModel];
+                        }
+                    }
+                    weakSelf.dataArr = dataArrM;
+                    [weakSelf.tableView reloadData];
+                }
+                NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+                self.pageCount = [pageCountNum intValue];
+            }
+            [weakSelf.tableView.mj_header endRefreshing];
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            [weakSelf.tableView.mj_header endRefreshing];
+        }];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
+        
+        weakSelf.pageIndex ++;
+        NSDictionary *param = @{
+                                @"policyStatus": self.requestKey ,
+                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageSize":[NSNumber numberWithInt:10]
+                                };
+        if (weakSelf.pageIndex <= weakSelf.pageCount) {
+            [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (response[@"data"]) {
+                    if (response[@"data"][@"dataSet"]) {
+                        NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                        for (NSDictionary *dataInfo in origionDataArr) {
+                            XCCheckoutDetailBaseModel *baseModel = [XCCheckoutDetailBaseModel yy_modelWithJSON:dataInfo];
+                            if (baseModel) {
+                                [weakSelf.dataArr addObject:baseModel];
+                            }
+                        }
+                        [weakSelf.tableView reloadData];
+                        
+                    }
+                }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                [weakSelf.tableView.mj_footer endRefreshing];
+            } fail:^(id error) {
+                weakSelf.pageIndex --;
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }];
+        }else {
+            weakSelf.pageIndex --;
+            if (weakSelf.pageIndex == weakSelf.pageCount) {
+                [weakSelf.tableView.mj_footer setState:MJRefreshStateNoMoreData];
+            }else {
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }
+        }
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +139,7 @@
     
         XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
     XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
-    [cell setTimeTitleStr:@"创建时间"];
+    [cell setTypeStr:@"配送"];
     [cell setupCellWithCaseListModel:model];
     return cell;
 }

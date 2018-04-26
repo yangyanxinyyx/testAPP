@@ -20,9 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weak typeof (self)weakSelf = self;
+    self.requestKey = @"已核保";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -56,7 +57,7 @@
         
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
-                                @"policyStatus":self.navTitle,
+                                @"policyStatus":self.requestKey,
                                 @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };

@@ -12,20 +12,28 @@
 #import "RequestAPI.h"
 #import "CoverLoopimageModel.h"
 #import "CoverAnnouncementModel.h"
+#import "YXTestNumber.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,UserInfoComfirmVIewDelegate>
-
+{
+    BOOL isHold;
+}
 @property (nonatomic,strong) UITextField *accoutTextField;
 @property (nonatomic,strong) UITextField *passwordTextField;
-
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isHold = YES;
     [self createUI];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    isHold = YES;
 }
 
 - (void)createUI
@@ -48,7 +56,7 @@
     _accoutTextField.leftView=imageView1;
     _accoutTextField.leftViewMode = UITextFieldViewModeAlways;
     _accoutTextField.font = [UIFont systemFontOfSize:14];
-
+    [_accoutTextField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
 
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_accoutTextField.frame), SCREEN_WIDTH-20, 44)];
     [self.view addSubview:_passwordTextField];
@@ -59,12 +67,14 @@
     _passwordTextField.textAlignment = NSTextAlignmentLeft;
     _passwordTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     _passwordTextField.returnKeyType = UIReturnKeyDone;
+    _passwordTextField.secureTextEntry = YES; //密文
     _passwordTextField.delegate = self;
     UIImageView *imageView2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_password.png"]];
     _passwordTextField.leftView = imageView2;
     _passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     _passwordTextField.font = [UIFont systemFontOfSize:14];
-
+    [_passwordTextField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
+    
     UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 345) / 2, CGRectGetMaxY(_passwordTextField.frame) + 50, 345, 44)];
     [self.view addSubview:loginBtn];
     [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
@@ -277,6 +287,7 @@
 
 - (void)pressForgetBtn:(UIButton *)sender
 {
+    isHold = NO;
     FindPasswordViewController *VC = [[FindPasswordViewController alloc] init];
      self.modalPresentationStyle=UIModalPresentationPopover;
     [self presentViewController:VC animated:YES completion:nil];
@@ -306,18 +317,54 @@
     [self.view endEditing:YES];
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.view endEditing:YES];
+    if (isHold) {
+        if ([textField isEqual:self.accoutTextField]) {
+            NSString *str = [YXTestNumber testingMobile:textField.text];
+            if (str && str.length > 0) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:str complete:^{
+                    self.accoutTextField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
+            
+        } else {
+            if (textField.text.length < 6 && textField.text.length > 0) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"密码字数不能低于6位" complete:^{
+                    self.passwordTextField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
+        }
+    } else {
+        self.accoutTextField.text = @"";
+        self.passwordTextField.text = @"";
+    }
+    
+   
+}
+
+- (void)textFieldDidChangePhoneNnumber:(UITextField *)textField{
+    if ([textField isEqual:self.accoutTextField]) {
+        if (textField.text.length > 11) {
+            self.accoutTextField.text = [self.accoutTextField.text substringToIndex:11];
+        }
+    }
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:LETTERNUMKEYBOARD] invertedSet];
     NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     return [string isEqualToString:filtered];
-
-
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [self.view endEditing:YES];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

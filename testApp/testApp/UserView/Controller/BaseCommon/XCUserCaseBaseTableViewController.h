@@ -28,6 +28,9 @@
 @property (nonatomic, assign) int  pageIndex;
 //下拉刷新获取总页数
 @property (nonatomic, assign) int pageCount ;
+
+//车险客户列表请求key
+@property (nonatomic, strong) NSString * requestKey ;
 - (instancetype)initWithTitle:(NSString *)title;
 
 @end

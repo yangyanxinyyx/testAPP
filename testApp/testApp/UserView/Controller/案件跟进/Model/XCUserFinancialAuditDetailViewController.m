@@ -79,13 +79,16 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //进度状态Cell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kDetailProgressCellID forIndexPath:indexPath];
-        
-//        [processCell setProcessStr:_detailModel.status];
-//        if ([_carTranDetailModel.status isEqualToString:@"处理完毕"]) {
-//            [processCell setIsFinish:YES];
-//        }else {
-        [processCell setIsFinish:NO];
-//        }
+        if (isUsableNSString(_detailModel.financeRemark, @"出纳审核通过")) {
+            [processCell setIsFinish:YES];
+        }else {
+            [processCell setIsFinish:NO];
+        }
+        if (isUsableNSString(_detailModel.financeRemark, @"")) {
+            [processCell setProcessStr:_detailModel.financeRemark];
+        }else {
+            [processCell setProcessStr:@"无"];
+        }
         return processCell;
     }
     else if (indexPath.section == 0 && indexPath.row == 1) {

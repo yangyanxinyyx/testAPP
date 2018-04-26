@@ -27,6 +27,9 @@
 /** 车架号 */
 @property (nonatomic, copy) NSString * vinNo;
 
+/** 创建日期 */
+@property (nonatomic, copy) NSString * createTime;
+
 /** 初登日期 */
 @property (nonatomic, copy) NSString * recordDate;
 
@@ -99,6 +102,9 @@
 /** 保单状态 */
 @property (nonatomic, copy) NSString * policyStatus;
 
+/** 财务审核状态 */
+@property (nonatomic, copy) NSString * financeRemark;
+
 // 保单信息
 /** 交强险 double*/
 @property (nonatomic, copy) NSNumber * jqValue;
@@ -114,6 +120,7 @@
 
 /** 车上(乘客)险 */
 @property (nonatomic, copy) NSNumber * csckValue;
+
 
 //退单添加
 /** 客户id long*/

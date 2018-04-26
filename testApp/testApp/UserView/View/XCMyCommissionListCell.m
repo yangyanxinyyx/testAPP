@@ -78,7 +78,6 @@
     labelSize = _createTimeLable.frame.size;
     [_createTimeLable setFrame:CGRectMake(labelOfLeftMargin, (_timeView.frame.size.height - labelSize.height) * 0.5, labelSize.width, labelSize.height)];
     
-#warning 216待定，等新的UI图出现知道
     //车险业绩
     [_carListView setFrame:CGRectMake(viewOfLeftMargin, CGRectGetMaxY(_timeView.frame),viewOfWidth,kcellForCarListViewH)];
     [self setBorderWithView:_carListView top:YES left:NO bottom:YES right:NO borderColor:COLOR_RGB_255(242, 242, 242) borderWidth:1];

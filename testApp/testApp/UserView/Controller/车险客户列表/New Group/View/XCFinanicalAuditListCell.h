@@ -10,8 +10,10 @@
 #import "XCCheckoutDetailBaseModel.h"
 
 @interface XCFinanicalAuditListCell : UITableViewCell
-/** <# 注释 #> */
-@property (nonatomic, copy) NSString * timeTitleStr ;
+
+/** 判断是年审还是配送 */
+@property (nonatomic, copy) NSString * typeStr;
+
 - (void)setupCellWithCaseListModel:(XCCheckoutDetailBaseModel *)model;
 
 @end

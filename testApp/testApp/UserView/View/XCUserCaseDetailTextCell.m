@@ -322,13 +322,13 @@
 - (void)setupCellWithCaseDetailModel:(XCUserCaseDetailModel *)model clipName:(BOOL)clip
 {
     
-    NSString *contacts = @"";
-    NSString *phone = @"";
-    NSString *occurTime = @"";
-    NSString *createTime = @"";
-    NSString *name = @""; //选择门店
+    NSString *contacts = @"未知";
+    NSString *phone = @"未知";
+    NSString *occurTime = @"未知";
+    NSString *createTime = @"未知";
+    NSString *name = @"未知"; //选择门店
 #warning 缺少咨询电话
-    NSString *namePhone = @"";
+    NSString *namePhone = THREECASEDETAIL_CUSTOMERPHOT;
     if (isUsableNSString(model.contacts, @"")) {
         contacts = model.contacts;
     }
@@ -336,10 +336,14 @@
         phone = model.phone;
     }
     if (isUsableNSString(model.occurTime, @"")) {
-        occurTime = model.occurTime;
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        occurTime = [tmpArr firstObject];
     }
     if (isUsableNSString(model.createTime, @"")) {
-        createTime = model.createTime;
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        occurTime = [tmpArr firstObject];
     }
     if (isUsableNSString(model.name, @"")) {
         name = model.name;

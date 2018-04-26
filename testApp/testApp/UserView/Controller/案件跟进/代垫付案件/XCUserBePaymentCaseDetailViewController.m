@@ -18,8 +18,12 @@
 @interface XCUserBePaymentCaseDetailViewController ()<XCUserCaseScrollerViewCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataTitleArrM ;
-/** <# 注释 #> */
+/** 相关文件数组 */
 @property (nonatomic, strong) NSMutableArray * imageURLArrM ;
+/** 司机身份证正反面、驾驶证、行驶证 数组 */
+@property (nonatomic, strong) NSMutableArray * driverIDImageURLArrM ;
+/** 被保险人身份证正反面 数组 */
+@property (nonatomic, strong) NSMutableArray * policyIDImageURlArrM ;
 @end
 
 @implementation XCUserBePaymentCaseDetailViewController
@@ -28,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _driverIDImageURLArrM = [[NSMutableArray alloc] init];
+    _policyIDImageURlArrM = [[NSMutableArray alloc] init];
     _imageURLArrM = [[NSMutableArray alloc] init];
     [self.tableView registerClass:[XCUserCaseDetailTextCell class] forCellReuseIdentifier:kCaseTextCellID];
     [self.tableView registerClass:[XCUserCaseScrollerViewCell class] forCellReuseIdentifier:kScrollViewCellID];
@@ -68,7 +74,6 @@
     if (photoURL) {
         XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
         previewVC.sourceURL = photoURL;
-        
         [self.navigationController pushViewController:previewVC animated:YES];
     }
 }
@@ -76,7 +81,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,8 +89,7 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //processCell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kProcessCellID forIndexPath:indexPath];
-        //        NSArray *processArr = @[@"处理完毕",@"服务中..."];
-        //        [processCell setProcessStrArr:processArr];
+ 
         [processCell setProcessStr:_detailModel.status];
         if ([_detailModel.status isEqualToString:@"处理完毕"]) {
             [processCell setIsFinish:YES];
@@ -110,22 +114,26 @@
         detailTextCell.isMutableTextType = YES;
         [detailTextCell setLongString:_detailModel.remark];
         return detailTextCell;
-    }else {
+    }else if (indexPath.section == 0 && indexPath.row == 3) {
+        XCUserCaseScrollerViewCell *cell = (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kScrollViewCellID forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell setTitleStr:@"司机身份证正反面、驾驶证、行驶证:"];
+        [cell setPhotoURLArr:_driverIDImageURLArrM];
+        return cell;
+    }else if (indexPath.section == 0 && indexPath.row == 4) {
+        XCUserCaseScrollerViewCell *cell = (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kScrollViewCellID forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell setTitleStr:@"被保险人身份证正反面:"];
+        [cell setPhotoURLArr:_policyIDImageURlArrM];
+        return cell;
+    }else  {
         XCUserCaseScrollerViewCell *cell = (XCUserCaseScrollerViewCell *)[tableView dequeueReusableCellWithIdentifier:kScrollViewCellID forIndexPath:indexPath];
         cell.delegate = self;
         [cell setTitleStr:@"相关文件:"];
         [cell setPhotoURLArr:_imageURLArrM];
         return cell;
     }
-    //    XCUserCaseDetailTextCell *cell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kCaseTextCellID forIndexPath:indexPath];
-    //
-    //    if (indexPath.row %2 == 0) {
-    //        cell.isMutableTextType = YES;
-    //    }else {
-    //        cell.isMutableTextType = NO;
-    //    }
-    //    return cell;
-    
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -135,7 +143,6 @@
         return [XCUserCaseDetailProgressCell getCellHeight];
     }
     else if (indexPath.row == 1) {
-        //        return (392 + 24 + 24) * ViewRateBaseOnIP6;
         return [XCUserCaseDetailTextCell getCaseCellHeightWithClip:YES];
     }
     else if (indexPath.row == 2) {
@@ -149,21 +156,7 @@
     }else {
         return (20 + 88 + 140 + 30) * ViewRateBaseOnIP6;
     }
-    //        if (indexPath.row %2 == 0) {
-    //            NSString *longString = @"描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中......";
-    //
-    //            height = [self getHeightLineWithString:longString withWidth:645 * ViewRateBaseOnIP6 withFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6]];
-    //            height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2 + height;
-    //        }else {
-    //            CGFloat count = 22;
-    //            if (count > 0) {
-    //             height  = ((20 + 88) + (30 + 24))* ViewRateBaseOnIP6  + (24 + 24) * ViewRateBaseOnIP6  * (count - 1) + 30 * ViewRateBaseOnIP6 ;
-    //            }else {
-    //                height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2;
-    //
-    //            }
-    //        }
-    //        return height;
+  
     
 }
 
@@ -222,22 +215,22 @@
         [_imageURLArrM addObject:_detailModel.url6];
     }
     if (isUsableNSString(_detailModel.driverPapersUrl1, @"")) {
-        [_imageURLArrM addObject:_detailModel.driverPapersUrl1];
+        [_driverIDImageURLArrM addObject:_detailModel.driverPapersUrl1];
     }
     if (isUsableNSString(_detailModel.driverPapersUrl2, @"")) {
-        [_imageURLArrM addObject:_detailModel.driverPapersUrl2];
+        [_driverIDImageURLArrM addObject:_detailModel.driverPapersUrl2];
     }
     if (isUsableNSString(_detailModel.driverPapersUrl3, @"")) {
-        [_imageURLArrM addObject:_detailModel.driverPapersUrl3];
+        [_driverIDImageURLArrM addObject:_detailModel.driverPapersUrl3];
     }
     if (isUsableNSString(_detailModel.driverPapersUrl4, @"")) {
-        [_imageURLArrM addObject:_detailModel.driverPapersUrl4];
+        [_driverIDImageURLArrM addObject:_detailModel.driverPapersUrl4];
     }
     if (isUsableNSString(_detailModel.recognizeeIdcard1, @"") ) {
-        [_imageURLArrM addObject:_detailModel.recognizeeIdcard1];
+        [_policyIDImageURlArrM addObject:_detailModel.recognizeeIdcard1];
     }
     if (isUsableNSString(_detailModel.recognizeeIdcard2, @"")) {
-        [_imageURLArrM addObject:_detailModel.recognizeeIdcard2];
+        [_policyIDImageURlArrM addObject:_detailModel.recognizeeIdcard2];
     }
     
 }
