@@ -90,11 +90,11 @@
         [cancelBtn addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchDown];
         [yesBtn addTarget:self action:@selector(clickYes:) forControlEvents:UIControlEventTouchDown];
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6, 100 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(325 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6, 120 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6)];
         label.text = @"请选择";
         label.textColor = [UIColor colorWithHexString:@"#444444"];
         label.font = [UIFont systemFontOfSize:34 * ViewRateBaseOnIP6];
-        [self addSubview:label];
+        [topView addSubview:label];
         
 //        [self click:^(UIView *view) {
 //

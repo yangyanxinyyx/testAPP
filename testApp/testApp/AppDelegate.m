@@ -58,10 +58,11 @@
             
             if (i==2) {
                 
-                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(self.myScrollView.frame.size.width*2, self.myScrollView.frame.size.height-75, SCREEN_WIDTH ,150)];
-                
+                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(113 * ViewRateBaseOnIP6 * 2, 546 *  ViewRateBaseOnIP6 * 2, 150 * ViewRateBaseOnIP6 * 2 ,50 * ViewRateBaseOnIP6 * 2)];
+                btn.layer.cornerRadius = 40 * ViewRateBaseOnIP6;
+                btn.layer.masksToBounds = YES;
                 [btn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
-                [self.myScrollView addSubview:btn];
+                [imageView addSubview:btn];
             }
         }
     } else {

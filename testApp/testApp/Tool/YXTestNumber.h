@@ -51,5 +51,13 @@
 + (BOOL)testingEmail:(NSString *)emailID;
 
 
+/**
+ 密码格式 是否是有英文和 数字结合的
+
+ @param password 密码
+ @param count 最大长度
+ @return BOOL
+ */
++ (BOOL)testingPassword:(NSString *)password count:(NSInteger )count;
 
 @end

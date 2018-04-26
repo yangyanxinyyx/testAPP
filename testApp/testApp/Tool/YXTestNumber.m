@@ -34,6 +34,11 @@
     return [testNumber isEqual:emailID];
 }
 
++ (BOOL)testingPassword:(NSString *)password count:(NSInteger)count{
+    YXTestNumber *testNumber = [[YXTestNumber alloc] init];
+    return [testNumber judgePassWordLegal:password count:count];
+}
+
 - (NSString *)valiMobile:(NSString *)mobile{
     if (mobile.length == 0) {
         return @"手机号码不能为空";
@@ -202,6 +207,22 @@
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
+}
+
+/*
+ *  判断用户输入的密码是否符合规范，符合规范的密码要求：
+ 1. 长度大于8位
+ 2. 密码中必须同时包含数字和字母
+ */
+- (BOOL)judgePassWordLegal:(NSString *)pass count:(NSInteger )count{
+    BOOL result = false;
+    if ([pass length] >= count){
+        // 判断长度大于8位后再接着判断是否同时包含数字和字符
+        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        result = [pred evaluateWithObject:pass];
+    }
+    return result;
 }
 
 
