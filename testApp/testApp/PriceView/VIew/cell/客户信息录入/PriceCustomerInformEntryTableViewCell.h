@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, weak) id <PriceCustomerInformEntryTableViewCellDelegate> delegate;
-- (void)setLabelNameText:(NSString *)text;
+//- (void)setLabelNameText:(NSString *)text;
+- (void)setLabelNameText:(NSString *)text isChoose:(BOOL)isChoose placeholderStr:(NSString *)placeholderStr isSelect:(BOOL)isSelect;
 @end

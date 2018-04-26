@@ -13,6 +13,7 @@
     BOOL isChangeColor;
 }
 @property (nonatomic, strong) UILabel *labelContext;
+@property (nonatomic, strong) UIImageView *imageViewSelect;
 
 @end
 
@@ -28,7 +29,10 @@
         [self.contentView addSubview:self.textField];
         self.labelContext = [[UILabel alloc] init];
         [self.contentView addSubview:self.labelContext];
+        self.imageViewSelect = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.imageViewSelect];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+ 
     }
     return self;
 }
@@ -36,24 +40,38 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 120 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
+
     self.labelName.font = [UIFont systemFontOfSize:27 * ViewRateBaseOnIP6];
-    if (!isChangeColor) {
-        self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
-    }
-    self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
-    self.textField.placeholder = @"请输入...";
-    
+
     self.textField.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
 }
-- (void)setLabelNameText:(NSString *)text{
-    isChangeColor = YES;
-    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,1)];
-    [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#444444"] range:NSMakeRange(1,3)];
-    self.labelName.attributedText = str;
+
+- (void)setLabelNameText:(NSString *)text isChoose:(BOOL)isChoose placeholderStr:(NSString *)placeholderStr isSelect:(BOOL)isSelect{
+    if (isChoose) {
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:text];
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,1)];
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#444444"] range:NSMakeRange(1,text.length - 1)];
+        self.labelName.attributedText = str;
+        self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 130 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
+        self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        self.textField.placeholder = placeholderStr;
+    } else {
+        
+        self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        
+        self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 120 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
+        self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
+        self.textField.placeholder = placeholderStr;
+        self.labelName.text = text;
+        
+    }
+    if (isSelect) {
+        self.imageViewSelect.frame = CGRectMake(SCREEN_WIDTH - 50 * ViewRateBaseOnIP6, 22 * ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
+        self.imageViewSelect.image = [UIImage imageNamed:@"右"];
+    }
+
 }
 
 - (void)drawRect:(CGRect)rect
@@ -64,11 +82,11 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if ([self.labelName.text isEqualToString:@"联系方式:"]) {
+    if ([self.labelName.text isEqualToString:@"*联系方式:"]) {
         textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     
-    if ([self.labelName.text isEqualToString:@"身  份  证:"]) {
+    if ([self.labelName.text isEqualToString:@"*身  份  证:"] || [self.labelName.text isEqualToString:@"*身份证号:"]) {
         textField.keyboardType = UIKeyboardTypeNamePhonePad;
     }
     [self.delegate textFieldBeginEditing:self.textField];
@@ -80,13 +98,13 @@
 }
 
 - (void)textFieldDidChangePhoneNnumber:(UITextField *)sender{
-    if ([self.labelName.text isEqualToString:@"联系方式:"]) {
+    if ([self.labelName.text isEqualToString:@"*联系方式:"]) {
         if (sender.text.length > 11) {
           self.textField.text = [self.textField.text substringToIndex:11];
         }
     }
     
-    if ([self.labelName.text isEqualToString:@"身  份  证:"]) {
+    if ([self.labelName.text isEqualToString:@"身  份  证:"] ||[self.labelName.text isEqualToString:@"*身份证号:"] ) {
         if (sender.text.length > 18) {
             self.textField.text = [self.textField.text substringToIndex:18];
         }

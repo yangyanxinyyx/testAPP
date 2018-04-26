@@ -60,7 +60,10 @@
 
     self.tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, SCREEN_WIDTH-40, 40)];
     _tempLabel.textColor = [UIColor whiteColor];
-    _tempLabel.text = _titleArray[self.index+1];
+    if (_titleArray.count > 1) {
+      _tempLabel.text = _titleArray[self.index+1];
+    }
+    
     [self addSubview:_tempLabel];
     self.layer.masksToBounds = YES;
 
@@ -100,7 +103,9 @@
         self.tempLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH-40, 40);
     } completion:^(BOOL finished) {
         self.announceLabel.text = self.tempLabel.text;
-        _tempLabel.text = _titleArray[self.index+1];
+        if (_titleArray.count > 1) {
+            _tempLabel.text = _titleArray[self.index+1];
+        }
         self.announceLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH-40, 40);
         self.tempLabel.frame = CGRectMake(40, 40, SCREEN_WIDTH-40, 40);
 

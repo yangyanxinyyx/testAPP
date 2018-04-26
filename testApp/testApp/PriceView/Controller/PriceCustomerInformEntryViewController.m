@@ -14,16 +14,22 @@
 #import "LYZSelectView.h"
 @interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
 
+{
+    BOOL isHold;
+}
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) NSNotification *notification;
 @property (nonatomic, strong) NSMutableDictionary *dictionaryInfo;
 @property (nonatomic, strong) UIButton *buttonSubmit;
+@property (nonatomic, strong) NSMutableArray *arrayCustSource;
+@property (nonatomic, strong) NSMutableArray *arrayEducation;
 @end
 
 @implementation PriceCustomerInformEntryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isHold = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate = self;
@@ -41,9 +47,20 @@
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    isHold = NO;
     if (isCancel) {
         [self.navigationController popViewControllerAnimated:YES];
+        
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    isHold = NO;
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    isHold = NO;
 }
 
 #pragma mark - fundation
@@ -85,6 +102,9 @@
     }
 }
 
+- (void)requestPriceContentParameter:(NSString *)Parameter{
+   
+}
 
 #pragma mark - cell delegate
 - (void)textFieldBeginEditing:(UITextField *)textField{
@@ -113,36 +133,42 @@
     } else if (textField.tag == 2){
         [self.dictionaryInfo setObject:textField.text forKey:@"vinNo"];
     } else if (textField.tag == 3){
-        [self.dictionaryInfo setObject:textField.text forKey:@"recordDate"];
+        [self.dictionaryInfo setObject:textField.text forKey:@"engineNo"];
     } else if (textField.tag == 4){
         [self.dictionaryInfo setObject:textField.text forKey:@"model"];
     } else if (textField.tag == 5){
         [self.dictionaryInfo setObject:textField.text forKey:@"brand"];
     } else if (textField.tag == 6){
-        NSString *prompt = [YXTestNumber testingMobile:textField.text];
-        if (prompt&&prompt.length > 0) {
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:prompt complete:^{
-                textField.text = @"";
-            }];
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-        } else {
-           [self.dictionaryInfo setObject:textField.text forKey:@"phoneNo"];
+        if (isHold) {
+            NSString *prompt = [YXTestNumber testingMobile:textField.text];
+            if (prompt&&prompt.length > 0) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:prompt complete:^{
+                    textField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                [self.dictionaryInfo setObject:textField.text forKey:@"phoneNo"];
+            }
         }
+        
         
     } else if (textField.tag == 7){
         [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
     } else if (textField.tag == 8){
         [self.dictionaryInfo setObject:textField.text forKey:@"source"];
     } else if (textField.tag == 9){
-        BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
-        if (!result) {
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
-                textField.text = @"";
-            }];
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-        } else {
-           [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+        if (isHold) {
+            BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
+            if (!result) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
+                    textField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+            }
         }
+        
     } else if (textField.tag == 10){
         [self.dictionaryInfo setObject:textField.text forKey:@"sex"];
     } else if (textField.tag == 12){
@@ -198,40 +224,45 @@
     cell.textField.tag = indexPath.section * 7 +indexPath.row;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [cell setLabelNameText:@"*车牌号 :"];
+            [cell setLabelNameText:@"*车牌号 :" isChoose:YES placeholderStr:@"请输入您的车牌号" isSelect:NO];
+            
         } else if (indexPath.row == 1) {
-            cell.labelName.text = @"初登日期:";
-//            [cell setLabelNameText:@"*初登日期:"]
+            [cell setLabelNameText:@"*初登日期:" isChoose:YES placeholderStr:@"请输入您的初登日期" isSelect:NO];
+            
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 2){
-            cell.labelName.text = @"车 架 号:";
+            [cell setLabelNameText:@"*车 架 号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
         } else if (indexPath.row == 3){
-            cell.labelName.text = @"发动机号:";
+            [cell setLabelNameText:@"*发动机号:" isChoose:YES placeholderStr:@"请输入您的发动机号" isSelect:NO];
+            
         } else if (indexPath.row == 4){
-            cell.labelName.text = @"车型代码:";
+            [cell setLabelNameText:@"车型型号:" isChoose:NO placeholderStr:@"请输入您的车型型号" isSelect:NO];
         } else if (indexPath.row == 5){
-            cell.labelName.text = @"品       牌:";;
+            [cell setLabelNameText:@"*品       牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
+            
         }  else{
-            cell.labelName.text = @"联系方式:";
+            [cell setLabelNameText:@"*联系方式:" isChoose:YES placeholderStr:@"请输入您的联系方式" isSelect:NO];
         }
         return cell;
     } else {
         if (indexPath.row == 0) {
-            cell.labelName.text = @"客户名称:";
+            [cell setLabelNameText:@"*客户名称:" isChoose:YES placeholderStr:@"请输入您的客户名称" isSelect:NO];
         } else if (indexPath.row == 1) {
-            cell.labelName.text = @"客户来源:";
+            [cell setLabelNameText:@"*客户来源:" isChoose:YES placeholderStr:@"请选择客户来源" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 2){
-            cell.labelName.text = @"身份证号:";
+            [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
         } else if (indexPath.row == 3){
-            cell.labelName.text = @"性      别:";
+            [cell setLabelNameText:@"性      别:" isChoose:NO placeholderStr:@"请选择性别" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 4){
-            cell.labelName.text = @"生      日:";
+            [cell setLabelNameText:@"生      日:" isChoose:NO placeholderStr:@"请选择日期" isSelect: YES];
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 5){
-            cell.labelName.text = @"区      域:";;
+            [cell setLabelNameText:@"学      历:" isChoose:NO placeholderStr:@"请选择学历" isSelect:YES];
+             cell.textField.userInteractionEnabled = NO;
         }  else{
-            cell.labelName.text = @"地      址:";
+            [cell setLabelNameText:@"地      址:" isChoose:NO placeholderStr:@"请输入您的地址" isSelect:NO];
         }
         return cell;
     }
@@ -264,6 +295,65 @@
         }];
         [self.view addSubview:selectView];
         
+    } else if (indexPath.section == 1 && indexPath.row == 1){
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//        education
+        if (self.arrayCustSource.count > 0) {
+            LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayCustSource confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                cell.textField.text = selectStr;
+                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"source"];
+            }];
+            [self.view addSubview:selectView];
+        } else {
+            NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:@"customer_source",@"dictCode", nil];
+            [RequestAPI getInsuredrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                    NSArray *data = response[@"data"];
+                    for (NSDictionary *dic in data) {
+                        [weakSelf.arrayCustSource addObject:[dic objectForKey:@"value"]];
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayCustSource confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                            cell.textField.text = selectStr;
+                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"source"];
+                        }];
+                        [self.view addSubview:selectView];
+                    });
+                }
+            } fail:^(id error) {
+                
+            }];
+        }
+    } else if (indexPath.section == 1 && indexPath.row == 5){
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (self.arrayEducation.count > 0) {
+            LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                cell.textField.text = selectStr;
+                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+            }];
+            [self.view addSubview:selectView];
+        } else {
+            NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:@"education",@"dictCode", nil];
+            [RequestAPI getInsuredrice:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                    NSArray *data = response[@"data"];
+                    for (NSDictionary *dic in data) {
+                        [weakSelf.arrayEducation addObject:[dic objectForKey:@"value"]];
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                            cell.textField.text = selectStr;
+                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                        }];
+                        [self.view addSubview:selectView];
+                    });
+                }
+            } fail:^(id error) {
+                
+            }];
+        }
     }
     
 }
@@ -312,8 +402,19 @@
     return _dictionaryInfo;
 }
 
+- (NSMutableArray *)arrayEducation{
+    if (!_arrayEducation) {
+        _arrayEducation = [NSMutableArray array];
+    }
+    return _arrayEducation;
+}
 
-
+- (NSMutableArray *)arrayCustSource{
+    if (!_arrayCustSource) {
+        _arrayCustSource = [NSMutableArray array];
+    }
+    return _arrayCustSource;
+}
 
 
 
