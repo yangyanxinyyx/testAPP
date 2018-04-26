@@ -47,8 +47,6 @@
     }
     for (int i=0; i <3; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54, 80, 80)];
-        imageView.layer.cornerRadius = 40;
-        imageView.layer.masksToBounds = YES;
         imageView.image = [UIImage imageNamed:images[i]];
         [self addSubview:imageView];
 
