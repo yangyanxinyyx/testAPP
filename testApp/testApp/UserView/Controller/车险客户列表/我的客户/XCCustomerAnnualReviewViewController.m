@@ -188,6 +188,8 @@ UIImagePickerControllerDelegate>
         NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:_lincesPhotoPath]];
         if (!uploadData) {
             return;
+        }else {
+            [weakSelf showAlterInfoWithNetWork:@"请添加照片"];
         }
         NSDictionary *param = @{
                                 @"file":@[uploadData],
@@ -251,6 +253,7 @@ UIImagePickerControllerDelegate>
         __weak __typeof(self) weakSelf = self;
         XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
         previewVC.sourceURL = photoURL;
+        previewVC.shouldShowDeleteBtn = YES;
         previewVC.deleteHandler = ^{
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
@@ -259,6 +262,7 @@ UIImagePickerControllerDelegate>
             }
             unlink([_lincesPhotoPath  UTF8String]);
             [cell setPhotoArr:@[]];
+            
         };
         [self.navigationController pushViewController:previewVC animated:YES];
     }

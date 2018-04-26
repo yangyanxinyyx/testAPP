@@ -7,12 +7,10 @@
 //
 
 #import "BaseViewController1.h"
-typedef void(^myBlock)();
+typedef void(^myBlock)(void);
 
 @interface XCCheckoutPhotoPreViewController : BaseViewController1<BaseNavigationBarDelegate>
 
-/** <# 注释 #> */
-//@property (nonatomic, strong) UIImage * sourceImage ;
 /**  */
 @property (nonatomic, strong) NSURL * sourceURL ;
 
@@ -21,6 +19,8 @@ typedef void(^myBlock)();
  */
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
+/** 是否显示删除 默认NO*/
+@property (nonatomic, assign) BOOL shouldShowDeleteBtn ;
 /** <# 注释 #> */
 @property (nonatomic, copy) myBlock deleteHandler;
 

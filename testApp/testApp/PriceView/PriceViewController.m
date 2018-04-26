@@ -62,6 +62,13 @@
     [self.view endEditing:YES];
 }
 
+- (void)toucheSearch:(UIButton *)button{
+    if (_textField.text.length > 0) {
+        [self pressCustomerVehicleEnquiries];
+    }
+    [_textField endEditing:YES];
+}
+
 #pragma mark -network
 - (void)getData{
 }
@@ -241,19 +248,21 @@
     if (!_textField) {
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6)];
         _textField.clearButtonMode = UITextFieldViewModeAlways;
+        _textField.returnKeyType = UIReturnKeyGo;
         _textField.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
         _textField.placeholder = @"车牌号/车架号";
         [_textField setValue:[UIColor colorWithHexString:@"#838383"] forKeyPath:@"_placeholderLabel.textColor"];
         [_textField setValue:[UIFont boldSystemFontOfSize:26 * ViewRateBaseOnIP6] forKeyPath:@"_placeholderLabel.font"];
-        UIImageView *rightView = [[UIImageView alloc]init];
-        rightView.image = [UIImage imageNamed:@"search"];
+        UIButton *rightView = [[UIButton alloc]init];
+        [rightView setBackgroundImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
         rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
         rightView.contentMode = UIViewContentModeCenter;
+        [rightView addTarget:self action:@selector(toucheSearch:) forControlEvents:UIControlEventTouchDown];
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
 //        _textField.text = @"粤AH05K9";
-        _textField.text = @"粤A785XQ";
+//        _textField.text = @"粤A785XQ";
     }
     return _textField;
 }

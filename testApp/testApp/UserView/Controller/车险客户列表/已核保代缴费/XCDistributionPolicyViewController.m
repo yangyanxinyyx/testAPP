@@ -24,6 +24,9 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 /** <# 注释 #> */
 @property (nonatomic, strong) XCDistributionBillModel * billModel ;
 
+/** 标记当前选择的Cell */
+@property (nonatomic, strong) NSString * selectedTitle;
+
 @end
 
 @implementation XCDistributionPolicyViewController
@@ -104,6 +107,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 {
     __weak __typeof(self) weakSelf = self;
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 3)) {
             //刷卡日期
@@ -303,7 +307,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     
     BOOL configureSuccess = YES;
     NSString *errString = @"保单信息错误";
-    if (_billModel.policyId) {
+    if (!isUsable(_billModel.policyId, [NSNumber class])) {
         errString = @"保单信息错误";
         configureSuccess = NO;
     }
@@ -323,10 +327,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         errString = @"收款金额为0";
         configureSuccess = NO;
     }
-    if (!isUsableNSString(_billModel.address, @"")) {
-        errString = @"配送地址为空";
-        configureSuccess = NO;
-    }
+#warning 配送地址是必填的那么那个打钩是否配送有意义吗？
+//    if (!isUsableNSString(_billModel.address, @"")) {
+//        errString = @"配送地址为空";
+//        configureSuccess = NO;
+//    }
     if (!isUsableNSString(_billModel.remark, @"")) {
         _billModel.address = @"";
     }
@@ -401,6 +406,12 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 
 
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+- (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
+{
+    self.selectedTitle = title;
+}
+
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
     if ([title isEqualToString:@"保单金额:"]) {
@@ -475,6 +486,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 //键盘显示
 - (void)keyboardShow:(NSNotification *)notification {
     
+    if (isUsableNSString(self.selectedTitle, @"")) {
+        if (![self shouldSetTableViewOffsetWithTitle:self.selectedTitle]) {
+            return;
+        }
+    }
     NSValue *keyboardEndFrameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardEndFrame;
     [keyboardEndFrameValue getValue:&keyboardEndFrame];
@@ -507,6 +523,23 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
         [self.tableView setContentOffset:offset animated:animated];
     }
+}
+            
+- (BOOL)shouldSetTableViewOffsetWithTitle:(NSString *)title {
+    
+    if ([title isEqualToString:@"联系电话:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"配送地址:"]) {
+        return YES;
+    }
+    else if ([title isEqualToString:@"配送备注:"]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Setter&Getter

@@ -11,6 +11,7 @@
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
 #import "YXTestNumber.h"
 #import "SelectTimeView.h"
+#import "LYZSelectView.h"
 @interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
 
 @property (nonatomic, strong) UITableView *myTableView;
@@ -46,7 +47,7 @@
 }
 
 #pragma mark - fundation
-- (void)submitCustomerInfo{
+- (void)submitCustomerInfo:(UIButton *)button{
     [self pressCustomerInformationInput];
 }
 
@@ -223,6 +224,7 @@
             cell.labelName.text = @"身份证号:";
         } else if (indexPath.row == 3){
             cell.labelName.text = @"性      别:";
+            cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 4){
             cell.labelName.text = @"生      日:";
             cell.textField.userInteractionEnabled = NO;
@@ -254,6 +256,14 @@
             [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+    } else if (indexPath.section == 1 && indexPath.row == 3){
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+       LYZSelectView *selectView = [LYZSelectView alterViewWithArray:@[@"男",@"女"] confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+            cell.textField.text = selectStr;
+            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"birthday"];
+        }];
+        [self.view addSubview:selectView];
+        
     }
     
 }

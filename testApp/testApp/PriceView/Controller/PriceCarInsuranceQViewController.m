@@ -65,6 +65,15 @@
     [self requestLastYearPrcie];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    _isFirstRequestPriceRecode = NO;
+    
+    [self.arrayRecodeData removeAllObjects];
+    [self.arrayPriceRecodeData removeAllObjects];
+    [self.arrayAllRecodeData removeAllObjects];
+}
+
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
     if (isCancel) {
         [_viewBear removeFromSuperview];

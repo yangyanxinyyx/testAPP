@@ -212,15 +212,16 @@
 {
     _shouldClickFllowerBtn = shouldClickFllowerBtn;
     if (shouldClickFllowerBtn) {
+        [_customerFollowUpBtn setTitleColor:COLOR_RGB_255(255, 255, 255) forState:UIControlStateNormal];
+        _customerFollowUpBtn.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
+        [_customerFollowUpBtn setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
+        [_customerFollowUpBtn setEnabled:YES];
+    }else {
         [_customerFollowUpBtn setTitleColor:COLOR_RGB_255(104, 153, 232) forState:UIControlStateNormal];
         [_customerFollowUpBtn.layer setBorderColor:COLOR_RGB_255(1, 77, 163).CGColor];
         [_customerFollowUpBtn setBackgroundColor:[UIColor whiteColor]];
-        [_customerFollowUpBtn setEnabled:YES];
-    }else {
-        [_customerFollowUpBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [_customerFollowUpBtn.layer setBorderColor:[UIColor grayColor].CGColor];
         [_customerFollowUpBtn setEnabled:NO];
-        [_customerFollowUpBtn setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+
     }
 }
 

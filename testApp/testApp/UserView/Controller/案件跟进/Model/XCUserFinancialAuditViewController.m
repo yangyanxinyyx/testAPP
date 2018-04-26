@@ -38,7 +38,6 @@
 {
     XCCheckoutDetailBaseModel *baseModel = nil;
     if (self.dataArr.count >= indexPath.row && self.dataArr.count > 0) {
-
         baseModel =  self.dataArr[indexPath.row];
     }
     XCUserFinancialAuditDetailViewController *detailVC = [[XCUserFinancialAuditDetailViewController alloc] initWithTitle:@"财务审核详情"];
@@ -57,16 +56,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.dataArr.count;
-    return 12;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
+    XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
     XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
-    [cell setTimeTitleStr:@"创建时间"];
-//    [cell setupCellWithCaseListModel:model];
+    [cell setupCellWithCaseListModel:model];
     return cell;
 }
 

@@ -49,4 +49,7 @@
  @return BOOL YES 格式正确
  */
 + (BOOL)testingEmail:(NSString *)emailID;
+
+
+
 @end

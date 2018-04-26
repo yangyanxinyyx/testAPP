@@ -186,7 +186,8 @@
     if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
         photoURL = [NSURL URLWithString:filePath];
     }else {
-        photoURL = [NSURL fileURLWithPath:filePath];
+//        photoURL = [NSURL fileURLWithPath:filePath];
+        photoURL = [NSURL URLWithString:filePath];
     }
     return photoURL;
 }
@@ -216,6 +217,7 @@
 //            [imageView setFrame:CGRectMake(i * (30 * ViewRateBaseOnIP6 + imageViewW) , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
+            [imageView setContentMode:UIViewContentModeScaleAspectFit];
             imageView.userInteractionEnabled = YES;
             [_scrollview addSubview:imageView];
         }

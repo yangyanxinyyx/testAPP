@@ -20,16 +20,20 @@
 - (void)clickCellHanderNetWorkDataWithModel:(XCUserListModel *)model
 {
     __weak typeof (self)weakSelf = self;
-    
     //车险客户列表
     if ([self isPolicyTypeVCWithModel:model]) {
         NSDictionary *param = @{
-                                @"policyStatus":model.title,
+                                @"policyStatus":[self changeTitleValueWithTitle:model.title],
                                 };
         [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            NSString *errStr = response[@"errormsg"];
-            if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
+            NSString *errStr;
+            if (isUsable(response[@"errormsg"], [NSString class])) {
+                errStr = response[@"errormsg"];
+            }else {
+                errStr = @"未知错误";
+            }
+            if (response[@"data"] && isUsable(response[@"data"],[NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                     NSArray *origionDataArr = response[@"data"][@"dataSet"];
@@ -64,10 +68,14 @@
         NSDictionary *param = @{
                                 @"type":model.title,
                                 };
-        
         [RequestAPI getelectCarTransactionList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            NSString *errStr = response[@"errormsg"];
+            NSString *errStr;
+            if (isUsable(response[@"errormsg"], [NSString class])) {
+                errStr = response[@"errormsg"];
+            }else {
+                errStr = @"未知错误";
+            }
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -105,7 +113,12 @@
                                 };
         [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            NSString *errStr = response[@"errormsg"];
+            NSString *errStr;
+            if (isUsable(response[@"errormsg"], [NSString class])) {
+                errStr = response[@"errormsg"];
+            }else {
+                errStr = @"未知错误";
+            }
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -147,7 +160,12 @@
                                 };
         [RequestAPI getThreeCaseApplyList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
-            NSString *errStr = response[@"errormsg"];
+            NSString *errStr;
+            if (isUsable(response[@"errormsg"], [NSString class])) {
+                errStr = response[@"errormsg"];
+            }else {
+                errStr = @"未知错误";
+            }
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -183,7 +201,12 @@
                                 @"id":[UserInfoManager shareInstance].storeID,
                                 };
         [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            NSString *errStr = response[@"errormsg"];
+            NSString *errStr;
+            if (isUsable(response[@"errormsg"], [NSString class])) {
+                errStr = response[@"errormsg"];
+            }else {
+                errStr = @"未知错误";
+            }
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
                 XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
@@ -261,5 +284,31 @@
     return result;
 }
 
+
+- (NSString *)changeTitleValueWithTitle:(NSString *)title
+{
+    if ([title isEqualToString:@"待核保"]) {
+        return @"待核保";
+    }
+    else if ([title isEqualToString:@"已核保代缴费"]) {
+        return @"已核保";
+    }
+    else if ([title isEqualToString:@"已缴费待打单"]) {
+        return @"待出单";
+    }
+    else if ([title isEqualToString:@"财务审核"]) {
+        return @"会计审核中";
+    }
+    else if ([title isEqualToString:@"配送"]) {
+        return @"配送中";
+    }
+    else if ([title isEqualToString:@"退单"]) {
+        return @"修改核保";
+    }
+    else if ([title isEqualToString:@"续保列表"]) {
+        return @"续保";
+    }
+    return @"";
+}
 
 @end
