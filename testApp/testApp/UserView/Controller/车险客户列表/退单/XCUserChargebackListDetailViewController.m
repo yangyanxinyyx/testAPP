@@ -81,6 +81,7 @@
         NSString * respnseStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"提交成功，待审核"];
+            [strongSelf.navigationController popViewControllerAnimated:YES];
         }else {
             [strongSelf showAlterInfoWithNetWork:respnseStr];
         }
@@ -128,9 +129,7 @@
             selected = YES;
         }
         [(XCCheckoutDetailInputCell *)cell setIsContinue:selected];
-        
     }
-    
 }
 
 
@@ -229,12 +228,12 @@
     }else if (indexPath.section == 0 && indexPath.row == 18 - 1){
         XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];
         [inputCell setTitle:title];
-        
+        [inputCell setIsContinue:_detailModel.isContinue];
         return inputCell;
     }else {
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
-        [cell setTitlePlaceholder:@"刘某某"];
+        [cell setupCellWithChargeBackModel:_detailModel];
         return cell;
     }
 }

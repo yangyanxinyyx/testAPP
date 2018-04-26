@@ -108,12 +108,20 @@
     
     if (isUsableNSString(model.customerName, @"")) {
         [_caseNameLabel setText:[NSString stringWithFormat:@"%@%@",model.customerName,caseTypeStr]];
+    }else {
+        [_caseNameLabel setText:[NSString stringWithFormat:@"%@%@",@"未知名",caseTypeStr]];
     }
     if(isUsableNSString(model.status, @"")) {
         [_caseProcessLabel setText:model.status];
+    }else {
+        [_caseProcessLabel setText:@"未知"];
     }
     if (isUsableNSString(model.occurTime, @"")) {
-        [_caseTimeLabel setText:model.occurTime];
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        [_caseTimeLabel setText:[NSString stringWithFormat:@"%@",[tmpArr firstObject]]];
+    }else {
+        [_caseTimeLabel setText:@"未知"];
     }
 }
 #pragma mark - Delegates & Notifications

@@ -38,9 +38,13 @@
 
     NSMutableArray *array = [NSMutableArray array];
     for (CoverAnnouncementModel *model in [UserInfoManager shareInstance].coverMainModel.announcementDatas) {
-        [array addObject:model.title];
+        if (model) {
+            [array addObject:model.title];
+        }
     }
-
+    if (array.count == 0) {
+        return;
+    }
     self.titleArray = array;
 
     self.index = 0;

@@ -13,6 +13,7 @@
 #import "UserViewController.h"
 #import "BaseTabbarController.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <Bugly/Bugly.h>
 /**当前app版本号*/
 #define BC_AppCurrentBuildVerison @"CurrentBuildVersion"
 @interface AppDelegate ()<UIScrollViewDelegate,UITabBarControllerDelegate>
@@ -30,8 +31,13 @@
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
+    //高德地图
     [AMapServices sharedServices].apiKey = @"780fe25c204479d57fd155664e193fa6";
+    //bugly
+    [Bugly startWithAppId:@"bb500984-d6de-417d-800f-6541fbce73e6"];
+
+    
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;
     self.window.rootViewController = tab;

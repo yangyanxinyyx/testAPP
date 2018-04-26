@@ -82,10 +82,7 @@
     labelSize = _processLabel.frame.size;
     CGFloat rigthMargin = 30 *ViewRateBaseOnIP6;
     [_processLabel setFrame:CGRectMake(SCREEN_WIDTH - rigthMargin - labelSize.width , _carNumLabel.frame.origin.y , labelSize.width, 23 * ViewRateBaseOnIP6)];
-    [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
-    if ([_processLabel.text isEqualToString:@"处理完毕"]) {
-        [_processLabel setTextColor:COLOR_RGB_255(131, 131, 131)];
-    }
+
     [_carNameLabel sizeToFit];
     labelSize = _carNameLabel.frame.size;
     [_carNameLabel setFrame:CGRectMake(_carNumLabel.frame.origin.x,CGRectGetMaxY(_carNumLabel.frame) + 30 * ViewRateBaseOnIP6, labelSize.width, 21 * ViewRateBaseOnIP6)];
@@ -121,17 +118,40 @@
     }else {
         [_carNameLabel setText:@"车主: 未知"];
     }
-    NSString *titleStr = @"创建时间: ";
-    if (isUsableNSString(model.recordDate,@"")) {
-        titleStr = [NSString stringWithFormat:@"创建时间: %@",model.recordDate];
-    }
-      [_timeLabel setText:titleStr];
 
-#warning 财务审核状态
-    if (isUsableNSString(model.policyStatus, @"")) {
-        [_processLabel setText:model.policyStatus];
+    if ([self.typeStr isEqualToString:@"配送"]) {
+        if (isUsableNSString(model.policyStatus, @"")) {
+            [_processLabel setText:model.policyStatus];
+        }else {
+            [_processLabel setText:@"未知"];
+        }
+        if (isUsableNSString(model.createTime,@"")) {
+            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_timeLabel setText:[NSString stringWithFormat:@"配送时间: %@",[tmpArr firstObject]]];
+        }else {
+            [_timeLabel setText:@"配送时间: 未知"];
+        }
+    }else if ([self.typeStr  isEqualToString:@"财务审核中"]) {
+        if (isUsableNSString(model.financeRemark, @"出纳审核通过")) {
+            [_processLabel setText:@"完成"];
+            [_processLabel setTextColor:COLOR_RGB_255(131, 131, 131)];
+        }else {
+            if(isUsableNSString(model.financeRemark, @"")) {
+                [_processLabel setText:model.financeRemark];
+            }else {
+                [_processLabel setText:@"未知"];
+            }
+            [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
+        }
+        if (isUsableNSString(model.recordDate,@"")) {
+            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];
+        }else {
+            [_timeLabel setText:@"创建时间: 未知"];
+        }
     }
-    
 }
 #pragma mark - Delegates & Notifications
 

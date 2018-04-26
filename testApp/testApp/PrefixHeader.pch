@@ -11,6 +11,7 @@
 
 #define SCREEN_SCALE  [UIScreen mainScreen].scale
 #define SCREEN_TABBAR_HEIGHT 44
+#define THREECASEDETAIL_CUSTOMERPHOT @"13800138000"
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
 #import "NSString+MoneyString.h"

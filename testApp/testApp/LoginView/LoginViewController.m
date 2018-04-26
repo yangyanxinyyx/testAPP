@@ -61,6 +61,7 @@
     self.passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_accoutTextField.frame), SCREEN_WIDTH-20, 44)];
     [self.view addSubview:_passwordTextField];
     _passwordTextField.placeholder = @"请输入密码";
+    _passwordTextField.secureTextEntry = YES;
     _passwordTextField.clearButtonMode = UITextFieldViewModeAlways;
     _passwordTextField.clearsOnBeginEditing = YES;
     _passwordTextField.textAlignment = NSTextAlignmentLeft;
@@ -104,6 +105,7 @@
 {
 //    self.accoutTextField.text = @"13570229475";
 //    self.passwordTextField.text = @"xc123456";
+    [self.view endEditing:YES];
     if (!self.accoutTextField.text || !self.passwordTextField.text) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入账号密码" complete:nil];
         [self.view addSubview:tipsView];
@@ -321,6 +323,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.view endEditing:YES];
     if (isHold) {
         if ([textField isEqual:self.accoutTextField]) {
             NSString *str = [YXTestNumber testingMobile:textField.text];
@@ -360,6 +363,7 @@
     NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     return [string isEqualToString:filtered];
 }
+
 
 
 - (void)didReceiveMemoryWarning {

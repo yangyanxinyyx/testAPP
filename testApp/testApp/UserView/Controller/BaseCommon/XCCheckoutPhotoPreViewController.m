@@ -28,6 +28,7 @@
     _origianFrame = CGRectZero;
     self.clipView = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation- kBottomMargan)];
     self.preView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.clipView.backgroundColor = [UIColor blackColor];
     [self addGestureRecognizerToView];
     [self.preView setUserInteractionEnabled:YES];
     [self.view addSubview:_clipView];
