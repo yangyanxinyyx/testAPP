@@ -139,6 +139,7 @@
     billVC.jqMoney = jqMoneyStr;
     billVC.syMoney = syMoneyStr;
     billVC.packageArr = packArrM;
+    billVC.policyId = self.model.BillID;
     [self.navigationController pushViewController:billVC animated:YES];
 }
 

@@ -16,6 +16,7 @@
 #import <Bugly/Bugly.h>
 /**当前app版本号*/
 #define BC_AppCurrentBuildVerison @"CurrentBuildVersion"
+#define kbuglyID @"bb500984-d6de-417d-800f-6541fbce73e6"
 @interface AppDelegate ()<UIScrollViewDelegate,UITabBarControllerDelegate>
 @property (nonatomic, copy)UIView *bgView;
 
@@ -35,8 +36,7 @@
     //高德地图
     [AMapServices sharedServices].apiKey = @"780fe25c204479d57fd155664e193fa6";
     //bugly
-    [Bugly startWithAppId:@"bb500984-d6de-417d-800f-6541fbce73e6"];
-
+    [self configureBuglySDK];
     
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;
@@ -93,6 +93,23 @@
         _bgView.backgroundColor = [UIColor clearColor];
     }
     return _bgView;
+}
+
+- (void)configureBuglySDK {
+
+    NSString * userInfo = [NSString stringWithFormat:@"Device %@ ",[UIDevice currentDevice].name];
+    BuglyConfig *config = [[BuglyConfig alloc] init];
+    config.debugMode = NO;
+    config.channel = @"appStore";
+    config.blockMonitorEnable = NO;
+    config.symbolicateInProcessEnable = YES;
+    config.unexpectedTerminatingDetectionEnable = NO;
+    config.viewControllerTrackingEnable = YES;
+    config.reportLogLevel = BuglyLogLevelWarn;
+    config.consolelogEnable = YES;
+    [Bugly startWithAppId:kbuglyID config:config];
+    [Bugly setUserIdentifier:userInfo];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -33,7 +33,9 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _payModel = [[XCDistributionPaymentBillModel alloc] init];
-    
+    if (self.policyId) {
+        _payModel.policyId = self.policyId;
+    }
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
