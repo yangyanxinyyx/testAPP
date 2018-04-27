@@ -268,6 +268,8 @@
 #pragma mark -
 #pragma mark Private helper methods
 
+
+
 // Returns a copy of the image that has been transformed using the given affine transform and scaled to the new size
 // The new image's orientation will be UIImageOrientationUp, regardless of the current image's orientation
 // If the new size is not integral, it will be rounded up

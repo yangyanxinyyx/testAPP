@@ -77,6 +77,7 @@
 		A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */; };
 		A75D30572081276F0012898A /* XCShopServiceEditedServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */; };
 		A787759A2093535D00902F55 /* WSImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A78775982093535C00902F55 /* WSImagePickerView.m */; };
+		A787759D20935C0800902F55 /* UIImage+imageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A787759C20935C0800902F55 /* UIImage+imageHelper.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
@@ -470,6 +471,8 @@
 		A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceEditedServiceViewController.m; sourceTree = "<group>"; };
 		A78775982093535C00902F55 /* WSImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSImagePickerView.m; sourceTree = "<group>"; };
 		A78775992093535D00902F55 /* WSImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImagePickerView.h; sourceTree = "<group>"; };
+		A787759B20935C0800902F55 /* UIImage+imageHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageHelper.h"; sourceTree = "<group>"; };
+		A787759C20935C0800902F55 /* UIImage+imageHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageHelper.m"; sourceTree = "<group>"; };
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
@@ -968,6 +971,8 @@
 				FC2805DD205E260300DD0DA9 /* UIButton+ImageTitleSpacing.m */,
 				A79A510920597A4F000D8D0F /* UIColor+Help.h */,
 				A79A510A20597A4F000D8D0F /* UIColor+Help.m */,
+				A787759B20935C0800902F55 /* UIImage+imageHelper.h */,
+				A787759C20935C0800902F55 /* UIImage+imageHelper.m */,
 			);
 			path = categary;
 			sourceTree = "<group>";
@@ -2453,6 +2458,7 @@
 				A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */,
 				FC32BF172079AA2000817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */,
 				FC32BF2F2079AA2000817156 /* XCUserUnderWritingViewController.m in Sources */,
+				A787759D20935C0800902F55 /* UIImage+imageHelper.m in Sources */,
 				FC32BF1B2079AA2000817156 /* XCModifyPwdViewController.m in Sources */,
 				FC32BE09207909C300817156 /* ProgressControll.m in Sources */,
 				FC32BF342079AA2000817156 /* XCCustomerViewController.m in Sources */,
