@@ -11,6 +11,7 @@
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
 #import "YXTestNumber.h"
 #import "SelectTimeView.h"
+#import "SelectTiemHoursView.h"
 #import "LYZSelectView.h"
 @interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
 
@@ -279,6 +280,8 @@
             [weakSelf.dictionaryInfo setObject:timeString forKey:@"recordDate"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+        
+        
     } else if (indexPath.section == 1 && indexPath.row == 4) {
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
@@ -291,7 +294,7 @@
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
        LYZSelectView *selectView = [LYZSelectView alterViewWithArray:@[@"男",@"女"] confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
             cell.textField.text = selectStr;
-            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"birthday"];
+            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"sex"];
         }];
         [self.view addSubview:selectView];
         
@@ -330,7 +333,7 @@
         if (self.arrayEducation.count > 0) {
             LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 cell.textField.text = selectStr;
-                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
             }];
             [self.view addSubview:selectView];
         } else {
@@ -345,7 +348,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                             cell.textField.text = selectStr;
-                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
                         }];
                         [self.view addSubview:selectView];
                     });

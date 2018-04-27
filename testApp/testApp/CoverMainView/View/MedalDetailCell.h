@@ -18,6 +18,7 @@
 
 @property (nonatomic,strong) UIImageView *imageV;
 
+@property (nonatomic,strong) UILabel *label0;
 @property (nonatomic,strong) UILabel *label1;
 @property (nonatomic,strong) UILabel *label2;
 @property (nonatomic,strong) UILabel *label3;

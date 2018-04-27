@@ -22,7 +22,12 @@ typedef void(^Complete)(void);
     if (self = [super init]) {
         self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [self createUI];
-        self.tipsLabel.text = title;
+        if ([title isKindOfClass:[NSString class]]) {
+          self.tipsLabel.text = title;
+        } else {
+            self.tipsLabel.text = @"出错了";
+        }
+        
         self.complete = complete;
     }
     return self;
@@ -38,7 +43,7 @@ typedef void(^Complete)(void);
     _tipsLabel.backgroundColor = [UIColor whiteColor];
     _tipsLabel.layer.cornerRadius = 5;
     _tipsLabel.layer.masksToBounds = YES;
-    _tipsLabel.numberOfLines = 2;
+    _tipsLabel.numberOfLines = 0;
     _tipsLabel.backgroundColor = COLOR_RGBA_255(0, 0, 0, 0.6);
     _tipsLabel.font = [UIFont systemFontOfSize:18];
     _tipsLabel.textColor = [UIColor whiteColor];

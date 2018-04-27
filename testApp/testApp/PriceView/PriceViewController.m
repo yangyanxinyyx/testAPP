@@ -70,8 +70,7 @@
 }
 
 #pragma mark -network
-- (void)getData{
-}
+
 
 - (void)pressCustomerVehicleEnquiries{
     
@@ -86,14 +85,46 @@
                 _buttonPrice.userInteractionEnabled = YES;
                 _infoView.hidden = NO;
                 NSDictionary *data = response[@"data"];
-                _nameView.labelContent.text = [data objectForKey:@"customerName"];
-                _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
-                _sexView.labelContent.text = [data objectForKey:@"sex"];
-                _addressView.labelContent.text = [data objectForKey:@"address"];
-                _brandView.labelContent.text = [data objectForKey:@"brand"];
-                _chassisView.labelContent.text = [data objectForKey:@"vinNo"];
-                _engineView.labelContent.text = [data objectForKey:@"engineNo"];
-                _modelsView.labelContent.text = [data objectForKey:@"model"];
+                NSNumber *customerName = [data objectForKey:@"customerName"];
+                if (![customerName isKindOfClass:[NSNull class]]) {
+                   _nameView.labelContent.text = [data objectForKey:@"customerName"];
+                }
+                
+                NSNumber *birthday = [data objectForKey:@"birthday"];
+                if (![birthday isKindOfClass:[NSNull class]]) {
+                    _birthdayView.labelContent.text = [data objectForKey:@"birthday"];
+                }
+                
+                NSNumber *sex = [data objectForKey:@"sex"];
+                if (![sex isKindOfClass:[NSNull class]]) {
+                    _sexView.labelContent.text = [data objectForKey:@"sex"];
+                }
+                
+                NSNumber *address = [data objectForKey:@"address"];
+                if (![address isKindOfClass:[NSNull class]]) {
+                    _addressView.labelContent.text = [data objectForKey:@"address"];
+                }
+                
+                NSNumber *brand = [data objectForKey:@"brand"];
+                if (![brand isKindOfClass:[NSNull class]]) {
+                    _brandView.labelContent.text = [data objectForKey:@"brand"];
+                }
+                
+                NSNumber *vinNo = [data objectForKey:@"vinNo"];
+                if (![vinNo isKindOfClass:[NSNull class]]) {
+                    _chassisView.labelContent.text = [data objectForKey:@"vinNo"];
+                }
+                
+                NSNumber *engineNo = [data objectForKey:@"engineNo"];
+                if (![engineNo isKindOfClass:[NSNull class]]) {
+                    _engineView.labelContent.text = [data objectForKey:@"engineNo"];
+                }
+                
+                NSNumber *model = [data objectForKey:@"model"];
+                if (![model isKindOfClass:[NSNull class]]) {
+                    _modelsView.labelContent.text = [data objectForKey:@"model"];
+                }
+            
                 if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
                     _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
                 }
@@ -125,7 +156,6 @@
                     [UserInfoManager shareInstance].customerId = [NSString stringWithFormat:@"%ld",[customerId longValue]];
                 }
                 
-                NSNumber *customerName = [data objectForKey:@"customerName"];
                 if (![customerName isKindOfClass:[NSNull class]]){
                     [UserInfoManager shareInstance].customerName = [data objectForKey:@"customerName"];
                 }
@@ -153,6 +183,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField.text.length > 0) {
         [self pressCustomerVehicleEnquiries];
+    } else {
+        _infoView.hidden = YES;
     }
     [textField endEditing:YES];
     return YES;
@@ -211,8 +243,8 @@
 
 - (UIScrollView *)myScrollView{
     if (!_myScrollView) {
-        _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 88 * ViewRateBaseOnIP6 , SCREEN_WIDTH, SCREEN_HEIGHT -(88 * ViewRateBaseOnIP6 + 20) - SCREEN_TABBAR_HEIGHT)];
-        _myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT -(88 * ViewRateBaseOnIP6 + 20) - SCREEN_TABBAR_HEIGHT);
+        _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT)];
+        _myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT);
         _myScrollView.bounces = NO;
         _myScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         _myScrollView.showsVerticalScrollIndicator = NO;
@@ -225,9 +257,9 @@
 
 - (UIView *)topView{
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6)];
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44 )];
         _topView.backgroundColor = [UIColor whiteColor];
-        UIView *segmentView = [[UIView alloc] initWithFrame:CGRectMake(0, 87 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];
+        UIView *segmentView = [[UIView alloc] initWithFrame:CGRectMake(0, 87 * ViewRateBaseOnIP6, SCREEN_WIDTH, 1)];
         segmentView.backgroundColor = [UIColor colorWithHexString:@"e5e5e5"];
         [_topView addSubview:segmentView];
     }
@@ -236,9 +268,9 @@
 
 - (UIView *)searchContenView {
     if (!_searchContenView) {
-        _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 56 * ViewRateBaseOnIP6)];
+        _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 28)];
         _searchContenView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
-        _searchContenView.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
+        _searchContenView.layer.cornerRadius = 5;
         _searchContenView.layer.masksToBounds = YES;
     }
     return _searchContenView;
@@ -246,7 +278,7 @@
 
 - (UITextField *)textField{
     if (!_textField) {
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6)];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(20 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 500 * ViewRateBaseOnIP6, 19 )];
         _textField.clearButtonMode = UITextFieldViewModeAlways;
         _textField.returnKeyType = UIReturnKeyGo;
         _textField.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
@@ -255,14 +287,14 @@
         [_textField setValue:[UIFont boldSystemFontOfSize:26 * ViewRateBaseOnIP6] forKeyPath:@"_placeholderLabel.font"];
         UIButton *rightView = [[UIButton alloc]init];
         [rightView setBackgroundImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-        rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 38 * ViewRateBaseOnIP6, 38 * ViewRateBaseOnIP6);
+        rightView.bounds = CGRectMake(-60 * ViewRateBaseOnIP6, 0, 18, 18);
         rightView.contentMode = UIViewContentModeCenter;
         [rightView addTarget:self action:@selector(toucheSearch:) forControlEvents:UIControlEventTouchDown];
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
-//        _textField.text = @"粤AH05K9";
-//        _textField.text = @"粤A785XQ";
+//        _textField.text = @"粤AS5665";
+        _textField.text = @"粤A785XQ";
     }
     return _textField;
 }

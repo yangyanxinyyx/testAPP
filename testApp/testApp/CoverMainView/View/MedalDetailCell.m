@@ -29,6 +29,12 @@
         self.imageV = [[UIImageView alloc] init];
         [self.contentView addSubview:_imageV];
 
+        _label0 = [[UILabel alloc] init];
+        _label0.font = [UIFont systemFontOfSize:12];
+        _label0.textColor = COLOR_RGB_255(51, 51, 51);
+        _label0.textAlignment = NSTextAlignmentCenter;
+        [self.imageV addSubview:_label0];
+
         _label1 = [[UILabel alloc] init];
         _label1.font = [UIFont systemFontOfSize:15];
         [self.contentView addSubview:_label1];
@@ -83,6 +89,7 @@
     _line.frame = CGRectMake(0, 0, SCREEN_WIDTH, 10);
 
     _imageV.frame = CGRectMake(15, 25, 80, 80);
+    _label0.frame = CGRectMake(0, 60, 80, 12);
 
     _label1.frame = CGRectMake(109, 25 + 10, 85, 15);
 

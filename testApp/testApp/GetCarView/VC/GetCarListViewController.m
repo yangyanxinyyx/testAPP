@@ -73,8 +73,17 @@ static NSString *identifier = @"listCell";
     }];
 
     _page = 2;
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+
+
 }
 
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
+}
 - (void)createUI
 {
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);

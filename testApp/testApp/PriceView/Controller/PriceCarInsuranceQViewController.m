@@ -68,10 +68,8 @@
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     _isFirstRequestPriceRecode = NO;
+
     
-    [self.arrayRecodeData removeAllObjects];
-    [self.arrayPriceRecodeData removeAllObjects];
-    [self.arrayAllRecodeData removeAllObjects];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
@@ -96,7 +94,7 @@
             PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
             jqModel.name = @"交强险";
             jqModel.isToubao = @"Y";
-            jqModel.isMianpei = @"Y";
+            jqModel.isMianpei = @"N";
             [self.arrayLasetData addObject:jqModel];
             
             PriceInfoModel *chesunModel = [[PriceInfoModel alloc] init];
@@ -354,12 +352,17 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.customerId forKey:@"customerId"];
     [dic setObject:self.carID forKey:@"carId"];
+    [dic setObject:@"10" forKey:@"PageSize"];
+    [dic setObject:@"1" forKey:@"PageIndex"];
+    
+    self.myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     [RequestAPI getPriceRecord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
-        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+        if (response[@"data"]) {
             NSLog(@"%@",response[@"data"]);
+            NSDictionary *dic = response[@"data"];
             _viewDataEmpty.hidden = YES;
-            for (NSDictionary *data in response[@"data"]) {
+            for (NSDictionary *data in dic[@"dataSet"]) {
                 NSMutableArray *dataArray = [NSMutableArray array];
                 NSMutableArray *allDataArray = [NSMutableArray array];
                 PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
@@ -645,21 +648,28 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (self.arrayRecodeData.count == 0) {
                     _viewDataEmpty.hidden = NO;
+                    self.myTableView.backgroundColor = [UIColor clearColor];
+                } else {
+                  self.myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
                 }
                [self.myTableView reloadData];
+                
             });
             
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 _viewDataEmpty.hidden = NO;
+                self.myTableView.backgroundColor = [UIColor clearColor];
         
             });
         }
     } fail:^(id error) {
+        NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.arrayRecodeData.count == 0) {
                 _viewDataEmpty.hidden = NO;
+                self.myTableView.backgroundColor = [UIColor clearColor];
             }
             [self.myTableView reloadData];
         });
@@ -681,6 +691,15 @@
     [self.navigationController pushViewController:priceInsVC animated:YES];
 }
 
+- (void)refresh{
+    _isFirstRequestPriceRecode = YES;
+    [self.arrayRecodeData removeAllObjects];
+    [self.arrayPriceRecodeData removeAllObjects];
+    [self.arrayAllRecodeData removeAllObjects];
+    [self requestPriceRecode];
+    [self.myTableView.mj_header endRefreshing];
+    
+}
 #pragma  mark - view delegate
 - (void)changeModel:(BOOL)isLaseY{
     if (isLaseY) {
@@ -694,6 +713,9 @@
         }];
         if (!_isFirstRequestPriceRecode) {
             _isFirstRequestPriceRecode = YES;
+            [self.arrayRecodeData removeAllObjects];
+            [self.arrayPriceRecodeData removeAllObjects];
+            [self.arrayAllRecodeData removeAllObjects];
             [self requestPriceRecode];
         }
         
@@ -954,8 +976,8 @@
     [self.viewBear addSubview:self.viewPriceRecord];
     [self.viewLastY addSubview:self.tableViewlast];
     [self.viewLastY addSubview:self.viewRequestFailed];
-    [self.viewPriceRecord addSubview:self.myTableView];
     [self.viewPriceRecord addSubview:self.viewDataEmpty];
+    [self.viewPriceRecord addSubview:self.myTableView];
     [self.viewLastY addSubview:self.buttonPrice];
     [self.viewLastY addSubview:self.buttonRevisePrice];
     [self.viewLastY addSubview:self.viewSegmentation];
@@ -982,14 +1004,13 @@
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 268 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
-        _myTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = NO;
+        _myTableView.bounces = YES;
         _myTableView.separatorColor = [UIColor purpleColor];
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
-        
+        _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     }
     return _myTableView;
 }
