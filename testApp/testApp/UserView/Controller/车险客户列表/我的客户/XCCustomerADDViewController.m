@@ -107,7 +107,7 @@
     } else if (textField.tag == 3){
         [self.dictionaryInfo setObject:textField.text forKey:@"birthday"];
     } else if (textField.tag == 4){
-        [self.dictionaryInfo setObject:textField.text forKey:@"area"];
+        [self.dictionaryInfo setObject:textField.text forKey:@"education"];
     } else if (textField.tag == 5){
         [self.dictionaryInfo setObject:textField.text forKey:@"address"];
     } else if (textField.tag == 6){
@@ -274,7 +274,7 @@
         if (self.arrayEducation.count > 0) {
             LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 cell.textField.text = selectStr;
-                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
             }];
             [self.view addSubview:selectView];
         } else {
@@ -289,7 +289,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                             cell.textField.text = selectStr;
-                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
                         }];
                         [self.view addSubview:selectView];
                     });

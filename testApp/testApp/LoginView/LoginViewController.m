@@ -103,8 +103,10 @@
 
 - (void)pressLoginBtn:(UIButton *)sender
 {
-    self.accoutTextField.text = @"15666666666";
-    self.passwordTextField.text = @"xc123456";
+//        self.accoutTextField.text = @"13570229475";
+//        self.passwordTextField.text = @"xc123456";
+//    self.accoutTextField.text = @"15666666666";
+//    self.passwordTextField.text = @"xc123456";
     [self.view endEditing:YES];
     if (!self.accoutTextField.text || !self.passwordTextField.text) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入账号密码" complete:nil];

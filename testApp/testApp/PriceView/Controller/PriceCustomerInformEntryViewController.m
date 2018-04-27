@@ -330,7 +330,7 @@
         if (self.arrayEducation.count > 0) {
             LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 cell.textField.text = selectStr;
-                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
             }];
             [self.view addSubview:selectView];
         } else {
@@ -345,7 +345,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                             cell.textField.text = selectStr;
-                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"area"];
+                            [weakSelf.dictionaryInfo setObject:selectStr forKey:@"education"];
                         }];
                         [self.view addSubview:selectView];
                     });

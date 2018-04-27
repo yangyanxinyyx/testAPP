@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSMutableArray *arrayAction;
 @property (nonatomic, strong) UIView *touchView;
 @property (nonatomic, strong) UIButton *buttonCancle;
+@property (nonatomic, strong) NSMutableArray *dataArr ;
 @end
 
 @implementation SelectSheetView
@@ -29,18 +30,26 @@
     if (!dataArray) {
         return;
     }
+    
     if (dataArray.count == 0) {
         return;
+    } else {
+        if (self.dataArr.count == 0) {
+            for (int i = 0; i < dataArray.count; i++) {
+                [self.dataArr addObject:dataArray[dataArray.count - i - 1]];
+            }
+        }
+        
     }
     if (self.topView) {
         for (UIView * view in self.subviews) {
             [view removeFromSuperview];
         }
     }
-    for (int i = 0; i < dataArray.count; i++) {
+    for (int i = 0; i < self.dataArr.count; i++) {
         UIView *cell = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 80*ViewRateBaseOnIP6*(i+1),SCREEN_WIDTH , 80 * ViewRateBaseOnIP6)];
         UILabel *labeltext = [[UILabel alloc] initWithFrame:CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, SCREEN_WIDTH - 60 * ViewRateBaseOnIP6, 30 * ViewRateBaseOnIP6)];
-        labeltext.text = dataArray[i];
+        labeltext.text = self.dataArr[i];
         labeltext.textColor = [UIColor colorWithHexString:@"#444444"];
         labeltext.font = [UIFont systemFontOfSize:30 * ViewRateBaseOnIP6];
         labeltext.textAlignment = NSTextAlignmentCenter;
@@ -71,7 +80,7 @@
     UIView *view = tapGest.view;
     NSLog(@"%ld",view.tag);
     if (_block) {
-        _block(view.tag);
+        _block(self.dataArr.count - view.tag - 1);
     }
     [UIView animateWithDuration:0.25 animations:^{
         self.hidden = YES;
@@ -97,10 +106,9 @@
 - (UIButton *)buttonCancle{
     if (!_buttonCancle) {
         _buttonCancle = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buttonCancle.frame = CGRectMake(SCREEN_WIDTH - 60, 0 , 88 * ViewRateBaseOnIP6, 88 * ViewRateBaseOnIP6);
+        _buttonCancle.frame = CGRectMake(SCREEN_WIDTH - 64 * ViewRateBaseOnIP6, 25 * ViewRateBaseOnIP6 , 34 * ViewRateBaseOnIP6, 34 * ViewRateBaseOnIP6);
         [_buttonCancle addTarget:self action:@selector(touchCancle:) forControlEvents:UIControlEventTouchDown];
-        [_buttonCancle setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        _buttonCancle.backgroundColor = [UIColor redColor];
+        [_buttonCancle setBackgroundImage:[UIImage imageNamed:@"fork"] forState:UIControlStateNormal];
     }
     return _buttonCancle;
 }
@@ -108,5 +116,11 @@
     [UIView animateWithDuration:0.25 animations:^{
         self.hidden = YES;
     }];
+}
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
 }
 @end

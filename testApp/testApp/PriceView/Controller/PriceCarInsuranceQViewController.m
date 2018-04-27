@@ -352,13 +352,17 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.customerId forKey:@"customerId"];
     [dic setObject:self.carID forKey:@"carId"];
+    [dic setObject:@"10" forKey:@"PageSize"];
+    [dic setObject:@"1" forKey:@"PageIndex"];
+    
     self.myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     [RequestAPI getPriceRecord:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
-        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+        if (response[@"data"]) {
             NSLog(@"%@",response[@"data"]);
+            NSDictionary *dic = response[@"data"];
             _viewDataEmpty.hidden = YES;
-            for (NSDictionary *data in response[@"data"]) {
+            for (NSDictionary *data in dic[@"dataSet"]) {
                 NSMutableArray *dataArray = [NSMutableArray array];
                 NSMutableArray *allDataArray = [NSMutableArray array];
                 PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
@@ -645,9 +649,11 @@
                 if (self.arrayRecodeData.count == 0) {
                     _viewDataEmpty.hidden = NO;
                     self.myTableView.backgroundColor = [UIColor clearColor];
+                } else {
+                  self.myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
                 }
                [self.myTableView reloadData];
-                self.myTableView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+                
             });
             
             
@@ -659,6 +665,7 @@
             });
         }
     } fail:^(id error) {
+        NSLog(@"%@",error);
         dispatch_async(dispatch_get_main_queue(), ^{
             if (self.arrayRecodeData.count == 0) {
                 _viewDataEmpty.hidden = NO;

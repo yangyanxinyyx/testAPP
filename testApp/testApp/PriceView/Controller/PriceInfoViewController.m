@@ -43,7 +43,7 @@
         
         self.route = @"1";
         _viewBase.hidden = NO;
-        _viewDataEmpty.hidden = NO;
+        _viewDataEmpty.hidden = YES;
     } else {
       [self requestPrecisePrice];
     }
@@ -58,6 +58,7 @@
 
 #pragma mark - Network
 - (void)requestPrecisePrice{
+    __weak typeof (self)weakSelf = self;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.quoteGroup forKey:@"quoteGroup"];
     [dic setObject:[UserInfoManager shareInstance].code forKey:@"CustKey"];
@@ -76,8 +77,8 @@
             if (![jqBaoFei isKindOfClass:[NSNull class]]) {
                 jqModel.number = [jqBaoFei doubleValue];
             }
-            [self.dataArray addObject:jqModel];
-            [self.allDataArray addObject:jqModel];
+            [weakSelf.dataArray addObject:jqModel];
+            [weakSelf.allDataArray addObject:jqModel];
             
             
             //车损险
@@ -100,9 +101,9 @@
                 csModel.priceValue = [csValue doubleValue];
             }
             if ([csModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:csModel];
+                [weakSelf.dataArray addObject:csModel];
             }
-            [self.allDataArray addObject:csModel];
+            [weakSelf.allDataArray addObject:csModel];
             
             
             //第三者险
@@ -125,10 +126,10 @@
                 szModel.priceValue = [szValue doubleValue];
             }
             if ([szModel.isToubao isEqualToString:@"Y"]) {
-               [self.dataArray addObject:szModel];
+               [weakSelf.dataArray addObject:szModel];
             }
             
-            [self.allDataArray addObject:szModel];
+            [weakSelf.allDataArray addObject:szModel];
             
             
             //车上司机险
@@ -151,9 +152,9 @@
                 cssjModel.priceValue = [cssjValue doubleValue];
             }
             if ([cssjModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:cssjModel];
+                [weakSelf.dataArray addObject:cssjModel];
             }
-            [self.allDataArray addObject:cssjModel];
+            [weakSelf.allDataArray addObject:cssjModel];
             
             
             //车上乘客险
@@ -176,9 +177,9 @@
                 csckModel.priceValue = [csckValue doubleValue];
             }
             if ([csckModel.isToubao isEqualToString:@"Y"]) {
-               [self.dataArray addObject:csckModel];
+               [weakSelf.dataArray addObject:csckModel];
             }
-            [self.allDataArray addObject:csckModel];
+            [weakSelf.allDataArray addObject:csckModel];
             
             
             //车身划痕险
@@ -201,9 +202,9 @@
                 cshhModel.priceValue = [cshhValue doubleValue];
             }
             if ([cshhModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:cshhModel];
+                [weakSelf.dataArray addObject:cshhModel];
             }
-            [self.allDataArray addObject:cshhModel];
+            [weakSelf.allDataArray addObject:cshhModel];
             
             //盗抢险
             PriceInfoModel *dqModel = [[PriceInfoModel alloc] init];
@@ -225,9 +226,9 @@
                 dqModel.priceValue = [dqValue doubleValue];
             }
             if ([dqModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:dqModel];
+                [weakSelf.dataArray addObject:dqModel];
             }
-            [self.allDataArray addObject:dqModel];
+            [weakSelf.allDataArray addObject:dqModel];
            
             //发动机涉水险
             PriceInfoModel *fdjsModel = [[PriceInfoModel alloc] init];
@@ -249,9 +250,9 @@
                 fdjsModel.priceValue = [fdjssValue doubleValue];
             }
             if ([fdjsModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:fdjsModel];
+                [weakSelf.dataArray addObject:fdjsModel];
             }
-            [self.allDataArray addObject:fdjsModel];
+            [weakSelf.allDataArray addObject:fdjsModel];
             
             //自燃险
             PriceInfoModel *zrModel = [[PriceInfoModel alloc] init];
@@ -273,9 +274,9 @@
                 zrModel.priceValue = [zrxValue doubleValue];
             }
             if ([zrModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:zrModel];
+                [weakSelf.dataArray addObject:zrModel];
             }
-            [self.allDataArray addObject:zrModel];
+            [weakSelf.allDataArray addObject:zrModel];
             
             
             // 玻璃险
@@ -294,9 +295,9 @@
                 blModel.priceValue = [blValue doubleValue];
             }
             if ([blModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:blModel];
+                [weakSelf.dataArray addObject:blModel];
             }
-            [self.allDataArray addObject:blModel];
+            [weakSelf.allDataArray addObject:blModel];
             
             
             //无第三方险
@@ -311,9 +312,9 @@
                 wfModel.number = [wfzddsfBaoFei doubleValue];
             }
             if ([wfModel.isToubao isEqualToString:@"Y"]) {
-                [self.dataArray addObject:wfModel];
+                [weakSelf.dataArray addObject:wfModel];
             }
-            [self.allDataArray addObject:wfModel];
+            [weakSelf.allDataArray addObject:wfModel];
             
             
             
@@ -325,14 +326,16 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 _viewDataEmpty.hidden = YES;
                 _viewBase.hidden = NO;
-                [self.myTableView reloadData];
+                [weakSelf.myTableView reloadData];
             });
             
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 _viewDataEmpty.hidden = NO;
-                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:^{
+                    [weakSelf baseNavigationDidPressCancelBtn:YES];
+                }];
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             });
             
