@@ -70,8 +70,7 @@
 }
 
 #pragma mark -network
-- (void)getData{
-}
+
 
 - (void)pressCustomerVehicleEnquiries{
     
@@ -294,7 +293,7 @@
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
-//        _textField.text = @"粤AH05K9";
+        _textField.text = @"粤AS5665";
 //        _textField.text = @"粤A785XQ";
     }
     return _textField;
