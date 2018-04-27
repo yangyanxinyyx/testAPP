@@ -10,16 +10,17 @@
 #import "PriceInfolabelTableViewCell.h"
 #import "PriceCommerceInsTableViewCell.h"
 #import "PriceInfoAddTableViewCell.h"
-#import "PriceInfoSaveTableViewCell.h"
 #import "PriceUnderwritingViewController.h"
 #import "PriceAdjustViewController.h"
 #import "PriceInfoModel.h"
 #import "InputTextView.h"
-@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,PriceInfoSaveTableViewCellDelegate,BaseNavigationBarDelegate,InputTextViewDelegate>
+@interface PriceInfoViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,InputTextViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
+@property (nonatomic, strong) UIView *viewDataEmpty;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *allDataArray;
 @property (nonatomic, strong) NSString *offerName;
+@property (nonatomic, strong) UIView *viewBase;
 
 @end
 
@@ -41,6 +42,8 @@
         [self.myTableView reloadData];
         
         self.route = @"1";
+        _viewBase.hidden = NO;
+        _viewDataEmpty.hidden = NO;
     } else {
       [self requestPrecisePrice];
     }
@@ -320,12 +323,15 @@
                 _syBaoFei = [bussice doubleValue];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                _viewDataEmpty.hidden = YES;
+                _viewBase.hidden = NO;
                 [self.myTableView reloadData];
             });
             
             
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
+                _viewDataEmpty.hidden = NO;
                 FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:nil];
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             });
@@ -333,6 +339,9 @@
             
         }
     } fail:^(id error) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+           _viewDataEmpty.hidden = NO;
+        });
         NSLog(@"%@",error);
     }];
 }
@@ -436,7 +445,6 @@
     static NSString *priceInforLabel = @"infoLabel";
     static NSString *priceCommerceIns = @"commerceIns";
     static NSString * priceInfoAdd = @"infoAdd";
-    static NSString *priceInfoSave = @"infoSave";
     if (indexPath.section == 0) {
         PriceInfolabelTableViewCell *infoLableCell = [tableView dequeueReusableCellWithIdentifier:priceInforLabel];
         if (!infoLableCell) {
@@ -525,7 +533,7 @@
         }
     
         
-    } else if (indexPath.section == 2) {
+    } else {
         PriceInfolabelTableViewCell *infoLableCell = [tableView dequeueReusableCellWithIdentifier:priceInforLabel];
         if (!infoLableCell) {
             infoLableCell = [[PriceInfolabelTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInforLabel];
@@ -536,19 +544,6 @@
         infoLableCell.labelNumber.text = [NSString stringWithFormat:@"¥ %2f",totality];
         infoLableCell.labelNumber.textColor = [UIColor colorWithHexString:@"#838383"];
         return infoLableCell;
-    }  else {
-        PriceInfoSaveTableViewCell *infoSaveCell = [tableView dequeueReusableCellWithIdentifier:priceInfoSave];
-        if (!infoSaveCell) {
-            infoSaveCell = [[PriceInfoSaveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:priceInfoSave];
-        }
-        infoSaveCell.delegate = self;
-        if ([self.route isEqualToString:@"1"]) {
-            [infoSaveCell setCellState:YES];
-        } else {
-            [infoSaveCell setCellState:NO];
-        }
-        
-        return infoSaveCell;
     }
     
 }
@@ -591,7 +586,7 @@
     if (self.dataArray.count == 0) {
         return 0;
     }
-    return 4;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -624,6 +619,10 @@
     
 }
 
+
+
+
+
 //点击cell
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1 && indexPath.row == self.dataArray.count-1) {
@@ -634,22 +633,7 @@
 }
 
 #pragma mark- cell Delegate
-- (void)savePriveInfoDelegate{
 
-    InputTextView *inputView = [[InputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    inputView.delegate = self;
-    [[UIApplication sharedApplication].keyWindow addSubview:inputView];
-    
-}
-
-- (void)submitNuclearInsDelegate{
-    PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
-    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%0.2f", _syBaoFei];
-    priceUnderVC.dataArray = [self.allDataArray copy];
-    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%f",_syBaoFei];
-    [self.navigationController pushViewController:priceUnderVC animated:YES];
-    
-}
 
 #pragma mark - viewDelegate
 - (void)inputTextFieldWithText:(NSString *)text{
@@ -664,15 +648,31 @@
 }
 
 #pragma mark- function
+- (void)savePriveInfo:(UIButton *)button{
+    InputTextView *inputView = [[InputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    inputView.delegate = self;
+    [[UIApplication sharedApplication].keyWindow addSubview:inputView];
+}
+
+- (void)submitNuclearIns:(UIButton *)button{
+    PriceUnderwritingViewController *priceUnderVC = [[PriceUnderwritingViewController alloc] init];
+    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%0.2f", _syBaoFei];
+    priceUnderVC.dataArray = [self.allDataArray copy];
+    priceUnderVC.bussiseNum = [NSString stringWithFormat:@"%f",_syBaoFei];
+    [self.navigationController pushViewController:priceUnderVC animated:YES];
+}
 
 #pragma mark - UI
 - (void)createUI{
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
     [self.view addSubview:self.myTableView];
+    [self.view addSubview:self.viewBase];
+    [self.view addSubview:self.viewDataEmpty];
 }
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 98 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
         _myTableView.backgroundColor = [UIColor whiteColor];
@@ -685,6 +685,72 @@
     return _myTableView;
 }
 
+- (UIView *)viewBase{
+    if (!_viewBase) {
+        _viewBase = [[UIView alloc] init];
+        _viewBase.hidden = YES;
+        UIButton *buttonSave = [UIButton buttonWithType:UIButtonTypeCustom];
+        [buttonSave addTarget:self action:@selector(savePriveInfo:) forControlEvents:UIControlEventTouchDown];
+        
+        UIButton *buttonSubmit = [UIButton buttonWithType:UIButtonTypeCustom];
+        buttonSubmit.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:77.0f/255.0f blue:162.0f/255.0f alpha:1.0f];
+        [buttonSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [buttonSubmit setTitle:@"提交核保" forState:UIControlStateNormal];
+        [buttonSubmit addTarget:self action:@selector(submitNuclearIns:) forControlEvents:UIControlEventTouchDown];
+        [_viewBase addSubview:buttonSave];
+        [_viewBase addSubview:buttonSubmit];
+        
+        if ([self.route isEqualToString:@"1"]) {
+            _viewBase.frame = CGRectMake(0, SCREEN_HEIGHT - 98 * ViewRateBaseOnIP6, SCREEN_WIDTH, 98 * ViewRateBaseOnIP6);
+            _viewBase.backgroundColor = [UIColor whiteColor];
+            buttonSubmit.frame = CGRectMake(0, 0, SCREEN_WIDTH, 98 * ViewRateBaseOnIP6);
+            buttonSave.hidden = YES;
+            
+            
+        } else {
+            _viewBase.frame = CGRectMake(0 , SCREEN_HEIGHT - 98 * ViewRateBaseOnIP6, SCREEN_WIDTH, 98 * ViewRateBaseOnIP6);
+            _viewBase.backgroundColor = [UIColor whiteColor];
+            
+            buttonSave.hidden = NO;
+            buttonSave.frame = CGRectMake(55 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6);
+            buttonSubmit.frame = CGRectMake(395 * ViewRateBaseOnIP6, 9 * ViewRateBaseOnIP6, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6);
+            buttonSave.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
+            buttonSave.layer.masksToBounds = YES;
+            buttonSave.backgroundColor = [UIColor whiteColor];
+            buttonSave.layer.borderColor = [UIColor colorWithHexString:@"#004da2"].CGColor;
+            buttonSave.layer.borderWidth = 1 * ViewRateBaseOnIP6;
+            [buttonSave setTitleColor:[UIColor colorWithHexString:@"#004da2"] forState:UIControlStateNormal];
+            [buttonSave setTitle:@"保存" forState:UIControlStateNormal];
+            
+            buttonSubmit.layer.cornerRadius = 10 * ViewRateBaseOnIP6;
+            buttonSubmit.layer.masksToBounds = YES;
+            UIView *viewSegment = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1 * ViewRateBaseOnIP6)];
+            viewSegment.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+            [_viewBase addSubview:viewSegment];
+            
+        }
+    }
+    return _viewBase;
+}
+
+- (UIView *)viewDataEmpty{
+    if (!_viewDataEmpty) {
+        _viewDataEmpty = [[UIView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _viewDataEmpty.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(285 * ViewRateBaseOnIP6, 270 * ViewRateBaseOnIP6, 218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6)];
+        imageView.image = [UIImage imageNamed:@"dataEmpty"];
+        [_viewDataEmpty addSubview:imageView];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(imageView.frame) + 40 * ViewRateBaseOnIP6, SCREEN_WIDTH, 24 * ViewRateBaseOnIP6)];
+        label.text = @"暂时没查到任何数据";
+        label.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
+        label.textColor = [UIColor colorWithRed:153 / 255.0 green:153 / 255.0 blue:153 / 255.0 alpha:1.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        [_viewDataEmpty addSubview:label];
+        _viewDataEmpty.hidden = YES;
+    }
+    
+    return _viewDataEmpty;
+}
 - (NSMutableArray *)dataArray{
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
