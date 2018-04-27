@@ -158,6 +158,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
                 for (XCUserPackageModel *model in strongSelf.packageArr) {
                     if ([model.name isEqualToString:selectStr]) {
                         selectID = model.packageID;
+                        packageBuy = [NSNumber numberWithDouble:[model.price doubleValue]];
                     }
                 }
                 if (!isUsable(selectID, [NSNumber class])) {
@@ -311,34 +312,33 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         errString = @"保单信息错误";
         configureSuccess = NO;
     }
-    if (!isUsableNSString(_billModel.receiverName,@"")) {
-        errString = @"收件客户名称为空";
-        configureSuccess = NO;
+    if (_isSelectDistribution) {
+        if (!isUsableNSString(_billModel.receiverName,@"")) {
+            errString = @"收件客户名称为空";
+            configureSuccess = NO;
+        }
+        if (!isUsableNSString(_billModel.phone,@"")) {
+            errString = @"联系电话为空";
+            configureSuccess = NO;
+        }
+        if (!isUsableNSString(_billModel.shipmentTime,@"")) {
+            errString = @"预约配送时间为空";
+            configureSuccess = NO;
+        }
+        if (!isUsable(_billModel.receiveMoney,[NSNumber class])) {
+            _billModel.receiveMoney = [NSNumber numberWithDouble:0];
+        }
+        if (!isUsableNSString(_billModel.remark, @"")) {
+            _billModel.address = @"";
+        }
+        if (!isUsableNSString(_billModel.address, @"")) {
+            errString = @"配送地址为空";
+            configureSuccess = NO;
+        }
     }
-    if (!isUsableNSString(_billModel.phone,@"")) {
-        errString = @"联系电话为空";
-        configureSuccess = NO;
+    if (!isUsable(_billModel.policyTotalAmount,[NSNumber class])) {
+        _billModel.policyTotalAmount = [NSNumber numberWithDouble:0];
     }
-    if (!isUsableNSString(_billModel.shipmentTime,@"")) {
-        errString = @"预约配送时间为空";
-        configureSuccess = NO;
-    }
-    if ([_billModel.receiveMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-        errString = @"收款金额为0";
-        configureSuccess = NO;
-    }
-#warning 配送地址是必填的那么那个打钩是否配送有意义吗？
-//    if (!isUsableNSString(_billModel.address, @"")) {
-//        errString = @"配送地址为空";
-//        configureSuccess = NO;
-//    }
-    if (!isUsableNSString(_billModel.remark, @"")) {
-        _billModel.address = @"";
-    }
-//    if ([_billModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-//        errString = @"保单金额为0";
-//        configureSuccess = NO;
-//    }
     if (!isUsableNSString(_billModel.payDate,@"")) {
         errString = @"刷卡日期为空";
         configureSuccess = NO;
@@ -347,7 +347,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         errString = @"请选择礼包";
         configureSuccess = NO;
     }
-    if (!isUsable(_billModel.packageBuyPrice, [NSNumber class])) {
+    if (!isUsable(_billModel.packageBuyPrice,[NSNumber class])) {
         errString = @"礼包数据错误";
         configureSuccess = NO;
     }
@@ -371,15 +371,10 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
             [weakSelf.view addSubview:tipsView];
         }];
-        
-    
     }else {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
         [self.view addSubview:tipsView];
     }
-
-  
-    
 }
 #pragma  mark - XCDistributionInputCellDelegate
 

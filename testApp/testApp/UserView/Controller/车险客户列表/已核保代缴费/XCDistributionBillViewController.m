@@ -122,6 +122,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
                 for (XCUserPackageModel *model in strongSelf.packageArr) {
                     if ([model.name isEqualToString:selectStr]) {
                         selectID = model.packageID;
+                        packageBuy = [NSNumber numberWithDouble:[model.price doubleValue]] ;
                     }
                 }
                 if (!isUsable(selectID, [NSNumber class])) {
@@ -151,7 +152,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     if ([self isTextCellTypeWithIndex:indexPath]) {
         XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
         textCell.shouldShowSeparator = YES;
-        textCell.title = titleName;
+        textCell.titleLabel.attributedText = [NSString stringWithImportentValue:titleName];
         if ([titleName isEqualToString:@"商业险金额:"]) {
             [textCell setTitlePlaceholder:self.syMoney];
         }
@@ -238,6 +239,8 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+
 - (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
 {
     self.selectedTitle = title;
@@ -248,6 +251,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
         [textField setText: [NSString stringWithMoneyNumber:price]];
+        
     }
     else if ([title isEqualToString:@"缴费单通知号:"]) {
         _payModel.payNoticeNo =  textField.text;
@@ -294,9 +298,8 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         errString = @"保单信息错误";
         configureSuccess = NO;
     }
-    if ([_payModel.policyTotalAmount isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-        errString = @"保单金额为0";
-        configureSuccess = NO;
+    if (!isUsable(_payModel.policyTotalAmount, [NSNumber class])) {
+        _payModel.policyTotalAmount = @(0.00);
     }
     if (!isUsableNSString(_payModel.payNoticeNo,@"")) {
         errString = @"缴费通知单号为空";
@@ -310,18 +313,20 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         errString = @"联系电话";
         configureSuccess = NO;
     }
-    if ([_payModel.borrowMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-        errString = @"预借款金额为0";
-        configureSuccess = NO;
+    if (!isUsable(_payModel.borrowMoney, [NSNumber class])) {
+        _payModel.borrowMoney = @(0.00);
     }
-    if ([_payModel.receiveMoney isEqualToNumber:[NSNumber numberWithDouble:0]]) {
-        errString = @"收款金额为0";
-        configureSuccess = NO;
+    if (!isUsable(_payModel.receiveMoney, [NSNumber class])) {
+        _payModel.receiveMoney = @(0.00);
     }
     if (!isUsableNSString(_payModel.address, @"")) {
         errString = @"配送地址为空";
         configureSuccess = NO;
     }
+    if (!isUsableNSString(_payModel.remark, @"")) {
+        _payModel.remark = @"";
+    }
+
 
     if (configureSuccess) {
         NSLog(@"点击确认提交");

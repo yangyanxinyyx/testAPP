@@ -111,26 +111,26 @@
     if (isUsableNSString(model.plateNo, @"")) {
         [_carNumLabel setText:[NSString stringWithFormat:@"%@",model.plateNo]];
     }else {
-        [_carNumLabel setText:@"未知"];
+        [_carNumLabel setText:@" "];
     }
     if(isUsableNSString(model.onwerName, @"")) {
         [_carNameLabel setText:model.onwerName];
     }else {
-        [_carNameLabel setText:@"车主: 未知"];
+        [_carNameLabel setText:@"车主:  "];
     }
 
     if ([self.typeStr isEqualToString:@"配送"]) {
         if (isUsableNSString(model.policyStatus, @"")) {
             [_processLabel setText:model.policyStatus];
         }else {
-            [_processLabel setText:@"未知"];
+            [_processLabel setText:@" "];
         }
         if (isUsableNSString(model.createTime,@"")) {
             NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_timeLabel setText:[NSString stringWithFormat:@"配送时间: %@",[tmpArr firstObject]]];
         }else {
-            [_timeLabel setText:@"配送时间: 未知"];
+            [_timeLabel setText:@"配送时间:  "];
         }
     }else if ([self.typeStr  isEqualToString:@"财务审核中"]) {
         if (isUsableNSString(model.financeRemark, @"出纳审核通过")) {
@@ -140,7 +140,7 @@
             if(isUsableNSString(model.financeRemark, @"")) {
                 [_processLabel setText:model.financeRemark];
             }else {
-                [_processLabel setText:@"未知"];
+                [_processLabel setText:@" "];
             }
             [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
         }
@@ -149,7 +149,7 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];
         }else {
-            [_timeLabel setText:@"创建时间: 未知"];
+            [_timeLabel setText:@"创建时间:  "];
         }
     }
 }

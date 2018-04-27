@@ -12,7 +12,8 @@
 +(UILabel *)createLabelWithTextFontSize:(CGFloat)fontSize textColor:(UIColor *)textColor
 {
     UILabel *label = [[UILabel alloc] init];
-    [label setFont:[UIFont systemFontOfSize:fontSize * ViewRateBaseOnIP6]];
+    [label setFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:fontSize * ViewRateBaseOnIP6]];
+//    [UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6]
     [label setTextColor:textColor];
     return label;
 }

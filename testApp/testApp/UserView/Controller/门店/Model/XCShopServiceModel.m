@@ -13,7 +13,6 @@
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
              @"storeID" : @"id",
-             @"storeID" : @"storeId",
              };
 }
 

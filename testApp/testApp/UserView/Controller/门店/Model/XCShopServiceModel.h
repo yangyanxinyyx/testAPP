@@ -27,5 +27,7 @@
 @property (nonatomic, copy) NSString * url1;
 
 /** 添加服务用 默认NO*/
+/** 获取服务name  */
+@property (nonatomic, copy) NSString * name;
 @property (nonatomic, assign) BOOL  isSelect;
 @end

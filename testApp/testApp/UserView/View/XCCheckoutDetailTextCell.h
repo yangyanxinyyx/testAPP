@@ -12,6 +12,7 @@
 @interface XCCheckoutDetailTextCell : UITableViewCell
 
 @property (nonatomic, strong) NSString * title ;
+@property (nonatomic, strong) UILabel * titleLabel ;
 
 @property (nonatomic, strong) NSString * titlePlaceholder ;
 

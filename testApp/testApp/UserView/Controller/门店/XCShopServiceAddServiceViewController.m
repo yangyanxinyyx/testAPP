@@ -56,10 +56,10 @@
             }
         }
     }
-    
+    NSArray *array = addItemsArrM;
     NSDictionary *param = @{
+                            @"serviceArrayId":array,
                             @"storeId":self.storeID,
-                            @"category":addItemsArrM,
                             };
     __weak __typeof(self) weakSelf = self;
     [RequestAPI insertService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
@@ -89,11 +89,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XCShopServiceModel *model = self.dataArrM[indexPath.row];
     XCShopDetailSeclectCell *cell = (XCShopDetailSeclectCell *)[tableView dequeueReusableCellWithIdentifier:kDetailSelectID forIndexPath:indexPath];
-    NSString *name = @"未知";
     if (isUsableNSString(model.serviceName, @"")) {
-        name = model.serviceName;
+        [cell setTitle:model.serviceName];
     }
-    [cell setTitle:name];
     return cell;
 }
 

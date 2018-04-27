@@ -40,6 +40,10 @@
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self.view addSubview:self.tableView];
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
 }
 
 - (void)viewWillLayoutSubviews
@@ -80,6 +84,9 @@
 
 
 #pragma mark - Privacy Method
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
+}
 //判断手机号码格式是否正确
 - (BOOL)valiMobile:(NSString *)mobile
 {

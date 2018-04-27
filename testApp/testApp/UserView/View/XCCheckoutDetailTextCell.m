@@ -11,7 +11,7 @@
 #import "XCCustomerDetailModel.h"
 @interface XCCheckoutDetailTextCell()
 
-@property (nonatomic, strong) UILabel * titleLabel ;
+//@property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UILabel * placeholderLabel ;
 @property (nonatomic, strong) UIView * separtatorLine ;
 
@@ -62,25 +62,25 @@
         if (isUsableNSString(model.onwerName,@"")) {
             [_placeholderLabel setText:model.onwerName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"身份证:"]  ) {
         if (isUsableNSString(model.onwerIdentify,@"")&&isUsableNSString(model.onwerIdentify,@"null")) {
             [_placeholderLabel setText:model.onwerIdentify];
         }else {
-             [_placeholderLabel setText:@"未登记"];
+             [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车牌号:"] ) {
        if (isUsableNSString(model.plateNo,@"")) {
            [_placeholderLabel setText:model.plateNo];
        }else {
-           [_placeholderLabel setText:@"未登记"];
+           [_placeholderLabel setText:@" "];
        }
    }else if ([self.title isEqualToString:@"车架号:"] ) {
        if (isUsableNSString(model.vinNo,@"")) {
            [_placeholderLabel setText:model.vinNo];
        }else {
-           [_placeholderLabel setText:@"未登记"];
+           [_placeholderLabel setText:@" "];
        }
    }else if ([self.title isEqualToString:@"初登日期:"] ) {
        if (isUsableNSString(model.recordDate,@"")) {
@@ -88,25 +88,25 @@
            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
            [_placeholderLabel setText:[tmpArr firstObject]];
        }else {
-           [_placeholderLabel setText:@"未登记"];
+           [_placeholderLabel setText:@" "];
        }
    }else if ([self.title isEqualToString:@"发动机号:"] ) {
        if (isUsableNSString(model.engineNo,@"")) {
            [_placeholderLabel setText:model.engineNo];
        }else {
-           [_placeholderLabel setText:@"未登记"];
+           [_placeholderLabel setText:@" "];
        }
     }else if ([self.title isEqualToString:@"车型名称:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车型代码:"]) {
         if (isUsableNSString(model.model,@"")) {
             [_placeholderLabel setText:model.model];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
@@ -114,7 +114,7 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
@@ -122,19 +122,19 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"保险公司:"] ) {
         if (isUsableNSString(model.insurerName,@"")) {
             [_placeholderLabel setText:model.insurerName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"缴费通知单号:"]) {
         if (isUsableNSString(model.payNoticeNo,@"")) {
             [_placeholderLabel setText:model.payNoticeNo];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"交强险(业务员)金额:"] ) {
         if (isUsable(model.jqMoney, [NSNumber class])) {
@@ -164,7 +164,7 @@
         if (isUsableNSString(model.exportmanName,@"")) {
             [_placeholderLabel setText:model.exportmanName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"交强险:"] ) {
         if ( isUsable(model.jqValue, [NSNumber class])) {
@@ -200,7 +200,7 @@
         if (isUsableNSString(model.exportmanName,@"")) {
             [_placeholderLabel setText:model.exportmanName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }
 }
@@ -211,55 +211,55 @@
         if (isUsableNSString(model.customerName,@"")) {
             [_placeholderLabel setText:model.customerName];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"客户来源:"]) {
         if (isUsableNSString(model.source,@"")) {
             [_placeholderLabel setText:model.source];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"性别:"] ) {
         if (isUsableNSString(model.sex,@"")) {
             [_placeholderLabel setText:model.sex];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"生日:"] ) {
         if (isUsableNSString(model.birthday,@"")) {
             [_placeholderLabel setText:model.birthday];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"区域:"] ) {
         if (isUsableNSString(model.area,@"")) {
             [_placeholderLabel setText:model.area];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"地址:"]) {
         if (isUsableNSString(model.address,@"")) {
             [_placeholderLabel setText:model.address];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"身份证:"]) {
         if (isUsableNSString(model.identity,@"")) {
             [_placeholderLabel setText:model.identity];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"车牌号:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"初登日期:"]) {
@@ -268,35 +268,35 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"车架号:"]) {
         if (isUsableNSString(model.vinNo,@"")) {
             [_placeholderLabel setText:model.vinNo];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@"  "];
         }
     }
     else if ([self.title isEqualToString:@"发动机号:"]) {
         if (isUsableNSString(model.engineNo,@"")) {
             [_placeholderLabel setText:model.engineNo];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"车型代码:"]) {
         if ( isUsableNSString(model.model,@"")) {
             [_placeholderLabel setText:model.vinNo];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
     else if ([self.title isEqualToString:@"联系方式:"]) {
         if (isUsableNSString(model.phoneNo,@"")) {
             [_placeholderLabel setText:model.phoneNo];
         }else {
-            [_placeholderLabel setText:@"未知"];
+            [_placeholderLabel setText:@" "];
         }
     }
 }
@@ -307,25 +307,25 @@
         if (isUsableNSString(model.onwerName,@"")) {
             [_placeholderLabel setText:model.onwerName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"身份证:"]  ) {
         if (isUsableNSString(model.onwerIdentify,@"")&&isUsableNSString(model.onwerIdentify,@"null")) {
             [_placeholderLabel setText:model.onwerIdentify];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车牌号:"] ) {
         if (isUsableNSString(model.plateNo,@"")) {
             [_placeholderLabel setText:model.plateNo];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车架号:"] ) {
         if (isUsableNSString(model.vinNo,@"")) {
             [_placeholderLabel setText:model.vinNo];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"初登日期:"] ) {
         if (isUsableNSString(model.recordDate,@"")) {
@@ -333,25 +333,25 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"发动机号:"] ) {
         if (isUsableNSString(model.engineNo,@"")) {
             [_placeholderLabel setText:model.engineNo];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车型名称:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"车型代码:"]) {
         if (isUsableNSString(model.model,@"")) {
             [_placeholderLabel setText:model.model];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
@@ -445,7 +445,7 @@
         if (isUsableNSString(model.exportmanName,@"")) {
             [_placeholderLabel setText:model.exportmanName];
         }else {
-            [_placeholderLabel setText:@"未登记"];
+            [_placeholderLabel setText:@" "];
         }
     }
 }
@@ -491,7 +491,6 @@
 
 - (void)setTitlePlaceholder:(NSString *)titlePlaceholder
 {
-  
     _titlePlaceholder = titlePlaceholder;
     [_placeholderLabel setText:_titlePlaceholder];
     [_placeholderLabel sizeToFit];

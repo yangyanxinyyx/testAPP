@@ -12,7 +12,7 @@
 
 + (NSString *)stringWithMoneyNumber:(double)money;
 
-
++ (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text;
 @end
 
 @interface NSString (Validate)

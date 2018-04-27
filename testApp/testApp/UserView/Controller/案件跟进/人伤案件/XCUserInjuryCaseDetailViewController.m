@@ -48,8 +48,7 @@
 
 - (void)configureData
 {
-//    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
-//                            @"提交时间:",@"选择门店:",@"咨询电话:"];
+
     self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
                             @"提交时间:",@"咨询电话:"];
 }
@@ -115,15 +114,7 @@
         [cell setPhotoURLArr:_imageURLArrM];
         return cell;
     }
-    //    XCUserCaseDetailTextCell *cell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kCaseTextCellID forIndexPath:indexPath];
-    //
-    //    if (indexPath.row %2 == 0) {
-    //        cell.isMutableTextType = YES;
-    //    }else {
-    //        cell.isMutableTextType = NO;
-    //    }
-    //    return cell;
-  
+ 
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,7 +124,6 @@
         return [XCUserCaseDetailProgressCell getCellHeight];
     }
     else if (indexPath.row == 1) {
-//        return (392 + 24 + 24) * ViewRateBaseOnIP6;
       return [XCUserCaseDetailTextCell getCaseCellHeightWithClip:YES];
     }
     else if (indexPath.row == 2) {
@@ -147,21 +137,7 @@
     }else {
         return (20 + 88 + 140 + 30) * ViewRateBaseOnIP6;
     }
-//        if (indexPath.row %2 == 0) {
-//            NSString *longString = @"描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中......";
-//
-//            height = [self getHeightLineWithString:longString withWidth:645 * ViewRateBaseOnIP6 withFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6]];
-//            height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2 + height;
-//        }else {
-//            CGFloat count = 22;
-//            if (count > 0) {
-//             height  = ((20 + 88) + (30 + 24))* ViewRateBaseOnIP6  + (24 + 24) * ViewRateBaseOnIP6  * (count - 1) + 30 * ViewRateBaseOnIP6 ;
-//            }else {
-//                height  = (20 + 88) * ViewRateBaseOnIP6 +  30 * ViewRateBaseOnIP6 * 2;
-//
-//            }
-//        }
-//        return height;
+
     
 }
 

@@ -187,7 +187,9 @@
     _carTarModel = model;
     [_carNumberLabel setText:model.plateOn];
     [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.customerName]];
-    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
+    NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+    NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];
 }
 
 #pragma mark - Delegates & Notifications
@@ -248,7 +250,7 @@
     if (isUsableNSString(baseModel.onwerName,@"")) {
         [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
     }else {
-        [_userNameLabel setText:[NSString stringWithFormat:@"车主: 未知"]];
+        [_userNameLabel setText:[NSString stringWithFormat:@"车主:  "]];
     }
     NSString *timeTitle  = @"创建时间";
     if (_timeTitleStr) {
@@ -259,7 +261,7 @@
         NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
         [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,[tmpArr firstObject]]];
     }else {
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: 未知",timeTitle]];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@:  ",timeTitle]];
     }
     
 }

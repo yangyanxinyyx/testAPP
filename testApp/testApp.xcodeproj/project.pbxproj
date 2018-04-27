@@ -49,6 +49,19 @@
 		A72148B92083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148B82083BDCA009E6DDC /* XCUserBePaymentCaseDetailViewController.m */; };
 		A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */; };
 		A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */; };
+		A721814020922FA8006730CF /* JFImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812520922FA7006730CF /* JFImagePickerViewCell.m */; };
+		A721814120922FA8006730CF /* JFAssetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812620922FA7006730CF /* JFAssetHelper.m */; };
+		A721814220922FA8006730CF /* JFImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812720922FA7006730CF /* JFImagePickerController.m */; };
+		A721814320922FA8006730CF /* JFImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812820922FA7006730CF /* JFImageManager.m */; };
+		A721814420922FA8006730CF /* JFImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812920922FA7006730CF /* JFImageCollectionViewController.m */; };
+		A721814520922FA8006730CF /* JFImageGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812A20922FA7006730CF /* JFImageGroupTableViewController.m */; };
+		A721814620922FA8006730CF /* JFPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812B20922FA7006730CF /* JFPhotoView.m */; };
+		A721814720922FA8006730CF /* JFPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721812C20922FA7006730CF /* JFPhotoBrowserViewController.m */; };
+		A721814820922FA8006730CF /* WSImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813620922FA7006730CF /* WSImagePickerView.m */; };
+		A721814920922FA8006730CF /* WSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813820922FA7006730CF /* WSImageModel.m */; };
+		A721814A20922FA8006730CF /* WSImageBroswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813920922FA7006730CF /* WSImageBroswerVC.m */; };
+		A721814B20922FA8006730CF /* WSImageBroserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813A20922FA7006730CF /* WSImageBroserCell.m */; };
+		A721814C20922FA8006730CF /* WSPhotosBroseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813B20922FA7006730CF /* WSPhotosBroseVC.m */; };
 		A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */; };
 		A72600722089F394001C5571 /* XCCheckoutPhotoPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */; };
 		A726007B2089F669001C5571 /* CameraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600762089F669001C5571 /* CameraBaseViewController.m */; };
@@ -59,6 +72,7 @@
 		A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
+		A75335562092C1BE0061CB8C /* XCUserListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75335552092C1BE0061CB8C /* XCUserListFooterView.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
 		A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */; };
 		A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */; };
@@ -399,6 +413,32 @@
 		A72148BB2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserNoResponsibilityCaseDetailViewController.m; sourceTree = "<group>"; };
 		A72148BD2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserParticularCaseDetailViewController.h; sourceTree = "<group>"; };
 		A72148BE2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserParticularCaseDetailViewController.m; sourceTree = "<group>"; };
+		A721812420922FA7006730CF /* JFPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		A721812520922FA7006730CF /* JFImagePickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerViewCell.m; sourceTree = "<group>"; };
+		A721812620922FA7006730CF /* JFAssetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAssetHelper.m; sourceTree = "<group>"; };
+		A721812720922FA7006730CF /* JFImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerController.m; sourceTree = "<group>"; };
+		A721812820922FA7006730CF /* JFImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageManager.m; sourceTree = "<group>"; };
+		A721812920922FA7006730CF /* JFImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageCollectionViewController.m; sourceTree = "<group>"; };
+		A721812A20922FA7006730CF /* JFImageGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageGroupTableViewController.m; sourceTree = "<group>"; };
+		A721812B20922FA7006730CF /* JFPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoView.m; sourceTree = "<group>"; };
+		A721812C20922FA7006730CF /* JFPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		A721812D20922FA7006730CF /* JFImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerController.h; sourceTree = "<group>"; };
+		A721812E20922FA7006730CF /* JFImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerViewCell.h; sourceTree = "<group>"; };
+		A721812F20922FA7006730CF /* JFAssetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAssetHelper.h; sourceTree = "<group>"; };
+		A721813020922FA7006730CF /* JFImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageCollectionViewController.h; sourceTree = "<group>"; };
+		A721813120922FA7006730CF /* JFImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageManager.h; sourceTree = "<group>"; };
+		A721813220922FA7006730CF /* JFPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoView.h; sourceTree = "<group>"; };
+		A721813320922FA7006730CF /* JFImageGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageGroupTableViewController.h; sourceTree = "<group>"; };
+		A721813520922FA7006730CF /* WSImagePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImagePickerView.h; sourceTree = "<group>"; };
+		A721813620922FA7006730CF /* WSImagePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSImagePickerView.m; sourceTree = "<group>"; };
+		A721813820922FA7006730CF /* WSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSImageModel.m; sourceTree = "<group>"; };
+		A721813920922FA7006730CF /* WSImageBroswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSImageBroswerVC.m; sourceTree = "<group>"; };
+		A721813A20922FA7006730CF /* WSImageBroserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSImageBroserCell.m; sourceTree = "<group>"; };
+		A721813B20922FA7006730CF /* WSPhotosBroseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSPhotosBroseVC.m; sourceTree = "<group>"; };
+		A721813C20922FA7006730CF /* WSImageBroserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImageBroserCell.h; sourceTree = "<group>"; };
+		A721813D20922FA7006730CF /* WSImageBroswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImageBroswerVC.h; sourceTree = "<group>"; };
+		A721813E20922FA7006730CF /* WSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImageModel.h; sourceTree = "<group>"; };
+		A721813F20922FA7006730CF /* WSPhotosBroseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSPhotosBroseVC.h; sourceTree = "<group>"; };
 		A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserPackageModel.h; sourceTree = "<group>"; };
 		A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserPackageModel.m; sourceTree = "<group>"; };
 		A72600702089F394001C5571 /* XCCheckoutPhotoPreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutPhotoPreViewController.h; sourceTree = "<group>"; };
@@ -420,6 +460,8 @@
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
 		A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+createLabel.h"; path = "testApp/Extend/categary/UILabel+createLabel.h"; sourceTree = SOURCE_ROOT; };
+		A75335542092C1BE0061CB8C /* XCUserListFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListFooterView.h; sourceTree = "<group>"; };
+		A75335552092C1BE0061CB8C /* XCUserListFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListFooterView.m; sourceTree = "<group>"; };
 		A753CC0D207E6AF000AFB66C /* XCShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopModel.h; sourceTree = "<group>"; };
 		A753CC0E207E6AF000AFB66C /* XCShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopModel.m; sourceTree = "<group>"; };
 		A75D304F2081022E0012898A /* XCShopServiceDetailListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceDetailListViewController.h; sourceTree = "<group>"; };
@@ -1015,6 +1057,63 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A721812220922FA7006730CF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				A721812320922FA7006730CF /* JFImagePickerController */,
+				A721813420922FA7006730CF /* WSImagePicker */,
+				A721813720922FA7006730CF /* WSImagebroswerVC */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A721812320922FA7006730CF /* JFImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				A721812420922FA7006730CF /* JFPhotoBrowserViewController.h */,
+				A721812520922FA7006730CF /* JFImagePickerViewCell.m */,
+				A721812620922FA7006730CF /* JFAssetHelper.m */,
+				A721812720922FA7006730CF /* JFImagePickerController.m */,
+				A721812820922FA7006730CF /* JFImageManager.m */,
+				A721812920922FA7006730CF /* JFImageCollectionViewController.m */,
+				A721812A20922FA7006730CF /* JFImageGroupTableViewController.m */,
+				A721812B20922FA7006730CF /* JFPhotoView.m */,
+				A721812C20922FA7006730CF /* JFPhotoBrowserViewController.m */,
+				A721812D20922FA7006730CF /* JFImagePickerController.h */,
+				A721812E20922FA7006730CF /* JFImagePickerViewCell.h */,
+				A721812F20922FA7006730CF /* JFAssetHelper.h */,
+				A721813020922FA7006730CF /* JFImageCollectionViewController.h */,
+				A721813120922FA7006730CF /* JFImageManager.h */,
+				A721813220922FA7006730CF /* JFPhotoView.h */,
+				A721813320922FA7006730CF /* JFImageGroupTableViewController.h */,
+			);
+			path = JFImagePickerController;
+			sourceTree = "<group>";
+		};
+		A721813420922FA7006730CF /* WSImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A721813520922FA7006730CF /* WSImagePickerView.h */,
+				A721813620922FA7006730CF /* WSImagePickerView.m */,
+			);
+			path = WSImagePicker;
+			sourceTree = "<group>";
+		};
+		A721813720922FA7006730CF /* WSImagebroswerVC */ = {
+			isa = PBXGroup;
+			children = (
+				A721813820922FA7006730CF /* WSImageModel.m */,
+				A721813920922FA7006730CF /* WSImageBroswerVC.m */,
+				A721813A20922FA7006730CF /* WSImageBroserCell.m */,
+				A721813B20922FA7006730CF /* WSPhotosBroseVC.m */,
+				A721813C20922FA7006730CF /* WSImageBroserCell.h */,
+				A721813D20922FA7006730CF /* WSImageBroswerVC.h */,
+				A721813E20922FA7006730CF /* WSImageModel.h */,
+				A721813F20922FA7006730CF /* WSPhotosBroseVC.h */,
+			);
+			path = WSImagebroswerVC;
+			sourceTree = "<group>";
+		};
 		A72600732089F669001C5571 /* UIbase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1143,6 +1242,7 @@
 		FC32BE842079AA2000817156 /* UserView */ = {
 			isa = PBXGroup;
 			children = (
+				A721812220922FA7006730CF /* New Group */,
 				FC32BE852079AA2000817156 /* Controller */,
 				FC32BEED2079AA2000817156 /* View */,
 				FC32BEDF2079AA2000817156 /* Model */,
@@ -1486,6 +1586,8 @@
 				FC32BF0C2079AA2000817156 /* XCUserListView.m */,
 				FC32BF0D2079AA2000817156 /* XCUserTopView.h */,
 				FC32BF0E2079AA2000817156 /* XCUserTopView.m */,
+				A75335542092C1BE0061CB8C /* XCUserListFooterView.h */,
+				A75335552092C1BE0061CB8C /* XCUserListFooterView.m */,
 			);
 			path = "个人中心";
 			sourceTree = "<group>";
@@ -2245,9 +2347,11 @@
 			files = (
 				FC32BF202079AA2000817156 /* XCUserNoResponsibilityCaseViewController.m in Sources */,
 				FC32BF372079AA2000817156 /* XCUserChargebackListViewController.m in Sources */,
+				A721814720922FA8006730CF /* JFPhotoBrowserViewController.m in Sources */,
 				FCF87677206BFF7C00CF6FDE /* GetCarListCell.m in Sources */,
 				FCF86B9D2069580200CF6FDE /* GetCarListViewController.m in Sources */,
 				FC32BFA22079AA5900817156 /* PriceCustomerInformEntryViewController.m in Sources */,
+				A721814020922FA8006730CF /* JFImagePickerViewCell.m in Sources */,
 				FC32BF1F2079AA2000817156 /* XCUserBePaymentCaseViewController.m in Sources */,
 				FC32BFB72079AA5900817156 /* PriceUnderwritingSureTableViewCell.m in Sources */,
 				FC32BF482079AA2000817156 /* XCUserCaseDetailProgressCell.m in Sources */,
@@ -2260,9 +2364,12 @@
 				FCF87669206BCF1600CF6FDE /* YXScrollView.m in Sources */,
 				FC32BF352079AA2000817156 /* XCCustomerViolationPreviewViewController.m in Sources */,
 				A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */,
+				A721814120922FA8006730CF /* JFAssetHelper.m in Sources */,
 				FC479520205553E900218362 /* main.m in Sources */,
 				FC47955C2055765F00218362 /* UserInfoManager.m in Sources */,
+				A721814B20922FA8006730CF /* WSImageBroserCell.m in Sources */,
 				2504C52D208345FA00A86022 /* InsuranceCompanyModel.m in Sources */,
+				A721814A20922FA8006730CF /* WSImageBroswerVC.m in Sources */,
 				FC32BF2A2079AA2000817156 /* XCUserWaitingToPayingDetailViewController.m in Sources */,
 				FC32BE102079261100817156 /* GetCarView.m in Sources */,
 				FC32BF392079AA2000817156 /* XCCheckoutDetailBaseModel.m in Sources */,
@@ -2279,6 +2386,7 @@
 				FC32BF2C2079AA2000817156 /* XCUserWaitingToWriteListDetailViewController.m in Sources */,
 				A720C5B720826423006B0C33 /* XCCustomerListModel.m in Sources */,
 				A7117AE3207E0D3200B0512D /* XCShopAMapViewController.m in Sources */,
+				A721814920922FA8006730CF /* WSImageModel.m in Sources */,
 				A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */,
 				FC32BF4B2079AA2000817156 /* XCUserCaseScrollerViewCell.m in Sources */,
 				FC32BF332079AA2000817156 /* XCCustomerRepairViewController.m in Sources */,
@@ -2287,6 +2395,7 @@
 				FC32BF4A2079AA2000817156 /* XCUserCaseListCell.m in Sources */,
 				FC32BFA62079AA5900817156 /* PriceRecodeModel.m in Sources */,
 				A72148BC2083BDE1009E6DDC /* XCUserNoResponsibilityCaseDetailViewController.m in Sources */,
+				A721814C20922FA8006730CF /* WSPhotosBroseVC.m in Sources */,
 				FC32BF4E2079AA2000817156 /* XCUserListView.m in Sources */,
 				FC33AB3E208838770081D30A /* AddOrderModel.m in Sources */,
 				A72148A92083B4E1009E6DDC /* XCUserDistributionViewController.m in Sources */,
@@ -2294,6 +2403,7 @@
 				FC32BF432079AA2000817156 /* XCCheckoutDetailPhotoCell.m in Sources */,
 				FC32BFAD2079AA5900817156 /* PriceInfolabelTableViewCell.m in Sources */,
 				A72148B22083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m in Sources */,
+				A721814520922FA8006730CF /* JFImageGroupTableViewController.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				FC32BFAB2079AA5900817156 /* PriceCommerceInsTableViewCell.m in Sources */,
 				258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */,
@@ -2306,6 +2416,7 @@
 				FC32BF492079AA2000817156 /* XCUserCaseDetailTextCell.m in Sources */,
 				FC32BFDC207B9BF800817156 /* MoneyInputVIew.m in Sources */,
 				FC32BF272079AA2000817156 /* XCUserViolationViewController.m in Sources */,
+				A721814320922FA8006730CF /* JFImageManager.m in Sources */,
 				FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */,
 				FC2805D5205D96DF00DD0DA9 /* LoginViewController.m in Sources */,
 				FC32BFAF2079AA5900817156 /* PriceInspectTableViewCell.m in Sources */,
@@ -2316,6 +2427,7 @@
 				FC32BF522079AA2000817156 /* XCDistributionPicketCell.m in Sources */,
 				A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
+				A721814420922FA8006730CF /* JFImageCollectionViewController.m in Sources */,
 				FC33AB412088387E0081D30A /* AddOrderListCell.m in Sources */,
 				FC32BF242079AA2000817156 /* XCUserRepairDetailViewController.m in Sources */,
 				FC32BFA12079AA5900817156 /* PriceCarInsuranceQViewController.m in Sources */,
@@ -2361,6 +2473,7 @@
 				25EA2370207E5ADF00A60866 /* priceModel.m in Sources */,
 				FC32BF292079AA2000817156 /* XCDistributionPolicyViewController.m in Sources */,
 				A726007C2089F669001C5571 /* BIAlertViewController.m in Sources */,
+				A721814620922FA8006730CF /* JFPhotoView.m in Sources */,
 				FC32BDED207601FC00817156 /* CoverAnnouncementModel.m in Sources */,
 				A71EC30D208A481E00DD546C /* NYXImagesHelper.m in Sources */,
 				FC32BFAA2079AA5900817156 /* PriceCarRecordTableViewCell.m in Sources */,
@@ -2377,6 +2490,7 @@
 				FC32BFB92079AA5900817156 /* PriceUnderwritingTextTableViewCell.m in Sources */,
 				FC32BF282079AA2000817156 /* XCDistributionBillViewController.m in Sources */,
 				A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */,
+				A75335562092C1BE0061CB8C /* XCUserListFooterView.m in Sources */,
 				FC32BFC32079AA7100817156 /* LYZSelectView.m in Sources */,
 				A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */,
 				FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */,
@@ -2401,6 +2515,7 @@
 				FC47954F20556E8B00218362 /* CoverMainViewController.m in Sources */,
 				A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */,
 				FC32BF312079AA2000817156 /* XCCustomerDetailViewController.m in Sources */,
+				A721814220922FA8006730CF /* JFImagePickerController.m in Sources */,
 				FC32BFAE2079AA5900817156 /* PriceInfoSaveTableViewCell.m in Sources */,
 				FC32BFB62079AA5900817156 /* PriceUnderwritingRenewalTableViewCell.m in Sources */,
 				FC32BF382079AA2000817156 /* XCShopViewController.m in Sources */,
@@ -2411,6 +2526,7 @@
 				FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */,
 				FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */,
 				FC32BF1D2079AA2000817156 /* XCUserInjuryCaseDetailViewController.m in Sources */,
+				A721814820922FA8006730CF /* WSImagePickerView.m in Sources */,
 				FCF87672206BD9C600CF6FDE /* GetCarModel.m in Sources */,
 				FC32BFBA2079AA5900817156 /* PriceAdjustSureTableViewCell.m in Sources */,
 				25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */,

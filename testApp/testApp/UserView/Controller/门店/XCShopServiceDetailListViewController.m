@@ -14,6 +14,7 @@
 #import "XCShopServiceEditedServiceViewController.h"
 #import "UILabel+createLabel.h"
 #import <MJRefresh/MJRefresh.h>
+#import "LYZAlertView.h"
 @interface XCShopServiceDetailListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,XCShopDetailListCellDelegate>
 
 /** <# 注释 #> */
@@ -45,42 +46,10 @@
 
     [self configureData];
     [self createUI];
+    __weak __typeof(self) weakSelf = self;
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        NSDictionary *param = @{
-                                @"storeId":[UserInfoManager shareInstance].storeID,
-                                };
-        __weak __typeof(self) weakSelf = self;
-        [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if (response[@"data"]) {
-                NSDictionary *dataInfo = response[@"data"];
-                NSArray *arr;
-                if ([self.titleTypeStr isEqualToString:@"洗车"]) {
-                    arr = dataInfo[@"xcServiceList"];
-                }
-                else if ([self.titleTypeStr isEqualToString:@"美容"]) {
-                    arr = dataInfo[@"mrServiceList"];
-                }
-                else if ([self.titleTypeStr isEqualToString:@"保养"]) {
-                    arr = dataInfo[@"byServiceList"];
-                }
-                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
-                    }
-                }
-                strongSelf.dataArr = serviceDataArrM;
-                [strongSelf.collectionView reloadData];
-            }
-            [strongSelf.collectionView.mj_header endRefreshing];
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-        } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
-        }];
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        [strongSelf refreshServiceData];
     }];
 }
 
@@ -118,7 +87,19 @@
                 NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
                 NSArray *origionDataArr = response[@"data"][@"dataSet"];
                 for (NSDictionary *dataInfo in origionDataArr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    //serviceID 为StoreID
+//                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                    XCShopServiceModel *serviceModel = [[XCShopServiceModel alloc] init];
+                    NSNumber *number;
+                    NSString *serviceName;
+                    if (dataInfo[@"id"]){
+                         number = [NSNumber numberWithLong:[dataInfo[@"id"] longValue]];
+                    }
+                    if(dataInfo[@"name"]) {
+                        serviceName = dataInfo[@"name"];
+                    }
+                    serviceModel.serviceId = number;
+                    serviceModel.serviceName = serviceName;
                     [dataArrM addObject:serviceModel];
                 }
                 XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
@@ -135,6 +116,46 @@
     }];
     
 }
+
+- (void)refreshServiceData
+{
+    NSDictionary *param = @{
+                            @"storeId":[UserInfoManager shareInstance].storeID,
+                            };
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if (response[@"data"]) {
+            NSDictionary *dataInfo = response[@"data"];
+            NSArray *arr;
+            if ([self.titleTypeStr isEqualToString:@"洗车"]) {
+                arr = dataInfo[@"xcServiceList"];
+            }
+            else if ([self.titleTypeStr isEqualToString:@"美容"]) {
+                arr = dataInfo[@"mrServiceList"];
+            }
+            else if ([self.titleTypeStr isEqualToString:@"保养"]) {
+                arr = dataInfo[@"byServiceList"];
+            }
+            NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+            for (NSDictionary *dataInfo in arr) {
+                XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                if (serviceModel) {
+                    [serviceDataArrM addObject:serviceModel];
+                }
+            }
+            strongSelf.dataArr = serviceDataArrM;
+            [strongSelf.collectionView reloadData];
+        }
+        [strongSelf.collectionView.mj_header endRefreshing];
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
+    }];
+}
+
 #pragma mark - Delegates & Notifications
 #pragma  mark - XCShopDetailListCellDelegate
 -(void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
@@ -144,6 +165,35 @@
     
     [self.navigationController pushViewController:editedVC animated:YES];
     
+}
+
+- (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
+{
+    //删除服务
+    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否删除该项目" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+       
+        NSDictionary *param = @{
+                                @"storeServiceid":serviceModel.storeID,
+                                };
+        __weak __typeof(self) weakSelf = self;
+
+        [RequestAPI deleteStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            if ([response[@"result"] integerValue] == 1) {
+                [strongSelf refreshServiceData];
+                [strongSelf showAlterInfoWithNetWork:@"删除成功"];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
+            }
+            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        } fail:^(id error) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr];
+        }];
+        
+    }];
+    [self.view addSubview:alterView];
 }
 
 #pragma mark - BaseNavigationBarDelegate
@@ -192,7 +242,7 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 //    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
-    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (336+158) * ViewRateBaseOnIP6);
+    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (474) * ViewRateBaseOnIP6);
     layout.sectionInset =  UIEdgeInsetsMake( 20 * ViewRateBaseOnIP6, 25* ViewRateBaseOnIP6, 0,25 * ViewRateBaseOnIP6);
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6) collectionViewLayout:layout];
     _collectionView.backgroundColor = COLOR_RGB_255(242, 242, 242);

@@ -12,15 +12,18 @@
 #import "XCUserListView.h"
 #import "XCUserListCollectionViewCell.h"
 #import "XCUserListHeaderView.h"
+#import "XCUserListFooterView.h"
 #import "XCUserListModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "XCMyCommissionViewController.h"
 #import "XCModifyPwdViewController.h"
+#import "LoginViewController.h"
 #define kCellID @"myCellID"
 #define kHeaderViewID @"myHeaderID"
 #define kFooterViewID @"myFooterID"
 #import "UserViewController+ListCellNetworkHandler.h"
-@interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "AppDelegate.h"
+@interface UserViewController ()<XCUserTopViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,XCUserListFooterViewDelegate>
 {
     BOOL _isStore; //判断用户 是否门店ID
 }
@@ -63,18 +66,10 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
     [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
-    [self.listView setFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT)];
+    [self.listView setFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT )];
 
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 #pragma mark - UI
 
@@ -138,6 +133,19 @@
 
 #pragma mark - Delegates & Notifications
 
+#pragma mark - XCUserListFooterViewDelegate
+-(void)XCUserListFooterViewClickCancelBtn:(UIButton *)button
+{
+    __weak __typeof(self) weakSelf = self;
+    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否退出登录" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [UserInfoManager destroyInstance];
+        [weakSelf.tabBarController setSelectedIndex:0];
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate.window.rootViewController presentViewController:loginVC animated:NO completion:nil];    }];
+    [self.view addSubview:alterView];
+}
+
 #pragma mark - XCUserTopViewDelegate
 
 - (void)XCUserTopViewMyCommissionButtonClickHandler:(UIButton *)button
@@ -190,7 +198,9 @@
         return headerView;
     }
     if (kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID forIndexPath:indexPath];
+        
+        XCUserListFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID forIndexPath:indexPath];
+        footerView.delegate = self;
         return footerView;
     }
     return nil;
@@ -208,7 +218,8 @@
     if (section != (self.listViewDataArray.count - 1)){
         return CGSizeMake(self.listView.frame.size.width,0);
     }
-    return CGSizeMake(self.listView.frame.size.width,40 * ViewRateBaseOnIP6);
+//    return CGSizeMake(self.listView.frame.size.width,40 * ViewRateBaseOnIP6);
+    return CGSizeMake(self.listView.frame.size.width, [XCUserListFooterView getFooterViewHeight]);
 }
 #pragma mark - UICollectionViewDidSeclect
 
@@ -268,12 +279,13 @@
         //  layout.itemSize = CGSizeMake(188 * ViewRateBaseOnIP6 , 180 * ViewRateBaseOnIP6);
         layout.itemSize = CGSizeMake((SCREEN_WIDTH - 4)/4.0 , 180 * ViewRateBaseOnIP6);
         
-        _listView = [[XCUserListView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + self.topView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - self.topView.frame.size.height - STATUS_BAR_HEIGHT - 98 * ViewRateBaseOnIP6) collectionViewLayout:layout];
+        _listView = [[XCUserListView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT) collectionViewLayout:layout];
         _listView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         [_listView  registerClass:[XCUserListCollectionViewCell class] forCellWithReuseIdentifier:kCellID];
         [_listView registerClass:[XCUserListHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewID];
-        [_listView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID];
+        [_listView registerClass:[XCUserListFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kFooterViewID];
         _listView.showsVerticalScrollIndicator = NO;
+        _listView.bounces = NO;
         _listView.dataSource = self;
         _listView.delegate = self;
     }

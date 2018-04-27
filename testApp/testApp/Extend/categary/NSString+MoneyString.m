@@ -19,7 +19,19 @@
     return newAmount;
 }
 
++ (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",text]];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,1)];
+    [str addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(68, 68, 68) range:NSMakeRange(1,text.length - 1)];
+    [str addAttribute:NSFontAttributeName
+                          value:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]
+                          range:NSMakeRange(1,text.length - 1)];
+    
 
+    
+    return str;
+}
 
 @end
 

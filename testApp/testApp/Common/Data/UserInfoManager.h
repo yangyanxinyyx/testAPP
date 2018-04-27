@@ -92,7 +92,7 @@
 
 
 + (UserInfoManager *)shareInstance;
-
++ (void)destroyInstance;
 @end
 
 

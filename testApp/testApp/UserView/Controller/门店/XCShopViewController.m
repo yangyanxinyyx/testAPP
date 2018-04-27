@@ -297,7 +297,6 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
    
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.serviceTableView) {
@@ -404,41 +403,31 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     BOOL configureSuccess = YES;
     NSString *errorStr = @"未知错误";
 
-    if (!isUsableNSString(_storeModel.tel, @"")) {
-        errorStr = @"请输入联系方式";
-        configureSuccess = NO;
-    }
-    if (![self valiMobile:_storeModel.corporateCellphone]) {
-        errorStr = @"请输入正确负责人电话";
-        configureSuccess = NO;
-    }
     if (!isUsableNSString(_storeModel.name, @"")) {
         errorStr = @"请输入门店名称";
         configureSuccess = NO;
-    }
-    if (!isUsableNSString(_storeModel.corporateName,@"")) {
+    }else if (!isUsableNSString(_storeModel.tel, @"")) {
+        errorStr = @"请输入联系方式";
+        configureSuccess = NO;
+    }else if (!isUsableNSString(_storeModel.corporateName,@"")) {
         errorStr = @"请输入负责人名称";
         configureSuccess = NO;
-    }
-    if (!isUsable(_storeModel.storeID, [NSNumber class])) {
+    }else if (![self valiMobile:_storeModel.corporateCellphone]) {
+        errorStr = @"请输入正确负责人电话";
         configureSuccess = NO;
-    }
-    if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
-        errorStr = @"请输入团体经理提成";
-        configureSuccess = NO;
-    }
-    if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
+    }else if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
         errorStr = @"请输入业务员提成";
         configureSuccess = NO;
-    }
-    if (!isUsableNSString(_storeModel.latitude, @"")) {
+    }else if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
+        errorStr = @"请输入团队经理提成";
+        configureSuccess = NO;
+    }else if (!isUsableNSString(_storeModel.longitude, @"")) {
         errorStr = @"定位信息错误";
         configureSuccess = NO;
-    }
-    if (!isUsableNSString(_storeModel.longitude, @"")) {
-        errorStr = @"定位信息错误";
+    }else if (!isUsable(_storeModel.storeID, [NSNumber class])) {
         configureSuccess = NO;
     }
+    
     if (configureSuccess) {
         __weak __typeof(self) weakSelf = self;
         LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否修改门店信息" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
@@ -920,7 +909,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
         _serviceTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _serviceTableView.showsVerticalScrollIndicator = NO;
-        _serviceTableView.bounces = YES;
+        _serviceTableView.bounces = NO;
         _serviceTableView.separatorColor = [UIColor purpleColor];
         _serviceTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_serviceTableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
@@ -937,7 +926,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
         _storeTableView.backgroundColor = [UIColor whiteColor];
         //取消滚动条的显示
         _storeTableView.showsVerticalScrollIndicator = NO;
-        _storeTableView.bounces = YES;
+        _storeTableView.bounces = NO;
         _storeTableView.separatorColor = [UIColor purpleColor];
         _storeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_storeTableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];

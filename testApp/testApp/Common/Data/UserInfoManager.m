@@ -62,22 +62,34 @@
 
 @end
 
+static UserInfoManager *manager = nil;
+
 @implementation UserInfoManager
 
 + (UserInfoManager *)shareInstance {
-    static UserInfoManager *manager = nil;
 
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[UserInfoManager alloc] init];
-        manager.performanceMedal = [[PerformanceMedal alloc] init];
-        manager.userMedal = [[UserMedal alloc] init];
-        manager.coverMainModel = [[CoverMainModel alloc] init];
-        manager.coverMainModel.announcementDatas = [NSMutableArray array];
-        manager.coverMainModel.loopImageDatas = [NSMutableArray array];
+        [manager configureInstance];
     });
 
     return manager;
 }
+
+- (void)configureInstance
+{
+    manager.performanceMedal = [[PerformanceMedal alloc] init];
+    manager.userMedal = [[UserMedal alloc] init];
+    manager.coverMainModel = [[CoverMainModel alloc] init];
+    manager.coverMainModel.announcementDatas = [NSMutableArray array];
+    manager.coverMainModel.loopImageDatas = [NSMutableArray array];
+}
+
+
++ (void)destroyInstance {    
+    [manager configureInstance];
+}
+
 
 @end
