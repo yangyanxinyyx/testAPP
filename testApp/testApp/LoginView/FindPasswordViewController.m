@@ -80,7 +80,7 @@
     [confirmBtn addTarget:self action:@selector(pressConfirmBtn:) forControlEvents:UIControlEventTouchUpInside];
 
     UIImage *image = [UIImage imageNamed:@"back.png"];
-    UIButton *backBtn = [[UIButton  alloc] initWithFrame:CGRectMake(15, 13 + STATUS_BAR_HEIGHT + kNavMargan, image.size.width, image.size.height)];
+    UIButton *backBtn = [[UIButton  alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT, 44, 44)];
     [backBtn setImage:image forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(pressBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backBtn];

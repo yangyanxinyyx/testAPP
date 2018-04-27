@@ -39,12 +39,10 @@
     [self addSubview:titleLabel];
 
     NSArray *kinds = @[@"冠军",@"亚军",@"季军"];
-    NSArray *images = nil;
-    if ([title isEqualToString:@"个人业绩"]) {
-        images = @[@"个人冠军.png",@"个人亚军.png",@"个人季军.png"];
-    }else{
-        images = @[@"年度冠军.png",@"年度亚军.png",@"年度季军.png"];
-    }
+    NSArray *images = @[@"年度冠军.png",@"年度亚军.png",@"年度季军.png"];
+    NSArray *noImages = @[@"没有冠军.png",@"没有亚军.png",@"没有季军.png"];
+
+
     for (int i=0; i <3; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54, 80, 80)];
         imageView.image = [UIImage imageNamed:images[i]];
@@ -52,6 +50,9 @@
 
         UILabel *countLabel = [[UILabel alloc] initWithFrame:CGRectMake(25 + ((SCREEN_WIDTH - 50 -240)/2 + 80) * i, 54+60, 80, 12)];
         countLabel.text = [NSString stringWithFormat:@"X%@",info[i]] ;
+        if ([countLabel.text isEqualToString:@"X0"]) {
+            imageView.image = [UIImage imageNamed:noImages[i]];
+        }
         countLabel.font = [UIFont systemFontOfSize:12];
         countLabel.textColor = COLOR_RGB_255(51, 51, 51);
         countLabel.textAlignment = NSTextAlignmentCenter;

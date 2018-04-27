@@ -216,12 +216,12 @@
 		FCEF5CFB208ED8EC00B387FA /* user_nomnal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C97208ED8EC00B387FA /* user_nomnal@3x.png */; };
 		FCEF5CFC208ED8EC00B387FA /* user_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C98208ED8EC00B387FA /* user_select@2x.png */; };
 		FCEF5CFD208ED8EC00B387FA /* user_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C99208ED8EC00B387FA /* user_select@3x.png */; };
-		FCEF5CFE208ED8EC00B387FA /* 个人亚军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9A208ED8EC00B387FA /* 个人亚军@2x.png */; };
-		FCEF5CFF208ED8EC00B387FA /* 个人亚军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9B208ED8EC00B387FA /* 个人亚军@3x.png */; };
-		FCEF5D00208ED8EC00B387FA /* 个人冠军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9C208ED8EC00B387FA /* 个人冠军@2x.png */; };
-		FCEF5D01208ED8EC00B387FA /* 个人冠军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9D208ED8EC00B387FA /* 个人冠军@3x.png */; };
-		FCEF5D02208ED8EC00B387FA /* 个人季军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9E208ED8EC00B387FA /* 个人季军@2x.png */; };
-		FCEF5D03208ED8EC00B387FA /* 个人季军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9F208ED8EC00B387FA /* 个人季军@3x.png */; };
+		FCEF5CFE208ED8EC00B387FA /* 没有亚军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9A208ED8EC00B387FA /* 没有亚军@2x.png */; };
+		FCEF5CFF208ED8EC00B387FA /* 没有亚军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9B208ED8EC00B387FA /* 没有亚军@3x.png */; };
+		FCEF5D00208ED8EC00B387FA /* 没有冠军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9C208ED8EC00B387FA /* 没有冠军@2x.png */; };
+		FCEF5D01208ED8EC00B387FA /* 没有冠军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9D208ED8EC00B387FA /* 没有冠军@3x.png */; };
+		FCEF5D02208ED8EC00B387FA /* 没有季军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9E208ED8EC00B387FA /* 没有季军@2x.png */; };
+		FCEF5D03208ED8EC00B387FA /* 没有季军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5C9F208ED8EC00B387FA /* 没有季军@3x.png */; };
 		FCEF5D04208ED8EC00B387FA /* 年度亚军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5CA0208ED8EC00B387FA /* 年度亚军@2x.png */; };
 		FCEF5D05208ED8EC00B387FA /* 年度亚军@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5CA1208ED8EC00B387FA /* 年度亚军@3x.png */; };
 		FCEF5D06208ED8EC00B387FA /* 年度冠军@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF5CA2208ED8EC00B387FA /* 年度冠军@2x.png */; };
@@ -712,12 +712,12 @@
 		FCEF5C97208ED8EC00B387FA /* user_nomnal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_nomnal@3x.png"; sourceTree = "<group>"; };
 		FCEF5C98208ED8EC00B387FA /* user_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@2x.png"; sourceTree = "<group>"; };
 		FCEF5C99208ED8EC00B387FA /* user_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_select@3x.png"; sourceTree = "<group>"; };
-		FCEF5C9A208ED8EC00B387FA /* 个人亚军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人亚军@2x.png"; sourceTree = "<group>"; };
-		FCEF5C9B208ED8EC00B387FA /* 个人亚军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人亚军@3x.png"; sourceTree = "<group>"; };
-		FCEF5C9C208ED8EC00B387FA /* 个人冠军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人冠军@2x.png"; sourceTree = "<group>"; };
-		FCEF5C9D208ED8EC00B387FA /* 个人冠军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人冠军@3x.png"; sourceTree = "<group>"; };
-		FCEF5C9E208ED8EC00B387FA /* 个人季军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人季军@2x.png"; sourceTree = "<group>"; };
-		FCEF5C9F208ED8EC00B387FA /* 个人季军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人季军@3x.png"; sourceTree = "<group>"; };
+		FCEF5C9A208ED8EC00B387FA /* 没有亚军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有亚军@2x.png"; sourceTree = "<group>"; };
+		FCEF5C9B208ED8EC00B387FA /* 没有亚军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有亚军@3x.png"; sourceTree = "<group>"; };
+		FCEF5C9C208ED8EC00B387FA /* 没有冠军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有冠军@2x.png"; sourceTree = "<group>"; };
+		FCEF5C9D208ED8EC00B387FA /* 没有冠军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有冠军@3x.png"; sourceTree = "<group>"; };
+		FCEF5C9E208ED8EC00B387FA /* 没有季军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有季军@2x.png"; sourceTree = "<group>"; };
+		FCEF5C9F208ED8EC00B387FA /* 没有季军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "没有季军@3x.png"; sourceTree = "<group>"; };
 		FCEF5CA0208ED8EC00B387FA /* 年度亚军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "年度亚军@2x.png"; sourceTree = "<group>"; };
 		FCEF5CA1208ED8EC00B387FA /* 年度亚军@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "年度亚军@3x.png"; sourceTree = "<group>"; };
 		FCEF5CA2208ED8EC00B387FA /* 年度冠军@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "年度冠军@2x.png"; sourceTree = "<group>"; };
@@ -1833,12 +1833,12 @@
 				FCEF5C97208ED8EC00B387FA /* user_nomnal@3x.png */,
 				FCEF5C98208ED8EC00B387FA /* user_select@2x.png */,
 				FCEF5C99208ED8EC00B387FA /* user_select@3x.png */,
-				FCEF5C9A208ED8EC00B387FA /* 个人亚军@2x.png */,
-				FCEF5C9B208ED8EC00B387FA /* 个人亚军@3x.png */,
-				FCEF5C9C208ED8EC00B387FA /* 个人冠军@2x.png */,
-				FCEF5C9D208ED8EC00B387FA /* 个人冠军@3x.png */,
-				FCEF5C9E208ED8EC00B387FA /* 个人季军@2x.png */,
-				FCEF5C9F208ED8EC00B387FA /* 个人季军@3x.png */,
+				FCEF5C9A208ED8EC00B387FA /* 没有亚军@2x.png */,
+				FCEF5C9B208ED8EC00B387FA /* 没有亚军@3x.png */,
+				FCEF5C9C208ED8EC00B387FA /* 没有冠军@2x.png */,
+				FCEF5C9D208ED8EC00B387FA /* 没有冠军@3x.png */,
+				FCEF5C9E208ED8EC00B387FA /* 没有季军@2x.png */,
+				FCEF5C9F208ED8EC00B387FA /* 没有季军@3x.png */,
 				FCEF5CA0208ED8EC00B387FA /* 年度亚军@2x.png */,
 				FCEF5CA1208ED8EC00B387FA /* 年度亚军@3x.png */,
 				FCEF5CA2208ED8EC00B387FA /* 年度冠军@2x.png */,
@@ -2078,16 +2078,16 @@
 				FCEF5CED208ED8EC00B387FA /* coverMain_select@3x.png in Resources */,
 				FCEF5CF4208ED8EC00B387FA /* placeholder@2x.png in Resources */,
 				FCEF5D46208ED8ED00B387FA /* 背景@2x.png in Resources */,
-				FCEF5D03208ED8EC00B387FA /* 个人季军@3x.png in Resources */,
+				FCEF5D03208ED8EC00B387FA /* 没有季军@3x.png in Resources */,
 				FCEF5CE9208ED8EC00B387FA /* back@3x.png in Resources */,
 				FCEF5CEE208ED8EC00B387FA /* down@2x.png in Resources */,
 				25712B2A20908F37001629AD /* guide2@3x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FCEF5CFA208ED8EC00B387FA /* user_nomnal@2x.png in Resources */,
 				FCEF5D30208ED8ED00B387FA /* confirm@3x.png in Resources */,
-				FCEF5CFE208ED8EC00B387FA /* 个人亚军@2x.png in Resources */,
+				FCEF5CFE208ED8EC00B387FA /* 没有亚军@2x.png in Resources */,
 				FCEF5D44208ED8ED00B387FA /* 精致洗车图@2x.png in Resources */,
-				FCEF5CFF208ED8EC00B387FA /* 个人亚军@3x.png in Resources */,
+				FCEF5CFF208ED8EC00B387FA /* 没有亚军@3x.png in Resources */,
 				FCEF5D2A208ED8ED00B387FA /* placeHolder@3x.png in Resources */,
 				FCEF5D26208ED8ED00B387FA /* login_username@3x.png in Resources */,
 				25712B2920908F37001629AD /* guide2@2x.png in Resources */,
@@ -2117,7 +2117,7 @@
 				FCEF5D3F208ED8ED00B387FA /* 标准洗车图@3x.png in Resources */,
 				FCEF5D23208ED8ED00B387FA /* login_preson@2x.png in Resources */,
 				FCEF5D21208ED8ED00B387FA /* login_password@2x.png in Resources */,
-				FCEF5D00208ED8EC00B387FA /* 个人冠军@2x.png in Resources */,
+				FCEF5D00208ED8EC00B387FA /* 没有冠军@2x.png in Resources */,
 				FCEF5D14208ED8ED00B387FA /* 未选中@3x.png in Resources */,
 				FCEF5D06208ED8EC00B387FA /* 年度冠军@2x.png in Resources */,
 				FCEF5CFC208ED8EC00B387FA /* user_select@2x.png in Resources */,
@@ -2153,14 +2153,14 @@
 				FCEF5D2D208ED8ED00B387FA /* 1@3x (1).png in Resources */,
 				FCEF5D47208ED8ED00B387FA /* 返回拷贝10@2x.png in Resources */,
 				FCEF5D1D208ED8ED00B387FA /* login_code@2x.png in Resources */,
-				FCEF5D01208ED8EC00B387FA /* 个人冠军@3x.png in Resources */,
+				FCEF5D01208ED8EC00B387FA /* 没有冠军@3x.png in Resources */,
 				25712B2D20908F37001629AD /* guide1@3x.png in Resources */,
 				FCEF5D10208ED8ED00B387FA /* 搜索@3x.png in Resources */,
 				FCEF5D3A208ED8ED00B387FA /* 快速洗车图@2x.png in Resources */,
 				FCEF5D32208ED8ED00B387FA /* red.png in Resources */,
 				FCEF5CF2208ED8EC00B387FA /* getCar_select@2x.png in Resources */,
 				FC32BF3F2079AA2000817156 /* userListViewData.plist in Resources */,
-				FCEF5D02208ED8EC00B387FA /* 个人季军@2x.png in Resources */,
+				FCEF5D02208ED8EC00B387FA /* 没有季军@2x.png in Resources */,
 				FCEF5CF6208ED8EC00B387FA /* price_nomnal@2x.png in Resources */,
 				FCEF5D22208ED8ED00B387FA /* login_password@3x.png in Resources */,
 				FC47951A205553E900218362 /* Assets.xcassets in Resources */,
