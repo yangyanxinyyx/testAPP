@@ -11,6 +11,7 @@
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
 #import "YXTestNumber.h"
 #import "SelectTimeView.h"
+#import "SelectTiemHoursView.h"
 #import "LYZSelectView.h"
 @interface PriceCustomerInformEntryViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
 
@@ -279,6 +280,8 @@
             [weakSelf.dictionaryInfo setObject:timeString forKey:@"recordDate"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+        
+        
     } else if (indexPath.section == 1 && indexPath.row == 4) {
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];

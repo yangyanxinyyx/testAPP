@@ -24,6 +24,8 @@
 @property (nonatomic, strong) AMapSearchAPI * searchAPI ;
 /** <# 注释 #> */
 @property (nonatomic, strong) AMapAddressComponent * currentComponent ;
+
+@property (nonatomic, strong) UIImageView *selectPointImageView;
 @end
 
 @implementation XCShopAMapViewController
@@ -36,16 +38,14 @@
     _searchAPI.delegate = self;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
     _mapView.delegate = self;
-    _mapView.showsUserLocation = YES;
+//    _mapView.showsUserLocation = YES;
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
     _mapView.userInteractionEnabled = YES;
     _mapView.zoomLevel = 15;
     [self.view addSubview:self.mapView];
     
     self.locationBtn = [UIButton buttonWithType:0];
-    [self.locationBtn setTitle:@"我的位置" forState:UIControlStateNormal];
-    [self.locationBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.locationBtn setBackgroundColor:[UIColor orangeColor]];
+    [self.locationBtn setBackgroundImage:[UIImage imageNamed:@"position"] forState:UIControlStateNormal];
     [self.locationBtn addTarget:self action:@selector(localMyPosition:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.locationBtn];
 
@@ -57,9 +57,8 @@
 
 - (void)viewWillLayoutSubviews
 {
-    CGSize buttonSize = CGSizeMake(200, 60);
     
-    [self.locationBtn setFrame:CGRectMake(15 * ViewRateBaseOnIP6, CGRectGetMaxY(_mapView.frame) - 15 * ViewRateBaseOnIP6 - buttonSize.height, buttonSize.width, buttonSize.height)];
+    [self.locationBtn setFrame:CGRectMake(SCREEN_WIDTH - 120 * ViewRateBaseOnIP6, SCREEN_HEIGHT - 120 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
 }
 
 #pragma mark - Init Method
@@ -108,12 +107,12 @@
     if ([annotation isKindOfClass:[MAPointAnnotation class]])
     {
         static NSString *reuseIndetifier = kannotaionID;
-        MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        MAPinAnnotationView *annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
         if (annotationView == nil)
         {
             annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
-        annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO
+        annotationView.canShowCallout = YES;       //设置气泡可以弹出，默认为NO
         annotationView.pinColor =  MAPinAnnotationColorRed;
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:annotation.coordinate.latitude longitude: annotation.coordinate.longitude];
@@ -127,10 +126,11 @@
         UIButton *button = [UIButton buttonWithType:0];
         [button setTitle:@"确定" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor orangeColor]];
-        [button sizeToFit];
+        [button setBackgroundImage:[UIImage imageNamed:@"bubb"] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, 96 * ViewRateBaseOnIP6, 68 * ViewRateBaseOnIP6);
         [button addTarget:self action:@selector(mapViewCalloutClickButton:) forControlEvents:UIControlEventTouchUpInside];
-        annotationView.leftCalloutAccessoryView =button;
+        annotationView.leftCalloutAccessoryView = button;
+        
         
         return annotationView;
     }
@@ -178,4 +178,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - Setter&Getter
+
+- (UIImageView *)selectPointImageView{
+    if (!_selectPointImageView) {
+        _selectPointImageView = [[UIImageView alloc] init];
+        _selectPointImageView.image = [UIImage imageNamed:@"selectPoint"];
+    }
+    return _selectPointImageView;
+}
 @end
