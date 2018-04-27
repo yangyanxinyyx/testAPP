@@ -137,7 +137,9 @@
         if (tempBarStyle!=UIStatusBarStyleLightContent) {
             [[UIApplication sharedApplication] setStatusBarStyle:tempBarStyle animated:NO];
         }
-		[_pickerDelegate imagePickerDidFinished:self];
+        if([_pickerDelegate respondsToSelector:@selector(imagePickerDidFinished:)]) {
+            [_pickerDelegate imagePickerDidFinished:self];
+        }
 	}
 }
 
