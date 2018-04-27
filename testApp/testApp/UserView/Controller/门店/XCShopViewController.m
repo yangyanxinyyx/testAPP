@@ -19,11 +19,12 @@
 #import "XCShopServiceDetailListViewController.h"
 #import "ProgressControll.h"
 #import "XCCheckoutPhotoPreViewController.h"
+#import "JFImagePickerController.h"
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,UIImagePickerControllerDelegate,
-XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
+XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong) UIView *contenView;
 @property (nonatomic, strong) priceCIQChangeView *CIQChangeView;
 @property (nonatomic, strong) UIView *viewBear;
@@ -579,19 +580,19 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                                                     cell:(XCCheckoutDetailPhotoCell *)cell
 {
     self.currentPhotoCell = cell;
-    [ProgressControll showProgressNormal];
-
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
-    //设置选取的照片是否可编辑
-    pickerController.allowsEditing = YES;
-    pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
-    //照片的选取样式还有以下两种
-    //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册
-    //UIImagePickerControllerSourceTypeCamera//调取摄像头
-    pickerController.delegate = self;
-    [self presentViewController:pickerController animated:YES completion:nil];
-    [ProgressControll dismissProgress];
-
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
+    [action showInView:self.navigationController.view];
+    
+//    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
+//    //设置选取的照片是否可编辑
+//    pickerController.allowsEditing = YES;
+//    pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;//图片分组列表样式
+//    //照片的选取样式还有以下两种
+//    //UIImagePickerControllerSourceTypePhotoLibrary,直接全部呈现系统相册
+//    //UIImagePickerControllerSourceTypeCamera//调取摄像头
+//    pickerController.delegate = self;
+//    [self presentViewController:pickerController animated:YES completion:nil];
+    
 }
 
 #pragma mark - navigationDelegate
@@ -647,6 +648,49 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIActionSheet delegate -
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *vc = [UIImagePickerController new];
+            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
+            vc.delegate = self;
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            NSInteger maxCount = 4;
+            if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+                maxCount = 1;
+                NSInteger count = maxCount - self.storePhotoArrM.count;
+                if (count < 0) {
+                    count = 0 ;
+                }
+                [JFImagePickerController setMaxCount:count];
+                JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
+                picker.pickerDelegate = self;
+                [self.navigationController presentViewController:picker animated:YES completion:nil];
+            }else {
+                NSInteger count = maxCount - self.storePhotoArrM.count;
+                if (count < 0) {
+                    count = 0 ;
+                }
+                [JFImagePickerController setMaxCount:count];
+                JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
+                picker.pickerDelegate = self;
+                [self.navigationController presentViewController:picker animated:YES completion:nil];
+            }
+        
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - XCShopAMapViewControllerDelegate

@@ -66,7 +66,7 @@
 
 	toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-44, [UIScreen mainScreen].bounds.size.width, 44)];
 	toolbar.tintColor = [UIColor whiteColor];
-	toolbar.barStyle = UIBarStyleDefault;
+	toolbar.barStyle = UIBarStyleBlack;
 	[self.view addSubview:toolbar];
     UIBarButtonItem *leftFix = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	UIBarButtonItem *rightFix = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];

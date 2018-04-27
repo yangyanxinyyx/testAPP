@@ -19,7 +19,7 @@
 {
     NSMutableDictionary *updateStoreInfo = [[NSMutableDictionary alloc] init];
     
-    if (!isUsableNSString(self.storeID, @"")) {
+    if (!isUsable(self.storeID, [NSNumber class])) {
         return nil;
     }
     [updateStoreInfo setValue:self.storeID forKey:@"id"];
@@ -47,10 +47,10 @@
     else if (isUsableNSString(self.area, @"")) {
         [updateStoreInfo setValue:self.area forKey:@"area"];
     }
-    else if (isUsableNSString(self.salesmanCommission, @"")) {
+    else if (isUsable(self.salesmanCommission, [NSNumber class])) {
         [updateStoreInfo setValue:self.salesmanCommission forKey:@"salesmanCommission"];
     }
-    else if (isUsableNSString(self.managerCommission, @"")) {
+    else if (isUsable(self.managerCommission, [NSNumber class])) {
         [updateStoreInfo setValue:self.managerCommission forKey:@"managerCommission"];
     }
     else if (isUsableNSString(self.licenseUrl, @"")) {

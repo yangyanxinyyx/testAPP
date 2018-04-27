@@ -22,7 +22,7 @@ static NSString *imagePickerCellIdentifier = @"imagePickerCellIdentifier";
 
 @implementation WSImagePickerView
 
-- (instancetype)initWithFrame:(CGRect)frame config:(WSImagePickerConfig *)config {
+- (instancetype)initWithFrame:(CGRect)frame config:(WSImagePickerConfig *)config{
     if(self = [super initWithFrame:frame]) {
         _config = (config != nil)?config:([WSImagePickerConfig new]);
         [self setupView];
@@ -118,7 +118,7 @@ static NSString *imagePickerCellIdentifier = @"imagePickerCellIdentifier";
     }
     else {
         imgView.image = nil;
-        imgView.image = [UIImage imageNamed:@"添加图片"];
+        imgView.image = [UIImage imageNamed:@"bg_photo_add"];
     }
     return cell;
 }
@@ -230,11 +230,11 @@ static NSString *imagePickerCellIdentifier = @"imagePickerCellIdentifier";
 
 - (instancetype)init {
     if(self = [super init]) {
-        _itemSize = CGSizeMake(140 * ViewRateBaseOnIP6, 140 * ViewRateBaseOnIP6);
-        _sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _minimumLineSpacing = 6 * ViewRateBaseOnIP6;
-        _minimumInteritemSpacing =6 * ViewRateBaseOnIP6;
-        _photosMaxCount = 4;
+        _itemSize = CGSizeMake(60, 60);
+        _sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+        _minimumLineSpacing = 10.0f;
+        _minimumInteritemSpacing = 10.0f;
+        _photosMaxCount = 9;
     }
     return self;
 }

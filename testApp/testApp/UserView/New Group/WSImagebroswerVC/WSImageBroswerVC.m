@@ -20,14 +20,6 @@
     [self initializeData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBarHidden = NO;
-    
-}
-
 - (void)initializeView {
     self.view.backgroundColor = [UIColor blackColor];
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
