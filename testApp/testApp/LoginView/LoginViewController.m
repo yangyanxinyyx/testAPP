@@ -136,6 +136,8 @@
                     [UserInfoManager shareInstance].userID = data[@"id"] ? data[@"id"] : @"";
                     [UserInfoManager shareInstance].isStoreAdministrator = data[@"isStoreAdministrator"] ? data[@"isStoreAdministrator"] : @"";
                     [UserInfoManager shareInstance].name = data[@"name"] ? data[@"name"] : @"";
+                    [UserInfoManager shareInstance].orgUnitId = data[@"orgUnitId"] ? data[@"orgUnitId"] : @"";
+                    [UserInfoManager shareInstance].orgUnitName = data[@"orgUnitName"] ? data[@"orgUnitName"] : @"";
                     [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : @"";
                     [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : @"";
                     [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : @"";
@@ -259,9 +261,7 @@
                                     [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
                                 }
                             }
-                            UserInfoManager *manager = [UserInfoManager shareInstance];
-                            NSLog(@"");
-                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].employeeName worknumber:[UserInfoManager shareInstance].code];
+                            UserInfoConfirmView *confirmView = [[UserInfoConfirmView alloc] initwithName:[UserInfoManager shareInstance].name department:[UserInfoManager shareInstance].orgUnitName worknumber:[UserInfoManager shareInstance].code];
                             confirmView.delegate = self;
                             [self.view addSubview:confirmView];
 
