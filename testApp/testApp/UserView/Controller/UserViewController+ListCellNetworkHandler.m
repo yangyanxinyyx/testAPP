@@ -24,6 +24,8 @@
     if ([self isPolicyTypeVCWithModel:model]) {
         NSDictionary *param = @{
                                 @"policyStatus":[self changeTitleValueWithTitle:model.title],
+                                @"pageSize":@10,
+                                @"pageIndex":@1
                                 };
         [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             BOOL configureSucess  = NO;
