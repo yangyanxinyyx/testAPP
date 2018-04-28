@@ -100,7 +100,7 @@ static NSString *identifier = @"listCell";
     _tab.delegate = self;
     _tab.dataSource = self;
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tab.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    _tab.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tab];
     _tab.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
     _tab.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
@@ -186,18 +186,13 @@ static NSString *identifier = @"listCell";
 - (void)showFixBtn:(BOOL)show
 {
     if (show) {
-//        self.fixBtn.hidden = NO;
-//        self.orderBtn.hidden = NO;
-//        self.orderBtn.frame = CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44);
+
         self.noFoundTipsView.hidden = NO;
-        _tab.hidden =YES;
 
     }else{
-//        self.fixBtn.hidden = YES;
-//        self.orderBtn.hidden = NO;
-//        self.orderBtn.frame = CGRectMake(15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH - 30, 44);
+
         self.noFoundTipsView.hidden = YES;
-        _tab.hidden = NO;
+
     }
 
 }
@@ -270,6 +265,8 @@ static NSString *identifier = @"listCell";
                                 }];
 
                                 [self.view addSubview:tipsView];
+                                [self.view sendSubviewToBack:tipsView];
+
                             });
 
                         }else{

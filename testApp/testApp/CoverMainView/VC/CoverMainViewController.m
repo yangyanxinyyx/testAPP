@@ -15,6 +15,8 @@
 #import "CoverWebViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "CoverLoopimageModel.h"
+#import <MJRefresh/MJRefresh.h>
+#import "CoverAnnouncementModel.h"
 
 @interface CoverMainViewController ()<UIScrollViewDelegate,CoverAnnouncementViewDelegate>
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -45,9 +47,11 @@
     _scrollView.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [ self.view addSubview:_scrollView];
     _scrollView.contentSize = CGSizeMake(0, 829 - 190 + 190 *kScaleHeight);
-    _scrollView.bounces = NO;
+//    _scrollView.bounces = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
+
+    _scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
 
 
     NSArray *array = [NSArray arrayWithObjects:[UIImage imageNamed:@"placeholder.png"],[UIImage imageNamed:@"placeholder.png"],[UIImage imageNamed:@"placeholder.png"], nil];
@@ -91,6 +95,122 @@
 
 }
 
+- (void)refresh
+{
+    //获取车险信息
+    NSDictionary  *param = @{
+                             @"salesman_id":[UserInfoManager shareInstance].userID
+                             };
+    [RequestAPI getPersonalPolicy:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        NSLog(@"%@",response);
+        if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"获取车险信息成功");
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = response[@"data"];
+                    [UserInfoManager shareInstance].performanceMedal.lastYearCar = data[@"last_year_car"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastMonthCar = data[@"last_month_car"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.nowMonthCar = data[@"now_month_car"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
+
+                    [UserInfoManager shareInstance].performanceMedal.lastYearInsurance = data[@"last_year_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastMonthInsurance = data[@"last_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.nowMonthInsurance = data[@"now_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking = data[@"last_year_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance_ranking"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking = data[@"last_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance_ranking"]]:@"";
+                    [UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking = data[@"now_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance_ranking"]]:@"";
+
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    [self loadCoverModel];
+
+                }
+            }else if (([response[@"result"] integerValue] == 0)){
+                NSLog(@"获取车险信息失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取车险信息错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
+
+    [self.scrollView.mj_header endRefreshing];
+}
+
+- (void)loadCoverModel
+{
+    [[UserInfoManager shareInstance].coverMainModel.loopImageDatas removeAllObjects];
+    [[UserInfoManager shareInstance].coverMainModel.announcementDatas removeAllObjects];
+    //获取公告信息
+    NSDictionary  *param = @{
+                             @"PageSize":@(10),
+                             @"PageIndex":@(1)
+                             };
+    [RequestAPI getCoverAnnouncement:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        NSLog(@"%@",response);
+        if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"获取公告成功");
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = response[@"data"];
+                    NSArray *dataSet = data[@"dataSet"];
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    for (NSDictionary *dicData in dataSet) {
+                        CoverAnnouncementModel *announcement = [[CoverAnnouncementModel alloc] init];
+                        [announcement setValuesForKeysWithDictionary:dicData];
+                        [[UserInfoManager shareInstance].coverMainModel.announcementDatas addObject:announcement];
+                    }
+                }
+
+                //获取轮播图信息
+                NSDictionary  *param = @{
+                                         @"type":@"业务端首页轮播图"
+                                         };
+                [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    NSLog(@"%@",response);
+                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"获取轮播图成功");
+                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                                NSArray *dataSet =  response[@"data"];
+                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                                for (NSDictionary *dicData in dataSet) {
+                                    CoverLoopimageModel *loopimage = [[CoverLoopimageModel alloc] init];
+                                    [loopimage setValuesForKeysWithDictionary:dicData];
+                                    [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
+                                }
+                            }
+                            [self reloadData];
+
+                        }else if (([response[@"result"] integerValue] == 0)){
+                            NSLog(@"获取轮播图失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取轮播图错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
+
+
+            }else if (([response[@"result"] integerValue] == 0)){
+                NSLog(@"获取公告失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取公告错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
+
+
+}
+
 - (void)reloadData
 {
     [_carView removeFromSuperview];
@@ -116,18 +236,11 @@
 
             [_scrollView addSubview:_imageScrollView];
 
-            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 190 * kScaleHeight - 40, SCREEN_WIDTH, 40)];
             _announcementView.delegate = self;
             [_scrollView addSubview:_announcementView];
         });
     });
-
-
-
-
-
-
-
 
 
     NSArray * array = @[

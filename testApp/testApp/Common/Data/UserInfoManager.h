@@ -75,6 +75,8 @@
 @property (nonatomic,strong) NSString *customerId;
 @property (nonatomic,strong) NSString *customerName;
 @property (nonatomic,strong) NSString *identity; //身份号码
+@property (nonatomic,strong) NSString *orgUnitId;
+@property (nonatomic,strong) NSString *orgUnitName;
 
 @property (nonatomic,assign) BOOL isStore;         //是否是门店 下面的属性是门店才有的
 
