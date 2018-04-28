@@ -13,5 +13,21 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testApp/UserView/Controller/&#x8f66;&#x9669;&#x5ba2;&#x6237;&#x5217;&#x8868;/&#x5df2;&#x7f34;&#x8d39;&#x5f85;&#x6253;&#x5355;/XCUserWaitingToWriteListViewController.m"
+            timestampString = "546538756.189959"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-XCCheckoutCellClickCheckoutButtonHandler:cell:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
