@@ -7,17 +7,16 @@
 //
 
 #import "XCCheckoutDetailTextFiledCell.h"
-
+#import "UILabel+createLabel.h"
 @interface XCCheckoutDetailTextFiledCell ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UIView * separtatorLine ;
 @property (nonatomic, strong) UIView * twoSepartatorLine ;
-
-
-/** <# 注释 #> */
 @property (nonatomic, strong) UILabel * secondTitlelabel ;
+
 /** <# 注释 #> */
+@property (nonatomic, strong) UIButton * clickBtn ;
 
 @end
 
@@ -34,6 +33,7 @@
     if (self) {
         _isTopShowSeparator = NO;
         _shouldShowSeparator = NO;
+        _shouldShowClickView = NO;
         _isCenterSeparator = NO;
         _isTwoInputType = NO;
         _isNumField = NO;
@@ -58,6 +58,16 @@
     
     _secondTitlelabel.hidden = YES;
     _secondTextField.hidden = YES;
+    
+    
+    if (_shouldShowClickView) {
+        labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
+        [_clickBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
+    }else {
+        [_clickBtn setFrame:CGRectZero];
+    }
+    
+    labelSize = _titleLabel.frame.size;
     if (_isTwoInputType) {
         _secondTitlelabel.hidden = NO;
         _secondTextField.hidden = NO;
@@ -79,7 +89,7 @@
         [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
         [_textField sizeToFit];
         labelSize = _textField.frame.size;
-        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, self.bounds.size.width - (CGRectGetMaxX(_titleLabel.frame) + 16 + 16 * ViewRateBaseOnIP6) , 44 * ViewRateBaseOnIP6)];
+        [_textField setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, (self.bounds.size.height - 44 * ViewRateBaseOnIP6 ) * 0.5, self.bounds.size.width - (CGRectGetMaxX(_titleLabel.frame) + (16 + 16) * ViewRateBaseOnIP6  + 30 * ViewRateBaseOnIP6 + _clickBtn.frame.size.width) , 44 * ViewRateBaseOnIP6)];
     }
     
     if (_shouldShowSeparator) {
@@ -92,6 +102,7 @@
     if (_isTopShowSeparator) {
           [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , 0, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
     }
+   
    
     
 }
@@ -123,9 +134,17 @@
     else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
         [_textField setText:model.storeStatus];
     }
+    else if ([self.title isEqualToString:@"详细地址:"]&&isUsableNSString(model.address, @"")) {
+        [_textField setText:model.address];
+    }
     
 }
-
+- (void)clickNextBtn:(UIButton *)btn
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailTextFiledClickBtn:title:)]) {
+        [self.delegate XCCheckoutDetailTextFiledClickBtn:self.textField title:self.titleLabel.text];
+    }
+}
 //- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model
 //{
 //    if ([self.title isEqualToString:@"投保人:"] && isUsableNSString(model.onwerName,@"")) {
@@ -201,13 +220,12 @@
 
 - (void)configSubVies
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_titleLabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
-    [_titleLabel setTextColor:COLOR_RGB_255(68, 68, 68)];
+    _titleLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
     [self addSubview:_titleLabel];
     
     _textField = [[UITextField alloc] init];
-    [_textField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
+    [_textField setFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:28 * ViewRateBaseOnIP6]];
+    [_textField setTextColor:COLOR_RGB_255(165, 165, 165)];
     _textField.delegate = self;
     _textField.returnKeyType = UIReturnKeyDone;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;  
@@ -222,17 +240,23 @@
     [self addSubview:_twoSepartatorLine];
     
     _secondTitlelabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_secondTitlelabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
-    [_secondTitlelabel setTextColor:COLOR_RGB_255(68, 68, 68)];
+    [_secondTitlelabel setFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:28 * ViewRateBaseOnIP6]];
+    [_secondTitlelabel setTextColor:COLOR_RGB_255(51, 51, 51)];
     [self addSubview:_secondTitlelabel];
     
     _secondTextField = [[UITextField alloc] init];
-    [_secondTextField setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
+    [_secondTextField setFont:[UIFont fontWithName:@"PingFang-SC-Medium" size:28 * ViewRateBaseOnIP6]];
+    [_secondTextField setTextColor:COLOR_RGB_255(165, 165, 165)];
     _secondTextField.delegate = self;
     _secondTextField.returnKeyType = UIReturnKeyDone;
-    [_secondTextField setBackgroundColor:[UIColor whiteColor]];
+    _secondTextField.clearButtonMode = UITextFieldViewModeWhileEditing;      [_secondTextField setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:_secondTextField];
     
+    _clickBtn = [UIButton buttonWithType: 0];
+    UIImage *arrowImage = [UIImage imageNamed:@"next"];
+    [_clickBtn setImage:arrowImage forState:UIControlStateNormal];
+    [_clickBtn addTarget:self action:@selector(clickNextBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_clickBtn];
 }
 
 #pragma mark - Setter&Getter
@@ -259,7 +283,7 @@
         return;
     }
     _titlePlaceholder = titlePlaceholder;
-    NSString *newString = [NSString stringWithFormat:@"   %@",_titlePlaceholder];
+    NSString *newString = [NSString stringWithFormat:@" %@",_titlePlaceholder];
     [_textField setPlaceholder:newString];
     [_textField sizeToFit];
 }

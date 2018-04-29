@@ -8,13 +8,14 @@
 
 #import "XCDistributionPicketCell.h"
 #import "XCShopModel.h"
+#import "UILabel+createLabel.h"
 @interface XCDistributionPicketCell()
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * titleLabel ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * valueLabel ;
 /** 右箭头 */
-@property (nonatomic, strong) UIImageView * extendImageView ;
+@property (nonatomic, strong) UIButton * extendBtn ;
 
 @property (nonatomic, strong) UIView * separtatorLine ;
 
@@ -35,11 +36,11 @@
     [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
     
     labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
-    [_extendImageView setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
+    [_extendBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
     
     [_valueLabel sizeToFit];
     labelSize = _valueLabel.frame.size;
-    [_valueLabel setFrame:CGRectMake(CGRectGetMinX(_extendImageView.frame) - 16 * ViewRateBaseOnIP6 - labelSize.width , (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
+    [_valueLabel setFrame:CGRectMake(CGRectGetMinX(_extendBtn.frame) - 16 * ViewRateBaseOnIP6 - labelSize.width , (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
     if (_shouldShowSeparator) {
         if (_isCenterSeparator) {
             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
@@ -77,23 +78,16 @@
 
 - (void)configSubVies
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_titleLabel setFont:[UIFont systemFontOfSize: 28 * ViewRateBaseOnIP6]];
-    [_titleLabel setTextColor:COLOR_RGB_255(68, 68, 68)];
-    [self addSubview:_titleLabel];
-    
-    
-    _valueLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_valueLabel setFont:[UIFont systemFontOfSize:24 * ViewRateBaseOnIP6]];
-    [_valueLabel setTextColor:COLOR_RGB_255(165, 165, 165)];
-    [self addSubview:_valueLabel];
-    
-    _extendImageView = [[UIImageView alloc] init];
-    _extendImageView.image = [UIImage imageNamed:@"next"];
-    [self addSubview:_extendImageView];
+    _titleLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
+    _valueLabel = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(165, 165, 165)];
+    _extendBtn = [UIButton buttonWithType:0];
+    [_extendBtn setImage:[UIImage imageNamed:@"next"] forState:UIControlStateNormal];
     
     _separtatorLine = [[UIView alloc] init];
     [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
+    [self addSubview:_titleLabel];
+    [self addSubview:_valueLabel];
+    [self addSubview:_extendBtn];
     [self addSubview:_separtatorLine];
 
 }

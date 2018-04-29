@@ -17,6 +17,7 @@
 #import "LYZAlertView.h"
 @interface XCShopServiceDetailListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,XCShopDetailListCellDelegate>
 
+
 /** <# 注释 #> */
 @property (nonatomic, strong) UICollectionView * collectionView ;
 /** <# 注释 #> */
@@ -53,6 +54,13 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self refreshServiceData];
+}
+
 -(void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -62,11 +70,12 @@
     labelSize = _bgLabel.frame.size;
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     
-    if (self.dataArr.count > 0 ) {
-        [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
+    if (self.dataArr.count > 0) {
+        _collectionView.alpha = 1.0;
     }else {
-        [_collectionView setFrame:CGRectZero];
+        _collectionView.alpha = 0.0;
     }
+    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
     [_addServiceBtn setFrame:CGRectMake(0, CGRectGetMaxY(_collectionView.frame) , SCREEN_WIDTH, 98 * ViewRateBaseOnIP6)];
     
 }
@@ -173,15 +182,15 @@
     LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否删除该项目" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
        
         NSDictionary *param = @{
-                                @"storeServiceid":serviceModel.storeID,
+                                @"storeServiceid":serviceModel.serviceId,
                                 };
         __weak __typeof(self) weakSelf = self;
 
         [RequestAPI deleteStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             if ([response[@"result"] integerValue] == 1) {
-                [strongSelf refreshServiceData];
                 [strongSelf showAlterInfoWithNetWork:@"删除成功"];
+                [strongSelf refreshServiceData];
             }else {
                 [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
             }
@@ -242,8 +251,12 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 //    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
-    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (474) * ViewRateBaseOnIP6);
-    layout.sectionInset =  UIEdgeInsetsMake( 20 * ViewRateBaseOnIP6, 25* ViewRateBaseOnIP6, 0,25 * ViewRateBaseOnIP6);
+//    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (474) * ViewRateBaseOnIP6);
+     layout.itemSize = CGSizeMake(320 * ViewRateBaseOnIP6 ,474 * ViewRateBaseOnIP6);
+     layout.sectionInset =  UIEdgeInsetsMake( 30  * ViewRateBaseOnIP6, (30+ 15)* ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6 ,(30 + 15) * ViewRateBaseOnIP6);
+    layout.minimumInteritemSpacing = 20 * ViewRateBaseOnIP6;
+    layout.minimumLineSpacing = 20 * ViewRateBaseOnIP6;
+
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6) collectionViewLayout:layout];
     _collectionView.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [_collectionView  registerClass:[XCShopDetailListCell class] forCellWithReuseIdentifier:kDetailListCellID];

@@ -49,12 +49,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 - (void)dealloc {
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter]removeObserver:self
-                                                   name:UIKeyboardDidShowNotification
-                                                 object:nil];
+    [self removeObserverKeyBoard];
 }
 
 #pragma mark - Init Method
@@ -397,6 +392,10 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 - (void)addObserverKeyboard {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+- (void)removeObserverKeyBoard {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 //键盘显示

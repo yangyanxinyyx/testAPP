@@ -238,7 +238,7 @@
     else if ([model.title isEqualToString:@"已缴费待打单"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"财务审核中"]) {
+    else if ([model.title isEqualToString:@"财务审核"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"配送"]) {

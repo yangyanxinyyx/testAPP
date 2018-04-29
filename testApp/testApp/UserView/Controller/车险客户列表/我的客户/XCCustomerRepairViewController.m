@@ -8,7 +8,7 @@
 
 #import "XCCustomerRepairViewController.h"
 #import "XCCustomerShopModel.h"
-#import "SelectTimeView.h"
+#import "SelectTiemHoursView.h"
 #import "XCCustomerShopListView.h"
 @interface XCCustomerRepairViewController ()<XCDistributionFooterViewDelegate>
 /** <# 注释 #> */
@@ -57,7 +57,7 @@
         }];
         [self.view addSubview:listView];
     }else if (indexPath.section == 0 && indexPath.row == 1){
-        SelectTimeView *selectTimeView =[[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        SelectTiemHoursView *selectTimeView =[[SelectTiemHoursView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectTimeView.block = ^(NSString *string) {
             weakSelf.model.appointmentTime = string;
             [(XCDistributionPicketCell *)cell setTitleValue:string];

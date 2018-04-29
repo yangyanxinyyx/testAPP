@@ -64,10 +64,9 @@
 - (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
 {
     if (photoURL) {
-        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-        previewVC.sourceURL = photoURL;
-        
-        [self.navigationController pushViewController:previewVC animated:YES];
+        XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:self.imageURLArrM];
+        [vc updatePositionWithIndex:index];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark - Table view data source

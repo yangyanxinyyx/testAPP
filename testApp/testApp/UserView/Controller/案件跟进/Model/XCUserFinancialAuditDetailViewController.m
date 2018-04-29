@@ -38,6 +38,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.tableView.alpha = 1.0;
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation )];
 }
 
@@ -95,7 +96,7 @@
         //基本信息Cell
         XCUserCaseDetailTextCell *detailTextCell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kDetailTextCellID forIndexPath:indexPath];
         [detailTextCell setTitleStr:@"基本信息"];
-        [detailTextCell setupDistributionCellWithDetailBaseModel:_detailModel];
+        [detailTextCell setupFinaAudiaCellWithDetailBaseModel:_detailModel];
         
         return detailTextCell;
     } else {
@@ -114,7 +115,7 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else if (indexPath.row == 1) {
-        num = 20;
+        num = 24;
     }
     else {
         num = 5;

@@ -15,9 +15,9 @@
 @interface XCShopServiceEditedServiceViewController ()<XCDistributionFooterViewDelegate,PriceUnderwritingImportTableViewCellDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 /** 价格 */
-@property (nonatomic, strong) NSString * price ;
+@property (nonatomic, strong) NSNumber * price ;
 /** 高级会员价格 */
-@property (nonatomic, strong) NSString * vipPrice ;
+@property (nonatomic, strong) NSNumber * vipPrice ;
 /** 描述 */
 @property (nonatomic, copy) NSString * remark ;
 @end
@@ -57,9 +57,12 @@
 {
     XCCheckoutDetailTextFiledCell *twoTextCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if (textField == twoTextCell.textField) {
-        self.price = textField.text;
+        self.price = [NSNumber numberWithDouble:[textField.text doubleValue]];
+        twoTextCell.textField.text = [NSString stringWithMoneyNumber:[textField.text doubleValue]];
     }else if (textField == twoTextCell.secondTextField) {
-        self.vipPrice = textField.text;
+        self.vipPrice = [NSNumber numberWithDouble:[textField.text doubleValue]];
+        twoTextCell.secondTextField.text = [NSString stringWithMoneyNumber:[textField.text doubleValue]];
+
     }
 }
 
@@ -73,7 +76,23 @@
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
     [self.tableView endEditing:YES];
-    //上传图片
+    
+    BOOL configureSuccess = YES;
+    if (!isUsable(_model.serviceId, [NSNumber class])) {
+        configureSuccess = NO;
+    }
+    if (!isUsable(self.price, [NSNumber class])) {
+        configureSuccess = NO;
+    }
+    if (!isUsable(self.vipPrice, [NSNumber class])) {
+        configureSuccess = NO;
+    }
+    
+    if (!configureSuccess) {
+        [self showAlterInfoWithNetWork:@"请输入正确信息"];
+        return;
+    }
+
     NSDictionary *param = @{
                             @"id":_model.serviceId,
                             @"price":self.price,
@@ -83,8 +102,9 @@
     [RequestAPI updateService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         if ([response[@"result"] integerValue] == 1) {
-            
             [strongSelf showAlterInfoWithNetWork:@"修改成功"];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {

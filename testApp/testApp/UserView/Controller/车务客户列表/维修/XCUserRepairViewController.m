@@ -60,7 +60,7 @@
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
                                 @"type":@"维修",
-                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex ],
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         if (weakSelf.pageIndex <= weakSelf.pageCount) {

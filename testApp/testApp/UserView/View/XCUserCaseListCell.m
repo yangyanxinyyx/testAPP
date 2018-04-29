@@ -117,9 +117,9 @@
         [_caseProcessLabel setText:@" "];
     }
     if (isUsableNSString(model.occurTime, @"")) {
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        [_caseTimeLabel setText:[NSString stringWithFormat:@"%@",[tmpArr firstObject]]];
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        [_caseTimeLabel setText:[NSString stringWithFormat:@"%@",model.occurTime]];
     }else {
         [_caseTimeLabel setText:@" "];
     }

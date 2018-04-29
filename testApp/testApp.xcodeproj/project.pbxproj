@@ -88,6 +88,7 @@
 		A787759A2093535D00902F55 /* WSImagePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A78775982093535C00902F55 /* WSImagePickerView.m */; };
 		A787759D20935C0800902F55 /* UIImage+imageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A787759C20935C0800902F55 /* UIImage+imageHelper.m */; };
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
+		A7B08BB72095DC12002BD479 /* XCPhotoPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B08BB62095DC12002BD479 /* XCPhotoPreViewController.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
 		FC0025F520964034008D75CD /* GetCarImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0025F420964034008D75CD /* GetCarImageCell.m */; };
@@ -496,6 +497,8 @@
 		A79A510520595E7C000D8D0F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A79A510920597A4F000D8D0F /* UIColor+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Help.h"; sourceTree = "<group>"; };
 		A79A510A20597A4F000D8D0F /* UIColor+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Help.m"; sourceTree = "<group>"; };
+		A7B08BB52095DC12002BD479 /* XCPhotoPreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCPhotoPreViewController.h; sourceTree = "<group>"; };
+		A7B08BB62095DC12002BD479 /* XCPhotoPreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCPhotoPreViewController.m; sourceTree = "<group>"; };
 		A7C8818020662B4A0073568F /* LYZAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LYZAlertView.h; sourceTree = "<group>"; };
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1301,6 +1304,8 @@
 				FC32BE8E2079AA2000817156 /* XCUserCaseBaseTableViewController.m */,
 				A72600702089F394001C5571 /* XCCheckoutPhotoPreViewController.h */,
 				A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */,
+				A7B08BB52095DC12002BD479 /* XCPhotoPreViewController.h */,
+				A7B08BB62095DC12002BD479 /* XCPhotoPreViewController.m */,
 			);
 			path = BaseCommon;
 			sourceTree = "<group>";
@@ -2466,6 +2471,7 @@
 				FC32BF522079AA2000817156 /* XCDistributionPicketCell.m in Sources */,
 				A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
+				A7B08BB72095DC12002BD479 /* XCPhotoPreViewController.m in Sources */,
 				A721814420922FA8006730CF /* JFImageCollectionViewController.m in Sources */,
 				FC33AB412088387E0081D30A /* AddOrderListCell.m in Sources */,
 				FC32BF242079AA2000817156 /* XCUserRepairDetailViewController.m in Sources */,

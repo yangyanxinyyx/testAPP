@@ -62,11 +62,12 @@
     labelSize = _bgLabel.frame.size;
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
 
-    if (self.dataArr.count > 0 ) {
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
-    }else {
-        [self.tableView setFrame:CGRectZero];
-    }
+//    if (self.dataArr.count > 0 ) {
+//        self.tableView.alpha = 1.0;
+//    }else {
+//        self.tableView.alpha = 0.0;
+//    }
 }
 
 #pragma mark - Action Method

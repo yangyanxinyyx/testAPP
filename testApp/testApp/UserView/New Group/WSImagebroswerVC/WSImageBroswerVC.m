@@ -9,18 +9,21 @@
 #import "WSImageBroswerVC.h"
 #import "WSImageBroserCell.h"
 @interface WSImageBroswerVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
-
+/** <# 注释 #> */
+@property (nonatomic, assign) BOOL firstLoad ;
 @end
 
 @implementation WSImageBroswerVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _firstLoad = NO;
     [self initializeView];
     [self initializeData];
 }
 
 - (void)initializeView {
+    [self.view setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - safeAreaBottom)];
     self.view.backgroundColor = [UIColor blackColor];
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
@@ -42,9 +45,13 @@
 
 - (void)initializeData {
     [self.collectionView reloadData];
+    
     if(_showIndex > 0 && _showIndex < _imageArray.count) {
         dispatch_async(dispatch_get_main_queue(), ^{
-           [self.collectionView setContentOffset:CGPointMake(_showIndex*self.collectionView.frame.size.width, 0) animated:NO];
+            if (!_firstLoad) {
+                _firstLoad = YES;
+            }
+           [self.collectionView setContentOffset:CGPointMake(_showIndex * self.collectionView.frame.size.width,- kHeightForNavigation) animated:NO];
         });
     }
     else {
@@ -74,22 +81,9 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self refreshTitle];
+    if (_firstLoad) {
+        [self refreshTitle];
+    }
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
