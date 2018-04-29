@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
 }
 
 - (void)setStatusBarBackgroundColor:(UIColor *)color {

@@ -10,7 +10,8 @@
 #import "GetCarView.h"
 #import "GetCarDetailModel.h"
 
-@interface GetCarViewController ()<BaseNavigationBarDelegate>
+
+@interface GetCarViewController ()<BaseNavigationBarDelegate,GetCarViewDelegate>
 
 
 @end
@@ -70,7 +71,8 @@
 
 - (void)createUIWithModel:(GetCarDetailModel *)model;
 {
-    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 312-34 : 312) model:model isFix:_isFix];
+    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 519 : 554) model:model isFix:_isFix];
+    view.delegate = self;
     [self.view addSubview:view];
 
     UIButton *getCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(view.frame), SCREEN_WIDTH - 30, 44)];
@@ -116,6 +118,11 @@
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [self.view addSubview:tipsView];
     }];
+
+}
+
+- (void)GetCarViewDidSelectImageIndex:(NSInteger)index
+{
 
 }
 

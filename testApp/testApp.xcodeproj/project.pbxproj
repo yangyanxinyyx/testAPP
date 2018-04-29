@@ -90,6 +90,7 @@
 		A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = A79A510A20597A4F000D8D0F /* UIColor+Help.m */; };
 		A7C8818220662B4A0073568F /* LYZAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C8818120662B4A0073568F /* LYZAlertView.m */; };
 		B920F964B968291C87CBC82D /* libPods-testApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D549854117E8F1634745B6 /* libPods-testApp.a */; };
+		FC0025F520964034008D75CD /* GetCarImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0025F420964034008D75CD /* GetCarImageCell.m */; };
 		FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1724F020668FDB00B23D7F /* MyMedalView.m */; };
 		FC28057A205B63D700DD0DA9 /* MyMedalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC280579205B63D700DD0DA9 /* MyMedalViewController.m */; };
 		FC2805CD205D96CD00DD0DA9 /* FinishTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2805CC205D96CD00DD0DA9 /* FinishTipsView.m */; };
@@ -499,6 +500,8 @@
 		A7C8818120662B4A0073568F /* LYZAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LYZAlertView.m; sourceTree = "<group>"; };
 		D9D549854117E8F1634745B6 /* libPods-testApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp/Pods-testApp.release.xcconfig"; sourceTree = "<group>"; };
+		FC0025F320964034008D75CD /* GetCarImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCarImageCell.h; sourceTree = "<group>"; };
+		FC0025F420964034008D75CD /* GetCarImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCarImageCell.m; sourceTree = "<group>"; };
 		FC1724EF20668FDB00B23D7F /* MyMedalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalView.h; sourceTree = "<group>"; };
 		FC1724F020668FDB00B23D7F /* MyMedalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyMedalView.m; sourceTree = "<group>"; };
 		FC280578205B63D700DD0DA9 /* MyMedalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyMedalViewController.h; sourceTree = "<group>"; };
@@ -2073,6 +2076,8 @@
 				FC33AB402088387D0081D30A /* AddOrderListCell.m */,
 				FCF87675206BFF7C00CF6FDE /* GetCarListCell.h */,
 				FCF87676206BFF7C00CF6FDE /* GetCarListCell.m */,
+				FC0025F320964034008D75CD /* GetCarImageCell.h */,
+				FC0025F420964034008D75CD /* GetCarImageCell.m */,
 				FC32BE0E2079261100817156 /* GetCarView.h */,
 				FC32BE0F2079261100817156 /* GetCarView.m */,
 				FC32BFDA207B9BF800817156 /* MoneyInputVIew.h */,
@@ -2474,6 +2479,7 @@
 				FC32BF1A2079AA2000817156 /* UserViewController.m in Sources */,
 				A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */,
 				A72148BF2083BDF6009E6DDC /* XCUserParticularCaseDetailViewController.m in Sources */,
+				FC0025F520964034008D75CD /* GetCarImageCell.m in Sources */,
 				250F5AFA20936CCB00F7C11B /* SelectTiemHoursView.m in Sources */,
 				A720C5B02081ECF0006B0C33 /* XCDistributionBillModel.m in Sources */,
 				FC32BF402079AA2000817156 /* XCCheckoutBaseFooterView.m in Sources */,

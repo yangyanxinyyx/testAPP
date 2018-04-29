@@ -55,11 +55,12 @@
         _textField.font = [UIFont systemFontOfSize:14];
     }else if (type == InputViewTypeSelect){
         _selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 44)];
-        NSString *str = nil;
+        NSString *str = @"";
 
         NSArray *array = (NSArray *)self.param;
-        str = array[0];
-
+        if (array.count > 0) {
+             str = array[0];
+        }
 
         [_selectBtn setTitle:str forState:UIControlStateNormal];
         [_selectBtn setTitleColor:COLOR_RGB_255(164, 164, 164) forState:UIControlStateNormal];
