@@ -23,7 +23,7 @@
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCFinanicalAuditListCell class] forCellReuseIdentifier:kFinaListCellID];
     self.requestKey = @"配送中";
-
+    self.navTitle = @"配送列表";
     __weak typeof (self)weakSelf = self;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
@@ -62,7 +62,7 @@
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
                                 @"policyStatus": self.requestKey ,
-                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         if (weakSelf.pageIndex <= weakSelf.pageCount) {
@@ -98,9 +98,11 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.navTitle = @"配送列表";
+
 }
 
 #pragma mark - Init Method

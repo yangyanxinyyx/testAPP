@@ -10,7 +10,9 @@
 #import "XCShopDetailSeclectCell.h"
 #import "XCShopServiceModel.h"
 #define kDetailSelectID @"DetailSelectID"
-@interface XCShopServiceAddServiceViewController ()<XCDistributionFooterViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface XCShopServiceAddServiceViewController ()<UITableViewDelegate,UITableViewDataSource>
+/** 提交审核按钮 */
+@property (nonatomic, strong) UIButton * confirmBtn ;
 
 @end
 
@@ -25,6 +27,18 @@
     [self createUI];
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+    CGFloat tmpContentViewHeight =  (40 + 88 + 40 ) * ViewRateBaseOnIP6;
+    CGFloat btnW = 690 * ViewRateBaseOnIP6;
+    CGFloat btnH = 88 * ViewRateBaseOnIP6;
+    [_confirmBtn setFrame:CGRectMake(30 * ViewRateBaseOnIP6,SCREEN_HEIGHT - tmpContentViewHeight + (tmpContentViewHeight - btnH) * 0.5 , btnW, btnH)];
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom  + tmpContentViewHeight))];
+}
+
 #pragma mark - Init Method
 - (void)configureData
 {
@@ -33,21 +47,32 @@
 
 - (void)createUI
 {
+    [self.view setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+
+    _confirmBtn = [UIButton buttonWithType:0];
+    _confirmBtn.layer.cornerRadius = 5;
+    _confirmBtn.layer.backgroundColor = COLOR_RGB_255(0, 77, 162).CGColor;
+    _confirmBtn.titleLabel.font = [UIFont systemFontOfSize:36 * ViewRateBaseOnIP6];
+    [_confirmBtn setTitle:@"提交审核" forState:UIControlStateNormal];
+    [_confirmBtn.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_confirmBtn addTarget:self action:@selector(clickConfirmBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_confirmBtn];
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[XCShopDetailSeclectCell class] forCellReuseIdentifier:kDetailSelectID];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kHeaderViewID];
-    [self.tableView registerClass:[XCDistributionFooterView class] forHeaderFooterViewReuseIdentifier:kFooterViewID];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
+    
 }
 #pragma mark - Action Method
-- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
+
+- (void)clickConfirmBtn:(UIButton *)button
 {
-    
     NSMutableArray *addItemsArrM = [[NSMutableArray alloc] init];
     for (XCShopServiceModel *model  in self.dataArrM) {
         if (model.isSelect) {
@@ -56,9 +81,9 @@
             }
         }
     }
-    NSArray *array = addItemsArrM;
+    
     NSDictionary *param = @{
-                            @"serviceArrayId":array,
+                            @"serviceArrayId":[addItemsArrM yy_modelToJSONString],
                             @"storeId":self.storeID,
                             };
     __weak __typeof(self) weakSelf = self;
@@ -69,13 +94,12 @@
             errorStr = @"提交成功";
         }
         [strongSelf showAlterInfoWithNetWork:errorStr];
-   [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
         [strongSelf showAlterInfoWithNetWork:errStr];
     }];
-    
 }
 
 #pragma mark - Delegates & Notifications
@@ -114,24 +138,10 @@
     return headerView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
-    [footerView setTitle:@"提交审核"];
-    footerView.delegate = self;
-    return footerView;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return  20 * ViewRateBaseOnIP6;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return (60 + 88 + 60) * ViewRateBaseOnIP6;
-}
-
 
 #pragma mark - Privacy Method
 

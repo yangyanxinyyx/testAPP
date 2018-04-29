@@ -8,8 +8,10 @@
 
 #import "XCUserBaseViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 @protocol XCShopAMapViewControllerDelegate <NSObject>
-- (void)XCShopAMapViewControllerDidConfirmAddressCity:(NSString *)city area:(NSString *)area coordinate:(CLLocationCoordinate2D)coordiante;
+- (void)XCShopAMapViewControllerDidConfirmWithAMapAddressComponent:(AMapAddressComponent *)selectComponent coordinate:(CLLocationCoordinate2D)coordiante;
 
 @end
 @interface XCShopAMapViewController : BaseViewController1<BaseNavigationBarDelegate>

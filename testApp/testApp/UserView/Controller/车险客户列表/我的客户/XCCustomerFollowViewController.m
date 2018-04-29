@@ -133,6 +133,12 @@
             cell.shouldShowSeparator = NO;
         }
         [cell setTitle:title];
+        if ([title isEqualToString:@"操作类型"]) {
+            [cell setTitleValue:@"选择操作类型"];
+        }
+        else if ([title isEqualToString:@"下次跟进时间"]) {
+            [cell setTitleValue:@"选择跟进时间"];
+        }
         return cell;
     }
 }

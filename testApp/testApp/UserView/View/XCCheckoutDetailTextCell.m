@@ -9,6 +9,7 @@
 #import "XCCheckoutDetailTextCell.h"
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCustomerDetailModel.h"
+#import "UILabel+createLabel.h"
 @interface XCCheckoutDetailTextCell()
 
 //@property (nonatomic, strong) UILabel * titleLabel ;
@@ -27,6 +28,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _shouldShowSeparator = NO;
+        _shouldTPRightMargin = NO;
         [self configSubVies];
     }
     return self;
@@ -48,7 +50,12 @@
     
     [_placeholderLabel sizeToFit];
     labelSize = _placeholderLabel.frame.size;
-    [_placeholderLabel setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, labeH)];
+    if (_shouldTPRightMargin) {
+         [_placeholderLabel setFrame:CGRectMake(self.bounds.size.width - labelSize.width  - 30 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, labeH)];
+    }else {
+         [_placeholderLabel setFrame:CGRectMake(_titleLabel.frame.origin.x + _titleLabel.frame.size.width + 16 * ViewRateBaseOnIP6, _titleLabel.frame.origin.y, labelSize.width, labeH)];
+    }
+   
     if (_shouldShowSeparator) {
         [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
     }
@@ -256,6 +263,13 @@
         }
     }
     else if ([self.title isEqualToString:@"车牌号:"]) {
+        if (isUsableNSString(model.plateNo,@"")) {
+            [_placeholderLabel setText:model.plateNo];
+        }else {
+            [_placeholderLabel setText:@" "];
+        }
+    }
+    else if ([self.title isEqualToString:@"车品牌:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -287,7 +301,7 @@
     }
     else if ([self.title isEqualToString:@"车型代码:"]) {
         if ( isUsableNSString(model.model,@"")) {
-            [_placeholderLabel setText:model.vinNo];
+            [_placeholderLabel setText:model.model];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -461,14 +475,10 @@
 
 - (void)configSubVies
 {
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_titleLabel setFont:[UIFont systemFontOfSize: 26 * ViewRateBaseOnIP6]];
-    [_titleLabel setTextColor:COLOR_RGB_255(68, 68, 68)];
+    _titleLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(51, 51, 51)];
     [self addSubview:_titleLabel];
     
-    _placeholderLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_placeholderLabel setFont:[UIFont systemFontOfSize:26 * ViewRateBaseOnIP6]];
-    [_placeholderLabel setTextColor:COLOR_RGB_255(165, 165, 165)];
+    _placeholderLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(165, 165, 165)];
     [self addSubview:_placeholderLabel];
     
     _separtatorLine = [[UIView alloc] init];

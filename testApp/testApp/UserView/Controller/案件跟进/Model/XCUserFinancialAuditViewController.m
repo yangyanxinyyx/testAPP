@@ -63,7 +63,7 @@
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
                                 @"policyStatus":self.requestKey,
-                                @"PageIndex":[NSNumber numberWithInt:1],
+                                @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         if (weakSelf.pageIndex <= weakSelf.pageCount) {
@@ -96,6 +96,13 @@
             }
         }
     }];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.navTitle = @"财务审核列表";
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,7 +143,7 @@
     
     XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
     XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
-    [cell setTypeStr:@"财务审核中"];
+    [cell setTypeStr:@"财务审核"];
     [cell setupCellWithCaseListModel:model];
     return cell;
 }

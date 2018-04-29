@@ -256,7 +256,7 @@
     if (_timeTitleStr) {
         timeTitle = _timeTitleStr;
     }
-    if (isUsableNSString(baseModel.recordDate,@"")) {
+    if (isUsableNSString(baseModel.createTime,@"")) {
         NSMutableString *tmpDate = [NSMutableString stringWithString:baseModel.createTime];
         NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
         [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,[tmpArr firstObject]]];

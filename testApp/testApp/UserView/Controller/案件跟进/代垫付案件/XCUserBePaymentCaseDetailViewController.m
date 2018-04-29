@@ -72,9 +72,37 @@
 - (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
 {
     if (photoURL) {
-        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-        previewVC.sourceURL = photoURL;
-        [self.navigationController pushViewController:previewVC animated:YES];
+        NSMutableArray *tmpArray = [NSMutableArray new];
+
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        if (indexPath.section == 0 && indexPath.row == 3){
+            //司机身份证正反面、驾驶证、行驶证:
+            for (NSString *imagePath in self.driverIDImageURLArrM) {
+                WSImageModel *model = [WSImageModel new];
+                model.imageUrl = imagePath;
+                [tmpArray addObject:model];
+            }
+        }
+        else if (indexPath.section == 0 && indexPath.row == 4) {
+            //被保险人身份证正反面:
+            for (NSString *imagePath in self.policyIDImageURlArrM) {
+                WSImageModel *model = [WSImageModel new];
+                model.imageUrl = imagePath;
+                [tmpArray addObject:model];
+            }
+        }
+        else if (indexPath.section == 0 && indexPath.row == 5){
+            //相关照片
+            for (NSString *imagePath in self.imageURLArrM) {
+                WSImageModel *model = [WSImageModel new];
+                model.imageUrl = imagePath;
+                [tmpArray addObject:model];
+            }
+            
+        }
+        WSPhotosBroseVC *vc = [[WSPhotosBroseVC alloc] initWithTitle:@"照片预览"sources:tmpArray];
+        vc.showIndex = index;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark - Table view data source

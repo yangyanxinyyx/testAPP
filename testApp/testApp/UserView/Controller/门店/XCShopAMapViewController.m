@@ -8,15 +8,13 @@
 
 #import "XCShopAMapViewController.h"
 #import <MAMapKit/MAMapKit.h>
-#import <AMapSearchKit/AMapSearchKit.h>
 #define kannotaionID @"myAnnotationID"
 @interface XCShopAMapViewController ()<MAMapViewDelegate,AMapSearchDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) MAMapView * mapView ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * locationBtn ;
 /** <# 注释 #> */
-@property (nonatomic, strong) UILongPressGestureRecognizer * longPress ;
-
+@property (nonatomic, strong) UIImageView * centerImageView ;
 /** <# 注释 #> */
 @property (nonatomic, strong) MAPointAnnotation * selectAnnotion ;
 
@@ -25,7 +23,6 @@
 /** <# 注释 #> */
 @property (nonatomic, strong) AMapAddressComponent * currentComponent ;
 
-@property (nonatomic, strong) UIImageView *selectPointImageView;
 @end
 
 @implementation XCShopAMapViewController
@@ -38,26 +35,38 @@
     _searchAPI.delegate = self;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
     _mapView.delegate = self;
-//    _mapView.showsUserLocation = YES;
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
     _mapView.userInteractionEnabled = YES;
     _mapView.zoomLevel = 15;
-    [self.view addSubview:self.mapView];
+    [self.view addSubview:_mapView];
+    
+    UIImage *redPointImage = [UIImage imageNamed:@"selectPoint"];
+    _centerImageView = [[UIImageView alloc] initWithImage:redPointImage];
+    [self.view addSubview:_centerImageView];
     
     self.locationBtn = [UIButton buttonWithType:0];
     [self.locationBtn setBackgroundImage:[UIImage imageNamed:@"position"] forState:UIControlStateNormal];
     [self.locationBtn addTarget:self action:@selector(localMyPosition:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.locationBtn];
 
-    _longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAddAnnotation:)];
-    _longPress.delegate = self;
-//    _longPress.minimumPressDuration = 0.7;
-    [self.mapView addGestureRecognizer:_longPress];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.selectAnnotion) {
+        [_mapView removeAnnotation:self.selectAnnotion];
+    }
+        CGPoint point =  CGPointMake(_mapView.center.x, _mapView.center.y - kHeightForNavigation );
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:point toCoordinateFromView:_mapView];
+        self.selectAnnotion = [[MAPointAnnotation alloc] init];
+        self.selectAnnotion.coordinate = coordinate;
+        [_mapView addAnnotation:self.selectAnnotion];
 }
 
 - (void)viewWillLayoutSubviews
 {
-    
+    [_centerImageView setCenter:self.view.center];
     [self.locationBtn setFrame:CGRectMake(SCREEN_WIDTH - 120 * ViewRateBaseOnIP6, SCREEN_HEIGHT - 120 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
 }
 
@@ -76,31 +85,33 @@
 }
 
 #pragma mark - Action Method
-- (void)localMyPosition:(UIButton *)button
+
+- (void)mapViewCalloutClickButton:(UIButton *)button
 {
-    [_mapView setCenterCoordinate:_mapView.userLocation.coordinate];
-    if (self.selectAnnotion) {
-        [_mapView removeAnnotation:self.selectAnnotion];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopAMapViewControllerDidConfirmWithAMapAddressComponent:coordinate:)]) {
+        [self.delegate XCShopAMapViewControllerDidConfirmWithAMapAddressComponent:self.currentComponent coordinate:self.selectAnnotion.coordinate];
+
     }
-    self.selectAnnotion = [[MAPointAnnotation alloc] init];
-    self.selectAnnotion.coordinate = _mapView.userLocation.coordinate;
-    [_mapView addAnnotation:self.selectAnnotion];
-}
-
-- (void)longPressAddAnnotation:(UILongPressGestureRecognizer *)longPress
-{
-    [_mapView removeAnnotation:self.selectAnnotion];
-
-    CGPoint point =  [longPress locationInView:_mapView];
-    CLLocationCoordinate2D coordinate = [_mapView convertPoint:point toCoordinateFromView:_mapView];
-    self.selectAnnotion = [[MAPointAnnotation alloc] init];
-    self.selectAnnotion.coordinate = coordinate;
-    [_mapView addAnnotation:self.selectAnnotion];
-    
+    NSLog(@"click");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Delegates & Notifications
 #pragma mark - MAMapViewDelegate
+
+- (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction
+{
+    if (wasUserAction) {
+        if (self.selectAnnotion) {
+            [mapView removeAnnotation:self.selectAnnotion];
+        }
+        CGPoint point =  CGPointMake(_mapView.center.x, _mapView.center.y - kHeightForNavigation );
+        CLLocationCoordinate2D coordinate = [_mapView convertPoint:point toCoordinateFromView:_mapView];
+        self.selectAnnotion = [[MAPointAnnotation alloc] init];
+        self.selectAnnotion.coordinate = coordinate;
+        [_mapView addAnnotation:self.selectAnnotion];
+    }
+}
 
 -(MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
@@ -112,16 +123,15 @@
         {
             annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
+        annotationView.image = [UIImage imageNamed:@"pin"];
+        annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height  +_centerImageView.frame.size.height * 0.5));
         annotationView.canShowCallout = YES;       //设置气泡可以弹出，默认为NO
-        annotationView.pinColor =  MAPinAnnotationColorRed;
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:annotation.coordinate.latitude longitude: annotation.coordinate.longitude];
-        
         [self.searchAPI  AMapReGoecodeSearch:regeo];
-        //设置中心点偏移，使得标注底部中间点成为经纬度对应点
-        annotationView.centerOffset = CGPointMake(0, -18);
         [annotationView setDraggable:NO];
         self.selectAnnotion = annotation;
+        [self.selectAnnotion setTitle:@"加载中..."];
         
         UIButton *button = [UIButton buttonWithType:0];
         [button setTitle:@"确定" forState:UIControlStateNormal];
@@ -131,8 +141,10 @@
         [button addTarget:self action:@selector(mapViewCalloutClickButton:) forControlEvents:UIControlEventTouchUpInside];
         annotationView.leftCalloutAccessoryView = button;
         
-        
         return annotationView;
+    }else {
+        MAAnnotationView *userMapView = [[MAAnnotationView alloc] init] ;
+        return userMapView;
     }
     return nil;
 }
@@ -146,8 +158,10 @@
     AMapReGeocode *regeocode = response.regeocode;
     AMapAddressComponent *addressComponent = regeocode.addressComponent;
     [self.selectAnnotion setTitle:addressComponent.streetNumber.street];
-    [self.selectAnnotion setSubtitle:addressComponent.building];
+    [self.selectAnnotion setSubtitle:[NSString stringWithFormat:@"%@%@%@ %@",addressComponent.city,addressComponent.district,addressComponent.township,addressComponent.building]];
     self.currentComponent = regeocode.addressComponent;
+    [self.mapView selectAnnotation:self.selectAnnotion animated:NO];
+
 }
 
 - (void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
@@ -163,27 +177,19 @@
     }
 }
 
-#pragma mark - longPressDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+#pragma mark - Privacy Method
+- (void)localMyPosition:(UIButton *)button
+{
+    [_mapView setCenterCoordinate:_mapView.userLocation.coordinate];
+    if (self.selectAnnotion) {
+        [_mapView removeAnnotation:self.selectAnnotion];
+    }
+    self.selectAnnotion = [[MAPointAnnotation alloc] init];
+    self.selectAnnotion.coordinate = _mapView.userLocation.coordinate;
+    [_mapView addAnnotation:self.selectAnnotion];
 }
 
-#pragma mark - Privacy Method
-- (void)mapViewCalloutClickButton:(UIButton *)button
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopAMapViewControllerDidConfirmAddressCity:area:coordinate:)]) {
-        [self.delegate XCShopAMapViewControllerDidConfirmAddressCity:self.currentComponent.city area:self.currentComponent.district coordinate:self.selectAnnotion.coordinate];
-    }
-    NSLog(@"click");
-    [self.navigationController popViewControllerAnimated:YES];
-}
 #pragma mark - Setter&Getter
 
-- (UIImageView *)selectPointImageView{
-    if (!_selectPointImageView) {
-        _selectPointImageView = [[UIImageView alloc] init];
-        _selectPointImageView.image = [UIImage imageNamed:@"selectPoint"];
-    }
-    return _selectPointImageView;
-}
+
 @end

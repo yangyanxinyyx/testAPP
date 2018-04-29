@@ -8,11 +8,11 @@
 
 #import "XCCustomerAnnualReviewViewController.h"
 #import "XCCheckoutDetailPhotoCell.h"
-#import "SelectTimeView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #define kPhotoCellID @"PhotoCellID"
 #import "XCCheckoutPhotoPreViewController.h"
 #import "LYZSelectView.h"
+#import "SelectTiemHoursView.h"
 @interface XCCustomerAnnualReviewViewController ()<XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,
 UIImagePickerControllerDelegate>
@@ -27,10 +27,6 @@ UIImagePickerControllerDelegate>
 @property (nonatomic, copy) NSNumber * orderPrice ;
 /** <# 注释 #> */
 @property (nonatomic, copy) NSString * lincesPhotoPath; ;
-//@property (nonatomic, copy) NSString * url1 ;
-//@property (nonatomic, copy) NSString * url2 ;
-//@property (nonatomic, copy) NSString * url3 ;
-//@property (nonatomic, copy) NSString * url4 ;
 
 @end
 
@@ -76,7 +72,7 @@ UIImagePickerControllerDelegate>
 {
     __weak __typeof(self) weakSelf = self;
     if (indexPath.section == 0 && indexPath.row == 0) {
-        SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        SelectTiemHoursView *selectView = [[SelectTiemHoursView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectView.block = ^(NSString *string) {
             weakSelf.appointmentTime = string;
             XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView cellForRowAtIndexPath:indexPath];

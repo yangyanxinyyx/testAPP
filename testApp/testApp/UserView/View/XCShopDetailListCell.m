@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UILabel * onSalePriceLabel ;
 /** 原价 */
 @property (nonatomic, strong) UILabel * priceLabel ;
+/** 原价Title */
+@property (nonatomic, strong) UILabel * priceTitleLabel ;
 /** 编辑按钮 */
 @property (nonatomic, strong) UIButton * editedButton ;
 /** 删除按钮 */
@@ -49,11 +51,15 @@
     
     [_onSalePriceLabel sizeToFit];
     labelSize = _onSalePriceLabel.frame.size;
-    [_onSalePriceLabel setFrame:CGRectMake(60 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 65 * ViewRateBaseOnIP6 , labelSize.width, 25 * ViewRateBaseOnIP6)];
+    [_onSalePriceLabel setFrame:CGRectMake((60 + 15 ) * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 65 * ViewRateBaseOnIP6 , labelSize.width, 25 * ViewRateBaseOnIP6)];
+    
+    [_priceTitleLabel sizeToFit];
+    labelSize = _priceTitleLabel.frame.size;
+    [_priceTitleLabel setFrame:CGRectMake(CGRectGetMaxX(_onSalePriceLabel.frame) + 22 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 71 * ViewRateBaseOnIP6, labelSize.width, 19 * ViewRateBaseOnIP6)];
     
     [_priceLabel sizeToFit];
     labelSize = _priceLabel.frame.size;
-    [_priceLabel setFrame: CGRectMake(CGRectGetMaxX(_onSalePriceLabel.frame) + 30 * ViewRateBaseOnIP6, _onSalePriceLabel.frame.origin.y, self.bounds.size.width - (CGRectGetMaxX(_onSalePriceLabel.frame) + 30 * ViewRateBaseOnIP6), 23 * ViewRateBaseOnIP6)];
+    [_priceLabel setFrame: CGRectMake(CGRectGetMaxX(_priceTitleLabel.frame) + 9 * ViewRateBaseOnIP6, _priceTitleLabel.frame.origin.y, self.bounds.size.width - (CGRectGetMaxX(_priceTitleLabel.frame) + 9 * ViewRateBaseOnIP6), 23 * ViewRateBaseOnIP6)];
     labelSize = CGSizeMake(100 * ViewRateBaseOnIP6, 48 * ViewRateBaseOnIP6);
     [_editedButton setFrame:CGRectMake( 40 * ViewRateBaseOnIP6 , CGRectGetMaxY(_iconImageView.frame)  + 106 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     [_deleteButton setFrame:CGRectMake(CGRectGetMaxX(_editedButton.frame) + 47 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame)  + 106 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
@@ -76,6 +82,8 @@
     [_iconImageView setContentMode:UIViewContentModeScaleAspectFit];
     _serviceNameLabel = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(51, 51, 51)];
     _onSalePriceLabel = [UILabel createLabelWithTextFontSize:30 textColor:COLOR_RGB_255(247, 44, 11)];
+    _priceTitleLabel = [UILabel createLabelWithTextFontSize:20 textColor:COLOR_RGB_255(165, 165, 165)];
+    [_priceTitleLabel setText:@"原价"];
     _priceLabel = [UILabel createLabelWithTextFontSize:23 textColor:COLOR_RGB_255(165, 165, 165)];
     
     _editedButton = [UIButton buttonWithType:0];
@@ -98,6 +106,7 @@
     
     [self addSubview:_iconImageView];
     [self addSubview:_serviceNameLabel];
+    [self addSubview:_priceTitleLabel];
     [self addSubview:_priceLabel];
     [self addSubview:_onSalePriceLabel];
     [self addSubview:_editedButton];
@@ -140,14 +149,12 @@
         [_onSalePriceLabel setText:[NSString stringWithFormat:@"¥%@",model.vipPrice]];
     }
     if (isUsableNSString(model.price, @"")) {
-        NSString *titleStr = @"原价 ";
-        NSMutableAttributedString * ma_price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@¥%@",titleStr,model.price]];
-        [ma_price addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:20 * ViewRateBaseOnIP6] range:NSMakeRange(0, titleStr.length )];
-        [ma_price addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:23 * ViewRateBaseOnIP6] range:NSMakeRange(titleStr.length + 1,model.price.length)];
-        [ma_price addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(165, 165, 165) range:NSMakeRange(0, titleStr.length + model.price.length)];
-        [ma_price addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange( titleStr.length, model.price.length + 1)];
+        NSMutableAttributedString * ma_price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@",model.price]];
+        [ma_price addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:23 * ViewRateBaseOnIP6] range:NSMakeRange(0,model.price.length)];
+        [ma_price addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(165, 165, 165) range:NSMakeRange(0,1 +model.price.length)];
+        [ma_price addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange(0, model.price.length + 1)];
        _priceLabel.attributedText = ma_price;
-        _priceLabel.textAlignment = NSTextAlignmentLeft;
+       _priceLabel.textAlignment = NSTextAlignmentLeft;
     }
     [self layoutSubviews];
     

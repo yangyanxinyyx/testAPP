@@ -13,6 +13,8 @@
 #import <MJRefresh/MJRefresh.h>
 #define kCaseListCellID @"caseListCellID"
 #define kHeaderViewID @"headerViewID"
+#import "WSImageModel.h"
+#import "WSPhotosBroseVC.h"
 @interface XCUserCaseBaseTableViewController :BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 
 /**

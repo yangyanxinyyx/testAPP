@@ -114,7 +114,7 @@
         [_carNumLabel setText:@" "];
     }
     if(isUsableNSString(model.onwerName, @"")) {
-        [_carNameLabel setText:model.onwerName];
+        [_carNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.onwerName]];
     }else {
         [_carNameLabel setText:@"车主:  "];
     }
@@ -132,19 +132,15 @@
         }else {
             [_timeLabel setText:@"配送时间:  "];
         }
-    }else if ([self.typeStr  isEqualToString:@"财务审核中"]) {
+    }else if ([self.typeStr isEqualToString:@"财务审核"]) {
         if (isUsableNSString(model.financeRemark, @"出纳审核通过")) {
             [_processLabel setText:@"完成"];
             [_processLabel setTextColor:COLOR_RGB_255(131, 131, 131)];
         }else {
-            if(isUsableNSString(model.financeRemark, @"")) {
-                [_processLabel setText:model.financeRemark];
-            }else {
-                [_processLabel setText:@" "];
-            }
+            [_processLabel setText:model.financeRemark];
             [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
         }
-        if (isUsableNSString(model.recordDate,@"")) {
+        if (isUsableNSString(model.createTime,@"")) {
             NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];

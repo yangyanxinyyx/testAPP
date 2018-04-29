@@ -11,6 +11,7 @@
 #import "XCUserCaseDetailProgressCell.h"
 #import "XCUserCaseScrollerViewCell.h"
 #import "XCCheckoutPhotoPreViewController.h"
+
 #define kDetailTextCellID @"DetailTextCellID"
 #define kDetailProgressCellID @"DetailProgressCellID"
 #define kDetailScrollerCellID @"DetailScrollerCellID"
@@ -37,11 +38,11 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden =YES;
 }
-
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -54,9 +55,19 @@
 #pragma marl - XCUserCaseScrollerViewCellDelegate
 - (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
 {
-    XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-    previewVC.sourceURL = photoURL;
-    [self.navigationController pushViewController:previewVC animated:YES];
+    
+    NSMutableArray *tmpArray = [NSMutableArray new];
+    for (NSString *imagePath in self.imageURLArrM) {
+        WSImageModel *model = [WSImageModel new];
+        model.imageUrl = imagePath;
+        [tmpArray addObject:model];
+    }
+    WSPhotosBroseVC *vc = [[WSPhotosBroseVC alloc] initWithTitle:@"照片预览"];
+    vc.imageArray = tmpArray;
+    vc.showIndex = index;
+//    XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
+//    previewVC.sourceURL = photoURL;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - Privacy Method
 

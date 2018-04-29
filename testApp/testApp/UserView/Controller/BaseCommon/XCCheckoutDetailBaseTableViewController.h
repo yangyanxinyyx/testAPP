@@ -20,7 +20,8 @@
 #define kTextInputCellID @"inpuitCellID"
 #define kHeaderViewID @"headerViewID"
 #define kFooterViewID @"footerViewID"
-
+#import "WSImageModel.h"
+#import "WSPhotosBroseVC.h"
 @interface XCCheckoutDetailBaseTableViewController : BaseViewController1 <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BaseNavigationBarDelegate>
 /**
  自定义导航栏

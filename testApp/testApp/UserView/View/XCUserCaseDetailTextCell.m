@@ -461,10 +461,10 @@
         syMoneyFinal = [NSString stringWithFormat:@"%2f",[model.syMoneyFinal doubleValue]];
     }
     if (isUsableNSString(model.jqNumber, @"")) {
-        jqNumber = model.jqNumber;
+        jqNumber = [NSString stringWithFormat:@"%2f",[model.jqNumber doubleValue]];
     }
     if (isUsableNSString(model.syNumber, @"")) {
-        syNumber = model.syNumber;
+        syNumber = [NSString stringWithFormat:@"%2f",[model.syNumber doubleValue]];
     }
     if (isUsableNSString(model.exportmanName, @"")) {
         exportmanName = model.exportmanName;
@@ -476,7 +476,7 @@
                            vinNo,recordDate,engineNo,
                            brand,carModel,syEffectDate,
                            jqEffectDate,insurerName,payNoticeNo,
-                           jqMoney,syMoney,jqMoneyFinal,
+                            syMoney,jqMoney,jqMoneyFinal,
                            syMoneyFinal,jqNumber,syNumber,
                            exportmanName,remark];
     
@@ -490,7 +490,7 @@
 
 - (void)setupFinaAudiaCellWithDetailBaseModel:(XCCheckoutDetailBaseModel *)model
 {
-    self.titleValueArr  = @[@"投保人:",@"身份证:",@"车牌号:",
+    self.labelTitleArrM  = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
                                   @"车型名称:",@"车型代码:",@"(商业)起保日期:",
                                   @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
@@ -536,7 +536,10 @@
         vinNo = model.vinNo;
     }
     if (isUsableNSString(model.recordDate, @"")) {
-        recordDate = model.recordDate;
+        //        recordDate = model.recordDate;
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        recordDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.engineNo, @"")) {
         engineNo = model.engineNo;
@@ -548,10 +551,16 @@
         carModel = model.model;
     }
     if (isUsableNSString(model.syEffectDate, @"")) {
-        syEffectDate = model.syEffectDate;
+        //        syEffectDate = model.syEffectDate;
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        syEffectDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.jqEffectDate, @"")) {
-        jqEffectDate = model.jqEffectDate;
+        //        jqEffectDate = model.jqEffectDate;
+        NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        jqEffectDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.insurerName, @"")) {
         insurerName = model.insurerName;
@@ -560,34 +569,36 @@
         payNoticeNo = model.payNoticeNo;
     }
     if (isUsable(model.jqMoney, [NSNumber class])) {
-        jqMoney = [NSString stringWithFormat:@"%2f",[model.jqMoney doubleValue]];
+        jqMoney = [NSString stringWithFormat:@"%.2f",[model.jqMoney doubleValue]];
     }
     if (isUsable(model.syMoney, [NSNumber class])) {
-        syMoney = [NSString stringWithFormat:@"%2f",[model.syMoney doubleValue]];
+        syMoney = [NSString stringWithFormat:@"%.2f",[model.syMoney doubleValue]];
     }
     if (isUsable(model.jqMoneyFinal, [NSNumber class])) {
-        jqMoneyFinal = [NSString stringWithFormat:@"%2f",[model.jqMoneyFinal doubleValue]];
+        jqMoneyFinal = [NSString stringWithFormat:@"%.2f",[model.jqMoneyFinal doubleValue]];
     }
     if (isUsable(model.syMoneyFinal, [NSNumber class])) {
-        syMoneyFinal = [NSString stringWithFormat:@"%2f",[model.syMoneyFinal doubleValue]];
+        syMoneyFinal = [NSString stringWithFormat:@"%.2f",[model.syMoneyFinal doubleValue]];
     }
-    if (isUsableNSString(model.jqNumber, @"")) {
-        jqNumber = model.jqNumber;
+    if (isUsable(model.jqNumber, [NSNumber class])) {
+        jqNumber = [NSString stringWithFormat:@"%.2f",[model.jqNumber doubleValue]];
     }
-    if (isUsableNSString(model.syNumber, @"")) {
-        syNumber = model.syNumber;
+    if (isUsable(model.syNumber, [NSNumber class])) {
+        syNumber = [NSString stringWithFormat:@"%.2f",[model.syNumber doubleValue]];
     }
     if (isUsable(model.jqBonus, [NSNumber class])) {
-        jqBonus = [NSString stringWithFormat:@"%2f",[model.jqBonus doubleValue]];
+        jqBonus = [NSString stringWithFormat:@"%.2f",[model.jqBonus doubleValue]];
     }
     if (isUsable(model.syBonus, [NSNumber class])) {
-        syBonus = [NSString stringWithFormat:@"%2f",[model.syBonus doubleValue]];
+        syBonus = [NSString stringWithFormat:@"%.2f",[model.syBonus doubleValue]];
     }
+
+
     if (isUsable(model.jqCommission, [NSNumber class])) {
-        jqCommission = [NSString stringWithFormat:@"%2f",[model.jqCommission doubleValue]];
+        jqCommission = [NSString stringWithFormat:@"%.2f",[model.jqCommission doubleValue]];
     }
     if (isUsable(model.syCommission, [NSNumber class])) {
-        syCommission = [NSString stringWithFormat:@"%2f",[model.syCommission doubleValue]];
+        syCommission = [NSString stringWithFormat:@"%.2f",[model.syCommission doubleValue]];
     }
     if (isUsableNSString(model.exportmanName, @"")) {
         exportmanName = model.exportmanName;
