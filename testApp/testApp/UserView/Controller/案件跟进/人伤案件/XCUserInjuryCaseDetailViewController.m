@@ -71,8 +71,8 @@
             [tmpArray addObject:model];
         }
         
-        WSPhotosBroseVC *vc = [[WSPhotosBroseVC alloc] initWithTitle:@"照片预览" sources:tmpArray];
-        vc.showIndex = index;
+        XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:tmpArray];
+        [vc updatePositionWithIndex:index];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

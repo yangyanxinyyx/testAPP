@@ -14,7 +14,7 @@
 #define kCaseTextCellID @"CaseTextCellID"
 #define kScrollViewCellID @"ScrollViewCellID"
 #import "XCCheckoutPhotoPreViewController.h"
-
+#import "XCPhotoPreViewController.h"
 @interface XCUserBePaymentCaseDetailViewController ()<XCUserCaseScrollerViewCellDelegate>
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataTitleArrM ;
@@ -77,31 +77,18 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         if (indexPath.section == 0 && indexPath.row == 3){
             //司机身份证正反面、驾驶证、行驶证:
-            for (NSString *imagePath in self.driverIDImageURLArrM) {
-                WSImageModel *model = [WSImageModel new];
-                model.imageUrl = imagePath;
-                [tmpArray addObject:model];
-            }
+            tmpArray = self.driverIDImageURLArrM;
         }
         else if (indexPath.section == 0 && indexPath.row == 4) {
             //被保险人身份证正反面:
-            for (NSString *imagePath in self.policyIDImageURlArrM) {
-                WSImageModel *model = [WSImageModel new];
-                model.imageUrl = imagePath;
-                [tmpArray addObject:model];
-            }
+            tmpArray = self.policyIDImageURlArrM;
         }
         else if (indexPath.section == 0 && indexPath.row == 5){
             //相关照片
-            for (NSString *imagePath in self.imageURLArrM) {
-                WSImageModel *model = [WSImageModel new];
-                model.imageUrl = imagePath;
-                [tmpArray addObject:model];
-            }
-            
+            tmpArray = self.imageURLArrM;
         }
-        WSPhotosBroseVC *vc = [[WSPhotosBroseVC alloc] initWithTitle:@"照片预览"sources:tmpArray];
-        vc.showIndex = index;
+        XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:tmpArray];
+        [vc updatePositionWithIndex:index];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -66,17 +66,8 @@
 - (void)XCUserCaseScrollerViewCellClickphotoWithURL:(NSURL *)photoURL index:(NSInteger)index cell:(XCUserCaseScrollerViewCell *)cell
 {
     if (photoURL) {
-        NSMutableArray *tmpArray = [NSMutableArray new];
-        for (NSString *imagePath in self.imageURLArrM) {
-            WSImageModel *model = [WSImageModel new];
-            model.imageUrl = imagePath;
-            [tmpArray addObject:model];
-        }
-        WSPhotosBroseVC *vc = [[WSPhotosBroseVC alloc] initWithTitle:@"照片预览"];
-        vc.imageArray = tmpArray;
-        vc.showIndex = index;
-        //        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-        //        previewVC.sourceURL = photoURL;
+        XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:self.imageURLArrM];
+        [vc updatePositionWithIndex:index];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

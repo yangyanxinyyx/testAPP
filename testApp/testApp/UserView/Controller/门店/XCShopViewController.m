@@ -20,6 +20,10 @@
 #import "ProgressControll.h"
 #import "XCCheckoutPhotoPreViewController.h"
 #import "JFImagePickerController.h"
+#import "XCPhotoPreViewController.h"
+#import <AMapSearchKit/AMapSearchKit.h>
+#define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
+
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
@@ -34,12 +38,15 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @property (nonatomic, strong) UITableView *storeTableView;
 @property (nonatomic, strong) UIView *viewSegment;
 
+
 /** 门店信息tableViewTitle数据 */
 @property (nonatomic, strong) NSArray * storeTitleArr;
 /** 预设 */
 @property (nonatomic, strong) NSArray * placeHolderArr ;
 /** 服务tableViewTitle数据 */
 @property (nonatomic, strong) NSArray * serviceTitleArr ;
+/** 选中当前CellTitle */
+@property (nonatomic, strong) NSString * selectedTitle ;
 /** 选中当前的Cell */
 @property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
 /** 证书图片URLPath */
@@ -48,6 +55,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
 /** 服务信息数据 */
 @property (nonatomic, strong) NSArray * services;
+
 
 /** 上传成功图片URL */
 @property (nonatomic, strong) NSMutableArray * networkURLArrM ;
@@ -70,6 +78,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         }
         unlink([filePath  UTF8String]);
     }
+    [self removeObserverKeyBoard];
 }
 
 - (void)viewDidLoad {
@@ -79,6 +88,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     _networkURLArrM = [[NSMutableArray alloc] init];
     _tmpDeleteURLArrM = [[NSMutableArray alloc] init];
     _services = [[NSMutableArray alloc] init];
+    [self addObserverKeyboard];
     [self configureData];
     [self createUI];
 }
@@ -101,11 +111,10 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 {
     self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
                            @"负责人电话:",@"业务员提成:",@"团队经理提成:",
-                           @"所属城市",@"所在地区",@"门店审核状态",
+                           @"所属城市",@"所在地区",@"详细地址:",@"门店审核状态",
                            @"营业执照上传,1张",@"门店图片,最多4张"];
-    self.placeHolderArr = @[@"请输入名称",@"请输入联系方式",@"请输入负责人姓名",
-                            @"请输入电话",@"请输入百分比",@"请输入百分比",
-                            @"广州市",@"天河区",@"审核中"];
+    self.placeHolderArr = @[@"请输入门店名称",@"请输入联系方式",@"请输入负责人",
+                            @"请输入负责人电话",@"请输入百分比",@"请输入百分比",@"城市",@"地区",@"",@"待审核",@"1张",@"4张"];
     self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
 }
 #pragma mark - Action Method
@@ -218,7 +227,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         if (!uploadData) {
             return;
         }
-        //上传图片
+        /// 上传图片
         NSDictionary *param = @{
                                 @"file":@[uploadData],
                                 };
@@ -260,7 +269,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         }
     }
     if (uploadPathArrM.count > 0) {
-        //上传图片
+        /// 上传图片
         NSDictionary *param = @{
                                 @"file":uploadDataArrM,
                                 };
@@ -280,7 +289,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                     [strongSelf.networkURLArrM addObject:urlPath];
 
                 }
-                //提交修改门店
+                /// 提交修改门店
                 [strongSelf postModifyShopInfo];
             }else {
                 [strongSelf showAlterInfoWithNetWork:@"提交失败"];
@@ -356,11 +365,13 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         }
     }
     else if (tableView == self.storeTableView) {
-        if (indexPath.row == 6) {
-            // 跳转地图
-            XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
-            mapVC.delegate = self;
-            [self.navigationController pushViewController:mapVC animated:YES];
+
+ 
+        if (indexPath.row == 6 || indexPath.row == 7) {
+//            // 跳转地图
+//            XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
+//            mapVC.delegate = self;
+//            [self.navigationController pushViewController:mapVC animated:YES];
         }
         
     }
@@ -402,30 +413,43 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 {
     
     BOOL configureSuccess = YES;
-    NSString *errorStr = @"未知错误";
+    NSString *errorStr = @"门店ID信息错误";
 
-    if (!isUsableNSString(_storeModel.name, @"")) {
-        errorStr = @"请输入门店名称";
-        configureSuccess = NO;
-    }else if (!isUsableNSString(_storeModel.tel, @"")) {
-        errorStr = @"请输入联系方式";
-        configureSuccess = NO;
-    }else if (!isUsableNSString(_storeModel.corporateName,@"")) {
-        errorStr = @"请输入负责人名称";
-        configureSuccess = NO;
-    }else if (![self valiMobile:_storeModel.corporateCellphone]) {
+    if (!isUsableNSString(_storeModel.name,@"")) {
+        _storeModel.name = @"";
+    }
+    if (!isUsableNSString(_storeModel.tel,@"")) {
+        _storeModel.tel = @"";
+    }
+    if (!isUsableNSString(_storeModel.corporateName,@"")) {
+        _storeModel.corporateName = @"";
+    }
+    if (![self valiMobile:_storeModel.corporateCellphone]) {
         errorStr = @"请输入正确负责人电话";
         configureSuccess = NO;
-    }else if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
-        errorStr = @"请输入业务员提成";
-        configureSuccess = NO;
-    }else if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
-        errorStr = @"请输入团队经理提成";
-        configureSuccess = NO;
-    }else if (!isUsableNSString(_storeModel.longitude, @"")) {
-        errorStr = @"定位信息错误";
-        configureSuccess = NO;
-    }else if (!isUsable(_storeModel.storeID, [NSNumber class])) {
+    }
+    if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
+        _storeModel.salesmanCommission = @(0.00);
+    }
+    if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
+        _storeModel.managerCommission = @(0.00);
+    }
+    if (!isUsableNSString(_storeModel.longitude, @"")) {
+        _storeModel.longitude = @"";
+    }
+    if (!isUsableNSString(_storeModel.latitude, @"")) {
+        _storeModel.longitude = @"";
+    }
+    if (!isUsableNSString(_storeModel.city, @"")) {
+        _storeModel.city = @"";
+    }
+    if (!isUsableNSString(_storeModel.area, @"")) {
+        _storeModel.area = @"";
+    }
+    if (!isUsableNSString(_storeModel.address, @"")) {
+        _storeModel.address = @"";
+    }
+    if (!isUsable(_storeModel.storeID, [NSNumber class])) {
         configureSuccess = NO;
     }
     
@@ -442,6 +466,11 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 }
 
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+- (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
+{
+    self.selectedTitle = title;
+}
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
@@ -512,12 +541,21 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     return YES;
 }
 
+- (void)XCCheckoutDetailTextFiledClickBtn:(UITextField *)textField title:(NSString *)title
+{
+    // 跳转地图
+    XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
+    mapVC.delegate = self;
+    [self.navigationController pushViewController:mapVC animated:YES];
+}
+
 #pragma  mark - XCCheckoutDetailPhotoCellDelegate
 - (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL *)photoURL
                                              index:(NSInteger)index
                                               cell:(XCCheckoutDetailPhotoCell *)cell
 {
     if (photoURL) {
+    
         XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
         previewVC.sourceURL = photoURL;
         previewVC.shouldShowDeleteBtn = YES;
@@ -693,24 +731,35 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     }
 }
 
-#pragma mark - XCShopAMapViewControllerDelegate
+#pragma mark - XCShopAMapViewControllerDelegate 地图
 
--(void)XCShopAMapViewControllerDidConfirmAddressCity:(NSString *)city area:(NSString *)area coordinate:(CLLocationCoordinate2D)coordiante
+- (void)XCShopAMapViewControllerDidConfirmWithAMapAddressComponent:(AMapAddressComponent *)selectComponent
+                                                        coordinate:(CLLocationCoordinate2D)coordiante
 {
-    if (isUsableNSString(city, @"")) {
-        [self.storeModel setCity:city];
-    }
-    if (isUsableNSString(area,@"")) {
-        [self.storeModel setArea:area];
-    }
-    if (coordiante.latitude != 0.0 && coordiante.longitude != 0.0) {
-        [self.storeModel setLatitude:[NSString stringWithFormat:@"%f",coordiante.latitude]];
-        [self.storeModel setLongitude:[NSString stringWithFormat:@"%f",coordiante.longitude]];
+    if (isUsable(selectComponent, [AMapAddressComponent class])) {
+        NSString *city = selectComponent.city;
+        NSString *area = selectComponent.district;
+        NSString *address = [NSString stringWithFormat:@"%@%@%@ %@",selectComponent.city,selectComponent.district,selectComponent.township,selectComponent.building];
+        if (isUsableNSString(city, @"")) {
+            [self.storeModel setCity:city];
+        }
+        if (isUsableNSString(area,@"")) {
+            [self.storeModel setArea:area];
+        }
+        if (isUsableNSString(address,@"")) {
+            [self.storeModel setAddress:address];
+        }
+        if (coordiante.latitude != 0.0 && coordiante.longitude != 0.0) {
+            [self.storeModel setLatitude:[NSString stringWithFormat:@"%f",coordiante.latitude]];
+            [self.storeModel setLongitude:[NSString stringWithFormat:@"%f",coordiante.longitude]];
+        }
     }
     NSIndexPath * cityIndexpath = [NSIndexPath indexPathForRow:6 inSection:0];
     NSIndexPath * areaIndexpath = [NSIndexPath indexPathForRow:7 inSection:0];
+    NSIndexPath * addressIndexpath = [NSIndexPath indexPathForRow:8 inSection:0];
+
     
-    [self.storeTableView reloadRowsAtIndexPaths:@[cityIndexpath,areaIndexpath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.storeTableView reloadRowsAtIndexPaths:@[cityIndexpath,areaIndexpath,addressIndexpath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - UITableViewDelegate
@@ -726,6 +775,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     
     if (tableView == self.storeTableView) {
         NSString *title = self.storeTitleArr[indexPath.row];
+        NSString *holderStr = self.placeHolderArr[indexPath.row];
+
         if ([self isPhotoCellWithIndex:indexPath]) {
             XCCheckoutDetailPhotoCell *photoCell = (XCCheckoutDetailPhotoCell *)[tableView dequeueReusableCellWithIdentifier:kaddPhotoCellID];
             photoCell.delegate = self;
@@ -746,24 +797,33 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             }
             return photoCell;
         }else if ([self isPicketCellWithIndex:indexPath]) {
-            NSString *holderStr = self.placeHolderArr[indexPath.row];
             XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
             picketCell.title = title;
             [picketCell setTitleValue:holderStr];
             [picketCell setupCellWithShopModel:self.storeModel];
             return picketCell;
+        }else if ([title isEqualToString:@"门店审核状态"]) {
+            XCCheckoutDetailTextCell *textCell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
+            textCell.title = title;
+            textCell.shouldTPRightMargin = YES;
+            textCell.titlePlaceholder = holderStr;
+            textCell.shouldShowSeparator = YES;
+            return textCell;
         }else {
-            NSString *holderStr = self.placeHolderArr[indexPath.row];
             XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID];
             textFiledCell.delegate = self;
             textFiledCell.title = title;
             [textFiledCell setTextFiledBGColor:[UIColor whiteColor]];
             [textFiledCell setTitlePlaceholder:holderStr];
+            textFiledCell.shouldShowSeparator = YES;
+
             if ([self isInputNumKeyBoardCellWithTitle:title]) {
                 [textFiledCell setIsNumField:YES];
                 textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             }else if ([title isEqualToString:@"业务员提成:"]||[title isEqualToString:@"团队经理提成:"]) {
                   textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+            }else if([title isEqualToString:@"详细地址:"]) {
+                textFiledCell.shouldShowClickView = YES;
             }
             if (self.storeModel) {
                 [textFiledCell setupCellWithShopModel:self.storeModel];
@@ -771,6 +831,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             return textFiledCell;
         }
     }else  {
+        //服务TableView
         NSString *title = nil;
         if (self.serviceTitleArr.count > indexPath.row) {
             title = self.serviceTitleArr[indexPath.row];
@@ -855,7 +916,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 
 - (BOOL)isPhotoCellWithIndex:(NSIndexPath *)indexpath
 {
-    if ( indexpath.row == 9|| indexpath.row == 10 ) {
+    if ( indexpath.row == 10|| indexpath.row == 11) {
         return YES;
     }
     return NO;
@@ -909,6 +970,64 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         [photoURLArrM addObject:storeModel.url4];
     }
     return photoURLArrM;
+}
+
+#pragma mark -  ========== 添加键盘通知 ==========
+
+- (void)addObserverKeyboard {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)removeObserverKeyBoard {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+//键盘显示
+- (void)keyboardShow:(NSNotification *)notification {
+    
+    if (isUsableNSString(self.selectedTitle, @"")) {
+        if (!( [self.selectedTitle isEqualToString:@"详细地址:"])) {
+            return;
+        }
+    }
+    NSValue *keyboardEndFrameValue = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardEndFrame;
+    [keyboardEndFrameValue getValue:&keyboardEndFrame];
+    //    NSLog(@"=====>:%d",(int)keyboardEndFrame.size.height);
+    //向上移动
+    __weak typeof (self)weakSelf = self;
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = weakSelf.storeTableView.frame;
+        frame.size.height = ktableViewH -  (keyboardEndFrame.size.height );
+        weakSelf.storeTableView.frame = frame;
+        [weakSelf scrollViewToBottom:NO];
+    }];
+    
+}
+
+//键盘隐藏
+- (void)keyboardHide:(NSNotification *)notification {
+    //往下移动
+    __weak typeof (self)weakSelf = self;
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = weakSelf.storeTableView.frame;
+        frame.size.height = ktableViewH ;
+        weakSelf.storeTableView.frame = frame;
+    }];
+    
+}
+
+- (void)scrollViewToBottom:(BOOL)animated
+{
+    if (self.storeTableView.contentSize.height > self.storeTableView.frame.size.height)
+    {
+        CGPoint offset = CGPointMake(0, self.storeTableView.contentSize.height - self.storeTableView.frame.size.height  );
+        [self.storeTableView setContentOffset:offset animated:animated];
+        
+    }
 }
 
 #pragma mark - Setter&Getter
@@ -973,6 +1092,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         _storeTableView.bounces = NO;
         _storeTableView.separatorColor = [UIColor purpleColor];
         _storeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_storeTableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
         [_storeTableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID];
         [_storeTableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
         [_storeTableView registerClass:[XCCheckoutDetailPhotoCell class] forCellReuseIdentifier:kaddPhotoCellID];

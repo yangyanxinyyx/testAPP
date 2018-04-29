@@ -14,7 +14,7 @@
 #define kCaseListCellID @"caseListCellID"
 #define kHeaderViewID @"headerViewID"
 #import "WSImageModel.h"
-#import "WSPhotosBroseVC.h"
+#import "XCPhotoPreViewController.h"
 @interface XCUserCaseBaseTableViewController :BaseViewController1 <UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate>
 
 /**
