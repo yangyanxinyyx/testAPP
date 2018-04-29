@@ -9,7 +9,7 @@
 #import "GetCarViewController.h"
 #import "GetCarView.h"
 #import "GetCarDetailModel.h"
-
+#import "XCPhotoPreViewController.h"
 
 @interface GetCarViewController ()<BaseNavigationBarDelegate,GetCarViewDelegate>
 
@@ -123,7 +123,9 @@
 
 - (void)GetCarViewDidSelectImageIndex:(NSInteger)index
 {
-
+    XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:nil];
+    [vc updatePositionWithIndex:index];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

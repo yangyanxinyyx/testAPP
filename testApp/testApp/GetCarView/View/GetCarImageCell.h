@@ -10,6 +10,6 @@
 
 @interface GetCarImageCell : UICollectionViewCell
 
-@property (nonatomic,strong) UIImageView *imageV
+@property (nonatomic,strong) UIImageView *imageV;
 
 @end
