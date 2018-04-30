@@ -119,22 +119,6 @@
     return nil;
 }
 
-/**
- *    @brief    验证固定电话区号是否正确（e.g. 010正确，030错误）
- *
- *    @return    返回固定电话区号是否正确
- */
-- (BOOL)isAreaCode
-{
-    
-    NSString *regex = [NSString stringWithFormat:@"^%@|%@$",[self regex_areaCode_threeDigit],[self regex_areaCode_fourDigit]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
-    if([predicate evaluateWithObject:self]){
-        return YES;
-    }
-    
-    return NO;
-}
 
 
 /**

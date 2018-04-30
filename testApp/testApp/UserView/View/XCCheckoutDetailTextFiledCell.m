@@ -257,6 +257,25 @@
     [self addSubview:_clickBtn];
 }
 
+- (void)setupCellWithDistributionBillModel:(XCCheckoutDetailBaseModel *)model
+{
+    if ([self.title isEqualToString:@"客户名称:"] ) {
+        if (isUsableNSString(model.customerName,@"")) {
+            [_textField setText:model.customerName];
+        }
+    }
+    else if ([self.title isEqualToString:@"联系电话:"]) {
+        if (isUsableNSString(model.phoneNo,@"")) {
+            [_textField setText:model.phoneNo];
+        }
+    }
+    else if ([self.title isEqualToString:@"配送地址:"]) {
+        if (isUsableNSString(model.phoneNo,@"")) {
+            [_textField setText:model.phoneNo];
+        }
+    }
+}
+
 #pragma mark - Setter&Getter
 
 -(void)setIsNumField:(BOOL)isNumField

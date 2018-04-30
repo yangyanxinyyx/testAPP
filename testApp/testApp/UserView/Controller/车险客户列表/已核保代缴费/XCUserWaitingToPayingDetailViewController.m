@@ -95,6 +95,7 @@
     policyVC.syMoney = syMoneyStr;
     policyVC.packageArr = packArrM;
     policyVC.policyId = self.model.BillID;
+    policyVC.model = self.model;
     [self.navigationController pushViewController:policyVC animated:YES];
 }
 
@@ -140,6 +141,7 @@
     billVC.syMoney = syMoneyStr;
     billVC.packageArr = packArrM;
     billVC.policyId = self.model.BillID;
+    billVC.model = self.model;
     [self.navigationController pushViewController:billVC animated:YES];
 }
 

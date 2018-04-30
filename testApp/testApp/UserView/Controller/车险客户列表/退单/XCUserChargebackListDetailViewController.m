@@ -105,7 +105,11 @@
     [self.tableView endEditing:YES];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     __weak __typeof(self) weakSelf = self;
-    if (indexPath.section == 0 && indexPath.row == 8) {
+    if (indexPath.section == 0 && indexPath.row == 10) {
+        //保险公司
+        
+    }
+    else if (indexPath.section == 0 && indexPath.row == 8) {
         //商业 起保日期
         SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectView.block = ^(NSString *string) {
@@ -144,12 +148,13 @@
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
-    BOOL isDoubleCellType = NO;
-    if ([title isEqualToString:@"缴费通知单号:"]) {
-        self.detailModel.payNoticeNo = textField.text;
-        isDoubleCellType = YES;
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
     }
-    else if ([title isEqualToString:@"交强险(业务员)金额:"]) {
+    BOOL isDoubleCellType = NO;
+    if ([title isEqualToString:@"交强险(业务员)金额:"]) {
         self.detailModel.jqMoney = [NSNumber numberWithDouble:[textField.text doubleValue]];
         isDoubleCellType = YES;
     }
@@ -157,24 +162,9 @@
         self.detailModel.syMoney = [NSNumber numberWithDouble:[textField.text doubleValue]];
         isDoubleCellType = YES;
     }
-//    else if ([title isEqualToString:@"交强险(出单员)金额:"]) {
-//        self.detailModel.jqMoneyExport = [NSNumber numberWithDouble:[textField.text doubleValue]];
-//        isDoubleCellType = YES;
-//    }
-//    else if ([title isEqualToString:@"商业险(出单员)金额:"]) {
-//        self.detailModel.syMoneyExport = [NSNumber numberWithDouble:[textField.text doubleValue]];
-//        isDoubleCellType = YES;
-//    }
-    else if ([title isEqualToString:@"保险公司:"]) {
-        self.detailModel.insurerName = textField.text;
-    }
-//    else if ([title isEqualToString:@"出单员:"]) {
-//        self.detailModel.exportmanName = textField.text;
-//    }
-    
     if (isDoubleCellType) {
         double num = [textField.text doubleValue];
-        textField.text = [NSString stringWithFormat:@"%.2f",num];
+        textField.text = [NSString stringWithMoneyNumber:num];
     }
 }
 
@@ -226,6 +216,12 @@
         }
         [textFiledCell setTitlePlaceholder:placetext];
         textFiledCell.delegate = self;
+        if (indexPath.section == 0 && indexPath.row == 10) {
+            //保险公司
+            textFiledCell.textField.userInteractionEnabled = NO;
+        }else {
+            textFiledCell.textField.userInteractionEnabled = YES;
+        }
         return textFiledCell;
     }else if (indexPath.section == 0 && indexPath.row == 17 - 1){
         XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];

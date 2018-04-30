@@ -54,10 +54,10 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self refreshServiceData];
 }
 
@@ -280,8 +280,10 @@
 
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+        [self.view addSubview:tipsView];
+    });
 }
 #pragma mark - Setter&Getter
 

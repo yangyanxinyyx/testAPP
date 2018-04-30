@@ -754,7 +754,7 @@
 //删除服务
 +(void)deleteStoreService:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail
 {
-    [self getRequest:DELETESTORESERVICE_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+    [self getRequest:DELETESTORESERVICE_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

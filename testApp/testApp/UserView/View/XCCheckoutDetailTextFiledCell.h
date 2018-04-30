@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "XCShopModel.h"
-
+#import "XCCheckoutDetailBaseModel.h"
 @protocol XCCheckoutDetailTextFiledCellDelegate <NSObject>
 
 - (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title;
@@ -54,6 +54,6 @@
 +(CGFloat)getCellHeight;
 
 //- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
-
+- (void)setupCellWithDistributionBillModel:(XCCheckoutDetailBaseModel *)model;
 - (void)setupCellWithShopModel:(XCShopModel *)model;
 @end

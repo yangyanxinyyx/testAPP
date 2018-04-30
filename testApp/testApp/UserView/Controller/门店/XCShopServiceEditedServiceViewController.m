@@ -55,6 +55,7 @@
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    
     XCCheckoutDetailTextFiledCell *twoTextCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if (textField == twoTextCell.textField) {
         self.price = [NSNumber numberWithDouble:[textField.text doubleValue]];
@@ -103,6 +104,7 @@
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"修改成功"];
+            [strongSelf.navigationController popViewControllerAnimated:YES];
         }else {
             [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
         }

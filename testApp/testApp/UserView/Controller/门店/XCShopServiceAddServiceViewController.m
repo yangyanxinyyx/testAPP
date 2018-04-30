@@ -73,17 +73,19 @@
 
 - (void)clickConfirmBtn:(UIButton *)button
 {
-    NSMutableArray *addItemsArrM = [[NSMutableArray alloc] init];
-    for (XCShopServiceModel *model  in self.dataArrM) {
+    NSMutableString * mutStr = [NSMutableString string];
+    for (int i = 0 ; i < self.dataArrM.count; i++) {
+        XCShopServiceModel *model = self.dataArrM[i];
         if (model.isSelect) {
             if (isUsable(model.serviceId, [NSNumber class])) {
-                [addItemsArrM addObject:model.serviceId];
+                [mutStr appendString:[NSString stringWithFormat:@"%ld,",[model.serviceId longValue]]];
             }
         }
     }
+    [mutStr deleteCharactersInRange:NSMakeRange(mutStr.length - 1, 1)];
     
     NSDictionary *param = @{
-                            @"serviceArrayId":[addItemsArrM yy_modelToJSONString],
+                            @"serviceArrayId":mutStr,
                             @"storeId":self.storeID,
                             };
     __weak __typeof(self) weakSelf = self;
@@ -92,8 +94,11 @@
         NSString *errorStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
             errorStr = @"提交成功,待审核!";
+            [strongSelf showAlterInfoWithNetWork:errorStr];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errorStr];
         }
-        [strongSelf showAlterInfoWithNetWork:errorStr];
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;

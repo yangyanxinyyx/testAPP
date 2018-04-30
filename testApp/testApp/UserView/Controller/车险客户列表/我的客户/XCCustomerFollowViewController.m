@@ -60,6 +60,14 @@
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
         if ((indexPath.section == 0 && indexPath.row == 0)) {
             NSArray * arr = @[@"人伤案件",@"无责事故案件",@"特殊案件",@"代垫付案件"];
+            if (self.selectArr) {
+                NSMutableArray *tmpArrM = [[NSMutableArray alloc] init];
+                for (NSDictionary *selectInfo in self.selectArr) {
+                    NSString *title = selectInfo[@"value"];
+                    [tmpArrM addObject:title];
+                }
+                arr = tmpArrM;
+            }
             __weak __typeof(self) weakSelf = self;
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
@@ -94,15 +102,22 @@
                             };
     [RequestAPI postCustomerFollowRec:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if ([response[@"result"] integerValue] == 1) {
-            [strongSelf requestSuccessHandler];
+        NSString *errStr;
+        if (isUsable(response[@"errormsg"], [NSString class])) {
+            errStr = response[@"errormsg"];
         }else {
-            [strongSelf requestFailureHandler];
+            errStr = @"未知错误";
+        }
+        if ([response[@"result"] integerValue] == 1) {
+            [strongSelf showAlterInfoWithNetWork:@"提交成功"];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errStr];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        [strongSelf requestFailureHandler];
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr];
     }];
     
 }
@@ -167,16 +182,7 @@
 }
 
 #pragma mark - Privacy Method
-- (void)requestFailureHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
-}
-- (void)requestSuccessHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"提交成功" complete:nil];
-    [self.view addSubview:tipsView];
-}
+
 #pragma mark - Setter&Getter
 
 ////获取操作类型

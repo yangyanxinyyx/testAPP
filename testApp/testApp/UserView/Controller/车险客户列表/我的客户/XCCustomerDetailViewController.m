@@ -17,6 +17,9 @@
 @property (nonatomic, strong) UIButton  * customerFollowUpBtn ;
 @property (nonatomic, strong) UIButton * subscribeBtn ;
 /** <# 注释 #> */
+@property (nonatomic, strong) UIView * bottomLine ;
+
+/** <# 注释 #> */
 @property (nonatomic, strong) AMapLocationManager * locationManager ;
 
 /** 用户定位 */
@@ -58,11 +61,13 @@
 {
     [super viewDidLayoutSubviews];
 
-    CGFloat bottomHeight = 140 * ViewRateBaseOnIP6;
+    CGFloat bottomHeight = 120 * ViewRateBaseOnIP6;
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
-    [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6, CGRectGetMaxY(self.tableView.frame) + 40 * ViewRateBaseOnIP6 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
+    [_bottomLine setFrame:CGRectMake(0, SCREEN_HEIGHT - bottomHeight - 1, SCREEN_WIDTH, 1)];
+    
+    [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6,CGRectGetMaxY(_bottomLine.frame) + (SCREEN_HEIGHT - CGRectGetMaxY(_bottomLine.frame)  - 80 * ViewRateBaseOnIP6) * 0.5 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 40 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     
 }
@@ -71,10 +76,30 @@
 
 - (void)clickCustomerFollowUpBtn:(UIButton *)button
 {
-    XCCustomerFollowViewController *followVC = [[XCCustomerFollowViewController alloc] initWithTitle:@"客户跟进"];
-    followVC.customerID = self.model.customerId;
-    followVC.customerName = self.model.customerName;
-    [self.navigationController pushViewController:followVC animated:YES];
+    
+    __block NSMutableArray * selectArrM = [[NSMutableArray alloc] init];
+    __weak __typeof(self) weakSelf = self;
+    NSDictionary *param = @{
+                            @"dictCode":@"three_case_type",
+                            };
+    [RequestAPI getSelectLinesByDictCode:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        NSString * respnseStr = response[@"errormsg"];
+        if (isUsable(response[@"data"], [NSArray class])) {
+            selectArrM = response[@"data"];
+            XCCustomerFollowViewController *followVC = [[XCCustomerFollowViewController alloc] initWithTitle:@"客户跟进"];
+            followVC.customerID = self.model.customerId;
+            followVC.customerName = self.model.customerName;
+            followVC.selectArr = selectArrM;
+            [self.navigationController pushViewController:followVC animated:YES];
+        }else {
+            [weakSelf showAlterInfoWithNetWork:respnseStr];
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        [weakSelf showAlterInfoWithNetWork:@"网络错误"];
+
+    }];
+    
 }
 
 - (void)clickSubscribeBtn:(UIButton *)button
@@ -170,6 +195,10 @@
 
 - (void)initUI
 {
+    
+    _bottomLine = [[UIView alloc] initWithFrame:CGRectZero];
+    [_bottomLine setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [self.view addSubview:_bottomLine];
     _customerFollowUpBtn = [UIButton buttonWithType:0];
     [_customerFollowUpBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [_customerFollowUpBtn.titleLabel setFont:[UIFont systemFontOfSize:32 * ViewRateBaseOnIP6]];

@@ -508,16 +508,21 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
     if ([title isEqualToString:@"门店名称:"]) {
         _storeModel.name = textField.text;
     }
     else if ([title isEqualToString:@"联系方式:"]) {
             [textField setText:[textField.text areaCodeFormat]];
-        if ([textField.text isAreaCode]) {
+        if (isUsableNSString(textField.text, @"")) {
             _storeModel.tel = [textField.text areaCodeFormat];
-
         }else {
-            [self showAlterInfoWithNetWork:@"请输入正确格式联系方式"];
+            [self showAlterInfoWithNetWork:@"请输入正确固话格式"];
         }
     }
     else if ([title isEqualToString:@"负责人:"]) {
@@ -914,10 +919,11 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             title = self.serviceTitleArr[indexPath.row];
         }
         XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
-        picketCell.title = title;
+        picketCell.titleLabel.text = title;
         if (picketCell == nil) {
             picketCell =[[XCDistributionPicketCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPicketCellID];
-            picketCell.title = title;
+            picketCell.titleLabel.text = title;
+
         }
         return picketCell;
     }

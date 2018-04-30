@@ -42,7 +42,8 @@
 - (instancetype)initWithTitle:(NSString *)title
                       sources:(NSArray<NSURL *> *)imageArrM{
     if (self = [super init]) {
-        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+//        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+        self.view.backgroundColor = [UIColor whiteColor];
         _topBar = [[BaseNavigationBar alloc] init];
         _topBar.delegate  = self;
         _topBar.title = title;

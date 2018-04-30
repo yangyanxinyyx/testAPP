@@ -251,6 +251,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         textFiledCell.shouldShowSeparator = NO;
         textFiledCell.titlePlaceholder = @"输入备注信息";
     }
+    _billModel.receiverName = self.model.customerName;
+    _billModel.phone = self.model.phoneNo;
+#warning 缺少客户地址
+    //    _payModel.address = self.model
+    [textFiledCell setupCellWithDistributionBillModel:self.model];
     
     return textFiledCell;
 }
@@ -329,7 +334,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             _billModel.receiveMoney = [NSNumber numberWithDouble:0];
         }
         if (!isUsableNSString(_billModel.remark, @"")) {
-            _billModel.address = @"";
+            _billModel.remark = @"";
         }
         if (!isUsableNSString(_billModel.address, @"")) {
             errString = @"配送地址为空";
@@ -363,9 +368,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"提交成功";
+                [weakSelf showAlterInfoWithNetWork:respnseStr];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                [weakSelf showAlterInfoWithNetWork:respnseStr];
             }
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
-            [weakSelf.view addSubview:tipsView];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
@@ -409,6 +416,13 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
     if ([title isEqualToString:@"保单金额:"]) {
         double price = [textField.text doubleValue];
         _billModel.policyTotalAmount = [NSNumber numberWithDouble:price];
