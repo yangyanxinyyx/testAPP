@@ -123,7 +123,6 @@
     }
     else if ([self.title isEqualToString:@"业务员提成:"] && isUsable(model.salesmanCommission, [NSNumber class])) {
     [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
-        
     }
     else if ([self.title isEqualToString:@"团队经理提成:"] && isUsable(model.managerCommission, [NSNumber class])) {
               [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];

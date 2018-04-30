@@ -90,8 +90,6 @@
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
         [strongSelf.view addSubview:tipsView];
     }];
-    
-  
 
 }
 

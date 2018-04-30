@@ -52,18 +52,9 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _labelArrM = [[NSMutableArray alloc] init];
         _isMutableTextType = NO;
+        _isWeizhangType = NO ;
         [self configSubVies];
-        [_titleLabel setText:@"刘某人伤案件理赔进度:"];
-//        NSArray *titleArr = @[@"联系人: 刘先生",@"联系电话: 13369925025",@"案发时间: 2017年11月20日",@"提交时间: 2017年12月1日",@"咨询电话: 020-8888888"];
-//        NSArray *titleArr = @[@"投保人:",@"身份证:",@"车牌号:",
-//                              @"车架号:",@"初登日期:",@"发动机号:",
-//                              @"车型名称:",@"车型代码:",@"(商业)起保日期:",
-//                              @"(交强)起保日期",@"保险公司",@"缴费通知单号:",
-//                              @"交强险(保单)金额",@"商业险(保单)金额",@"交强保单最终金额:",
-//                              @"商业险保险最终金额",@"交强险保单:",@"商业险保单:",
-//                              @"交强险佣金:",@"商业险佣金",@"出单员:",@"备注:"];
-//        [self setLabelArrM:titleArr];
-//        [_mutableTextLabel setText:@"描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中描述中......"];
+
     }
     return self;
 }
@@ -100,20 +91,40 @@
     }else {
         [_mutableTextLabel setFrame:CGRectZero];
         if (_labelArrM.count > 0 ) {
+            UILabel *lastLabel = nil;
             for (int i = 0 ; i < _labelArrM.count; i++) {
                 UILabel *label = _labelArrM[i];
                 [label sizeToFit];
                 labelSize = label.frame.size;
 
-                if (i == 0) {
-                    [label setFrame:CGRectMake(leftMargin, (startY + topMargin) , labelSize.width, 24 * ViewRateBaseOnIP6)];
-                    
+                if (_isWeizhangType) {
+                    //车务VC违章模式
+                    if (i == 0) {
+                        [label setFrame:CGRectMake(leftMargin, (startY + topMargin) , labelSize.width, 24 * ViewRateBaseOnIP6)];
+                        lastLabel = label;
+                    }
+                    else if(i == 10){
+                        [label sizeToFit];
+                        CGFloat height = [UILabel getXCTextHeightLineWithString:label.text withWidth:self.bounds.size.width - leftMargin * 2 withFontSize:26];
+                        [label setFrame:CGRectMake(leftMargin, CGRectGetMaxY(lastLabel.frame) + labelTopMargin  , self.bounds.size.width - leftMargin * 2, height)];
+                        lastLabel = label;
+                    }
+                    else {
+                        [label setFrame:CGRectMake(leftMargin,  CGRectGetMaxY(lastLabel.frame) + labelTopMargin , self.bounds.size.width - leftMargin * 2, 24 * ViewRateBaseOnIP6)];
+                        lastLabel = label;
+                    }
                 }else {
-
-                    [label setFrame:CGRectMake(leftMargin, (startY + topMargin) + (labelTopMargin + 24 * ViewRateBaseOnIP6)  + (labelTopMargin + 24 * ViewRateBaseOnIP6) * (i - 1) , self.bounds.size.width - leftMargin * 2, 24 * ViewRateBaseOnIP6)];
+                    //普通模式
+                    if (i == 0) {
+                        [label setFrame:CGRectMake(leftMargin, (startY + topMargin) , labelSize.width, 24 * ViewRateBaseOnIP6)];
+                        lastLabel = label;
+                    }
+                    else {
+                        [label setFrame:CGRectMake(leftMargin,  CGRectGetMaxY(lastLabel.frame) + labelTopMargin , self.bounds.size.width - leftMargin * 2, 24 * ViewRateBaseOnIP6)];
+                        lastLabel = label;
+                    }
                 }
             }
-            
         }
     }
   
@@ -252,6 +263,7 @@
         NSString * title = baseTitleNameArr[i];
         UILabel *label = _labelArrM[i];
         [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+
     }
 }
 
@@ -712,6 +724,9 @@
     for (int i = 0 ; i < labelTitleArrM.count; i++) {
         NSString *title = labelTitleArrM[i];
         UILabel *label = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(51, 51, 51)];
+        if(i == 10){
+            label.numberOfLines = 0;
+        }
         [label setText:title];
         [self addSubview:label];
         [_labelArrM addObject:label];

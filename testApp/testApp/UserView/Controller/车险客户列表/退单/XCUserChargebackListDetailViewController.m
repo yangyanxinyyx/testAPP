@@ -8,9 +8,11 @@
 
 #import "XCUserChargebackListDetailViewController.h"
 #import "SelectTimeView.h"
+#import "LYZSelectView.h"
 @interface XCUserChargebackListDetailViewController ()<XCCheckoutDetailTextFiledCellDelegate>
 @property (nonatomic, strong) UIButton * commitBtn ;
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray * policyCompanyArrM ;
 @end
 
 @implementation XCUserChargebackListDetailViewController
@@ -44,13 +46,8 @@
 #pragma mark - Init Method
 - (void)configureData
 {
+
     // 12 15 16 有输入
-//    NSArray *baseTitleNameArr = @[@"投保人:",@"身份证:",@"车牌号:",
-//                                  @"车架号:",@"初登日期:",@"发动机号:",
-//                                  @"车型名称:",@"车型代码:",@"(商业)起保日期:",
-//                                  @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
-//                                  @"交强险(业务员)金额:",@"商业险(业务员)金额:",@"交强险(出单员)金额:",
-//                                  @"商业险(出单员)金额:",@"出单员:",@"是否续保"];
     NSArray *baseTitleNameArr = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
                                   @"车型名称:",@"车型代码:",@"(商业)起保日期:",
@@ -86,16 +83,17 @@
 
         NSString * respnseStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"提交成功，待审核"];
-            [strongSelf.navigationController popViewControllerAnimated:YES];
+            [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:respnseStr];
+            [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 
 }
@@ -107,7 +105,48 @@
     __weak __typeof(self) weakSelf = self;
     if (indexPath.section == 0 && indexPath.row == 10) {
         //保险公司
-        
+        if (self.policyCompanyArrM) {
+            LYZSelectView * alterView = [LYZSelectView alterViewWithArray:self.policyCompanyArrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                weakSelf.detailModel.insurerName = selectStr;
+                [(XCCheckoutDetailTextFiledCell *)cell setTitlePlaceholder:selectStr];
+            }];
+            [self.view addSubview:alterView];
+        }else{
+            if (!self.policyCompanyArrM) {
+                //获取保险公司
+                _policyCompanyArrM = [[NSMutableArray alloc] init];
+                if (_detailModel.exportUnitName) {
+                    NSDictionary *param = @{
+                                            @"dictCode":_detailModel.exportUnitName,
+                                            };
+                    [RequestAPI getInsuredrice:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                        if (isUsable(response[@"data"], [NSArray class])) {
+                            NSArray *dataArr = response[@"data"];
+                            for (NSDictionary *dataInfo in dataArr) {
+                                NSString *policyName = dataInfo[@"content"];
+                                [_policyCompanyArrM addObject:policyName];
+                            }
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            LYZSelectView * alterView = [LYZSelectView alterViewWithArray:self.policyCompanyArrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                                weakSelf.detailModel.insurerName = selectStr;
+                                [(XCCheckoutDetailTextFiledCell *)cell setTitlePlaceholder:selectStr];
+                            }];
+                            [weakSelf.view addSubview:alterView];
+                        });
+                        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    } fail:^(id error) {
+                        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+                        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+                        _policyCompanyArrM = nil;
+                    }];
+                }else {
+                    [self showAlterInfoWithNetWork:@"退单无出单机构信息" complete:nil];
+                    _policyCompanyArrM = nil;
+                }
+            }
+        }
     }
     else if (indexPath.section == 0 && indexPath.row == 8) {
         //商业 起保日期
@@ -181,7 +220,12 @@
 
 
 #pragma mark - Setter&Getter
-
+- (void)setDetailModel:(XCCheckoutDetailBaseModel *)detailModel
+{
+    _detailModel = detailModel;
+    
+   
+}
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -212,7 +256,9 @@
             textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             placetext = @"输入金额";
         }else {
-            placetext = @"请输入";
+            if (indexPath.row == 10 ) {
+                placetext = @"请选择";
+            }
         }
         [textFiledCell setTitlePlaceholder:placetext];
         textFiledCell.delegate = self;

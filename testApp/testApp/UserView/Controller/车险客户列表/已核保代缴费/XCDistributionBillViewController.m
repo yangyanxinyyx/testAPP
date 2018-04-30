@@ -334,17 +334,18 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
     if (configureSuccess) {
         NSLog(@"点击确认提交");
-        __weak typeof (self)weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
-                respnseStr = @"修改成功";
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf resetData];
-                });
+                [strongSelf showAlterInfoWithNetWork:@"修改成功" complete:^{
+                    [strongSelf resetData];
+                }];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
             }
-            [weakSelf showAlterInfoWithNetWork:respnseStr];
             
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {

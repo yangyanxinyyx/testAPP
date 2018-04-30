@@ -21,7 +21,6 @@
 #define kHeaderViewID @"headerViewID"
 #define kFooterViewID @"footerViewID"
 #import "WSImageModel.h"
-#import "WSPhotosBroseVC.h"
 @interface XCCheckoutDetailBaseTableViewController : BaseViewController1 <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,BaseNavigationBarDelegate>
 /**
  自定义导航栏
@@ -40,5 +39,5 @@
 - (instancetype)initWithTitle:(NSString *)title;
 
 //提示框
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr;
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete;
 @end

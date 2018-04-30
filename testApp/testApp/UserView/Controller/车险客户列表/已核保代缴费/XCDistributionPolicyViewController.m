@@ -362,16 +362,19 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     }
     if (configureSuccess) {
         NSLog(@"点击确认提交");
-        __weak typeof (self)weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"提交成功";
-                [weakSelf showAlterInfoWithNetWork:respnseStr];
-                [self.navigationController popViewControllerAnimated:YES];
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:^{
+                    [strongSelf.navigationController popViewControllerAnimated:YES];
+
+                }];
             }else {
-                [weakSelf showAlterInfoWithNetWork:respnseStr];
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {

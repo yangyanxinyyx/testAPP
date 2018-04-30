@@ -83,6 +83,7 @@
                             @"dictCode":@"three_case_type",
                             };
     [RequestAPI getSelectLinesByDictCode:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString * respnseStr = response[@"errormsg"];
         if (isUsable(response[@"data"], [NSArray class])) {
             selectArrM = response[@"data"];
@@ -90,14 +91,15 @@
             followVC.customerID = self.model.customerId;
             followVC.customerName = self.model.customerName;
             followVC.selectArr = selectArrM;
-            [self.navigationController pushViewController:followVC animated:YES];
+            [strongSelf.navigationController pushViewController:followVC animated:YES];
         }else {
-            [weakSelf showAlterInfoWithNetWork:respnseStr];
+            [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
-        [weakSelf showAlterInfoWithNetWork:@"网络错误"];
-
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
     
 }

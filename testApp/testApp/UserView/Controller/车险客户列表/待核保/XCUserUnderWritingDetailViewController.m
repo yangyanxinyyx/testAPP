@@ -54,16 +54,18 @@
                                     };
             [RequestAPI postPolicyRevokeBySaleMan:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
                 if ([response[@"result"] boolValue] == 1) {
-                    [strongSelf showAlterInfoWithNetWork:@"提交成功，待审核"];
+                    [strongSelf showAlterInfoWithNetWork:@"提交成功,待审核" complete:^{
+                        [strongSelf.navigationController popViewControllerAnimated:YES];
+                    }];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
             } fail:^(id error) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-                [strongSelf showAlterInfoWithNetWork:errStr];
+                [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
             }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"参数错误"];
+            [strongSelf showAlterInfoWithNetWork:@"参数错误" complete:nil];
         }
     }];
 

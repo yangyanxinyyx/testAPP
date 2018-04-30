@@ -67,8 +67,6 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
-        
-        
         topView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 546 * ViewRateBaseOnIP6, SCREEN_WIDTH, 88 * ViewRateBaseOnIP6)];
         topView.backgroundColor = RGBACOLOR(242, 242, 242, 1.0);
         [self addSubview:topView];

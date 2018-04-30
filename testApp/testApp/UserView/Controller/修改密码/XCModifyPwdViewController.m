@@ -46,6 +46,7 @@
     for (int i=0; i<titles.count; i++) {
         UITextField *accoutTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, kHeightForNavigation + i * 44, SCREEN_WIDTH-20, 44)];
         [self.view addSubview:accoutTextField];
+        
         accoutTextField.placeholder = titles[i];
         accoutTextField.clearButtonMode = UITextFieldViewModeAlways;
         accoutTextField.clearsOnBeginEditing = YES;
@@ -59,6 +60,7 @@
         accoutTextField.leftViewMode = UITextFieldViewModeAlways;
         accoutTextField.font = [UIFont systemFontOfSize:14];
         accoutTextField.tag = i;
+
         [self.textFieldArray addObject:accoutTextField];
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, kHeightForNavigation + 44 * (i + 1), SCREEN_WIDTH - 30, 1)];
@@ -107,7 +109,7 @@
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 
 }
@@ -177,10 +179,12 @@
 }
 
 #pragma mark - Privacy Method
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
+        [self.view addSubview:tipsView];
+    });
 }
 #pragma mark - Setter&Getter
 - (NSMutableArray *)textFieldArray{

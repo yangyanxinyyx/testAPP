@@ -123,6 +123,8 @@
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else {
         return 720 * ViewRateBaseOnIP6;
+//        CGFloat num = self.dataTitleArrM.count - 1;
+//        return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num )  + 30 * ViewRateBaseOnIP6  ;
     }
 }
 @end

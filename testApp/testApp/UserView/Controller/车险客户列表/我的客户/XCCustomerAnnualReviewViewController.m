@@ -188,21 +188,27 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                             @"url2":url2Str,
                             @"url3":url3Str,
                             @"url4":url4Str,
-                            
                             };
     [RequestAPI addOrderByAuditAndRules:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        
-        if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"预约成功"];
+        NSString *errStr;
+        if (isUsable(response[@"errormsg"], [NSString class])) {
+            errStr = response[@"errormsg"];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"预约失败"];
+            errStr = @"未知错误";
+        }
+        if ([response[@"result"] integerValue] == 1) {
+            [strongSelf showAlterInfoWithNetWork:@"预约成功" complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 
 }
@@ -267,6 +273,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                     }
                     unlink([filePath  UTF8String]);
+                    [strongSelf.storePhotoArrM removeObject:filePath];
                 }
                 NSArray *urlStrArr  = response[@"data"];
                 for (NSString *urlPath in urlStrArr) {
@@ -277,46 +284,23 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                 /// 提交年审费用
                 [strongSelf postAnnualNetworkBill];
             }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败"];
+                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
                 return ;            }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
             return ;
         }];
     }else {
-        [self showAlterInfoWithNetWork:@"请添加正确证件照片！"];
+        [self showAlterInfoWithNetWork:@"请添加正确证件照片！" complete:nil];
     }
     
 }
 
 #pragma mark - XCCheckoutDetailPhotoCellDelegate
 
-//- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell
-//{
-//    if (image) {
-//        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-////        previewVC.sourceImage = image;
-//       __block NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
-//        previewVC.sourceURL = fileURL;
-//        __weak __typeof(self) weakSelf = self;
-//        previewVC.deleteHandler = ^{
-//            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-//            XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-//            if ([[NSFileManager defaultManager] fileExistsAtPath:_pathToPhoto]) {
-//                [[NSFileManager defaultManager] removeItemAtPath:_pathToPhoto error:nil];
-//            }
-//            unlink([_pathToPhoto  UTF8String]);
-//            [cell setPhotoArr:@[]];
-//
-//        };
-//        [self.navigationController pushViewController:previewVC animated:YES];
-//    }
-//
-//
-//}
 - (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL *)photoURL
                                              index:(NSInteger)index
                                               cell:(XCCheckoutDetailPhotoCell *)cell
@@ -331,7 +315,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             if (deleArray.count > 0) {
                 for (NSString *imagePath in deleArray) {
                     if ([strongSelf isUsefulURLWith:imagePath]) {
-
+                        
                     }else {
                         //本地删除
                         if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
@@ -347,7 +331,8 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             [strongSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
         [self.navigationController pushViewController:previewVC animated:YES];
-    }
+    };
+
 }
 
 

@@ -56,13 +56,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr];
+                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }];
     }
     else if ([self isCarTransactionTypeVCWithModel:model]) {
@@ -99,13 +99,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr];
+                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }];
     }
     else if ([model.title isEqualToString:@"我的客户"]) {
@@ -138,18 +138,17 @@
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
                     [weakSelf.navigationController pushViewController:subVC animated:YES];
-                
                     configureSucess = YES;
                 }
             }
             if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr];
+                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
             
         }];
     }
@@ -189,13 +188,13 @@
                 }
             }
             if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr];
+                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }];
     }
     else if ([model.title isEqualToString:@"门店"]) {
@@ -215,13 +214,15 @@
                 subVC.storeModel = shopModel;
                 [weakSelf.navigationController pushViewController:subVC animated:YES];
             }else {
-                [weakSelf showAlterInfoWithNetWork:errStr];
+                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];        }];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            
+        }];
     }
     
 }

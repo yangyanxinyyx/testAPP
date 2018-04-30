@@ -119,7 +119,7 @@
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
     
 }
@@ -218,7 +218,6 @@
     if (section != (self.listViewDataArray.count - 1)){
         return CGSizeMake(self.listView.frame.size.width,0);
     }
-//    return CGSizeMake(self.listView.frame.size.width,40 * ViewRateBaseOnIP6);
     return CGSizeMake(self.listView.frame.size.width, [XCUserListFooterView getFooterViewHeight]);
 }
 #pragma mark - UICollectionViewDidSeclect
@@ -235,10 +234,13 @@
 }
 
 #pragma mark - Privacy Method
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
+        [self.view addSubview:tipsView];
+    });
+  
 }
 - (void)initWithListData
 {

@@ -94,16 +94,17 @@
         NSString *errorStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
             errorStr = @"提交成功,待审核!";
-            [strongSelf showAlterInfoWithNetWork:errorStr];
-            [self.navigationController popViewControllerAnimated:YES];
+            [strongSelf showAlterInfoWithNetWork:errorStr complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:errorStr];
+            [strongSelf showAlterInfoWithNetWork:errorStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 }
 
