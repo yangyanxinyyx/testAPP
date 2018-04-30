@@ -10,7 +10,6 @@
 
 @interface XCCheckoutDetailInputCell ()
 
-@property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UIImageView * continueView ;
 
 @end
@@ -24,8 +23,8 @@
 {
     [super layoutSubviews];
 
-    CGSize labelSize = _titleLabel.frame.size;
     [_titleLabel sizeToFit];
+    CGSize labelSize = _titleLabel.frame.size;
     [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - 24 * ViewRateBaseOnIP6) * 0.5, labelSize.width,24 * ViewRateBaseOnIP6)];
     
     CGFloat imageViewH = 40 * ViewRateBaseOnIP6;

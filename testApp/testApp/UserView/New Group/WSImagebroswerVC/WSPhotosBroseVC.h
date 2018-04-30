@@ -8,6 +8,16 @@
 
 #import "WSImageBroswerVC.h"
 
-@interface WSPhotosBroseVC : WSImageBroswerVC
+@interface WSPhotosBroseVC : WSImageBroswerVC<BaseNavigationBarDelegate>
+
+/** 自定义导航栏 */
+@property (nonatomic, strong) BaseNavigationBar *topBar ;
+@property (nonatomic,strong) NSString *navTitle;
+
 @property (nonatomic, copy) void(^completion)(NSArray <UIImage *> *array);
+
+- (instancetype)initWithTitle:(NSString *)title;
+
+- (instancetype)initWithTitle:(NSString *)title
+                      sources:(NSMutableArray<WSImageModel *> *)imageArrM;
 @end

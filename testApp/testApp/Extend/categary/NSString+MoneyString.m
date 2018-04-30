@@ -25,13 +25,53 @@
     [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,1)];
     [str addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(68, 68, 68) range:NSMakeRange(1,text.length - 1)];
     [str addAttribute:NSFontAttributeName
-                          value:[UIFont systemFontOfSize:28 * ViewRateBaseOnIP6]
+                          value:[UIFont fontWithName:@"PingFang-SC-Medium" size:28 * ViewRateBaseOnIP6]
                           range:NSMakeRange(1,text.length - 1)];
     
 
     
     return str;
 }
+
++ (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text fontSize:(CGFloat)size
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",text]];
+    [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0,1)];
+    [str addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(68, 68, 68) range:NSMakeRange(1,text.length - 1)];
+    [str addAttribute:NSFontAttributeName
+                value:[UIFont fontWithName:@"PingFang-SC-Medium" size:size * ViewRateBaseOnIP6]
+                range:NSMakeRange(1,text.length - 1)];
+    
+    
+    
+    return str;
+}
+
+//获取当前时间戳  （以毫秒为单位）
++(NSString *)getNowTimeTimestamp{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    //设置时区,这个对于时间的处理有时很重要
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    
+    [formatter setTimeZone:timeZone];
+    
+    NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+    
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+    
+    return timeSp;
+    
+}
+
 
 @end
 

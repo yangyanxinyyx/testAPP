@@ -13,6 +13,10 @@
 + (NSString *)stringWithMoneyNumber:(double)money;
 
 + (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text;
++ (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text fontSize:(CGFloat)size;
+
++ (NSString *)getNowTimeTimestamp;
+
 @end
 
 @interface NSString (Validate)

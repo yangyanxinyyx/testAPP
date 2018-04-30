@@ -129,7 +129,7 @@
     if (indexPath.row == self.dataArrM.count - 1) {
         cell.shouldShowSeparator = NO;
     }
-    [cell setTitle:title];
+    cell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
 
     return cell;
 }

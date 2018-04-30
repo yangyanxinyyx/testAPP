@@ -147,7 +147,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     if ([self isTextCellTypeWithIndex:indexPath]) {
         XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
         textCell.shouldShowSeparator = YES;
-        textCell.titleLabel.attributedText = [NSString stringWithImportentValue:titleName];
+        [textCell setTitle:titleName];
         if ([titleName isEqualToString:@"商业险金额:"]) {
             [textCell setTitlePlaceholder:self.syMoney];
         }
@@ -158,6 +158,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         return textCell;
     }else if([self isPicketCellTypeWithIndex:indexPath]) {
         XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
+
         picketCell.title = titleName;
         picketCell.selectionStyle = UITableViewCellSelectionStyleNone;
         

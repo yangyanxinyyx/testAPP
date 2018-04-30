@@ -40,7 +40,7 @@
 
 #pragma mark - Init Method
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSMutableArray<NSURL *> *)imageArrM{
+                      sources:(NSArray<NSURL *> *)imageArrM{
     if (self = [super init]) {
         self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
         _topBar = [[BaseNavigationBar alloc] init];
@@ -52,8 +52,10 @@
         NSMutableArray *tmpArray = [NSMutableArray new];
         for (NSString *imagePath in imageArrM) {
             WSImageModel *model = [WSImageModel new];
-            model.imageUrl = imagePath;
-            [tmpArray addObject:model];
+            if (isUsableNSString(imagePath, @"")) {
+                model.imageUrl = imagePath;
+                [tmpArray addObject:model];
+            }
         }
         self.imageArray = tmpArray;
         self.tmpDeleArr = [[NSMutableArray alloc] init];
@@ -77,7 +79,7 @@
 - (void)configureSubViews
 {
 
-    self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    self.view.backgroundColor = [UIColor whiteColor];
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     layout.minimumLineSpacing = 0.0f;

@@ -11,6 +11,7 @@
 @interface XCCheckoutDetailInputCell : UITableViewCell
 
 @property (nonatomic, copy) NSString * title;
+@property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, assign) BOOL isContinue ;
 
 @end

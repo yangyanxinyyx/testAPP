@@ -29,6 +29,7 @@
 @property (nonatomic, copy) NSString * title ;
 @property (nonatomic, strong) UITextField * textField ;
 @property (nonatomic, copy) NSString * titlePlaceholder ;
+@property (nonatomic, strong) UILabel * titleLabel ;
 
 @property (nonatomic, copy) NSString * secondTitle ;
 @property (nonatomic, strong) UITextField * secondTextField ;

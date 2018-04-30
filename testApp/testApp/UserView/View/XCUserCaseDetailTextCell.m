@@ -449,22 +449,22 @@
         payNoticeNo = model.payNoticeNo;
     }
     if (isUsable(model.jqMoney, [NSNumber class])) {
-        jqMoney = [NSString stringWithFormat:@"%2f",[model.jqMoney doubleValue]];
+        jqMoney = [NSString stringWithMoneyNumber:[model.jqMoney doubleValue]];
     }
     if (isUsable(model.syMoney, [NSNumber class])) {
-        syMoney = [NSString stringWithFormat:@"%2f",[model.syMoney doubleValue]];
+        syMoney =  [NSString stringWithMoneyNumber:[model.syMoney doubleValue]];
     }
     if (isUsable(model.jqMoneyFinal, [NSNumber class])) {
-        jqMoneyFinal = [NSString stringWithFormat:@"%2f",[model.jqMoneyFinal doubleValue]];
+        jqMoneyFinal =  [NSString stringWithMoneyNumber:[model.jqMoneyFinal doubleValue]];
     }
     if (isUsable(model.syMoneyFinal, [NSNumber class])) {
-        syMoneyFinal = [NSString stringWithFormat:@"%2f",[model.syMoneyFinal doubleValue]];
+        syMoneyFinal =  [NSString stringWithMoneyNumber:[model.syMoneyFinal doubleValue]];
     }
     if (isUsableNSString(model.jqNumber, @"")) {
-        jqNumber = [NSString stringWithFormat:@"%2f",[model.jqNumber doubleValue]];
+        jqNumber = [NSString stringWithMoneyNumber:[model.jqNumber doubleValue]];
     }
     if (isUsableNSString(model.syNumber, @"")) {
-        syNumber = [NSString stringWithFormat:@"%2f",[model.syNumber doubleValue]];
+        syNumber = [NSString stringWithMoneyNumber:[model.syNumber doubleValue]];
     }
     if (isUsableNSString(model.exportmanName, @"")) {
         exportmanName = model.exportmanName;
@@ -511,16 +511,16 @@
     NSString * jqEffectDate = @"";
     NSString * insurerName = @"";
     NSString * payNoticeNo = @"";
-    NSString * jqMoney = @"0.00";
-    NSString * syMoney = @"0.00";
-    NSString * jqMoneyFinal = @"0.00";
-    NSString * syMoneyFinal = @"0.00";
+    NSString * jqMoney = @"¥0.00";
+    NSString * syMoney = @"¥0.00";
+    NSString * jqMoneyFinal = @"¥0.00";
+    NSString * syMoneyFinal = @"¥0.00";
     NSString * jqNumber = @"";
     NSString * syNumber = @"";
-    NSString * jqBonus = @"0.00";
-    NSString * syBonus = @"0.00";
-    NSString * jqCommission = @"0.00";
-    NSString * syCommission = @"0.00";
+    NSString * jqBonus = @"¥0.00";
+    NSString * syBonus = @"¥0.00";
+    NSString * jqCommission = @"¥0.00";
+    NSString * syCommission = @"¥0.00";
     NSString * exportmanName = @"";
     NSString * remark = @"";
     if (isUsableNSString(model.onwerName,@"")) {
@@ -569,36 +569,34 @@
         payNoticeNo = model.payNoticeNo;
     }
     if (isUsable(model.jqMoney, [NSNumber class])) {
-        jqMoney = [NSString stringWithFormat:@"%.2f",[model.jqMoney doubleValue]];
+        jqMoney = [NSString stringWithMoneyNumber:[model.jqMoney doubleValue]];
     }
     if (isUsable(model.syMoney, [NSNumber class])) {
-        syMoney = [NSString stringWithFormat:@"%.2f",[model.syMoney doubleValue]];
+        syMoney = [NSString stringWithMoneyNumber:[model.syMoney doubleValue]];
     }
     if (isUsable(model.jqMoneyFinal, [NSNumber class])) {
-        jqMoneyFinal = [NSString stringWithFormat:@"%.2f",[model.jqMoneyFinal doubleValue]];
+        jqMoneyFinal = [NSString stringWithMoneyNumber:[model.jqMoneyFinal doubleValue]];
     }
     if (isUsable(model.syMoneyFinal, [NSNumber class])) {
-        syMoneyFinal = [NSString stringWithFormat:@"%.2f",[model.syMoneyFinal doubleValue]];
+        syMoneyFinal = [NSString stringWithMoneyNumber:[model.syMoneyFinal doubleValue]];
     }
     if (isUsable(model.jqNumber, [NSNumber class])) {
-        jqNumber = [NSString stringWithFormat:@"%.2f",[model.jqNumber doubleValue]];
+        jqNumber = [NSString stringWithMoneyNumber:[model.jqNumber doubleValue]];
     }
     if (isUsable(model.syNumber, [NSNumber class])) {
-        syNumber = [NSString stringWithFormat:@"%.2f",[model.syNumber doubleValue]];
+        syNumber =  [NSString stringWithMoneyNumber:[model.syNumber doubleValue]];
     }
     if (isUsable(model.jqBonus, [NSNumber class])) {
-        jqBonus = [NSString stringWithFormat:@"%.2f",[model.jqBonus doubleValue]];
+        jqBonus = [NSString stringWithMoneyNumber:[model.jqBonus doubleValue]];
     }
     if (isUsable(model.syBonus, [NSNumber class])) {
-        syBonus = [NSString stringWithFormat:@"%.2f",[model.syBonus doubleValue]];
+        syBonus = [NSString stringWithMoneyNumber:[model.syBonus doubleValue]];
     }
-
-
     if (isUsable(model.jqCommission, [NSNumber class])) {
-        jqCommission = [NSString stringWithFormat:@"%.2f",[model.jqCommission doubleValue]];
+        jqCommission =  [NSString stringWithMoneyNumber:[model.jqCommission doubleValue]];
     }
     if (isUsable(model.syCommission, [NSNumber class])) {
-        syCommission = [NSString stringWithFormat:@"%.2f",[model.syCommission doubleValue]];
+        syCommission = [NSString stringWithMoneyNumber:[model.syCommission doubleValue]];
     }
     if (isUsableNSString(model.exportmanName, @"")) {
         exportmanName = model.exportmanName;

@@ -71,7 +71,6 @@
 
 - (void)clickCustomerFollowUpBtn:(UIButton *)button
 {
-
     XCCustomerFollowViewController *followVC = [[XCCustomerFollowViewController alloc] initWithTitle:@"客户跟进"];
     followVC.customerID = self.model.customerId;
     followVC.customerName = self.model.customerName;
@@ -238,7 +237,6 @@
     XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
     [cell setTitle:title];
     [cell setupCellWithCustomerDetailModel:self.model];
-//    [cell setTitlePlaceholder:@"刘某某"];
     return cell;
 }
 

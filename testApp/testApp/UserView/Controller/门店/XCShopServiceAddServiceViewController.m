@@ -91,7 +91,7 @@
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errorStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-            errorStr = @"提交成功";
+            errorStr = @"提交成功,待审核!";
         }
         [strongSelf showAlterInfoWithNetWork:errorStr];
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
