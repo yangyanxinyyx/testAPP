@@ -129,7 +129,14 @@
         [self addSubview:tipsView];
         return;
     }
+    int insurancetMoney = [_insurancetTF.text intValue];
+    int selfMoney = [_selfTF.text intValue];
 
+    if (insurancetMoney<1 && selfMoney<1) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请输入金额" complete:nil];
+        [self addSubview:tipsView];
+        return;
+    }
     NSDictionary *param = @{@"id":_orderId,
                             @"insurance":[NSNumber numberWithInt:[_insurancetTF.text intValue]],
                             @"weixiuZifei":[NSNumber numberWithInt:[_selfTF.text intValue] ]

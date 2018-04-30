@@ -300,12 +300,6 @@ static NSString *identifier = @"listCell";
     [self.navigationController pushViewController:VC animated:YES];
 }
 
-//- (void)pressFixBtn{
-//
-//    NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
-//    [self.navigationController pushViewController:VC animated:YES];
-//}
-
 #pragma mark textfieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -325,6 +319,15 @@ static NSString *identifier = @"listCell";
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
     return YES;
+}
+
+- (void)pressSearchBtn{
+
+    [self.view endEditing:YES];
+    _textField.text = [_textField.text uppercaseString];
+    _page = 2;
+    [_dataSource removeAllObjects];
+    [self requestDataWithPage:@(1) selectNumber:_textField.text];
 }
 
 #pragma mark - getter&setter
@@ -418,6 +421,11 @@ static NSString *identifier = @"listCell";
         rightView.contentMode = UIViewContentModeCenter;
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
+
+        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, rightView.frame.size.width, rightView.frame.size.height)];
+        searchBtn.backgroundColor = [UIColor clearColor];
+        [rightView addSubview:searchBtn];
+        [searchBtn addTarget:self action:@selector(pressSearchBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _textField;
 }
@@ -438,21 +446,7 @@ static NSString *identifier = @"listCell";
     return _orderBtn;
 }
 
-//- (UIButton *)fixBtn
-//{
-//    if (!_fixBtn) {
-//        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
-//        [_fixBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        _fixBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-//        [_fixBtn addTarget:self action:@selector(pressFixBtn) forControlEvents:UIControlEventTouchUpInside];
-//        _fixBtn.layer.cornerRadius = 5;
-//        _fixBtn.layer.masksToBounds = YES;
-//        [_fixBtn setTitle:@"新增维修" forState:UIControlStateNormal];
-//        _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
-//        _fixBtn.hidden = YES;
-//    }
-//    return _fixBtn;
-//}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

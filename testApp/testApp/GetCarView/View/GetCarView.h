@@ -9,8 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "GetCarDetailModel.h"
 
-@interface GetCarView : UIView<UIScrollViewDelegate>
+@protocol GetCarViewDelegate <NSObject>
+
+- (void)GetCarViewDidSelectImageIndex:(NSInteger)index;
+
+@end
+
+@interface GetCarView : UIView<UIScrollViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (nonatomic,strong)NSMutableArray *dataSource;
+@property (nonatomic,weak)id<GetCarViewDelegate>delegate;
+
 
 - (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix;
+
 
 @end

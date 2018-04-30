@@ -74,7 +74,15 @@
     _passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     _passwordTextField.font = [UIFont systemFontOfSize:14];
     [_passwordTextField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
-    
+
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"]) {
+        self.accoutTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"];
+    }
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"]) {
+        self.passwordTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"];
+    }
+
+
     UIButton *loginBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 345) / 2, CGRectGetMaxY(_passwordTextField.frame) + 50, 345, 44)];
     [self.view addSubview:loginBtn];
     [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
@@ -127,6 +135,9 @@
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
             if ([response[@"result"] integerValue] == 1) {
                 NSLog(@"登录成功");
+                [[NSUserDefaults standardUserDefaults] setObject:self.accoutTextField.text forKey:@"kUserAccout"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTextField.text forKey:@"kUserPassword"];
+
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *data = response[@"data"];
                     [UserInfoManager shareInstance].code = data[@"code"] ? data[@"code"] : @"";
