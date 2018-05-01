@@ -34,7 +34,7 @@
         scrollView.delegate = self;
 
         NSArray *titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"项      目:"];
-        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",@"没传时间"],[NSString stringWithFormat:@"%@",orderCategory]];
+        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",orderCategory]];
         for (int i=0 ; i<6; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 44)];
             label.font = [UIFont systemFontOfSize:14];

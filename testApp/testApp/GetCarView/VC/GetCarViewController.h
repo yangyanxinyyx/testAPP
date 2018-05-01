@@ -21,5 +21,6 @@
 @property (nonatomic,strong) NSNumber *orderID;
 @property (nonatomic,assign) BOOL isFix;
 @property (nonatomic,strong) NSString *orderCategory;
+@property (nonatomic,strong) NSString *appointmentTime;
 
 @end
