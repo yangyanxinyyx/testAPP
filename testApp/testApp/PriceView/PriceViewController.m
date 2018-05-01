@@ -17,7 +17,7 @@
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceCarInsuranceQViewController.h"
 #import "PriceCustomerModel.h"
-
+#import <MJRefresh/MJRefresh.h>
 @interface PriceViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *topView;
@@ -205,6 +205,16 @@
     [self.navigationController pushViewController:priceCustomerVC animated:YES];
 }
 
+- (void)refresh{
+    if (_textField.text.length > 0) {
+        [self pressCustomerVehicleEnquiries];
+    } else {
+        _infoView.hidden = YES;
+    }
+    [_textField endEditing:YES];
+    [self.myScrollView.mj_header endRefreshing];
+    
+}
 #pragma mark- UI
 
 - (void)createUI{
@@ -245,11 +255,12 @@
     if (!_myScrollView) {
         _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT)];
         _myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT);
-        _myScrollView.bounces = NO;
+        _myScrollView.bounces = YES;
         _myScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         _myScrollView.showsVerticalScrollIndicator = NO;
         _myScrollView.showsHorizontalScrollIndicator = NO;
         _myScrollView.delegate = self;
+        _myScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
         
     }
     return _myScrollView;
