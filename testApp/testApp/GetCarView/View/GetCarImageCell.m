@@ -10,9 +10,9 @@
 
 @implementation GetCarImageCell
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    if (self = [super init]) {
+    if (self = [super initWithFrame:frame]) {
         self.imageV = [[UIImageView alloc] init];
         [self.contentView addSubview:_imageV];
     }
@@ -21,6 +21,7 @@
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
     _imageV.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     _imageV.image = [UIImage imageNamed:@"placeHolder.png"];
 }
