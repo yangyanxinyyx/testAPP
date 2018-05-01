@@ -86,7 +86,7 @@
     }
     if (configureSuccess) {
         
-        __weak typeof (self)weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         NSDictionary *param = @{
                                 @"customerId":_model.customerId,
                                 @"customerName":_model.customerName,
@@ -98,20 +98,24 @@
                                 @"appointmentTime":_model.appointmentTime,
                                 };
         [RequestAPI addOrderByMaintain:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
-                respnseStr = @"预约成功";
+                [strongSelf showAlterInfoWithNetWork:@"预约成功" complete:^{
+                    [strongSelf.navigationController popViewControllerAnimated:YES];
+                }];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
             }
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
-            [weakSelf.view addSubview:tipsView];
+
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
-            [weakSelf.view addSubview:tipsView];
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }];
     }else {
-        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
-        [self.view addSubview:tipsView];
+        [self showAlterInfoWithNetWork:errString complete:nil];
     }
 }
 #pragma mark - Delegates & Notifications
@@ -129,7 +133,7 @@
     if (indexPath.row == self.dataArrM.count - 1) {
         cell.shouldShowSeparator = NO;
     }
-    [cell setTitle:title];
+    cell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
 
     return cell;
 }

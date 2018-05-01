@@ -19,6 +19,7 @@
 @property (nonatomic,strong) NSString *phone;
 @property (nonatomic,strong) NSString *plateNo;
 @property (nonatomic,strong) NSString *model;
+@property (nonatomic,strong) NSString *brand;
 @property (nonatomic,strong) NSArray *detailList;
 
 @end

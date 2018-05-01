@@ -16,8 +16,10 @@
 /** 动态内容数组 */
 @property (nonatomic, strong) NSArray * labelTitleArrM ;
 
-/** 第二种类型 */
+/** 第二种类型(三大按键 巨TextCell) */
 @property (nonatomic, assign) BOOL isMutableTextType ;
+/** 违章 默认NO */
+@property (nonatomic, assign) BOOL  isWeizhangType ;
 /** 长文字设置 */
 @property (nonatomic, copy) NSString * longString;
 

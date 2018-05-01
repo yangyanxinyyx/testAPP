@@ -125,6 +125,8 @@
 //退单添加
 /** 客户id long*/
 @property (nonatomic, strong) NSNumber * customerId ;
+/** 客户手机 */
+@property (nonatomic, copy) NSString * phoneNo;
 /** 客户名称 */
 @property (nonatomic, copy) NSString * customerName;
 /** 业务员id long*/

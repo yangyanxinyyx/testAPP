@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _firstLoad = NO;
+    NSLog(@"===========>viewDidLoad");
     [self initializeView];
     [self initializeData];
 }
@@ -45,12 +45,8 @@
 
 - (void)initializeData {
     [self.collectionView reloadData];
-    
     if(_showIndex > 0 && _showIndex < _imageArray.count) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (!_firstLoad) {
-                _firstLoad = YES;
-            }
            [self.collectionView setContentOffset:CGPointMake(_showIndex * self.collectionView.frame.size.width,- kHeightForNavigation) animated:NO];
         });
     }
@@ -81,9 +77,13 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (_firstLoad) {
         [self refreshTitle];
-    }
+}
+
+- (void)setImageArray:(NSMutableArray<WSImageModel *> *)imageArray
+{
+    _imageArray = imageArray;
+    NSLog(@"=======>setImageARrM");
 }
 
 @end

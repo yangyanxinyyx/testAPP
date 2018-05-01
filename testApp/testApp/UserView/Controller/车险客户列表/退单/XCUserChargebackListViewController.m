@@ -109,9 +109,7 @@
     [cell setTimeTitleStr:@"退单时间"];
     cell.delegate = self;
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    if(baseModel) {
-        cell.baseModel = baseModel;
-    }
+    cell.baseModel = baseModel;
 
     return cell;
 }
@@ -121,9 +119,9 @@
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
+//    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"退单详情"];
-    chargebackVC.detailModel = baseModel;
+    chargebackVC.detailModel = cell.baseModel;
     [self.navigationController pushViewController:chargebackVC animated:YES];
 }
 

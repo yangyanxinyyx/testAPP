@@ -54,10 +54,10 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self refreshServiceData];
 }
 
@@ -75,7 +75,7 @@
     }else {
         _collectionView.alpha = 0.0;
     }
-    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
+    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
     [_addServiceBtn setFrame:CGRectMake(0, CGRectGetMaxY(_collectionView.frame) , SCREEN_WIDTH, 98 * ViewRateBaseOnIP6)];
     
 }
@@ -280,8 +280,10 @@
 
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+        [self.view addSubview:tipsView];
+    });
 }
 #pragma mark - Setter&Getter
 

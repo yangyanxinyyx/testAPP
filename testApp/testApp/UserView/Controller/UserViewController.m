@@ -66,7 +66,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
+    [self.topView setFrame:CGRectMake(0, isIPhoneX?safeAreaTop:STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
     [self.listView setFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT )];
 
 }
@@ -119,7 +119,7 @@
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
     
 }
@@ -218,7 +218,6 @@
     if (section != (self.listViewDataArray.count - 1)){
         return CGSizeMake(self.listView.frame.size.width,0);
     }
-//    return CGSizeMake(self.listView.frame.size.width,40 * ViewRateBaseOnIP6);
     return CGSizeMake(self.listView.frame.size.width, [XCUserListFooterView getFooterViewHeight]);
 }
 #pragma mark - UICollectionViewDidSeclect
@@ -235,10 +234,13 @@
 }
 
 #pragma mark - Privacy Method
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
+        [self.view addSubview:tipsView];
+    });
+  
 }
 - (void)initWithListData
 {
@@ -246,12 +248,11 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSArray *dataArr = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
         NSInteger listCount = dataArr.count;
-#warning 测试使用 临时注释
-//        if (!_isStore) {
-//            if (dataArr.count >= 1) {
-//                listCount = dataArr.count - 1;
-//            }
-//        }
+        if (!_isStore) {
+            if (dataArr.count >= 1) {
+                listCount = dataArr.count - 1;
+            }
+        }
         self.listViewDataArray = [NSMutableArray arrayWithCapacity:listCount];
         for (int i = 0 ; i < listCount; i++) {
             id object = dataArr[i];

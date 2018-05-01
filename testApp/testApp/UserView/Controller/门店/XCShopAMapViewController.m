@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view.
     _searchAPI = [[AMapSearchAPI alloc] init];
     _searchAPI.delegate = self;
-    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation)];
+    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - safeAreaBottom)];
     _mapView.delegate = self;
     _mapView.userTrackingMode = MAUserTrackingModeFollow;
     _mapView.userInteractionEnabled = YES;
@@ -67,7 +67,7 @@
 - (void)viewWillLayoutSubviews
 {
     [_centerImageView setCenter:self.view.center];
-    [self.locationBtn setFrame:CGRectMake(SCREEN_WIDTH - 120 * ViewRateBaseOnIP6, SCREEN_HEIGHT - 120 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
+    [self.locationBtn setFrame:CGRectMake(SCREEN_WIDTH - 120 * ViewRateBaseOnIP6, SCREEN_HEIGHT - 120 * ViewRateBaseOnIP6 - safeAreaBottom, 80 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
 }
 
 #pragma mark - Init Method

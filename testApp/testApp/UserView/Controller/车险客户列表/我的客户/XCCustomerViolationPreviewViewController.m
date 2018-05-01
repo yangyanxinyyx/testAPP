@@ -11,6 +11,7 @@
 #import "XCUserViolationDetailClickCell.h"
 #define kheaderViewID @"headerViewID"
 #define kClickCellID @"clickCellID"
+#import "UILabel+createLabel.h"
 @interface XCCustomerViolationPreviewViewController ()<XCUserViolationDetailClickCellDelegate>
 
 @end
@@ -89,8 +90,6 @@
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
         [strongSelf.view addSubview:tipsView];
     }];
-    
-  
 
 }
 
@@ -121,7 +120,16 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [XCUserViolationDetailClickCell getCellHeight];
+//    return [XCUserViolationDetailClickCell getCellHeight];
+    
+    CGFloat num = 4 - 1;
+    XCUserViolationDetailModel *model =  self.dataArrM[indexPath.row];
+    CGFloat weizhangHeight = (26 + 12) * ViewRateBaseOnIP6;
+    if (model.weizhangClause) {
+        weizhangHeight = 12  * ViewRateBaseOnIP6  + [UILabel getXCTextHeightLineWithString:[NSString stringWithFormat:@"违章条款: %@",model.weizhangClause] withWidth:SCREEN_WIDTH - 30 * ViewRateBaseOnIP6  withFontSize:28];
+    }
+    return  (10 + 30) * ViewRateBaseOnIP6 + ((26 + 12) * ViewRateBaseOnIP6  * num) + 1 + (30 + 46+ 27 + 47)* ViewRateBaseOnIP6 + weizhangHeight;
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

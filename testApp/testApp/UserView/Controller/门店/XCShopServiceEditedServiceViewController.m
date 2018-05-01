@@ -55,6 +55,7 @@
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    
     XCCheckoutDetailTextFiledCell *twoTextCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if (textField == twoTextCell.textField) {
         self.price = [NSNumber numberWithDouble:[textField.text doubleValue]];
@@ -89,7 +90,7 @@
     }
     
     if (!configureSuccess) {
-        [self showAlterInfoWithNetWork:@"请输入正确信息"];
+        [self showAlterInfoWithNetWork:@"请输入正确信息" complete:nil];
         return;
     }
 
@@ -101,16 +102,24 @@
     __weak __typeof(self) weakSelf = self;
     [RequestAPI updateService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"修改成功"];
+        NSString *errStr;
+        if (isUsable(response[@"errormsg"], [NSString class])) {
+            errStr = response[@"errormsg"];
         }else {
-            [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
+            errStr = @"未知错误";
+        }
+        if ([response[@"result"] integerValue] == 1) {
+            [strongSelf showAlterInfoWithNetWork:@"修改成功" complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
     
 
@@ -192,10 +201,13 @@
 }
 
 #pragma mark - Privacy Method
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
+        [self.view addSubview:tipsView];
+    });
+  
 }
 #pragma mark - Setter&Getter
 - (void)setModel:(XCShopServiceModel *)model

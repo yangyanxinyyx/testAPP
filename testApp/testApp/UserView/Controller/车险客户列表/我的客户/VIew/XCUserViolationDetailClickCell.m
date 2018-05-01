@@ -44,13 +44,16 @@
         [label setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_topLine.frame) + 30 *ViewRateBaseOnIP6 + (12 + 26) * ViewRateBaseOnIP6 * i , self.bounds.size.width - leftMargin, 26 * ViewRateBaseOnIP6)];
     }
     UILabel *lastLabel = [self viewWithTag:(200+_titleArr.count -1)];
+    [lastLabel setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_topLine.frame) + 30 *ViewRateBaseOnIP6 + (12 + 26) * ViewRateBaseOnIP6 * 3 , self.bounds.size.width - leftMargin * 2, [UILabel getXCTextHeightLineWithString:[NSString stringWithFormat:@"违章条款: %@",_detailModel.weizhangClause] withWidth:lastLabel.frame.size.width withFontSize:28])];
+    lastLabel.numberOfLines = 0;
     
     [_middleLine setFrame:CGRectMake(0, CGRectGetMaxY(lastLabel.frame) + 30 *ViewRateBaseOnIP6, self.bounds.size.width, 1)];
     
     [_statusLabel sizeToFit];
     labelSize = _statusLabel.frame.size;
-    [_statusLabel setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_middleLine.frame) + 46 * ViewRateBaseOnIP6, labelSize.width, 27 * ViewRateBaseOnIP6)];
-    [_confirmBtn setFrame:CGRectMake(self.bounds.size.width - (240 + 30) * ViewRateBaseOnIP6 , CGRectGetMaxY(_middleLine.frame)+ 25 * ViewRateBaseOnIP6, 240 *ViewRateBaseOnIP6, 70 * ViewRateBaseOnIP6)];
+//    [_statusLabel setFrame:CGRectMake(leftMargin, CGRectGetMaxY(_middleLine.frame) + 46 * ViewRateBaseOnIP6, labelSize.width, 27 * ViewRateBaseOnIP6)];
+      [_statusLabel setFrame:CGRectMake(leftMargin,CGRectGetMaxY(_middleLine.frame) +  (self.bounds.size.height - CGRectGetMaxY(_middleLine.frame) - 27 * ViewRateBaseOnIP6) * 0.5, labelSize.width, 27 * ViewRateBaseOnIP6)];
+    [_confirmBtn setFrame:CGRectMake(self.bounds.size.width - (240 + 30) * ViewRateBaseOnIP6 , CGRectGetMaxY(_middleLine.frame) + (self.bounds.size.height - CGRectGetMaxY(_middleLine.frame) - 70 * ViewRateBaseOnIP6) * 0.5, 240 *ViewRateBaseOnIP6, 70 * ViewRateBaseOnIP6)];
     
     if ([self.detailModel.handled isEqualToString:@"0"]) {
         [_statusLabel setText:@"未处理"];

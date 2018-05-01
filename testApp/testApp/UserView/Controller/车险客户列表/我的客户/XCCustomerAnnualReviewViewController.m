@@ -10,14 +10,17 @@
 #import "XCCheckoutDetailPhotoCell.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #define kPhotoCellID @"PhotoCellID"
-#import "XCCheckoutPhotoPreViewController.h"
 #import "LYZSelectView.h"
 #import "SelectTiemHoursView.h"
+#import "JFImagePickerController.h"
+#import "XCPhotoPreViewController.h"
+#import "UIImage+imageHelper.h"
 @interface XCCustomerAnnualReviewViewController ()<XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,
-UIImagePickerControllerDelegate>
+UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
 {
-   
+    dispatch_semaphore_t _videoTrackSynLoadSemaphore;
+    dispatch_time_t _maxVideoLoadTrackTimeConsume ;
 }
 /** 预约时间 */
 @property (nonatomic, copy) NSString * appointmentTime ;
@@ -25,9 +28,12 @@ UIImagePickerControllerDelegate>
 @property (nonatomic, copy) NSString * onlineType ;
 /** 年审费用 */
 @property (nonatomic, copy) NSNumber * orderPrice ;
-/** <# 注释 #> */
-@property (nonatomic, copy) NSString * lincesPhotoPath; ;
-
+/** 4张图片保存 */
+@property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
+/** 上传成功图片URL */
+@property (nonatomic, strong) NSMutableArray * networkURLArrM ;
+/** 选中当前的Cell */
+@property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
 @end
 
 @implementation XCCustomerAnnualReviewViewController
@@ -36,14 +42,19 @@ UIImagePickerControllerDelegate>
 
 
 - (void)dealloc {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
-        [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
+    
+    NSLog(@"===========我的客户-年审预约 Dealloc");
+    for (NSString *filePath in self.storePhotoArrM) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
+        unlink([filePath  UTF8String]);
     }
-    unlink([_lincesPhotoPath  UTF8String]);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self.tableView registerClass:[XCDistributionPicketCell class] forCellReuseIdentifier:kPicketCellID];
     [self.tableView registerClass:[XCCheckoutDetailTextFiledCell class] forCellReuseIdentifier:kTextFiledCellID ];
     [self.tableView registerClass:[XCCheckoutDetailPhotoCell class] forCellReuseIdentifier:kPhotoCellID];
@@ -53,14 +64,13 @@ UIImagePickerControllerDelegate>
     [self configureData];
     [self.tableView reloadData];
     
-  
-    
 }
 
 #pragma mark - Init Method
 
 - (void)configureData
 {
+    _storePhotoArrM = [[NSMutableArray alloc] init];
     self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"预约时间",@"类型选择",@"年审费用:",@"行驶证拍照"]];
 }
 - (void)initUI
@@ -99,7 +109,8 @@ UIImagePickerControllerDelegate>
                 NSUInteger index = [titleArrM indexOfObject:selectStr];
                 NSString *selectMoney = [moneyArrM objectAtIndex:index];
                 [moneyCell setTitlePlaceholder:selectMoney];
-                [cell setTitleValue:selectStr];
+                [cell setTitleValue:[NSString stringWithMoneyNumber:[selectStr doubleValue]]];
+                
                 
                 weakSelf.onlineType = selectStr;
                 weakSelf.orderPrice = [NSNumber numberWithDouble:[selectMoney doubleValue]];
@@ -141,9 +152,27 @@ UIImagePickerControllerDelegate>
     if (!self.onlineType) {
         configureSuccess = NO ;
     }
-    if (![self isUsefulURLWith:_lincesPhotoPath]) {
-        configureSuccess = NO ;
+    
+    NSString *url1Str = @"";
+    NSString *url2Str = @"";
+    NSString *url3Str = @"";
+    NSString *url4Str = @"";
+    for (int i = 0 ; i < self.storePhotoArrM.count; i++) {
+        NSString *filePath = self.storePhotoArrM[i];
+        if (i == 0) {
+            url1Str = filePath;
+        }
+        else if (i == 1) {
+            url2Str = filePath;
+        }
+        else if (i == 2) {
+            url3Str = filePath;
+        }
+        else if (i == 3) {
+            url4Str = filePath;
+        }
     }
+    
     NSDictionary *param = @{
                             @"customerId":self.model.customerId,
                             @"customerName":self.model.customerName,
@@ -155,169 +184,316 @@ UIImagePickerControllerDelegate>
                             @"orderPrice":self.orderPrice,
                             @"appointmentTime":self.appointmentTime,
                             @"onlineType":self.onlineType,
-                            @"url1":_lincesPhotoPath,
+                            @"url1":url1Str,
+                            @"url2":url2Str,
+                            @"url3":url3Str,
+                            @"url4":url4Str,
                             };
     [RequestAPI addOrderByAuditAndRules:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        
-        if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"预约成功"];
+        NSString *errStr;
+        if (isUsable(response[@"errormsg"], [NSString class])) {
+            errStr = response[@"errormsg"];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"预约失败"];
+            errStr = @"未知错误";
+        }
+        if ([response[@"result"] integerValue] == 1) {
+            [strongSelf showAlterInfoWithNetWork:@"预约成功" complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 
 }
 
 #pragma mark - Delegates & Notifications
+
+#pragma mark - XCCheckoutDetailTextFiledCellDelegate
+
+-(void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
+{
+    if ([title isEqualToString:@"年审费用:"]) {
+        self.orderPrice = [NSNumber numberWithDouble:[textField.text doubleValue]];
+        textField.text = [NSString stringWithMoneyNumber:[textField.text doubleValue]];
+    }
+}
+
+- (BOOL)XCCheckoutDetailTextFiledShouldChangeCharactersInRange:(NSRange)range
+                                             replacementString:(NSString *)string
+                                                         title:(NSString *)title
+                                                     textFiled:(UITextField *)textFiled
+{
+    if ([title isEqualToString:@"年审费用:"]) {
+        NSCharacterSet *cs;
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890."] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        BOOL basicTest = [string isEqualToString:filtered];
+        if(!basicTest)  {
+            return NO;
+        }
+        return YES;
+    }
+    return YES;
+}
+
 #pragma mark - XCDistributionFooterViewDelegate
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
     __weak __typeof(self) weakSelf = self;
     //上传图片
-    if (![self isUsefulURLWith:_lincesPhotoPath]) {
-        NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:_lincesPhotoPath]];
-        if (!uploadData) {
-            return;
-        }else {
-            [weakSelf showAlterInfoWithNetWork:@"请添加照片"];
+    __block NSMutableArray *uploadDataArrM = [[NSMutableArray alloc] init];
+    __block NSMutableArray *uploadPathArrM = [[NSMutableArray alloc] init];
+    for (NSString *filePath in self.storePhotoArrM) {
+        if (![self isUsefulURLWith:filePath]) {
+            NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL URLWithString:filePath]];
+            if (uploadData) {
+                [uploadDataArrM addObject:uploadData];
+                [uploadPathArrM addObject:filePath];
+            }
+            
         }
+    }
+    if (uploadPathArrM.count > 0) {
+        /// 上传图片
         NSDictionary *param = @{
-                                @"file":@[uploadData],
+                                @"file":uploadDataArrM,
                                 };
         [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if (([response[@"result"] integerValue] == 1)&&response[@"data"]) {
-                //                [strongSelf requestSuccessHandler];
-                if ([[NSFileManager defaultManager] fileExistsAtPath:strongSelf.lincesPhotoPath]) {
-                    [[NSFileManager defaultManager] removeItemAtPath:strongSelf.lincesPhotoPath error:nil];
+            if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
+                for (NSString *filePath in uploadPathArrM) {
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                    }
+                    unlink([filePath  UTF8String]);
+                    [strongSelf.storePhotoArrM removeObject:filePath];
                 }
-                unlink([strongSelf.lincesPhotoPath  UTF8String]);
                 NSArray *urlStrArr  = response[@"data"];
-                strongSelf.lincesPhotoPath = [urlStrArr firstObject];
+                for (NSString *urlPath in urlStrArr) {
+                    [strongSelf.storePhotoArrM addObject:urlPath];
+                    [strongSelf.networkURLArrM addObject:urlPath];
+                    
+                }
+                /// 提交年审费用
                 [strongSelf postAnnualNetworkBill];
             }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败"];
-            }
+                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+                return ;            }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            return ;
         }];
-
+    }else {
+        [self showAlterInfoWithNetWork:@"请添加正确证件照片！" complete:nil];
     }
- 
-
+    
 }
 
 #pragma mark - XCCheckoutDetailPhotoCellDelegate
 
-//- (void)XCCheckoutDetailPhotoCellClickphotoImageView:(UIImage *)image index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell
-//{
-//    if (image) {
-//        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-////        previewVC.sourceImage = image;
-//       __block NSURL *fileURL = [NSURL fileURLWithPath:_pathToPhoto];
-//        previewVC.sourceURL = fileURL;
-//        __weak __typeof(self) weakSelf = self;
-//        previewVC.deleteHandler = ^{
-//            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-//            XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-//            if ([[NSFileManager defaultManager] fileExistsAtPath:_pathToPhoto]) {
-//                [[NSFileManager defaultManager] removeItemAtPath:_pathToPhoto error:nil];
-//            }
-//            unlink([_pathToPhoto  UTF8String]);
-//            [cell setPhotoArr:@[]];
-//
-//        };
-//        [self.navigationController pushViewController:previewVC animated:YES];
-//    }
-//
-//
-//}
 - (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL *)photoURL
                                              index:(NSInteger)index
                                               cell:(XCCheckoutDetailPhotoCell *)cell
 {
     if (photoURL) {
         __weak __typeof(self) weakSelf = self;
-        XCCheckoutPhotoPreViewController *previewVC = [[XCCheckoutPhotoPreViewController alloc] initWithTitle:@"照片预览"];
-        previewVC.sourceURL = photoURL;
-        previewVC.shouldShowDeleteBtn = YES;
-        previewVC.deleteHandler = ^{
+        XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.storePhotoArrM];
+        previewVC.shouldShowDeleBtm = YES;
+        [previewVC updatePositionWithIndex:index];
+        previewVC.completion = ^(NSArray<NSURL *> *deleArray) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            XCCheckoutDetailPhotoCell *cell = [strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
-                [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
+            if (deleArray.count > 0) {
+                for (NSString *imagePath in deleArray) {
+                    if ([strongSelf isUsefulURLWith:imagePath]) {
+                        
+                    }else {
+                        //本地删除
+                        if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+                            [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
+                        }
+                        unlink([imagePath  UTF8String]);
+                    }
+                    [strongSelf.storePhotoArrM removeObject:imagePath];
+                }
+                [cell setPhotoArr:self.storePhotoArrM];
             }
-            unlink([_lincesPhotoPath  UTF8String]);
-            [cell setPhotoArr:@[]];
-            
+            NSIndexPath *indexPath = [strongSelf.tableView indexPathForCell:cell];
+            [strongSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         };
         [self.navigationController pushViewController:previewVC animated:YES];
-    }
+    };
+
 }
 
 
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ProgressControll showProgressNormal];
-    });
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]init];
-    //设置选取的照片是否可编辑
-    pickerController.allowsEditing = YES;
-    pickerController.sourceType =  UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    pickerController.delegate = self;
-    [self presentViewController:pickerController animated:YES completion:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [ProgressControll dismissProgress];
-        });
-    }];
+    self.currentPhotoCell = cell;
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
+    [action showInView:self.navigationController.view];
 }
 
-#pragma mark - navigationDelegate
+#pragma mark - JFImagePickerDelegate 选择照片回调
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-    
-    NSURL *imageAssetUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+- (void)imagePickerDidFinished:(JFImagePickerController *)picker
+{
+    _videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
     __weak __typeof(self) weakSelf = self;
-    [assetLibrary assetForURL:imageAssetUrl resultBlock:^(ALAsset *asset)  {
-        ALAssetRepresentation* representation = [asset defaultRepresentation];
-        // 创建一个buffer保存图片数据
-        uint8_t *buffer = (Byte*)malloc(representation.size);
-        NSUInteger length = [representation getBytes:buffer fromOffset: 0.0  length:representation.size error:nil];
-        // 将buffer转换为NSData object，然后释放buffer内存
-        NSData *imageData = [[NSData alloc] initWithBytesNoCopy:buffer length:representation.size freeWhenDone:YES];
-        UIImage *image = [UIImage imageWithData:imageData scale:1.0];
-        
-        NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *doc_l_path = [NSString stringWithFormat:@"%@/", [docPaths firstObject]];
-        _lincesPhotoPath = [doc_l_path stringByAppendingPathComponent:@"Annuallience.jpg"];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
-        }
-        unlink([_lincesPhotoPath  UTF8String]);
-        [UIImagePNGRepresentation(image) writeToFile:_lincesPhotoPath atomically:YES];
-        XCCheckoutDetailPhotoCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-         [cell setPhotoArr:@[_lincesPhotoPath]];
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-    } failureBlock:^(NSError *error) {
-        //失败的处理
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    [ProgressControll showProgressNormal];
+    __block NSInteger sloveCount = 0;
+    __block NSInteger photoNum = 0;
+    [picker.assets enumerateObjectsUsingBlock:^(ALAsset *asset, NSUInteger idx, BOOL * _Nonnull stop) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        [[JFImageManager sharedManager] imageWithAsset:asset resultHandler:^(CGImageRef imageRef, BOOL longImage) {
+            UIImage *image = [UIImage imageWithCGImage:imageRef];
+            // =================== modify by Liangyz 处理图片
+                NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
+                                     [NSString stringWithFormat:@"storeImage%@%lu.jpg",[NSString getNowTimeTimestamp],(unsigned long)photoNum]];
+                NSLog(@"%@",tmpPath);
+                if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+                    [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
+                }
+                unlink([tmpPath  UTF8String]);
+                photoNum ++;
+                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tmpPath atomically:YES];
+                NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+                [strongSelf.storePhotoArrM addObject:[tmpFileURL absoluteString]];
+
+         sloveCount++;
+            NSLog(@"=======>%ld",(long)sloveCount); /// 线程0000000？(TODO)
+            if (sloveCount == picker.assets.count) {
+                //完成
+                NSLog(@"=========>D");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [ProgressControll dismissProgress];
+                    [strongSelf imagePickerDidCancel:picker];
+                    [strongSelf.currentPhotoCell setPhotoArr:strongSelf.storePhotoArrM];
+                });
+                
+            }
+        }];
     }];
 }
 
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+
+- (void)imagePickerDidCancel:(JFImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [JFImagePickerController clear];
 }
+#pragma  mark - imagePickerController Delegate - 照片
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self imageHandleWithpickerController:picker MdediaInfo:info];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+}
+
+- (void)imageHandleWithpickerController:(UIImagePickerController *)picker MdediaInfo:(NSDictionary *)info {
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    UIImage *originalImage, *editedImage, *imageToSave;
+    // Handle a still image capture
+    if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
+        == kCFCompareEqualTo) {
+        
+        editedImage = (UIImage *) [info objectForKey:
+                                   UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *) [info objectForKey:
+                                     UIImagePickerControllerOriginalImage];
+        if (editedImage) {
+            imageToSave = editedImage;
+        } else {
+            imageToSave = originalImage;
+        }
+        imageToSave = [UIImage fixOrientation:imageToSave];
+        // Save the new image (original or edited) to the Camera Roll
+        [self photoCellHanderSelectImage:imageToSave];
+    }
+    NSIndexPath *indexpath = [self.tableView indexPathForCell:self.currentPhotoCell];
+    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *vc = [UIImagePickerController new];
+            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
+            vc.delegate = self;
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            NSInteger maxCount = 4;
+            NSInteger count = maxCount - self.storePhotoArrM.count;
+            if (count < 0) {
+                count = 0 ;
+            }
+            [JFImagePickerController setMaxCount:count];
+            JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
+            picker.pickerDelegate = self;
+            [self.navigationController presentViewController:picker animated:YES completion:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+//#pragma mark - navigationDelegate
+//
+//-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+//
+//    NSURL *imageAssetUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
+//    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+//    __weak __typeof(self) weakSelf = self;
+//    [assetLibrary assetForURL:imageAssetUrl resultBlock:^(ALAsset *asset)  {
+//        ALAssetRepresentation* representation = [asset defaultRepresentation];
+//        // 创建一个buffer保存图片数据
+//        uint8_t *buffer = (Byte*)malloc(representation.size);
+//        NSUInteger length = [representation getBytes:buffer fromOffset: 0.0  length:representation.size error:nil];
+//        // 将buffer转换为NSData object，然后释放buffer内存
+//        NSData *imageData = [[NSData alloc] initWithBytesNoCopy:buffer length:representation.size freeWhenDone:YES];
+//        UIImage *image = [UIImage imageWithData:imageData scale:1.0];
+//
+//        NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *doc_l_path = [NSString stringWithFormat:@"%@/", [docPaths firstObject]];
+//        _lincesPhotoPath = [doc_l_path stringByAppendingPathComponent:@"Annuallience.jpg"];
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
+//            [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
+//        }
+//        unlink([_lincesPhotoPath  UTF8String]);
+//        [UIImagePNGRepresentation(image) writeToFile:_lincesPhotoPath atomically:YES];
+//        XCCheckoutDetailPhotoCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+//         [cell setPhotoArr:@[_lincesPhotoPath]];
+//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//    } failureBlock:^(NSError *error) {
+//        //失败的处理
+//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+//    }];
+//}
+//
+//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//}
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
@@ -332,10 +508,12 @@ UIImagePickerControllerDelegate>
     if (indexPath.row == 2) {
       
         XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
+        textFiledCell.delegate = self;
         textFiledCell.isNumField = YES;
         textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [textFiledCell setTitle:title];
         textFiledCell.shouldShowSeparator = YES;
+        textFiledCell.userInteractionEnabled = NO;
             if (self.dataArr.count == 1) {
                 NSNumber *money  = [self.dataArr firstObject][@"money"];
                 self.orderPrice = money;
@@ -347,25 +525,18 @@ UIImagePickerControllerDelegate>
     }else if(indexPath.row == 3) {
         XCCheckoutDetailPhotoCell *photoCell = (XCCheckoutDetailPhotoCell *)[tableView dequeueReusableCellWithIdentifier:kPhotoCellID forIndexPath:indexPath];
         photoCell.delegate = self;
-        photoCell.maxPhoto = 1;
-        [photoCell setTitle:title];
-        photoCell.isAnnualType = YES;
-        if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
-//            NSURL *photoUrl = [NSURL fileURLWithPath:_pathToPhoto];
-            [photoCell setPhotoArr:@[_lincesPhotoPath]];
+        photoCell.maxPhoto = 4;
+        photoCell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+        [photoCell setPhotoArr:self.storePhotoArrM];
 
-        }else {
-            [photoCell setPhotoArr:@[]];
-
-        }
         return photoCell;
     }
     XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID forIndexPath:indexPath];
     if (indexPath.row == self.dataArrM.count - 1) {
         cell.shouldShowSeparator = NO;
     }
-    [cell setTitle:title];
-    
+    cell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+
     if (indexPath.row == 1) {
         if (self.dataArr.count == 1) {
             NSString *onlineType  = [self.dataArr firstObject][@"onlineType"];
@@ -412,6 +583,23 @@ UIImagePickerControllerDelegate>
     }
     return result;
 }
+
+//处理选择图片
+- (void)photoCellHanderSelectImage:(UIImage *)image
+{
+
+    NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
+                         [NSString stringWithFormat:@"storeImage%@%lu.jpg",[NSString getNowTimeTimestamp],(unsigned long)self.storePhotoArrM.count]];
+    NSLog(@"%@",tmpPath);
+    if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
+    }
+    unlink([tmpPath  UTF8String]);
+    [UIImageJPEGRepresentation(image, 1.0) writeToFile:tmpPath atomically:YES];
+    NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+    [self.storePhotoArrM addObject:[tmpFileURL absoluteString]];
+}
+
 #pragma mark - Setter&Getter
 - (void)setModel:(XCCustomerDetailModel *)model
 {
