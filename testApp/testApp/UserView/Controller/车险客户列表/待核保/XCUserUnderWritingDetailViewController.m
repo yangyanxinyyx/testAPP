@@ -36,7 +36,7 @@
 {
     [super viewDidLayoutSubviews];
     CGFloat buttonH = 98 * ViewRateBaseOnIP6;
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + buttonH))];
+    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + buttonH + safeAreaBottom))];
     [_commitBtn setFrame:CGRectMake(0,  CGRectGetMaxY(self.tableView.frame), SCREEN_WIDTH, buttonH)];
     
 }

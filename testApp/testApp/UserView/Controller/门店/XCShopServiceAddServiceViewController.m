@@ -35,7 +35,7 @@
     CGFloat tmpContentViewHeight =  (40 + 88 + 40 ) * ViewRateBaseOnIP6;
     CGFloat btnW = 690 * ViewRateBaseOnIP6;
     CGFloat btnH = 88 * ViewRateBaseOnIP6;
-    [_confirmBtn setFrame:CGRectMake(30 * ViewRateBaseOnIP6,SCREEN_HEIGHT - tmpContentViewHeight + (tmpContentViewHeight - btnH) * 0.5 , btnW, btnH)];
+    [_confirmBtn setFrame:CGRectMake(30 * ViewRateBaseOnIP6,SCREEN_HEIGHT - tmpContentViewHeight + (tmpContentViewHeight - btnH) * 0.5 - safeAreaBottom , btnW, btnH)];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom  + tmpContentViewHeight))];
 }
 

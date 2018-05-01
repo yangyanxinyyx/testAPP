@@ -75,7 +75,7 @@
     }else {
         _collectionView.alpha = 0.0;
     }
-    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation + kBottomMargan, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
+    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
     [_addServiceBtn setFrame:CGRectMake(0, CGRectGetMaxY(_collectionView.frame) , SCREEN_WIDTH, 98 * ViewRateBaseOnIP6)];
     
 }

@@ -1159,6 +1159,21 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		A751F627209851C30084C492 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
+				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
+				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
+				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
+				A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */,
+				A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */,
+				A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */,
+				A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		A753CC0C207E5E3500AFB66C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1489,6 +1504,7 @@
 		FC32BECA2079AA2000817156 /* 我的客户 */ = {
 			isa = PBXGroup;
 			children = (
+				A751F627209851C30084C492 /* VIew */,
 				A720C5B420826145006B0C33 /* Model */,
 				FC32BECB2079AA2000817156 /* XCCustomerAnnualReviewViewController.h */,
 				FC32BECC2079AA2000817156 /* XCCustomerAnnualReviewViewController.m */,
@@ -1504,14 +1520,6 @@
 				FC32BED62079AA2000817156 /* XCCustomerViolationPreviewViewController.m */,
 				25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */,
 				25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */,
-				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
-				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
-				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
-				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
-				A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */,
-				A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */,
-				A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */,
-				A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";

@@ -65,7 +65,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
-    [_bottomLine setFrame:CGRectMake(0, SCREEN_HEIGHT - bottomHeight - 1, SCREEN_WIDTH, 1)];
+    [_bottomLine setFrame:CGRectMake(0, SCREEN_HEIGHT - bottomHeight - 1 - safeAreaBottom, SCREEN_WIDTH, 1)];
     
     [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6,CGRectGetMaxY(_bottomLine.frame) + (SCREEN_HEIGHT - CGRectGetMaxY(_bottomLine.frame)  - 80 * ViewRateBaseOnIP6) * 0.5 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 40 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];

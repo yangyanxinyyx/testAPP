@@ -66,7 +66,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self.topView setFrame:CGRectMake(0, STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
+    [self.topView setFrame:CGRectMake(0, isIPhoneX?safeAreaTop:STATUS_BAR_HEIGHT + safeAreaTop, SCREEN_WIDTH, (88 + 310) * ViewRateBaseOnIP6)]; //88为导航栏高度
     [self.listView setFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - CGRectGetMaxY(self.topView.frame) - SCREEN_TABBAR_HEIGHT )];
 
 }
