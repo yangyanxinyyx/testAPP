@@ -373,7 +373,7 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"请输入"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
@@ -381,19 +381,19 @@
             NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
             [_placeholderLabel setText:[tmpArr firstObject]];
         }else {
-            [_placeholderLabel setText:@"请输入"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"保险公司:"] ) {
         if (isUsableNSString(model.insurerName,@"")) {
             [_placeholderLabel setText:model.insurerName];
         }else {
-            [_placeholderLabel setText:@"请输入"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"缴费通知单号:"]) {
         if (isUsableNSString(model.payNoticeNo,@"")) {
             [_placeholderLabel setText:model.payNoticeNo];
         }else {
-            [_placeholderLabel setText:@"请输入"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"交强险(业务员)金额:"] ) {
         if (isUsable(model.jqMoney, [NSNumber class])) {
@@ -423,7 +423,7 @@
         if (isUsableNSString(model.exportmanName,@"")) {
             [_placeholderLabel setText:model.exportmanName];
         }else {
-            [_placeholderLabel setText:@"请输入"];
+            [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"交强险:"] ) {
         if ( isUsable(model.jqValue, [NSNumber class])) {
@@ -463,6 +463,8 @@
         }
     }
 }
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

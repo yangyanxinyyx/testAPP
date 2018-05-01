@@ -95,18 +95,6 @@
 
 #pragma mark - privary Method
 
-//    LYZAlertView *alertView = [LYZAlertView alterViewWithTitle:@"是否删除" content:nil comfirmStr:@"是" cancelStr:@"否" comfirmClick:^(LYZAlertView *alertView) {
-//        [self.dataArr removeObjectAtIndex:indexpath.row];
-//
-//        //(TODO)删除数据
-//        [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
-//        [self.tableView reloadData];
-//           } cancelClick:^(LYZAlertView *alertView) {
-//        [weakSelf removeAlertView:alertView cellIndexpath:indexpath];
-//    }];
-//
-//    [self.view addSubview:alertView];
-
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

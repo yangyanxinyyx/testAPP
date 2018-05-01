@@ -211,6 +211,7 @@
     XCCustomerDetailModel *detailModel = self.dataArr[indexPath.row];
     PriceCarInsuranceQViewController *insuranceQVC = [[PriceCarInsuranceQViewController alloc] init];
     insuranceQVC.carID = [detailModel.carId stringValue];
+    [UserInfoManager shareInstance].carID = [detailModel.carId stringValue];
     insuranceQVC.customerId = [detailModel.customerId stringValue];
     [self.navigationController pushViewController:insuranceQVC animated:YES];
 }

@@ -12,7 +12,6 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 @interface XCCheckoutDetailPhotoCell ()
 /** <# 注释 #> */
-@property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UIScrollView * scrollview ;
 /** <# 注释 #> */
 @property (nonatomic, strong) UIImageView * addPhotoImageView ;

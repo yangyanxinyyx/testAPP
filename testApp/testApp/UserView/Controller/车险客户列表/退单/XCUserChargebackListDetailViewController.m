@@ -8,9 +8,11 @@
 
 #import "XCUserChargebackListDetailViewController.h"
 #import "SelectTimeView.h"
+#import "LYZSelectView.h"
 @interface XCUserChargebackListDetailViewController ()<XCCheckoutDetailTextFiledCellDelegate>
 @property (nonatomic, strong) UIButton * commitBtn ;
-
+/** <# 注释 #> */
+@property (nonatomic, strong) NSMutableArray * policyCompanyArrM ;
 @end
 
 @implementation XCUserChargebackListDetailViewController
@@ -44,11 +46,12 @@
 #pragma mark - Init Method
 - (void)configureData
 {
+
     // 12 15 16 有输入
     NSArray *baseTitleNameArr = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
                                   @"车型名称:",@"车型代码:",@"(商业)起保日期:",
-                                  @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
+                                  @"(交强)起保日期:",@"保险公司:",
                                   @"交强险(业务员)金额:",@"商业险(业务员)金额:",@"交强险(出单员)金额:",
                                   @"商业险(出单员)金额:",@"出单员:",@"是否续保"];
     NSArray *policyTitleNameArr = @[@"交强险:",@"机动车损险:",@"第三责任险:",@"车上(司机)险:",@"车上(乘客)险:"];
@@ -80,16 +83,17 @@
 
         NSString * respnseStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"提交成功，待审核"];
-            [strongSelf.navigationController popViewControllerAnimated:YES];
+            [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:respnseStr];
+            [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 
 }
@@ -99,7 +103,52 @@
     [self.tableView endEditing:YES];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     __weak __typeof(self) weakSelf = self;
-    if (indexPath.section == 0 && indexPath.row == 8) {
+    if (indexPath.section == 0 && indexPath.row == 10) {
+        //保险公司
+        if (self.policyCompanyArrM) {
+            LYZSelectView * alterView = [LYZSelectView alterViewWithArray:self.policyCompanyArrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                weakSelf.detailModel.insurerName = selectStr;
+                [(XCCheckoutDetailTextFiledCell *)cell setTitlePlaceholder:selectStr];
+            }];
+            [self.view addSubview:alterView];
+        }else{
+            if (!self.policyCompanyArrM) {
+                //获取保险公司
+                _policyCompanyArrM = [[NSMutableArray alloc] init];
+                if (_detailModel.exportUnitName) {
+                    NSDictionary *param = @{
+                                            @"dictCode":_detailModel.exportUnitName,
+                                            };
+                    [RequestAPI getInsuredrice:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                        if (isUsable(response[@"data"], [NSArray class])) {
+                            NSArray *dataArr = response[@"data"];
+                            for (NSDictionary *dataInfo in dataArr) {
+                                NSString *policyName = dataInfo[@"content"];
+                                [_policyCompanyArrM addObject:policyName];
+                            }
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            LYZSelectView * alterView = [LYZSelectView alterViewWithArray:self.policyCompanyArrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                                weakSelf.detailModel.insurerName = selectStr;
+                                [(XCCheckoutDetailTextFiledCell *)cell setTitlePlaceholder:selectStr];
+                            }];
+                            [weakSelf.view addSubview:alterView];
+                        });
+                        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    } fail:^(id error) {
+                        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
+                        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+                        _policyCompanyArrM = nil;
+                    }];
+                }else {
+                    [self showAlterInfoWithNetWork:@"退单无出单机构信息" complete:nil];
+                    _policyCompanyArrM = nil;
+                }
+            }
+        }
+    }
+    else if (indexPath.section == 0 && indexPath.row == 8) {
         //商业 起保日期
         SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectView.block = ^(NSString *string) {
@@ -119,7 +168,7 @@
         };
         [self.view addSubview:selectView];
     }
-    else if (indexPath.section == 0 && indexPath.row == 17) {
+    else if (indexPath.section == 0 && indexPath.row == 16) {
         BOOL selected = NO ;
         if ([self.detailModel.isContinue isEqualToString:@"Y"]) {
             self.detailModel.isContinue = @"N";
@@ -138,12 +187,13 @@
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
-    BOOL isDoubleCellType = NO;
-    if ([title isEqualToString:@"缴费通知单号:"]) {
-        self.detailModel.payNoticeNo = textField.text;
-        isDoubleCellType = YES;
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
     }
-    else if ([title isEqualToString:@"交强险(业务员)金额:"]) {
+    BOOL isDoubleCellType = NO;
+    if ([title isEqualToString:@"交强险(业务员)金额:"]) {
         self.detailModel.jqMoney = [NSNumber numberWithDouble:[textField.text doubleValue]];
         isDoubleCellType = YES;
     }
@@ -151,28 +201,9 @@
         self.detailModel.syMoney = [NSNumber numberWithDouble:[textField.text doubleValue]];
         isDoubleCellType = YES;
     }
-    else if ([title isEqualToString:@"交强险(出单员)金额:"]) {
-        self.detailModel.jqMoneyExport = [NSNumber numberWithDouble:[textField.text doubleValue]];
-        isDoubleCellType = YES;
-    }
-    else if ([title isEqualToString:@"商业险(出单员)金额:"]) {
-        self.detailModel.syMoneyExport = [NSNumber numberWithDouble:[textField.text doubleValue]];
-        isDoubleCellType = YES;
-    }
-    else if ([title isEqualToString:@"商业险(出单员)金额:"]) {
-        self.detailModel.syMoneyExport = [NSNumber numberWithDouble:[textField.text doubleValue]];
-        isDoubleCellType = YES;
-    }
-    else if ([title isEqualToString:@"保险公司:"]) {
-        self.detailModel.insurerName = textField.text;
-    }
-    else if ([title isEqualToString:@"出单员:"]) {
-        self.detailModel.exportmanName = textField.text;
-    }
-    
     if (isDoubleCellType) {
         double num = [textField.text doubleValue];
-        textField.text = [NSString stringWithFormat:@"%.2f",num];
+        textField.text = [NSString stringWithMoneyNumber:num];
     }
 }
 
@@ -180,7 +211,7 @@
 
 - (BOOL)isMoneyCellWithIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 12 || indexPath.row == 13|| indexPath.row == 14 || indexPath.row == 15)
+    if (indexPath.row == 11 || indexPath.row == 12)
     {
         return  YES;
     }
@@ -189,7 +220,12 @@
 
 
 #pragma mark - Setter&Getter
-
+- (void)setDetailModel:(XCCheckoutDetailBaseModel *)detailModel
+{
+    _detailModel = detailModel;
+    
+   
+}
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -207,32 +243,45 @@
     
     NSArray *titleArr = self.dataTitleArrM[indexPath.section];
     NSString *title = titleArr[indexPath.row];
-    if (indexPath.section == 0 && (indexPath.row == 10 || indexPath.row == 11||
-                                   [self isMoneyCellWithIndexPath:indexPath]||indexPath.row == 16 )) {
+    if (indexPath.section == 0 && (indexPath.row == 10 ||
+                                   [self isMoneyCellWithIndexPath:indexPath] )) {
     
         XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
-        [textFiledCell setTitle:title];
+//        [textFiledCell setTitle:title];
+        textFiledCell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+
         NSString *placetext ;
-        if (indexPath.row == 11) {
-            placetext = @"输入单号";
-            textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
-        }else if ([self isMoneyCellWithIndexPath:indexPath]) {
+  
+        if ([self isMoneyCellWithIndexPath:indexPath]) {
             textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             placetext = @"输入金额";
         }else {
-            placetext = @"请输入";
+            if (indexPath.row == 10 ) {
+                placetext = @"请选择";
+            }
         }
         [textFiledCell setTitlePlaceholder:placetext];
         textFiledCell.delegate = self;
+        if (indexPath.section == 0 && indexPath.row == 10) {
+            //保险公司
+            textFiledCell.textField.userInteractionEnabled = NO;
+        }else {
+            textFiledCell.textField.userInteractionEnabled = YES;
+        }
         return textFiledCell;
-    }else if (indexPath.section == 0 && indexPath.row == 18 - 1){
+    }else if (indexPath.section == 0 && indexPath.row == 17 - 1){
         XCCheckoutDetailInputCell *inputCell = (XCCheckoutDetailInputCell *)[tableView dequeueReusableCellWithIdentifier:kTextInputCellID forIndexPath:indexPath];
-        [inputCell setTitle:title];
+//        [inputCell setTitle:title];
+        inputCell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+
         [inputCell setIsContinue:_detailModel.isContinue];
         return inputCell;
     }else {
         XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
         [cell setTitle:title];
+        if (indexPath.section == 0 && (indexPath.row == 8 ||indexPath.row == 9)) {
+            cell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+        }
         [cell setupCellWithChargeBackModel:_detailModel];
         return cell;
     }

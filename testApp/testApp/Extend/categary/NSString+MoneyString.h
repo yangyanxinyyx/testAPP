@@ -13,6 +13,11 @@
 + (NSString *)stringWithMoneyNumber:(double)money;
 
 + (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text;
++ (NSMutableAttributedString *)stringWithImportentValue:(NSString *)text fontSize:(CGFloat)size;
+
++ (NSString *)getNowTimeTimestamp;
+
+
 @end
 
 @interface NSString (Validate)
@@ -24,11 +29,6 @@
  */
 - (NSString*)areaCodeFormat;
 
-/**
- *    @brief    验证固定电话区号是否正确（e.g. 010正确，040错误）
- *
- *    @return    返回固定电话区号是否正确
- */
-- (BOOL)isAreaCode;
+
 
 @end

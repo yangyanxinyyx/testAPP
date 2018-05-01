@@ -40,7 +40,6 @@
 		A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A71EF1272082F3EF001B75ED /* XCCarTransactionModel.m */; };
 		A71F1191207CBE4A00D57FEF /* XCShopDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */; };
 		A71F1194207CC9BD00D57FEF /* XCShopDetailSeclectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */; };
-		A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5A82081AC8B006B0C33 /* XCCheckoutBaseModel.m */; };
 		A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5AB2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m */; };
 		A720C5B02081ECF0006B0C33 /* XCDistributionBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5AF2081ECF0006B0C33 /* XCDistributionBillModel.m */; };
 		A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A720C5B22081EFE5006B0C33 /* XCDistributionPaymentBillModel.m */; };
@@ -80,6 +79,8 @@
 		A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
+		A751F62420981C6E0084C492 /* XCPickerCityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A751F62320981C6E0084C492 /* XCPickerCityHandler.m */; };
+		A751F6262098206C0084C492 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = A751F6252098206C0084C492 /* city.plist */; };
 		A75335562092C1BE0061CB8C /* XCUserListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75335552092C1BE0061CB8C /* XCUserListFooterView.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
 		A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */; };
@@ -399,8 +400,6 @@
 		A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopDetailListCell.m; sourceTree = "<group>"; };
 		A71F1192207CC9BD00D57FEF /* XCShopDetailSeclectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopDetailSeclectCell.h; sourceTree = "<group>"; };
 		A71F1193207CC9BD00D57FEF /* XCShopDetailSeclectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopDetailSeclectCell.m; sourceTree = "<group>"; };
-		A720C5A72081AC8B006B0C33 /* XCCheckoutBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutBaseModel.h; sourceTree = "<group>"; };
-		A720C5A82081AC8B006B0C33 /* XCCheckoutBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutBaseModel.m; sourceTree = "<group>"; };
 		A720C5AA2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UserViewController+ListCellNetworkHandler.h"; sourceTree = "<group>"; };
 		A720C5AB2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UserViewController+ListCellNetworkHandler.m"; sourceTree = "<group>"; };
 		A720C5AE2081ECF0006B0C33 /* XCDistributionBillModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCDistributionBillModel.h; sourceTree = "<group>"; };
@@ -480,6 +479,9 @@
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
 		A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+createLabel.h"; path = "testApp/Extend/categary/UILabel+createLabel.h"; sourceTree = SOURCE_ROOT; };
+		A751F62220981C6E0084C492 /* XCPickerCityHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCPickerCityHandler.h; sourceTree = "<group>"; };
+		A751F62320981C6E0084C492 /* XCPickerCityHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCPickerCityHandler.m; sourceTree = "<group>"; };
+		A751F6252098206C0084C492 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		A75335542092C1BE0061CB8C /* XCUserListFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserListFooterView.h; sourceTree = "<group>"; };
 		A75335552092C1BE0061CB8C /* XCUserListFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListFooterView.m; sourceTree = "<group>"; };
 		A753CC0D207E6AF000AFB66C /* XCShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopModel.h; sourceTree = "<group>"; };
@@ -1157,13 +1159,31 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		A751F627209851C30084C492 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
+				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
+				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
+				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
+				A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */,
+				A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */,
+				A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */,
+				A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
 		A753CC0C207E5E3500AFB66C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A751F6252098206C0084C492 /* city.plist */,
 				A753CC0D207E6AF000AFB66C /* XCShopModel.h */,
 				A753CC0E207E6AF000AFB66C /* XCShopModel.m */,
 				A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */,
 				A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */,
+				A751F62220981C6E0084C492 /* XCPickerCityHandler.h */,
+				A751F62320981C6E0084C492 /* XCPickerCityHandler.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1484,6 +1504,7 @@
 		FC32BECA2079AA2000817156 /* 我的客户 */ = {
 			isa = PBXGroup;
 			children = (
+				A751F627209851C30084C492 /* VIew */,
 				A720C5B420826145006B0C33 /* Model */,
 				FC32BECB2079AA2000817156 /* XCCustomerAnnualReviewViewController.h */,
 				FC32BECC2079AA2000817156 /* XCCustomerAnnualReviewViewController.m */,
@@ -1499,14 +1520,6 @@
 				FC32BED62079AA2000817156 /* XCCustomerViolationPreviewViewController.m */,
 				25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */,
 				25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */,
-				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
-				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
-				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
-				A71AA9672087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m */,
-				A7281843208B7105001BD20F /* XCUserViolationDetailHeaderView.h */,
-				A7281844208B7105001BD20F /* XCUserViolationDetailHeaderView.m */,
-				A7281846208B7321001BD20F /* XCUserViolationDetailClickCell.h */,
-				A7281847208B7321001BD20F /* XCUserViolationDetailClickCell.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";
@@ -1543,8 +1556,6 @@
 		FC32BEDF2079AA2000817156 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A720C5A72081AC8B006B0C33 /* XCCheckoutBaseModel.h */,
-				A720C5A82081AC8B006B0C33 /* XCCheckoutBaseModel.m */,
 				FC32BEE02079AA2000817156 /* XCCheckoutDetailBaseModel.h */,
 				FC32BEE12079AA2000817156 /* XCCheckoutDetailBaseModel.m */,
 				FC32BEE22079AA2000817156 /* XCCheckoutDetailPolicyModel.h */,
@@ -2297,6 +2308,7 @@
 				FCEF5D2B208ED8ED00B387FA /* shouye@2x.png in Resources */,
 				FCEF5D2D208ED8ED00B387FA /* 1@3x (1).png in Resources */,
 				FCEF5D47208ED8ED00B387FA /* 返回拷贝10@2x.png in Resources */,
+				A751F6262098206C0084C492 /* city.plist in Resources */,
 				FCEF5D1D208ED8ED00B387FA /* login_code@2x.png in Resources */,
 				FCEF5D01208ED8EC00B387FA /* 没有冠军@3x.png in Resources */,
 				25712B2D20908F37001629AD /* guide1@3x.png in Resources */,
@@ -2453,6 +2465,7 @@
 				258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */,
 				FC32BF412079AA2000817156 /* XCCheckoutDetailHeaderView.m in Sources */,
 				FC32BF452079AA2000817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
+				A751F62420981C6E0084C492 /* XCPickerCityHandler.m in Sources */,
 				FC32BF4D2079AA2000817156 /* XCUserListHeaderView.m in Sources */,
 				FC32BF3C2079AA2000817156 /* XCMyCommissionListModel.m in Sources */,
 				FC32BFB32079AA5900817156 /* PriceCustomerInformEntryTableViewCell.m in Sources */,
@@ -2580,7 +2593,6 @@
 				25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */,
 				FC32BF472079AA2000817156 /* XCMyCommissionListCell.m in Sources */,
 				FC32BFBB2079AA5900817156 /* PriceAdjustTableViewCell.m in Sources */,
-				A720C5A92081AC8B006B0C33 /* XCCheckoutBaseModel.m in Sources */,
 				FC32BFA72079AA5900817156 /* PriceCustomerModel.m in Sources */,
 				A72148AF2083B5A3009E6DDC /* XCUserFinancialAuditViewController.m in Sources */,
 				FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */,

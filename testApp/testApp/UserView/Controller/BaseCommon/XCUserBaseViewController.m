@@ -121,10 +121,10 @@
         }
     }
 }
-- (void)showAlterInfoWithNetWork:(NSString *)titleStr
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
         [self.view addSubview:tipsView];
     });
 }

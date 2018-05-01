@@ -25,7 +25,7 @@
  @return ->self
  */
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSMutableArray<NSURL *> *)imageArrM;
+                      sources:(NSArray<NSURL *> *)imageArrM;
 
 - (void)updatePositionWithIndex:(NSUInteger)index;
 

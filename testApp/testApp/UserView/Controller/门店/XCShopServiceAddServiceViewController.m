@@ -35,7 +35,7 @@
     CGFloat tmpContentViewHeight =  (40 + 88 + 40 ) * ViewRateBaseOnIP6;
     CGFloat btnW = 690 * ViewRateBaseOnIP6;
     CGFloat btnH = 88 * ViewRateBaseOnIP6;
-    [_confirmBtn setFrame:CGRectMake(30 * ViewRateBaseOnIP6,SCREEN_HEIGHT - tmpContentViewHeight + (tmpContentViewHeight - btnH) * 0.5 , btnW, btnH)];
+    [_confirmBtn setFrame:CGRectMake(30 * ViewRateBaseOnIP6,SCREEN_HEIGHT - tmpContentViewHeight + (tmpContentViewHeight - btnH) * 0.5 - safeAreaBottom , btnW, btnH)];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom  + tmpContentViewHeight))];
 }
 
@@ -73,17 +73,19 @@
 
 - (void)clickConfirmBtn:(UIButton *)button
 {
-    NSMutableArray *addItemsArrM = [[NSMutableArray alloc] init];
-    for (XCShopServiceModel *model  in self.dataArrM) {
+    NSMutableString * mutStr = [NSMutableString string];
+    for (int i = 0 ; i < self.dataArrM.count; i++) {
+        XCShopServiceModel *model = self.dataArrM[i];
         if (model.isSelect) {
             if (isUsable(model.serviceId, [NSNumber class])) {
-                [addItemsArrM addObject:model.serviceId];
+                [mutStr appendString:[NSString stringWithFormat:@"%ld,",[model.serviceId longValue]]];
             }
         }
     }
+    [mutStr deleteCharactersInRange:NSMakeRange(mutStr.length - 1, 1)];
     
     NSDictionary *param = @{
-                            @"serviceArrayId":[addItemsArrM yy_modelToJSONString],
+                            @"serviceArrayId":mutStr,
                             @"storeId":self.storeID,
                             };
     __weak __typeof(self) weakSelf = self;
@@ -91,14 +93,18 @@
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errorStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-            errorStr = @"提交成功";
+            errorStr = @"提交成功,待审核!";
+            [strongSelf showAlterInfoWithNetWork:errorStr complete:^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+            }];
+        }else {
+            [strongSelf showAlterInfoWithNetWork:errorStr complete:nil];
         }
-        [strongSelf showAlterInfoWithNetWork:errorStr];
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
         NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
     }];
 }
 

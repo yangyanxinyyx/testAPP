@@ -11,6 +11,8 @@
 @interface XCDistributionPicketCell : UITableViewCell
 
 @property (nonatomic, copy) NSString * title;
+/** <# 注释 #> */
+@property (nonatomic, strong) UILabel * titleLabel ;
 
 @property (nonatomic, copy) NSString * titleValue;
 

@@ -17,6 +17,7 @@
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
 @property (nonatomic, strong) NSString * title ;
 @property (nonatomic, strong) NSArray * photoArr ;
+@property (nonatomic, strong) UILabel * titleLabel ;
 
 @property (nonatomic, assign) NSInteger  maxPhoto ;
 

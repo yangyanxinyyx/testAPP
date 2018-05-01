@@ -12,6 +12,7 @@
 @interface WSImageBroserCell()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIImageView *imageView;
+
 @end
 
 @implementation WSImageBroserCell
@@ -29,6 +30,7 @@
     _scrollView.delegate = self;
     _scrollView.minimumZoomScale = 1;//设置最小放大比例
     _scrollView.maximumZoomScale = 2.5;//设置最大放大比例
+    _scrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:_scrollView];
     
     _imageView = [[UIImageView alloc] initWithFrame:_scrollView.bounds];
@@ -57,7 +59,8 @@
         _imageView.image = model.image;
     }
     else {
-        [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl]];
+        UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
+        [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:placeHolderImage];
     }
     
 }

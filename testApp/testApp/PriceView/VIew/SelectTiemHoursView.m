@@ -67,7 +67,7 @@
 - (NSMutableArray *)hoursArray{
     if (!_hoursArray) {
         _hoursArray = [NSMutableArray array];
-        for (int hours = 1; hours <= 24; hours ++) {
+        for (int hours = 0; hours < 24; hours ++) {
             NSString *str = [NSString stringWithFormat:@"%02d时",hours];
             [_hoursArray addObject:str];
         }

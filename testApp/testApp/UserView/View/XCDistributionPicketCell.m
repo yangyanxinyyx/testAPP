@@ -10,8 +10,7 @@
 #import "XCShopModel.h"
 #import "UILabel+createLabel.h"
 @interface XCDistributionPicketCell()
-/** <# 注释 #> */
-@property (nonatomic, strong) UILabel * titleLabel ;
+
 /** <# 注释 #> */
 @property (nonatomic, strong) UILabel * valueLabel ;
 /** 右箭头 */
@@ -111,7 +110,8 @@
 {
 
     _title = title;
-    [_titleLabel setText:_title];
+//    [_titleLabel setText:_title];
+    _titleLabel.attributedText = [NSString stringWithImportentValue:title];
     [_titleLabel sizeToFit];
     
 }

@@ -22,4 +22,7 @@
 /** 礼包数据 */
 @property (nonatomic, strong) NSArray * packageArr ;
 
+@property (nonatomic, strong) XCCheckoutDetailBaseModel * model ;
+
+
 @end

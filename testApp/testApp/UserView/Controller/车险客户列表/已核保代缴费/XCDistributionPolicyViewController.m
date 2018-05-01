@@ -251,6 +251,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         textFiledCell.shouldShowSeparator = NO;
         textFiledCell.titlePlaceholder = @"输入备注信息";
     }
+    _billModel.receiverName = self.model.customerName;
+    _billModel.phone = self.model.phoneNo;
+#warning 缺少客户地址
+    //    _payModel.address = self.model
+    [textFiledCell setupCellWithDistributionBillModel:self.model];
     
     return textFiledCell;
 }
@@ -329,7 +334,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             _billModel.receiveMoney = [NSNumber numberWithDouble:0];
         }
         if (!isUsableNSString(_billModel.remark, @"")) {
-            _billModel.address = @"";
+            _billModel.remark = @"";
         }
         if (!isUsableNSString(_billModel.address, @"")) {
             errString = @"配送地址为空";
@@ -357,15 +362,20 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     }
     if (configureSuccess) {
         NSLog(@"点击确认提交");
-        __weak typeof (self)weakSelf = self;
+        __weak __typeof(self) weakSelf = self;
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
                 respnseStr = @"提交成功";
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:^{
+                    [strongSelf.navigationController popViewControllerAnimated:YES];
+
+                }];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
             }
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
-            [weakSelf.view addSubview:tipsView];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
@@ -409,6 +419,13 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
     if ([title isEqualToString:@"保单金额:"]) {
         double price = [textField.text doubleValue];
         _billModel.policyTotalAmount = [NSNumber numberWithDouble:price];

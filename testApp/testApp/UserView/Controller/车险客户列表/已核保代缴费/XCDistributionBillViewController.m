@@ -33,9 +33,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _payModel = [[XCDistributionPaymentBillModel alloc] init];
-    if (self.policyId) {
-        _payModel.policyId = self.policyId;
-    }
+
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -48,7 +46,6 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 
 - (void)dealloc {
-    
     [self removeObserverKeyBoard];
 }
 
@@ -147,7 +144,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     if ([self isTextCellTypeWithIndex:indexPath]) {
         XCCheckoutDetailTextCell *textCell =(XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID];
         textCell.shouldShowSeparator = YES;
-        textCell.titleLabel.attributedText = [NSString stringWithImportentValue:titleName];
+        [textCell setTitle:titleName];
         if ([titleName isEqualToString:@"商业险金额:"]) {
             [textCell setTitlePlaceholder:self.syMoney];
         }
@@ -158,6 +155,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         return textCell;
     }else if([self isPicketCellTypeWithIndex:indexPath]) {
         XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
+
         picketCell.title = titleName;
         picketCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -181,6 +179,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
             break;
         case 3: {
             textFiledCell.titlePlaceholder = @"请输入通知号";
+            textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         }
             break;
         case 7: {
@@ -202,6 +201,11 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         }
             break;
     }
+    _payModel.receiverName = self.model.customerName;
+    _payModel.phone = self.model.phoneNo;
+#warning 缺少客户地址
+//    _payModel.address = self.model
+    [textFiledCell setupCellWithDistributionBillModel:self.model];
     return textFiledCell;
 }
 
@@ -242,11 +246,16 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
     if ([title isEqualToString:@"保单金额:"]) {
         double price = [textField.text doubleValue];
         _payModel.receiveMoney = [NSNumber numberWithDouble:price];
         [textField setText: [NSString stringWithMoneyNumber:price]];
-        
     }
     else if ([title isEqualToString:@"缴费单通知号:"]) {
         _payModel.payNoticeNo =  textField.text;
@@ -289,7 +298,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 {
     BOOL configureSuccess = YES;
     NSString *errString = @"保单信息错误";
-    if (_payModel.policyId) {
+    if (!isUsable(_payModel.policyId, [NSNumber class])) {
         errString = @"保单信息错误";
         configureSuccess = NO;
     }
@@ -325,16 +334,19 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
     if (configureSuccess) {
         NSLog(@"点击确认提交");
-        __weak typeof (self)weakSelf = self;
-        
+        __weak __typeof(self) weakSelf = self;
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
             NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
-                respnseStr = @"修改成功";
+                [strongSelf showAlterInfoWithNetWork:@"修改成功" complete:^{
+                    [strongSelf resetData];
+                }];
+            }else {
+                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
             }
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
-            [weakSelf.view addSubview:tipsView];
+            
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败" complete:nil];
@@ -344,10 +356,18 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
         [self.view addSubview:tipsView];
     }
-
 }
 
 #pragma mark - Privacy Method
+
+- (void)resetData
+{
+//    _payModel = [[XCDistributionPaymentBillModel alloc] init];
+//    _payModel.policyId = self.policyId;
+//
+//    [self.tableView reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (BOOL)isTextCellTypeWithIndex:(NSIndexPath *)indexPath
 {
@@ -444,6 +464,11 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 }
 #pragma mark - Setter&Getter
 
+- (void)setPolicyId:(NSNumber *)policyId
+{
+    _policyId = policyId;
+    _payModel.policyId = _policyId;
+}
 
 
 @end

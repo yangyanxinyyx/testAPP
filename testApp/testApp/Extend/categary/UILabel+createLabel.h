@@ -10,4 +10,7 @@
 
 @interface UILabel (createLabel)
 +(UILabel *)createLabelWithTextFontSize:(CGFloat)fontSize textColor:(UIColor *)textColor;
+
++ (CGFloat)getXCTextHeightLineWithString:(NSString *)string withWidth:(CGFloat)width withFontSize:(CGFloat )fontsize;
++ (CGFloat)getHeightLineWithString:(NSString *)string withWidth:(CGFloat)width withFont:(UIFont *)font;
 @end

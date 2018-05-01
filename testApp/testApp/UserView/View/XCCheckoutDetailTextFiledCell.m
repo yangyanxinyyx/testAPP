@@ -10,7 +10,6 @@
 #import "UILabel+createLabel.h"
 @interface XCCheckoutDetailTextFiledCell ()<UITextFieldDelegate>
 
-@property (nonatomic, strong) UILabel * titleLabel ;
 @property (nonatomic, strong) UIView * separtatorLine ;
 @property (nonatomic, strong) UIView * twoSepartatorLine ;
 @property (nonatomic, strong) UILabel * secondTitlelabel ;
@@ -102,9 +101,7 @@
     if (_isTopShowSeparator) {
           [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , 0, self.bounds.size.width - 30 * ViewRateBaseOnIP6, 1)];
     }
-   
-   
-    
+
 }
 #pragma mark - Init Method
 
@@ -126,7 +123,6 @@
     }
     else if ([self.title isEqualToString:@"业务员提成:"] && isUsable(model.salesmanCommission, [NSNumber class])) {
     [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
-        
     }
     else if ([self.title isEqualToString:@"团队经理提成:"] && isUsable(model.managerCommission, [NSNumber class])) {
               [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];
@@ -145,6 +141,7 @@
         [self.delegate XCCheckoutDetailTextFiledClickBtn:self.textField title:self.titleLabel.text];
     }
 }
+
 //- (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model
 //{
 //    if ([self.title isEqualToString:@"投保人:"] && isUsableNSString(model.onwerName,@"")) {
@@ -259,6 +256,25 @@
     [self addSubview:_clickBtn];
 }
 
+- (void)setupCellWithDistributionBillModel:(XCCheckoutDetailBaseModel *)model
+{
+    if ([self.title isEqualToString:@"客户名称:"] ) {
+        if (isUsableNSString(model.customerName,@"")) {
+            [_textField setText:model.customerName];
+        }
+    }
+    else if ([self.title isEqualToString:@"联系电话:"]) {
+        if (isUsableNSString(model.phoneNo,@"")) {
+            [_textField setText:model.phoneNo];
+        }
+    }
+    else if ([self.title isEqualToString:@"配送地址:"]) {
+        if (isUsableNSString(model.phoneNo,@"")) {
+            [_textField setText:model.phoneNo];
+        }
+    }
+}
+
 #pragma mark - Setter&Getter
 
 -(void)setIsNumField:(BOOL)isNumField
@@ -268,11 +284,8 @@
 
 - (void)setTitle:(NSString *)title
 {
-    if ([_title isEqualToString:title]) {
-        return;
-    }
     _title = title;
-    [_titleLabel setText:_title];
+    _titleLabel.attributedText = [NSString stringWithImportentValue:title];
     [_titleLabel sizeToFit];
 
 }

@@ -11,6 +11,7 @@
 #import "XCUserCaseDetailProgressCell.h"
 #define kDetailTextCellID @"DetailTextCellID"
 #define kDetailProgressCellID @"DetailProgressCellID"
+#import "UILabel+createLabel.h"
 @interface XCUserViolationDetailViewController ()
 
 @end
@@ -23,7 +24,7 @@
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCUserCaseDetailProgressCell class] forCellReuseIdentifier:kDetailProgressCellID];
     [self.tableView registerClass:[XCUserCaseDetailTextCell class] forCellReuseIdentifier:kDetailTextCellID];
-
+    
     
     [self initUI];
     [self configureData];
@@ -110,6 +111,7 @@
     else {
         //基本信息Cell
         XCUserCaseDetailTextCell *detailTextCell = (XCUserCaseDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kDetailTextCellID forIndexPath:indexPath];
+        detailTextCell.isWeizhangType = YES;
         [detailTextCell setTitleStr:@"基本信息"];
         [detailTextCell setLabelTitleArrM:self.dataTitleArrM];
         [detailTextCell setupCellWithViolationCarTranDetailModel:_carTranDetailModel];
@@ -123,7 +125,15 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else {
-        return 820 * ViewRateBaseOnIP6;
+//        return 820 * ViewRateBaseOnIP6;
+        CGFloat num = self.dataTitleArrM.count - 1;
+ 
+        if (_carTranDetailModel.weizhangClause) {
+           CGFloat height = [UILabel getXCTextHeightLineWithString:_carTranDetailModel.weizhangClause withWidth:self.view.bounds.size.width - 30 * ViewRateBaseOnIP6 * 2 withFontSize:26];
+            return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num - 1) + height + 30 * ViewRateBaseOnIP6  ;
+        }else {
+            return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num )  + 30 * ViewRateBaseOnIP6  ;
+        }
     }
 }
 @end
