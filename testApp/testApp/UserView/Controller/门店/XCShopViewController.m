@@ -71,8 +71,10 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @end
 
 @implementation XCShopViewController
+
+#pragma mark - lifeCycle
 - (void)dealloc {
-  
+    
     for (NSString *filePath in self.lincePhotoArrM) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
@@ -90,7 +92,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
     _storePhotoArrM = [[NSMutableArray alloc] init];
     _lincePhotoArrM = [[NSMutableArray alloc] init];
     _networkURLArrM = [[NSMutableArray alloc] init];
@@ -101,10 +103,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     [self createUI];
 }
 
-#pragma mark - lifeCycle
-
 #pragma mark - Init Method
-#pragma mark - UI
+
 - (void)createUI{
     [self.view addSubview:self.contenView];
     [self.contenView addSubview:self.viewBear];
@@ -712,6 +712,42 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     
 }
 
+#pragma mark - UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *vc = [UIImagePickerController new];
+            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
+            vc.delegate = self;
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+                imagePickerVc.allowPickingVideo = NO;
+                imagePickerVc.sortAscendingByModificationDate = YES;
+                [self presentViewController:imagePickerVc animated:YES completion:nil];
+            }else {
+                NSInteger maxCount = 4;
+                NSInteger count = maxCount - self.storePhotoArrM.count;
+                if (count < 0) {
+                    count = 0 ;
+                }
+                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+                imagePickerVc.allowPickingVideo = NO;
+                imagePickerVc.sortAscendingByModificationDate = YES;
+                [self presentViewController:imagePickerVc animated:YES completion:nil];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark - TZImagePickerControllerDelegate - 新照片
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto
@@ -797,42 +833,6 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
-#pragma mark - UIActionSheet delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-        {
-            UIImagePickerController *vc = [UIImagePickerController new];
-            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
-            vc.delegate = self;
-            [self.navigationController presentViewController:vc animated:YES completion:nil];
-        }
-            break;
-        case 1:
-        {
-            if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-                imagePickerVc.allowPickingVideo = NO;
-                imagePickerVc.sortAscendingByModificationDate = YES;
-                [self presentViewController:imagePickerVc animated:YES completion:nil];
-            }else {
-                NSInteger maxCount = 4;
-                NSInteger count = maxCount - self.storePhotoArrM.count;
-                if (count < 0) {
-                    count = 0 ;
-                }
-               TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-                imagePickerVc.allowPickingVideo = NO;
-                imagePickerVc.sortAscendingByModificationDate = YES;
-                [self presentViewController:imagePickerVc animated:YES completion:nil];
-            }
-        }
-            break;
-        default:
-            break;
-    }
-}
 
 #pragma mark - XCShopAMapViewControllerDelegate 地图
 
@@ -1114,6 +1114,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 - (void)addObserverKeyboard {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    
 }
 
 - (void)removeObserverKeyBoard {

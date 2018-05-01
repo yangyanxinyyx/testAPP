@@ -22,6 +22,8 @@
 
 @property (nonatomic, retain)UIScrollView *myScrollView;
 @property (nonatomic, copy)NSArray *imageArray;
+@property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier; //向系统申请后台运行的额外时间
+@property (nonatomic, strong) NSTimer *backgroundTimer;
 @end
 
 @implementation AppDelegate
@@ -36,7 +38,19 @@
     //高德地图
     [AMapServices sharedServices].apiKey = @"780fe25c204479d57fd155664e193fa6";
     //bugly
-    [self configureBuglySDK];
+    NSString * userInfo = [NSString stringWithFormat:@"Device %@ ",[UIDevice currentDevice].name];
+    BuglyConfig *config = [[BuglyConfig alloc] init];
+    config.debugMode = NO;
+    config.channel = @"appStore";
+    config.blockMonitorEnable = NO;
+    config.symbolicateInProcessEnable = YES;
+    config.unexpectedTerminatingDetectionEnable = NO;
+    config.viewControllerTrackingEnable = YES;
+    config.reportLogLevel = BuglyLogLevelWarn;
+    config.consolelogEnable = YES;
+    [Bugly startWithAppId:kbuglyID config:config];
+    [Bugly setUserIdentifier:userInfo];
+    
     
     BaseTabbarController *tab = [[BaseTabbarController alloc] init];
     tab.delegate = self;
@@ -96,22 +110,6 @@
     return _bgView;
 }
 
-- (void)configureBuglySDK {
-
-    NSString * userInfo = [NSString stringWithFormat:@"Device %@ ",[UIDevice currentDevice].name];
-    BuglyConfig *config = [[BuglyConfig alloc] init];
-    config.debugMode = NO;
-    config.channel = @"appStore";
-    config.blockMonitorEnable = NO;
-    config.symbolicateInProcessEnable = YES;
-    config.unexpectedTerminatingDetectionEnable = NO;
-    config.viewControllerTrackingEnable = YES;
-    config.reportLogLevel = BuglyLogLevelWarn;
-    config.consolelogEnable = YES;
-    [Bugly startWithAppId:kbuglyID config:config];
-    [Bugly setUserIdentifier:userInfo];
-
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -122,8 +120,46 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    //申请进入后台额外时间
+    self.backgroundTaskIdentifier = [application beginBackgroundTaskWithExpirationHandler:^{
+        [self endbackgroundTask];
+    }];
+    self.backgroundTimer =[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerMethod:)     userInfo:nil repeats:YES];
 }
 
+
+- (void) timerMethod:(NSTimer *)paramSender{
+    
+    
+    NSTimeInterval backgroundTimeRemaining =[[UIApplication sharedApplication] backgroundTimeRemaining];
+    
+    if (backgroundTimeRemaining == DBL_MAX){
+//        NSLog(@"没设置后台时间");
+    } else {
+        
+        //NSLog(@"后台还剩 = %.02f 秒", backgroundTimeRemaining);
+        if (backgroundTimeRemaining < 10) {
+//            NSLog(@"后台申请时间即将结束 即将进入后台");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"FCHMessageListSetSendFail" object:nil];
+        }
+    }
+}
+
+-(void)endbackgroundTask
+{
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTaskIdentifier];
+        
+        [self.backgroundTimer invalidate];
+        self.backgroundTimer = nil;
+        
+        self.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+        
+    });
+}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
