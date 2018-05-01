@@ -21,7 +21,7 @@
 @property (nonatomic,weak)id<GetCarViewDelegate>delegate;
 
 
-- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix;
+- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString*)orderCategory;
 
 
 @end

@@ -243,6 +243,7 @@ static NSString *identifier = @"listCell";
         VC.delegate = self;
         VC.orderID = model.orderID;
         VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
+        VC.orderCategory = model.orderCategory;
         [self.navigationController pushViewController:VC animated:YES];
     }else if (cell.getCarBtnType == GetCarBtnTypePay){
         if ([model.orderCategory isEqualToString:@"维修"]) {
@@ -422,7 +423,7 @@ static NSString *identifier = @"listCell";
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
 
-        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, rightView.frame.size.width, rightView.frame.size.height)];
+        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(-30, 0, rightView.frame.size.width, rightView.frame.size.height)];
         searchBtn.backgroundColor = [UIColor clearColor];
         [rightView addSubview:searchBtn];
         [searchBtn addTarget:self action:@selector(pressSearchBtn) forControlEvents:UIControlEventTouchUpInside];

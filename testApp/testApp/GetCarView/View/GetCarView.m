@@ -7,82 +7,88 @@
 //
 
 #import "GetCarView.h"
-
+#import "GetCarImageCell.h"
+#import <UIImageView+WebCache.h>
 
 @implementation GetCarView
 
-- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix
+- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString *)orderCategory
 {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
-        self.dataSource = [NSMutableArray array];
 
 
-        CGFloat height = 554;
+        CGFloat height = 530;
         if (isFix) {
-            height = 519;
+            height = 495;
         }else{
-            height = 554 ;
+            height = 530 ;
         }
 
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
         scrollView.backgroundColor = [UIColor whiteColor];
         [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(0, isFix ? 519 : 554- 72 +36*model.detailList.count);
+        scrollView.contentSize = CGSizeMake(0, isFix ? 495 : 530- 72 +36*model.detailList.count);
         scrollView.bounces = NO;
         scrollView.showsVerticalScrollIndicator = !isFix;
         scrollView.delegate = self;
 
         NSArray *titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"项      目:"];
-        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.model],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.phone]];
+        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",@"没传时间"],[NSString stringWithFormat:@"%@",orderCategory]];
         for (int i=0 ; i<6; i++) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 44*i, 68, 44)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 44)];
             label.font = [UIFont systemFontOfSize:14];
             label.textColor = COLOR_RGB_255(68, 68, 68);
             label.text = titleArray1[i];
             [scrollView addSubview:label];
 
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(82, 44*i, 200, 44)];
+            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(82, 40*i, SCREEN_WIDTH - 82 - 15, 44)];
             label2.font = [UIFont systemFontOfSize:13];
             label2.textColor = COLOR_RGB_255(165, 165, 165);
             label2.text = titleArray2[i];
             [scrollView addSubview:label2];
 
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, 43*(i+1), SCREEN_WIDTH-30, 1)];
-            line.backgroundColor = COLOR_RGB_255(229, 229, 229);
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label2.frame), SCREEN_WIDTH-30, 1)];
+            line.backgroundColor = COLOR_RGB_255(242, 242, 242);
             [scrollView addSubview:line];
         }
 
-        UIView *seqline = [[UIView alloc] initWithFrame:CGRectMake(0, 264, SCREEN_WIDTH, 5)];
+        UIView *seqline = [[UIView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, 5)];
         seqline.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [scrollView addSubview:seqline];
 
-        UILabel *requireLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 269, 150, 40)];
+        UILabel *requireLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 245, 150, 40)];
         requireLabel.font = [UIFont systemFontOfSize:14];
         requireLabel.textColor = COLOR_RGB_255(68, 68, 68);
         requireLabel.text = @"要求描述";
         [scrollView addSubview:requireLabel];
 
-        UILabel *requireLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 309, SCREEN_WIDTH-30, 80)];
+        UILabel *requireLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 285, SCREEN_WIDTH-30, 80)];
         requireLabel2.font = [UIFont systemFontOfSize:13];
         requireLabel2.textColor = COLOR_RGB_255(165, 165, 165);
         requireLabel2.numberOfLines = 0;
-        requireLabel2.text = [NSString stringWithFormat:@"%@",model.phone];
+        requireLabel2.text = [NSString stringWithFormat:@"%@",@"没传描述"];
         [scrollView addSubview:requireLabel2];
 
-        UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 389, SCREEN_WIDTH, 5)];
+        UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 365, SCREEN_WIDTH, 5)];
         seqline2.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [scrollView addSubview:seqline2];
 
 
         if (isFix) {
             //维修
-            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 389, SCREEN_WIDTH - 15, 35)];
+            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365, SCREEN_WIDTH - 15, 35)];
             itemLabel.font = [UIFont systemFontOfSize:14];
             itemLabel.textColor = COLOR_RGB_255(68, 68, 68);
             itemLabel.text = @"相关照片";
             [scrollView addSubview:itemLabel];
 
+            self.dataSource = [NSMutableArray array];
+            for (NSDictionary *dic in model.detailList) {
+                if (dic[@"serviceName"]) {
+                    [self.dataSource addObject:dic[@"serviceName"]];
+                }
+            }
 
             UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
             flowLayout.itemSize = CGSizeMake(70, 70);
@@ -94,13 +100,15 @@
             collection.contentInset = UIEdgeInsetsMake(10, 15, 10, 10);
             collection.delegate = self;
             collection.dataSource = self;
+            collection.backgroundColor = [UIColor whiteColor];
 
             //注册cell
-            [collection registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+            [collection registerClass:[GetCarImageCell class] forCellWithReuseIdentifier:@"cell"];
+
 
         }else{
             //接车
-            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 389, SCREEN_WIDTH - 15, 44)];
+            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365, SCREEN_WIDTH - 15, 44)];
             itemLabel.font = [UIFont systemFontOfSize:14];
             itemLabel.textColor = COLOR_RGB_255(68, 68, 68);
             itemLabel.text = @"服务";
@@ -115,7 +123,7 @@
                 UILabel *item = [[UILabel alloc] initWithFrame:CGRectMake(15, i*36, 200, 36)];
                 item.font = [UIFont systemFontOfSize:14];
                 item.textColor = COLOR_RGB_255(68, 68, 68);
-                item.text = dic[@"serviceName"];
+                item.text = [NSString stringWithFormat:@"%@",dic[@"serviceName"]];
                 [view addSubview:item];
 
                 UILabel *money = [[UILabel alloc] initWithFrame:CGRectMake(15, i*36, SCREEN_WIDTH - 15, 36)];
@@ -141,14 +149,18 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return self.dataSource.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    GetCarImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
 
-
+    NSString *str = self.dataSource[indexPath.row];
+    if (isUsableNSString(str, nil)) {
+        NSURL *url = [NSURL URLWithString:str];
+        [cell.imageV sd_setImageWithURL:url];
+    }
     return cell;
 }
 

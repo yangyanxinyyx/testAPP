@@ -20,5 +20,6 @@
 
 @property (nonatomic,strong) NSNumber *orderID;
 @property (nonatomic,assign) BOOL isFix;
+@property (nonatomic,strong) NSString *orderCategory;
 
 @end

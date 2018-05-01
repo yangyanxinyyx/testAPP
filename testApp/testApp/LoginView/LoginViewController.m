@@ -116,8 +116,8 @@
   //    self.passwordTextField.text = @"xc123456";
   //    self.accoutTextField.text = @"15688888888";
     //    self.passwordTextField.text = @"xc123456";
-        self.accoutTextField.text = @"13570229475";
-        self.passwordTextField.text = @"xc123456";
+//        self.accoutTextField.text = @"13570229475";
+//        self.passwordTextField.text = @"xc123456";
 
     [self.view endEditing:YES];
     if (!self.accoutTextField.text || !self.passwordTextField.text) {

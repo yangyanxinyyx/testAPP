@@ -71,11 +71,11 @@
 
 - (void)createUIWithModel:(GetCarDetailModel *)model;
 {
-    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 519 : 554) model:model isFix:_isFix];
+    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 495 : 530) model:model isFix:_isFix orderCategory:_orderCategory];
     view.delegate = self;
     [self.view addSubview:view];
 
-    UIButton *getCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(view.frame), SCREEN_WIDTH - 30, 44)];
+    UIButton *getCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(view.frame) +10, SCREEN_WIDTH - 30, 44)];
     [getCarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     getCarBtn.titleLabel.font = [UIFont systemFontOfSize:18];
     [getCarBtn addTarget:self action:@selector(pressGetCarBtn) forControlEvents:UIControlEventTouchUpInside];
