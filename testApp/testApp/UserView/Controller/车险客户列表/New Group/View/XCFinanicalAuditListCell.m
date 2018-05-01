@@ -81,7 +81,7 @@
     [_processLabel sizeToFit];
     labelSize = _processLabel.frame.size;
     CGFloat rigthMargin = 30 *ViewRateBaseOnIP6;
-    [_processLabel setFrame:CGRectMake(SCREEN_WIDTH - rigthMargin - labelSize.width , _carNumLabel.frame.origin.y , labelSize.width, 23 * ViewRateBaseOnIP6)];
+    [_processLabel setFrame:CGRectMake(SCREEN_WIDTH - 33 * ViewRateBaseOnIP6 - labelSize.width ,36 * ViewRateBaseOnIP6 , labelSize.width, 23 * ViewRateBaseOnIP6)];
 
     [_carNameLabel sizeToFit];
     labelSize = _carNameLabel.frame.size;
