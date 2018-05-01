@@ -41,7 +41,6 @@ static NSString *identifier = @"listCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.dataSource = [NSMutableArray array];
     self.serviceArray = [NSMutableArray array];
 
     [self createUI];
@@ -141,13 +140,13 @@ static NSString *identifier = @"listCell";
                     for (NSDictionary *dicData in dataSet) {
                         GetCarModel *model = [[GetCarModel alloc] init];
                         [model setValuesForKeysWithDictionary:dicData];
-                        [_dataSource addObject:model];
+                        [self.dataSource addObject:model];
                     }
 
                     dispatch_async(dispatch_get_main_queue(), ^{
 
                         [self.tab reloadData];
-                        [self showFixBtn:_dataSource.count > 0 ? NO : YES];
+                        [self showFixBtn:self.dataSource.count > 0 ? NO : YES];
                     });
                     if (dataSet.count < [pageSize integerValue]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -169,8 +168,7 @@ static NSString *identifier = @"listCell";
 
 -(void)refresh
 {
-    [_dataSource removeAllObjects];
-//    _dataSource = [NSMutableArray array];
+    [self.dataSource removeAllObjects];
     [self.tab.mj_footer resetNoMoreData];
     _page = 2;
     [self requestDataWithPage:@(1) selectNumber:_textField.text];
@@ -212,13 +210,17 @@ static NSString *identifier = @"listCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
     GetCarListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegate = self;
     if (cell == nil) {
         cell = [[GetCarListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         cell.delegate = self;
     }
-    GetCarModel *model =_dataSource[indexPath.row];
+    if (self.dataSource.count == 0) {
+        return cell;
+    }
+    GetCarModel *model = self.dataSource[indexPath.row];
 
     cell.carNumberLabel.text = model.plateNo;
     cell.ownerLabel.text = model.customerName;
@@ -238,7 +240,7 @@ static NSString *identifier = @"listCell";
 - (void)pressGetCarBtn:(GetCarListCell *)cell
 {
     NSIndexPath *indexPath = [_tab indexPathForCell:cell];
-    GetCarModel *model = _dataSource[indexPath.row];
+    GetCarModel *model = self.dataSource[indexPath.row];
     if (cell.getCarBtnType == GetCarBtnTypeGet) {
         GetCarViewController *VC = [[GetCarViewController alloc] init];
         VC.delegate = self;
@@ -293,7 +295,7 @@ static NSString *identifier = @"listCell";
 {
     _page = 2;
     [self.tab.mj_footer resetNoMoreData];
-    [_dataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
     [self requestDataWithPage:@(1) selectNumber:nil];
 }
 
@@ -308,7 +310,7 @@ static NSString *identifier = @"listCell";
     [textField resignFirstResponder];
     textField.text = [textField.text uppercaseString];
     _page = 2;
-    [_dataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
     [self requestDataWithPage:@(1) selectNumber:textField.text];
     return YES;
 
@@ -329,7 +331,7 @@ static NSString *identifier = @"listCell";
     [self.view endEditing:YES];
     _textField.text = [_textField.text uppercaseString];
     _page = 2;
-    [_dataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
     [self requestDataWithPage:@(1) selectNumber:_textField.text];
 }
 
@@ -449,7 +451,12 @@ static NSString *identifier = @"listCell";
     return _orderBtn;
 }
 
-
+- (NSMutableArray *)dataSource{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
