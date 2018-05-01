@@ -12,12 +12,12 @@
 #define kPhotoCellID @"PhotoCellID"
 #import "LYZSelectView.h"
 #import "SelectTiemHoursView.h"
-#import "JFImagePickerController.h"
 #import "XCPhotoPreViewController.h"
 #import "UIImage+imageHelper.h"
+#import <TZImagePickerController.h>
 @interface XCCustomerAnnualReviewViewController ()<XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,
-UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
+UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePickerControllerDelegate>
 {
     dispatch_semaphore_t _videoTrackSynLoadSemaphore;
     dispatch_time_t _maxVideoLoadTrackTimeConsume ;
@@ -306,11 +306,8 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
                                               cell:(XCCheckoutDetailPhotoCell *)cell
 {
     if (photoURL) {
-        __weak __typeof(self) weakSelf = self;
-        XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.storePhotoArrM];
-        previewVC.shouldShowDeleBtm = YES;
-        [previewVC updatePositionWithIndex:index];
-        previewVC.completion = ^(NSArray<NSURL *> *deleArray) {
+        __weak __typeof(self) weakSelf = self;      
+        XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.storePhotoArrM comlectionBlock:^(NSArray<NSURL *> *deleArray) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             if (deleArray.count > 0) {
                 for (NSString *imagePath in deleArray) {
@@ -329,7 +326,9 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             }
             NSIndexPath *indexPath = [strongSelf.tableView indexPathForCell:cell];
             [strongSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        };
+        }];
+        previewVC.shouldShowDeleBtm = YES;
+        [previewVC updatePositionWithIndex:index];
         [self.navigationController pushViewController:previewVC animated:YES];
     };
 
@@ -343,56 +342,31 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
     [action showInView:self.navigationController.view];
 }
 
-#pragma mark - JFImagePickerDelegate 选择照片回调
-
-- (void)imagePickerDidFinished:(JFImagePickerController *)picker
+#pragma mark - TZImagePickerControllerDelegate 新照片
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto
 {
-    _videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
-    __weak __typeof(self) weakSelf = self;
-    [ProgressControll showProgressNormal];
-    __block NSInteger sloveCount = 0;
-    __block NSInteger photoNum = 0;
-    [picker.assets enumerateObjectsUsingBlock:^(ALAsset *asset, NSUInteger idx, BOOL * _Nonnull stop) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        [[JFImageManager sharedManager] imageWithAsset:asset resultHandler:^(CGImageRef imageRef, BOOL longImage) {
-            UIImage *image = [UIImage imageWithCGImage:imageRef];
-            // =================== modify by Liangyz 处理图片
-                NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
-                                     [NSString stringWithFormat:@"storeImage%@%lu.jpg",[NSString getNowTimeTimestamp],(unsigned long)photoNum]];
-                NSLog(@"%@",tmpPath);
-                if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
-                    [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
-                }
-                unlink([tmpPath  UTF8String]);
-                photoNum ++;
-                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tmpPath atomically:YES];
-                NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
-                [strongSelf.storePhotoArrM addObject:[tmpFileURL absoluteString]];
-
-         sloveCount++;
-            NSLog(@"=======>%ld",(long)sloveCount); /// 线程0000000？(TODO)
-            if (sloveCount == picker.assets.count) {
-                //完成
-                NSLog(@"=========>D");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [ProgressControll dismissProgress];
-                    [strongSelf imagePickerDidCancel:picker];
-                    [strongSelf.currentPhotoCell setPhotoArr:strongSelf.storePhotoArrM];
-                });
-                
-            }
-        }];
-    }];
+    for (UIImage *newImage in photos) {
+        NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
+                             [NSString stringWithFormat:@"storeImage%@%lu.jpg",[NSString getNowTimeTimestamp],(unsigned long)self.storePhotoArrM.count]];
+        NSLog(@"%@",tmpPath);
+        if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
+        }
+        unlink([tmpPath  UTF8String]);
+        [UIImageJPEGRepresentation(newImage, 1.0) writeToFile:tmpPath atomically:YES];
+        NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+        [self.storePhotoArrM addObject:[tmpFileURL absoluteString]];
+        NSLog(@"============>A");
+    }
+    NSLog(@"============>D");
+    //完成
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.currentPhotoCell setPhotoArr:self.storePhotoArrM];
+    });
+    
 }
 
-
-
-- (void)imagePickerDidCancel:(JFImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    [JFImagePickerController clear];
-}
-#pragma  mark - imagePickerController Delegate - 照片
+#pragma  mark - imagePickerController Delegate - 拍照
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self imageHandleWithpickerController:picker MdediaInfo:info];
@@ -446,10 +420,12 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             if (count < 0) {
                 count = 0 ;
             }
-            [JFImagePickerController setMaxCount:count];
-            JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
-            picker.pickerDelegate = self;
-            [self.navigationController presentViewController:picker animated:YES completion:nil];
+            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+            imagePickerVc.allowPickingVideo = NO;
+            imagePickerVc.allowTakePicture = NO;
+            imagePickerVc.sortAscendingByModificationDate = YES;
+            [self presentViewController:imagePickerVc animated:YES completion:nil];
+
         }
             break;
             
@@ -457,43 +433,6 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate>
             break;
     }
 }
-
-//#pragma mark - navigationDelegate
-//
-//-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
-//
-//    NSURL *imageAssetUrl = [info objectForKey:UIImagePickerControllerReferenceURL];
-//    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
-//    __weak __typeof(self) weakSelf = self;
-//    [assetLibrary assetForURL:imageAssetUrl resultBlock:^(ALAsset *asset)  {
-//        ALAssetRepresentation* representation = [asset defaultRepresentation];
-//        // 创建一个buffer保存图片数据
-//        uint8_t *buffer = (Byte*)malloc(representation.size);
-//        NSUInteger length = [representation getBytes:buffer fromOffset: 0.0  length:representation.size error:nil];
-//        // 将buffer转换为NSData object，然后释放buffer内存
-//        NSData *imageData = [[NSData alloc] initWithBytesNoCopy:buffer length:representation.size freeWhenDone:YES];
-//        UIImage *image = [UIImage imageWithData:imageData scale:1.0];
-//
-//        NSArray *docPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *doc_l_path = [NSString stringWithFormat:@"%@/", [docPaths firstObject]];
-//        _lincesPhotoPath = [doc_l_path stringByAppendingPathComponent:@"Annuallience.jpg"];
-//        if ([[NSFileManager defaultManager] fileExistsAtPath:_lincesPhotoPath]) {
-//            [[NSFileManager defaultManager] removeItemAtPath:_lincesPhotoPath error:nil];
-//        }
-//        unlink([_lincesPhotoPath  UTF8String]);
-//        [UIImagePNGRepresentation(image) writeToFile:_lincesPhotoPath atomically:YES];
-//        XCCheckoutDetailPhotoCell *cell = [weakSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
-//         [cell setPhotoArr:@[_lincesPhotoPath]];
-//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-//    } failureBlock:^(NSError *error) {
-//        //失败的处理
-//        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-//    }];
-//}
-//
-//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 

@@ -8,13 +8,15 @@
 
 #import "BaseViewController1.h"
 #import "WSImageModel.h"
+typedef void (^completionBlock)(NSArray <NSURL *> *deleArray);
+
 @interface XCPhotoPreViewController : BaseViewController1<BaseNavigationBarDelegate>
 /// 自定义导航栏
 @property (nonatomic, strong) BaseNavigationBar *topBar ;
 @property (nonatomic,strong) NSString *navTitle;
 /** 显示删除按钮 默认NO*/
 @property (nonatomic, assign) BOOL shouldShowDeleBtm ;
-@property (nonatomic, copy) void(^completion)(NSArray <NSURL *> *deleArray);
+@property (nonatomic, copy) completionBlock completion;
 
 
 /**
@@ -26,6 +28,10 @@
  */
 - (instancetype)initWithTitle:(NSString *)title
                       sources:(NSArray<NSURL *> *)imageArrM;
+
+- (instancetype)initWithTitle:(NSString *)title
+                      sources:(NSArray<NSURL *> *)imageArrM
+              comlectionBlock:(completionBlock)completionBlock;
 
 - (void)updatePositionWithIndex:(NSUInteger)index;
 

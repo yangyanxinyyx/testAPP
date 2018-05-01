@@ -10,7 +10,6 @@
 #import "XCUserCaseDetailTextCell.h"
 #import "XCUserCaseDetailProgressCell.h"
 #import "XCUserCaseScrollerViewCell.h"
-//#import "XCCheckoutPhotoPreViewController.h"
 #import "XCPhotoPreViewController.h"
 #define kDetailTextCellID @"DetailTextCellID"
 #define kDetailProgressCellID @"DetailProgressCellID"
