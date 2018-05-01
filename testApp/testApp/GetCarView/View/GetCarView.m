@@ -9,6 +9,7 @@
 #import "GetCarView.h"
 #import "GetCarImageCell.h"
 #import <UIImageView+WebCache.h>
+#import "NSString+MoneyString.h"
 
 @implementation GetCarView
 
@@ -135,10 +136,11 @@
                 [view addSubview:money];
             }
 
-            UILabel *lastLabel = [[UILabel alloc] initWithFrame:CGRectMake(240, CGRectGetMaxY(view.frame), SCREEN_WIDTH - 240, 44)];
+            UILabel *lastLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view.frame), SCREEN_WIDTH -10, 44)];
             lastLabel.font = [UIFont systemFontOfSize:12];
+            lastLabel.textAlignment = NSTextAlignmentRight;
             lastLabel.textColor = COLOR_RGB_255(68, 68, 68);
-            lastLabel.text = [NSString stringWithFormat:@"共%ld项      合计￥ %@",model.detailList.count,model.orderPrice];
+            lastLabel.text = [NSString stringWithFormat:@"共%ld项      合计￥ %@",model.detailList.count,[NSString getTheCorrectMoneyNum:[NSString stringWithFormat:@"%@",model.orderPrice]]];
 
             [scrollView addSubview:lastLabel];
         }

@@ -7,6 +7,7 @@
 //
 
 #import "CoverPerformanceView.h"
+#import "NSString+MoneyString.h"
 
 @implementation CoverPerformanceView
 
@@ -46,7 +47,7 @@
         UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 35 + 40*i, SCREEN_WIDTH/2, 40)];
         UIColor *color;
         if (contentArrays.count == 6) {
-            contentLabel.text = contentArrays[i];
+            contentLabel.text = [NSString getTheCorrectMoneyNum:contentArrays[i]];
             contentLabel.textAlignment = NSTextAlignmentCenter;
             contentLabel.backgroundColor = [UIColor whiteColor];
             if ([contentArrays[i] isEqualToString:@"1"] && i>2) {

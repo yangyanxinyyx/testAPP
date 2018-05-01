@@ -7,6 +7,7 @@
 //
 
 #import "MyMedalView.h"
+#import "NSString+MoneyString.h"
 
 @interface MyMedalView ()
 

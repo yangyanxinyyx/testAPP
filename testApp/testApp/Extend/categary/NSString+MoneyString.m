@@ -151,4 +151,36 @@
     return [NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@",fourDigit03,fourDigit04,fourDigit05,fourDigit06,fourDigit07,fourDigit08,fourDigit09];
     
 }
+
++ (NSString*)getTheCorrectMoneyNum:(NSString*)tempString{
+    if ([tempString hasPrefix:@"."]) {
+        tempString = [NSString stringWithFormat:@"0%@",tempString];
+
+    }
+    NSUInteger endLength = tempString.length;
+    if ([tempString containsString:@"."]){
+        NSRange pointRange = [tempString rangeOfString:@"."]; NSLog(@"%lu",pointRange.location);
+        NSUInteger f = tempString.length - 1 - pointRange.location;
+        if (f > 2) {
+            endLength = pointRange.location + 2 + 1;
+        }
+    }
+    NSUInteger start = 0;
+    const char *tempChar = [tempString UTF8String];
+    for (int i = 0; i < tempString.length; i++) {
+        if (tempChar[i] == '0') {
+            start++;
+        }else{
+        break;
+        }
+    }
+    if (tempChar[start] == '.') {
+        start--;
+    }
+    //根据最终的开始位置,计算长度,并截取
+    NSRange range = {start,endLength-start};
+    tempString = [tempString substringWithRange:range];
+    return tempString;
+
+}
 @end
