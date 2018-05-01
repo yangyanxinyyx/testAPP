@@ -22,6 +22,8 @@
 #import "XCPhotoPreViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "UIImage+imageHelper.h"
+#import "SelectStateView.h"
+#import "XCPickerCityHandler.h"
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
 
 @interface XCShopViewController ()<UITableViewDelegate,
@@ -60,7 +62,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @property (nonatomic, strong) NSMutableArray * storePhotoArrM ;
 /** 服务信息数据 */
 @property (nonatomic, strong) NSArray * services;
-
+/** 定位记录省份 */
+@property (nonatomic, strong) NSString *storeProvence ;
 
 /** 上传成功图片URL */
 @property (nonatomic, strong) NSMutableArray * networkURLArrM ;
@@ -412,6 +415,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                 serviceDetailVC.titleTypeStr = @"保养";
                 serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
+                
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
@@ -421,12 +425,36 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     }
     else if (tableView == self.storeTableView) {
          if (indexPath.row == 6) {
-//             [XCSelectCityView cityPickerViewWithSelectProvenceStr:@"广东省" CityBlock:^(NSString *city) {
-//                 NSLog(@"====>%@",city);
-//             }];
+             if (isUsableNSString(self.storeProvence, @"")) {
+                 NSArray *cityArr = [XCPickerCityHandler  pickerCityWithIndexStr:self.storeProvence];
+                 __weak __typeof(self) weakSelf = self;
+                 SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+                     __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                     strongSelf.storeModel.city = string;
+                     XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
+                     [cell setTitleValue:string];
+                 }];
+                 [self.view addSubview:selectView];
+             }else {
+                 [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
+             }
         }
         else if (indexPath.row == 7) {
             
+            if (isUsableNSString(self.storeModel.city,@"") && isUsableNSString(self.storeProvence, @"")) {
+                NSArray *cityArr = [XCPickerCityHandler  pickerCityWithIndexStr:self.storeProvence cityStr:self.storeModel.city];
+                __weak __typeof(self) weakSelf = self;
+                SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+                    __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                    strongSelf.storeModel.city = string;
+                    XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
+                    [cell setTitleValue:string];
+                }];
+                [self.view addSubview:selectView];
+            }else {
+                [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
+            }
+        
         }
         
     }
@@ -862,6 +890,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [self.storeModel setLatitude:[NSString stringWithFormat:@"%f",coordiante.latitude]];
             [self.storeModel setLongitude:[NSString stringWithFormat:@"%f",coordiante.longitude]];
         }
+        self.storeProvence = selectComponent.province;
     }
     NSIndexPath * cityIndexpath = [NSIndexPath indexPathForRow:6 inSection:0];
     NSIndexPath * areaIndexpath = [NSIndexPath indexPathForRow:7 inSection:0];

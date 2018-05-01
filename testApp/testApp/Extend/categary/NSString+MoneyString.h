@@ -17,6 +17,7 @@
 
 + (NSString *)getNowTimeTimestamp;
 
+
 @end
 
 @interface NSString (Validate)
