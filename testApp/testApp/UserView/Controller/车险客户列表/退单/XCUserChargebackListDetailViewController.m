@@ -264,6 +264,7 @@
         textFiledCell.delegate = self;
         if (indexPath.section == 0 && indexPath.row == 10) {
             //保险公司
+            textFiledCell.textField.text = _detailModel.insurerName;
             textFiledCell.textField.userInteractionEnabled = NO;
         }else {
             textFiledCell.textField.userInteractionEnabled = YES;
