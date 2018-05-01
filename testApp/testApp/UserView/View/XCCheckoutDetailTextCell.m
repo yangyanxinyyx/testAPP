@@ -46,7 +46,8 @@
     [_titleLabel sizeToFit];
     CGSize labelSize = _titleLabel.frame.size;
     CGFloat labeH = 24 * ViewRateBaseOnIP6;
-    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
+//    [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labeH) * 0.5, labelSize.width,labeH)];
+       [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, 30 * ViewRateBaseOnIP6 , labelSize.width,labeH)];
     
     [_placeholderLabel sizeToFit];
     labelSize = _placeholderLabel.frame.size;

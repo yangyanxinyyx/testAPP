@@ -170,7 +170,7 @@ static NSString *identifier = @"listCell";
 -(void)refresh
 {
     [_dataSource removeAllObjects];
-    _dataSource = [NSMutableArray array];
+//    _dataSource = [NSMutableArray array];
     [self.tab.mj_footer resetNoMoreData];
     _page = 2;
     [self requestDataWithPage:@(1) selectNumber:_textField.text];

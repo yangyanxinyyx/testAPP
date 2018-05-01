@@ -95,7 +95,7 @@
     }
 
     NSDictionary *param = @{
-                            @"id":_model.serviceId,
+                            @"id":[_model.storeID stringValue],
                             @"price":self.price,
                             @"vipPrice":self.vipPrice,
                             };

@@ -182,7 +182,7 @@
     LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否删除该项目" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
        
         NSDictionary *param = @{
-                                @"storeServiceid":serviceModel.serviceId,
+                                @"storeServiceid":serviceModel.storeID,
                                 };
         __weak __typeof(self) weakSelf = self;
 
