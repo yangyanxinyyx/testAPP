@@ -65,6 +65,17 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title
+                      sources:(NSArray<NSURL *> *)imageArrM
+              comlectionBlock:(completionBlock)completionBlock
+{
+    self = [self initWithTitle:title sources:imageArrM];
+    self.completion = completionBlock;
+    
+    return self;
+}
+
+
 - (void)configureData
 {
     if(_showIndex > 0 && _showIndex < _imageArray.count) {
