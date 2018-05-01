@@ -313,7 +313,7 @@
 #pragma mark userInfoConfrimDelegate;
 - (void)didConfirmUserInfo:(BOOL)isConfirm
 {
-    isConfirm = YES ;
+
     if (isConfirm) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadCoverMainViewData" object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
