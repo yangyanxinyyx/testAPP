@@ -119,11 +119,11 @@
     if (_getCarBtnType == GetCarBtnTypeGet) {
         [self.getCarBtn setTitle:@"接车" forState:UIControlStateNormal];
         self.getCarBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
-        _label3.text = @"接车时间:";
+        _label3.text = @"预约时间:";
     }else if (_getCarBtnType == GetCarBtnTypePay){
         [self.getCarBtn setTitle:@"完成" forState:UIControlStateNormal];
         self.getCarBtn.backgroundColor = COLOR_RGB_255(57, 174, 54);
-        _label3.text = @"预约时间:";
+        _label3.text = @"接车时间:";
     }else{
         [self.getCarBtn setTitle:@"交易完成" forState:UIControlStateNormal];
         self.getCarBtn.backgroundColor = COLOR_RGB_255(182, 182, 182);

@@ -244,6 +244,7 @@ static NSString *identifier = @"listCell";
         VC.orderID = model.orderID;
         VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
         VC.orderCategory = model.orderCategory;
+        VC.appointmentTime = model.appointmentTime
         [self.navigationController pushViewController:VC animated:YES];
     }else if (cell.getCarBtnType == GetCarBtnTypePay){
         if ([model.orderCategory isEqualToString:@"维修"]) {

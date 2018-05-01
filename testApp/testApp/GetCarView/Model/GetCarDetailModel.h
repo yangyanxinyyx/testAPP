@@ -22,4 +22,5 @@
 @property (nonatomic,strong) NSString *brand;
 @property (nonatomic,strong) NSArray *detailList;
 
+@property (nonatomic,strong) NSString *appointmentTime;
 @end
