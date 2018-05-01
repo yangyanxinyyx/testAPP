@@ -331,7 +331,7 @@ static NSString *identifier = @"listCell";
     [self.view endEditing:YES];
     _textField.text = [_textField.text uppercaseString];
     _page = 2;
-    [eslf.dataSource removeAllObjects];
+    [self.dataSource removeAllObjects];
     [self requestDataWithPage:@(1) selectNumber:_textField.text];
 }
 
