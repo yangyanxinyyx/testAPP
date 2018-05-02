@@ -108,8 +108,7 @@
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
     }];
 
 }

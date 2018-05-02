@@ -366,15 +366,13 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         NSDictionary *param = [_billModel yy_modelToJSONObject];
         [RequestAPI postSubmitPolicyPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
-                respnseStr = @"提交成功";
-                [strongSelf showAlterInfoWithNetWork:respnseStr complete:^{
+                [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
                     [strongSelf.navigationController popViewControllerAnimated:YES];
 
                 }];
             }else {
-                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
+                [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
@@ -382,7 +380,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             [weakSelf.view addSubview:tipsView];
         }];
     }else {
-        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:errString complete:nil];
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [self.view addSubview:tipsView];
     }
 }

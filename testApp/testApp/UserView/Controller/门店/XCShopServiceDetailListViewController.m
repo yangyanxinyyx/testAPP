@@ -70,11 +70,6 @@
     labelSize = _bgLabel.frame.size;
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     
-    if (self.dataArr.count > 0) {
-        _collectionView.alpha = 1.0;
-    }else {
-        _collectionView.alpha = 0.0;
-    }
     [_collectionView setFrame:CGRectMake(0, kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6 - kBottomMargan)];
     [_addServiceBtn setFrame:CGRectMake(0, CGRectGetMaxY(_collectionView.frame) , SCREEN_WIDTH, 98 * ViewRateBaseOnIP6)];
     
@@ -120,8 +115,7 @@
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误"];
     }];
     
 }
@@ -160,8 +154,7 @@
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误"];
     }];
 }
 
@@ -192,13 +185,12 @@
                 [strongSelf showAlterInfoWithNetWork:@"删除成功"];
                 [strongSelf refreshServiceData];
             }else {
-                [strongSelf showAlterInfoWithNetWork:response[@"errormsg"]];
+                [strongSelf showAlterInfoWithNetWork:@"删除失败"];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误"];
         }];
         
     }];
@@ -218,6 +210,11 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (self.dataArr.count > 0 ) {
+        [self hideNullDataView];
+    }else {
+        [self showNullDataView];
+    }
     return self.dataArr.count;
 }
 
@@ -240,14 +237,6 @@
 
 - (void)createUI
 {
-
-    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
-    _bgImageView.image = image;
-    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
-    [_bgLabel setText:@"暂无查询数据"];
-    [self.view addSubview:_bgImageView];
-    [self.view addSubview:_bgLabel];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
 //    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
@@ -274,8 +263,16 @@
     [_addServiceBtn setBackgroundColor:[UIColor whiteColor]];
     [_addServiceBtn setImage:image2 forState:UIControlStateNormal];
     
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
+    _bgImageView.image = image;
+    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
+    [_bgLabel setText:@"暂无查询数据"];
+
     [self.view addSubview:_collectionView];
     [self.view addSubview:_addServiceBtn];
+    [self.collectionView addSubview:_bgImageView];
+    [self.collectionView addSubview:_bgLabel];
 }
 
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr
@@ -284,6 +281,32 @@
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
         [self.view addSubview:tipsView];
     });
+}
+
+- (void)showNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden = NO;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = NO;
+    }
+    if (self.collectionView) {
+        self.collectionView.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)hideNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden =YES;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = YES;
+    }
+    if (self.collectionView) {
+        self.collectionView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    }
 }
 #pragma mark - Setter&Getter
 

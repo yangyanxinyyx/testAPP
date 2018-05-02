@@ -82,7 +82,9 @@
             }
         }
     }
-    [mutStr deleteCharactersInRange:NSMakeRange(mutStr.length - 1, 1)];
+    if (mutStr.length  > 1) {
+        [mutStr deleteCharactersInRange:NSMakeRange(mutStr.length - 1, 1)];
+    }
     
     NSDictionary *param = @{
                             @"serviceArrayId":mutStr,
@@ -91,20 +93,17 @@
     __weak __typeof(self) weakSelf = self;
     [RequestAPI insertService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errorStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-            errorStr = @"提交成功,待审核!";
-            [strongSelf showAlterInfoWithNetWork:errorStr complete:^{
+            [strongSelf showAlterInfoWithNetWork:@"提交成功,待审核!" complete:^{
                 [strongSelf.navigationController popViewControllerAnimated:YES];
             }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:errorStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
     }];
 }
 

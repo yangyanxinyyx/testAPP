@@ -84,7 +84,6 @@
                             };
     [RequestAPI getSelectLinesByDictCode:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString * respnseStr = response[@"errormsg"];
         if (isUsable(response[@"data"], [NSArray class])) {
             selectArrM = response[@"data"];
             XCCustomerFollowViewController *followVC = [[XCCustomerFollowViewController alloc] initWithTitle:@"客户跟进"];
@@ -93,13 +92,12 @@
             followVC.selectArr = selectArrM;
             [strongSelf.navigationController pushViewController:followVC animated:YES];
         }else {
-            [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
     }];
     
 }
@@ -122,7 +120,6 @@
                                     @"carId":_model.carId,
                                     };
             [RequestAPI getCarVerificationMoney:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                NSString * respnseStr = response[@"errormsg"];
                 if (response[@"data"]) {
                     NSArray *origionDataArr = response[@"data"];
                         if (origionDataArr) {
@@ -132,12 +129,12 @@
                             [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
                         }
                 }else {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
             } fail:^(id error) {
-                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网路错误" complete:nil];
                 [weakSelf.view addSubview:tipsView];
             }];
          
@@ -146,9 +143,7 @@
                                     @"carId":_model.carId,
                                     };
             [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                
-                NSString * respnseStr = response[@"errormsg"];
-                if (response[@"data"][@"lists"]) {
+                                if (response[@"data"][@"lists"]) {
                     NSArray *dataArr = response[@"data"][@"lists"];
                     NSMutableArray *detailModelArrM = [[NSMutableArray alloc] init];
                     for (NSDictionary *dataInfo in dataArr) {
@@ -167,12 +162,12 @@
                     violationVC.dataArrM = detailModelArrM;
                     [weakSelf.navigationController pushViewController:violationVC animated:YES];
                 }else{
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:respnseStr complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
             } fail:^(id error) {
-                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
                 [weakSelf.view addSubview:tipsView];
             }];
             

@@ -221,21 +221,16 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                             };
     [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-//            [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
-
                 [strongSelf.networkURLArrM  removeAllObjects];
                 [strongSelf deleteAllTmpPhoto];
-//            }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         for (NSString *fileURLPath in strongSelf.networkURLArrM ) {
             NSDictionary *param = @{
                                     @"url":fileURLPath,
@@ -302,8 +297,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
             return ;
         }];
     }else {
@@ -358,8 +352,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
             return ;
         }];
     }else {
@@ -373,12 +366,14 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         
         switch (indexPath.row) {
             case 0:{ //洗车项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
@@ -389,12 +384,14 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             }
                 break;
             case 1: { //美容项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
@@ -405,19 +402,21 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             }
                 break;
             case 2: { //保养项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
                 serviceDetailVC.titleTypeStr = @"保养";
                 serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
-                
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
@@ -487,8 +486,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         }];
         self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     }

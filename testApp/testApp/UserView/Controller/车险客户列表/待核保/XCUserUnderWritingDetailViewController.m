@@ -59,10 +59,16 @@
                     }];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-            } fail:^(id error) {
-                __strong __typeof__(weakSelf)strongSelf = weakSelf;
-                NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-                [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            } fail:^(NSError  *error) {
+//                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//                NSString *errStr = @"网络请求失败!";
+//                if (error.code == NSURLErrorTimedOut) {
+//                    errStr = @"网络请求超时!";
+//                }
+//                if (isUsableNSString(error.userInfo[NSLocalizedDescriptionKey], @"")) {
+//                    errStr = error.userInfo[NSLocalizedDescriptionKey];
+//                }
+                [strongSelf showAlterInfoWithNetWork:@"撤销失败" complete:nil];
             }];
         }else {
             [strongSelf showAlterInfoWithNetWork:@"参数错误" complete:nil];
@@ -103,16 +109,6 @@
     [self.view addSubview:_commitBtn];
 }
 
-- (void)requestFailureHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
-}
-- (void)requestSuccessHandler
-{
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"撤销成功" complete:nil];
-    [self.view addSubview:tipsView];
-}
 #pragma mark - Setter&Getter
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate

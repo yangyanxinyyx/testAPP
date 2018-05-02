@@ -81,19 +81,17 @@
     [RequestAPI submitPolicyAfterRevoke:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
 
-        NSString * respnseStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
                 [strongSelf.navigationController popViewControllerAnimated:YES];
             }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
     }];
 
 }
@@ -137,8 +135,7 @@
                         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
                     } fail:^(id error) {
                         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-                        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-                        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+                        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
                         _policyCompanyArrM = nil;
                     }];
                 }else {

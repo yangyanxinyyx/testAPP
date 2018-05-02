@@ -331,25 +331,23 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         _payModel.remark = @"";
     }
 
-
     if (configureSuccess) {
         NSLog(@"点击确认提交");
         __weak __typeof(self) weakSelf = self;
         NSDictionary *param = [_payModel yy_modelToJSONObject];
         [RequestAPI postSubmitPaymentList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString * respnseStr = response[@"errormsg"];
             if ([response[@"result"] integerValue] == 1) {
                 [strongSelf showAlterInfoWithNetWork:@"修改成功" complete:^{
                     [strongSelf resetData];
                 }];
             }else {
-                [strongSelf showAlterInfoWithNetWork:respnseStr complete:nil];
+                [strongSelf showAlterInfoWithNetWork:@"修改失败" complete:nil];
             }
             
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"修改失败" complete:nil];
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络失败" complete:nil];
             [weakSelf.view addSubview:tipsView];
         }];
     }else {
