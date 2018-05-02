@@ -236,16 +236,16 @@
     else if ([model.title isEqualToString:@"已核保代缴费"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"已缴费待打单"]) {
+    else if ([model.title isEqualToString:@"已缴费待出单"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"财务审核"]) {
+    else if ([model.title isEqualToString:@"会计审核中"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"配送"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"退单"]) {
+    else if ([model.title isEqualToString:@"修改核保"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"续保列表"]) {
@@ -296,16 +296,16 @@
     else if ([title isEqualToString:@"已核保代缴费"]) {
         return @"已核保";
     }
-    else if ([title isEqualToString:@"已缴费待打单"]) {
+    else if ([title isEqualToString:@"已缴费待出单"]) {
         return @"待出单";
     }
-    else if ([title isEqualToString:@"财务审核"]) {
+    else if ([title isEqualToString:@"会计审核中"]) {
         return @"会计审核中";
     }
     else if ([title isEqualToString:@"配送"]) {
         return @"配送中";
     }
-    else if ([title isEqualToString:@"退单"]) {
+    else if ([title isEqualToString:@"修改核保"]) {
         return @"修改核保";
     }
     else if ([title isEqualToString:@"续保列表"]) {

@@ -191,6 +191,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             _storeModel.licenseUrl = [self.lincePhotoArrM firstObject];
         }
     }
+    NSMutableString * cityStrM = [NSMutableString stringWithString:_storeModel.city];
+    NSArray *strArr = [cityStrM componentsSeparatedByString:@"市"];
+    cityStrM = [strArr firstObject];
     
     dispatch_semaphore_t videoTrackSynLoadSemaphore;
     videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
@@ -206,7 +209,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                             @"longitude":_storeModel.longitude,
                             @"latitude":_storeModel.latitude,
                             @"type":_storeModel.type,
-                            @"city":_storeModel.city,
+                            @"city":cityStrM,
                             @"area":_storeModel.area,
                             @"salesmanCommission":_storeModel.salesmanCommission,
                             @"managerCommission":_storeModel.managerCommission,
@@ -828,8 +831,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         // Save the new image (original or edited) to the Camera Roll
             [self photoCellHanderSelectImage:imageToSave];
     }
-    NSIndexPath *indexpath = [self.tableView indexPathForCell:self.currentPhotoCell];
-    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
+    NSIndexPath *indexpath = [self.storeTableView indexPathForCell:self.currentPhotoCell];
+    [self.storeTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 

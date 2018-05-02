@@ -25,7 +25,7 @@
 			</dict>
 			<dict>
 				<key>title</key>
-				<string>已缴费待打单</string>
+				<string>已缴费待出单</string>
 				<key>iconName</key>
 				<string>已缴费待打单</string>
 				<key>url</key>
@@ -33,7 +33,7 @@
 			</dict>
 			<dict>
 				<key>title</key>
-				<string>财务审核</string>
+				<string>会计审核中</string>
 				<key>iconName</key>
 				<string>财务审核中</string>
 				<key>url</key>
@@ -49,7 +49,7 @@
 			</dict>
 			<dict>
 				<key>title</key>
-				<string>退单</string>
+				<string>修改核保</string>
 				<key>iconName</key>
 				<string>退单</string>
 				<key>url</key>
