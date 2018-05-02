@@ -119,6 +119,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    
     return self.dataTitleArrM.count;
 
 }

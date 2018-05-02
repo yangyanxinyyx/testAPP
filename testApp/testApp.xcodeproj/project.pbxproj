@@ -1016,7 +1016,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A721489E2083AF2C009E6DDC /* 财务审核中 */ = {
+		A721489E2083AF2C009E6DDC /* 财务审核中(第二种baseVC) */ = {
 			isa = PBXGroup;
 			children = (
 				A72148B32083B814009E6DDC /* View */,
@@ -1025,7 +1025,7 @@
 				A72148B02083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.h */,
 				A72148B12083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m */,
 			);
-			name = "财务审核中";
+			name = "财务审核中(第二种baseVC)";
 			path = "New Group";
 			sourceTree = "<group>";
 		};
@@ -1400,7 +1400,7 @@
 			children = (
 				A72148A02083B044009E6DDC /* 续保列表 */,
 				A721489F2083AF66009E6DDC /* 配送 */,
-				A721489E2083AF2C009E6DDC /* 财务审核中 */,
+				A721489E2083AF2C009E6DDC /* 财务审核中(第二种baseVC) */,
 				FC32BEC52079AA2000817156 /* 待核保 */,
 				FC32BEB72079AA2000817156 /* 已核保代缴费 */,
 				FC32BEC02079AA2000817156 /* 已缴费待打单 */,

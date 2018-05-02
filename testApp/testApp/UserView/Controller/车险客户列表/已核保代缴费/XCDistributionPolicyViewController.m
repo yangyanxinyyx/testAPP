@@ -254,7 +254,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     _billModel.receiverName = self.model.customerName;
     _billModel.phone = self.model.phoneNo;
 #warning 缺少客户地址
-    //    _payModel.address = self.model
+//    _payModel.address = self.model
     [textFiledCell setupCellWithDistributionBillModel:self.model];
     
     return textFiledCell;

@@ -516,10 +516,10 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         configureSuccess = NO;
     }
     if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
-        _storeModel.salesmanCommission = @(0.00);
+        _storeModel.salesmanCommission = [NSNumber numberWithDouble:0.00];
     }
     if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
-        _storeModel.managerCommission = @(0.00);
+        _storeModel.managerCommission = [NSNumber numberWithDouble:0.00];
     }
     if (!isUsableNSString(_storeModel.longitude, @"")) {
         _storeModel.longitude = @"";
@@ -589,26 +589,26 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         }
     }
     else if ([title isEqualToString:@"业务员提成:"]) {
-        if ([textField.text doubleValue] < 100) {
+        if ([textField.text doubleValue] < 1000) {
             double num = [textField.text doubleValue];
             NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
             textField.text = numStr;
             _storeModel.salesmanCommission = [NSNumber numberWithDouble:num];
-            
         }else {
+            textField.text =  [NSString stringWithFormat:@"%.2f%%",[_storeModel.salesmanCommission doubleValue]];
             [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];
         }
     }
     else if ([title isEqualToString:@"团队经理提成:"]) {
-        if ([textField.text doubleValue] < 100) {
+        if ([textField.text doubleValue] < 1000) {
             double num = [textField.text doubleValue];
             NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
             textField.text = numStr;
             _storeModel.managerCommission = [NSNumber numberWithDouble:num];
             
         }else {
-            [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];
-        }
+            textField.text =  [NSString stringWithFormat:@"%.2f%%",[_storeModel.managerCommission doubleValue]];
+            [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];        }
     }
 }
 
@@ -618,9 +618,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                                                      textFiled:(UITextField *)textFiled
 {
     if ([title isEqualToString:@"业务员提成:"]||[title isEqualToString:@"团队经理提成:"]) {
-        if (range.location > 4 ) {
-            return NO;
-        }
+//        if (range.location > 4 ) {
+//            return NO;
+//        }
         NSCharacterSet *cs;
         cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890."] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];

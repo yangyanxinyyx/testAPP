@@ -40,37 +40,32 @@
     _bgImageView.image = image;
     _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
     [_bgLabel setText:@"暂无查询数据"];
-    [self.view addSubview:_bgImageView];
-    [self.view addSubview:_bgLabel];
+    _bgLabel.hidden = YES;
+    _bgImageView.hidden = YES;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView registerClass:[XCCheckoutTableViewCell class] forCellReuseIdentifier:kcheckCellID];
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
-//    [self.tableView registerClass:[XCCheckoutBaseFooterView class] forHeaderFooterViewReuseIdentifier:kfooterViewID];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+    [self.tableView addSubview:_bgImageView];
+    [self.tableView addSubview:_bgLabel];
     [self.view addSubview:self.tableView];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-
     CGSize labelSize = CGSizeMake(218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6);
     [_bgImageView setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5,kHeightForNavigation + 342 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     [_bgLabel sizeToFit];
     labelSize = _bgLabel.frame.size;
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
-    if (self.dataArr.count > 0 ) {
-        self.tableView.alpha = 1.0;
-    }else {
-        self.tableView.alpha = 0.0;
-    }
-  
-
+    
 }
 
 
@@ -82,6 +77,33 @@
     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
     [self.view addSubview:tipsView];
 }
+
+- (void)showNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden = NO;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = NO;
+    }
+    if (self.tableView) {
+        self.tableView.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)hideNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden =YES;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = YES;
+    }
+    if (self.tableView) {
+        self.tableView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    }
+}
+
 #pragma mark - Setter&Getter
 
 - (void)setNavTitle:(NSString *)navTitle

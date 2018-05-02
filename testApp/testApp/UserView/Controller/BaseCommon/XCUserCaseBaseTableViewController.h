@@ -33,6 +33,9 @@
 
 //车险客户列表请求key
 @property (nonatomic, strong) NSString * requestKey ;
+
 - (instancetype)initWithTitle:(NSString *)title;
 
+- (void)showNullDataView;
+- (void)hideNullDataView;
 @end

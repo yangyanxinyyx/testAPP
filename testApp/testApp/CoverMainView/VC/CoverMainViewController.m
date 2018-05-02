@@ -221,7 +221,9 @@
         for (CoverLoopimageModel *model in [UserInfoManager shareInstance].coverMainModel.loopImageDatas) {
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:model.url]];
             UIImage *image = [UIImage imageWithData:data];
-            [muImageArray addObject:image];
+            if (image) {
+                [muImageArray addObject:image]; 
+            }
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{

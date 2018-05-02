@@ -44,4 +44,8 @@
 
 //提示框
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr;
+
+- (void)showNullDataView;
+- (void)hideNullDataView;
+
 @end

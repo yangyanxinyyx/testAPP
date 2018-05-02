@@ -28,13 +28,7 @@
                                 @"pageIndex":@1
                                 };
         [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            BOOL configureSucess  = NO;
-            NSString *errStr;
-            if (isUsable(response[@"errormsg"], [NSString class])) {
-                errStr = response[@"errormsg"];
-            }else {
-                errStr = @"未知错误";
-            }
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"],[NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -45,24 +39,19 @@
                             [dataArrM addObject:baseModel];
                         }
                     }
-                    XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                     NSNumber *pageCountNum = response[@"data"][@"pageCount"];
                     NSNumber *pageIndexNum = response[@"data"][@"pageIndex"];
                     subVC.pageIndex = [pageIndexNum intValue];
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
-                    [weakSelf.navigationController pushViewController:subVC animated:YES];
-                    configureSucess = YES;
                 }
             }
-            if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
-            }
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+            [strongSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     else if ([self isCarTransactionTypeVCWithModel:model]) {
@@ -71,13 +60,8 @@
                                 @"type":model.title,
                                 };
         [RequestAPI getelectCarTransactionList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            BOOL configureSucess  = NO;
-            NSString *errStr;
-            if (isUsable(response[@"errormsg"], [NSString class])) {
-                errStr = response[@"errormsg"];
-            }else {
-                errStr = @"未知错误";
-            }
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -88,24 +72,20 @@
                             [dataArrM addObject:baseModel];
                         }
                     }
-                    XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+
                     NSNumber *pageCountNum = response[@"data"][@"pageCount"];
                     NSNumber *pageIndexNum = response[@"data"][@"pageIndex"];
                     subVC.pageIndex = [pageIndexNum intValue];
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
-                    [weakSelf.navigationController pushViewController:subVC animated:YES];
-                    configureSucess = YES;
                 }
             }
-            if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
-            }
+            [strongSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+          XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+            [strongSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     else if ([model.title isEqualToString:@"我的客户"]) {
@@ -114,13 +94,7 @@
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            BOOL configureSucess  = NO;
-            NSString *errStr;
-            if (isUsable(response[@"errormsg"], [NSString class])) {
-                errStr = response[@"errormsg"];
-            }else {
-                errStr = @"未知错误";
-            }
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -131,25 +105,18 @@
                             [dataArrM addObject:baseModel];
                         }
                     }
-                    XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                     NSNumber *pageCountNum = response[@"data"][@"pageCount"];
                     NSNumber *pageIndexNum = response[@"data"][@"pageIndex"];
                     subVC.pageIndex = [pageIndexNum intValue];
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
-                    [weakSelf.navigationController pushViewController:subVC animated:YES];
-                    configureSucess = YES;
                 }
             }
-            if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
-            }
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
-            
+          XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     else if ([self isCaseTypeVCWithModel:model]) {
@@ -160,13 +127,7 @@
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         [RequestAPI getThreeCaseApplyList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            BOOL configureSucess  = NO;
-            NSString *errStr;
-            if (isUsable(response[@"errormsg"], [NSString class])) {
-                errStr = response[@"errormsg"];
-            }else {
-                errStr = @"未知错误";
-            }
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 if (response[@"data"][@"dataSet"]) {
                     NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
@@ -177,24 +138,18 @@
                             [dataArrM addObject:caseModel];
                         }
                     }
-                    XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                     NSNumber *pageCountNum = response[@"data"][@"pageCount"];
                     NSNumber *pageIndexNum = response[@"data"][@"pageIndex"];
                     subVC.pageIndex = [pageIndexNum intValue];
                     subVC.pageCount = [pageCountNum intValue];
                     subVC.dataArr = dataArrM;
-                    [weakSelf.navigationController pushViewController:subVC animated:YES];
-                    configureSucess = YES;
                 }
             }
-            if (!configureSucess) {
-                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
-            }
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+         XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+         [weakSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     else if ([model.title isEqualToString:@"门店"]) {
@@ -202,26 +157,16 @@
                                 @"id":[UserInfoManager shareInstance].storeID,
                                 };
         [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            NSString *errStr;
-            if (isUsable(response[@"errormsg"], [NSString class])) {
-                errStr = response[@"errormsg"];
-            }else {
-                errStr = @"未知错误";
-            }
+            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
-                XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
                 subVC.storeModel = shopModel;
-                [weakSelf.navigationController pushViewController:subVC animated:YES];
-            }else {
-                [weakSelf showAlterInfoWithNetWork:errStr complete:nil];
             }
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
-            
+          XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
+         [weakSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     
