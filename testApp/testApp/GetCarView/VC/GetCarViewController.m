@@ -52,6 +52,7 @@
 
                     __block GetCarDetailModel *model = [[GetCarDetailModel alloc] init];
                     [model setValuesForKeysWithDictionary:data];
+                    model.appointmentTime = _appointmentTime;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self createUIWithModel:model];
                     });

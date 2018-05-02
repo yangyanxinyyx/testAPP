@@ -273,7 +273,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (30 + 25) * ViewRateBaseOnIP6;
+    return (30 + 25 ) * ViewRateBaseOnIP6;
 }
 
 @end

@@ -18,19 +18,19 @@
 #import "XCShopServiceModel.h"
 #import "XCShopServiceDetailListViewController.h"
 #import "ProgressControll.h"
-#import "JFImagePickerController.h"
 #import "XCPhotoPreViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "UIImage+imageHelper.h"
 #import "SelectStateView.h"
 #import "XCPickerCityHandler.h"
+#import <TZImagePickerController.h>
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
 
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,UIImagePickerControllerDelegate,
-XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionSheetDelegate,JFImagePickerDelegate>
+XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionSheetDelegate,TZImagePickerControllerDelegate>
 {
     dispatch_semaphore_t _videoTrackSynLoadSemaphore;
     dispatch_time_t _maxVideoLoadTrackTimeConsume ;
@@ -55,7 +55,6 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @property (nonatomic, strong) NSString * selectedTitle ;
 /** 选中当前的Cell */
 @property (nonatomic, strong) XCCheckoutDetailPhotoCell * currentPhotoCell ;
-
 /** <# 注释 #> */
 @property (nonatomic, strong) NSMutableArray * lincePhotoArrM ;
 /** 4张图片保存 */
@@ -72,8 +71,10 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 @end
 
 @implementation XCShopViewController
+
+#pragma mark - lifeCycle
 - (void)dealloc {
-  
+    
     for (NSString *filePath in self.lincePhotoArrM) {
         if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
             [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
@@ -91,7 +92,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
     _storePhotoArrM = [[NSMutableArray alloc] init];
     _lincePhotoArrM = [[NSMutableArray alloc] init];
     _networkURLArrM = [[NSMutableArray alloc] init];
@@ -102,10 +103,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     [self createUI];
 }
 
-#pragma mark - lifeCycle
-
 #pragma mark - Init Method
-#pragma mark - UI
+
 - (void)createUI{
     [self.view addSubview:self.contenView];
     [self.contenView addSubview:self.viewBear];
@@ -648,9 +647,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     if (photoURL) {
         __weak __typeof(self) weakSelf = self;
         if ([cell.title isEqualToString:@"营业执照上传,1张"]) {
-            XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.lincePhotoArrM];
-            previewVC.shouldShowDeleBtm = YES;
-            previewVC.completion = ^(NSArray<NSURL *> *deleArray) {
+//            XCPhotoPreViewController *previewVC = [[XCPhotoPreViewControll≥er alloc] initWithTitle:@"照片预览" sources:self.lincePhotoArrM];
+            XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.lincePhotoArrM comlectionBlock:^(NSArray<NSURL *> *deleArray) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 if (deleArray.count > 0) {
                     for (NSString *imagePath in deleArray) {
@@ -665,20 +663,18 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                             unlink([imagePath  UTF8String]);
                         }
                         [strongSelf.lincePhotoArrM removeObject:imagePath];
-
                     }
                 }
                 NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
                 [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
+            }];
+            previewVC.shouldShowDeleBtm = YES;
             [self.navigationController pushViewController:previewVC animated:YES];
         }
         else if([cell.title isEqualToString:@"门店图片,最多4张"]) {
             
-            XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.storePhotoArrM];
-            previewVC.shouldShowDeleBtm = YES;
-            [previewVC updatePositionWithIndex:index];
-            previewVC.completion = ^(NSArray<NSURL *> *deleArray) {
+            XCPhotoPreViewController *previewVC = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:self.storePhotoArrM comlectionBlock:^(NSArray<NSURL *> *deleArray) {
+                
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
                 if (deleArray.count > 0) {
                     for (NSString *imagePath in deleArray) {
@@ -698,7 +694,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                 }
                 NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
                 [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
+            }];
+            previewVC.shouldShowDeleBtm = YES;
+            [previewVC updatePositionWithIndex:index];
             [self.navigationController pushViewController:previewVC animated:YES];
         }
     }
@@ -714,83 +712,93 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     
 }
 
-#pragma mark - JFImagePickerDelegate 选择照片回调
+#pragma mark - UIActionSheet delegate
 
-- (void)imagePickerDidFinished:(JFImagePickerController *)picker
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *vc = [UIImagePickerController new];
+            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
+            vc.delegate = self;
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+                imagePickerVc.allowPickingVideo = NO;
+                imagePickerVc.sortAscendingByModificationDate = YES;
+                [self presentViewController:imagePickerVc animated:YES completion:nil];
+            }else {
+                NSInteger maxCount = 4;
+                NSInteger count = maxCount - self.storePhotoArrM.count;
+                if (count < 0) {
+                    count = 0 ;
+                }
+                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+                imagePickerVc.allowPickingVideo = NO;
+                imagePickerVc.sortAscendingByModificationDate = YES;
+                [self presentViewController:imagePickerVc animated:YES completion:nil];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+#pragma mark - TZImagePickerControllerDelegate - 新照片
+
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto
 {
-   _videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
-    __weak __typeof(self) weakSelf = self;
-    [ProgressControll showProgressNormal];
-    __block NSInteger sloveCount = 0;
-    __block NSInteger photoNum = 0;
-    [picker.assets enumerateObjectsUsingBlock:^(ALAsset *asset, NSUInteger idx, BOOL * _Nonnull stop) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        [[JFImageManager sharedManager] imageWithAsset:asset resultHandler:^(CGImageRef imageRef, BOOL longImage) {
-            UIImage *image = [UIImage imageWithCGImage:imageRef];
-            // =================== modify by Liangyz 处理图片
-            if ([strongSelf.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-                
-                NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
-                                     [NSString stringWithFormat:@"linceImage%@.jpg",[NSString getNowTimeTimestamp]]];
-                if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
-                    [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
-                }
-                unlink([tmpPath  UTF8String]);
-                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tmpPath atomically:YES];
-                NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
-                [strongSelf.lincePhotoArrM addObject:[tmpFileURL absoluteString]];
+    
+    if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+        if(photos.count == 1) {
+            UIImage *lienceImage = [photos firstObject];
+            NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
+                                 [NSString stringWithFormat:@"linceImage%@.jpg",[NSString getNowTimeTimestamp]]];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
             }
-            else if ([strongSelf.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
-                NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
-                                     [NSString stringWithFormat:@"storeImage%@%lu.jpg",[NSString getNowTimeTimestamp],(unsigned long)photoNum]];
-                NSLog(@"%@",tmpPath);
-                if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
-                    [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
-                }
-                unlink([tmpPath  UTF8String]);
-                photoNum ++;
-                [UIImageJPEGRepresentation(image, 1.0) writeToFile:tmpPath atomically:YES];
-                NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
-                [strongSelf.storePhotoArrM addObject:[tmpFileURL absoluteString]];
+            unlink([tmpPath  UTF8String]);
+            [UIImageJPEGRepresentation(lienceImage, 1.0) writeToFile:tmpPath atomically:YES];
+            NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+            [self.lincePhotoArrM addObject:[tmpFileURL absoluteString]];
+        }
+        
+    }
+    else if ([self.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
+        for (UIImage *newImage  in photos) {
+            NSString *tmpPath = [NSTemporaryDirectory() stringByAppendingString:
+                                 [NSString stringWithFormat:@"storeImage%@%ld.jpg",[NSString getNowTimeTimestamp],self.storePhotoArrM.count]];
+            NSLog(@"%@",tmpPath);
+            if ([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:tmpPath error:nil];
             }
-//            dispatch_semaphore_signal(_videoTrackSynLoadSemaphore);
-
-            // ===================
-            sloveCount++;
-            NSLog(@"=======>%ld",(long)sloveCount); /// 线程0000000？(TODO)
-            if (sloveCount == picker.assets.count) {
-                //完成
-                NSLog(@"=========>D");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [ProgressControll dismissProgress];
-                    [strongSelf imagePickerDidCancel:picker];
-                    if ([strongSelf.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-                        if (strongSelf.lincePhotoArrM.count == 1) {
-                            [strongSelf.currentPhotoCell setPhotoArr:strongSelf.lincePhotoArrM];
-                        }else {
-                            NSLog(@"===========>Error lincePhotoArrM");
-                        }
-                    }
-                    else if ([strongSelf.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
-                        [strongSelf.currentPhotoCell setPhotoArr:strongSelf.storePhotoArrM];
-                    }
-                    [JFImagePickerController clear];
-
-                });
-            
+            unlink([tmpPath  UTF8String]);
+            [UIImageJPEGRepresentation(newImage, 1.0) writeToFile:tmpPath atomically:YES];
+            NSURL *tmpFileURL = [NSURL fileURLWithPath:tmpPath];
+            [self.storePhotoArrM addObject:[tmpFileURL absoluteString]];
+        }
+    }
+    //完成
+    NSLog(@"=========>D");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
+            if (self.lincePhotoArrM.count == 1) {
+                [self.currentPhotoCell setPhotoArr:self.lincePhotoArrM];
+            }else {
+                NSLog(@"===========>Error lincePhotoArrM");
             }
-        }];
-
-    }];
+        }
+        else if ([self.currentPhotoCell.title isEqualToString:@"门店图片,最多4张"]) {
+            [self.currentPhotoCell setPhotoArr:self.storePhotoArrM];
+        }
+    });
 }
 
-
-
-- (void)imagePickerDidCancel:(JFImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-#pragma  mark - imagePickerController Delegate - 照片
+#pragma  mark - imagePickerController Delegate - 拍照
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self imageHandleWithpickerController:picker MdediaInfo:info];
@@ -825,48 +833,6 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
-#pragma mark - UIActionSheet delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    switch (buttonIndex) {
-        case 0:
-        {
-            UIImagePickerController *vc = [UIImagePickerController new];
-            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
-            vc.delegate = self;
-            [self.navigationController presentViewController:vc animated:YES completion:nil];
-        }
-            break;
-        case 1:
-        {
-            NSInteger maxCount = 4;
-            if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-                maxCount = 1;
-                NSInteger count = maxCount - self.lincePhotoArrM.count;
-                if (count < 0) {
-                    count = 0 ;
-                }
-                [JFImagePickerController setMaxCount:count];
-                JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
-                picker.pickerDelegate = self;
-                [self.navigationController presentViewController:picker animated:YES completion:nil];
-            }else {
-                NSInteger count = maxCount - self.storePhotoArrM.count;
-                if (count < 0) {
-                    count = 0 ;
-                }
-                [JFImagePickerController setMaxCount:count];
-                JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:[UIViewController new]];
-                picker.pickerDelegate = self;
-                [self.navigationController presentViewController:picker animated:YES completion:nil];
-            }
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
 
 #pragma mark - XCShopAMapViewControllerDelegate 地图
 
@@ -1148,6 +1114,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
 - (void)addObserverKeyboard {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    
 }
 
 - (void)removeObserverKeyBoard {

@@ -17,6 +17,7 @@
 
 + (NSString *)getNowTimeTimestamp;
 
++ (NSString*)getTheCorrectMoneyNum:(NSString*)tempString;
 
 @end
 
@@ -28,7 +29,6 @@
  *    @return    返回格式化后的号码（形如 010-85792889）
  */
 - (NSString*)areaCodeFormat;
-
 
 
 @end

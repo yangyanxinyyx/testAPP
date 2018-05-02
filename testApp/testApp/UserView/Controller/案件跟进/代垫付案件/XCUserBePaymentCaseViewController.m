@@ -113,7 +113,7 @@
             NSDictionary *dataInfo = response[@"data"];
             if(isUsable(dataInfo, [NSDictionary class])) {
                 XCUserCaseDetailModel *detailModel = [XCUserCaseDetailModel yy_modelWithJSON:dataInfo];
-                XCUserBePaymentCaseDetailViewController *injuryCaseDetailVC = [[XCUserBePaymentCaseDetailViewController alloc] initWithTitle:@"人伤案件跟进"];
+                XCUserBePaymentCaseDetailViewController *injuryCaseDetailVC = [[XCUserBePaymentCaseDetailViewController alloc] initWithTitle:self.navTitle];
                 injuryCaseDetailVC.detailModel = detailModel;
                 [self.navigationController pushViewController:injuryCaseDetailVC animated:YES];
                 configureSucess = YES;

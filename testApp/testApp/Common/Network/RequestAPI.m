@@ -664,11 +664,10 @@
     } progress:^(NSProgress *_Nonnull uploadProgress) {
         //打印下上传进度
         dispatch_async(dispatch_get_main_queue(), ^{
-            [ProgressControll showProgressWithText:[NSString stringWithFormat:@"上传图片中...%f",uploadProgress.fractionCompleted]];
+            [ProgressControll showProgressWithText:[NSString stringWithFormat:@"上传图片中"]];
         });
         NSLog(@"downloadProgress-->%@",uploadProgress);
     } success:^(NSURLSessionDataTask *_Nonnull task,id _Nullable responseObject) {
-        
         NSLog(@"responseObject-->%@",responseObject);
         success(responseObject);
         [ProgressControll dismissProgress];

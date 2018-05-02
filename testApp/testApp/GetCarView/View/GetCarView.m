@@ -9,6 +9,7 @@
 #import "GetCarView.h"
 #import "GetCarImageCell.h"
 #import <UIImageView+WebCache.h>
+#import "NSString+MoneyString.h"
 
 @implementation GetCarView
 
@@ -34,7 +35,7 @@
         scrollView.delegate = self;
 
         NSArray *titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"项      目:"];
-        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",@"没传时间"],[NSString stringWithFormat:@"%@",orderCategory]];
+        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",orderCategory]];
         for (int i=0 ; i<6; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 44)];
             label.font = [UIFont systemFontOfSize:14];
@@ -135,10 +136,11 @@
                 [view addSubview:money];
             }
 
-            UILabel *lastLabel = [[UILabel alloc] initWithFrame:CGRectMake(240, CGRectGetMaxY(view.frame), SCREEN_WIDTH - 240, 44)];
+            UILabel *lastLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(view.frame), SCREEN_WIDTH -10, 44)];
             lastLabel.font = [UIFont systemFontOfSize:12];
+            lastLabel.textAlignment = NSTextAlignmentRight;
             lastLabel.textColor = COLOR_RGB_255(68, 68, 68);
-            lastLabel.text = [NSString stringWithFormat:@"共%ld项      合计￥ %@",model.detailList.count,model.orderPrice];
+            lastLabel.text = [NSString stringWithFormat:@"共%ld项      合计￥ %@",model.detailList.count,[NSString getTheCorrectMoneyNum:[NSString stringWithFormat:@"%@",model.orderPrice]]];
 
             [scrollView addSubview:lastLabel];
         }
