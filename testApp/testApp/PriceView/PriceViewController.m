@@ -167,6 +167,9 @@
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+                _infoView.hidden = YES;
+                _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+                _buttonPrice.userInteractionEnabled = NO;
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             });
         }
@@ -174,6 +177,9 @@
     } fail:^(id error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:error complete:nil];
+            _infoView.hidden = YES;
+            _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+            _buttonPrice.userInteractionEnabled = NO;
             [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
         });
     }];
@@ -210,6 +216,8 @@
         [self pressCustomerVehicleEnquiries];
     } else {
         _infoView.hidden = YES;
+        _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+        _buttonPrice.userInteractionEnabled = NO;
     }
     [_textField endEditing:YES];
     [self.myScrollView.mj_header endRefreshing];

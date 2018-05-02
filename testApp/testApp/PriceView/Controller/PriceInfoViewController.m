@@ -343,7 +343,8 @@
         }
     } fail:^(id error) {
         dispatch_sync(dispatch_get_main_queue(), ^{
-           _viewDataEmpty.hidden = NO;
+            _viewDataEmpty.hidden = NO;
+            [weakSelf baseNavigationDidPressCancelBtn:YES];
         });
         NSLog(@"%@",error);
     }];
