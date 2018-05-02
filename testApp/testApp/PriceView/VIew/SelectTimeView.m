@@ -158,9 +158,9 @@
 }
 
 - (void)clickCancel:(UIButton *)button{
-    if (_block) {
-        _block(nil);
-    }
+//    if (_block) {
+//        _block(nil);
+//    }
     
     [self remove];
 }
