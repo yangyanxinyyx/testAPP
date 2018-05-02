@@ -208,6 +208,7 @@
 
 - (void)toucheButtonEntry:(UIButton *)button{
     PriceCustomerInformEntryViewController *priceCustomerVC = [[PriceCustomerInformEntryViewController alloc] init];
+    priceCustomerVC.titleName = @"客户信息录入";
     [self.navigationController pushViewController:priceCustomerVC animated:YES];
 }
 
@@ -405,14 +406,14 @@
 
 - (PriceInfoCellView *)bussinessRisksView{
     if (!_bussinessRisksView) {
-        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.modelsView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"商业险起保日期:"];
+        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.modelsView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"保险到期日期:"];
     }
     return _bussinessRisksView;
 }
 
 - (PriceInfoCellView *)insuranceView{
     if (!_insuranceView) {
-        _insuranceView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bussinessRisksView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"交强险起保日期:"];
+        _insuranceView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bussinessRisksView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"年审到期日期:"];
     }
     return _insuranceView;
 }

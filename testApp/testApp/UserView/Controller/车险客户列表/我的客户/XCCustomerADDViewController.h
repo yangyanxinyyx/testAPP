@@ -8,6 +8,6 @@
 
 #import "XCUserBaseViewController.h"
 
-@interface XCCustomerADDViewController : XCUserBaseViewController
+@interface XCCustomerADDViewController : BaseViewController1
 
 @end

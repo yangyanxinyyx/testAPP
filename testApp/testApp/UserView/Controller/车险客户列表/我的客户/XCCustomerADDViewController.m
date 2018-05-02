@@ -1,8 +1,8 @@
 //
-//  XCCustomerADDViewController.m
+//  PriceCustomerInformEntryViewController.m
 //  testApp
 //
-//  Created by 严玉鑫 on 2018/4/17.
+//  Created by 严玉鑫 on 2018/3/19.
 //  Copyright © 2018年 outPutTeam. All rights reserved.
 //
 
@@ -10,10 +10,15 @@
 #import "PriceCustomerInformEntryTableViewCell.h"
 #import "PriceCustomerInformEntrySubmitTableViewCell.h"
 #import "YXTestNumber.h"
-@interface XCCustomerADDViewController ()<PriceCustomerInformEntryTableViewCellDelegate>
+#import "SelectTimeView.h"
+#import "SelectTiemHoursView.h"
+#import "LYZSelectView.h"
+@interface XCCustomerADDViewController ()<UITableViewDelegate,UITableViewDataSource,BaseNavigationBarDelegate,PriceCustomerInformEntryTableViewCellDelegate>
+
 {
     BOOL isHold;
 }
+@property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) NSNotification *notification;
 @property (nonatomic, strong) NSMutableDictionary *dictionaryInfo;
 @property (nonatomic, strong) UIButton *buttonSubmit;
@@ -25,27 +30,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     isHold = YES;
-    [self.view addSubview:self.buttonSubmit];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+    BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
+    topBar.delegate = self;
+    topBar.title = @"客户信息录入";
+    [self.view addSubview:topBar];
     _notification = [NSNotification notificationWithName:@"CustomerNotification" object:nil userInfo:nil];
+    [self createUI];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+}
+
+- (void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
+}
+
+- (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel{
+    isHold = NO;
+    if (isCancel) {
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     isHold = NO;
 }
-
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     isHold = NO;
 }
 
-- (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    self.tableView.frame = CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom ) - 80 * ViewRateBaseOnIP6);
-}
-
+#pragma mark - fundation
 - (void)submitCustomerInfo:(UIButton *)button{
     [self pressCustomerInformationInput];
 }
@@ -84,58 +103,43 @@
     }
 }
 
+- (void)requestPriceContentParameter:(NSString *)Parameter{
+    
+}
+
 #pragma mark - cell delegate
 - (void)textFieldBeginEditing:(UITextField *)textField{
     if (textField.tag > 6) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.tableView.contentOffset = CGPointMake(0, SCREEN_HEIGHT / 4 + textField.tag * 15 * ViewRateBaseOnIP6);
+            self.myTableView.contentOffset = CGPointMake(0, SCREEN_HEIGHT / 4 + textField.tag * 12 * ViewRateBaseOnIP6);
         }];
+    }
+    if (textField.tag == 1 || textField.tag == 11) {
+        textField.text = @"";
+        [textField resignFirstResponder];
+        
     }
 }
 
 - (void)textFieldendEditing:(UITextField *)textField{
     if (textField.tag > 6) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.tableView.contentOffset = CGPointMake(0, 0);
+            self.myTableView.contentOffset = CGPointMake(0, 0);
         }];
     }
     
+    
     if (textField.tag == 0) {
-        [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
-    } else if (textField.tag == 1) {
-        [self.dictionaryInfo setObject:textField.text forKey:@"source"];
-    } else if (textField.tag == 3){
-        [self.dictionaryInfo setObject:textField.text forKey:@"birthday"];
-    } else if (textField.tag == 4){
-        [self.dictionaryInfo setObject:textField.text forKey:@"education"];
-    } else if (textField.tag == 5){
-        [self.dictionaryInfo setObject:textField.text forKey:@"address"];
-    } else if (textField.tag == 6){
-        if (isHold) {
-            BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
-            if (!result) {
-                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
-                    textField.text = @"";
-                }];
-                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-            } else {
-                [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
-            }
-        }
-        
-    } else if (textField.tag == 7){
         [self.dictionaryInfo setObject:textField.text forKey:@"plateNo"];
-    } else if (textField.tag == 8){
-        [self.dictionaryInfo setObject:textField.text forKey:@"brand"];
-    } else if (textField.tag == 9){
-        [self.dictionaryInfo setObject:textField.text forKey:@"recordDate"];
-    } else if (textField.tag == 10){
+    } else if (textField.tag == 2){
         [self.dictionaryInfo setObject:textField.text forKey:@"vinNo"];
-    } else if (textField.tag == 11){
+    } else if (textField.tag == 3){
         [self.dictionaryInfo setObject:textField.text forKey:@"engineNo"];
-    } else if (textField.tag == 12){
+    } else if (textField.tag == 4){
         [self.dictionaryInfo setObject:textField.text forKey:@"model"];
-    } else {
+    } else if (textField.tag == 5){
+        [self.dictionaryInfo setObject:textField.text forKey:@"brand"];
+    } else if (textField.tag == 6){
         if (isHold) {
             NSString *prompt = [YXTestNumber testingMobile:textField.text];
             if (prompt&&prompt.length > 0) {
@@ -148,75 +152,135 @@
             }
         }
         
+        
+    } else if (textField.tag == 7){
+        [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
+    } else if (textField.tag == 8){
+        [self.dictionaryInfo setObject:textField.text forKey:@"source"];
+    } else if (textField.tag == 9){
+        if (isHold) {
+            BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
+            if (!result) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
+                    //                    textField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            } else {
+                [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+            }
+        }
+        
+    } else if (textField.tag == 10){
+        [self.dictionaryInfo setObject:textField.text forKey:@"sex"];
+    } else if (textField.tag == 12){
+        [self.dictionaryInfo setObject:textField.text forKey:@"quyv"];
+    } else {
+        [self.dictionaryInfo setObject:textField.text forKey:@"address"];
     }
+    NSLog(@"%@",self.dictionaryInfo);
 }
 
-#pragma mark - tableView delegate
+#pragma mark - tabnleview detegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 14;
+    if (section == 2) {
+        return 1;
+    } else if (section == 1){
+        return 7;
+    } else {
+        return 9;
+    }
     
-}
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifier = @"cell";
-    PriceCustomerInformEntryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[PriceCustomerInformEntryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    cell.delegate = self;
-    cell.textField.tag = indexPath.row;
-    if (indexPath.row == 0) {
-       [cell setLabelNameText:@"*客户名称:" isChoose:YES placeholderStr:@"请输入您的客户名称" isSelect:NO];
-    } else if (indexPath.row == 1) {
-       [cell setLabelNameText:@"*客户来源:" isChoose:YES placeholderStr:@"请选择客户来源" isSelect:YES];
-        cell.textField.userInteractionEnabled = NO;
-    } else if (indexPath.row == 2){
-        [cell setLabelNameText:@"性      别:" isChoose:NO placeholderStr:@"请选择性别" isSelect:YES];
-        cell.textField.userInteractionEnabled = NO;
-    } else if (indexPath.row == 3){
-        [cell setLabelNameText:@"生      日:" isChoose:NO placeholderStr:@"请选择日期" isSelect: YES];
-        cell.textField.userInteractionEnabled = NO;
-    } else if (indexPath.row == 4){
-        [cell setLabelNameText:@"学      历:" isChoose:NO placeholderStr:@"请选择学历" isSelect:YES];
-        cell.textField.userInteractionEnabled = NO;
-    } else if (indexPath.row == 5){
-        [cell setLabelNameText:@"地      址:" isChoose:NO placeholderStr:@"请输入您的地址" isSelect:NO];
-    } else if (indexPath.row == 6) {
-        [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
-    } else if (indexPath.row == 7){
-        [cell setLabelNameText:@"*车牌号 :" isChoose:YES placeholderStr:@"请输入您的车牌号" isSelect:NO];
-    } else if (indexPath.row == 8){
-        [cell setLabelNameText:@"*车 品 牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
-    } else if (indexPath.row == 9){
-        [cell setLabelNameText:@"*初登日期:" isChoose:YES placeholderStr:@"请输入您的初登日期" isSelect:NO];
-        cell.textField.userInteractionEnabled = NO;
-    } else if (indexPath.row == 10){
-        [cell setLabelNameText:@"*车 架 号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
-    } else if (indexPath.row == 11){
-        [cell setLabelNameText:@"*发动机号:" isChoose:YES placeholderStr:@"请输入您的发动机号" isSelect:NO];
-    } else if (indexPath.row == 12){
-        [cell setLabelNameText:@"车型型号:" isChoose:NO placeholderStr:@"请输入您的车型型号" isSelect:NO];
-    }  else{
-        [cell setLabelNameText:@"*联系方式:" isChoose:YES placeholderStr:@"请输入您的联系方式" isSelect:NO];
-    }
-    return cell;
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80 * ViewRateBaseOnIP6;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section{
+    return 20 * ViewRateBaseOnIP6;
+}
+- (UIView * )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view;
+    if (section == 2) {
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60 * ViewRateBaseOnIP6)];
+    } else {
+        view  = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20 * ViewRateBaseOnIP6)];
+    }
+    view.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+    
+    
+    return view;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString * identifier = @"cell";
+    PriceCustomerInformEntryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[PriceCustomerInformEntryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.delegate = self;
+    cell.textField.tag = indexPath.section * 7 +indexPath.row;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [cell setLabelNameText:@"*车牌号 :" isChoose:YES placeholderStr:@"请输入您的车牌号" isSelect:NO];
+            
+        } else if (indexPath.row == 1) {
+            [cell setLabelNameText:@"*初登日期:" isChoose:YES placeholderStr:@"请输入您的初登日期" isSelect:NO];
+            
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 2){
+            [cell setLabelNameText:@"*车 架  号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
+        } else if (indexPath.row == 3){
+            [cell setLabelNameText:@"*发动机号:" isChoose:YES placeholderStr:@"请输入您的发动机号" isSelect:NO];
+            
+        } else if (indexPath.row == 4){
+            [cell setLabelNameText:@"车辆型号 :" isChoose:NO placeholderStr:@"请输入您的车辆型号" isSelect:NO];
+        } else if (indexPath.row == 5){
+            [cell setLabelNameText:@"保险到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 6){
+            [cell setLabelNameText:@"年审到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 7){
+            [cell setLabelNameText:@"*品       牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
+            
+        }  else{
+            [cell setLabelNameText:@"*联系方式:" isChoose:YES placeholderStr:@"请输入您的联系方式" isSelect:NO];
+        }
+        return cell;
+    } else {
+        if (indexPath.row == 0) {
+            [cell setLabelNameText:@"*客户名称:" isChoose:YES placeholderStr:@"请输入您的客户名称" isSelect:NO];
+        } else if (indexPath.row == 1) {
+            [cell setLabelNameText:@"*客户来源:" isChoose:YES placeholderStr:@"请选择客户来源" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 2){
+            [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
+        } else if (indexPath.row == 3){
+            [cell setLabelNameText:@"性      别:" isChoose:NO placeholderStr:@"请选择性别" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 4){
+            [cell setLabelNameText:@"生      日:" isChoose:NO placeholderStr:@"请选择日期" isSelect: YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 5){
+            [cell setLabelNameText:@"学      历:" isChoose:NO placeholderStr:@"请选择学历" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        }  else{
+            [cell setLabelNameText:@"地      址:" isChoose:NO placeholderStr:@"请输入您的地址" isSelect:NO];
+        }
+        return cell;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 2) {
-        
-    }
     __weak __typeof(self) weakSelf = self;
-    if (indexPath.row == 9) {
+    
+    if (indexPath.section == 0 && indexPath.row == 1) {
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
         selectTV.block = ^(NSString * timeString) {
@@ -224,7 +288,9 @@
             [weakSelf.dictionaryInfo setObject:timeString forKey:@"recordDate"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
-    } else if ( indexPath.row == 3) {
+        
+        
+    } else if (indexPath.section == 0 && indexPath.row == 5) {
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
         selectTV.block = ^(NSString * timeString) {
@@ -232,7 +298,23 @@
             [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
-    } else if (indexPath.row == 2){
+    } else if (indexPath.section == 0 && indexPath.row == 6) {
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
+        selectTV.block = ^(NSString * timeString) {
+            cell.textField.text = timeString;
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+    } else if (indexPath.section == 1 && indexPath.row == 4) {
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
+        selectTV.block = ^(NSString * timeString) {
+            cell.textField.text = timeString;
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+    } else if (indexPath.section == 1 && indexPath.row == 3){
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         LYZSelectView *selectView = [LYZSelectView alterViewWithArray:@[@"男",@"女"] confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
             cell.textField.text = selectStr;
@@ -240,8 +322,9 @@
         }];
         [self.view addSubview:selectView];
         
-    } else if (indexPath.row == 3){
+    } else if (indexPath.section == 1 && indexPath.row == 1){
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        //        education
         if (self.arrayCustSource.count > 0) {
             LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayCustSource confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 cell.textField.text = selectStr;
@@ -269,7 +352,7 @@
                 
             }];
         }
-    } else if (indexPath.row == 4){
+    } else if (indexPath.section == 1 && indexPath.row == 5){
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (self.arrayEducation.count > 0) {
             LYZSelectView *selectView = [LYZSelectView alterViewWithArray:weakSelf.arrayEducation confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
@@ -299,20 +382,33 @@
             }];
         }
     }
+    
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     // 通过 通知中心 发送 通知
     [[NSNotificationCenter defaultCenter] postNotification:_notification];
 }
-
-#pragma mark -  get&&set
-- (NSMutableDictionary *)dictionaryInfo{
-    if (!_dictionaryInfo) {
-        _dictionaryInfo = [NSMutableDictionary dictionary];
-    }
-    return _dictionaryInfo;
+#pragma marik - UI
+- (void)createUI{
+    [self.view addSubview:self.myTableView];
+    [self.view addSubview:self.buttonSubmit];
 }
+
+- (UITableView *)myTableView{
+    if (!_myTableView) {
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 88 * ViewRateBaseOnIP6) style:UITableViewStylePlain];
+        _myTableView.delegate = self;
+        _myTableView.dataSource = self;
+        _myTableView.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
+        //取消滚动条的显示
+        _myTableView.showsVerticalScrollIndicator = NO;
+        _myTableView.bounces = YES;
+        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _myTableView;
+}
+
 - (UIButton *)buttonSubmit{
     if (!_buttonSubmit) {
         _buttonSubmit = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -324,6 +420,13 @@
         [_buttonSubmit addTarget:self action:@selector(submitCustomerInfo:) forControlEvents:UIControlEventTouchDown];
     }
     return _buttonSubmit;
+}
+
+- (NSMutableDictionary *)dictionaryInfo{
+    if (!_dictionaryInfo) {
+        _dictionaryInfo = [NSMutableDictionary dictionary];
+    }
+    return _dictionaryInfo;
 }
 
 - (NSMutableArray *)arrayEducation{
@@ -339,5 +442,8 @@
     }
     return _arrayCustSource;
 }
+
+
+
 
 @end
