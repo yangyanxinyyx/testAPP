@@ -17,7 +17,7 @@
 #import "PriceCustomerInformEntryViewController.h"
 #import "PriceCarInsuranceQViewController.h"
 #import "PriceCustomerModel.h"
-
+#import <MJRefresh/MJRefresh.h>
 @interface PriceViewController ()<UIScrollViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *topView;
@@ -167,6 +167,9 @@
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+                _infoView.hidden = YES;
+                _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+                _buttonPrice.userInteractionEnabled = NO;
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             });
         }
@@ -174,6 +177,9 @@
     } fail:^(id error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:error complete:nil];
+            _infoView.hidden = YES;
+            _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+            _buttonPrice.userInteractionEnabled = NO;
             [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
         });
     }];
@@ -202,9 +208,22 @@
 
 - (void)toucheButtonEntry:(UIButton *)button{
     PriceCustomerInformEntryViewController *priceCustomerVC = [[PriceCustomerInformEntryViewController alloc] init];
+    priceCustomerVC.titleName = @"客户信息录入";
     [self.navigationController pushViewController:priceCustomerVC animated:YES];
 }
 
+- (void)refresh{
+    if (_textField.text.length > 0) {
+        [self pressCustomerVehicleEnquiries];
+    } else {
+        _infoView.hidden = YES;
+        _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+        _buttonPrice.userInteractionEnabled = NO;
+    }
+    [_textField endEditing:YES];
+    [self.myScrollView.mj_header endRefreshing];
+    
+}
 #pragma mark- UI
 
 - (void)createUI{
@@ -245,11 +264,12 @@
     if (!_myScrollView) {
         _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44 , SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT)];
         _myScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - SCREEN_TABBAR_HEIGHT);
-        _myScrollView.bounces = NO;
+        _myScrollView.bounces = YES;
         _myScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
         _myScrollView.showsVerticalScrollIndicator = NO;
         _myScrollView.showsHorizontalScrollIndicator = NO;
         _myScrollView.delegate = self;
+        _myScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
         
     }
     return _myScrollView;
@@ -386,14 +406,14 @@
 
 - (PriceInfoCellView *)bussinessRisksView{
     if (!_bussinessRisksView) {
-        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.modelsView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"商业险起保日期:"];
+        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.modelsView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"保险到期日期:"];
     }
     return _bussinessRisksView;
 }
 
 - (PriceInfoCellView *)insuranceView{
     if (!_insuranceView) {
-        _insuranceView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bussinessRisksView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"交强险起保日期:"];
+        _insuranceView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bussinessRisksView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"年审到期日期:"];
     }
     return _insuranceView;
 }

@@ -25,7 +25,6 @@
 		25712B2A20908F37001629AD /* guide2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2420908F37001629AD /* guide2@3x.png */; };
 		25712B2D20908F37001629AD /* guide1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25712B2720908F37001629AD /* guide1@3x.png */; };
 		25769AC720863A6900BBDBF3 /* SelectTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769AC520863A6900BBDBF3 /* SelectTimeView.m */; };
-		25769ACD2086476600BBDBF3 /* XCCustomerADDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */; };
 		258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */; };
 		259A83EF207BAD2A006693FB /* CarLastYearRecodemodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A83EE207BAD2A006693FB /* CarLastYearRecodemodel.m */; };
 		25EA2370207E5ADF00A60866 /* priceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EA236F207E5ADF00A60866 /* priceModel.m */; };
@@ -360,8 +359,6 @@
 		25712B2720908F37001629AD /* guide1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide1@3x.png"; sourceTree = "<group>"; };
 		25769AC520863A6900BBDBF3 /* SelectTimeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectTimeView.m; sourceTree = "<group>"; };
 		25769AC620863A6900BBDBF3 /* SelectTimeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectTimeView.h; sourceTree = "<group>"; };
-		25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCustomerADDViewController.h; sourceTree = "<group>"; };
-		25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCustomerADDViewController.m; sourceTree = "<group>"; };
 		258EFCB6208F79EA00FB06C0 /* YXTestNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YXTestNumber.m; sourceTree = "<group>"; };
 		258EFCB7208F79EA00FB06C0 /* YXTestNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXTestNumber.h; sourceTree = "<group>"; };
 		259A83ED207BAD2A006693FB /* CarLastYearRecodemodel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarLastYearRecodemodel.h; sourceTree = "<group>"; };
@@ -1465,8 +1462,6 @@
 				FC32BED42079AA2000817156 /* XCCustomerViewController.m */,
 				FC32BED52079AA2000817156 /* XCCustomerViolationPreviewViewController.h */,
 				FC32BED62079AA2000817156 /* XCCustomerViolationPreviewViewController.m */,
-				25769ACB2086476600BBDBF3 /* XCCustomerADDViewController.h */,
-				25769ACC2086476600BBDBF3 /* XCCustomerADDViewController.m */,
 			);
 			path = "我的客户";
 			sourceTree = "<group>";
@@ -2551,7 +2546,6 @@
 				FC1724F120668FDB00B23D7F /* MyMedalView.m in Sources */,
 				A720C5B32081EFE5006B0C33 /* XCDistributionPaymentBillModel.m in Sources */,
 				FC32BF162079AA2000817156 /* XCCheckoutBaseTableViewController.m in Sources */,
-				25769ACD2086476600BBDBF3 /* XCCustomerADDViewController.m in Sources */,
 				FC32BFA32079AA5900817156 /* PriceInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

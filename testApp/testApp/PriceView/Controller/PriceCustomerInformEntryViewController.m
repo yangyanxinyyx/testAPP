@@ -34,7 +34,8 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate = self;
-    topBar.title = @"客户信息录入";
+
+    topBar.title = self.titleName;
     [self.view addSubview:topBar];
     _notification = [NSNotification notificationWithName:@"CustomerNotification" object:nil userInfo:nil];
     [self createUI];
@@ -162,7 +163,7 @@
             BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
             if (!result) {
                 FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
-                    textField.text = @"";
+//                    textField.text = @"";
                 }];
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             } else {
@@ -184,8 +185,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2) {
         return 1;
-    } else {
+    } else if (section == 1){
         return 7;
+    } else {
+        return 9;
     }
     
 }
@@ -232,13 +235,19 @@
             
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 2){
-            [cell setLabelNameText:@"*车 架 号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
+            [cell setLabelNameText:@"*车 架  号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
         } else if (indexPath.row == 3){
             [cell setLabelNameText:@"*发动机号:" isChoose:YES placeholderStr:@"请输入您的发动机号" isSelect:NO];
             
         } else if (indexPath.row == 4){
-            [cell setLabelNameText:@"车型型号:" isChoose:NO placeholderStr:@"请输入您的车型型号" isSelect:NO];
+            [cell setLabelNameText:@"车辆型号 :" isChoose:NO placeholderStr:@"请输入您的车辆型号" isSelect:NO];
         } else if (indexPath.row == 5){
+            [cell setLabelNameText:@"保险到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 6){
+            [cell setLabelNameText:@"年审到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
+            cell.textField.userInteractionEnabled = NO;
+        } else if (indexPath.row == 7){
             [cell setLabelNameText:@"*品       牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
             
         }  else{
@@ -282,6 +291,22 @@
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
         
         
+    } else if (indexPath.section == 0 && indexPath.row == 5) {
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
+        selectTV.block = ^(NSString * timeString) {
+            cell.textField.text = timeString;
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
+    } else if (indexPath.section == 0 && indexPath.row == 6) {
+        PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
+        selectTV.block = ^(NSString * timeString) {
+            cell.textField.text = timeString;
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+        };
+        [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
     } else if (indexPath.section == 1 && indexPath.row == 4) {
         PriceCustomerInformEntryTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
@@ -392,7 +417,12 @@
         _buttonSubmit.backgroundColor = [UIColor colorWithHexString:@"#004da2"];
         [_buttonSubmit.titleLabel setFont:[UIFont systemFontOfSize:36 * ViewRateBaseOnIP6]];
         [_buttonSubmit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_buttonSubmit setTitle:@"确认提交" forState:UIControlStateNormal];
+        if ([self.titleName isEqualToString:@"客户信息录入"]) {
+            [_buttonSubmit setTitle:@"确认提交" forState:UIControlStateNormal];
+        } else {
+            [_buttonSubmit setTitle:@"保存" forState:UIControlStateNormal];
+        }
+        
         [_buttonSubmit addTarget:self action:@selector(submitCustomerInfo:) forControlEvents:UIControlEventTouchDown];
     }
     return _buttonSubmit;

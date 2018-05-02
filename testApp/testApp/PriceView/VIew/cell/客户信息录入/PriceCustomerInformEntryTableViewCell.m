@@ -55,16 +55,19 @@
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#444444"] range:NSMakeRange(1,text.length - 1)];
         self.labelName.attributedText = str;
         self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 130 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
+        
         self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
         self.textField.placeholder = placeholderStr;
     } else {
         
-        self.textField.frame = CGRectMake(163 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+
         
         self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 120 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
         self.labelName.textColor = [UIColor colorWithHexString:@"#444444"];
         self.textField.placeholder = placeholderStr;
         self.labelName.text = text;
+        [self.labelName sizeToFit];
+        self.textField.frame = CGRectMake(CGRectGetMaxX(self.labelName.frame) + 10 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
         
     }
     if (isSelect) {

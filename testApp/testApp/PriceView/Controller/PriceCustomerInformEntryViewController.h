@@ -9,5 +9,5 @@
 #import "BaseViewController1.h"
 
 @interface PriceCustomerInformEntryViewController : BaseViewController1
-
+@property (nonatomic, strong) NSString *titleName;
 @end
