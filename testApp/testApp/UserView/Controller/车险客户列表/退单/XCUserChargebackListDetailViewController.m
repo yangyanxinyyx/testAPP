@@ -258,6 +258,20 @@
             }
         }
         [textFiledCell setTitlePlaceholder:placetext];
+        if ([title isEqualToString:@"交强险(业务员)金额:"]) {
+            if (isUsable(self.detailModel.jqMoney, [NSNumber class])) {
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[self.detailModel.jqMoney doubleValue]];
+            }else {
+                textFiledCell.textField.text = @"¥0.00";
+            }
+        }
+        else if ([title isEqualToString:@"商业险(业务员)金额:"]) {
+            if (isUsable(self.detailModel.syMoney, [NSNumber class])) {
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[self.detailModel.syMoney doubleValue]];
+            }else {
+                textFiledCell.textField.text = @"¥0.00";
+            }
+        }
         textFiledCell.delegate = self;
         if (indexPath.section == 0 && indexPath.row == 10) {
             //保险公司

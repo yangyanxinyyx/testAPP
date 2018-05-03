@@ -594,11 +594,11 @@
     if (isUsable(model.syMoneyFinal, [NSNumber class])) {
         syMoneyFinal = [NSString stringWithMoneyNumber:[model.syMoneyFinal doubleValue]];
     }
-    if (isUsable(model.jqNumber, [NSNumber class])) {
-        jqNumber = [NSString stringWithMoneyNumber:[model.jqNumber doubleValue]];
+    if (isUsableNSString(model.jqNumber, @"")) {
+        jqNumber = model.jqNumber;
     }
-    if (isUsable(model.syNumber, [NSNumber class])) {
-        syNumber =  [NSString stringWithMoneyNumber:[model.syNumber doubleValue]];
+    if (isUsableNSString(model.syNumber, @"")) {
+        syNumber =  model.syNumber;
     }
     if (isUsable(model.jqBonus, [NSNumber class])) {
         jqBonus = [NSString stringWithMoneyNumber:[model.jqBonus doubleValue]];
