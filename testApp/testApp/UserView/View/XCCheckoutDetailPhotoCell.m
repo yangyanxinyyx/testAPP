@@ -216,7 +216,8 @@
 //            [imageView setFrame:CGRectMake(i * (30 * ViewRateBaseOnIP6 + imageViewW) , 0, imageViewW, imageViewW)];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImageView:)];
             [imageView addGestureRecognizer:tap];
-            [imageView setContentMode:UIViewContentModeScaleAspectFill];
+            [imageView setContentMode:UIViewContentModeScaleToFill];
+//            [imageView setClipsToBounds:YES];
             imageView.userInteractionEnabled = YES;
             [_scrollview addSubview:imageView];
         }
