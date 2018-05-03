@@ -153,6 +153,10 @@
 }
 
 + (NSString*)getTheCorrectMoneyNum:(NSString*)tempString{
+    if ([tempString isEqualToString:@"0"]) {
+        return tempString;
+        
+    }
     if ([tempString hasPrefix:@"."]) {
         tempString = [NSString stringWithFormat:@"0%@",tempString];
 
