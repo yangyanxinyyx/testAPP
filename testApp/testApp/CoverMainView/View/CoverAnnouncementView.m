@@ -35,6 +35,7 @@
 
 
 - (void)createUI{
+    self.backgroundColor = COLOR_RGBA_255(0, 0, 0, 0.4);
 
     NSMutableArray *array = [NSMutableArray array];
     for (CoverAnnouncementModel *model in [UserInfoManager shareInstance].coverMainModel.announcementDatas) {

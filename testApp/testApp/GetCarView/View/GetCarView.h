@@ -11,7 +11,7 @@
 
 @protocol GetCarViewDelegate <NSObject>
 
-- (void)GetCarViewDidSelectImageIndex:(NSInteger)index;
+- (void)GetCarViewDidSelectImageIndex:(NSInteger)index source:(NSMutableArray *)source;
 
 @end
 

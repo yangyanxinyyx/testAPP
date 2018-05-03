@@ -122,9 +122,9 @@
 
 }
 
-- (void)GetCarViewDidSelectImageIndex:(NSInteger)index
+- (void)GetCarViewDidSelectImageIndex:(NSInteger)index source:(NSMutableArray *)source
 {
-    XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览"sources:nil];
+    XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:source];
     [vc updatePositionWithIndex:index];
     [self.navigationController pushViewController:vc animated:YES];
 }
