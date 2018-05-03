@@ -239,11 +239,10 @@
 {
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
-//    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (474) * ViewRateBaseOnIP6);
-     layout.itemSize = CGSizeMake(320 * ViewRateBaseOnIP6 ,474 * ViewRateBaseOnIP6);
-     layout.sectionInset =  UIEdgeInsetsMake( 30  * ViewRateBaseOnIP6, (30+ 15)* ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6 ,(30 + 15) * ViewRateBaseOnIP6);
-    layout.minimumInteritemSpacing = 20 * ViewRateBaseOnIP6;
+
+     layout.itemSize = CGSizeMake(335 * ViewRateBaseOnIP6 ,(336 + 158) * ViewRateBaseOnIP6);
+     layout.sectionInset =  UIEdgeInsetsMake( 30  * ViewRateBaseOnIP6, 30* ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6 ,30* ViewRateBaseOnIP6);
+//    layout.minimumInteritemSpacing = 20 * ViewRateBaseOnIP6;
     layout.minimumLineSpacing = 20 * ViewRateBaseOnIP6;
 
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6) collectionViewLayout:layout];
