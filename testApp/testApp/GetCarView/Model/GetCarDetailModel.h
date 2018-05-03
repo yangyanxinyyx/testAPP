@@ -22,5 +22,11 @@
 @property (nonatomic,strong) NSString *brand;
 @property (nonatomic,strong) NSArray *detailList;
 
+@property (nonatomic,strong) NSString *remark;
+@property (nonatomic,strong) NSString *url1;
+@property (nonatomic,strong) NSString *url2;
+@property (nonatomic,strong) NSString *url3;
+@property (nonatomic,strong) NSString *url4;
+
 @property (nonatomic,strong) NSString *appointmentTime;
 @end

@@ -68,7 +68,8 @@
         requireLabel2.font = [UIFont systemFontOfSize:13];
         requireLabel2.textColor = COLOR_RGB_255(165, 165, 165);
         requireLabel2.numberOfLines = 0;
-        requireLabel2.text = [NSString stringWithFormat:@"%@",@"没传描述"];
+        NSString *text = [NSString stringWithFormat:@"%@",model.remark];
+        requireLabel2.text = [text isEqualToString:@"(null)"] ? @"没传描述" : model.remark;
         [scrollView addSubview:requireLabel2];
 
         UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 365, SCREEN_WIDTH, 5)];
@@ -85,10 +86,17 @@
             [scrollView addSubview:itemLabel];
 
             self.dataSource = [NSMutableArray array];
-            for (NSDictionary *dic in model.detailList) {
-                if (dic[@"serviceName"]) {
-                    [self.dataSource addObject:dic[@"serviceName"]];
-                }
+            if (isUsableNSString(model.url1, @"")) {
+                [self.dataSource addObject:model.url1];
+            }
+            if (isUsableNSString(model.url2, @"")) {
+                [self.dataSource addObject:model.url2];
+            }
+            if (isUsableNSString(model.url3, @"")) {
+                [self.dataSource addObject:model.url3];
+            }
+            if (isUsableNSString(model.url4, @"")) {
+                [self.dataSource addObject:model.url4];
             }
 
             UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -168,7 +176,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate GetCarViewDidSelectImageIndex:indexPath.row];
+    [self.delegate GetCarViewDidSelectImageIndex:indexPath.row source:self.dataSource];
 }
 
 /*
