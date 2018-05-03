@@ -73,7 +73,7 @@
         if ([response[@"result"] boolValue] == 1) {
             requstStr = @"预约成功";
         }else {
-           requstStr = response[@"errormsg"] ;
+           requstStr = @"预约失败";
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
@@ -86,8 +86,7 @@
         [statusLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        requstStr = [NSString stringWithFormat:@"%@",error];
-        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:requstStr complete:nil];
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [strongSelf.view addSubview:tipsView];
     }];
 

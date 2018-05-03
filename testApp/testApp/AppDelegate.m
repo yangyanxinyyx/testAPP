@@ -16,7 +16,7 @@
 #import <Bugly/Bugly.h>
 /**当前app版本号*/
 #define BC_AppCurrentBuildVerison @"CurrentBuildVersion"
-#define kbuglyID @"bb500984-d6de-417d-800f-6541fbce73e6"
+#define kbuglyID @"c30734b618"
 @interface AppDelegate ()<UIScrollViewDelegate,UITabBarControllerDelegate>
 @property (nonatomic, copy)UIView *bgView;
 
@@ -163,6 +163,9 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    if (self.backgroundTimer) {
+        [self endbackgroundTask];
+    }
 }
 
 

@@ -191,6 +191,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             _storeModel.licenseUrl = [self.lincePhotoArrM firstObject];
         }
     }
+    NSMutableString * cityStrM = [NSMutableString stringWithString:_storeModel.city];
+    NSArray *strArr = [cityStrM componentsSeparatedByString:@"市"];
+    cityStrM = [strArr firstObject];
     
     dispatch_semaphore_t videoTrackSynLoadSemaphore;
     videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);
@@ -206,7 +209,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                             @"longitude":_storeModel.longitude,
                             @"latitude":_storeModel.latitude,
                             @"type":_storeModel.type,
-                            @"city":_storeModel.city,
+                            @"city":cityStrM,
                             @"area":_storeModel.area,
                             @"salesmanCommission":_storeModel.salesmanCommission,
                             @"managerCommission":_storeModel.managerCommission,
@@ -218,21 +221,16 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                             };
     [RequestAPI postUpdateStore:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = response[@"errormsg"];
         if ([response[@"result"] integerValue] == 1) {
-//            [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
-
                 [strongSelf.networkURLArrM  removeAllObjects];
                 [strongSelf deleteAllTmpPhoto];
-//            }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         for (NSString *fileURLPath in strongSelf.networkURLArrM ) {
             NSDictionary *param = @{
                                     @"url":fileURLPath,
@@ -299,8 +297,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
             return ;
         }];
     }else {
@@ -355,8 +352,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
             return ;
         }];
     }else {
@@ -370,12 +366,14 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         
         switch (indexPath.row) {
             case 0:{ //洗车项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
@@ -386,12 +384,14 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             }
                 break;
             case 1: { //美容项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
@@ -402,19 +402,21 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             }
                 break;
             case 2: { //保养项目
-                NSArray *arr = self.services[indexPath.row];
                 NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                for (NSDictionary *dataInfo in arr) {
-                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    if (serviceModel) {
-                        [serviceDataArrM addObject:serviceModel];
+                
+                if (self.services.count > 0) {
+                    NSArray *arr = self.services[indexPath.row];
+                    for (NSDictionary *dataInfo in arr) {
+                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                        if (serviceModel) {
+                            [serviceDataArrM addObject:serviceModel];
+                        }
                     }
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
                 serviceDetailVC.titleTypeStr = @"保养";
                 serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
-                
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
                 break;
@@ -484,8 +486,7 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
         }];
         self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
     }
@@ -513,10 +514,10 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         configureSuccess = NO;
     }
     if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
-        _storeModel.salesmanCommission = @(0.00);
+        _storeModel.salesmanCommission = [NSNumber numberWithDouble:0.00];
     }
     if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
-        _storeModel.managerCommission = @(0.00);
+        _storeModel.managerCommission = [NSNumber numberWithDouble:0.00];
     }
     if (!isUsableNSString(_storeModel.longitude, @"")) {
         _storeModel.longitude = @"";
@@ -586,26 +587,26 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         }
     }
     else if ([title isEqualToString:@"业务员提成:"]) {
-        if ([textField.text doubleValue] < 100) {
+        if ([textField.text doubleValue] < 1000) {
             double num = [textField.text doubleValue];
             NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
             textField.text = numStr;
             _storeModel.salesmanCommission = [NSNumber numberWithDouble:num];
-            
         }else {
+            textField.text =  [NSString stringWithFormat:@"%.2f%%",[_storeModel.salesmanCommission doubleValue]];
             [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];
         }
     }
     else if ([title isEqualToString:@"团队经理提成:"]) {
-        if ([textField.text doubleValue] < 100) {
+        if ([textField.text doubleValue] < 1000) {
             double num = [textField.text doubleValue];
             NSString *numStr = [NSString stringWithFormat:@"%.2f%%",num];
             textField.text = numStr;
             _storeModel.managerCommission = [NSNumber numberWithDouble:num];
             
         }else {
-            [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];
-        }
+            textField.text =  [NSString stringWithFormat:@"%.2f%%",[_storeModel.managerCommission doubleValue]];
+            [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];        }
     }
 }
 
@@ -615,9 +616,9 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
                                                      textFiled:(UITextField *)textFiled
 {
     if ([title isEqualToString:@"业务员提成:"]||[title isEqualToString:@"团队经理提成:"]) {
-        if (range.location > 4 ) {
-            return NO;
-        }
+//        if (range.location > 4 ) {
+//            return NO;
+//        }
         NSCharacterSet *cs;
         cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890."] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
@@ -828,8 +829,8 @@ XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionS
         // Save the new image (original or edited) to the Camera Roll
             [self photoCellHanderSelectImage:imageToSave];
     }
-    NSIndexPath *indexpath = [self.tableView indexPathForCell:self.currentPhotoCell];
-    [self.tableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
+    NSIndexPath *indexpath = [self.storeTableView indexPathForCell:self.currentPhotoCell];
+    [self.storeTableView reloadRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationNone];
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 

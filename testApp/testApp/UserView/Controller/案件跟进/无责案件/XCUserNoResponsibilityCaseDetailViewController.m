@@ -34,6 +34,8 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
+    [self hideNullDataView];
+
 }
 
 #pragma mark - lifeCycle

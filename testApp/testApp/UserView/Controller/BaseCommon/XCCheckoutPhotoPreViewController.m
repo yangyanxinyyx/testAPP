@@ -226,7 +226,7 @@
                                        newHeight);
         }
 
-        [strongSelf.preView setContentMode:UIViewContentModeScaleAspectFit];
+        [strongSelf.preView setContentMode:UIViewContentModeScaleAspectFill];
         [strongSelf.preView setFrame:prewViewFrame];
         strongSelf.origianFrame = prewViewFrame;
     }];

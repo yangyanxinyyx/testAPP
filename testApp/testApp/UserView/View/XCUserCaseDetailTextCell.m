@@ -352,14 +352,16 @@
         phone = model.phone;
     }
     if (isUsableNSString(model.occurTime, @"")) {
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        occurTime = [tmpArr firstObject];
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        occurTime = [tmpArr firstObject];
+        occurTime = model.occurTime;
     }
     if (isUsableNSString(model.createTime, @"")) {
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        occurTime = [tmpArr firstObject];
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        occurTime = [tmpArr firstObject];
+        createTime = model.createTime;
     }
     if (isUsableNSString(model.name, @"")) {
         name = model.name;

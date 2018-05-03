@@ -11,8 +11,9 @@
 #import "XCCustomerListModel.h"
 #import <MJRefresh/MJRefresh.h>
 #import "XCCustomerDetailModel.h"
-#import "XCCustomerADDViewController.h"
 #import "PriceCarInsuranceQViewController.h"
+#import "PriceCustomerInformEntryViewController.h"
+
 @interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
     CGFloat _addBtnHeigth;
 }
@@ -116,7 +117,8 @@
 
 - (void)clickAddCustomerButton:(UIButton *)button
 {
-    XCCustomerADDViewController *customerADDVC = [[XCCustomerADDViewController alloc] initWithTitle:@"新增客户"];
+    PriceCustomerInformEntryViewController *customerADDVC = [[PriceCustomerInformEntryViewController alloc] init];
+    customerADDVC.titleName = @"新增客户";
     [self.navigationController pushViewController:customerADDVC animated:YES];
 }
 
@@ -129,7 +131,7 @@
     [_addCustomerBtn setTitle:@"新增客户" forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"NewCustomeradd2"];
     [_addCustomerBtn setImage:image forState:UIControlStateNormal];
-    [_addCustomerBtn setBackgroundColor:COLOR_RGB_255(104, 153, 232)];
+    [_addCustomerBtn setBackgroundColor:COLOR_RGB_255(0, 77, 162)];
     [_addCustomerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 24 * ViewRateBaseOnIP6, 0, 0)];
     [_addCustomerBtn addTarget:self action:@selector(clickAddCustomerButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addCustomerBtn];
@@ -145,6 +147,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.dataArr.count > 0 ) {
+        [self hideNullDataView];
+    }else {
+        [self showNullDataView];
+    }
     return self.dataArr.count;
 }
 

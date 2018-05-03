@@ -183,9 +183,17 @@
             //请求失败
             NSLog(@"error-->%@",error);
             if (fail) {
-                fail(error);
-                [ProgressControll dismissProgress];
+                if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"The Internet connection appears to be offline."]) {
+                    fail(@"网络出错");
+                } else {
+                   fail(error);
+                }
+            } else {
+              fail(error);
             }
+            
+            [ProgressControll dismissProgress];
+            
         }];
     }else{
         [manager GET:url parameters:paramenter progress:^(NSProgress * _Nonnull downloadProgress) {

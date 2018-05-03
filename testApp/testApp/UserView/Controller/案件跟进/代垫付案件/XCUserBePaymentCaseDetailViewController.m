@@ -41,6 +41,8 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
+    [self hideNullDataView];
+
 }
 
 #pragma mark - lifeCycle
@@ -171,8 +173,6 @@
     }else {
         return (20 + 88 + 140 + 30) * ViewRateBaseOnIP6;
     }
-  
-    
 }
 
 

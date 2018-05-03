@@ -95,31 +95,25 @@
     }
 
     NSDictionary *param = @{
-                            @"id":_model.serviceId,
+                            @"id":[_model.storeID stringValue],
                             @"price":self.price,
                             @"vipPrice":self.vipPrice,
                             };
     __weak __typeof(self) weakSelf = self;
     [RequestAPI updateService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr;
-        if (isUsable(response[@"errormsg"], [NSString class])) {
-            errStr = response[@"errormsg"];
-        }else {
-            errStr = @"未知错误";
-        }
+
         if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"修改成功" complete:^{
                 [strongSelf.navigationController popViewControllerAnimated:YES];
             }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"修改失败" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
     }];
     
 

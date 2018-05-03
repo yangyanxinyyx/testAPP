@@ -134,6 +134,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.dataArr.count > 0 ) {
+        [self hideNullDataView];
+    }else {
+        [self showNullDataView];
+    }
     return self.dataArr.count;
 }
 

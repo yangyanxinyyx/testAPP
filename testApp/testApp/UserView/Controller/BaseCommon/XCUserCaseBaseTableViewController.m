@@ -35,14 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
-    _bgImageView.image = image;
-    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
-    [_bgLabel setText:@"暂无查询数据"];
-    [self.view addSubview:_bgImageView];
-    [self.view addSubview:_bgLabel];
+
     [self.view setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -50,7 +43,13 @@
     self.tableView.dataSource = self;
     [self.tableView setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
     [self.view addSubview:self.tableView];
-    
+    _bgImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    UIImage *image = [UIImage imageNamed:@"dataEmpty"];
+    _bgImageView.image = image;
+    _bgLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(153, 153, 153)];
+    [_bgLabel setText:@"暂无查询数据"];
+    [self.tableView addSubview:_bgImageView];
+    [self.tableView addSubview:_bgLabel];
 }
 
 -(void)viewDidLayoutSubviews
@@ -63,11 +62,7 @@
     [_bgLabel setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5, CGRectGetMaxY(_bgImageView.frame) + 40 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
 
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom))];
-    if (self.dataArr.count > 0 ) {
-        self.tableView.alpha = 1.0;
-    }else {
-        self.tableView.alpha = 0.0;
-    }
+ 
 }
 
 #pragma mark - Action Method
@@ -93,7 +88,31 @@
     return 0 * ViewRateBaseOnIP6;
 }
 #pragma mark - Privacy Method
+- (void)showNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden = NO;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = NO;
+    }
+    if (self.tableView) {
+        self.tableView.backgroundColor = [UIColor clearColor];
+    }
+}
 
+- (void)hideNullDataView
+{
+    if (self.bgLabel) {
+        self.bgLabel.hidden =YES;
+    }
+    if (self.bgImageView) {
+        self.bgImageView.hidden = YES;
+    }
+    if (self.tableView) {
+        self.tableView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    }
+}
 #pragma mark - Setter&Getter
 
 - (void)setNavTitle:(NSString *)navTitle

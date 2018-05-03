@@ -89,19 +89,12 @@
 
 - (void)clickMyCommission
 {
-    XCLog(@"===========>ClickmyCommissionBtn");
     NSDictionary *param = @{
                             @"user_id":[UserInfoManager shareInstance].userID,
                             };
     __weak typeof (self)weakSelf = self;
     [RequestAPI getMyCommission:param header:[UserInfoManager shareInstance].ticketID  success:^(id response) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr;
-        if (isUsable(response[@"errormsg"], [NSString class])) {
-            errStr = response[@"errormsg"];
-        }else {
-            errStr = @"未知错误";
-        }
+        XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
         if (isUsableArray(response[@"data"], 0)) {
             NSMutableArray <XCMyCommissionListModel *>*modelArr = [[NSMutableArray alloc] init];
             NSArray *dataArr  = response[@"data"];
@@ -109,19 +102,14 @@
                 XCMyCommissionListModel  * listModel = [XCMyCommissionListModel getMyCommissionListWithDataInfo:commissionInfo];
                 [modelArr addObject:listModel];
             }
-            XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
             myCommissionVC.dataArrM = modelArr;
-            [strongSelf.navigationController pushViewController:myCommissionVC animated:YES];
-        }else {
-            XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
-            [strongSelf.navigationController pushViewController:myCommissionVC animated:YES];        }
+        }
+        [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        NSString *errStr = [NSString stringWithFormat:@"error:%@",error];
-        [strongSelf showAlterInfoWithNetWork:errStr complete:nil];
+        XCMyCommissionViewController *myCommissionVC = [[XCMyCommissionViewController alloc] init];
+        [weakSelf.navigationController pushViewController:myCommissionVC animated:YES];
     }];
-    
 }
 
 - (void)clickModifyBtn

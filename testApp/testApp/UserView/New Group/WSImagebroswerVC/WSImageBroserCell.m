@@ -28,6 +28,8 @@
     _scrollView = [[UIScrollView alloc]initWithFrame:self.bounds];
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _scrollView.delegate = self;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.bounces = NO;
     _scrollView.minimumZoomScale = 1;//设置最小放大比例
     _scrollView.maximumZoomScale = 2.5;//设置最大放大比例
     _scrollView.showsHorizontalScrollIndicator = NO;

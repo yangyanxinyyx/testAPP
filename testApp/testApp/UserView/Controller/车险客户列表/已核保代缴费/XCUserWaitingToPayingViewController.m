@@ -99,6 +99,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.dataArr.count > 0 ) {
+        [self hideNullDataView];
+    }else {
+        [self showNullDataView];
+    }
     return self.dataArr.count;
 }
 
@@ -114,10 +119,6 @@
     if (baseModel) {
         cell.baseModel = baseModel;
     }
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
-    
     return cell;
 }
 

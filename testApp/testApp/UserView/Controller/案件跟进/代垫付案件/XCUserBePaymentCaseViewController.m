@@ -113,7 +113,7 @@
             NSDictionary *dataInfo = response[@"data"];
             if(isUsable(dataInfo, [NSDictionary class])) {
                 XCUserCaseDetailModel *detailModel = [XCUserCaseDetailModel yy_modelWithJSON:dataInfo];
-                XCUserBePaymentCaseDetailViewController *injuryCaseDetailVC = [[XCUserBePaymentCaseDetailViewController alloc] initWithTitle:@"人伤案件跟进"];
+                XCUserBePaymentCaseDetailViewController *injuryCaseDetailVC = [[XCUserBePaymentCaseDetailViewController alloc] initWithTitle:self.navTitle];
                 injuryCaseDetailVC.detailModel = detailModel;
                 [self.navigationController pushViewController:injuryCaseDetailVC animated:YES];
                 configureSucess = YES;
@@ -136,6 +136,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.dataArr.count > 0 ) {
+        [self hideNullDataView];
+    }else {
+        [self showNullDataView];
+    }
     return self.dataArr.count;
 }
 

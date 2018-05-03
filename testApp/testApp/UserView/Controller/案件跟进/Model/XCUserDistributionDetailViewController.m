@@ -31,9 +31,11 @@
     
 }
 
+
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.tableView.alpha = 1.0;
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation )];
 }
 

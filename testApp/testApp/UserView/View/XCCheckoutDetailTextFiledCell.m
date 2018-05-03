@@ -268,11 +268,12 @@
             [_textField setText:model.phoneNo];
         }
     }
-    else if ([self.title isEqualToString:@"配送地址:"]) {
-        if (isUsableNSString(model.phoneNo,@"")) {
-            [_textField setText:model.phoneNo];
-        }
-    }
+//    else if ([self.title isEqualToString:@"配送地址:"]) {
+//        if (isUsableNSString(model.,@"")) {
+//#warning 缺少默认客户地址
+//            [_textField setText:model.phoneNo];
+//        }
+//    }
 }
 
 #pragma mark - Setter&Getter
