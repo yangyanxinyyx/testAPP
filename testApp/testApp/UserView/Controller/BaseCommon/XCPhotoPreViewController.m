@@ -40,7 +40,7 @@
 
 #pragma mark - Init Method
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM{
+                      sources:(NSArray<NSString *> *)imageArrM{
     if (self = [super init]) {
 //        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
         self.view.backgroundColor = [UIColor whiteColor];
@@ -66,7 +66,7 @@
 }
 
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM
+                      sources:(NSArray<NSString *> *)imageArrM
               comlectionBlock:(completionBlock)completionBlock
 {
     self = [self initWithTitle:title sources:imageArrM];
