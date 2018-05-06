@@ -10,6 +10,7 @@
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCustomerDetailModel.h"
 #import "UILabel+createLabel.h"
+#import "XCShopServiceModel.h"
 @interface XCCheckoutDetailTextCell()
 
 //@property (nonatomic, strong) UILabel * titleLabel ;
@@ -464,7 +465,88 @@
         }
     }
 }
+- (void)setupCellWithShopServiceModel:(XCShopServiceModel *)model
+{
+    
+    if ([self.titleLabel.text isEqualToString:@"当前状态:"]) {
+        if (isUsableNSString(model.status, @"")) {
+            [_placeholderLabel setText:model.status];
+        }else {
+            [_placeholderLabel setText:@""];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"拒绝时间:"] ||
+             [self.titleLabel.text isEqualToString:@"提交时间:"]||
+             [self.titleLabel.text isEqualToString:@"下架时间:"]||[self.titleLabel.text isEqualToString:@"上架时间:"])
+    {
+        if ([self.titleLabel.text isEqualToString:@"拒绝时间:"]) {
+            if (isUsableNSString(model.auditingTime, @"")) {
+                [_placeholderLabel setText:model.auditingTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"提交时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"下架时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"上架时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
 
+    }
+    else if ([self.titleLabel.text isEqualToString:@"原      价:"] )
+    {
+        if (isUsable(model.servicePrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.servicePrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"标准售价:"] )
+    {
+        if (isUsable(model.serviceVipPrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.serviceVipPrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"门店价格:"] )
+    {
+        _placeholderLabel.textColor = [UIColor redColor];
+        if (isUsable(model.price, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.price doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"高级会员价:"] )
+    {
+        _placeholderLabel.textColor = [UIColor redColor];
+        if (isUsable(model.vipPrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.vipPrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -7,7 +7,7 @@
 //
 
 #import "XCUserBaseViewController.h"
-
+/// 点击配送保单
 @interface XCDistributionPolicyViewController : XCUserBaseViewController
 
 /** 商业险金额 */

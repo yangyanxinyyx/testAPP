@@ -17,4 +17,8 @@
 @property (nonatomic, strong) UILabel *labelName;
 @property (nonatomic, strong) UITextView * textView;
 @property (nonatomic, weak) id <PriceUnderwritingImportTableViewCellDelegate> delegate;
+// =================== modify by Liangyz
+/** 是否显示下划线默认NO */
+@property (nonatomic, assign) BOOL  shouldShowSpearactorLine ;
+// ===================
 @end

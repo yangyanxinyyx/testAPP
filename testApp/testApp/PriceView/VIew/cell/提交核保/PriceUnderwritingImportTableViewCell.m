@@ -8,7 +8,8 @@
 
 #import "PriceUnderwritingImportTableViewCell.h"
 @interface PriceUnderwritingImportTableViewCell()<UITextViewDelegate>
-
+/** <# 注释 #> */
+@property (nonatomic, strong) UIView * topLine ;
 @end
 @implementation PriceUnderwritingImportTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -22,6 +23,11 @@
         self.textView.text = @"请输入...";
         [self.contentView addSubview:self.textView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        self.topLine = [[UIView alloc] initWithFrame:CGRectZero];
+        [self.topLine setBackgroundColor:COLOR_RGB_255(242, 242, 242)];
+        [self addSubview:self.topLine];
+        
     }
     return self;
 }
@@ -47,6 +53,12 @@
     self.textView.layer.borderColor = [UIColor colorWithHexString:@"#e5e5e5"].CGColor;
     self.textView.layer.cornerRadius = 20 * ViewRateBaseOnIP6;
     self.textView.layer.masksToBounds = YES;
+    
+    if (_shouldShowSpearactorLine) {
+        [self.topLine setFrame:CGRectMake(0, 0, self.bounds.size.width, 1)];
+    }else {
+        [self.topLine setFrame:CGRectZero];
+    }
     
 }
 

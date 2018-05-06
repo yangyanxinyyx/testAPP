@@ -100,6 +100,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     _networkURLArrM = [[NSMutableArray alloc] init];
     _tmpDeleteURLArrM = [[NSMutableArray alloc] init];
     _services = [[NSMutableArray alloc] init];
+    _storeModel = [[XCShopModel alloc] init];
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -160,9 +161,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     }else {
         [self showAlterInfoWithNetWork:@"提交成功" complete:nil];
     }
-  
 }
-
 
 - (void)postModifyShopInfo
 {
@@ -202,7 +201,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     dispatch_time_t maxVideoLoadTrackTimeConsume = dispatch_time(DISPATCH_TIME_NOW, 10.0 * NSEC_PER_SEC);
     __weak __typeof(self) weakSelf = self;
     NSDictionary *param = @{
-                            @"id":_storeModel.storeID,
+                            @"id":[UserInfoManager shareInstance].storeID,
                             @"tel":_storeModel.tel,
                             @"name":_storeModel.name,
                             @"corporateName":_storeModel.corporateName,
@@ -380,7 +379,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
                 serviceDetailVC.titleTypeStr = @"洗车";
-                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -398,7 +396,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
                 serviceDetailVC.titleTypeStr = @"美容";
-                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -417,7 +414,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
                 }
                 XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
                 serviceDetailVC.titleTypeStr = @"保养";
-                serviceDetailVC.storeID = self.storeModel.storeID;
                 serviceDetailVC.dataArr = serviceDataArrM;
                 [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
@@ -457,13 +453,9 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             }else {
                 [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
             }
-        
         }
-        
     }
 }
-
-
 
 #pragma mark - Delegates & Notifications
 
@@ -500,13 +492,17 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 {
     
     BOOL configureSuccess = YES;
-    NSString *errorStr = @"门店ID信息错误";
+    NSString *errorStr = @"门店信息错误,请联系客服！";
 
     if (!isUsableNSString(_storeModel.name,@"")) {
         _storeModel.name = @"";
     }
     if (!isUsableNSString(_storeModel.tel,@"")) {
         _storeModel.tel = @"";
+    }
+    if (!isUsableNSString(_storeModel.type,@"")) {
+        configureSuccess = NO;
+        errorStr = @"未知门店类型,请联系客服!";
     }
     if (!isUsableNSString(_storeModel.corporateName,@"")) {
         _storeModel.corporateName = @"";
@@ -536,7 +532,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     if (!isUsableNSString(_storeModel.address, @"")) {
         _storeModel.address = @"";
     }
-    if (!isUsable(_storeModel.storeID, [NSNumber class])) {
+    if (!isUsable([UserInfoManager shareInstance].storeID, [NSNumber class])) {
         configureSuccess = NO;
     }
     
@@ -568,6 +564,24 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 - (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
 {
     self.selectedTitle = title;
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
+    if ([title isEqualToString:@"业务员提成:"]) {
+        if( isUsable(_storeModel.salesmanCommission, [NSNumber class])){
+            textField.text = [_storeModel.salesmanCommission stringValue];
+        }
+    }
+    else if ([title isEqualToString:@"团队经理提成:"]) {
+        if( isUsable(_storeModel.managerCommission, [NSNumber class])){
+            textField.text = [_storeModel.managerCommission stringValue];
+        }
+    }
+    
 }
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
@@ -1014,7 +1028,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
         }else {
             footerView.userInteractionEnabled = YES ;
         }
-        if ([self.storeModel.storeStatus isEqualToString:@"已拒绝"]) {
+        if ([self.storeModel.storeStatus isEqualToString:@"审核不通过"]) {
             [footerView setTitle:@"重新提交审核"];
         }
         footerView.delegate = self;

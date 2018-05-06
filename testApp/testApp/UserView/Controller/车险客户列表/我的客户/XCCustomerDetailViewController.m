@@ -140,7 +140,7 @@
          
         }else if([selectStr isEqualToString:@"违章预约"]) {
             NSDictionary *param = @{
-                                    @"carId":_model.carId,
+                                    @"carId":weakSelf.model.carId,
                                     };
             [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
                                 if (response[@"data"][@"lists"]) {
@@ -160,6 +160,7 @@
                     }
                      XCCustomerViolationPreviewViewController *violationVC = [[XCCustomerViolationPreviewViewController alloc] initWithTitle:@"违章预约"];
                     violationVC.dataArrM = detailModelArrM;
+                    violationVC.model = weakSelf.model;
                     [weakSelf.navigationController pushViewController:violationVC animated:YES];
                 }else{
                     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];

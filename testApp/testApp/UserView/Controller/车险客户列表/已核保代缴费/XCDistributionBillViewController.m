@@ -243,6 +243,33 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 - (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
 {
     self.selectedTitle = title;
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    if ([title isEqualToString:@"保单金额:"]) {
+        if (isUsable(_payModel.policyTotalAmount, [NSNumber class])) {
+            [textField setText:[_payModel.policyTotalAmount stringValue]];
+        }
+    }
+    else if ([title isEqualToString:@"购买金额:"]) {
+        if (isUsable(_payModel.packageBuyPrice, [NSNumber class])) {
+            [textField setText: [_payModel.packageBuyPrice stringValue]];
+        }
+    }
+    else if ([title isEqualToString:@"预借款金额:"]) {
+        if (isUsable(_payModel.borrowMoney, [NSNumber class])) {
+            [textField setText:[_payModel.borrowMoney stringValue]];
+        }
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        if (isUsable(_payModel.receiveMoney, [NSNumber class])) {
+            [textField setText:[_payModel.receiveMoney stringValue]];
+        }
+    }
+    
 }
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
@@ -254,7 +281,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     
     if ([title isEqualToString:@"保单金额:"]) {
         double price = [textField.text doubleValue];
-        _payModel.receiveMoney = [NSNumber numberWithDouble:price];
+        _payModel.policyTotalAmount = [NSNumber numberWithDouble:price];
         [textField setText: [NSString stringWithMoneyNumber:price]];
     }
     else if ([title isEqualToString:@"缴费单通知号:"]) {
@@ -385,6 +412,12 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 - (BOOL)shouldSetTableViewOffsetWithTitle:(NSString *)title {
     
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    
     if ([title isEqualToString:@"客户名称:"]) {
         return YES;
     }
@@ -418,6 +451,8 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 //键盘显示
 - (void)keyboardShow:(NSNotification *)notification {
+    
+  
     
     if (isUsableNSString(self.selectedTitle, @"")) {
         if (![self shouldSetTableViewOffsetWithTitle:self.selectedTitle]) {

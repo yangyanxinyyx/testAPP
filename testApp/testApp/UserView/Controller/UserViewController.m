@@ -59,7 +59,20 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    
+    UserInfoManager *userManager = [UserInfoManager shareInstance];
+    _isStore = NO;
+    if (userManager.isStore) {
+        _isStore = YES;
+    }
+    [self initWithListData];
+    //设置用户头型数据UI
+    if (userManager) {
+        [self.topView setUserName:userManager.name];
+        if (userManager.iconUrl) {
+            [self.topView setUserIconUrlString:userManager.iconUrl];
+        }
+    }
+    [self.listView reloadData];
 }
 
 

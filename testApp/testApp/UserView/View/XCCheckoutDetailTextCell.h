@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class XCCheckoutDetailBaseModel;
 @class XCCustomerDetailModel;
+@class XCShopServiceModel;
 @interface XCCheckoutDetailTextCell : UITableViewCell
 
 @property (nonatomic, strong) NSString * title ;
@@ -23,5 +24,6 @@
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model;
 - (void)setupCellWithCustomerDetailModel:(XCCustomerDetailModel *)model;
 - (void)setupCellWithChargeBackModel:(XCCheckoutDetailBaseModel *)model;
+- (void)setupCellWithShopServiceModel:(XCShopServiceModel *)model;
 
 @end
