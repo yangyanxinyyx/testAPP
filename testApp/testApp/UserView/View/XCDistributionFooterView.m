@@ -8,9 +8,8 @@
 
 #import "XCDistributionFooterView.h"
 @interface XCDistributionFooterView ()
-{
-    UIButton *_confirmBtn;
-}
+
+
 @end
 
 @implementation XCDistributionFooterView

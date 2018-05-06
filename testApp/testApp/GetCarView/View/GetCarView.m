@@ -69,7 +69,7 @@
         requireLabel2.textColor = COLOR_RGB_255(165, 165, 165);
         requireLabel2.numberOfLines = 0;
         NSString *text = [NSString stringWithFormat:@"%@",model.remark];
-        requireLabel2.text = [text isEqualToString:@"(null)"] ? @"没传描述" : model.remark;
+        requireLabel2.text = [text isEqualToString:@"(null)"] ? @"暂无描述" : model.remark;
         [scrollView addSubview:requireLabel2];
 
         UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 365, SCREEN_WIDTH, 5)];
@@ -169,7 +169,7 @@
     NSString *str = self.dataSource[indexPath.row];
     if (isUsableNSString(str, nil)) {
         NSURL *url = [NSURL URLWithString:str];
-        [cell.imageV sd_setImageWithURL:url];
+        [cell.imageV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeHolder.png"]];
     }
     return cell;
 }

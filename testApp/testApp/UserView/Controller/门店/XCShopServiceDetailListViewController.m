@@ -12,6 +12,7 @@
 #define kDetailListCellID @"DetailListCellID"
 #import "XCShopServiceAddServiceViewController.h"
 #import "XCShopServiceEditedServiceViewController.h"
+#import "XCShopServiceCheckoutViewController.h"
 #import "UILabel+createLabel.h"
 #import <MJRefresh/MJRefresh.h>
 #import "LYZAlertView.h"
@@ -55,7 +56,7 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self refreshServiceData];
@@ -78,50 +79,14 @@
 #pragma mark - Action Method
 - (void)clickAddNewService:(UIButton *)button
 {
-    NSDictionary *param = @{
-                            @"storeId":self.storeID,
-                            @"category":self.titleTypeStr,
-                            @"PageSize":@"-1"
-                            };
-    __weak __typeof(self) weakSelf = self;
-    [RequestAPI queryServiceByStoreId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if (response[@"data"]) {
-            if (response[@"data"][@"dataSet"]) {
-                NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
-                NSArray *origionDataArr = response[@"data"][@"dataSet"];
-                for (NSDictionary *dataInfo in origionDataArr) {
-                    //serviceID 为StoreID
-//                    XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                    XCShopServiceModel *serviceModel = [[XCShopServiceModel alloc] init];
-                    NSNumber *number;
-                    NSString *serviceName;
-                    if (dataInfo[@"id"]){
-                         number = [NSNumber numberWithLong:[dataInfo[@"id"] longValue]];
-                    }
-                    if(dataInfo[@"name"]) {
-                        serviceName = dataInfo[@"name"];
-                    }
-                    serviceModel.serviceId = number;
-                    serviceModel.serviceName = serviceName;
-                    [dataArrM addObject:serviceModel];
-                }
-                XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
-                addService.storeID = strongSelf.storeID;
-                addService.dataArrM = dataArrM;
-                [strongSelf.navigationController pushViewController:addService animated:YES];
-            }
-        }
-        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-    } fail:^(id error) {
-        __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        [strongSelf showAlterInfoWithNetWork:@"网络错误"];
-    }];
-    
+    XCShopServiceAddServiceViewController *addService = [[XCShopServiceAddServiceViewController alloc] initWithTitle:@"添加服务"];
+    addService.titleTypeStr = self.titleTypeStr;
+    [self.navigationController pushViewController:addService animated:YES];
 }
 
 - (void)refreshServiceData
 {
+    
     NSDictionary *param = @{
                             @"storeId":[UserInfoManager shareInstance].storeID,
                             };
@@ -160,6 +125,14 @@
 
 #pragma mark - Delegates & Notifications
 #pragma  mark - XCShopDetailListCellDelegate
+
+- (void)XCShopDetailListCellClickDetailButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
+{
+    XCShopServiceCheckoutViewController *detailVC  =[[XCShopServiceCheckoutViewController alloc] initWithTitle:serviceModel.serviceName];
+    detailVC.serviceModel = serviceModel;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 -(void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
 {
     XCShopServiceEditedServiceViewController *editedVC = [[XCShopServiceEditedServiceViewController alloc] initWithTitle:serviceModel.serviceName];
@@ -239,11 +212,10 @@
 {
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//    layout.minimumInteritemSpacing = 18 * ViewRateBaseOnIP6;
-//    layout.itemSize = CGSizeMake((SCREEN_WIDTH - (30 + 18 + 30)*ViewRateBaseOnIP6) * 0.5 , (474) * ViewRateBaseOnIP6);
-     layout.itemSize = CGSizeMake(320 * ViewRateBaseOnIP6 ,474 * ViewRateBaseOnIP6);
-     layout.sectionInset =  UIEdgeInsetsMake( 30  * ViewRateBaseOnIP6, (30+ 15)* ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6 ,(30 + 15) * ViewRateBaseOnIP6);
-    layout.minimumInteritemSpacing = 20 * ViewRateBaseOnIP6;
+
+     layout.itemSize = CGSizeMake(335 * ViewRateBaseOnIP6 ,(336 + 158) * ViewRateBaseOnIP6);
+     layout.sectionInset =  UIEdgeInsetsMake( 30  * ViewRateBaseOnIP6, 30* ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6 ,30* ViewRateBaseOnIP6);
+//    layout.minimumInteritemSpacing = 20 * ViewRateBaseOnIP6;
     layout.minimumLineSpacing = 20 * ViewRateBaseOnIP6;
 
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - 98 * ViewRateBaseOnIP6) collectionViewLayout:layout];

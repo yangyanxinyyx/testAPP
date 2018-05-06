@@ -9,6 +9,7 @@
 #import "XCPhotoPreViewController.h"
 #import "UILabel+createLabel.h"
 #import "WSImageBroserCell.h"
+#import "LYZAlertView.h"
 @interface XCPhotoPreViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 
@@ -40,7 +41,7 @@
 
 #pragma mark - Init Method
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM{
+                      sources:(NSArray<NSString *> *)imageArrM{
     if (self = [super init]) {
 //        self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
         self.view.backgroundColor = [UIColor whiteColor];
@@ -66,7 +67,7 @@
 }
 
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM
+                      sources:(NSArray<NSString *> *)imageArrM
               comlectionBlock:(completionBlock)completionBlock
 {
     self = [self initWithTitle:title sources:imageArrM];
@@ -137,15 +138,21 @@
 
 - (void)onClickDel
 {
-    if(self.showIndex >= 0 && self.showIndex < self.imageArray.count) {
-        [self.tmpDeleArr addObject:self.imageArray[self.showIndex]];
-        [self.imageArray removeObjectAtIndex:self.showIndex];
-        [self.collectionView reloadData];
-    }
-    [self refreshTitle];
-    if(self.imageArray.count == 0) {
-        [self onClickBack];
-    }
+    __weak __typeof(self) weakSelf = self;
+    LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"确认要删除吗?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        if(strongSelf.showIndex >= 0 && strongSelf.showIndex < strongSelf.imageArray.count) {
+            [strongSelf.tmpDeleArr addObject:strongSelf.imageArray[strongSelf.showIndex]];
+            [strongSelf.imageArray removeObjectAtIndex:strongSelf.showIndex];
+            [strongSelf.collectionView reloadData];
+        }
+        [strongSelf refreshTitle];
+        if(strongSelf.imageArray.count == 0) {
+            [strongSelf onClickBack];
+        }
+    }];
+    [self.view addSubview:alterView];
+
 }
 
 #pragma mark - Delegates & Notifications

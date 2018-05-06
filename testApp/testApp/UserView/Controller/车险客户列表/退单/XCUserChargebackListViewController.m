@@ -123,7 +123,7 @@
 
 - (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 //    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
     XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"退单详情"];
     chargebackVC.detailModel = cell.baseModel;

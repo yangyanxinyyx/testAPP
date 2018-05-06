@@ -128,6 +128,7 @@
             [imageView sd_setImageWithURL:imageURL placeholderImage:placeHolderImage];
             imageView.userInteractionEnabled = YES;
             imageView.contentMode = UIViewContentModeScaleToFill;
+//            [imageView setClipsToBounds:YES];
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
             [imageView addGestureRecognizer:tap];
             [_scrollView addSubview:imageView];

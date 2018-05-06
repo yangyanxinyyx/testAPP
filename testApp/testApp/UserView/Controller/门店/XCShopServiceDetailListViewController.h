@@ -18,9 +18,9 @@
 @property (nonatomic, strong) UIImageView * bgImageView ;
 @property (nonatomic, strong) UILabel * bgLabel ;
 
-/** 门店ID */
-@property (nonatomic, strong) NSNumber * storeID ;
-/** <# 注释 #> */
+///** 门店ID */
+//@property (nonatomic, strong) NSNumber * storeID ;
+/** 服务分类 */
 @property (nonatomic, strong) NSString * titleTypeStr ;
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * dataArr ;

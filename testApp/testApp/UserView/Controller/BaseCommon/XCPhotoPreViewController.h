@@ -27,10 +27,10 @@ typedef void (^completionBlock)(NSArray <NSURL *> *deleArray);
  @return ->self
  */
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM;
+                      sources:(NSArray<NSString *> *)imageArrM;
 
 - (instancetype)initWithTitle:(NSString *)title
-                      sources:(NSArray<NSURL *> *)imageArrM
+                      sources:(NSArray<NSString *> *)imageArrM
               comlectionBlock:(completionBlock)completionBlock;
 
 - (void)updatePositionWithIndex:(NSUInteger)index;

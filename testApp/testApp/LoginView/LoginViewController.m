@@ -49,7 +49,7 @@
     _accoutTextField.clearButtonMode = UITextFieldViewModeAlways;
     _accoutTextField.clearsOnBeginEditing = YES;
     _accoutTextField.textAlignment = NSTextAlignmentLeft;
-    _accoutTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    _accoutTextField.keyboardType = UIKeyboardTypeDecimalPad;
     _accoutTextField.returnKeyType = UIReturnKeyDone;
     _accoutTextField.delegate = self;
     UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"login_username.png"]];
@@ -115,8 +115,8 @@
   //    self.passwordTextField.text = @"xc123456";
   //    self.accoutTextField.text = @"15688888888";
     //    self.passwordTextField.text = @"xc123456";
-        self.accoutTextField.text = @"13570229475";
-        self.passwordTextField.text = @"xc123456";
+//        self.accoutTextField.text = @"13570229475";
+//        self.passwordTextField.text = @"xc123456";
 
     [self.view endEditing:YES];
     if (!self.accoutTextField.text || !self.passwordTextField.text) {
@@ -381,6 +381,167 @@
     return [string isEqualToString:filtered];
 }
 
+
+- (void)loginWithUserDefault{
+
+    NSDictionary  *param = @{
+                             @"userCode":[[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"],
+                             @"password":[[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"]
+                             };
+    [RequestAPI getUserInfo:param header:nil success:^(id response) {
+        NSLog(@"%@",response);
+        if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"登录成功");
+                [[NSUserDefaults standardUserDefaults] setObject:self.accoutTextField.text forKey:@"kUserAccout"];
+                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTextField.text forKey:@"kUserPassword"];
+
+                if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *data = response[@"data"];
+                    [UserInfoManager shareInstance].code = data[@"code"] ? data[@"code"] : @"";
+                    [UserInfoManager shareInstance].employeeId = data[@"employeeId"] ? data[@"employeeId"] : 0;
+                    [UserInfoManager shareInstance].employeeName = data[@"employeeName"] ? data[@"employeeName"] : @"";
+                    [UserInfoManager shareInstance].iconUrl = data[@"iconUrl"] ? data[@"iconUrl"] : @"";
+                    [UserInfoManager shareInstance].userID = data[@"id"] ? data[@"id"] : @"";
+                    [UserInfoManager shareInstance].isStoreAdministrator = data[@"isStoreAdministrator"] ? data[@"isStoreAdministrator"] : @"";
+                    [UserInfoManager shareInstance].name = data[@"name"] ? data[@"name"] : @"";
+                    [UserInfoManager shareInstance].orgUnitId = data[@"orgUnitId"] ? data[@"orgUnitId"] : @"";
+                    [UserInfoManager shareInstance].orgUnitName = data[@"orgUnitName"] ? data[@"orgUnitName"] : @"";
+                    [UserInfoManager shareInstance].needModifyPwsNextLogin = data[@"needModifyPwsNextLogin"] ? data[@"needModifyPwsNextLogin"] : @"";
+                    [UserInfoManager shareInstance].noModifyPsw = data[@"noModifyPsw"] ? data[@"noModifyPsw"] : @"";
+                    [UserInfoManager shareInstance].phone = data[@"phone"] ? data[@"phone"] : @"";
+                    NSDictionary *store = [NSDictionary dictionary];
+                    if ( data[@"store"] && [data[@"store"] isKindOfClass:[NSDictionary class]]) {
+                        store = data[@"store"];
+                        [UserInfoManager shareInstance].isStore = store.count > 0 ? YES : NO;
+                    }
+                    [UserInfoManager shareInstance].storeID = store[@"id"] ? store[@"id"] : @"";
+                    [UserInfoManager shareInstance].storeName = store[@"storeName"] ? store[@"name"] : @"";
+                    [UserInfoManager shareInstance].storeCode = store[@"storeCode"] ? store[@"code"] : @"";
+                    [UserInfoManager shareInstance].tel = store[@"tel"] ? store[@"tel"] : @"";
+                    [UserInfoManager shareInstance].corporateName = store[@"corporateName"] ? store[@"corporateName"] : @"";
+                    [UserInfoManager shareInstance].corporateCellphone = store[@"corporateCellphone"] ? store[@"corporateCellphone"] : @"";
+                    [UserInfoManager shareInstance].address = store[@"address"] ? store[@"address"] : @"";
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                }
+
+                //获取车险信息
+                NSDictionary  *param = @{
+                                         @"salesman_id":[UserInfoManager shareInstance].userID
+                                         };
+                [RequestAPI getPersonalPolicy:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                    NSLog(@"%@",response);
+                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                        if ([response[@"result"] integerValue] == 1) {
+                            NSLog(@"获取车险信息成功");
+                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                                NSDictionary *data = response[@"data"];
+                                [UserInfoManager shareInstance].performanceMedal.lastYearCar = data[@"last_year_car"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthCar = data[@"last_month_car"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthCar = data[@"now_month_car"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking = data[@"last_year_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_car_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking = data[@"last_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_car_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking = data[@"now_month_car_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_car_ranking"]]:@"";
+
+                                [UserInfoManager shareInstance].performanceMedal.lastYearInsurance = data[@"last_year_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthInsurance = data[@"last_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthInsurance = data[@"now_month_Insurance"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking = data[@"last_year_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_year_Insurance_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking = data[@"last_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"last_month_Insurance_ranking"]]:@"";
+                                [UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking = data[@"now_month_Insurance_ranking"] ? [NSString stringWithFormat:@"%@",data[@"now_month_Insurance_ranking"]]:@"";
+
+                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                                NSDictionary  *param = @{
+                                                         @"PageSize":@(10),
+                                                         @"PageIndex":@(1)
+                                                         };
+                                [RequestAPI getCoverAnnouncement:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                                    NSLog(@"%@",response);
+                                    if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                                        if ([response[@"result"] integerValue] == 1) {
+                                            NSLog(@"获取公告成功");
+                                            if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+                                                NSDictionary *data = response[@"data"];
+                                                NSArray *dataSet = data[@"dataSet"];
+                                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                                                for (NSDictionary *dicData in dataSet) {
+                                                    CoverAnnouncementModel *announcement = [[CoverAnnouncementModel alloc] init];
+                                                    [announcement setValuesForKeysWithDictionary:dicData];
+                                                    [[UserInfoManager shareInstance].coverMainModel.announcementDatas addObject:announcement];
+                                                }
+                                            }
+
+                                            //获取轮播图信息
+                                            NSDictionary  *param = @{
+                                                                     @"type":@"业务端首页轮播图"
+                                                                     };
+                                            [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                                                NSLog(@"%@",response);
+                                                if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
+                                                    if ([response[@"result"] integerValue] == 1) {
+                                                        NSLog(@"获取轮播图成功");
+                                                        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSArray class]]) {
+                                                            NSArray *dataSet =  response[@"data"];
+                                                            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                                                            for (NSDictionary *dicData in dataSet) {
+                                                                CoverLoopimageModel *loopimage = [[CoverLoopimageModel alloc] init];
+                                                                [loopimage setValuesForKeysWithDictionary:dicData];
+                                                                [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
+                                                            }
+                                                        }
+                                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadCoverMainViewData" object:nil];
+
+                                                    }else if (([response[@"result"] integerValue] == 0)){
+                                                        NSLog(@"获取轮播图失败");
+                                                        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取轮播图错误" complete:nil];
+                                                        [self.view addSubview:tipsView];
+                                                    }
+                                                }
+                                            } fail:^(id error) {
+                                                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                                                [self.view addSubview:tipsView];
+                                            }];
+
+
+                                        }else if (([response[@"result"] integerValue] == 0)){
+                                            NSLog(@"获取公告失败");
+                                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取公告错误" complete:nil];
+                                            [self.view addSubview:tipsView];
+                                        }
+                                    }
+                                } fail:^(id error) {
+                                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                                    [self.view addSubview:tipsView];
+                                }];
+
+                            }
+                        }else if (([response[@"result"] integerValue] == 0)){
+                            NSLog(@"获取车险信息失败");
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"获取车险信息错误" complete:nil];
+                            [self.view addSubview:tipsView];
+                        }
+                    }
+                } fail:^(id error) {
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                    [self.view addSubview:tipsView];
+                }];
+
+
+            }else if (([response[@"result"] integerValue] == 0)){
+                NSLog(@"登录失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"账号或密码错误" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
+
+}
 
 
 - (void)didReceiveMemoryWarning {

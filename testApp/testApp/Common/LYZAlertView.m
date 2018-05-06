@@ -107,7 +107,7 @@
     [self.titleLabel setFrame:CGRectMake(0, 0, self.centerView.bounds.size.width, 110 * ViewRateBaseOnIP6)];
 
     
-     [self.contentLabel setFrame:CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame), self.centerView.bounds.size.width, 110 * ViewRateBaseOnIP6)];
+    [self.contentLabel setFrame:CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame), self.centerView.bounds.size.width, 110 * ViewRateBaseOnIP6)];
     if (!self.contentStr) {
         [self.contentLabel setFrame:CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame), self.centerView.bounds.size.width, 0)];
     }
@@ -126,7 +126,9 @@
 
 - (void)clickComfirmButton:(UIButton *)button
 {
-   self.confirmblock(self);
+    if (self.confirmblock) {
+        self.confirmblock(self);
+    }
    [self removeFromSuperview];
 }
 
@@ -147,25 +149,27 @@
 
 - (void)setTitleStr:(NSString *)titleStr
 {
+    _titleStr = titleStr;
     _titleLabel.text = titleStr;
 }
 
 - (void)setContentStr:(NSString *)contentStr
 {
+    _contentStr = contentStr;
     _contentLabel.text = contentStr;
 }
 
 -(void)setComfirmStr:(NSString *)comfirmStr
 {
+    _confirmStr = comfirmStr;
     [_comfirmBtn setTitle:comfirmStr forState:UIControlStateNormal];
 }
 
 - (void)setCancelStr:(NSString *)cancelStr
 {
+    _cancelStr = cancelStr;
     [_cancelBtn setTitle:cancelStr forState:UIControlStateNormal];
 }
-
-
 
 @end
 

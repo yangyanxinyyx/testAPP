@@ -42,7 +42,7 @@
 /** 预约配送时间 */
 @property (nonatomic, copy) NSString * shipmentTime;
 
-///** 预借款金额 double */
+///** 预借款金额 double 已存在*/
 //@property (nonatomic, strong) NSNumber * borrowMoney ;
 
 /** 收款金额 double */

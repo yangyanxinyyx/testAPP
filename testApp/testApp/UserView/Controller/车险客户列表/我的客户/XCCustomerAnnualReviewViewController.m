@@ -108,8 +108,8 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
                 XCCheckoutDetailTextFiledCell *moneyCell = (XCCheckoutDetailTextFiledCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
                 NSUInteger index = [titleArrM indexOfObject:selectStr];
                 NSString *selectMoney = [moneyArrM objectAtIndex:index];
-                [moneyCell setTitlePlaceholder:selectMoney];
-                [cell setTitleValue:[NSString stringWithMoneyNumber:[selectStr doubleValue]]];
+                [moneyCell setTitlePlaceholder:[NSString stringWithMoneyNumber:[selectMoney doubleValue]]];
+                [cell setTitleValue:selectStr];
                 
                 
                 weakSelf.onlineType = selectStr;

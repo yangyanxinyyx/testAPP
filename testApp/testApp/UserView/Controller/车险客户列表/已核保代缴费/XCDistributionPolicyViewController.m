@@ -413,6 +413,27 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 - (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
 {
     self.selectedTitle = title;
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    if ([title isEqualToString:@"保单金额:"]) {
+        if (isUsable(_billModel.policyTotalAmount, [NSNumber class])) {
+            [textField setText:[_billModel.policyTotalAmount stringValue]];
+        }
+    }
+    else if ([title isEqualToString:@"购买金额:"]) {
+        if (isUsable(_billModel.packageBuyPrice, [NSNumber class])) {
+            [textField setText:[_billModel.packageBuyPrice  stringValue]];
+        }
+    }
+    else if ([title isEqualToString:@"收款金额:"]) {
+        if (isUsable(_billModel.receiveMoney, [NSNumber class])) {
+            [textField setText:[_billModel.receiveMoney stringValue]];
+        }
+    }
 }
 
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
@@ -536,6 +557,12 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
 }
             
 - (BOOL)shouldSetTableViewOffsetWithTitle:(NSString *)title {
+    
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
     
     if ([title isEqualToString:@"联系电话:"]) {
         return YES;
