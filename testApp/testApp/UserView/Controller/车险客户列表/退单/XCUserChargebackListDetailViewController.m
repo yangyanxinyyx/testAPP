@@ -50,7 +50,7 @@
     // 12 15 16 有输入
     NSArray *baseTitleNameArr = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
-                                  @"车型名称:",@"车型代码:",@"(商业)起保日期:",
+                                  @"品牌:",@"车型代码:",@"(商业)起保日期:",
                                   @"(交强)起保日期:",@"保险公司:",
                                   @"交强险(业务员)金额:",@"商业险(业务员)金额:",@"交强险(出单员)金额:",
                                   @"商业险(出单员)金额:",@"出单员:",@"是否续保"];
@@ -181,7 +181,24 @@
 
 #pragma mark - Delegates & Notifications
 #pragma mark - XCCheckoutDetailTextFiledCellDelegate
-
+- (void)XCCheckoutDetailTextFiledBeginEditing:(UITextField *)textField title:(NSString *)title
+{
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    if ([title isEqualToString:@"交强险(业务员)金额:"]) {
+        if (isUsable(self.detailModel.jqMoney, [NSNumber class])) {
+            textField.text =  [self.detailModel.jqMoney stringValue];
+        }
+    }
+    else if ([title isEqualToString:@"商业险(业务员)金额:"]) {
+        if (isUsable(self.detailModel.syMoney, [NSNumber class])) {
+            textField.text =  [self.detailModel.syMoney stringValue];
+        }
+    }
+}
 - (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
 {
     NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
@@ -258,6 +275,20 @@
             }
         }
         [textFiledCell setTitlePlaceholder:placetext];
+        if ([title isEqualToString:@"交强险(业务员)金额:"]) {
+            if (isUsable(self.detailModel.jqMoney, [NSNumber class])) {
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[self.detailModel.jqMoney doubleValue]];
+            }else {
+                textFiledCell.textField.text = @"¥0.00";
+            }
+        }
+        else if ([title isEqualToString:@"商业险(业务员)金额:"]) {
+            if (isUsable(self.detailModel.syMoney, [NSNumber class])) {
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[self.detailModel.syMoney doubleValue]];
+            }else {
+                textFiledCell.textField.text = @"¥0.00";
+            }
+        }
         textFiledCell.delegate = self;
         if (indexPath.section == 0 && indexPath.row == 10) {
             //保险公司

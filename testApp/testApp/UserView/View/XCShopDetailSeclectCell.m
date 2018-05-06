@@ -54,6 +54,7 @@
     UIImage *unSelectImage = [UIImage imageNamed:@"灰勾"];
     _titleLabel = [UILabel createLabelWithTextFontSize:28 textColor:COLOR_RGB_255(68, 68, 68)];
     _selectButton = [UIButton buttonWithType:0];
+    _selectButton.userInteractionEnabled = NO;
     [_selectButton setImage:unSelectImage forState:UIControlStateNormal];
     [_selectButton setImage:selectImage forState:UIControlStateSelected];
     
@@ -65,11 +66,12 @@
 
 - (void)setButtonSelect:(BOOL)selecte
 {
-    if (selecte) {
-        _selectButton.selected = YES;
-    }else {
-        _selectButton.selected = NO;
-    }
+    [_selectButton setSelected:selecte];
+//    if (selecte) {
+//        _selectButton.selected = YES;
+//    }else {
+//        _selectButton.selected = NO;
+//    }
 }
 
 #pragma mark - Delegates & Notifications

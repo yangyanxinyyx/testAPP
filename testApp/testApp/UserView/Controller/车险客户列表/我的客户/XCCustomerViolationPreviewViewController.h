@@ -8,10 +8,9 @@
 
 #import "XCUserBaseViewController.h"
 #import "XCUserViolationDetailModel.h"
-
+#import "XCCustomerDetailModel.h"
 @interface XCCustomerViolationPreviewViewController : XCUserBaseViewController
-
-
-
+/** 客户信息model */
+@property (nonatomic, strong) XCCustomerDetailModel * model ;
 
 @end

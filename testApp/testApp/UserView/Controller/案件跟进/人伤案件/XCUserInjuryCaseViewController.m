@@ -64,7 +64,7 @@
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
         if (weakSelf.pageIndex <= weakSelf.pageCount) {
-            [RequestAPI getMyPolicyInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            [RequestAPI getThreeCaseApplyList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
                 if (response[@"data"]) {
                     if (response[@"data"][@"dataSet"]) {
                         NSArray *origionDataArr = response[@"data"][@"dataSet"];

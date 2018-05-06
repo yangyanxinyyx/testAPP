@@ -11,6 +11,8 @@
 @protocol XCShopDetailListCellDelegate <NSObject>
 - (void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
 - (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
+- (void)XCShopDetailListCellClickDetailButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
+
 @end
 
 @interface XCShopDetailListCell : UICollectionViewCell

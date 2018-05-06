@@ -12,7 +12,12 @@
 #define kheaderViewID @"headerViewID"
 #define kClickCellID @"clickCellID"
 #import "UILabel+createLabel.h"
+#import <MJRefresh.h>
 @interface XCCustomerViolationPreviewViewController ()<XCUserViolationDetailClickCellDelegate>
+/** <# 注释 #> */
+@property (nonatomic, assign) int  pageIndex;
+//下拉刷新获取总页数
+@property (nonatomic, assign) int pageCount ;
 
 @end
 
@@ -27,6 +32,7 @@
     [self.tableView registerClass:[XCUserViolationDetailHeaderView class] forHeaderFooterViewReuseIdentifier:kheaderViewID];
     [self initUI];
     [self configureData];
+    
 
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -41,7 +47,78 @@
 }
 - (void)initUI
 {
-    
+#warning 委托办理成功后，后台没有及时更新UI，故不加刷新
+//    __weak typeof (self)weakSelf = self;
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        NSDictionary *param = @{
+//                                @"carId":weakSelf.model.carId,
+//                                };
+//        weakSelf.pageIndex = 1;
+//        [weakSelf.tableView.mj_footer setState:MJRefreshStateIdle];
+//        [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//            if (response[@"data"][@"lists"]) {
+//                NSArray *dataArr = response[@"data"][@"lists"];
+//                NSMutableArray *detailModelArrM = [[NSMutableArray alloc] init];
+//                for (NSDictionary *dataInfo in dataArr) {
+//                    XCUserViolationDetailModel *model = [XCUserViolationDetailModel yy_modelWithJSON:dataInfo];
+//                    model.customerId = weakSelf.model.customerId;
+//                    model.customerName = weakSelf.model.customerName;
+//                    model.phone = weakSelf.model.phoneNo;
+//                    model.contacts = weakSelf.model.customerName;
+//                    model.carId = weakSelf.model.carId;
+//                    model.plateNo = weakSelf.model.plateNo;
+//                    model.remark = weakSelf.model.remark;
+//                    model.type = @"违章";
+//                    [detailModelArrM addObject:model];
+//                }
+//                weakSelf.dataArrM = detailModelArrM;
+//                [weakSelf.tableView reloadData];
+//            }
+//            [weakSelf.tableView.mj_header endRefreshing];
+//            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//        } fail:^(id error) {
+//            [weakSelf.tableView.mj_header endRefreshing];
+//        }];
+//    }];
+//
+//    self.tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
+//        weakSelf.pageIndex ++;
+//        NSDictionary *param = @{
+//                                @"carId":weakSelf.model.carId,
+//                                };
+//        if (weakSelf.pageIndex <= weakSelf.pageCount) {
+//            [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//                if (response[@"data"][@"lists"]) {
+//                    NSArray *dataArr = response[@"data"][@"lists"];
+//                    for (NSDictionary *dataInfo in dataArr) {
+//                        XCUserViolationDetailModel *model = [XCUserViolationDetailModel yy_modelWithJSON:dataInfo];
+//                        model.customerId = weakSelf.model.customerId;
+//                        model.customerName = weakSelf.model.customerName;
+//                        model.phone = weakSelf.model.phoneNo;
+//                        model.contacts = weakSelf.model.customerName;
+//                        model.carId = weakSelf.model.carId;
+//                        model.plateNo = weakSelf.model.plateNo;
+//                        model.remark = weakSelf.model.remark;
+//                        model.type = @"违章";
+//                        [weakSelf.dataArrM  addObject:model];
+//                    }
+//                    [weakSelf.tableView reloadData];
+//                }
+//                [weakSelf.tableView.mj_header endRefreshing];
+//                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//            } fail:^(id error) {
+//                weakSelf.pageIndex --;
+//                [weakSelf.tableView.mj_footer endRefreshing];
+//            }];
+//        }else {
+//            weakSelf.pageIndex --;
+//            if (weakSelf.pageIndex == weakSelf.pageCount) {
+//                [weakSelf.tableView.mj_footer setState:MJRefreshStateNoMoreData];
+//            }else {
+//                [weakSelf.tableView.mj_footer endRefreshing];
+//            }
+//        }
+//    }];
 }
 #pragma mark - Action Method
 

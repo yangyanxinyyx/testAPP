@@ -119,6 +119,12 @@
 }
 
 #pragma mark - PriceUnderwritingImportTableViewCellDelegate
+- (void)textViewBeginWithTextView:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"内容描述..."]) {
+        textView.text = @"";
+    }
+}
 - (void)textViewENDWithTextView:(UITextView *)textView
 {
     self.contentStr = textView.text;

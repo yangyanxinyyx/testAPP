@@ -120,7 +120,7 @@
 			</dict>
 			<dict>
 				<key>title</key>
-				<string>无责案件</string>
+				<string>无责事故案件</string>
 				<key>iconName</key>
 				<string>无责</string>
 				<key>url</key>

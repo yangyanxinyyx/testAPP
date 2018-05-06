@@ -60,7 +60,19 @@
 		A721814A20922FA8006730CF /* WSImageBroswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813920922FA7006730CF /* WSImageBroswerVC.m */; };
 		A721814B20922FA8006730CF /* WSImageBroserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813A20922FA7006730CF /* WSImageBroserCell.m */; };
 		A721814C20922FA8006730CF /* WSPhotosBroseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A721813B20922FA7006730CF /* WSPhotosBroseVC.m */; };
+		A721F6CB209C8BB700917954 /* XCShopServiceCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A721F6CA209C8BB700917954 /* XCShopServiceCheckoutViewController.m */; };
 		A723D6C420864E50007FDDB9 /* XCUserPackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */; };
+		A724C731209B47F7002BBC21 /* bluetap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C727209B47F5002BBC21 /* bluetap@2x.png */; };
+		A724C732209B47F7002BBC21 /* bluetap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C728209B47F5002BBC21 /* bluetap@3x.png */; };
+		A724C733209B47F7002BBC21 /* redtap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C729209B47F6002BBC21 /* redtap@3x.png */; };
+		A724C734209B47F7002BBC21 /* reject@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72A209B47F6002BBC21 /* reject@2x.png */; };
+		A724C735209B47F7002BBC21 /* redtap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72B209B47F6002BBC21 /* redtap@2x.png */; };
+		A724C736209B47F7002BBC21 /* reject@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72C209B47F6002BBC21 /* reject@3x.png */; };
+		A724C737209B47F7002BBC21 /* yellowtap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72D209B47F7002BBC21 /* yellowtap@2x.png */; };
+		A724C738209B47F7002BBC21 /* greentap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72E209B47F7002BBC21 /* greentap@3x.png */; };
+		A724C739209B47F7002BBC21 /* greentap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C72F209B47F7002BBC21 /* greentap@2x.png */; };
+		A724C73A209B47F7002BBC21 /* yellowtap@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A724C730209B47F7002BBC21 /* yellowtap@3x.png */; };
+		A724C741209B5751002BBC21 /* XCShopRejectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A724C740209B5751002BBC21 /* XCShopRejectView.m */; };
 		A72600722089F394001C5571 /* XCCheckoutPhotoPreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */; };
 		A726007B2089F669001C5571 /* CameraBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600762089F669001C5571 /* CameraBaseViewController.m */; };
 		A726007C2089F669001C5571 /* BIAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72600772089F669001C5571 /* BIAlertViewController.m */; };
@@ -74,6 +86,7 @@
 		A751F6262098206C0084C492 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = A751F6252098206C0084C492 /* city.plist */; };
 		A75335562092C1BE0061CB8C /* XCUserListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75335552092C1BE0061CB8C /* XCUserListFooterView.m */; };
 		A753CC0F207E6AF000AFB66C /* XCShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A753CC0E207E6AF000AFB66C /* XCShopModel.m */; };
+		A757DA73209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A757DA72209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m */; };
 		A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */; };
 		A75D305420811FF70012898A /* XCShopServiceAddServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */; };
 		A75D30572081276F0012898A /* XCShopServiceEditedServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */; };
@@ -430,8 +443,22 @@
 		A721813D20922FA7006730CF /* WSImageBroswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImageBroswerVC.h; sourceTree = "<group>"; };
 		A721813E20922FA7006730CF /* WSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSImageModel.h; sourceTree = "<group>"; };
 		A721813F20922FA7006730CF /* WSPhotosBroseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSPhotosBroseVC.h; sourceTree = "<group>"; };
+		A721F6C9209C8BB700917954 /* XCShopServiceCheckoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceCheckoutViewController.h; sourceTree = "<group>"; };
+		A721F6CA209C8BB700917954 /* XCShopServiceCheckoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceCheckoutViewController.m; sourceTree = "<group>"; };
 		A723D6C220864E50007FDDB9 /* XCUserPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCUserPackageModel.h; sourceTree = "<group>"; };
 		A723D6C320864E50007FDDB9 /* XCUserPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserPackageModel.m; sourceTree = "<group>"; };
+		A724C727209B47F5002BBC21 /* bluetap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetap@2x.png"; sourceTree = "<group>"; };
+		A724C728209B47F5002BBC21 /* bluetap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bluetap@3x.png"; sourceTree = "<group>"; };
+		A724C729209B47F6002BBC21 /* redtap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redtap@3x.png"; sourceTree = "<group>"; };
+		A724C72A209B47F6002BBC21 /* reject@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reject@2x.png"; sourceTree = "<group>"; };
+		A724C72B209B47F6002BBC21 /* redtap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redtap@2x.png"; sourceTree = "<group>"; };
+		A724C72C209B47F6002BBC21 /* reject@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reject@3x.png"; sourceTree = "<group>"; };
+		A724C72D209B47F7002BBC21 /* yellowtap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellowtap@2x.png"; sourceTree = "<group>"; };
+		A724C72E209B47F7002BBC21 /* greentap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greentap@3x.png"; sourceTree = "<group>"; };
+		A724C72F209B47F7002BBC21 /* greentap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greentap@2x.png"; sourceTree = "<group>"; };
+		A724C730209B47F7002BBC21 /* yellowtap@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellowtap@3x.png"; sourceTree = "<group>"; };
+		A724C73F209B5751002BBC21 /* XCShopRejectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopRejectView.h; sourceTree = "<group>"; };
+		A724C740209B5751002BBC21 /* XCShopRejectView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopRejectView.m; sourceTree = "<group>"; };
 		A72600702089F394001C5571 /* XCCheckoutPhotoPreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCCheckoutPhotoPreViewController.h; sourceTree = "<group>"; };
 		A72600712089F394001C5571 /* XCCheckoutPhotoPreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCCheckoutPhotoPreViewController.m; sourceTree = "<group>"; };
 		A72600742089F669001C5571 /* CGAffineTransformFun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAffineTransformFun.h; sourceTree = "<group>"; };
@@ -458,6 +485,8 @@
 		A75335552092C1BE0061CB8C /* XCUserListFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserListFooterView.m; sourceTree = "<group>"; };
 		A753CC0D207E6AF000AFB66C /* XCShopModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopModel.h; sourceTree = "<group>"; };
 		A753CC0E207E6AF000AFB66C /* XCShopModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopModel.m; sourceTree = "<group>"; };
+		A757DA71209D69BC004100CD /* XCShopServiceAddsServiceFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceAddsServiceFooterView.h; sourceTree = "<group>"; };
+		A757DA72209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceAddsServiceFooterView.m; sourceTree = "<group>"; };
 		A75D304F2081022E0012898A /* XCShopServiceDetailListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceDetailListViewController.h; sourceTree = "<group>"; };
 		A75D30502081022E0012898A /* XCShopServiceDetailListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceDetailListViewController.m; sourceTree = "<group>"; };
 		A75D305220811FF70012898A /* XCShopServiceAddServiceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceAddServiceViewController.h; sourceTree = "<group>"; };
@@ -1082,6 +1111,17 @@
 			path = WSImagebroswerVC;
 			sourceTree = "<group>";
 		};
+		A724C73B209B49EA002BBC21 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A724C73F209B5751002BBC21 /* XCShopRejectView.h */,
+				A724C740209B5751002BBC21 /* XCShopRejectView.m */,
+				A757DA71209D69BC004100CD /* XCShopServiceAddsServiceFooterView.h */,
+				A757DA72209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		A72600732089F669001C5571 /* UIbase */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,6 +1520,7 @@
 		FC32BEDC2079AA2000817156 /* 门店 */ = {
 			isa = PBXGroup;
 			children = (
+				A724C73B209B49EA002BBC21 /* View */,
 				A753CC0C207E5E3500AFB66C /* Model */,
 				FC32BEDD2079AA2000817156 /* XCShopViewController.h */,
 				FC32BEDE2079AA2000817156 /* XCShopViewController.m */,
@@ -1491,6 +1532,8 @@
 				A75D305320811FF70012898A /* XCShopServiceAddServiceViewController.m */,
 				A75D30552081276F0012898A /* XCShopServiceEditedServiceViewController.h */,
 				A75D30562081276F0012898A /* XCShopServiceEditedServiceViewController.m */,
+				A721F6C9209C8BB700917954 /* XCShopServiceCheckoutViewController.h */,
+				A721F6CA209C8BB700917954 /* XCShopServiceCheckoutViewController.m */,
 			);
 			path = "门店";
 			sourceTree = "<group>";
@@ -2002,6 +2045,16 @@
 				FCEF5CE7208ED8EC00B387FA /* 返回拷贝10@3x.png */,
 				250F5AFB2093779700F7C11B /* pin@2x.png */,
 				250F5AFE2093779800F7C11B /* pin@3x.png */,
+				A724C727209B47F5002BBC21 /* bluetap@2x.png */,
+				A724C728209B47F5002BBC21 /* bluetap@3x.png */,
+				A724C72F209B47F7002BBC21 /* greentap@2x.png */,
+				A724C72E209B47F7002BBC21 /* greentap@3x.png */,
+				A724C72B209B47F6002BBC21 /* redtap@2x.png */,
+				A724C729209B47F6002BBC21 /* redtap@3x.png */,
+				A724C72A209B47F6002BBC21 /* reject@2x.png */,
+				A724C72C209B47F6002BBC21 /* reject@3x.png */,
+				A724C72D209B47F7002BBC21 /* yellowtap@2x.png */,
+				A724C730209B47F7002BBC21 /* yellowtap@3x.png */,
 				250F5AFF2093779800F7C11B /* position@2x.png */,
 				250F5AFD2093779700F7C11B /* position@3x.png */,
 				250F5B002093779800F7C11B /* selectPoint@2x.png */,
@@ -2162,6 +2215,7 @@
 				FCEF5D3E208ED8ED00B387FA /* 标准洗车图@2x.png in Resources */,
 				FCEF5D31208ED8ED00B387FA /* NewCustomeradd2@3x.png in Resources */,
 				FCEF5D2C208ED8ED00B387FA /* startBg.png in Resources */,
+				A724C734209B47F7002BBC21 /* reject@2x.png in Resources */,
 				FCEF5D16208ED8ED00B387FA /* 禁止@3x.png in Resources */,
 				FCEF5D18208ED8ED00B387FA /* 选中@3x.png in Resources */,
 				FCEF5CF7208ED8EC00B387FA /* price_nomnal@3x.png in Resources */,
@@ -2172,19 +2226,23 @@
 				FCEF5D46208ED8ED00B387FA /* 背景@2x.png in Resources */,
 				FCEF5D03208ED8EC00B387FA /* 没有季军@3x.png in Resources */,
 				FCEF5CE9208ED8EC00B387FA /* back@3x.png in Resources */,
+				A724C732209B47F7002BBC21 /* bluetap@3x.png in Resources */,
 				250F5B022093779800F7C11B /* selectPoint@3x.png in Resources */,
 				FCEF5CEE208ED8EC00B387FA /* down@2x.png in Resources */,
 				25712B2A20908F37001629AD /* guide2@3x.png in Resources */,
 				FC47951D205553E900218362 /* LaunchScreen.storyboard in Resources */,
 				FCEF5CFA208ED8EC00B387FA /* user_nomnal@2x.png in Resources */,
 				FCEF5D30208ED8ED00B387FA /* confirm@3x.png in Resources */,
+				A724C735209B47F7002BBC21 /* redtap@2x.png in Resources */,
 				FCEF5CFE208ED8EC00B387FA /* 没有亚军@2x.png in Resources */,
 				FCEF5D44208ED8ED00B387FA /* 精致洗车图@2x.png in Resources */,
+				A724C738209B47F7002BBC21 /* greentap@3x.png in Resources */,
 				FCEF5CFF208ED8EC00B387FA /* 没有亚军@3x.png in Resources */,
 				FCEF5D2A208ED8ED00B387FA /* placeHolder@3x.png in Resources */,
 				FCEF5D26208ED8ED00B387FA /* login_username@3x.png in Resources */,
 				25712B2920908F37001629AD /* guide2@2x.png in Resources */,
 				FCEF5CFB208ED8EC00B387FA /* user_nomnal@3x.png in Resources */,
+				A724C736209B47F7002BBC21 /* reject@3x.png in Resources */,
 				FCEF5D0D208ED8ED00B387FA /* 汽车2.jpg in Resources */,
 				FCEF5D13208ED8ED00B387FA /* 未选中@2x.png in Resources */,
 				FCEF5D36208ED8ED00B387FA /* unconfirm@3x.png in Resources */,
@@ -2195,6 +2253,7 @@
 				FCEF5D37208ED8ED00B387FA /* 个人中心@2x.png in Resources */,
 				FCEF5D27208ED8ED00B387FA /* next@2x.png in Resources */,
 				FCEF5D28208ED8ED00B387FA /* next@3x.png in Resources */,
+				A724C73A209B47F7002BBC21 /* yellowtap@3x.png in Resources */,
 				FCEF5D48208ED8ED00B387FA /* 返回拷贝10@3x.png in Resources */,
 				FCEF5D1E208ED8ED00B387FA /* login_code@3x.png in Resources */,
 				FCEF5D35208ED8ED00B387FA /* unconfirm@2x.png in Resources */,
@@ -2223,6 +2282,7 @@
 				FCEF5D15208ED8ED00B387FA /* 禁止@2x.png in Resources */,
 				FCEF5D0A208ED8EC00B387FA /* 提醒@2x.png in Resources */,
 				FCEF5D43208ED8ED00B387FA /* 添加符号@3x.png in Resources */,
+				A724C739209B47F7002BBC21 /* greentap@2x.png in Resources */,
 				FCEF5D1C208ED8ED00B387FA /* loading@2x.png in Resources */,
 				250F5B042093779800F7C11B /* pin@3x.png in Resources */,
 				FCEF5D08208ED8EC00B387FA /* 年度季军@2x.png in Resources */,
@@ -2240,6 +2300,7 @@
 				250F5B032093779800F7C11B /* position@3x.png in Resources */,
 				250F5B012093779800F7C11B /* pin@2x.png in Resources */,
 				FCEF5D42208ED8ED00B387FA /* 添加符号@2x.png in Resources */,
+				A724C733209B47F7002BBC21 /* redtap@3x.png in Resources */,
 				FCEF5D07208ED8EC00B387FA /* 年度冠军@3x.png in Resources */,
 				25FE1E432091785E0034E2A2 /* guide3@2x.png in Resources */,
 				FCEF5D12208ED8ED00B387FA /* 暂无订单@3x.png in Resources */,
@@ -2258,6 +2319,8 @@
 				FCEF5D10208ED8ED00B387FA /* 搜索@3x.png in Resources */,
 				FCEF5D3A208ED8ED00B387FA /* 快速洗车图@2x.png in Resources */,
 				FCEF5D32208ED8ED00B387FA /* red.png in Resources */,
+				A724C731209B47F7002BBC21 /* bluetap@2x.png in Resources */,
+				A724C737209B47F7002BBC21 /* yellowtap@2x.png in Resources */,
 				FCEF5CF2208ED8EC00B387FA /* getCar_select@2x.png in Resources */,
 				FC32BF3F2079AA2000817156 /* userListViewData.plist in Resources */,
 				FCEF5D02208ED8EC00B387FA /* 没有季军@2x.png in Resources */,
@@ -2436,6 +2499,7 @@
 				A720C5AC2081AED9006B0C33 /* UserViewController+ListCellNetworkHandler.m in Sources */,
 				FC47955520556EAB00218362 /* GetCarViewController.m in Sources */,
 				A7B08BB72095DC12002BD479 /* XCPhotoPreViewController.m in Sources */,
+				A757DA73209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m in Sources */,
 				FC33AB412088387E0081D30A /* AddOrderListCell.m in Sources */,
 				FC32BF242079AA2000817156 /* XCUserRepairDetailViewController.m in Sources */,
 				FC32BFA12079AA5900817156 /* PriceCarInsuranceQViewController.m in Sources */,
@@ -2512,6 +2576,7 @@
 				A7281845208B7105001BD20F /* XCUserViolationDetailHeaderView.m in Sources */,
 				A726007D2089F669001C5571 /* CGAffineTransformFun.m in Sources */,
 				FC32BF3E2079AA2000817156 /* XCUserListModel.m in Sources */,
+				A721F6CB209C8BB700917954 /* XCShopServiceCheckoutViewController.m in Sources */,
 				FC32BF442079AA2000817156 /* XCCheckoutDetailTextCell.m in Sources */,
 				A71EF1282082F3EF001B75ED /* XCCarTransactionModel.m in Sources */,
 				FC32BFB02079AA5900817156 /* PriceCRQLastYInfoTableViewCell.m in Sources */,
@@ -2530,6 +2595,7 @@
 				FC32BF382079AA2000817156 /* XCShopViewController.m in Sources */,
 				2570165E207DE560007177F5 /* SelectStateView.m in Sources */,
 				250784C42081A28600B573F3 /* InputTextView.m in Sources */,
+				A724C741209B5751002BBC21 /* XCShopRejectView.m in Sources */,
 				FC32BFA52079AA5900817156 /* PriceUnderwritingViewController.m in Sources */,
 				FC32BFBE2079AA5900817156 /* PriceInfoCellView.m in Sources */,
 				FC32BFC62079AAAD00817156 /* NSString+MoneyString.m in Sources */,

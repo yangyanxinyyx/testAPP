@@ -34,12 +34,19 @@
     CGSize labelSize = _titleLabel.frame.size;
     [_titleLabel setFrame:CGRectMake(30 * ViewRateBaseOnIP6, (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
     
-    labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
-    [_extendBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
+    CGFloat valueLabelLeftMargin = 16 * ViewRateBaseOnIP6;
+    if (_shouldShowArrow) {
+        labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
+        [_extendBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
+    }else {
+        labelSize = CGSizeMake(0.1, 0.1);
+        [_extendBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
+        valueLabelLeftMargin = 0;
+    }
     
     [_valueLabel sizeToFit];
     labelSize = _valueLabel.frame.size;
-    [_valueLabel setFrame:CGRectMake(CGRectGetMinX(_extendBtn.frame) - 16 * ViewRateBaseOnIP6 - labelSize.width , (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
+    [_valueLabel setFrame:CGRectMake(CGRectGetMinX(_extendBtn.frame) - valueLabelLeftMargin - labelSize.width , (self.bounds.size.height - labelSize.height) * 0.5, labelSize.width,labelSize.height)];
     if (_shouldShowSeparator) {
         if (_isCenterSeparator) {
             [_separtatorLine setFrame:CGRectMake(30 * ViewRateBaseOnIP6 , self.bounds.size.height - 1, self.bounds.size.width - (30 * ViewRateBaseOnIP6) * 2, 1)];
@@ -70,6 +77,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _shouldShowSeparator = YES;
         _isCenterSeparator = NO;
+        _shouldShowArrow = YES ;
         [self configSubVies];
     }
     return self;
@@ -81,7 +89,7 @@
     _valueLabel = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(165, 165, 165)];
     _extendBtn = [UIButton buttonWithType:0];
     [_extendBtn setImage:[UIImage imageNamed:@"next"] forState:UIControlStateNormal];
-    
+    [_extendBtn addTarget:self action:@selector(clickArrowBtn:) forControlEvents:UIControlEventTouchUpInside];
     _separtatorLine = [[UIView alloc] init];
     [_separtatorLine setBackgroundColor:COLOR_RGB_255(229, 229, 229)];
     [self addSubview:_titleLabel];
@@ -92,6 +100,13 @@
 }
 
 #pragma mark - Action Method
+
+- (void)clickArrowBtn:(UIButton *)button
+{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(XCDistributionPicketCellClickArrowBtn:title:cell:)]) {
+        [self.delegate XCDistributionPicketCellClickArrowBtn:button title:self.titleLabel.text cell:self];
+    }
+}
 
 - (void)setupCellWithShopModel:(XCShopModel *)model
 {

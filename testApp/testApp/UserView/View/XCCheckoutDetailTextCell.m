@@ -10,6 +10,7 @@
 #import "XCCheckoutDetailBaseModel.h"
 #import "XCCustomerDetailModel.h"
 #import "UILabel+createLabel.h"
+#import "XCShopServiceModel.h"
 @interface XCCheckoutDetailTextCell()
 
 //@property (nonatomic, strong) UILabel * titleLabel ;
@@ -92,9 +93,10 @@
        }
    }else if ([self.title isEqualToString:@"初登日期:"] ) {
        if (isUsableNSString(model.recordDate,@"")) {
-           NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-           NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-           [_placeholderLabel setText:[tmpArr firstObject]];
+//           NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//           NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+           [_placeholderLabel setText:model.recordDate];
+           
        }else {
            [_placeholderLabel setText:@" "];
        }
@@ -104,7 +106,7 @@
        }else {
            [_placeholderLabel setText:@" "];
        }
-    }else if ([self.title isEqualToString:@"车型名称:"]) {
+    }else if ([self.title isEqualToString:@"品牌:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -118,17 +120,17 @@
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.syEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.jqEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -279,9 +281,9 @@
     }
     else if ([self.title isEqualToString:@"初登日期:"]) {
         if (isUsableNSString(model.recordDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.recordDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -344,9 +346,9 @@
         }
     }else if ([self.title isEqualToString:@"初登日期:"] ) {
         if (isUsableNSString(model.recordDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.recordDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -356,7 +358,7 @@
         }else {
             [_placeholderLabel setText:@" "];
         }
-    }else if ([self.title isEqualToString:@"车型名称:"]) {
+    }else if ([self.title isEqualToString:@"品牌:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -370,17 +372,17 @@
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.syEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.jqEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -464,7 +466,88 @@
         }
     }
 }
+- (void)setupCellWithShopServiceModel:(XCShopServiceModel *)model
+{
+    
+    if ([self.titleLabel.text isEqualToString:@"当前状态:"]) {
+        if (isUsableNSString(model.status, @"")) {
+            [_placeholderLabel setText:model.status];
+        }else {
+            [_placeholderLabel setText:@""];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"拒绝时间:"] ||
+             [self.titleLabel.text isEqualToString:@"提交时间:"]||
+             [self.titleLabel.text isEqualToString:@"下架时间:"]||[self.titleLabel.text isEqualToString:@"上架时间:"])
+    {
+        if ([self.titleLabel.text isEqualToString:@"拒绝时间:"]) {
+            if (isUsableNSString(model.auditingTime, @"")) {
+                [_placeholderLabel setText:model.auditingTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"提交时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"下架时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
+        else if ([self.titleLabel.text isEqualToString:@"上架时间:"])
+        {
+            if (isUsableNSString(model.updateTime, @"")) {
+                [_placeholderLabel setText:model.updateTime];
+            }else {
+                [_placeholderLabel setText:@""];
+            }
+        }
 
+    }
+    else if ([self.titleLabel.text isEqualToString:@"原      价:"] )
+    {
+        if (isUsable(model.servicePrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.servicePrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"标准售价:"] )
+    {
+        if (isUsable(model.serviceVipPrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.serviceVipPrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"门店价格:"] )
+    {
+        _placeholderLabel.textColor = [UIColor redColor];
+        if (isUsable(model.price, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.price doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+    else if ([self.titleLabel.text isEqualToString:@"高级会员价:"] )
+    {
+        _placeholderLabel.textColor = [UIColor redColor];
+        if (isUsable(model.vipPrice, [NSNumber class])) {
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.vipPrice doubleValue]]];
+        }else {
+            [_placeholderLabel setText:@"¥0.00"];
+        }
+    }
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

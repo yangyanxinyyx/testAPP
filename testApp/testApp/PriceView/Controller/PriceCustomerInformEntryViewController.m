@@ -296,7 +296,7 @@
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
         selectTV.block = ^(NSString * timeString) {
             cell.textField.text = timeString;
-            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"motTestTime"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
     } else if (indexPath.section == 0 && indexPath.row == 6) {
@@ -304,7 +304,7 @@
         SelectTimeView *selectTV = [[SelectTimeView alloc] initWithFrame:self.view.frame];
         selectTV.block = ^(NSString * timeString) {
             cell.textField.text = timeString;
-            [weakSelf.dictionaryInfo setObject:timeString forKey:@"birthday"];
+            [weakSelf.dictionaryInfo setObject:timeString forKey:@"insuranceTime"];
         };
         [[UIApplication sharedApplication].keyWindow addSubview:selectTV];
     } else if (indexPath.section == 1 && indexPath.row == 4) {

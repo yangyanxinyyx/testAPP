@@ -14,6 +14,7 @@
 @end
 
 @interface XCDistributionFooterView : UITableViewHeaderFooterView
+@property (nonatomic, strong) UIButton * confirmBtn ;
 
 @property (nonatomic, copy) NSString *title ;
 @property (nonatomic, weak) id<XCDistributionFooterViewDelegate> delegate;

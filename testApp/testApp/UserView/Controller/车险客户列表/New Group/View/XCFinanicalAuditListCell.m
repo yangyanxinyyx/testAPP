@@ -126,9 +126,9 @@
             [_processLabel setText:@" "];
         }
         if (isUsableNSString(model.createTime,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_timeLabel setText:[NSString stringWithFormat:@"配送时间: %@",[tmpArr firstObject]]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_timeLabel setText:[NSString stringWithFormat:@"配送时间: %@",model.createTime]];
         }else {
             [_timeLabel setText:@"配送时间:  "];
         }
@@ -141,9 +141,9 @@
             [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
         }
         if (isUsableNSString(model.createTime,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
         }else {
             [_timeLabel setText:@"创建时间:  "];
         }

@@ -11,7 +11,7 @@
 
 #define SCREEN_SCALE  [UIScreen mainScreen].scale
 #define SCREEN_TABBAR_HEIGHT 44
-#define THREECASEDETAIL_CUSTOMERPHOT @"13800138000"
+#define THREECASEDETAIL_CUSTOMERPHOT @"020-4328432"
 #define XCFont(fontSize) [UIFont fontWithName:@"PingFang-SC-Medium" size:(fontSize) * ViewRateBaseOnIP6]
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"

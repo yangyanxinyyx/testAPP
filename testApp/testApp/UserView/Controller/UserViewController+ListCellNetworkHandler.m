@@ -156,8 +156,8 @@
         NSDictionary *param = @{
                                 @"id":[UserInfoManager shareInstance].storeID,
                                 };
+        XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
         [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
             if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
                 XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
                 subVC.storeModel = shopModel;
@@ -165,8 +165,7 @@
             [weakSelf.navigationController pushViewController:subVC animated:YES];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
-          XCCheckoutBaseTableViewController *subVC = [(XCCheckoutBaseTableViewController *)[NSClassFromString(model.urlString)alloc] initWithTitle:model.title];
-         [weakSelf.navigationController pushViewController:subVC animated:YES];
+            [weakSelf.navigationController pushViewController:subVC animated:YES];
         }];
     }
     
@@ -220,7 +219,7 @@
     if ([model.title isEqualToString:@"人伤案件"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"无责案件"]) {
+    else if ([model.title isEqualToString:@"无责事故案件"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"特殊案件"]) {
