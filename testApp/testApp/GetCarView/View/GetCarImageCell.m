@@ -23,7 +23,6 @@
 {
     [super layoutSubviews];
     _imageV.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    _imageV.image = [UIImage imageNamed:@"placeHolder.png"];
 }
 
 @end

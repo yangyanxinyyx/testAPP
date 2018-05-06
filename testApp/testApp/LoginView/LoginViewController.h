@@ -10,4 +10,6 @@
 
 @interface LoginViewController : BaseViewController1
 
+- (void)loginWithUserDefault;
+
 @end

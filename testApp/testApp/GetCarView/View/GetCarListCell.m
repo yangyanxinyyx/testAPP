@@ -117,7 +117,7 @@
     _getCarBtnType = getCarBtnType;
 
     if (_getCarBtnType == GetCarBtnTypeGet) {
-        [self.getCarBtn setTitle:@"接车" forState:UIControlStateNormal];
+        [self.getCarBtn setTitle:@"查看" forState:UIControlStateNormal];
         self.getCarBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
         _label3.text = @"预约时间:";
     }else if (_getCarBtnType == GetCarBtnTypePay){

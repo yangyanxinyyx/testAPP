@@ -29,7 +29,7 @@
     titleLabel.font = [UIFont systemFontOfSize:13];
     [self addSubview:titleLabel];
 
-    NSArray *textArrays = @[@"年度业绩",@"上月业绩",@"本月业绩",@"年度排名",@"上月排名",@"本月排名"];
+    NSArray *textArrays = @[@"上年业绩",@"上月业绩",@"本月业绩",@"上年排名",@"上月排名",@"本月排名"];
     NSArray *contentArrays = nil;
     if (data) {
         contentArrays = [NSArray arrayWithArray:data];

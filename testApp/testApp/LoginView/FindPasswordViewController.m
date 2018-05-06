@@ -45,9 +45,15 @@
         accoutTextField.leftView=imageView;
         accoutTextField.leftViewMode = UITextFieldViewModeAlways;
         accoutTextField.font = [UIFont systemFontOfSize:14];
+        accoutTextField.tag = i;
+        [accoutTextField21 addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
+
+        if (i == 0) {
+            accoutTextField.keyboardType = UIKeyboardTypeDecimalPad;
+        }
 
         if (i == 1) {
-            accoutTextField.frame = CGRectMake(10, CGRectGetMaxY(topImageView.frame) + i * 44, SCREEN_WIDTH-20 - 90, 44);
+            accoutTextField.frame = CGRectMake(10, CGRectGetMaxY(topImageView.frame) + i * 44, SCREEN_WIDTH-20 - 110, 44);
 
             UIButton *sendCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 20 - 90,CGRectGetMaxY(topImageView.frame) + i * 44+ 7, 90, 30)];
             [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
@@ -59,13 +65,13 @@
             sendCodeBtn.layer.borderWidth =1;
             sendCodeBtn.layer.borderColor = [COLOR_RGB_255(57, 174, 54) CGColor];
             [self.view addSubview:sendCodeBtn];
+        }else if (i == 2 || i == 3){
+            accoutTextField.secureTextEntry = YES;
         }
 
-//        if (i != 2) {
             UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(topImageView.frame) + 44 * (i +1), SCREEN_WIDTH - 30, 1)];
             line.backgroundColor = COLOR_RGBA_255(229, 229, 229, 1);
             [self.view addSubview:line];
-//        }
 
     }
 
@@ -116,28 +122,54 @@
     [self.view endEditing:YES];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    return [self validateNumber:string];
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.view endEditing:YES];
+        if (textField.tag == 0) {
+            NSString *str = [YXTestNumber testingMobile:textField.text];
+            if (str && str.length > 0) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:str complete:^{
+                    textField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
 
-}
-- (BOOL)validateNumber:(NSString*)number {
-    BOOL res = YES;
-    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-    int i = 0;
-    while (i < number.length) {
-        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
-        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
-        if (range.length == 0) {
-            res = NO;
-            break;
+        }else if (textField.tag == 1){
 
+        }else {
+            if (textField.text.length < 6 && textField.text.length > 0) {
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"密码字数不能低于6位" complete:^{
+                    textField.text = @"";
+                }];
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            }
         }
-        i++;
 
+    if (textField.tag == 3) {
+        UITextField *passField = [self.view viewWithTag:2];
+        if (![textField.text isEqualToString:passField.text]) {
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"请确认密码保持一致" complete:^{
+                textField.text = @"";
+            }];
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+        }
     }
-    return res;
 
 }
+
+- (void)textFieldDidChangePhoneNnumber:(UITextField *)textField{
+    if (textField.tag == 0) {
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:LETTERNUMKEYBOARD] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

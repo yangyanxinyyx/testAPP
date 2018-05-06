@@ -67,11 +67,11 @@
 //    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
 //    [_scrollView addSubview:_announcementView];
 
-    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:@[@"3213",@"31223",@"3123",@"3",@"2",@"1"]];
+    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:@[@"0",@"0",@"0",@"0",@"0",@"0"]];
     _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
     [_scrollView addSubview:_carView];
 
-    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:@[@"3213",@"31223",@"3123",@"3",@"2",@"1"]];
+    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:@[@"0",@"0",@"0",@"0",@"0",@"0"]];
     _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
     [_scrollView addSubview:_repairView];
 
@@ -274,7 +274,13 @@
 - (void)getLoginUserInfo
 {
     LoginViewController *loginVC = [[LoginViewController alloc] init];
-    [self presentViewController:loginVC animated:NO completion:nil];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"] && [[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"]) {
+        [loginVC loginWithUserDefault];
+    }else{
+
+        [self presentViewController:loginVC animated:NO completion:nil];
+    }
+
 }
 
 - (void)pressMedalBtn
