@@ -28,7 +28,8 @@
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
-    
+    [self hideNullDataView];
+
 }
 
 
@@ -64,7 +65,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return 3;
 }
 

@@ -26,7 +26,8 @@
 #import <TZImagePickerController.h>
 #import "XCShopRejectView.h"
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
-
+#define kshopStatusDaiShenHe @"待审核"
+#define kshopStatusShenHeTongGuo @""
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
@@ -225,8 +226,11 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
         if ([response[@"result"] integerValue] == 1) {
                 [strongSelf.networkURLArrM  removeAllObjects];
                 [strongSelf deleteAllTmpPhoto];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:9 inSection:0];
+            XCDistributionPicketCell *picketCell = [weakSelf.storeTableView cellForRowAtIndexPath:indexPath];
+            [picketCell setTitleValue:kshopStatusDaiShenHe];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+            [strongSelf showAlterInfoWithNetWork:response[@"errormsg"] complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
@@ -501,8 +505,9 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
         _storeModel.tel = @"";
     }
     if (!isUsableNSString(_storeModel.type,@"")) {
-        configureSuccess = NO;
-        errorStr = @"未知门店类型,请联系客服!";
+//        configureSuccess = NO;
+//        errorStr = @"未知门店类型,请联系客服!";
+        _storeModel.type = @"";
     }
     if (!isUsableNSString(_storeModel.corporateName,@"")) {
         _storeModel.corporateName = @"";
@@ -697,7 +702,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
             [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }];
-        if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+        if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
             previewVC.shouldShowDeleBtm = NO;
         }else {
             previewVC.shouldShowDeleBtm = YES;
@@ -728,7 +733,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
             [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }];
-        if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+        if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
             previewVC.shouldShowDeleBtm = NO;
         }else {
             previewVC.shouldShowDeleBtm = YES;
@@ -938,7 +943,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             picketCell.title = title;
             [picketCell setTitleValue:holderStr];
             [picketCell setupCellWithShopModel:self.storeModel];
-            if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+            if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
                 picketCell.userInteractionEnabled = NO;
             }else {
                 picketCell.userInteractionEnabled = YES;
@@ -951,9 +956,9 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             if (isUsableNSString(self.storeModel.storeStatus, @"")) {
                 pickerCell.titleValue = self.storeModel.storeStatus;
             }else {
-                pickerCell.titleValue = @"待审核";/// 写死了
+                pickerCell.titleValue = @"";/// 写死了
             }
-            if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+            if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
                 pickerCell.userInteractionEnabled = NO;
             }else {
                 pickerCell.userInteractionEnabled = YES;
@@ -982,11 +987,12 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
                   textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
             }else if([title isEqualToString:@"详细地址:"]) {
                 textFiledCell.shouldShowClickView = YES;
+                [textFiledCell.textField setTextAlignment:NSTextAlignmentRight];
             }
             if (self.storeModel) {
                 [textFiledCell setupCellWithShopModel:self.storeModel];
             }
-            if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+            if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
                 textFiledCell.userInteractionEnabled = NO;
             }else {
                 textFiledCell.userInteractionEnabled = YES;
@@ -1021,7 +1027,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     if (tableView == self.storeTableView) {
         XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
         [footerView setTitle:@"提交审核"];
-        if ([self.storeModel.storeStatus isEqualToString:@"审核中"]) {
+        if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
             [footerView.confirmBtn setBackgroundColor:COLOR_RGB_255(204, 204, 204)];
             footerView.userInteractionEnabled = NO ;
             [footerView setTitle:@"正在审核"];

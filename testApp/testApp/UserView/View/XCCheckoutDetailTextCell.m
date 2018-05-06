@@ -93,9 +93,10 @@
        }
    }else if ([self.title isEqualToString:@"初登日期:"] ) {
        if (isUsableNSString(model.recordDate,@"")) {
-           NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-           NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-           [_placeholderLabel setText:[tmpArr firstObject]];
+//           NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//           NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+           [_placeholderLabel setText:model.recordDate];
+           
        }else {
            [_placeholderLabel setText:@" "];
        }
@@ -105,7 +106,7 @@
        }else {
            [_placeholderLabel setText:@" "];
        }
-    }else if ([self.title isEqualToString:@"车型名称:"]) {
+    }else if ([self.title isEqualToString:@"品牌:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -119,17 +120,17 @@
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.syEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.jqEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -280,9 +281,9 @@
     }
     else if ([self.title isEqualToString:@"初登日期:"]) {
         if (isUsableNSString(model.recordDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.recordDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -345,9 +346,9 @@
         }
     }else if ([self.title isEqualToString:@"初登日期:"] ) {
         if (isUsableNSString(model.recordDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.recordDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
@@ -357,7 +358,7 @@
         }else {
             [_placeholderLabel setText:@" "];
         }
-    }else if ([self.title isEqualToString:@"车型名称:"]) {
+    }else if ([self.title isEqualToString:@"品牌:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -371,17 +372,17 @@
         }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.syEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }
     }else if ([self.title isEqualToString:@"(交强)起保日期:"]) {
         if (isUsableNSString(model.jqEffectDate,@"")) {
-            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-            [_placeholderLabel setText:[tmpArr firstObject]];
+//            NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//            NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+            [_placeholderLabel setText:model.jqEffectDate];
         }else {
             [_placeholderLabel setText:@" "];
         }

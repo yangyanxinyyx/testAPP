@@ -235,10 +235,10 @@
         weizhangCity = model.weizhangCity;
     }
     if (isUsableNSString(model.weizhangDate, @"")) {
-//        weizhangDate = model.weizhangDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.weizhangDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        weizhangDate = [tmpArr firstObject];
+        weizhangDate = model.weizhangDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.weizhangDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        weizhangDate = [tmpArr firstObject];
     }
     if (isUsable(model.buckleScores, [NSNumber class])) {
         buckleScores = [NSString stringWithFormat:@"%@分",model.buckleScores];
@@ -392,10 +392,10 @@
 {
     self.labelTitleArrM = @[@"投保人:",@"身份证:",@"车牌号:",
                                  @"车架号:",@"初登日期:",@"发动机号:",
-                                 @"车型名称:",@"车型代码:",@"(商业)起保日期:",
+                                 @"品牌:",@"车型代码:",@"(商业)起保日期:",
                                  @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
-                                 @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强保单最终金额:",
-                                 @"商业险保险最终金额:",@"交强险保单:",@"商业险保单:",
+                                 @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强险保单最终金额:",
+                                 @"商业险保单最终金额:",@"交强险保单:",@"商业险保单:",
                                  @"出单员:",@"备注:"];
     NSString * onwerName = @" ";
     NSString * onwerIdentify = @" ";
@@ -430,10 +430,10 @@
         vinNo = model.vinNo;
     }
     if (isUsableNSString(model.recordDate, @"")) {
-//        recordDate = model.recordDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        recordDate = [tmpArr firstObject];
+        recordDate = model.recordDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        recordDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.engineNo, @"")) {
         engineNo = model.engineNo;
@@ -445,16 +445,16 @@
         carModel = model.model;
     }
     if (isUsableNSString(model.syEffectDate, @"")) {
-//        syEffectDate = model.syEffectDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        recordDate = [tmpArr firstObject];
+        syEffectDate = model.syEffectDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        recordDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.jqEffectDate, @"")) {
-//        jqEffectDate = model.jqEffectDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        recordDate = [tmpArr firstObject];
+        jqEffectDate = model.jqEffectDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        recordDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.insurerName, @"")) {
         insurerName = model.insurerName;
@@ -462,11 +462,11 @@
     if (isUsableNSString(model.payNoticeNo, @"")) {
         payNoticeNo = model.payNoticeNo;
     }
-    if (isUsable(model.jqMoney, [NSNumber class])) {
-        jqMoney = [NSString stringWithMoneyNumber:[model.jqMoney doubleValue]];
+    if (isUsable(model.jqMoneyExport, [NSNumber class])) {
+        jqMoney = [NSString stringWithMoneyNumber:[model.jqMoneyExport doubleValue]];
     }
-    if (isUsable(model.syMoney, [NSNumber class])) {
-        syMoney =  [NSString stringWithMoneyNumber:[model.syMoney doubleValue]];
+    if (isUsable(model.syMoneyExport, [NSNumber class])) {
+        syMoney =  [NSString stringWithMoneyNumber:[model.syMoneyExport doubleValue]];
     }
     if (isUsable(model.jqMoneyFinal, [NSNumber class])) {
         jqMoneyFinal =  [NSString stringWithMoneyNumber:[model.jqMoneyFinal doubleValue]];
@@ -506,10 +506,10 @@
 {
     self.labelTitleArrM  = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
-                                  @"车型名称:",@"车型代码:",@"(商业)起保日期:",
+                                  @"品牌:",@"车型代码:",@"(商业)起保日期:",
                                   @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
-                                  @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强保单最终金额:",
-                                  @"商业险保险最终金额:",@"交强险保单:",@"商业险保单:",
+                                  @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强险保单最终金额:",
+                                  @"商业险保单最终金额:",@"交强险保单:",@"商业险保单:",
                                   @"交强险佣金:",@"商业险佣金:",@"交强险提成:",
                                   @"商业险提成:",@"出单员:",@"备注:"];
     
@@ -550,10 +550,10 @@
         vinNo = model.vinNo;
     }
     if (isUsableNSString(model.recordDate, @"")) {
-        //        recordDate = model.recordDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        recordDate = [tmpArr firstObject];
+                recordDate = model.recordDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.recordDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        recordDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.engineNo, @"")) {
         engineNo = model.engineNo;
@@ -565,16 +565,16 @@
         carModel = model.model;
     }
     if (isUsableNSString(model.syEffectDate, @"")) {
-        //        syEffectDate = model.syEffectDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        syEffectDate = [tmpArr firstObject];
+                syEffectDate = model.syEffectDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        syEffectDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.jqEffectDate, @"")) {
-        //        jqEffectDate = model.jqEffectDate;
-        NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        jqEffectDate = [tmpArr firstObject];
+                jqEffectDate = model.jqEffectDate;
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:model.jqEffectDate];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+//        jqEffectDate = [tmpArr firstObject];
     }
     if (isUsableNSString(model.insurerName, @"")) {
         insurerName = model.insurerName;

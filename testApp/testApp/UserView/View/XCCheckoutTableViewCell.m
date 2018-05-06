@@ -187,9 +187,9 @@
     _carTarModel = model;
     [_carNumberLabel setText:model.plateOn];
     [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.customerName]];
-    NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
-    NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",[tmpArr firstObject]]];
+//    NSMutableString *tmpDate = [NSMutableString stringWithString:model.createTime];
+//    NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+    [_issueTimeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
 }
 
 #pragma mark - Delegates & Notifications
@@ -257,9 +257,9 @@
         timeTitle = _timeTitleStr;
     }
     if (isUsableNSString(baseModel.createTime,@"")) {
-        NSMutableString *tmpDate = [NSMutableString stringWithString:baseModel.createTime];
-        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
-        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,[tmpArr firstObject]]];
+//        NSMutableString *tmpDate = [NSMutableString stringWithString:baseModel.createTime];
+//        NSArray *tmpArr = [tmpDate componentsSeparatedByString:@" "];
+        [_issueTimeLabel setText:[NSString stringWithFormat:@"%@: %@",timeTitle,baseModel.createTime]];
     }else {
         [_issueTimeLabel setText:[NSString stringWithFormat:@"%@:  ",timeTitle]];
     }
