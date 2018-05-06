@@ -112,14 +112,14 @@
 - (void)textFieldBeginEditing:(UITextField *)textField{
     if (textField.tag > 6) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.myTableView.contentOffset = CGPointMake(0, SCREEN_HEIGHT / 4 + textField.tag * 12 * ViewRateBaseOnIP6);
+            self.myTableView.contentOffset = CGPointMake(0, SCREEN_HEIGHT / 4 + textField.tag * 30 * ViewRateBaseOnIP6);
         }];
     }
-    if (textField.tag == 1 || textField.tag == 11) {
-        textField.text = @"";
-        [textField resignFirstResponder];
-        
-    }
+//    if (textField.tag == 1 || textField.tag == 11) {
+//        textField.text = @"";
+//        [textField resignFirstResponder];
+//
+//    }
 }
 
 - (void)textFieldendEditing:(UITextField *)textField{
@@ -138,9 +138,9 @@
         [self.dictionaryInfo setObject:textField.text forKey:@"engineNo"];
     } else if (textField.tag == 4){
         [self.dictionaryInfo setObject:textField.text forKey:@"model"];
-    } else if (textField.tag == 5){
+    } else if (textField.tag == 7){
         [self.dictionaryInfo setObject:textField.text forKey:@"brand"];
-    } else if (textField.tag == 6){
+    } else if (textField.tag == 8){
         if (isHold) {
             NSString *prompt = [YXTestNumber testingMobile:textField.text];
             if (prompt&&prompt.length > 0) {
@@ -154,11 +154,9 @@
         }
         
         
-    } else if (textField.tag == 7){
-        [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
-    } else if (textField.tag == 8){
-        [self.dictionaryInfo setObject:textField.text forKey:@"source"];
     } else if (textField.tag == 9){
+        [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
+    } else if (textField.tag == 11){
         if (isHold) {
             BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
             if (!result) {
@@ -171,11 +169,7 @@
             }
         }
         
-    } else if (textField.tag == 10){
-        [self.dictionaryInfo setObject:textField.text forKey:@"sex"];
-    } else if (textField.tag == 12){
-        [self.dictionaryInfo setObject:textField.text forKey:@"quyv"];
-    } else {
+    }  else if (textField.tag == 15) {
         [self.dictionaryInfo setObject:textField.text forKey:@"address"];
     }
     NSLog(@"%@",self.dictionaryInfo);
@@ -225,22 +219,44 @@
         cell = [[PriceCustomerInformEntryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.delegate = self;
-    cell.textField.tag = indexPath.section * 7 +indexPath.row;
+    cell.textField.tag = indexPath.section * 9 +indexPath.row;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [cell setLabelNameText:@"*车牌号 :" isChoose:YES placeholderStr:@"请输入您的车牌号" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"plateNo"]) {
+              cell.textField.text = [self.dictionaryInfo objectForKey:@"plateNo"];
+            } else {
+                cell.textField.text = @"";
+            }
             
         } else if (indexPath.row == 1) {
             [cell setLabelNameText:@"*初登日期:" isChoose:YES placeholderStr:@"请输入您的初登日期" isSelect:NO];
-            
             cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"recordDate"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"recordDate"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 2){
             [cell setLabelNameText:@"*车 架  号:" isChoose:YES placeholderStr:@"请输入您的车架号" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"vinNo"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"vinNo"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 3){
             [cell setLabelNameText:@"*发动机号:" isChoose:YES placeholderStr:@"请输入您的发动机号" isSelect:NO];
-            
+            cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"engineNo"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"engineNo"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 4){
             [cell setLabelNameText:@"车辆型号 :" isChoose:NO placeholderStr:@"请输入您的车辆型号" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
         } else if (indexPath.row == 5){
             [cell setLabelNameText:@"保险到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
@@ -249,30 +265,49 @@
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 7){
             [cell setLabelNameText:@"*品       牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
-            
-        }  else{
+            cell.textField.userInteractionEnabled = YES;
+        }  else if (indexPath.row == 8){
             [cell setLabelNameText:@"*联系方式:" isChoose:YES placeholderStr:@"请输入您的联系方式" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
         }
         return cell;
     } else {
         if (indexPath.row == 0) {
             [cell setLabelNameText:@"*客户名称:" isChoose:YES placeholderStr:@"请输入您的客户名称" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
         } else if (indexPath.row == 1) {
             [cell setLabelNameText:@"*客户来源:" isChoose:YES placeholderStr:@"请选择客户来源" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 2){
             [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
         } else if (indexPath.row == 3){
             [cell setLabelNameText:@"性      别:" isChoose:NO placeholderStr:@"请选择性别" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 4){
             [cell setLabelNameText:@"生      日:" isChoose:NO placeholderStr:@"请选择日期" isSelect: YES];
             cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"birthday"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"birthday"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 5){
             [cell setLabelNameText:@"学      历:" isChoose:NO placeholderStr:@"请选择学历" isSelect:YES];
-             cell.textField.userInteractionEnabled = NO;
-        }  else{
+            cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"education"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"education"];
+            } else {
+                cell.textField.text = @"";
+            }
+        }  else if(indexPath.row == 6) {
             [cell setLabelNameText:@"地      址:" isChoose:NO placeholderStr:@"请输入您的地址" isSelect:NO];
+            cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"address"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"address"];
+            } else {
+                cell.textField.text = @"";
+            }
         }
         return cell;
     }
@@ -404,7 +439,7 @@
         _myTableView.backgroundColor = [UIColor colorWithHexString:@"#e5e5e5"];
         //取消滚动条的显示
         _myTableView.showsVerticalScrollIndicator = NO;
-        _myTableView.bounces = YES;
+        _myTableView.bounces = NO;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTableView;
