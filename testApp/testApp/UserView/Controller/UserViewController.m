@@ -48,7 +48,7 @@
     [self setUI];
     //设置用户头型数据UI
     if (userManager) {
-        [self.topView setUserName:userManager.name];
+        [self.topView setUserName:userManager.employeeName];
         if (userManager.iconUrl) {
             [self.topView setUserIconUrlString:userManager.iconUrl];
         }
@@ -67,7 +67,7 @@
     [self initWithListData];
     //设置用户头型数据UI
     if (userManager) {
-        [self.topView setUserName:userManager.name];
+        [self.topView setUserName:userManager.employeeName];
         if (userManager.iconUrl) {
             [self.topView setUserIconUrlString:userManager.iconUrl];
         }
