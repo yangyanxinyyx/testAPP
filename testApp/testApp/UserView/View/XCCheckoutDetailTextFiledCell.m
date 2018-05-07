@@ -60,7 +60,7 @@
     
     
     if (_shouldShowClickView) {
-        labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
+        labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, self.frame.size.height);
         [_clickBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
     }else {
         [_clickBtn setFrame:CGRectZero];
@@ -121,11 +121,19 @@
     else if ([self.title isEqualToString:@"负责人电话:"] && isUsableNSString(model.corporateCellphone, @"")) {
         [_textField setText:model.corporateCellphone];
     }
-    else if ([self.title isEqualToString:@"业务员提成:"] && isUsable(model.salesmanCommission, [NSNumber class])) {
-    [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
+    else if ([self.title isEqualToString:@"业务员提成:"]) {
+        if (isUsable(model.salesmanCommission, [NSNumber class])) {
+            [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
+        }else {
+            [_textField setText:@"0.00 %"];
+        }
     }
-    else if ([self.title isEqualToString:@"团队经理提成:"] && isUsable(model.managerCommission, [NSNumber class])) {
-              [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];
+    else if ([self.title isEqualToString:@"团队经理提成:"]) {
+        if (isUsable(model.managerCommission, [NSNumber class])) {
+               [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];
+        }else {
+            [_textField setText:@"0.00 %"];
+        }
     }
     else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
         [_textField setText:model.storeStatus];

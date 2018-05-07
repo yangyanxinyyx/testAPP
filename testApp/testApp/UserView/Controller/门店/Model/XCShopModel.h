@@ -27,6 +27,8 @@
 @property (nonatomic, copy) NSString * area;
 /** 门店审核状态 */
 @property (nonatomic, copy) NSString * storeStatus;
+/** 拒绝原因 */
+@property (nonatomic, copy) NSString * repulseRemark;
 /** 营业执照图片URLStr */
 @property (nonatomic, copy) NSString * licenseUrl;
 /** 门店图片1URL */

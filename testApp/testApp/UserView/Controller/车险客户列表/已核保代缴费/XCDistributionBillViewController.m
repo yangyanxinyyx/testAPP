@@ -53,9 +53,10 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 - (void)configureData
 {
     self.titleArr = @[@"商业险金额:",@"交强险金额:",@"保单金额:",
-                      @"缴费单通知号:",@"礼包选择",@"配送时间",
+                      @"缴费单通知号:",@"礼包选择",@"礼包类型",
                       @"购买金额:",@"客户名称:",@"联系电话:",
-                      @"预借款金额:",@"收款金额:",@"配送地址:",@"配送备注:"];
+                      @"预约配送时间",@"预借款金额:",@"收款金额:",
+                      @"配送地址:",@"配送备注:"];
 }
 
 - (void)createUI
@@ -86,7 +87,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([NSStringFromClass([cell class]) isEqualToString:NSStringFromClass([XCDistributionPicketCell class])]) {
-        if ((indexPath.section == 0 && indexPath.row == 5)) {
+        if ((indexPath.section == 0 && indexPath.row == 9)) {
             //配送时间
             [weakSelf.tableView endEditing:YES];
             SelectTimeView *selectView = [[SelectTimeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -122,6 +123,21 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
                 }
                 strongSelf.payModel.packageId = selectID;
                 strongSelf.payModel.packageBuyPrice = packageBuy;
+                [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
+                
+                NSIndexPath *indePatch = [NSIndexPath indexPathForRow:6 inSection:0];
+                XCCheckoutDetailTextFiledCell *textFiledCell = [strongSelf.tableView cellForRowAtIndexPath:indePatch];
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[packageBuy doubleValue]];
+                
+            }];
+            [weakSelf.view addSubview:alterView];
+        }
+        else if(indexPath.section == 0 && indexPath.row == 5){
+            NSArray * arr = @[@"赠送",@"购买"];
+            LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                
+                strongSelf.payModel.packageGiveOrBuy = selectStr;
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
             }];
             [weakSelf.view addSubview:alterView];
@@ -170,6 +186,9 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
     switch (indexPath.row) {
         case 2:
         case 6:
+        {
+            textFiledCell.titleLabel.text = titleName;
+        }
         case 9:
         case 10: {
             textFiledCell.titlePlaceholder = @"请输入金额";
@@ -192,11 +211,17 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
             textFiledCell.titlePlaceholder = @"请输入联系电话";
         }
             break;
-        case 11:  {
+        case 11:
+        {
+            textFiledCell.titlePlaceholder = @"请输入金额";
+        }
+            break;
+        case 12:  {
             textFiledCell.titlePlaceholder = @"填写地址";
         }
             break;
         default: {
+            textFiledCell.titleLabel.text = titleName;
             textFiledCell.titlePlaceholder = @"输入备注信息";
         }
             break;
@@ -404,7 +429,7 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
 - (BOOL)isPicketCellTypeWithIndex:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && (indexPath.row == 4 || indexPath.row == 5)) {
+    if (indexPath.section == 0 && (indexPath.row == 4 ||indexPath.row == 5|| indexPath.row == 9)) {
         return YES;
     }
     return NO;

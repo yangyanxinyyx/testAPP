@@ -81,14 +81,12 @@
     
     NSString *jqMoneyStr = @"¥0.00";
     NSString *syMoneyStr = @"¥0.00";
+
     if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
         jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
     }
     if (isUsable(self.model.syMoney, [NSNumber class]) && [self.model.syMoney doubleValue]!= 0) {
-        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
-    }
-    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
-        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
+        syMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
     }
     XCDistributionPolicyViewController *policyVC = [[XCDistributionPolicyViewController alloc] initWithTitle:@"配送保单"];
     policyVC.jqMoney = jqMoneyStr;
@@ -131,11 +129,9 @@
         jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
     }
     if (isUsable(self.model.syMoney, [NSNumber class]) && [self.model.syMoney doubleValue]!= 0) {
-        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
+        syMoneyStr = [NSString stringWithMoneyNumber:[self.model.syMoney doubleValue]];
     }
-    if (isUsable(self.model.jqMoney, [NSNumber class]) && [self.model.jqMoney doubleValue]!= 0) {
-        jqMoneyStr = [NSString stringWithMoneyNumber:[self.model.jqMoney doubleValue]];
-    }
+
     XCDistributionBillViewController *billVC = [[XCDistributionBillViewController alloc] initWithTitle:@"配送缴费单"];
     billVC.jqMoney = jqMoneyStr;
     billVC.syMoney = syMoneyStr;
