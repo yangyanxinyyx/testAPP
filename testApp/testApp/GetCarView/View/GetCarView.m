@@ -101,12 +101,12 @@
 
             UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
             flowLayout.itemSize = CGSizeMake(70, 70);
-            flowLayout.minimumLineSpacing = 17;
+            flowLayout.minimumLineSpacing = 17*kScaleWidth;
 
             //设置上下左右四个边的边距
             UICollectionView *collection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(itemLabel.frame), SCREEN_WIDTH, 90) collectionViewLayout:flowLayout];
             [scrollView addSubview:collection];
-            collection.contentInset = UIEdgeInsetsMake(10, 15, 10, 10);
+            collection.contentInset = UIEdgeInsetsMake(10, 15, 10, 0);
             collection.delegate = self;
             collection.dataSource = self;
             collection.backgroundColor = [UIColor whiteColor];

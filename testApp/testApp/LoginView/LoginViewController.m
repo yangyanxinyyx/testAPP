@@ -393,8 +393,7 @@
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
             if ([response[@"result"] integerValue] == 1) {
                 NSLog(@"登录成功");
-                [[NSUserDefaults standardUserDefaults] setObject:self.accoutTextField.text forKey:@"kUserAccout"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTextField.text forKey:@"kUserPassword"];
+
 
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *data = response[@"data"];

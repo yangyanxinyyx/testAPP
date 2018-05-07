@@ -82,7 +82,7 @@
     [getCarBtn addTarget:self action:@selector(pressGetCarBtn) forControlEvents:UIControlEventTouchUpInside];
     getCarBtn.layer.cornerRadius = 5;
     getCarBtn.layer.masksToBounds = YES;
-    [getCarBtn setTitle:@"查看" forState:UIControlStateNormal];
+    [getCarBtn setTitle:@"接车" forState:UIControlStateNormal];
     getCarBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
     [self.view addSubview:getCarBtn];
 

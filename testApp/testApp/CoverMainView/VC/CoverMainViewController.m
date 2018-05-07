@@ -21,8 +21,9 @@
 @interface CoverMainViewController ()<UIScrollViewDelegate,CoverAnnouncementViewDelegate>
 @property (nonatomic,strong) UIScrollView *scrollView;
 
-@property (nonatomic,strong) CoverPerformanceView *carView;
-@property (nonatomic,strong) CoverPerformanceView *repairView;
+@property (nonatomic,strong) CoverPerformanceView *nowMonthView;
+@property (nonatomic,strong) CoverPerformanceView *lastMonthView;
+@property (nonatomic,strong) CoverPerformanceView *yearView;
 @property (nonatomic,strong) YXScrollView *imageScrollView;
 @property (nonatomic,strong) CoverAnnouncementView *announcementView;
 
@@ -46,7 +47,7 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT-49)];
     _scrollView.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [ self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(0, 829 - 190 + 190 *kScaleHeight);
+    _scrollView.contentSize = CGSizeMake(0, 436 - 190 + 190 *kScaleHeight);
 //    _scrollView.bounces = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
@@ -64,23 +65,30 @@
 
     [_scrollView addSubview:_imageScrollView];
 
-//    self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-//    [_scrollView addSubview:_announcementView];
 
-    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:@[@"0",@"0",@"0",@"0",@"0",@"0"]];
-    _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
-    [_scrollView addSubview:_carView];
 
-    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:@[@"0",@"0",@"0",@"0",@"0",@"0"]];
-    _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
-    [_scrollView addSubview:_repairView];
+    _nowMonthView = [[CoverPerformanceView alloc] initWithTitle:@"本月数据统计" carAchie:@"0" carRank:@"0" repairAchie:@"0" repairRank:@"0"];
+    _nowMonthView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_nowMonthView];
 
-    UIButton *medalBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_repairView.frame) + 15, SCREEN_WIDTH, 44)];
+    _lastMonthView = [[CoverPerformanceView alloc] initWithTitle:@"上月数据统计" carAchie:@"0" carRank:@"0" repairAchie:@"0" repairRank:@"0"];
+    _lastMonthView.frame = CGRectMake(0, 190 * kScaleHeight + 124, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_lastMonthView];
+
+    _yearView = [[CoverPerformanceView alloc] initWithTitle:@"年度数据统计" carAchie:@"0" carRank:@"0" repairAchie:@"0" repairRank:@"0"];
+    _yearView.frame = CGRectMake(0, 190 * kScaleHeight + 124+124, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_yearView];
+
+    UIButton *medalBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_yearView.frame) + 15, SCREEN_WIDTH, 44)];
     medalBtn.backgroundColor = [UIColor whiteColor];
     [medalBtn addTarget:self action:@selector(pressMedalBtn) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:medalBtn];
 
-    UILabel *medalLabel = [[UILabel alloc] initWithFrame:CGRectMake(17, 15, 60, 14)];
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(17, 10, 20, 20)];
+    imageV.image = [UIImage imageNamed:@"我的勋章.jpg"];
+    [medalBtn addSubview:imageV];
+
+    UILabel *medalLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 15, 60, 14)];
     medalLabel.text = @"我的勋章";
     medalLabel.textColor = COLOR_RGB_255(68, 68, 68);
     medalLabel.backgroundColor = [UIColor clearColor];
@@ -213,8 +221,8 @@
 
 - (void)reloadData
 {
-    [_carView removeFromSuperview];
-    [_repairView removeFromSuperview];
+    [_nowMonthView removeFromSuperview];
+    [_lastMonthView removeFromSuperview];
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray *muImageArray = [NSMutableArray array];
@@ -244,31 +252,18 @@
         });
     });
 
+    _nowMonthView = [[CoverPerformanceView alloc] initWithTitle:@"本月数据统计"
+                     carAchie:[UserInfoManager shareInstance].performanceMedal.nowMonthCar carRank:[UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking repairAchie:[UserInfoManager shareInstance].performanceMedal.nowMonthInsurance repairRank:[UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking];
+    _nowMonthView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_nowMonthView];
 
-    NSArray * array = @[
-                        [UserInfoManager shareInstance].performanceMedal.lastYearCar,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthCar,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthCar,
-                        [UserInfoManager shareInstance].performanceMedal.lastYearCarRanking,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthCarRanking,
-                        ];
-    NSArray * array2 = @[
-                        [UserInfoManager shareInstance].performanceMedal.lastYearInsurance,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthInsurance,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthInsurance,
-                        [UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking,
-                        [UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking,
-                        [UserInfoManager shareInstance].performanceMedal.nowMonthInsuranceRanking,
-                        ];
+    _lastMonthView = [[CoverPerformanceView alloc] initWithTitle:@"上月数据统计" carAchie:[UserInfoManager shareInstance].performanceMedal.lastMonthCar carRank:[UserInfoManager shareInstance].performanceMedal.lastMonthCarRanking repairAchie:[UserInfoManager shareInstance].performanceMedal.lastMonthInsurance repairRank:[UserInfoManager shareInstance].performanceMedal.lastMonthInsuranceRanking];
+    _lastMonthView.frame = CGRectMake(0, 190 * kScaleHeight + 124, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_lastMonthView];
 
-    _carView = [[CoverPerformanceView alloc] initWithTitle:@"个人车险业绩" UserData:array];
-    _carView.frame = CGRectMake(0, 190 * kScaleHeight, SCREEN_WIDTH, 280);
-    [_scrollView addSubview:_carView];
-
-    _repairView = [[CoverPerformanceView alloc] initWithTitle:@"个人维修业绩" UserData:array2];
-    _repairView.frame = CGRectMake(0, 190 * kScaleHeight + 280, SCREEN_WIDTH, 280);
-    [_scrollView addSubview:_repairView];
+    _yearView = [[CoverPerformanceView alloc] initWithTitle:@"年度数据统计" carAchie:[UserInfoManager shareInstance].performanceMedal.lastYearCar carRank:[UserInfoManager shareInstance].performanceMedal.lastYearCarRanking repairAchie:[UserInfoManager shareInstance].performanceMedal.lastYearInsurance repairRank:[UserInfoManager shareInstance].performanceMedal.lastYearInsuranceRanking];
+    _yearView.frame = CGRectMake(0, 190 * kScaleHeight + 124+124, SCREEN_WIDTH, 124);
+    [_scrollView addSubview:_yearView];
 }
 
 - (void)getLoginUserInfo
