@@ -132,7 +132,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
             [[UIApplication sharedApplication].keyWindow addSubview:selectView];
         }
         else if(indexPath.section == 0 && indexPath.row == 4){
-            NSArray * arr = @[@"赠送",@"购买",@"无"];
+            NSArray * arr = @[@"赠送",@"购买"];
             LYZSelectView *alterView = [LYZSelectView alterViewWithArray:arr confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 __strong __typeof__(weakSelf)strongSelf = weakSelf;
 
@@ -167,6 +167,12 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
                 strongSelf.billModel.packageId = selectID;
                 strongSelf.billModel.packageBuyPrice = packageBuy;
                 [(XCDistributionPicketCell *)cell setTitleValue:selectStr];
+                
+                NSIndexPath *indePatch = [NSIndexPath indexPathForRow:6 inSection:0];
+                XCCheckoutDetailTextFiledCell *textFiledCell = [strongSelf.tableView cellForRowAtIndexPath:indePatch];
+                textFiledCell.textField.text = [NSString stringWithMoneyNumber:[packageBuy doubleValue]];
+                
+                
             }];
             [weakSelf.view addSubview:alterView];
         }
@@ -214,9 +220,9 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
         picketCell.title = titleName;
         [picketCell setShouldShowSeparator:YES];
-        if (indexPath.section == 1 && indexPath.row == 2) {
-            [picketCell setShouldShowSeparator:NO];
-        }
+//        if (indexPath.section == 1 && indexPath.row == 2) {
+//            [picketCell setShouldShowSeparator:NO];
+//        }
         return picketCell;
     }else if([self isInputCellTypeWithIndex:indexPath]){
             XCDistributionInputCell *inputCell = (XCDistributionInputCell *)[tableView dequeueReusableCellWithIdentifier:kInputCellID];
@@ -232,9 +238,11 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     textFiledCell.delegate = self;
     textFiledCell.isNumField = NO;
     if ([titleName isEqualToString:@"保单金额:"]||[titleName isEqualToString:@"购买金额:"]||[titleName isEqualToString:@"收款金额:"]) {
-        textFiledCell.shouldShowSeparator = NO;
-        if([titleName isEqualToString:@"保单金额:"]) {
-            textFiledCell.shouldShowSeparator = YES;
+        if([titleName isEqualToString:@"购买金额:"]) {
+            textFiledCell.shouldShowSeparator = NO;
+        }
+        if(![titleName isEqualToString:@"保单金额:"]) {
+            textFiledCell.titleLabel.text = titleName;
         }
         textFiledCell.titlePlaceholder = @"请输入金额";
         textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -248,6 +256,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     }else if([titleName isEqualToString:@"配送地址:"]) {
         textFiledCell.titlePlaceholder = @"填写地址";
     }else if([titleName isEqualToString:@"配送备注:"])  {
+        textFiledCell.titleLabel.text = titleName;
         textFiledCell.shouldShowSeparator = NO;
         textFiledCell.titlePlaceholder = @"输入备注信息";
     }
@@ -299,7 +308,7 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     CGFloat footerViewHeigth;
     footerViewHeigth = (60 + 88 + 60) * ViewRateBaseOnIP6;
     if (_isSelectDistribution) {
-        if (section != 3) {
+        if (section != 1) {
             footerViewHeigth = 0.0;
         }
     }
@@ -391,15 +400,17 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
     NSLog(@"选中");
     _isSelectDistribution = isselected;
     [self.dataArrM removeAllObjects];
-    NSArray *customerArr = @[@"客户名称:",@"联系电话:",@"配送时间"];
-    NSArray *moneyArr = @[@"收款金额:"];
-    NSArray *addressArr = @[@"配送地址:",@"配送备注:"];
+    NSArray * secondTitle = @[@"客户名称:",@"联系电话:",@"配送时间",@"收款金额:",@"配送地址:",@"配送备注:"];
+//    NSArray *customerArr = @[@"客户名称:",@"联系电话:",@"配送时间"];
+//    NSArray *moneyArr = @[@"收款金额:"];
+//    NSArray *addressArr = @[@"配送地址:",@"配送备注:"];
     [self.dataArrM addObject:self.titleArr];
     _billModel.isShipmentBaodan = @"N";
     if (_isSelectDistribution) {
-        [self.dataArrM addObject:customerArr];
-        [self.dataArrM addObject:moneyArr];
-        [self.dataArrM addObject:addressArr];
+//        [self.dataArrM addObject:customerArr];
+//        [self.dataArrM addObject:moneyArr];
+//        [self.dataArrM addObject:addressArr];
+        [self.dataArrM addObject:secondTitle];
         _billModel.isShipmentBaodan = @"Y";
     }
     [self.tableView reloadData];

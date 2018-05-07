@@ -26,7 +26,7 @@
 #import <TZImagePickerController.h>
 #import "XCShopRejectView.h"
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
-#define kshopStatusDaiShenHe @"待审核"
+#define kshopStatusDaiShenHe @"审核中"
 #define kshopStatusShenHeTongGuo @""
 @interface XCShopViewController ()<UITableViewDelegate,
 UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
@@ -121,11 +121,11 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 }
 - (void)configureData
 {
-    self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
+    self.storeTitleArr = @[@"门店名称:",@"门店电话:",@"负责人:",
                            @"负责人电话:",@"业务员提成:",@"团队经理提成:",
                            @"所属城市",@"所在地区",@"详细地址:",@"门店审核状态",
                            @"营业执照上传,1张",@"门店图片,最多4张"];
-    self.placeHolderArr = @[@"请输入门店名称",@"请输入联系方式",@"请输入负责人",
+    self.placeHolderArr = @[@"请输入门店名称",@"请输入门店电话",@"请输入负责人",
                             @"请输入负责人电话",@"请输入百分比",@"请输入百分比",@"城市",@"地区",@"",@"待审核",@"1张",@"4张"];
     self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
 }
@@ -458,6 +458,12 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
                 [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
             }
         }
+        else if (indexPath.row == 8) {
+            // 跳转地图
+            XCShopAMapViewController *mapVC = [[XCShopAMapViewController alloc] initWithTitle:@"地图定位"];
+            mapVC.delegate = self;
+            [self.navigationController pushViewController:mapVC animated:YES];
+        }
     }
 }
 
@@ -559,7 +565,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 {
     if ([title isEqualToString:@"门店审核状态"]) {
         [XCShopRejectView alterViewWithTitle:@"拒绝原因"
-                                     content:@"门店名称不合法，联系方式不对，地址不正常营业执照不合法。图片很模糊。"
+                                     content:self.storeModel.repulseRemark
                                 confirmClick:nil];
     }
 }
@@ -600,7 +606,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     if ([title isEqualToString:@"门店名称:"]) {
         _storeModel.name = textField.text;
     }
-    else if ([title isEqualToString:@"联系方式:"]) {
+    else if ([title isEqualToString:@"门店电话:"]) {
             [textField setText:[textField.text areaCodeFormat]];
         if (isUsableNSString(textField.text, @"")) {
             _storeModel.tel = [textField.text areaCodeFormat];
@@ -956,7 +962,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             if (isUsableNSString(self.storeModel.storeStatus, @"")) {
                 pickerCell.titleValue = self.storeModel.storeStatus;
             }else {
-                pickerCell.titleValue = @"";/// 写死了
+                pickerCell.titleValue = @"待审核";/// 写死了
             }
             if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
                 pickerCell.userInteractionEnabled = NO;
@@ -1034,7 +1040,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
         }else {
             footerView.userInteractionEnabled = YES ;
         }
-        if ([self.storeModel.storeStatus isEqualToString:@"审核不通过"]) {
+        if ([self.storeModel.storeStatus isEqualToString:@"已拒绝"]) {
             [footerView setTitle:@"重新提交审核"];
         }
         footerView.delegate = self;
@@ -1120,7 +1126,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 - (BOOL)isInputNumKeyBoardCellWithTitle:(NSString *)title
 {
     BOOL result = NO;
-    if ([title isEqualToString:@"联系方式:"]) {
+    if ([title isEqualToString:@"门店电话:"]) {
         result = YES;
     }
     else if ([title isEqualToString:@"负责人电话:"]){

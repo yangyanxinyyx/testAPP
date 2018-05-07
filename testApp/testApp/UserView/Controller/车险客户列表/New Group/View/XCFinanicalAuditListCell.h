@@ -11,6 +11,8 @@
 
 @interface XCFinanicalAuditListCell : UITableViewCell
 
+/** 默认为NO 会计审核中 特殊Cell */
+@property (nonatomic, assign) BOOL shoulSecondType ;
 /** 判断是年审还是配送 */
 @property (nonatomic, copy) NSString * typeStr;
 

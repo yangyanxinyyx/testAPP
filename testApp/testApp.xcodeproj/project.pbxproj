@@ -2776,9 +2776,10 @@
 			baseConfigurationReference = 3EC8818A25C1285D6823327D /* Pods-testApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2795,6 +2796,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dreamstech.xiechuangMgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2805,9 +2807,10 @@
 			baseConfigurationReference = DDCB00780C4684562392341C /* Pods-testApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2824,6 +2827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dreamstech.xiechuangMgr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

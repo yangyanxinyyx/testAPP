@@ -32,6 +32,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        _shoulSecondType = NO;
         [self configSubVies];
         [_detailLabel setText:@"查看详情"];
         
@@ -100,6 +101,19 @@
     labelSize = _detailLabel.frame.size;
     [_detailLabel setFrame:CGRectMake(CGRectGetMinX(_nextImageView.frame) - leftMargin - labelSize.width, 122 * ViewRateBaseOnIP6, labelSize.width, 21 * ViewRateBaseOnIP6)];
     
+    if (_shoulSecondType) {
+        [_processLabel setFrame:CGRectZero];
+        [_nextImageView setFrame:CGRectZero];
+        [_detailLabel setText:@"查看"];
+        [_detailLabel setTextAlignment:NSTextAlignmentCenter];
+        _detailLabel.font = [UIFont systemFontOfSize:28 * ViewRateBaseOnIP6];
+        [_detailLabel setTextColor:COLOR_RGB_255(104, 153, 232)];
+        _detailLabel.layer.cornerRadius = 3;
+        _detailLabel.layer.borderColor = COLOR_RGB_255(104, 153, 232).CGColor;
+        _detailLabel.layer.borderWidth = 0.5;
+        labelSize = CGSizeMake( 160 * ViewRateBaseOnIP6, 60 * ViewRateBaseOnIP6);
+        [_detailLabel setFrame:CGRectMake(self.frame.size.width - 31 * ViewRateBaseOnIP6 -labelSize.width ,(self.frame.size.height - labelSize.height) * 0.5   , labelSize.width, labelSize.height)];
+    }
 }
 
 #pragma mark - Action Method

@@ -69,8 +69,8 @@
     
     [_priceLabel sizeToFit];
     labelSize = _priceLabel.frame.size;
-    [_priceLabel setFrame: CGRectMake(CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6, _priceTitleLabel.frame.origin.y + 1 * ViewRateBaseOnIP6, self.bounds.size.width - (CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6 ), 18 * ViewRateBaseOnIP6)];
-    
+
+    [_priceLabel setFrame: CGRectMake(CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 72 * ViewRateBaseOnIP6, self.bounds.size.width - (CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6 ),25 * ViewRateBaseOnIP6)];
     if ([self.model.status isEqualToString:@"待审核"]) { /// 审核中
         UIImage *tipsImage  = [UIImage imageNamed:@"greentap"];
         if (tipsImage) {
@@ -216,7 +216,7 @@
     if (isUsable(model.price, [NSNumber class])) {
         NSString *priceStr = [NSString stringWithFormat:@"¥%@",model.price.stringValue];
         NSMutableAttributedString * ma_price = [[NSMutableAttributedString alloc] initWithString:priceStr];
-        [ma_price addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:23 * ViewRateBaseOnIP6] range:NSMakeRange(0,priceStr.length)];
+        [ma_price addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:24 * ViewRateBaseOnIP6] range:NSMakeRange(0,priceStr.length)];
         [ma_price addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(165, 165, 165) range:NSMakeRange(0,priceStr.length)];
         [ma_price addAttributes:@{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle], NSBaselineOffsetAttributeName : @(NSUnderlineStyleSingle)} range:NSMakeRange(0,priceStr.length )];
        _priceLabel.attributedText = ma_price;

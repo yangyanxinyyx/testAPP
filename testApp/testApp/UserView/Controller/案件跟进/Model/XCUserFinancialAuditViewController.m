@@ -143,6 +143,7 @@
     XCCheckoutDetailBaseModel *model =self.dataArr[indexPath.row];
     XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
     [cell setTypeStr:@"财务审核"];
+    cell.shoulSecondType = YES ;
     [cell setupCellWithCaseListModel:model];
     return cell;
 }
