@@ -473,7 +473,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 - (void)changeModel:(BOOL)isLaseY{
     if (isLaseY) {
         self.viewBear.frame = CGRectMake(0, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
+        self.viewLastY.hidden = NO ;
     } else {
+        self.viewLastY.hidden = YES ;
+
         NSDictionary *param = @{
                                 @"storeId":[UserInfoManager shareInstance].storeID,
                                 };
