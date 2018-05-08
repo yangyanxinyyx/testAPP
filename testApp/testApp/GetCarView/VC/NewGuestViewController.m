@@ -49,7 +49,14 @@
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
 
     [self createUI];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
 
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
@@ -65,16 +72,22 @@
         for (int i=0; i<7; i++) {
             __block int j =i;
             if (i<4) {
-                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation + 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil WithCompletionHandler:^(NSString *content) {
-                    if (j == 0) {
-                        self.name = content;
-                    }else if (j == 1) {
-                        self.plateNO = content;
-                    }else if (j == 2) {
-                        self.car = content;
-                    }else if (j == 3) {
-                        self.phoneNO = content;
-                    }
+                NSString *param = nil;
+                if (j == 0) {
+                    param = self.currentModel.customerName;
+                    self.name = param;
+                }else if (j == 1) {
+                    param = self.currentModel.plateNo;
+                    self.plateNO = param;
+                }else if (j == 2) {
+                    param = self.currentModel.brand;
+                    self.car = param;
+                }else if (j == 3) {
+                    param = self.currentModel.phoneNo;
+                    self.phoneNO = param;
+                }
+
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation + 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeLabel param:param WithCompletionHandler:^(NSString *content) {
                 }];
 
                 [self.view addSubview:inputView];
@@ -107,24 +120,43 @@
         NSArray *array = @[@"客户名称",@"车  牌  号",@"车  型  号",@"联系电话",@"保单金额",@"自费金额",];
         for (int i=0; i<6; i ++) {
             __block int j =i;
-            UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil WithCompletionHandler:^(NSString *content) {
+            if (i<4) {
+                NSString *param = nil;
                 if (j == 0) {
-                    self.name = content;
+                    param = self.currentModel.customerName;
+                    self.name = param;
                 }else if (j == 1) {
-                    self.plateNO = content;
+                    param = self.currentModel.plateNo;
+                    self.plateNO = param;
                 }else if (j == 2) {
-                    self.car = content;
+                    param = self.currentModel.brand;
+                    self.car = param;
                 }else if (j == 3) {
-                    self.phoneNO = content;
-                }else if (j == 4) {
-                    self.InsuranceMoney = [NSNumber numberWithInt:[content intValue]];
-                }else if (j == 5) {
-                    self.selfMoney = [NSNumber numberWithInt:[content intValue]];
+                    param = self.currentModel.phoneNo;
+                    self.phoneNO = param;
                 }
-            }];
-            [self.view addSubview:inputView];
+
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation + 10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeLabel param:param WithCompletionHandler:^(NSString *content) {
+                }];
+
+                [self.view addSubview:inputView];
+
+            }else{
+                UserInfoInputView *inputView = [[UserInfoInputView alloc] initWithFrame:CGRectMake(0,kHeightForNavigation +  10 + i*44, SCREEN_WIDTH, 44) title:array[i] type:InputViewTypeTextField param:nil WithCompletionHandler:^(NSString *content) {
+                     if (j == 4) {
+                        self.InsuranceMoney = [NSNumber numberWithInt:[content intValue]];
+                    }else if (j == 5) {
+                        self.selfMoney = [NSNumber numberWithInt:[content intValue]];
+                    }
+                }];
+                [self.view addSubview:inputView];
+            }
+
+
         }
     }
+
+    
 
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(15, 412, SCREEN_WIDTH - 30, 44)];
     [btn setTitle:@"提交" forState:UIControlStateNormal];
@@ -214,8 +246,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-
-
 
     return YES;
 

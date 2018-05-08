@@ -50,15 +50,15 @@
     [super layoutSubviews];
     _line1.frame = CGRectMake(0, 0, SCREEN_WIDTH, 10);
 
-    _line2.frame = CGRectMake(0, 40, SCREEN_WIDTH, 1);
+    _line2.frame = CGRectMake(0, 50, SCREEN_WIDTH, 1);
 
     _selectImageV.frame = CGRectMake(SCREEN_WIDTH - 35, 20, 20, 20);
 
-    _titleLabel.frame = CGRectMake(15, 23, 150, 14);
+    _titleLabel.frame = CGRectMake(15, 23, 250, 14);
 
-    _ownerLabel.frame = CGRectMake(15, 55, 150, 13);
+    _ownerLabel.frame = CGRectMake(15, 65, 250, 13);
 
-    _carLabel.frame = CGRectMake(15, 78, 150, 13);
+    _carLabel.frame = CGRectMake(15, 88, 250, 13);
 
 
 }

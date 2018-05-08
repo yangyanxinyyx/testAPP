@@ -37,6 +37,14 @@
 
     [self createUI];
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
 }
 
 - (void)baseNavigationDidPressCancelBtn:(BOOL)isCancel
@@ -103,7 +111,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 104;
+    return 114;
 }
 
 - (void)pressOrderBtn
@@ -111,6 +119,7 @@
     if (!self.currentModel) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请选择客户" complete:nil];
         [self.view addSubview:tipsView];
+        return;
     }
     NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:YES];
     VC.serviceArray = self.serviceArray;
@@ -123,6 +132,7 @@
     if (!self.currentModel) {
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请选择客户" complete:nil];
         [self.view addSubview:tipsView];
+        return;
     }
     NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
     VC.currentModel = self.currentModel;
@@ -201,6 +211,14 @@
     return YES;
 }
 
+- (void)pressSearchBtn{
+
+    [self.view endEditing:YES];
+    _textField.text = [_textField.text uppercaseString];
+    [_dataSource removeAllObjects];
+    [self requestDataWithselectNumber:_textField.text];
+}
+
 - (UIView *)searchContenView {
     if (!_searchContenView) {
         _searchContenView = [[UIView alloc] initWithFrame:CGRectMake(105 * ViewRateBaseOnIP6, 16 * ViewRateBaseOnIP6, 540 * ViewRateBaseOnIP6, 28)];
@@ -229,6 +247,11 @@
         rightView.contentMode = UIViewContentModeCenter;
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
+
+        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(500 * ViewRateBaseOnIP6 - 25, -10, 30, 30)];
+        searchBtn.backgroundColor = [UIColor clearColor];
+        [_textField addSubview:searchBtn];
+        [searchBtn addTarget:self action:@selector(pressSearchBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _textField;
 }
