@@ -148,27 +148,31 @@
         }
     }else if ([self.title isEqualToString:@"交强险(业务员)金额:"] ) {
         if (isUsable(model.jqMoney, [NSNumber class])) {
-            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.jqMoney doubleValue]]];
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.jqMoney doubleValue]]];
+//            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.jqMoney doubleValue]]];
         }else {
-            [_placeholderLabel setText:@"0.00"];
+            [_placeholderLabel setText:@"¥0.00"];
         }
     }else if ([self.title isEqualToString:@"商业险(业务员)金额:"]) {
         if (isUsable(model.syMoney, [NSNumber class])) {
-            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.syMoney doubleValue]]];
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.syMoney doubleValue]]];
+//            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.syMoney doubleValue]]];
         }else {
-            [_placeholderLabel setText:@"0.00"];
+            [_placeholderLabel setText:@"¥0.00"];
         }
     }else if ([self.title isEqualToString:@"交强险(出单员)金额:"]) {
         if (isUsable(model.jqMoneyExport, [NSNumber class])) {
-            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.jqMoneyExport doubleValue]]];
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.jqMoneyExport doubleValue]]];
+//            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.jqMoneyExport doubleValue]]];
         }else {
-            [_placeholderLabel setText:@"0.00"];
+            [_placeholderLabel setText:@"¥0.00"];
         }
     }else if ([self.title isEqualToString:@"商业险(出单员)金额:"]) {
         if (isUsable(model.syMoneyExport, [NSNumber class])) {
-            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.syMoneyExport doubleValue]]];
+            [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.syMoneyExport doubleValue]]];
+//            [_placeholderLabel setText:[NSString stringWithFormat:@"%.2f",[model.syMoneyExport doubleValue]]];
         }else {
-            [_placeholderLabel setText:@"0.00"];
+            [_placeholderLabel setText:@"¥0.00"];
         }
     }else if ([self.title isEqualToString:@"出单员:"] ) {
         if (isUsableNSString(model.exportmanName,@"")) {
