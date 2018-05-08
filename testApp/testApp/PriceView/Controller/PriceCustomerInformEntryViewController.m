@@ -79,7 +79,7 @@
                 NSLog(@"提交成功");
                 dispatch_async(dispatch_get_main_queue(), ^{
                     FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"提交成功,待审核" complete:^{
-                        
+                        [self.navigationController popViewControllerAnimated:YES];
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
                 });
@@ -131,7 +131,21 @@
 
     
     if (textField.tag == 0) {
-        [self.dictionaryInfo setObject:textField.text forKey:@"plateNo"];
+//        if (textField.text.length >0 ) {
+//            if (isHold) {
+//                BOOL result = [YXTestNumber testingNumberPlate:textField.text];
+//                if (!result) {
+//                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"请输入正确的车牌号码" complete:^{
+//                        textField.text = @"";
+//                    }];
+//                    [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+//                } else {
+//                    
+//                }
+//            }
+//        }
+        textField.text = [textField.text uppercaseString];
+        [self.dictionaryInfo setObject:[textField.text uppercaseString] forKey:@"plateNo"];
     } else if (textField.tag == 2){
         [self.dictionaryInfo setObject:textField.text forKey:@"vinNo"];
     } else if (textField.tag == 3){
@@ -157,18 +171,19 @@
     } else if (textField.tag == 9){
         [self.dictionaryInfo setObject:textField.text forKey:@"customerName"];
     } else if (textField.tag == 11){
-        if (isHold) {
-            BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
-            if (!result) {
-                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
-//                    textField.text = @"";
-                }];
-                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-            } else {
-                [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+        if (textField.text.length != 0) {
+            if (isHold) {
+                BOOL result = [YXTestNumber testingIdentutyCard:textField.text];
+                if (!result) {
+                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"身份证格式不对,请重新输入" complete:^{
+                        //                    textField.text = @"";
+                    }];
+                    [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+                } else {
+                    [self.dictionaryInfo setObject:textField.text forKey:@"identity"];
+                }
             }
         }
-        
     }  else if (textField.tag == 15) {
         [self.dictionaryInfo setObject:textField.text forKey:@"address"];
     }
@@ -255,35 +270,80 @@
                 cell.textField.text = @"";
             }
         } else if (indexPath.row == 4){
-            [cell setLabelNameText:@"车辆型号 :" isChoose:NO placeholderStr:@"请输入您的车辆型号" isSelect:NO];
+            [cell setLabelNameText:@"车型代码 :" isChoose:NO placeholderStr:@"请输入您的车型代码" isSelect:NO];
+            if ([self.dictionaryInfo objectForKey:@"model"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"model"];
+            } else {
+                cell.textField.text = @"";
+            }
             cell.textField.userInteractionEnabled = YES;
         } else if (indexPath.row == 5){
             [cell setLabelNameText:@"保险到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
+            if ([self.dictionaryInfo objectForKey:@"insuranceTime"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"insuranceTime"];
+            } else {
+                cell.textField.text = @"";
+            }
             cell.textField.userInteractionEnabled = NO;
         } else if (indexPath.row == 6){
             [cell setLabelNameText:@"年审到期日期:" isChoose:NO placeholderStr:@"请选择日期" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"motTestTime"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"motTestTime"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 7){
             [cell setLabelNameText:@"*品       牌:" isChoose:YES placeholderStr:@"请输入您的车辆品牌" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"brand"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"brand"];
+            } else {
+                cell.textField.text = @"";
+            }
         }  else if (indexPath.row == 8){
             [cell setLabelNameText:@"*联系方式:" isChoose:YES placeholderStr:@"请输入您的联系方式" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"phoneNo"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"phoneNo"];
+            } else {
+                cell.textField.text = @"";
+            }
         }
         return cell;
     } else {
         if (indexPath.row == 0) {
             [cell setLabelNameText:@"*客户名称:" isChoose:YES placeholderStr:@"请输入您的客户名称" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"customerName"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"customerName"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 1) {
             [cell setLabelNameText:@"*客户来源:" isChoose:YES placeholderStr:@"请选择客户来源" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"source"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"source"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 2){
             [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
+            if ([self.dictionaryInfo objectForKey:@"identity"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"identity"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 3){
             [cell setLabelNameText:@"性      别:" isChoose:NO placeholderStr:@"请选择性别" isSelect:YES];
             cell.textField.userInteractionEnabled = NO;
+            if ([self.dictionaryInfo objectForKey:@"sex"]) {
+                cell.textField.text = [self.dictionaryInfo objectForKey:@"sex"];
+            } else {
+                cell.textField.text = @"";
+            }
         } else if (indexPath.row == 4){
             [cell setLabelNameText:@"生      日:" isChoose:NO placeholderStr:@"请选择日期" isSelect: YES];
             cell.textField.userInteractionEnabled = NO;

@@ -344,6 +344,12 @@
     [dic setObject:@"6" forKey:@"quoteGroup"];
     [dic setObject:[UserInfoManager shareInstance].code forKey:@"CustKey"];
     [dic setObject:[UserInfoManager shareInstance].carID forKey:@"carId"];
+    PriceInfoModel *jqModel = [self.dataArray objectAtIndex:0];
+    if ([jqModel.isToubao isEqualToString:@"Y"]) {
+        [dic setObject:@"1" forKey:@"jiaoqiang"];
+    } else {
+        [dic setObject:@"0" forKey:@"jiaoqiang"];
+    }
     PriceInfoModel *csModel = [self.dataArray objectAtIndex:1];
     if ([csModel.isMianpei isEqualToString:@"Y"]) {
       [dic setObject:@"1" forKey:@"bujimianChesun"];
@@ -356,6 +362,7 @@
         [dic setObject:@"0" forKey:@"chesun"];
     }
     
+
     PriceInfoModel *szModel = [self.dataArray objectAtIndex:2];
     if ([szModel.isMianpei isEqualToString:@"Y"]) {
         [dic setObject:@"1" forKey:@"bujimianSanzhe"];
@@ -712,7 +719,7 @@
             }
             [cell hiddenFranchiseView:YES];
             cell.tag = indexPath.row;
-            [cell selectToubaoState:NO];
+            [cell selectToubaoState:YES];
         }
         if (indexPath.section == 1) {
             [cell selectToubaoState:YES];
