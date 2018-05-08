@@ -255,6 +255,7 @@
 
                 //获取轮播图信息
                 NSDictionary  *param = @{
+                                         @"facility":@(2),
                                          @"type":@"业务端首页轮播图"
                                          };
                 [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
@@ -474,6 +475,7 @@
 
                                             //获取轮播图信息
                                             NSDictionary  *param = @{
+                                                                     @"facility":@(2),
                                                                      @"type":@"业务端首页轮播图"
                                                                      };
                                             [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
