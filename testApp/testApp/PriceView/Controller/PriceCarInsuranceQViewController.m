@@ -93,7 +93,15 @@
             NSDictionary *data = response[@"data"];
             PriceInfoModel *jqModel = [[PriceInfoModel alloc] init];
             jqModel.name = @"交强险";
-            jqModel.isToubao = @"Y";
+
+            NSNumber *jiaoqiangtoubao = [data objectForKey:@"jiaoqiang"];
+            if (![jiaoqiangtoubao isKindOfClass:[NSNull class]]) {
+                if ([jiaoqiangtoubao doubleValue] == 0) {
+                    jqModel.isToubao = @"N";
+                } else if ([jiaoqiangtoubao doubleValue] == 1) {
+                    jqModel.isToubao = @"Y";
+                }
+            }
             jqModel.isMianpei = @"N";
             [self.arrayLasetData addObject:jqModel];
             
@@ -703,11 +711,14 @@
 #pragma  mark - view delegate
 - (void)changeModel:(BOOL)isLaseY{
     if (isLaseY) {
+        self.viewLastY.hidden = NO;
         [UIView animateWithDuration:0.25 animations:^{
          self.viewBear.frame = CGRectMake(0, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
         }];
         
+        
     } else {
+        self.viewLastY.hidden = YES;
         [UIView animateWithDuration:0.25 animations:^{
             self.viewBear.frame = CGRectMake(-SCREEN_WIDTH, 180 * ViewRateBaseOnIP6, 2 * SCREEN_WIDTH, SCREEN_HEIGHT - 180);
         }];

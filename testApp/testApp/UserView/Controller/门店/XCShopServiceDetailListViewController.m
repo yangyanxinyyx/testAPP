@@ -201,6 +201,15 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    XCShopServiceModel *model = self.dataArr[indexPath.row];
+    XCShopServiceCheckoutViewController *detailVC  =[[XCShopServiceCheckoutViewController alloc] initWithTitle:model.serviceName];
+    detailVC.serviceModel = model;
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
 #pragma mark - Privacy Method
 
 - (void)configureData

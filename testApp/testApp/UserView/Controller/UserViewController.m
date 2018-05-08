@@ -141,6 +141,7 @@
     LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否退出登录" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
         LoginViewController *loginVC = [[LoginViewController alloc] init];
         [UserInfoManager destroyInstance];
+        [NSUserDefaults resetStandardUserDefaults];
         [weakSelf.tabBarController setSelectedIndex:0];
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [delegate.window.rootViewController presentViewController:loginVC animated:NO completion:nil];    }];

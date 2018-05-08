@@ -71,8 +71,11 @@
         
     }
     if (isSelect) {
+        self.imageViewSelect.hidden = NO;
         self.imageViewSelect.frame = CGRectMake(SCREEN_WIDTH - 50 * ViewRateBaseOnIP6, 22 * ViewRateBaseOnIP6, 20 * ViewRateBaseOnIP6, 36 * ViewRateBaseOnIP6);
         self.imageViewSelect.image = [UIImage imageNamed:@"右"];
+    } else {
+        self.imageViewSelect.hidden = YES;
     }
 
 }
