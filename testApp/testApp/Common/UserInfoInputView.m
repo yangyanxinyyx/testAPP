@@ -59,7 +59,8 @@
 
         NSArray *array = (NSArray *)self.param;
         if (array.count > 0) {
-             str = array[0];
+            NSDictionary *dic = array[0];
+            str = dic[@"name"];
         }
 
         [_selectBtn setTitle:str forState:UIControlStateNormal];
@@ -76,6 +77,7 @@
         _dateLabel.font = [UIFont systemFontOfSize:14];
         [self addSubview:_dateLabel];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView)];
+        _dateLabel.userInteractionEnabled = YES;
         [_dateLabel addGestureRecognizer:tap];
 
 

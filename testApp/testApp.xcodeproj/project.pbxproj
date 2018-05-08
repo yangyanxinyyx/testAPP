@@ -221,6 +221,8 @@
 		FC4F7D032067748100468032 /* BaseViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D022067748100468032 /* BaseViewController1.m */; };
 		FC4F7D0C2067762500468032 /* MedalDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0B2067762500468032 /* MedalDetailViewController.m */; };
 		FC4F7D0F2067791F00468032 /* MedalDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4F7D0E2067791F00468032 /* MedalDetailCell.m */; };
+		FC4FBEC020A0C96100AE00EC /* 我的勋章@3x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC4FBEBE20A0C96000AE00EC /* 我的勋章@3x.jpg */; };
+		FC4FBEC120A0C96100AE00EC /* 我的勋章@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC4FBEBF20A0C96100AE00EC /* 我的勋章@2x.jpg */; };
 		FCCC0ED72061754C00986A9E /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */; };
 		FCE4E702208274B500E04A6B /* UserInfoInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */; };
 		FCE4E70620827BA500E04A6B /* CoverWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE4E70520827BA500E04A6B /* CoverWebViewController.m */; };
@@ -755,6 +757,8 @@
 		FC4F7D0B2067762500468032 /* MedalDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailViewController.m; sourceTree = "<group>"; };
 		FC4F7D0D2067791F00468032 /* MedalDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MedalDetailCell.h; sourceTree = "<group>"; };
 		FC4F7D0E2067791F00468032 /* MedalDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedalDetailCell.m; sourceTree = "<group>"; };
+		FC4FBEBE20A0C96000AE00EC /* 我的勋章@3x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "我的勋章@3x.jpg"; sourceTree = "<group>"; };
+		FC4FBEBF20A0C96100AE00EC /* 我的勋章@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "我的勋章@2x.jpg"; sourceTree = "<group>"; };
 		FCCC0ED52061754C00986A9E /* BaseNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
 		FCCC0ED62061754C00986A9E /* BaseNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		FCE4E6FE208274B400E04A6B /* UserInfoInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfoInputView.m; path = testApp/Common/UserInfoInputView.m; sourceTree = SOURCE_ROOT; };
@@ -1937,6 +1941,8 @@
 		FCEF5C85208ED8EC00B387FA /* CoverMain */ = {
 			isa = PBXGroup;
 			children = (
+				FC4FBEBF20A0C96100AE00EC /* 我的勋章@2x.jpg */,
+				FC4FBEBE20A0C96000AE00EC /* 我的勋章@3x.jpg */,
 				FCEF5C86208ED8EC00B387FA /* coverMain_nomnal@2x.png */,
 				FCEF5C87208ED8EC00B387FA /* coverMain_nomnal@3x.png */,
 				FCEF5C88208ED8EC00B387FA /* coverMain_select@2x.png */,
@@ -2258,6 +2264,7 @@
 				FCEF5D1E208ED8ED00B387FA /* login_code@3x.png in Resources */,
 				FCEF5D35208ED8ED00B387FA /* unconfirm@2x.png in Resources */,
 				FCEF5D33208ED8ED00B387FA /* red@2x.png in Resources */,
+				FC4FBEC020A0C96100AE00EC /* 我的勋章@3x.jpg in Resources */,
 				25712B2820908F37001629AD /* guide1@2x.png in Resources */,
 				FCEF5D34208ED8ED00B387FA /* red@3x.png in Resources */,
 				FCEF5D40208ED8ED00B387FA /* 添加图片@2x.png in Resources */,
@@ -2276,6 +2283,7 @@
 				250F5B0920937DA700F7C11B /* bubb@2x.png in Resources */,
 				FCEF5D20208ED8ED00B387FA /* login_location@3x.png in Resources */,
 				FCEF5D25208ED8ED00B387FA /* login_username@2x.png in Resources */,
+				FC4FBEC120A0C96100AE00EC /* 我的勋章@2x.jpg in Resources */,
 				FCEF5D41208ED8ED00B387FA /* 添加图片@3x.png in Resources */,
 				FCEF5D29208ED8ED00B387FA /* placeHolder@2x.png in Resources */,
 				FCEF5CF0208ED8EC00B387FA /* getCar_nomnal@2x.png in Resources */,

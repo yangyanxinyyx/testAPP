@@ -108,6 +108,10 @@
 
 - (void)pressOrderBtn
 {
+    if (!self.currentModel) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请选择客户" complete:nil];
+        [self.view addSubview:tipsView];
+    }
     NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:YES];
     VC.serviceArray = self.serviceArray;
     VC.currentModel = self.currentModel;
@@ -116,6 +120,10 @@
 
 - (void)pressFixBtn
 {
+    if (!self.currentModel) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"请选择客户" complete:nil];
+        [self.view addSubview:tipsView];
+    }
     NewGuestViewController *VC = [[NewGuestViewController alloc] initWithIsOrder:NO];
     VC.currentModel = self.currentModel;
     [self.navigationController pushViewController:VC animated:YES];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CoverPerformanceView : UIView
-- (instancetype)initWithTitle:(NSString *)title UserData:(NSArray *)data;
+- (instancetype)initWithTitle:(NSString *)title carAchie:(NSString *)carAchie carRank:(NSString *)carRank repairAchie:(NSString *)repairAchie repairRank:(NSString *)repairRank;
 
 
 @end

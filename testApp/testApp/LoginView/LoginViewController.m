@@ -255,6 +255,7 @@
 
                 //获取轮播图信息
                 NSDictionary  *param = @{
+                                         @"facility":@(2),
                                          @"type":@"业务端首页轮播图"
                                          };
                 [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
@@ -393,8 +394,7 @@
         if (response && [response isKindOfClass:[NSDictionary class]] && response[@"result"]) {
             if ([response[@"result"] integerValue] == 1) {
                 NSLog(@"登录成功");
-                [[NSUserDefaults standardUserDefaults] setObject:self.accoutTextField.text forKey:@"kUserAccout"];
-                [[NSUserDefaults standardUserDefaults] setObject:self.passwordTextField.text forKey:@"kUserPassword"];
+
 
                 if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
                     NSDictionary *data = response[@"data"];
@@ -475,6 +475,7 @@
 
                                             //获取轮播图信息
                                             NSDictionary  *param = @{
+                                                                     @"facility":@(2),
                                                                      @"type":@"业务端首页轮播图"
                                                                      };
                                             [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {

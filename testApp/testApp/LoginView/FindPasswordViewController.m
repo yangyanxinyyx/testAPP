@@ -46,7 +46,7 @@
         accoutTextField.leftViewMode = UITextFieldViewModeAlways;
         accoutTextField.font = [UIFont systemFontOfSize:14];
         accoutTextField.tag = i;
-        [accoutTextField21 addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
+        [accoutTextField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
 
         if (i == 0) {
             accoutTextField.keyboardType = UIKeyboardTypeDecimalPad;
