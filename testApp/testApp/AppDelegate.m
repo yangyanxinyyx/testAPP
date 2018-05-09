@@ -72,7 +72,7 @@
             
             if (i==2) {
                 
-                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(113 * ViewRateBaseOnIP6 * 2, 546 *  ViewRateBaseOnIP6 * 2, 150 * ViewRateBaseOnIP6 * 2 ,50 * ViewRateBaseOnIP6 * 2)];
+                UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(113 * ViewRateBaseOnIP6 * 2, 546 *  ViewRateBaseOnIP6 * 2 + kNavMargan * 2.7, 150 * ViewRateBaseOnIP6 * 2 ,50 * ViewRateBaseOnIP6 * 2)];
                 btn.layer.cornerRadius = 40 * ViewRateBaseOnIP6;
                 btn.layer.masksToBounds = YES;
                 [btn addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];

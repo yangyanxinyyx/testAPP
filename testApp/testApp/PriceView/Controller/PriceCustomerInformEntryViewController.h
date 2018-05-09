@@ -8,6 +8,9 @@
 
 #import "BaseViewController1.h"
 
+typedef void(^RequestSucces)(NSString *);
+
 @interface PriceCustomerInformEntryViewController : BaseViewController1
 @property (nonatomic, strong) NSString *titleName;
+@property (nonatomic, copy) RequestSucces requestSucces;
 @end

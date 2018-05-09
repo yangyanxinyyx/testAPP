@@ -64,7 +64,7 @@
 
 - (void)toucheSearch:(UIButton *)button{
     if (_textField.text.length > 0) {
-        [self pressCustomerVehicleEnquiries];
+        [self pressCustomerVehicleEnquiriesWithCriteria:_textField.text];
     }
     [_textField endEditing:YES];
 }
@@ -72,10 +72,10 @@
 #pragma mark -network
 
 
-- (void)pressCustomerVehicleEnquiries{
+- (void)pressCustomerVehicleEnquiriesWithCriteria:(NSString *)criteria{
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:self.textField.text forKey:@"criteria"];
+    [dic setValue:criteria forKey:@"criteria"];
     [RequestAPI getCustomerVehicleEnquiries:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         
         if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
@@ -188,7 +188,7 @@
 #pragma mark - function
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if (textField.text.length > 0) {
-        [self pressCustomerVehicleEnquiries];
+        [self pressCustomerVehicleEnquiriesWithCriteria:textField.text];
     } else {
         _infoView.hidden = YES;
     }
@@ -209,12 +209,16 @@
 - (void)toucheButtonEntry:(UIButton *)button{
     PriceCustomerInformEntryViewController *priceCustomerVC = [[PriceCustomerInformEntryViewController alloc] init];
     priceCustomerVC.titleName = @"客户信息录入";
+    __weak typeof (self)weakSelf = self;
+    priceCustomerVC.requestSucces = ^(NSString * planNO) {
+        [weakSelf pressCustomerVehicleEnquiriesWithCriteria:planNO];
+    };
     [self.navigationController pushViewController:priceCustomerVC animated:YES];
 }
 
 - (void)refresh{
     if (_textField.text.length > 0) {
-        [self pressCustomerVehicleEnquiries];
+        [self pressCustomerVehicleEnquiriesWithCriteria:_textField.text];
     } else {
         _infoView.hidden = YES;
         _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
@@ -314,7 +318,7 @@
         _textField.rightViewMode = UITextFieldViewModeAlways;
         _textField.delegate = self;
 //        _textField.text = @"粤AS5665";
-        _textField.text = @"粤A785XQ";
+//        _textField.text = @"粤A785XQ";
     }
     return _textField;
 }
@@ -398,7 +402,7 @@
 
 
 - (PriceInfoCellView *)modelsView{
-    if (!_modelsView) {
+    if (_modelsView) {
         _modelsView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.engineView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"车型代码:"];
     }
     return _modelsView;
@@ -406,7 +410,7 @@
 
 - (PriceInfoCellView *)bussinessRisksView{
     if (!_bussinessRisksView) {
-        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.modelsView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"保险到期日期:"];
+        _bussinessRisksView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.engineView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"保险到期日期:"];
     }
     return _bussinessRisksView;
 }
@@ -421,7 +425,7 @@
 - (PriceInfoCellView *)salesmanView{
     if (!_salesmanView) {
         _salesmanView = [[PriceInfoCellView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.insuranceView.frame) + 30 * ViewRateBaseOnIP6, SCREEN_WIDTH, 26 * ViewRateBaseOnIP6) withLabelNameText:@"所属携创业务员:"];
-        _salesmanView.labelContent.text = @"老王";
+        
     }
     return _salesmanView;
 }
