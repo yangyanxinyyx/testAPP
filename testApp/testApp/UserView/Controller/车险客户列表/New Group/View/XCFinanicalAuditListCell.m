@@ -121,6 +121,7 @@
 
     if ([self.typeStr isEqualToString:@"配送"]) {
         if (isUsableNSString(model.policyStatus, @"")) {
+            [_processLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
             [_processLabel setText:model.policyStatus];
         }else {
             [_processLabel setText:@" "];
