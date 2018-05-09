@@ -53,6 +53,15 @@
         _textField.returnKeyType = UIReturnKeyDone;
         _textField.delegate = self;
         _textField.font = [UIFont systemFontOfSize:14];
+    }else if (type == InputViewTypeLabel){
+        _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 0, SCREEN_WIDTH - 85, 44)];
+        _dateLabel.textColor = COLOR_RGB_255(68, 68, 68);
+        _dateLabel.font = [UIFont systemFontOfSize:14];
+        if ([self.param isKindOfClass:[NSString class]]) {
+            _dateLabel.text = self.param;
+        }
+        [self addSubview:_dateLabel];
+
     }else if (type == InputViewTypeSelect){
         _selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 0, 100, 44)];
         NSString *str = @"";

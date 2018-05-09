@@ -40,27 +40,41 @@
 
     for (int i=0; i<2; i++) {
         UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(line2.frame)+15, SCREEN_WIDTH/2, 14)];
+        NSMutableAttributedString *moneyStr = nil;
+
         if (i == 0) {
-            textLabel.text = [NSString getTheCorrectMoneyNum:carAchie];
+            moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@",[NSString getTheCorrectMoneyNum:carAchie]]];
         }else{
-            textLabel.text = [NSString getTheCorrectMoneyNum:repairAchie];
+            moneyStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥%@",[NSString getTheCorrectMoneyNum:repairAchie]]];
         }
         textLabel.textColor = COLOR_RGB_255(248, 21, 21);
         textLabel.textAlignment = NSTextAlignmentCenter;
         textLabel.backgroundColor = [UIColor whiteColor];
         textLabel.font = [UIFont systemFontOfSize:14];
+        NSRange range = [[moneyStr string] rangeOfString:@"¥"];
+        [moneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10] range:range];
+        [textLabel setAttributedText:moneyStr];
         [self addSubview:textLabel];
 
+
         UILabel *textLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel.frame)+7, SCREEN_WIDTH/2, 12)];
+        NSMutableAttributedString *noteStr = nil;
         if (i == 0) {
-            textLabel2.text = [NSString stringWithFormat:@"%@名",carRank];
+            noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@名",carRank]];
         }else{
-            textLabel2.text = [NSString stringWithFormat:@"%@名",repairRank];
+            noteStr =[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@名",repairRank]];
         }
         textLabel2.textColor = COLOR_RGB_255(57, 174, 57);
         textLabel2.textAlignment = NSTextAlignmentCenter;
         textLabel2.backgroundColor = [UIColor whiteColor];
         textLabel2.font = [UIFont systemFontOfSize:12];
+        NSRange range2 = [[noteStr string] rangeOfString:@"名"];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10] range:range2];
+
+        [textLabel2 setAttributedText:noteStr];
+        if ([textLabel2.text isEqualToString:@"0名"]) {
+            textLabel2.text = @"暂无排名";
+        }
         [self addSubview:textLabel2];
 
         UILabel *textLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel2.frame)+10, SCREEN_WIDTH/2, 10)];

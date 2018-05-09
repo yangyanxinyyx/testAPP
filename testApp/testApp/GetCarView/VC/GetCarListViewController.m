@@ -222,7 +222,7 @@ static NSString *identifier = @"listCell";
     }
     GetCarModel *model = self.dataSource[indexPath.row];
 
-    cell.carNumberLabel.text = model.plateNo;
+    cell.carNumberLabel.text = [NSString stringWithFormat:@"%ld. %@",indexPath.row + 1,model.plateNo] ;
     cell.ownerLabel.text = model.customerName;
     cell.itemsLabel.text = model.orderCategory;
     cell.timeLabel.text = model.appointmentTime;
@@ -427,9 +427,9 @@ static NSString *identifier = @"listCell";
         _textField.rightView = rightView;
         _textField.rightViewMode = UITextFieldViewModeAlways;
 
-        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(-30, 0, rightView.frame.size.width, rightView.frame.size.height)];
+        UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(500 * ViewRateBaseOnIP6 - 25, -10, 30, 30)];
         searchBtn.backgroundColor = [UIColor clearColor];
-        [rightView addSubview:searchBtn];
+        [_textField addSubview:searchBtn];
         [searchBtn addTarget:self action:@selector(pressSearchBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _textField;

@@ -47,7 +47,7 @@
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT-49)];
     _scrollView.backgroundColor = COLOR_RGB_255(242, 242, 242);
     [ self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(0, 436 - 190 + 190 *kScaleHeight);
+    _scrollView.contentSize = CGSizeMake(0, 626 - 190 + 190 *kScaleHeight);
 //    _scrollView.bounces = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
@@ -79,7 +79,7 @@
     _yearView.frame = CGRectMake(0, 190 * kScaleHeight + 124+124, SCREEN_WIDTH, 124);
     [_scrollView addSubview:_yearView];
 
-    UIButton *medalBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_yearView.frame) + 15, SCREEN_WIDTH, 44)];
+    UIButton *medalBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_yearView.frame) + 10, SCREEN_WIDTH, 44)];
     medalBtn.backgroundColor = [UIColor whiteColor];
     [medalBtn addTarget:self action:@selector(pressMedalBtn) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:medalBtn];
@@ -175,6 +175,7 @@
 
                 //获取轮播图信息
                 NSDictionary  *param = @{
+                                        @"facility":@(2),
                                          @"type":@"业务端首页轮播图"
                                          };
                 [RequestAPI getCoverLoopImage:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {

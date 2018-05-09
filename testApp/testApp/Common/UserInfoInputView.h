@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, InputViewType) {
     InputViewTypeTextField = 0,
     InputViewTypeDate,
-    InputViewTypeSelect
+    InputViewTypeSelect,
+    InputViewTypeLabel
 };
 
 @interface UserInfoInputView : UIView
@@ -19,6 +20,7 @@ typedef NS_ENUM(NSInteger, InputViewType) {
 @property (nonatomic,strong) UITextField *textField;
 @property (nonatomic,strong) UILabel *dateLabel;
 @property (nonatomic,strong) UIButton *selectBtn;
+@property (nonatomic,strong) UILabel *textLabel;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title type:(InputViewType)type param:(id)param WithCompletionHandler:(void (^)(NSString *))complete;
 
