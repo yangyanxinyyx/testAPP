@@ -100,7 +100,8 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else if (indexPath.row == 1) {
-        num = 20;
+//        num = 20;
+        num = 19;
     }
     else {
         num = 5;

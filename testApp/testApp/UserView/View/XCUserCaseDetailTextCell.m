@@ -33,7 +33,7 @@
 
 + (CGFloat)getCellHeight
 {
-    return (20 + 557) * ViewRateBaseOnIP6;
+    return (20 + 557 - (24+24)) * ViewRateBaseOnIP6;
 }
 
 + (CGFloat)getCaseCellHeightWithClip:(BOOL)clip
@@ -41,7 +41,7 @@
     if(clip) {
         return 392 * ViewRateBaseOnIP6;
     }else {
-        return (392 + 24 + 24) * ViewRateBaseOnIP6;
+        return (392 + 24 + 24 - (24+24)) * ViewRateBaseOnIP6;
     }
 }
 
@@ -103,7 +103,7 @@
                         [label setFrame:CGRectMake(leftMargin, (startY + topMargin) , labelSize.width, 24 * ViewRateBaseOnIP6)];
                         lastLabel = label;
                     }
-                    else if(i == 10){
+                    else if(i == 9){
                         [label sizeToFit];
                         CGFloat height = [UILabel getXCTextHeightLineWithString:label.text withWidth:self.bounds.size.width - leftMargin * 2 withFontSize:26];
                         [label setFrame:CGRectMake(leftMargin, CGRectGetMaxY(lastLabel.frame) + labelTopMargin  , self.bounds.size.width - leftMargin * 2, height)];
@@ -135,7 +135,7 @@
 - (void)setupCellWithCarTransactionDetailModel:(XCCarTransactioDetailModel *)model
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"车架号:",@"发动机号:",
                                   @"联系电话:",@"年审到期时间:",@"备注:"];
     
     NSString * name = @"";
@@ -143,7 +143,7 @@
     NSString * brand = @"";
     NSString * vinNo = @"";
     NSString * engineNo = @"";
-    NSString * Carmodel = @"";
+//    NSString * Carmodel = @"";
     NSString * phone = @"";
     NSString * time = @"";
     NSString * remark = @"";
@@ -164,9 +164,9 @@
     if (isUsableNSString(model.engineNo,@"")) {
         engineNo = model.engineNo;
     }
-    if (isUsableNSString(model.model, @"")) {
-        Carmodel = model.model;
-    }
+//    if (isUsableNSString(model.model, @"")) {
+//        Carmodel = model.model;
+//    }
     if (isUsableNSString(model.phone, @"")) {
         phone = model.phone;
     }
@@ -177,7 +177,7 @@
     if (isUsableNSString(model.remark, @"")) {
         remark = model.remark;
     }
-    self.titleValueArr = @[name,plateNo,brand,vinNo,engineNo,Carmodel,phone,time,remark];
+    self.titleValueArr = @[name,plateNo,brand,vinNo,engineNo,phone,time,remark];
 
     for (int i = 0 ; i < _labelArrM.count; i++) {
         NSString * title = baseTitleNameArr[i];
@@ -190,7 +190,7 @@
 - (void)setupCellWithViolationCarTranDetailModel:(XCCarTransactioDetailModel *)model
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"车架号:",@"发动机号:",
                                   @"违章地点:",@"违章城市:",@"违章时间:",
                                   @"违章分数:",@"违章条款:",@"总费用:"
                                   ,@"备注:"];
@@ -200,7 +200,7 @@
     NSString * brand = @"";
     NSString * vinNo = @"";
     NSString * engineNo = @"";
-    NSString * Carmodel = @"";
+//    NSString * Carmodel = @"";
     NSString * weizhangArea = @"";
     NSString * weizhangCity = @"";
     NSString * weizhangDate = @"";
@@ -225,9 +225,9 @@
     if (isUsableNSString(model.engineNo,@"")) {
         engineNo = model.engineNo;
     }
-    if (isUsableNSString(model.model, @"")) {
-        Carmodel = model.model;
-    }
+//    if (isUsableNSString(model.model, @"")) {
+//        Carmodel = model.model;
+//    }
     if (isUsableNSString(model.weizhangArea, @"")) {
         weizhangArea = model.weizhangArea;
     }
@@ -254,7 +254,7 @@
         remark = model.remark;
     }
     self.titleValueArr = @[name,plateNo,brand,
-                           vinNo,engineNo,Carmodel,
+                           vinNo,engineNo,
                            weizhangArea,weizhangCity,
                            weizhangDate,buckleScores,weizhangClause,orderPrice,
                            remark];
@@ -270,7 +270,7 @@
 - (void)setupCellWithRepairCarTranDetailModel:(XCCarTransactioDetailModel *)model
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"车架号:",@"发动机号:",
                                   @"联系电话:",@"预约时间:",@"保险金额:",
                                   @"自费金额:",@"门店名称:",@"备注:"];
     
@@ -279,7 +279,7 @@
     NSString * brand = @"";
     NSString * vinNo = @"";
     NSString * engineNo = @"";
-    NSString * Carmodel = @"";
+//    NSString * Carmodel = @"";
     NSString * phone = @"";
     NSString * appointmentTime = @"";
     NSString * insurance = @"¥0.00";
@@ -302,9 +302,9 @@
     if (isUsableNSString(model.engineNo,@"")) {
         engineNo = model.engineNo;
     }
-    if (isUsableNSString(model.model, @"")) {
-        Carmodel = model.model;
-    }
+//    if (isUsableNSString(model.model, @"")) {
+//        Carmodel = model.model;
+//    }
     if (isUsableNSString(model.phone, @"")) {
         phone = model.phone;
     }
@@ -324,7 +324,7 @@
         remark = model.remark;
     }
     self.titleValueArr = @[name,plateNo,brand,
-                           vinNo,engineNo,Carmodel,
+                           vinNo,engineNo,
                            phone,appointmentTime,insurance,
                            weixiuZifei,storeName,remark];
     
@@ -392,7 +392,7 @@
 {
     self.labelTitleArrM = @[@"投保人:",@"身份证:",@"车牌号:",
                                  @"车架号:",@"初登日期:",@"发动机号:",
-                                 @"品牌型号:",@"车型代码:",@"(商业)起保日期:",
+                                 @"品牌型号:",@"(商业)起保日期:",
                                  @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
                                  @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强险保单最终金额:",
                                  @"商业险保单最终金额:",@"交强险保单:",@"商业险保单:",
@@ -404,7 +404,7 @@
     NSString * recordDate = @" ";
     NSString * engineNo = @" ";
     NSString * brand = @" ";
-    NSString * carModel = @" ";
+//    NSString * carModel = @" ";
     NSString * syEffectDate = @" ";
     NSString * jqEffectDate = @" ";
     NSString * insurerName = @" ";
@@ -441,9 +441,9 @@
     if (isUsableNSString(model.brand, @"")) {
         brand = model.brand;
     }
-    if (isUsableNSString(model.model, @"")) {
-        carModel = model.model;
-    }
+//    if (isUsableNSString(model.model, @"")) {
+//        carModel = model.model;
+//    }
     if (isUsableNSString(model.syEffectDate, @"")) {
         syEffectDate = model.syEffectDate;
 //        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
@@ -488,7 +488,7 @@
     }
     self.titleValueArr = @[onwerName,onwerIdentify,plateNo,
                            vinNo,recordDate,engineNo,
-                           brand,carModel,syEffectDate,
+                           brand,syEffectDate,
                            jqEffectDate,insurerName,payNoticeNo,
                             syMoney,jqMoney,jqMoneyFinal,
                            syMoneyFinal,jqNumber,syNumber,
@@ -506,7 +506,7 @@
 {
     self.labelTitleArrM  = @[@"投保人:",@"身份证:",@"车牌号:",
                                   @"车架号:",@"初登日期:",@"发动机号:",
-                                  @"品牌型号:",@"车型代码:",@"(商业)起保日期:",
+                                  @"品牌型号:",@"(商业)起保日期:",
                                   @"(交强)起保日期:",@"保险公司:",@"缴费通知单号:",
                                   @"交强险(保单)金额:",@"商业险(保单)金额:",@"交强险保单最终金额:",
                                   @"商业险保单最终金额:",@"交强险保单:",@"商业险保单:",
@@ -520,7 +520,7 @@
     NSString * recordDate = @"";
     NSString * engineNo = @"";
     NSString * brand = @"";
-    NSString * carModel = @"";
+//    NSString * carModel = @"";
     NSString * syEffectDate = @"";
     NSString * jqEffectDate = @"";
     NSString * insurerName = @"";
@@ -561,9 +561,9 @@
     if (isUsableNSString(model.brand, @"")) {
         brand = model.brand;
     }
-    if (isUsableNSString(model.model, @"")) {
-        carModel = model.model;
-    }
+//    if (isUsableNSString(model.model, @"")) {
+//        carModel = model.model;
+//    }
     if (isUsableNSString(model.syEffectDate, @"")) {
                 syEffectDate = model.syEffectDate;
 //        NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
@@ -620,7 +620,7 @@
     }
     self.titleValueArr = @[onwerName,onwerIdentify,plateNo,
                            vinNo,recordDate,engineNo,
-                           brand,carModel,syEffectDate,
+                           brand,syEffectDate,
                            jqEffectDate,insurerName,payNoticeNo,
                            jqMoney,syMoney,jqMoneyFinal,
                            syMoneyFinal,jqNumber,syNumber,
@@ -726,7 +726,7 @@
     for (int i = 0 ; i < labelTitleArrM.count; i++) {
         NSString *title = labelTitleArrM[i];
         UILabel *label = [UILabel createLabelWithTextFontSize:26 textColor:COLOR_RGB_255(51, 51, 51)];
-        if(i == 10){
+        if(i == 9){
             label.numberOfLines = 0;
         }
         [label setText:title];

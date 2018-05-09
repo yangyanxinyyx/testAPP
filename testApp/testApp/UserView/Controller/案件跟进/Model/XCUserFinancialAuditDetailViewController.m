@@ -114,7 +114,8 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else if (indexPath.row == 1) {
-        num = 24;
+//        num = 24;
+        num = 23;
     }
     else {
         num = 5;

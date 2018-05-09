@@ -52,7 +52,7 @@
 - (void)configureData
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"车架号:",@"发动机号:",
                                   @"联系电话:",@"预约时间:",@"保险金额:",
                                   @"自费金额:",@"门店名称:",@"备注:"];
     self.dataTitleArrM = [[NSMutableArray alloc] initWithArray:baseTitleNameArr];
@@ -122,7 +122,7 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else {
-        return 720 * ViewRateBaseOnIP6;
+        return (720 - 24 - 24) * ViewRateBaseOnIP6;
 //        CGFloat num = self.dataTitleArrM.count - 1;
 //        return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num )  + 30 * ViewRateBaseOnIP6  ;
     }

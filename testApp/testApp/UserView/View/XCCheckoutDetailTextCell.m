@@ -112,12 +112,12 @@
         }else {
             [_placeholderLabel setText:@" "];
         }
-    }else if ([self.title isEqualToString:@"车型代码:"]) {
-        if (isUsableNSString(model.model,@"")) {
-            [_placeholderLabel setText:model.model];
-        }else {
-            [_placeholderLabel setText:@" "];
-        }
+//    }else if ([self.title isEqualToString:@"车型代码:"]) {
+//        if (isUsableNSString(model.model,@"")) {
+//            [_placeholderLabel setText:model.model];
+//        }else {
+//            [_placeholderLabel setText:@" "];
+//        }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
 //            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];
@@ -306,13 +306,13 @@
             [_placeholderLabel setText:@" "];
         }
     }
-    else if ([self.title isEqualToString:@"车型代码:"]) {
-        if ( isUsableNSString(model.model,@"")) {
-            [_placeholderLabel setText:model.model];
-        }else {
-            [_placeholderLabel setText:@" "];
-        }
-    }
+//    else if ([self.title isEqualToString:@"车型代码:"]) {
+//        if ( isUsableNSString(model.model,@"")) {
+//            [_placeholderLabel setText:model.model];
+//        }else {
+//            [_placeholderLabel setText:@" "];
+//        }
+//    }
     else if ([self.title isEqualToString:@"联系方式:"]) {
         if (isUsableNSString(model.phoneNo,@"")) {
             [_placeholderLabel setText:model.phoneNo];
@@ -368,12 +368,12 @@
         }else {
             [_placeholderLabel setText:@" "];
         }
-    }else if ([self.title isEqualToString:@"车型代码:"]) {
-        if (isUsableNSString(model.model,@"")) {
-            [_placeholderLabel setText:model.model];
-        }else {
-            [_placeholderLabel setText:@" "];
-        }
+//    }else if ([self.title isEqualToString:@"车型代码:"]) {
+//        if (isUsableNSString(model.model,@"")) {
+//            [_placeholderLabel setText:model.model];
+//        }else {
+//            [_placeholderLabel setText:@" "];
+//        }
     }else if ([self.title isEqualToString:@"(商业)起保日期:"]) {
         if (isUsableNSString(model.syEffectDate,@"")) {
 //            NSMutableString *tmpDate = [NSMutableString stringWithString:model.syEffectDate];

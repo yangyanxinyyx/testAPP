@@ -63,7 +63,7 @@
 - (void)configureData
 {
     NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",@"车型代码:",
+                                  @"车架号:",@"发动机号:",
                                   @"联系电话:",@"年审到期时间:",@"备注:"];
     self.dataTitleArrM = [[NSMutableArray alloc] initWithArray:baseTitleNameArr];
 
