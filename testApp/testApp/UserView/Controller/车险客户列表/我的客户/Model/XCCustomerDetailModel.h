@@ -36,7 +36,7 @@
 /** 车牌号 */
 @property (nonatomic, copy) NSString * plateNo;
 
-/** 车品牌 */
+/** 品牌型号 */
 @property (nonatomic, copy) NSString * brand;
 
 /** 初登日期 */

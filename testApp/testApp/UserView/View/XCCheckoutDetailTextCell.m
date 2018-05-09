@@ -106,7 +106,7 @@
        }else {
            [_placeholderLabel setText:@" "];
        }
-    }else if ([self.title isEqualToString:@"品牌:"]) {
+    }else if ([self.title isEqualToString:@"品牌型号:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -276,7 +276,7 @@
             [_placeholderLabel setText:@" "];
         }
     }
-    else if ([self.title isEqualToString:@"车品牌:"]) {
+    else if ([self.title isEqualToString:@"品牌型号:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {
@@ -362,7 +362,7 @@
         }else {
             [_placeholderLabel setText:@" "];
         }
-    }else if ([self.title isEqualToString:@"品牌:"]) {
+    }else if ([self.title isEqualToString:@"品牌型号:"]) {
         if (isUsableNSString(model.brand,@"")) {
             [_placeholderLabel setText:model.brand];
         }else {

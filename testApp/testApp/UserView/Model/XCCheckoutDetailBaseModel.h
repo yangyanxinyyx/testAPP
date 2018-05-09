@@ -36,7 +36,7 @@
 /** 发动机号 */
 @property (nonatomic, copy) NSString * engineNo;
 
-/** 品牌 */
+/** 品牌型号 */
 @property (nonatomic, copy) NSString * brand;
 
 /** 车型代码 */
