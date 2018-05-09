@@ -475,7 +475,18 @@
     
     if ([self.titleLabel.text isEqualToString:@"当前状态:"]) {
         if (isUsableNSString(model.status, @"")) {
-            [_placeholderLabel setText:model.status];
+            if ([model.status isEqualToString:@"待审核"]) {
+                [_placeholderLabel setText:@"审核中"];
+            }
+            else if ([model.status isEqualToString:@"审核通过"]) {
+                [_placeholderLabel setText:@"已上架"];
+            }
+            else if ([model.status isEqualToString:@"审核不通过"]) {
+                [_placeholderLabel setText:@"已拒绝"];
+            }
+            else if ([model.status isEqualToString:@"下架"]) {
+                [_placeholderLabel setText:@"已下架"];
+            }
         }else {
             [_placeholderLabel setText:@""];
         }

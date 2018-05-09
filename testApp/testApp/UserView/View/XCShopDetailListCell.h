@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class XCShopServiceModel;
+@class XCShopDetailListCell;
 @protocol XCShopDetailListCellDelegate <NSObject>
 - (void)XCShopDetailListCellClickEditedButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
-- (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
+- (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel WithCell:(XCShopDetailListCell *)cell;
 - (void)XCShopDetailListCellClickDetailButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel;
 
 @end

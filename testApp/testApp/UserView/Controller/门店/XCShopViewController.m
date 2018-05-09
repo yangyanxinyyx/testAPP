@@ -193,9 +193,43 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             _storeModel.licenseUrl = [self.lincePhotoArrM firstObject];
         }
     }
+    if (!isUsableNSString(_storeModel.city, @"")) {
+        _storeModel.city = @"";
+    }
     NSMutableString * cityStrM = [NSMutableString stringWithString:_storeModel.city];
     NSArray *strArr = [cityStrM componentsSeparatedByString:@"市"];
     cityStrM = [strArr firstObject];
+    
+    if (!isUsableNSString(_storeModel.tel, @"")) {
+        _storeModel.tel = @"";
+    }
+    if (!isUsableNSString(_storeModel.name, @"")) {
+        _storeModel.name = @"";
+    }
+    if (!isUsableNSString(_storeModel.corporateName, @"")) {
+        _storeModel.corporateName = @"";
+    }
+    if (!isUsableNSString(_storeModel.address, @"")) {
+        _storeModel.address = @"";
+    }
+    if (!isUsableNSString(_storeModel.longitude,@"")) {
+        _storeModel.longitude = @"";
+    }
+    if (!isUsableNSString(_storeModel.latitude, @"")) {
+        _storeModel.latitude = @"";
+    }
+    if (!isUsableNSString(_storeModel.type, @"")) {
+        _storeModel.type = @"";
+    }
+    if (!isUsableNSString(_storeModel.area, @"")) {
+        _storeModel.area = @"";
+    }
+    if (!isUsable(_storeModel.salesmanCommission, [NSNumber class])) {
+        _storeModel.salesmanCommission = [NSNumber numberWithDouble:0.00];
+    }
+    if (!isUsable(_storeModel.managerCommission, [NSNumber class])) {
+        _storeModel.managerCommission = [NSNumber numberWithDouble:0.00];
+    }
     
     dispatch_semaphore_t videoTrackSynLoadSemaphore;
     videoTrackSynLoadSemaphore = dispatch_semaphore_create(0);

@@ -59,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshServiceData];
+//    [self refreshServiceData];
 }
 
 -(void)viewWillLayoutSubviews
@@ -142,8 +142,16 @@
     
 }
 
-- (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel
+
+- (void)XCShopDetailListCellClickDeleteButton:(UIButton *)button serviceModel:(XCShopServiceModel *)serviceModel WithCell:(XCShopDetailListCell *)cell
 {
+    NSIndexPath *indepath = [self.collectionView indexPathForCell:cell];
+
+    if (self.dataArr.count <= indepath.row) {
+        return;
+    }
+    XCShopServiceModel *model = [self.dataArr objectAtIndex:indepath.row];
+    
     //删除服务
     LYZAlertView *alterView = [LYZAlertView alterViewWithTitle:@"是否删除该项目" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
        
@@ -155,8 +163,10 @@
         [RequestAPI deleteStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             if ([response[@"result"] integerValue] == 1) {
-                [strongSelf showAlterInfoWithNetWork:@"删除成功"];
-                [strongSelf refreshServiceData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [strongSelf.dataArr removeObject:model];
+                    [strongSelf.collectionView deleteItemsAtIndexPaths:@[indepath]];
+                });
             }else {
                 [strongSelf showAlterInfoWithNetWork:@"删除失败"];
             }
@@ -165,7 +175,7 @@
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
             [strongSelf showAlterInfoWithNetWork:@"网络错误"];
         }];
-        
+
     }];
     [self.view addSubview:alterView];
 }

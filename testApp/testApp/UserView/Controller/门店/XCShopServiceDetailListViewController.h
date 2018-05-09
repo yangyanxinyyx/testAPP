@@ -23,7 +23,7 @@
 /** 服务分类 */
 @property (nonatomic, strong) NSString * titleTypeStr ;
 /** <# 注释 #> */
-@property (nonatomic, strong) NSArray * dataArr ;
+@property (nonatomic, strong) NSMutableArray * dataArr ;
 
 - (instancetype)initWithTitle:(NSString *)title;
 @end

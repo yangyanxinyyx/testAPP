@@ -72,6 +72,7 @@
 
     [_priceLabel setFrame: CGRectMake(CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 72 * ViewRateBaseOnIP6, self.bounds.size.width - (CGRectGetMaxX(_priceTitleLabel.frame) + 5 * ViewRateBaseOnIP6 ),25 * ViewRateBaseOnIP6)];
     if ([self.model.status isEqualToString:@"待审核"]) { /// 审核中
+
         UIImage *tipsImage  = [UIImage imageNamed:@"greentap"];
         if (tipsImage) {
             [_tipsImageView setImage:tipsImage];
@@ -95,10 +96,8 @@
             [_tipsImageView setImage:tipsImage];
         }
         [_detailButton setFrame:CGRectMake(10 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 111 * ViewRateBaseOnIP6, buttonSize.width, buttonSize.height)];
-
-        [_editedButton setFrame:CGRectMake(CGRectGetMaxY(_detailButton.frame)+ 8 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
-
-        [_deleteButton setFrame:CGRectMake(CGRectGetMaxY(_editedButton.frame)+ 7 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
+        [_editedButton setFrame:CGRectMake(CGRectGetMaxX(_detailButton.frame)+ 8 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
+        [_deleteButton setFrame:CGRectMake(CGRectGetMaxX(_editedButton.frame)+ 7 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
         
     }
     else if ([self.model.status isEqualToString:@"下架"]) {
@@ -106,11 +105,13 @@
         if (tipsImage) {
             [_tipsImageView setImage:tipsImage];
         }
-        [_detailButton setFrame:CGRectMake(40 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 111 * ViewRateBaseOnIP6, buttonSize.width, buttonSize.height)];
+//        [_detailButton setFrame:CGRectMake(40 * ViewRateBaseOnIP6, CGRectGetMaxY(_iconImageView.frame) + 111 * ViewRateBaseOnIP6, buttonSize.width, buttonSize.height)];
+//        [_editedButton setFrame:CGRectZero];
+//        [_deleteButton setFrame:CGRectZero];
+//        [_deleteButton setFrame:CGRectMake(CGRectGetMaxX(_detailButton.frame) + 55 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
         [_editedButton setFrame:CGRectZero];
         [_deleteButton setFrame:CGRectZero];
-//        [_deleteButton setFrame:CGRectMake(CGRectGetMaxY(_detailButton.frame) + 55 * ViewRateBaseOnIP6, _detailButton.frame.origin.y, buttonSize.width, buttonSize.height)];
-        
+        [_detailButton setFrame:CGRectMake((self.frame.size.width - buttonSize.width) * 0.5, CGRectGetMaxY(_priceLabel.frame) + 20 * ViewRateBaseOnIP6, buttonSize.width, buttonSize.height)];
     }
         labelSize = CGSizeMake(70 * ViewRateBaseOnIP6, 70 * ViewRateBaseOnIP6);
     [_tipsImageView setFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
@@ -140,22 +141,20 @@
     _priceLabel = [UILabel createLabelWithTextFontSize:24 textColor:COLOR_RGB_255(165, 165, 165)];
     
     _editedButton = [self createButtonWithTitle:@"编辑" TitleColor:COLOR_RGB_255(1, 77, 163) action:@selector(clickEditBtn:)];
-    
     _deleteButton = [self createButtonWithTitle:@"删除" TitleColor:COLOR_RGB_255(1, 77, 163) action:@selector(clickDeleteBtn:)];
-
     _detailButton = [self createButtonWithTitle:@"查看" TitleColor:[UIColor whiteColor] action:@selector(clickDetailBtn:)];
     [_detailButton setBackgroundColor:COLOR_RGB_255(1, 77, 163)];
 
     
-    [self addSubview:_iconImageView];
-    [self addSubview:_tipsImageView];
-    [self addSubview:_serviceNameLabel];
-    [self addSubview:_priceTitleLabel];
-    [self addSubview:_priceLabel];
-    [self addSubview:_onSalePriceLabel];
-    [self addSubview:_editedButton];
-    [self addSubview:_deleteButton];
-    [self addSubview:_detailButton];
+    [self.contentView  addSubview:_iconImageView];
+    [self.contentView  addSubview:_tipsImageView];
+    [self.contentView  addSubview:_serviceNameLabel];
+    [self.contentView  addSubview:_priceTitleLabel];
+    [self.contentView  addSubview:_priceLabel];
+    [self.contentView  addSubview:_onSalePriceLabel];
+    [self.contentView  addSubview:_detailButton];
+    [self.contentView  addSubview:_editedButton];
+    [self.contentView  addSubview:_deleteButton];
     
     
 }
@@ -183,8 +182,8 @@
 
 - (void)clickDeleteBtn:(UIButton *)button
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopDetailListCellClickDeleteButton:serviceModel:)]) {
-        [self.delegate XCShopDetailListCellClickDeleteButton:button serviceModel:_model];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(XCShopDetailListCellClickDeleteButton:serviceModel:WithCell:)]) {
+        [self.delegate XCShopDetailListCellClickDeleteButton:button serviceModel:_model WithCell:self];
     }
 }
 
