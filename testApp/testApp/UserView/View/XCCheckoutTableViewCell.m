@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 
 @interface XCCheckoutTableViewCell ()
+@property (nonatomic, strong) UIView * leftLine ;
 
 @property (nonatomic, strong) UILabel * carNumberLabel ;
 @property (nonatomic, strong) UILabel * userNameLabel ;
@@ -45,6 +46,11 @@
 
 - (void)configSubVies
 {
+    
+    _leftLine = [[UIView alloc] init];
+    [_leftLine setBackgroundColor:COLOR_RGB_255(0, 77, 161)];
+    [self addSubview:_leftLine];
+    
     self.carNumberLabel = ({
         UILabel *carNumberLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [carNumberLabel setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
@@ -107,12 +113,15 @@
     [super layoutSubviews];
     
     CGFloat leftMargin = 30 * ViewRateBaseOnIP6;
+    
+    [_leftLine setFrame:CGRectMake(leftMargin , 30 * ViewRateBaseOnIP6 , 2, 29 * ViewRateBaseOnIP6)];
+    
     [self.carNumberLabel sizeToFit];
-    [self.carNumberLabel setFrame:CGRectMake(leftMargin, 29 * ViewRateBaseOnIP6, 430 * ViewRateBaseOnIP6, 28 * ViewRateBaseOnIP6)];
+    [self.carNumberLabel setFrame:CGRectMake(CGRectGetMaxX(_leftLine.frame) + leftMargin, 29 * ViewRateBaseOnIP6, 430 * ViewRateBaseOnIP6 -  CGRectGetMaxX(_leftLine.frame) , 28 * ViewRateBaseOnIP6)];
     [self.userNameLabel sizeToFit];
-    [self.userNameLabel setFrame:CGRectMake(leftMargin, self.carNumberLabel.frame.origin.y + self.carNumberLabel.frame.size.height + 18 * ViewRateBaseOnIP6, self.userNameLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
+    [self.userNameLabel setFrame:CGRectMake(CGRectGetMaxX(_leftLine.frame) + leftMargin, self.carNumberLabel.frame.origin.y + self.carNumberLabel.frame.size.height + 18 * ViewRateBaseOnIP6, self.userNameLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     [self.issueTimeLabel sizeToFit];
-    [self.issueTimeLabel setFrame:CGRectMake(leftMargin, self.userNameLabel.frame.origin.y + self.userNameLabel.frame.size.height + 12 * ViewRateBaseOnIP6, self.issueTimeLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
+    [self.issueTimeLabel setFrame:CGRectMake(CGRectGetMaxX(_leftLine.frame) + leftMargin, self.userNameLabel.frame.origin.y + self.userNameLabel.frame.size.height + 12 * ViewRateBaseOnIP6, self.issueTimeLabel.frame.size.width, 21 * ViewRateBaseOnIP6)];
     
     
     CGFloat buttonW = 160 * ViewRateBaseOnIP6;
