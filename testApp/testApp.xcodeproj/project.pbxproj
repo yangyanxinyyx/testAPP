@@ -82,6 +82,7 @@
 		A728184B208B7378001BD20F /* XCUserViolationDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */; };
 		A728D08D20A33CC00083EB2D /* map2.png in Resources */ = {isa = PBXBuildFile; fileRef = A728D08B20A33CBF0083EB2D /* map2.png */; };
 		A728D08E20A33CC00083EB2D /* map2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728D08C20A33CBF0083EB2D /* map2@3x.png */; };
+		A728D09420A365C50083EB2D /* XCCustomerSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A728D09220A365C50083EB2D /* XCCustomerSearchView.m */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
 		A751F62420981C6E0084C492 /* XCPickerCityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A751F62320981C6E0084C492 /* XCPickerCityHandler.m */; };
@@ -480,6 +481,8 @@
 		A728184A208B7378001BD20F /* XCUserViolationDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCUserViolationDetailModel.m; sourceTree = "<group>"; };
 		A728D08B20A33CBF0083EB2D /* map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map2.png; sourceTree = "<group>"; };
 		A728D08C20A33CBF0083EB2D /* map2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2@3x.png"; sourceTree = "<group>"; };
+		A728D09220A365C50083EB2D /* XCCustomerSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCustomerSearchView.m; sourceTree = "<group>"; };
+		A728D09320A365C50083EB2D /* XCCustomerSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCustomerSearchView.h; sourceTree = "<group>"; };
 		A72CFCF9207FC32400017DFA /* XCShopServiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopServiceModel.h; sourceTree = "<group>"; };
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
@@ -1154,6 +1157,8 @@
 		A751F627209851C30084C492 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
+				A728D09320A365C50083EB2D /* XCCustomerSearchView.h */,
+				A728D09220A365C50083EB2D /* XCCustomerSearchView.m */,
 				A71AA9632087A83A00E78990 /* XCCustomerShopListView.h */,
 				A71AA9642087A83A00E78990 /* XCCustomerShopListView.m */,
 				A71AA9662087AFB100E78990 /* XCCustomerShopSrcollerViewCell.h */,
@@ -2547,6 +2552,7 @@
 				FC32BF462079AA2000817156 /* XCCheckoutTableViewCell.m in Sources */,
 				FC32BE1320792AD900817156 /* GetCarDetailModel.m in Sources */,
 				FC32BF4C2079AA2000817156 /* XCUserListCollectionViewCell.m in Sources */,
+				A728D09420A365C50083EB2D /* XCCustomerSearchView.m in Sources */,
 				A75D30512081022E0012898A /* XCShopServiceDetailListViewController.m in Sources */,
 				FC32BF172079AA2000817156 /* XCCheckoutDetailBaseTableViewController.m in Sources */,
 				FC32BF2F2079AA2000817156 /* XCUserUnderWritingViewController.m in Sources */,
