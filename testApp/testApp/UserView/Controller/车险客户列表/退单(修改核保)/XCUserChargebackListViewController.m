@@ -125,7 +125,7 @@
 {
 //    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 //    XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"退单详情"];
+    XCUserChargebackListDetailViewController *chargebackVC = [[XCUserChargebackListDetailViewController alloc] initWithTitle:@"核保详情"];
     chargebackVC.detailModel = cell.baseModel;
     [self.navigationController pushViewController:chargebackVC animated:YES];
 }

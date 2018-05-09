@@ -114,7 +114,7 @@
     if (self.dataArr.count >= indexPath.row && self.dataArr.count > 0) {
         baseModel =  self.dataArr[indexPath.row];
     }
-    XCUserFinancialAuditDetailViewController *detailVC = [[XCUserFinancialAuditDetailViewController alloc] initWithTitle:@"财务审核详情"];
+    XCUserFinancialAuditDetailViewController *detailVC = [[XCUserFinancialAuditDetailViewController alloc] initWithTitle:@"会计审核详情"];
     if (baseModel) {
         detailVC.detailModel = baseModel;
     }

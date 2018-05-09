@@ -129,7 +129,7 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     XCCheckoutDetailBaseModel *baseModel = self.dataArr[indexPath.row];
-    XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待打单详情"];
+    XCUserWaitingToWriteListDetailViewController *detailVC = [[XCUserWaitingToWriteListDetailViewController alloc] initWithTitle:@"已缴费待出单详情"];
     detailVC.model = baseModel;
     [self.navigationController pushViewController:detailVC animated:YES];
     
