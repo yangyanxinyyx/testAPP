@@ -18,7 +18,7 @@
     NSNumber *serviceCommission = data[@"service_commission"];
     NSNumber *carCommission = data[@"car_commission"];
     NSNumber *carRoyalties = data[@"car_royalties"];
-    NSNumber *medalBonus = data[@"car_royalties"];
+    NSNumber *medalBonus = data[@"medal_bonus"];
     NSNumber *carPerformance = data[@"car_performance"];
     NSNumber *servicePerformance = data[@"service_performance"];
     NSString *createTime = data[@"creat_time"];

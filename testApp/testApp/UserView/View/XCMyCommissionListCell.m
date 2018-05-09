@@ -199,7 +199,7 @@
         [_createTimeLable setText:timeString];
         }
     }else {
-        [_createTimeLable setText:@"未知时间"];
+        [_createTimeLable setText:@""];
     }
     
     if (model.carPerformance) {
