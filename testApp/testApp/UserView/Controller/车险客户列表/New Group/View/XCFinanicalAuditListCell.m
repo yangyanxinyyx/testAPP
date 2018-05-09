@@ -20,7 +20,8 @@
 @property (nonatomic, strong) UIImageView * nextImageView ;
 
 @property (nonatomic, strong) XCCheckoutDetailBaseModel * model ;
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCarTransactionModel * carModel ;
 
 @end
 @implementation XCFinanicalAuditListCell
@@ -145,6 +146,53 @@
         }
     }
 }
+
+- (void)setupCellWithCarTransactionModel:(XCCarTransactionModel *)model
+{
+    _carModel = model;
+    
+    if (isUsableNSString(model.plateOn, @"")) {
+        [_carNumLabel setText:[NSString stringWithFormat:@"%@",model.plateOn]];
+    }else {
+        [_carNumLabel setText:@" "];
+    }
+    if(isUsableNSString(model.customerName, @"")) {
+        [_carNameLabel setText:[NSString stringWithFormat:@"车主: %@",model.customerName]];
+    }else {
+        [_carNameLabel setText:@"车主:  "];
+    }
+        if (isUsableNSString(model.status, @"")) {
+            if ([model.status isEqualToString:@"未付款"]) {
+                [_processLabel setTextColor:COLOR_RGB_255(246, 41, 41)];
+            }
+            else if ([model.status isEqualToString:@"待处理"] )
+            {
+                [_processLabel setTextColor:COLOR_RGB_255(49, 190, 166)];
+            }
+            else if ([model.status isEqualToString:@"处理中"])
+            {
+                [_processLabel setTextColor:COLOR_RGB_255(253, 161, 0)];
+            }
+            else if ([model.status isEqualToString:@"处理完毕"])
+            {
+                [_processLabel setTextColor:COLOR_RGB_255(0, 77, 161)];
+            }
+            else if ([model.status isEqualToString:@"待定价"])
+            {
+                [_processLabel setTextColor:COLOR_RGB_255(49, 190, 166)];
+            }
+            [_processLabel setText:model.status];
+        }else {
+            [_processLabel setText:@" "];
+        }
+    
+    if (isUsableNSString(model.createTime,@"")) {
+        [_timeLabel setText:[NSString stringWithFormat:@"创建时间: %@",model.createTime]];
+    }else {
+        [_timeLabel setText:@"创建时间:  "];
+    }
+}
+
 #pragma mark - Delegates & Notifications
 
 #pragma mark - Privacy Method

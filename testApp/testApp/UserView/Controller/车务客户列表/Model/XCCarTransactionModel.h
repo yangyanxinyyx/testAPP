@@ -21,5 +21,7 @@
 /** 创建时间 */
 @property (nonatomic, copy) NSString * createTime;
 
+/** 状态 */
+@property (nonatomic, copy) NSString * status;
 
 @end

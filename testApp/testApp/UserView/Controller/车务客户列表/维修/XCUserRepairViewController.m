@@ -9,6 +9,8 @@
 #import "XCUserRepairViewController.h"
 #import "XCUserRepairDetailViewController.h"
 #import "XCCarTransactionModel.h"
+#import "XCFinanicalAuditListCell.h"
+#define kFinaListCellID @"FinaListCellID"
 
 @interface XCUserRepairViewController ()<XCCheckoutTableViewCellDelegate>
 
@@ -19,6 +21,7 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tableView registerClass:[XCFinanicalAuditListCell class] forCellReuseIdentifier:kFinaListCellID];
     __weak typeof (self)weakSelf = self;
     self.pageIndex = 1;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -99,33 +102,33 @@
 
 #pragma mark - Action Method
 
-- (void)clickCheckDetailButtonWithCell:(XCCheckoutTableViewCell *)cell
-{
-    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
-    XCCarTransactionModel *model = self.dataArr[indexPath.row];
-    __weak typeof (self)weakSelf = self;
-    
-    //车务客户列表
-    NSDictionary *param = @{
-                            @"id":model.carTransID,
-                            };
-    [RequestAPI getCarTransaction:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        BOOL configureSucess  = NO;
-        if (response[@"data"]) {
-            XCCarTransactioDetailModel *detailModel = [XCCarTransactioDetailModel yy_modelWithJSON:response[@"data"]];
-       XCUserRepairDetailViewController *repairDetail = [[XCUserRepairDetailViewController alloc] initWithTitle:@"维修详情"];
-            repairDetail.carTranDetailModel = detailModel;
-            [self.navigationController pushViewController:repairDetail animated:YES];
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-            configureSucess = YES;
-        }
-        if (!configureSucess) {
-            [weakSelf requestFailureHandler];
-        }
-    } fail:^(id error) {
-        [weakSelf requestFailureHandler];
-    }];
-}
+//- (void)clickCheckDetailButtonWithCell:(XCCheckoutTableViewCell *)cell
+//{
+//    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+//    XCCarTransactionModel *model = self.dataArr[indexPath.row];
+//    __weak typeof (self)weakSelf = self;
+//    
+//    //车务客户列表
+//    NSDictionary *param = @{
+//                            @"id":model.carTransID,
+//                            };
+//    [RequestAPI getCarTransaction:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+//        BOOL configureSucess  = NO;
+//        if (response[@"data"]) {
+//            XCCarTransactioDetailModel *detailModel = [XCCarTransactioDetailModel yy_modelWithJSON:response[@"data"]];
+//       XCUserRepairDetailViewController *repairDetail = [[XCUserRepairDetailViewController alloc] initWithTitle:@"维修详情"];
+//            repairDetail.carTranDetailModel = detailModel;
+//            [self.navigationController pushViewController:repairDetail animated:YES];
+//            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+//            configureSucess = YES;
+//        }
+//        if (!configureSucess) {
+//            [weakSelf requestFailureHandler];
+//        }
+//    } fail:^(id error) {
+//        [weakSelf requestFailureHandler];
+//    }];
+//}
 #pragma mark - privary Method
 - (void)requestFailureHandler
 {
@@ -152,22 +155,55 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
-    [cell setTimeTitleStr:@"创建时间"];
-    cell.delegate = self;
-    XCCarTransactionModel*carTranModel = self.dataArr[indexPath.row];
-    [cell setupCellWithCarTransactionListModel:carTranModel];
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
-    
+//    XCCheckoutTableViewCell *cell = (XCCheckoutTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kcheckCellID forIndexPath:indexPath];
+//    [cell setTimeTitleStr:@"创建时间"];
+//    cell.delegate = self;
+//    XCCarTransactionModel*carTranModel = self.dataArr[indexPath.row];
+//    [cell setupCellWithCarTransactionListModel:carTranModel];
+    XCCarTransactionModel * carTranModel =self.dataArr[indexPath.row];
+    XCFinanicalAuditListCell *cell = (XCFinanicalAuditListCell *)[tableView dequeueReusableCellWithIdentifier:kFinaListCellID forIndexPath:indexPath];
+    [cell setTypeStr:@"车务维修"];
+    [cell setupCellWithCarTransactionModel:carTranModel];
     return cell;
+    
 }
-
-#pragma mark - XCCheckoutTableViewCellDelegate
-
-- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self clickCheckDetailButtonWithCell:cell];
+    return 180 * ViewRateBaseOnIP6;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell];
+        XCCarTransactionModel *model = self.dataArr[indexPath.row];
+        __weak typeof (self)weakSelf = self;
+    
+        //车务客户列表
+        NSDictionary *param = @{
+                                @"id":model.carTransID,
+                                };
+        [RequestAPI getCarTransaction:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            BOOL configureSucess  = NO;
+            if (response[@"data"]) {
+                XCCarTransactioDetailModel *detailModel = [XCCarTransactioDetailModel yy_modelWithJSON:response[@"data"]];
+           XCUserRepairDetailViewController *repairDetail = [[XCUserRepairDetailViewController alloc] initWithTitle:@"维修详情"];
+                repairDetail.carTranDetailModel = detailModel;
+                [self.navigationController pushViewController:repairDetail animated:YES];
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                configureSucess = YES;
+            }
+            if (!configureSucess) {
+                [weakSelf requestFailureHandler];
+            }
+        } fail:^(id error) {
+            [weakSelf requestFailureHandler];
+        }];
+}
+
+//#pragma mark - XCCheckoutTableViewCellDelegate
+//
+//- (void)XCCheckoutCellClickCheckoutButtonHandler:(UIButton *)button cell:(XCCheckoutTableViewCell *)cell
+//{
+//    [self clickCheckDetailButtonWithCell:cell];
+//}
 @end
