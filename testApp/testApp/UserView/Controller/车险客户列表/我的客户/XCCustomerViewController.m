@@ -13,18 +13,24 @@
 #import "XCCustomerDetailModel.h"
 #import "PriceCarInsuranceQViewController.h"
 #import "PriceCustomerInformEntryViewController.h"
+#import "XCCustomerSearchView.h"
 
-@interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate> {
+@interface XCCustomerViewController ()<XCCheckoutTableViewCellDelegate,XCCustomerSearchViewDelegate> {
     CGFloat _addBtnHeigth;
 }
 /** <# 注释 #> */
 @property (nonatomic, strong) UIButton * addCustomerBtn ;
+
+/** <# 注释 #> */
+@property (nonatomic, strong) XCCustomerSearchView * searchView ;
 
 @end
 
 @implementation XCCustomerViewController
 
 #pragma mark - lifeCycle
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _addBtnHeigth = 88 * ViewRateBaseOnIP6;
@@ -53,7 +59,7 @@
                     [weakSelf.tableView reloadData];
                 }
                 NSNumber *pageCountNum = response[@"data"][@"pageCount"];
-                self.pageCount = [pageCountNum intValue];
+                weakSelf.pageCount = [pageCountNum intValue];
             }
             [weakSelf.tableView.mj_header endRefreshing];
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
@@ -97,10 +103,7 @@
             }else {
                 [weakSelf.tableView.mj_footer endRefreshing];
             }
-            
         }
-        
-      
     }];
     
 }
@@ -108,7 +111,9 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + _addBtnHeigth + kBottomMargan))];
+    
+    [self.searchView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, 96 * ViewRateBaseOnIP6)];
+    [self.tableView setFrame:CGRectMake(0, CGRectGetMaxY(self.searchView.frame), SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + _addBtnHeigth + kBottomMargan + 96 * ViewRateBaseOnIP6))];
     [self.addCustomerBtn setFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), SCREEN_WIDTH, _addBtnHeigth)];
     
 }
@@ -127,6 +132,11 @@
 
 - (void)createUI
 {
+    
+    _searchView = [[XCCustomerSearchView alloc] initWithFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, 96 * ViewRateBaseOnIP6)];
+    _searchView.delegate = self;
+    [self.view addSubview:_searchView];
+    
     _addCustomerBtn = [UIButton buttonWithType:0];
     [_addCustomerBtn setTitle:@"新增客户" forState:UIControlStateNormal];
     UIImage *image = [UIImage imageNamed:@"NewCustomeradd2"];
@@ -135,6 +145,15 @@
     [_addCustomerBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 24 * ViewRateBaseOnIP6, 0, 0)];
     [_addCustomerBtn addTarget:self action:@selector(clickAddCustomerButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_addCustomerBtn];
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+    
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap{
+    [self.view endEditing:YES];
 }
 
 - (void)requestFailureHandler
@@ -161,14 +180,59 @@
     cell.delegate = self;
     XCCustomerListModel *model = self.dataArr[indexPath.row];
     [cell setupCellWithMYCustomerListModel:model];
-//    cell.carNumber = @"粤AAAAAA";
-//    cell.userName = @"梁艺钟";
-//    cell.issureTime = @"a123213-321-321-3";
+
     cell.isCustomerCell = YES;
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 1;
+    }else {
+        return 0.1;
+    }
+}
 
+#pragma mark - XCCustomerSearchViewDelegate
+
+- (void)XCCustomerSearchViewClickSerachWithText:(NSString *)text textFiled:(UITextField *)textfiled
+{
+    NSLog(@"====>Click");
+    [self viewTapped:nil];
+    
+    NSDictionary *param = @{
+                            @"PageIndex":[NSNumber numberWithInt:1],
+                            @"PageSize":[NSNumber numberWithInt:10]
+                            };
+    self.pageIndex = 1;
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"data"]) {
+            if (response[@"data"][@"dataSet"]) {
+                NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                for (NSDictionary *dataInfo in origionDataArr) {
+                    XCCustomerListModel *baseModel = [XCCustomerListModel yy_modelWithJSON:dataInfo];
+                    if (baseModel) {
+                        [dataArrM addObject:baseModel];
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.dataArr = dataArrM;
+                    [weakSelf.tableView reloadData];
+                });
+            }
+            NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+            weakSelf.pageCount = [pageCountNum intValue];
+        }
+
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        [weakSelf showAlterInfoWithNetWork:@"网络错误"];
+    }];
+   
+}
 
 #pragma mark - XCCheckoutTableViewCellDelegate
 
@@ -222,5 +286,6 @@
     insuranceQVC.customerId = [detailModel.customerId stringValue];
     [self.navigationController pushViewController:insuranceQVC animated:YES];
 }
+
 
 @end

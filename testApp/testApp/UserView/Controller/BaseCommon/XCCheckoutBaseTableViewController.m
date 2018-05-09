@@ -56,9 +56,9 @@
     
 }
 
--(void)viewDidLayoutSubviews
+-(void)viewWillLayoutSubviews
 {
-    [super viewDidLayoutSubviews];
+    [super viewWillLayoutSubviews];
     CGSize labelSize = CGSizeMake(218 * ViewRateBaseOnIP6, 142 * ViewRateBaseOnIP6);
     [_bgImageView setFrame:CGRectMake((self.view.bounds.size.width - labelSize.width) * 0.5,kHeightForNavigation + 342 * ViewRateBaseOnIP6, labelSize.width, labelSize.height)];
     [_bgLabel sizeToFit];
@@ -74,8 +74,11 @@
 #pragma mark - Privacy Method
 - (void)showAlterInfoWithNetWork:(NSString *)titleStr
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:nil];
+        [self.view addSubview:tipsView];
+    });
+   
 }
 
 - (void)showNullDataView
