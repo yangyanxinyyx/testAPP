@@ -247,8 +247,8 @@
     if (isUsableNSString(baseModel.plateNo, @"")) {
         [_carNumberLabel setText:baseModel.plateNo];
     }
-    if (isUsableNSString(baseModel.onwerName,@"")) {
-        [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.onwerName]];
+    if (isUsableNSString(baseModel.customerName,@"")) {
+        [_userNameLabel setText:[NSString stringWithFormat:@"车主: %@",baseModel.customerName]];
     }else {
         [_userNameLabel setText:[NSString stringWithFormat:@"车主:  "]];
     }

@@ -68,8 +68,8 @@
 - (void)setupCellWithDetailPolicyModel:(XCCheckoutDetailBaseModel *)model
 {
     if ([self.title isEqualToString:@"投保人:"]) {
-        if (isUsableNSString(model.onwerName,@"")) {
-            [_placeholderLabel setText:model.onwerName];
+        if (isUsableNSString(model.customerName,@"")) {
+            [_placeholderLabel setText:model.customerName];
         }else {
             [_placeholderLabel setText:@" "];
         }

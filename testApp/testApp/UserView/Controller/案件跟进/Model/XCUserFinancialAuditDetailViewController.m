@@ -79,15 +79,15 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //进度状态Cell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kDetailProgressCellID forIndexPath:indexPath];
-        if (isUsableNSString(_detailModel.financeRemark, @"出纳审核通过")) {
+        if ([_detailModel.policyStatus isEqualToString:@"会计审核通过"]) {
             [processCell setIsFinish:YES];
         }else {
             [processCell setIsFinish:NO];
         }
-        if (isUsableNSString(_detailModel.financeRemark, @"")) {
-            [processCell setProcessStr:_detailModel.financeRemark];
+        if (isUsableNSString(_detailModel.policyStatus, @"")) {
+            [processCell setProcessStr:_detailModel.policyStatus];
         }else {
-            [processCell setProcessStr:@"无"];
+            [processCell setProcessStr:@""];
         }
         return processCell;
     }
