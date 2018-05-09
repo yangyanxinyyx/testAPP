@@ -258,7 +258,7 @@
     [self addSubview:_secondTextField];
     
     _clickBtn = [UIButton buttonWithType: 0];
-    UIImage *arrowImage = [UIImage imageNamed:@"next"];
+    UIImage *arrowImage = [UIImage imageNamed:@"map2"];
     [_clickBtn setImage:arrowImage forState:UIControlStateNormal];
     [_clickBtn addTarget:self action:@selector(clickNextBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_clickBtn];
