@@ -203,7 +203,8 @@
     
     NSDictionary *param = @{
                             @"PageIndex":[NSNumber numberWithInt:1],
-                            @"PageSize":[NSNumber numberWithInt:10]
+                            @"PageSize":[NSNumber numberWithInt:10],
+                            @"searchCriteria":text
                             };
     self.pageIndex = 1;
     __weak __typeof(self) weakSelf = self;

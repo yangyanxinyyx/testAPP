@@ -61,7 +61,7 @@
     _searchFiled.clearButtonMode = UITextFieldViewModeAlways;
     _searchFiled.returnKeyType = UIReturnKeyGo;
     _searchFiled.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
-    _searchFiled.placeholder = @"车牌号/车架号";
+    _searchFiled.placeholder = @"客户名称/手机号/车牌号";
     [_searchFiled setValue:[UIColor colorWithHexString:@"#838383"] forKeyPath:@"_placeholderLabel.textColor"];
     [_searchFiled setValue:[UIFont fontWithName:@"PingFang-SC-Medium" size:26 * ViewRateBaseOnIP6] forKeyPath:@"_placeholderLabel.font"];
     UIButton *rightView = [[UIButton alloc]init];
