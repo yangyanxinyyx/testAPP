@@ -215,14 +215,26 @@
  2. 密码中必须同时包含数字和字母
  */
 - (BOOL)judgePassWordLegal:(NSString *)pass count:(NSInteger )count{
-    BOOL result = false;
+    
     if ([pass length] >= count){
-        // 判断长度大于8位后再接着判断是否同时包含数字和字符
-        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        result = [pred evaluateWithObject:pass];
+//        // 判断长度大于8位后再接着判断是否同时包含数字和字符
+//        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+//        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//        result = [pred evaluateWithObject:pass];
+        
+        NSCharacterSet *s = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"];
+        s = [s invertedSet];
+        NSRange r = [pass rangeOfCharacterFromSet:s];
+        if (r.location != NSNotFound){
+            NSLog(@"the string contains illegal characters");
+            return NO;
+            
+        }else {
+            return YES;
+        }
+
     }
-    return result;
+    return NO;
 }
 
 

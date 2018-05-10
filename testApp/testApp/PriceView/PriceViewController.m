@@ -322,6 +322,8 @@
     }
     return _textField;
 }
+
+
 - (UIView *)backView{
     if (!_backView) {
         _backView = [[UIView alloc] initWithFrame:CGRectMake(0, kNavMargan, SCREEN_WIDTH, 652 * ViewRateBaseOnIP6)];
