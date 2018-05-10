@@ -84,6 +84,30 @@ static UserInfoManager *manager = nil;
     manager.coverMainModel = [[CoverMainModel alloc] init];
     manager.coverMainModel.announcementDatas = [NSMutableArray array];
     manager.coverMainModel.loopImageDatas = [NSMutableArray array];
+    manager.isStore = NO;
+    manager.code = nil;
+    manager.employeeId = nil;
+    manager.employeeName = nil;
+    manager.iconUrl = nil;
+    manager.userID = nil;
+    manager.isStoreAdministrator = nil;
+    manager.name = nil;
+    manager.needModifyPwsNextLogin = nil;
+    manager.noModifyPsw = nil;
+    manager.phone = nil;
+    manager.carID = nil;
+    manager.customerId = nil;
+    manager.customerName = nil;
+    manager.identity = nil;
+    manager.orgUnitId = nil;
+    manager.orgUnitName = nil;
+    manager.storeID = nil;
+    manager.storeName = nil;
+    manager.storeCode = nil;
+    manager.tel = nil;
+    manager.corporateName = nil;
+    manager.corporateCellphone = nil;
+    manager.address = nil;
 }
 
 
