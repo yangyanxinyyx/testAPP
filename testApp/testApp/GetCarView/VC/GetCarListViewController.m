@@ -83,6 +83,14 @@ static NSString *identifier = @"listCell";
 -(void)viewTapped:(UITapGestureRecognizer*)tap{
     [self.view endEditing:YES];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (![UserInfoManager shareInstance].isStore) {
+        [self.view addSubview:self.forbidTipsView];
+    }
+}
+
 - (void)createUI
 {
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
@@ -90,10 +98,7 @@ static NSString *identifier = @"listCell";
     [self.topView addSubview:self.searchContenView];
     [self.searchContenView addSubview:self.textField];
     [self.view addSubview:self.noFoundTipsView];
-    if (![UserInfoManager shareInstance].isStore) {
-        [self.view addSubview:self.forbidTipsView];
-        return;
-    }
+
 
     _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44 - 30 -44) style:UITableViewStylePlain];
     _tab.delegate = self;
