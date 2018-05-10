@@ -26,7 +26,8 @@
 /** <# 注释 #> */
 @property (nonatomic, strong) NSArray * titleValueArr ;
 
-
+/** <# 注释 #> */
+@property (nonatomic, strong) XCUserCaseDetailModel * caseModel ;
 @end
 
 @implementation XCUserCaseDetailTextCell
@@ -39,9 +40,9 @@
 + (CGFloat)getCaseCellHeightWithClip:(BOOL)clip
 {
     if(clip) {
-        return 392 * ViewRateBaseOnIP6;
+        return (392 +24+24) * ViewRateBaseOnIP6;
     }else {
-        return (392 + 24 + 24 - (24+24)) * ViewRateBaseOnIP6;
+        return (392 + 24+24 +24+24) * ViewRateBaseOnIP6;
     }
 }
 
@@ -337,9 +338,10 @@
 
 - (void)setupCellWithCaseDetailModel:(XCUserCaseDetailModel *)model clipName:(BOOL)clip
 {
-    
+    _caseModel = model;
     NSString *contacts = @" ";
     NSString *phone = @" ";
+    NSString *carNum = @" ";
     NSString *occurTime = @" ";
     NSString *createTime = @" ";
     NSString *name = @" "; //选择门店
@@ -350,6 +352,9 @@
     }
     if (isUsableNSString(model.phone, @"")) {
         phone = model.phone;
+    }
+    if (isUsableNSString(model.plateNo, @"")) {
+        carNum = model.plateNo;
     }
     if (isUsableNSString(model.occurTime, @"")) {
 //        NSMutableString *tmpDate = [NSMutableString stringWithString:model.occurTime];
@@ -368,14 +373,14 @@
     }
     NSArray *baseTitleNameArr;
     if (clip) {
-        baseTitleNameArr = @[@"联系人:",@"联系电话:",@"案发时间:",
+        baseTitleNameArr = @[@"联 系 人 :",@"联系电话:",@"车 牌 号 :", @"案发时间:",
                                        @"提交时间:",@"咨询电话:"];
-        self.titleValueArr = @[contacts,phone,occurTime,
+        self.titleValueArr = @[contacts,phone,carNum,occurTime,
                                createTime,namePhone];
     }else {
-        baseTitleNameArr = @[@"联系人:",@"联系电话:",@"案发时间:",
+        baseTitleNameArr = @[@"联 系 人 :",@"联系电话:",@"车 牌 号 :",@"案发时间:",
                                        @"提交时间:",@"选择门店:",@"咨询电话:"];
-        self.titleValueArr = @[contacts,phone,occurTime,
+        self.titleValueArr = @[contacts,phone,carNum,occurTime,
                                createTime,name,namePhone];
     }
    
@@ -383,9 +388,45 @@
     for (int i = 0 ; i < _labelArrM.count; i++) {
         NSString * title = baseTitleNameArr[i];
         UILabel *label = _labelArrM[i];
-        [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+        if (i == 1) {
+            if (isUsableNSString(model.phone, @"")) {
+                NSTextAttachment *foreAttachment = [[NSTextAttachment alloc]init];
+                foreAttachment.image = [UIImage imageNamed:@"callphone"];
+                foreAttachment.bounds = CGRectMake(0, -3, 26 * ViewRateBaseOnIP6, 26 * ViewRateBaseOnIP6);
+                NSAttributedString *phoneCallString = [NSAttributedString attributedStringWithAttachment:foreAttachment];
+                
+                NSMutableAttributedString *kongAttributString = [[NSMutableAttributedString alloc]initWithString:@""];
+                
+                NSMutableAttributedString *newAttributString = [[NSMutableAttributedString alloc]initWithString:model.phone];
+                [newAttributString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"PingFang-SC-Medium" size:26 * ViewRateBaseOnIP6] range:NSMakeRange(0, model.phone.length)];
+                [newAttributString addAttribute:NSForegroundColorAttributeName value:COLOR_RGB_255(0, 77, 161) range:NSMakeRange(0, model.phone.length)];
+                [newAttributString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:NSMakeRange(0, model.phone.length)];
+                
+                NSMutableAttributedString * attrStrM = [[NSMutableAttributedString alloc] initWithString:@"联系电话: "];
+                [attrStrM appendAttributedString:phoneCallString];
+                [attrStrM appendAttributedString:kongAttributString];
+                [attrStrM appendAttributedString:newAttributString];
+                label.attributedText = attrStrM;
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickLabelCappPhone:)];
+                [label addGestureRecognizer:tap];
+                label.userInteractionEnabled = YES;
+            }else {
+                [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+            }
+        }else {
+            [label setText:[NSString stringWithFormat:@"%@ %@",title,self.titleValueArr[i]]];
+        }
     }
     
+}
+
+- (void)clickLabelCappPhone:(UILabel *)lable
+{
+    NSLog(@"====>打电话");
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",_caseModel.phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    
+
 }
 
 - (void)setupDistributionCellWithDetailBaseModel:(XCCheckoutDetailBaseModel *)model

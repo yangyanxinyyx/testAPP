@@ -59,7 +59,7 @@
 {
     //    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
     //                            @"提交时间:",@"选择门店:",@"咨询电话:"];
-    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
+    self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"车 牌 号 :",@"案发时间:",
                             @"提交时间:",@"咨询电话:"];
 }
 
@@ -106,7 +106,6 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         //processCell
         XCUserCaseDetailProgressCell *processCell =  (XCUserCaseDetailProgressCell *)[tableView dequeueReusableCellWithIdentifier:kProcessCellID forIndexPath:indexPath];
- 
         [processCell setProcessStr:_detailModel.status];
         if ([_detailModel.status isEqualToString:@"处理完毕"]) {
             [processCell setIsFinish:YES];

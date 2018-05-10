@@ -25,4 +25,7 @@
 /** 处理状态 */
 @property (nonatomic, copy) NSString * status;
 
+/** 车牌号 */
+@property (nonatomic, copy) NSString * plateNo;
+
 @end

@@ -156,7 +156,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 160 * ViewRateBaseOnIP6;
+    return [XCUserCaseListCell getCaseListCellHeight];
 }
 
 #pragma mark - Privacy Method

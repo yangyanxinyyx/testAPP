@@ -21,6 +21,8 @@
 @property (nonatomic, copy) NSString * name;
 ///** 咨询电话 */
 //@property (nonatomic, copy) <# 类型 #> * <# 类型名称 #>;
+/** 车牌号 */
+@property (nonatomic, copy) NSString * plateNo;
 /** 情况说明 */
 @property (nonatomic, copy) NSString * remark;
 /** 处理状态 */

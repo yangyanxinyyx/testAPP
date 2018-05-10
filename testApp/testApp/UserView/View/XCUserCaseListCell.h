@@ -10,6 +10,8 @@
 #import "XCUserCaseListModel.h"
 @interface XCUserCaseListCell : UITableViewCell
 
++ (CGFloat)getCaseListCellHeight;
+
 - (void)setupCellWithCaseListModel:(XCUserCaseListModel *)model caseTypeStr:(NSString *)caseTypeStr;
 
 @end

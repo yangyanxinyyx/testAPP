@@ -50,7 +50,7 @@
 
 - (void)configureData
 {
-        self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"案发时间:",
+        self.dataTitleArrM  = @[@"联系人:",@"联系电话:",@"车 牌 号 :",@"案发时间:",
                                 @"提交时间:",@"选择门店:",@"咨询电话:"];
  
 }

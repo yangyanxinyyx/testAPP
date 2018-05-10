@@ -1022,6 +1022,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             [textFiledCell setTitlePlaceholder:holderStr];
             textFiledCell.shouldShowSeparator = YES;
             textFiledCell.shouldShowClickView = NO;
+            [textFiledCell.textField setTextAlignment:NSTextAlignmentLeft];
 
             if ([self isInputNumKeyBoardCellWithTitle:title]) {
                 [textFiledCell setIsNumField:YES];
