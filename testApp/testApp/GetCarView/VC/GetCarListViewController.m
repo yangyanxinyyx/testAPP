@@ -88,6 +88,10 @@ static NSString *identifier = @"listCell";
 {
     if (![UserInfoManager shareInstance].isStore) {
         [self.view addSubview:self.forbidTipsView];
+    }else {
+        if ([self.forbidTipsView superview]) {
+            [self.forbidTipsView removeFromSuperview];
+        }
     }
 }
 
