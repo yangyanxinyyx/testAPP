@@ -86,6 +86,7 @@ static NSString *identifier = @"listCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     if (![UserInfoManager shareInstance].isStore) {
         [self.view addSubview:self.forbidTipsView];
     }else {
