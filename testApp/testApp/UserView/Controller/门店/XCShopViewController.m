@@ -629,6 +629,12 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             textField.text = [_storeModel.managerCommission stringValue];
         }
     }
+    else if ([title isEqualToString:@"门店电话:"]) {
+        if (isUsableNSString(_storeModel.tel, @"")) {
+            NSMutableString *mutalStr = [NSMutableString stringWithString:_storeModel.tel];
+            textField.text = [mutalStr stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        }
+    }
     
 }
 

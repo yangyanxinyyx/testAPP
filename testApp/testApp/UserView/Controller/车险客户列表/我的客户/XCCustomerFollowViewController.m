@@ -149,7 +149,8 @@
         if (indexPath.row == self.dataArrM.count - 1) {
             cell.shouldShowSeparator = NO;
         }
-        [cell setTitle:title];
+//        [cell setTitle:title];
+        cell.textLabel.text = title;
         if ([title isEqualToString:@"操作类型"]) {
             [cell setTitleValue:@"选择操作类型"];
         }
