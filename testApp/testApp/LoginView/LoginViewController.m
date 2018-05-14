@@ -492,7 +492,10 @@
                                                                 [[UserInfoManager shareInstance].coverMainModel.loopImageDatas addObject:loopimage];
                                                             }
                                                         }
-                                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadCoverMainViewData" object:nil];
+                                                        dispatch_async(dispatch_get_main_queue(), ^{
+
+                                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"kReloadCoverMainViewData" object:nil];
+                                                        });
 
                                                     }else if (([response[@"result"] integerValue] == 0)){
                                                         NSLog(@"获取轮播图失败");

@@ -27,6 +27,7 @@
 @property (nonatomic,strong) YXScrollView *imageScrollView;
 @property (nonatomic,strong) CoverAnnouncementView *announcementView;
 
+@property (nonatomic,strong) UIView *forbidView;
 @end
 
 @implementation CoverMainViewController
@@ -38,6 +39,11 @@
     [self getLoginUserInfo];
 
     [self createUI];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"] && [[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"]) {
+        self.forbidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.view addSubview:self.forbidView];
+        self.forbidView.backgroundColor = [UIColor clearColor];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"kReloadCoverMainViewData" object:nil];
 
 }
@@ -92,7 +98,7 @@
     medalLabel.text = @"我的勋章";
     medalLabel.textColor = COLOR_RGB_255(68, 68, 68);
     medalLabel.backgroundColor = [UIColor clearColor];
-    medalLabel.font = [UIFont systemFontOfSize:13];
+    medalLabel.font = [UIFont systemFontOfSize:13 * kScaleWidth];
     [medalBtn addSubview:medalLabel];
 
     UIImage *image = [UIImage imageNamed:@"next.png"];
@@ -222,6 +228,7 @@
 
 - (void)reloadData
 {
+
     [_nowMonthView removeFromSuperview];
     [_lastMonthView removeFromSuperview];
 
@@ -236,6 +243,10 @@
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.forbidView) {
+                [self.forbidView removeFromSuperview];
+                self.forbidView = nil;
+            }
             [_imageScrollView removeFromSuperview];
 
             NSArray *imageArray = muImageArray;
@@ -247,7 +258,7 @@
 
             [_scrollView addSubview:_imageScrollView];
 
-            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 190 * kScaleHeight - 40, SCREEN_WIDTH, 40)];
+            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 190 * kScaleHeight - 20, SCREEN_WIDTH, 20)];
             _announcementView.delegate = self;
             [_scrollView addSubview:_announcementView];
         });
@@ -272,6 +283,8 @@
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     if ([[NSUserDefaults standardUserDefaults] valueForKey:@"kUserAccout"] && [[NSUserDefaults standardUserDefaults] valueForKey:@"kUserPassword"]) {
         [loginVC loginWithUserDefault];
+
+
     }else{
 
         [self presentViewController:loginVC animated:NO completion:nil];

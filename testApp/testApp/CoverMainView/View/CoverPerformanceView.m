@@ -29,7 +29,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 15, 32)];
     titleLabel.text = title;
     titleLabel.textColor = COLOR_RGB_255(131, 131, 131);
-    titleLabel.font = [UIFont systemFontOfSize:13];
+    titleLabel.font = [UIFont systemFontOfSize:13 * kScaleWidth];
     [self addSubview:titleLabel];
 
     NSArray *textArrays = @[@"车险业绩",@"维修业绩"];
@@ -39,7 +39,7 @@
     [self addSubview:line2];
 
     for (int i=0; i<2; i++) {
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(line2.frame)+15, SCREEN_WIDTH/2, 14)];
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(line2.frame)+15, SCREEN_WIDTH/2, 14 * kScaleWidth)];
         NSMutableAttributedString *moneyStr = nil;
 
         if (i == 0) {
@@ -50,14 +50,14 @@
         textLabel.textColor = COLOR_RGB_255(248, 21, 21);
         textLabel.textAlignment = NSTextAlignmentCenter;
         textLabel.backgroundColor = [UIColor whiteColor];
-        textLabel.font = [UIFont systemFontOfSize:14];
+        textLabel.font = [UIFont systemFontOfSize:14 * kScaleWidth];
         NSRange range = [[moneyStr string] rangeOfString:@"¥"];
-        [moneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10] range:range];
+        [moneyStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10 * kScaleWidth] range:range];
         [textLabel setAttributedText:moneyStr];
         [self addSubview:textLabel];
 
 
-        UILabel *textLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel.frame)+7, SCREEN_WIDTH/2, 12)];
+        UILabel *textLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel.frame)+7, SCREEN_WIDTH/2, 12 * kScaleWidth)];
         NSMutableAttributedString *noteStr = nil;
         if (i == 0) {
             noteStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@名",carRank]];
@@ -67,9 +67,9 @@
         textLabel2.textColor = COLOR_RGB_255(57, 174, 57);
         textLabel2.textAlignment = NSTextAlignmentCenter;
         textLabel2.backgroundColor = [UIColor whiteColor];
-        textLabel2.font = [UIFont systemFontOfSize:12];
+        textLabel2.font = [UIFont systemFontOfSize:12 * kScaleWidth];
         NSRange range2 = [[noteStr string] rangeOfString:@"名"];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10] range:range2];
+        [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10 * kScaleWidth] range:range2];
 
         [textLabel2 setAttributedText:noteStr];
         if ([textLabel2.text isEqualToString:@"0名"]) {
@@ -77,12 +77,12 @@
         }
         [self addSubview:textLabel2];
 
-        UILabel *textLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel2.frame)+10, SCREEN_WIDTH/2, 10)];
+        UILabel *textLabel3 = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2*i, CGRectGetMaxY(textLabel2.frame)+10, SCREEN_WIDTH/2, 10 * kScaleWidth)];
         textLabel3.text = textArrays[i];
         textLabel3.textColor = COLOR_RGB_255(68, 68, 68);
         textLabel3.textAlignment = NSTextAlignmentCenter;
         textLabel3.backgroundColor = [UIColor whiteColor];
-        textLabel3.font = [UIFont systemFontOfSize:10];
+        textLabel3.font = [UIFont systemFontOfSize:10 * kScaleWidth];
         [self addSubview:textLabel3];
     }
 

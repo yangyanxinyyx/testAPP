@@ -19,7 +19,7 @@
 
 @property (nonatomic,assign) NSInteger index;
 @property (nonatomic,strong) NSArray *titleArray;
-
+@property (nonatomic,assign) CGFloat height;
 
 @end
 
@@ -29,6 +29,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self createUI];
+        self.height = frame.size.height;
     }
     return self;
 }
@@ -49,18 +50,20 @@
     self.titleArray = array;
 
     self.index = 0;
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(16, 10, 18, 18)];
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(8, 1, 18, 18)];
     self.imageView.image = [UIImage imageNamed:@"提醒.png"];
     [self addSubview:_imageView];
 
 
-    self.announceLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, SCREEN_WIDTH-40, 40)];
+    self.announceLabel = [[UILabel alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH-34, self.height)];
     _announceLabel.textColor = [UIColor whiteColor];
     _announceLabel.text = _titleArray[self.index];
+    _announceLabel.font = [UIFont systemFontOfSize:12 * kScaleWidth];
     [self addSubview:_announceLabel];
 
-    self.tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, SCREEN_WIDTH-40, 40)];
+    self.tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(34, self.height, SCREEN_WIDTH-34, self.height)];
     _tempLabel.textColor = [UIColor whiteColor];
+    _tempLabel.font = [UIFont systemFontOfSize:12 * kScaleWidth];
     if (_titleArray.count > 1) {
       _tempLabel.text = _titleArray[self.index+1];
     }
@@ -74,7 +77,7 @@
 
     }
 
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.height)];
     [self addSubview:btn];
     btn.backgroundColor = [UIColor clearColor];
     [btn addTarget:self action:@selector(pressToPush) forControlEvents:UIControlEventTouchUpInside];
@@ -103,15 +106,15 @@
     self.index = self.index +1;
     NSLog(@"%ld",self.index);
     [UIView animateWithDuration:1 animations:^{
-        self.announceLabel.frame = CGRectMake(40, -40, SCREEN_WIDTH-40, 40);
-        self.tempLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH-40, 40);
+        self.announceLabel.frame = CGRectMake(34, -self.height, SCREEN_WIDTH-34, self.height);
+        self.tempLabel.frame = CGRectMake(34, 0, SCREEN_WIDTH-34, self.height);
     } completion:^(BOOL finished) {
         self.announceLabel.text = self.tempLabel.text;
         if (_titleArray.count > 1) {
             _tempLabel.text = _titleArray[self.index+1];
         }
-        self.announceLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH-40, 40);
-        self.tempLabel.frame = CGRectMake(40, 40, SCREEN_WIDTH-40, 40);
+        self.announceLabel.frame = CGRectMake(34, 0, SCREEN_WIDTH-34, self.height);
+        self.tempLabel.frame = CGRectMake(34, self.height, SCREEN_WIDTH-34, self.height);
 
     }];
 }

@@ -55,7 +55,7 @@
             imageView.image = [UIImage imageNamed:noImages[i]];
         }
         countLabel.font = [UIFont systemFontOfSize:12];
-        countLabel.textColor = COLOR_RGB_255(51, 51, 51);
+        countLabel.textColor = [UIColor whiteColor];
         countLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:countLabel];
 
