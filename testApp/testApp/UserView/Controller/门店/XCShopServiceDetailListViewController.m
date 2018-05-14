@@ -59,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [self refreshServiceData];
+    [self refreshServiceData];
 }
 
 -(void)viewWillLayoutSubviews
@@ -86,7 +86,6 @@
 
 - (void)refreshServiceData
 {
-    
     NSDictionary *param = @{
                             @"storeId":[UserInfoManager shareInstance].storeID,
                             };

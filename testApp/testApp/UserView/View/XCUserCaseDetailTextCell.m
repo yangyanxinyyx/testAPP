@@ -404,7 +404,7 @@
                 
                 NSMutableAttributedString * attrStrM = [[NSMutableAttributedString alloc] initWithString:@"联系电话: "];
                 [attrStrM appendAttributedString:phoneCallString];
-                [attrStrM appendAttributedString:kongAttributString];
+                [attrStrM appendAttributedString:kongAttributString];                          
                 [attrStrM appendAttributedString:newAttributString];
                 label.attributedText = attrStrM;
                 UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickLabelCappPhone:)];

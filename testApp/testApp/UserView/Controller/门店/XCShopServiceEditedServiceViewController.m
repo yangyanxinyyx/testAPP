@@ -73,27 +73,23 @@
     //提交审核
     [self.tableView endEditing:YES];
     
-    BOOL configureSuccess = YES;
-    NSString *errorStr = @"请输入正确信息";
     if (!isUsable(_model.serviceId, [NSNumber class])) {
-        configureSuccess = NO;
-        errorStr = @"服务信息错误";
+        _model.serviceId = [NSNumber numberWithDouble:0];
     }
-    else if (!isUsable([UserInfoManager shareInstance].storeID, [NSNumber class])) {
-        configureSuccess = NO;
-        errorStr = @"服务信息错误";
+    if (!isUsable(_model.storeID, [NSNumber class])) {
+        _model.serviceId = [NSNumber numberWithDouble:0];
     }
-    else if (!isUsable(self.price, [NSNumber class])) {
-        configureSuccess = NO;
-    }
-    else if (!isUsable(self.vipPrice, [NSNumber class])) {
-        configureSuccess = NO;
-    }
-    
-    if (!configureSuccess) {
-        [self showAlterInfoWithNetWork:errorStr complete:nil];
+    if (!isUsable([UserInfoManager shareInstance].storeID, [NSNumber class])) {
+        [self showAlterInfoWithNetWork:@"非法门店ID" complete:nil];
         return;
     }
+    if (!isUsable(self.price, [NSNumber class])) {
+        _price = [NSNumber numberWithDouble:0];
+    }
+    if (!isUsable(self.vipPrice, [NSNumber class])) {
+        _vipPrice = [NSNumber numberWithDouble:0];
+    }
+    
     
     if (_isNewService) {
         NSDictionary *param = @{
@@ -110,7 +106,7 @@
                     [strongSelf.navigationController popViewControllerAnimated:YES];
                 }];
             }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+                [strongSelf showAlterInfoWithNetWork:response[@"errormsg"] complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
@@ -120,7 +116,7 @@
         
     }else {
         NSDictionary *param = @{
-                                @"id":self.model.serviceId,
+                                @"id":self.model.storeID,
                                 @"price":self.price,
                                 @"vipPrice":self.vipPrice,
                                 };
@@ -132,7 +128,7 @@
                     [strongSelf.navigationController popViewControllerAnimated:YES];
                 }];
             }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+                [strongSelf showAlterInfoWithNetWork:response[@"errormsg"] complete:nil];
             }
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
