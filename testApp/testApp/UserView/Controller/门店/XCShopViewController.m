@@ -25,6 +25,7 @@
 #import "XCPickerCityHandler.h"
 #import <TZImagePickerController.h>
 #import "XCShopRejectView.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 #define ktableViewH SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + 160 * ViewRateBaseOnIP6)
 #define kshopStatusDaiShenHe @"审核中"
 #define kshopStatusShenHeTongGuo @""
@@ -33,7 +34,7 @@ UITableViewDataSource,priceCIQChangeViewDelegate,BaseNavigationBarDelegate,
 XCDistributionFooterViewDelegate,XCCheckoutDetailPhotoCellDelegate,
 UINavigationControllerDelegate,UIImagePickerControllerDelegate,
 XCShopAMapViewControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,UIActionSheetDelegate,
-TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
+TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDelegate>
 {
     dispatch_semaphore_t _videoTrackSynLoadSemaphore;
     dispatch_time_t _maxVideoLoadTrackTimeConsume ;
@@ -71,6 +72,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 @property (nonatomic, strong) NSMutableArray * networkURLArrM ;
 /** tmp保存即将删除图片的数组 */
 @property (nonatomic, strong) NSMutableArray *tmpDeleteURLArrM  ;
+
+@property (nonatomic, strong) AMapSearchAPI * searchAPI ;
+
+
 @end
 
 @implementation XCShopViewController
@@ -102,6 +107,8 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
     _tmpDeleteURLArrM = [[NSMutableArray alloc] init];
     _services = [[NSMutableArray alloc] init];
     _storeModel = [[XCShopModel alloc] init];
+    _searchAPI = [[AMapSearchAPI alloc] init];
+    _searchAPI.delegate = self;
     [self addObserverKeyboard];
     [self configureData];
     [self createUI];
@@ -503,6 +510,30 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
 
 #pragma mark - Delegates & Notifications
 
+#pragma mark - AMapSearchDelegate
+
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response;
+{
+//    AMapGeocodeSearchRequest *req = [[AMapGeocodeSearchRequest alloc] init];
+//    req.address = response.regeocode.formattedAddress;
+//    [self.searchAPI AMapGeocodeSearch:req];
+//
+//    AMapReGeocode *regeocode = response.regeocode;
+//    AMapAddressComponent *addressComponent = regeocode.addressComponent;
+    if (self.storeModel) {
+        if (response.geocodes.count > 0) {
+            AMapGeocode *geoCode = [response.geocodes firstObject];
+            self.storeModel.latitude =  [NSString stringWithFormat:@"%f",geoCode.location.latitude];
+            self.storeModel.longitude = [NSString stringWithFormat:@"%f",geoCode.location.longitude];
+            NSLog(@"=======>latitude:%f",geoCode.location.latitude);
+            NSLog(@"=======>longitude:%f",geoCode.location.longitude);
+            
+        }
+    }
+   
+}
+
+
 #pragma mark -priceCIQChangeViewDelegate
 - (void)changeModel:(BOOL)isLaseY{
     if (isLaseY) {
@@ -689,6 +720,11 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             textField.text =  [NSString stringWithFormat:@"%.2f%%",[_storeModel.managerCommission doubleValue]];
             [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];        }
     }
+    else if ([title isEqualToString:@"详细地址:"]) {
+        [self mapSearch];
+    }
+    
+    
 }
 
 - (BOOL)XCCheckoutDetailTextFiledShouldChangeCharactersInRange:(NSRange)range
@@ -1038,6 +1074,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
             }else if([title isEqualToString:@"详细地址:"]) {
                 textFiledCell.shouldShowClickView = YES;
                 [textFiledCell.textField setTextAlignment:NSTextAlignmentRight];
+                [self mapSearch];
             }
             if (self.storeModel) {
                 [textFiledCell setupCellWithShopModel:self.storeModel];
@@ -1235,6 +1272,18 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate>
         [self.storePhotoArrM addObject:[tmpFileURL absoluteString]];
     }
     
+}
+
+- (void)mapSearch
+{
+    if (self.storeModel) {
+        if(isUsableNSString(self.storeModel.address, @""))
+        {
+            AMapGeocodeSearchRequest *req = [[AMapGeocodeSearchRequest alloc] init];
+            req.address = _storeModel.address;
+            [self.searchAPI AMapGeocodeSearch:req];
+        }
+    }
 }
 
 #pragma mark -  ========== 添加键盘通知 ==========
