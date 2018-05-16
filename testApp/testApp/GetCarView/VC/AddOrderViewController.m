@@ -22,6 +22,8 @@
 @property (nonatomic,strong) UITableView *tab;
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,strong) AddOrderModel *currentModel;
+
+@property (nonatomic,strong) UIView *noFoundTipsView;
 @end
 
 @implementation AddOrderViewController
@@ -56,15 +58,15 @@
 
 - (void)createUI
 {
-
+    self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
+    [self.view addSubview:self.noFoundTipsView];
     _dataSource = [NSMutableArray array];
 
-    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44 - 30 -44) style:UITableViewStylePlain];
+    _tab = [[UITableView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44 - 30) style:UITableViewStylePlain];
     _tab.delegate = self;
     _tab.dataSource = self;
     _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tab.backgroundColor = COLOR_RGB_255(242, 242, 242);
-    _tab.hidden = YES;
+    _tab.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tab];
 
     [self.view addSubview:self.orderBtn];
@@ -160,11 +162,9 @@
 
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (_dataSource.count > 0) {
-                            _tab.hidden = NO;
+                            _noFoundTipsView.hidden = YES;
                         }else{
-                            _tab.hidden = YES;
-                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"没有用户数据" complete:nil];
-                            [self.view addSubview:tipsView];
+                            _noFoundTipsView.hidden = NO;
                         }
                         [_tab reloadData];
                     });
@@ -259,7 +259,7 @@
 - (UIButton *)orderBtn
 {
     if (!_orderBtn) {
-        _orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
+        _orderBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 +15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan, SCREEN_WIDTH/2 - 30, 44)];
         [_orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _orderBtn.titleLabel.font = [UIFont systemFontOfSize:18];
         [_orderBtn addTarget:self action:@selector(pressOrderBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -274,7 +274,7 @@
 - (UIButton *)fixBtn
 {
     if (!_fixBtn) {
-        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan-44, SCREEN_WIDTH/2 - 30, 44)];
+        _fixBtn = [[UIButton alloc] initWithFrame:CGRectMake( 15, SCREEN_HEIGHT - 15 - 44 - kBottomMargan, SCREEN_WIDTH/2 - 30, 44)];
         [_fixBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _fixBtn.titleLabel.font = [UIFont systemFontOfSize:18];
         [_fixBtn addTarget:self action:@selector(pressFixBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -284,6 +284,31 @@
         _fixBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
     }
     return _fixBtn;
+}
+
+- (UIView *)noFoundTipsView
+{
+    if (!_noFoundTipsView) {
+        _noFoundTipsView = [[UIView alloc] initWithFrame:CGRectMake(0 , kHeightForNavigation , SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation) - kBottomMargan - 44)];
+        _noFoundTipsView.backgroundColor = COLOR_RGB_255(242, 242, 242);
+        _noFoundTipsView.hidden = YES;
+
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        imageView.image = [UIImage imageNamed:@"暂无订单.png"];
+        imageView.center = CGPointMake(SCREEN_WIDTH/2, _noFoundTipsView.bounds.size.height/2);
+        [_noFoundTipsView addSubview:imageView];
+
+
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 72)/2, CGRectGetMaxY(imageView.frame) +12, 72, 11)];
+        label.font = [UIFont systemFontOfSize:11];
+        label.text = @"无客户信息!";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = COLOR_RGB_255(165, 165, 165);
+        [_noFoundTipsView addSubview:label];
+
+
+    }
+    return _noFoundTipsView;
 }
 
 - (void)didReceiveMemoryWarning {
