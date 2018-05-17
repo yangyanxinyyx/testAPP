@@ -76,10 +76,22 @@ static NSString *identifier = @"listCell";
     tap1.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap1];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:kNOTIFICATION_LOGINOUT object:nil];
 
 }
 
-
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    
+    NSLog(@"%@",notification.userInfo);
+    
+    NSLog(@"---接收到通知---");
+    
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:self];
+    
+}
 -(void)viewTapped:(UITapGestureRecognizer*)tap{
     [self.view endEditing:YES];
 }

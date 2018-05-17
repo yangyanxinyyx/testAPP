@@ -13,6 +13,7 @@
 #define SCREEN_TABBAR_HEIGHT 44
 #define THREECASEDETAIL_CUSTOMERPHOT @"020-4328432"
 #define XCFont(fontSize) [UIFont fontWithName:@"PingFang-SC-Medium" size:(fontSize) * ViewRateBaseOnIP6]
+#define kNOTIFICATION_LOGINOUT @"loginOut"
 #import "UIColor+Help.h"
 #import "XCScreenFitMacro.h"
 #import "NSString+MoneyString.h"

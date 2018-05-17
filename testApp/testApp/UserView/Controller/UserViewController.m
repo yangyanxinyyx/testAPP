@@ -144,7 +144,11 @@
         [NSUserDefaults resetStandardUserDefaults];
         [weakSelf.tabBarController setSelectedIndex:0];
         AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        [delegate.window.rootViewController presentViewController:loginVC animated:NO completion:nil];    }];
+        NSNotification *notification = [NSNotification notificationWithName:kNOTIFICATION_LOGINOUT object:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+        [delegate.window.rootViewController presentViewController:loginVC animated:NO completion:nil];
+    }];
     [self.view addSubview:alterView];
 }
 
