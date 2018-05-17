@@ -267,9 +267,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
         if ([response[@"result"] integerValue] == 1) {
                 [strongSelf.networkURLArrM  removeAllObjects];
                 [strongSelf deleteAllTmpPhoto];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:9 inSection:0];
-            XCDistributionPicketCell *picketCell = [weakSelf.storeTableView cellForRowAtIndexPath:indexPath];
-            [picketCell setTitleValue:kshopStatusDaiShenHe];
+            [strongSelf refreshXCShopInfo];
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:9 inSection:0];
+//            XCDistributionPicketCell *picketCell = [weakSelf.storeTableView cellForRowAtIndexPath:indexPath];
+//            [picketCell setTitleValue:kshopStatusDaiShenHe];
         }else {
             [strongSelf showAlterInfoWithNetWork:response[@"errormsg"] complete:nil];
         }
@@ -291,6 +292,27 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             }];
             dispatch_semaphore_wait(videoTrackSynLoadSemaphore, maxVideoLoadTrackTimeConsume);
         }
+    }];
+}
+
+- (void)refreshXCShopInfo
+{
+    NSDictionary *param = @{
+                            @"id":[UserInfoManager shareInstance].storeID,
+                            };
+    __weak __typeof(self) weakSelf = self;
+    [RequestAPI getShopsInfo:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"data"] && isUsable(response[@"data"], [NSDictionary class])) {
+            __strong __typeof__(weakSelf)strongSelf = weakSelf;
+            XCShopModel *shopModel = [XCShopModel yy_modelWithJSON:response[@"data"]];
+            strongSelf.storeModel = shopModel;
+            [strongSelf.storeTableView reloadData];
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+        __strong __typeof__(weakSelf)strongSelf = weakSelf;
+        [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+    
     }];
 }
 
@@ -1355,6 +1377,9 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
     _storeModel = storeModel;
     self.storePhotoArrM = [self getOrigianShopPhotoWithModel:_storeModel]; //获取线上图片数组
     if ([self isUsefulURLWith: _storeModel.licenseUrl]) {
+        if (self.lincePhotoArrM.count > 0) {
+            [self.lincePhotoArrM removeAllObjects];
+        }
         [self.lincePhotoArrM addObject:_storeModel.licenseUrl];
     }    
 }

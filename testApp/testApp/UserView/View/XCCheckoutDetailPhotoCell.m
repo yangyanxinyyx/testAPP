@@ -134,8 +134,11 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(XCCheckoutDetailPhotoCellClickphotoWithURL:index:cell:)]) {
         NSInteger index =  [_scrollview.subviews indexOfObject:tap.view];
         NSString *urlPath = self.photoArr[index];
-        NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
-        [self.delegate XCCheckoutDetailPhotoCellClickphotoWithURL:photoURL index:index cell:self];
+        if (isUsable(urlPath, [NSString class])) {
+            NSURL *photoURL = [self getImageURLWithFilePath:urlPath];
+            [self.delegate XCCheckoutDetailPhotoCellClickphotoWithURL:photoURL index:index cell:self];
+
+        }
     }
 }
 
@@ -182,11 +185,13 @@
 - (NSURL *)getImageURLWithFilePath:(NSString *)filePath
 {
     NSURL *photoURL = nil;;
-    if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
-        photoURL = [NSURL URLWithString:filePath];
-    }else {
-//        photoURL = [NSURL fileURLWithPath:filePath];
-        photoURL = [NSURL URLWithString:filePath];
+    if (isUsable(filePath, [NSString class])) {
+        if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
+            photoURL = [NSURL URLWithString:filePath];
+        }else {
+            //        photoURL = [NSURL fileURLWithPath:filePath];
+            photoURL = [NSURL URLWithString:filePath];
+        }
     }
     return photoURL;
 }
@@ -235,6 +240,5 @@
 -(void)setMaxPhoto:(NSInteger)maxPhoto
 {
     _maxPhoto = maxPhoto;
-    [self layoutSubviews];
 }
 @end

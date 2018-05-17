@@ -80,11 +80,13 @@
 #pragma mark - Privacy Method
 - (NSURL *)getImageURLWithFilePath:(NSString *)filePath
 {
-    NSURL *photoURL = nil;;
-    if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
-        photoURL = [NSURL URLWithString:filePath];
-    }else {
-        photoURL = [NSURL fileURLWithPath:filePath];
+    NSURL *photoURL = nil;
+    if (isUsable(filePath, [NSString class])) {
+        if ([filePath hasPrefix:@"http://"]||[filePath hasPrefix:@"https://"]) {
+            photoURL = [NSURL URLWithString:filePath];
+        }else {
+            photoURL = [NSURL fileURLWithPath:filePath];
+        }
     }
     return photoURL;
 }
