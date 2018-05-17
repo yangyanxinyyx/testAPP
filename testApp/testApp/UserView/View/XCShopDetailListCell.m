@@ -59,9 +59,9 @@
     [_onSalePriceLabel sizeToFit];
     labelSize = _onSalePriceLabel.frame.size;
     if (labelSize.width > (68+62) * ViewRateBaseOnIP6) {
-        labelSize.width = (68+62) * ViewRateBaseOnIP6;
+        labelSize.width = (68+62) * ViewRateBaseOnIP6 ;
     }
-    [_onSalePriceLabel setFrame:CGRectMake((68+62) * ViewRateBaseOnIP6 - labelSize.width, CGRectGetMaxY(_iconImageView.frame) + 66  * ViewRateBaseOnIP6 ,labelSize.width, 25 * ViewRateBaseOnIP6)];
+    [_onSalePriceLabel setFrame:CGRectMake(leftMargin + (68+62) * ViewRateBaseOnIP6 - labelSize.width, CGRectGetMaxY(_iconImageView.frame) + 66  * ViewRateBaseOnIP6 ,labelSize.width, 25 * ViewRateBaseOnIP6)];
     
     [_priceTitleLabel sizeToFit];
     labelSize = _priceTitleLabel.frame.size;

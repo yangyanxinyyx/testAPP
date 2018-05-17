@@ -76,17 +76,22 @@
     if (!isUsable(_model.serviceId, [NSNumber class])) {
         _model.serviceId = [NSNumber numberWithDouble:0];
     }
-    if (!isUsable(_model.storeID, [NSNumber class])) {
-        _model.serviceId = [NSNumber numberWithDouble:0];
-    }
     if (!isUsable([UserInfoManager shareInstance].storeID, [NSNumber class])) {
         [self showAlterInfoWithNetWork:@"非法门店ID" complete:nil];
         return;
     }
     if (!isUsable(self.price, [NSNumber class])) {
+        if (_isNewService) {
+            [self showAlterInfoWithNetWork:@"请输入门店价格" complete:nil];
+            return;
+        }
         _price = [NSNumber numberWithDouble:0];
     }
     if (!isUsable(self.vipPrice, [NSNumber class])) {
+        if (_isNewService) {
+            [self showAlterInfoWithNetWork:@"请输入高级会员价格" complete:nil];
+            return;
+        }
         _vipPrice = [NSNumber numberWithDouble:0];
     }
     
