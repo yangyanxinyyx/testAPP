@@ -56,6 +56,23 @@
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
     tap1.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap1];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:kNOTIFICATION_LOGINOUT object:nil];
+
+}
+
+
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    
+    self.textField.text = @"";
+    [self pressCustomerVehicleEnquiriesWithCriteria:@""];
+    
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:self];
+    
 }
 
 -(void)viewTapped:(UITapGestureRecognizer*)tap{
