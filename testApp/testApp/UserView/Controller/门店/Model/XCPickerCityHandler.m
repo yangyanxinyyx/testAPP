@@ -15,7 +15,6 @@
 +(NSArray *)pickerCityWithIndexStr:(NSString *)provence
 {
     
-    
     NSString * path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
     NSArray *dateSource = [NSArray arrayWithContentsOfFile:path];
     
