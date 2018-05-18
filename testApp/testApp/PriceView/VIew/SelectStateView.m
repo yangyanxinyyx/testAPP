@@ -59,6 +59,38 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+                     datArray:(NSArray *)dataArray
+                    indexName:(NSString *)indexName
+        WithCompletionHandler:(void (^)(NSString *))complete
+{
+    if (self = [self initWithFrame:frame datArray:dataArray WithCompletionHandler:complete]) {
+        
+        NSUInteger  index = 0;
+        if (dataArray.count > 0) {
+            for (int p =  0 ; p < dataArray.count; p++) {
+                NSString * itemName = dataArray[p];
+                NSMutableString *tmpStr = [NSMutableString stringWithString:itemName];
+                NSMutableString *selectTmpStr = [NSMutableString stringWithString:indexName];
+               
+                itemName = [tmpStr stringByReplacingOccurrencesOfString:@"市" withString:@""];
+                 NSString * searchName  = [selectTmpStr stringByReplacingOccurrencesOfString:@"市" withString:@""];
+                if ([searchName isEqualToString:itemName]) {
+                    index = p;
+                }
+            }
+        }
+        [_pickerView selectRow:index inComponent:0 animated:NO];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UILabel *label = (UILabel *)[_pickerView viewForRow:index forComponent:0];
+            label.textColor = [UIColor colorWithHexString:@"4494f0"];
+            [label setFont:[UIFont systemFontOfSize:30 * ViewRateBaseOnIP6]];
+            
+        });
+    }
+    return self;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray WithCompletionHandler:(void (^)(NSString *))complete
 {
     if (self = [super initWithFrame:frame]) {

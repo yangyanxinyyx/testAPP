@@ -67,6 +67,8 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 @property (nonatomic, strong) NSArray * services;
 /** 定位记录省份 */
 @property (nonatomic, strong) NSString *storeProvence ;
+@property (nonatomic, strong) NSString *storeCity ;
+@property (nonatomic, strong) NSString *storeArea ;
 
 /** 上传成功图片URL */
 @property (nonatomic, strong) NSMutableArray * networkURLArrM ;
@@ -84,16 +86,20 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 - (void)dealloc {
     
     for (NSString *filePath in self.lincePhotoArrM) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        if (isUsable(filePath, [NSString class])) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+            }
+            unlink([filePath  UTF8String]);
         }
-        unlink([filePath  UTF8String]);
     }
     for (NSString *filePath in self.storePhotoArrM) {
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        if (isUsable(filePath, [NSString class])) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+            }
+            unlink([filePath  UTF8String]);
         }
-        unlink([filePath  UTF8String]);
     }
     [self removeObserverKeyBoard];
 }
@@ -352,8 +358,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                 [strongSelf.lincePhotoArrM removeAllObjects];
                 NSArray *urlStrArr  = response[@"data"];
                 for (NSString *urlPath in urlStrArr) {
-                    [strongSelf.lincePhotoArrM addObject:urlPath];
-                    [strongSelf.networkURLArrM addObject:urlPath];
+                    if (isUsable(urlPath, [NSString class])) {
+                        [strongSelf.lincePhotoArrM addObject:urlPath];
+                        [strongSelf.networkURLArrM addObject:urlPath];
+                    }
                 }
                     [strongSelf postStorePhoto]; //上传2
                 });
@@ -407,8 +415,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                 strongSelf.storePhotoArrM = [strongSelf getOrigianShopPhotoWithModel:strongSelf.storeModel];
                 NSArray *urlStrArr  = response[@"data"];
                 for (NSString *urlPath in urlStrArr) {
-                    [strongSelf.storePhotoArrM addObject:urlPath];
-                    [strongSelf.networkURLArrM addObject:urlPath];
+                    if (isUsable(urlPath, [NSString class])) {
+                        [strongSelf.storePhotoArrM addObject:urlPath];
+                        [strongSelf.networkURLArrM addObject:urlPath];
+                    }
                 }
                 /// 提交修改门店
                     [strongSelf postModifyShopInfo]; //上传3
@@ -494,12 +504,19 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
              if (isUsableNSString(self.storeProvence, @"")) {
                  NSArray *cityArr = [XCPickerCityHandler  pickerCityWithIndexStr:self.storeProvence];
                  __weak __typeof(self) weakSelf = self;
-                 SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+                 SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr indexName:self.storeModel.city WithCompletionHandler:^(NSString *string) {
                      __strong __typeof__(weakSelf)strongSelf = weakSelf;
                      strongSelf.storeModel.city = string;
+                     self.storeCity = string;
                      XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
                      [cell setTitleValue:string];
                  }];
+//                 SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+//                     __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//                     strongSelf.storeModel.city = string;
+//                     XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
+//                     [cell setTitleValue:string];
+//                 }];
                  [self.view addSubview:selectView];
              }else {
                  [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
@@ -508,14 +525,22 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
         else if (indexPath.row == 7) {
             
             if (isUsableNSString(self.storeModel.city,@"") && isUsableNSString(self.storeProvence, @"")) {
-                NSArray *cityArr = [XCPickerCityHandler  pickerCityWithIndexStr:self.storeProvence cityStr:self.storeModel.city];
+                NSArray *cityArr = [XCPickerCityHandler  pickerCityWithIndexStr:self.storeProvence cityStr:self.storeCity];
                 __weak __typeof(self) weakSelf = self;
-                SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+                SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr indexName:self.storeArea WithCompletionHandler:^(NSString *string) {
                     __strong __typeof__(weakSelf)strongSelf = weakSelf;
-                    strongSelf.storeModel.city = string;
+                    strongSelf.storeModel.area = string;
+                    strongSelf.storeArea = string;
                     XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
                     [cell setTitleValue:string];
                 }];
+                
+//                SelectStateView *selectView = [[SelectStateView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) datArray:cityArr WithCompletionHandler:^(NSString *string) {
+//                    __strong __typeof__(weakSelf)strongSelf = weakSelf;
+//                    strongSelf.storeModel.city = string;
+//                    XCDistributionPicketCell *cell =  [strongSelf.storeTableView cellForRowAtIndexPath:indexPath];
+//                    [cell setTitleValue:string];
+//                }];
                 [self.view addSubview:selectView];
             }else {
                 [self showAlterInfoWithNetWork:@"请先进行详细地址定位" complete:nil];
@@ -547,6 +572,9 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             AMapGeocode *geoCode = [response.geocodes firstObject];
             self.storeModel.latitude =  [NSString stringWithFormat:@"%f",geoCode.location.latitude];
             self.storeModel.longitude = [NSString stringWithFormat:@"%f",geoCode.location.longitude];
+            self.storeProvence = geoCode.province;
+            self.storeCity = geoCode.city;
+            self.storeArea = geoCode.district;
             NSLog(@"=======>latitude:%f",geoCode.location.latitude);
             NSLog(@"=======>longitude:%f",geoCode.location.longitude);
             
@@ -743,6 +771,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             [self showAlterInfoWithNetWork:@"请输入正确百分比" complete:nil];        }
     }
     else if ([title isEqualToString:@"详细地址:"]) {
+        self.storeModel.address = textField.text;
         [self mapSearch];
     }
     
@@ -992,9 +1021,11 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
         NSString *area = selectComponent.district;
         NSString *address = [NSString stringWithFormat:@"%@%@%@ %@",selectComponent.city,selectComponent.district,selectComponent.township,selectComponent.building];
         if (isUsableNSString(city,@"")) {
+            self.storeCity = city;
             [self.storeModel setCity:city];
         }
         if (isUsableNSString(area,@"")) {
+            self.storeArea = area;
             [self.storeModel setArea:area];
         }
         if (isUsableNSString(address,@"")) {
@@ -1096,7 +1127,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             }else if([title isEqualToString:@"详细地址:"]) {
                 textFiledCell.shouldShowClickView = YES;
                 [textFiledCell.textField setTextAlignment:NSTextAlignmentRight];
-                [self mapSearch];
             }
             if (self.storeModel) {
                 [textFiledCell setupCellWithShopModel:self.storeModel];
@@ -1381,7 +1411,8 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             [self.lincePhotoArrM removeAllObjects];
         }
         [self.lincePhotoArrM addObject:_storeModel.licenseUrl];
-    }    
+    }
+    [self mapSearch];
 }
 
 - (UIView *)contenView{

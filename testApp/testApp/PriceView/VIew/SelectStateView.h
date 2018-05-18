@@ -16,5 +16,8 @@
 @property (nonatomic,weak)id<SelectStateViewDelegate>delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray;
+// =================== modify by Liangyz
+- (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray indexName:(NSString *)indexName WithCompletionHandler:(void (^)(NSString *))complete;
+// ===================
 - (instancetype)initWithFrame:(CGRect)frame datArray:(NSArray *)dataArray WithCompletionHandler:(void (^)(NSString *))complete;
 @end

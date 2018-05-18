@@ -326,7 +326,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (_requestCount == 3) {
                     _requestCount = 0;
-                    FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:@"请求上年续保报价失败" complete:^{
+                    FinishTipsView *finshTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:^{
                         
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finshTV];
