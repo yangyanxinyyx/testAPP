@@ -258,7 +258,7 @@
 
             [_scrollView addSubview:_imageScrollView];
 
-            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 190 * kScaleHeight - 20, SCREEN_WIDTH, 20)];
+            self.announcementView = [[CoverAnnouncementView alloc] initWithFrame:CGRectMake(0, 190 * kScaleHeight - 20 * kScaleWidth, SCREEN_WIDTH, 20 * kScaleWidth)];
             _announcementView.delegate = self;
             [_scrollView addSubview:_announcementView];
         });

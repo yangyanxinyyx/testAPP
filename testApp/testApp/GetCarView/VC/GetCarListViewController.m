@@ -85,11 +85,14 @@ static NSString *identifier = @"listCell";
     NSLog(@"%@",notification.userInfo);
     
     NSLog(@"---接收到通知---");
+    [self.dataSource removeAllObjects];
+    [self.tab reloadData];
+    self.noFoundTipsView.hidden = NO;
     
 }
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 -(void)viewTapped:(UITapGestureRecognizer*)tap{

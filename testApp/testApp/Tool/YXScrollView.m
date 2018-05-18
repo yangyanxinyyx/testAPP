@@ -108,7 +108,7 @@ typedef enum {
 {
     [super setFrame:frame];
     self.scrollView.frame = self.bounds;
-    self.pageControl.center = CGPointMake(self.width * 0.5, self.height -40 - 10);
+    self.pageControl.center = CGPointMake(self.width * 0.5, self.height -20*kScaleWidth - 10);
     [self setScrollViewContentSize];
 }
 

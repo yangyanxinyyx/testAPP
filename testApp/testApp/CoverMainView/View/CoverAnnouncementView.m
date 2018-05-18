@@ -28,8 +28,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        [self createUI];
         self.height = frame.size.height;
+        [self createUI];
     }
     return self;
 }
