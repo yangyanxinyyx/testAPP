@@ -100,14 +100,14 @@
 
     self.label1.frame = CGRectMake(16, CGRectGetMaxY(_line1.frame) + 15, 40, 12);
 
-    self.ownerLabel.frame = CGRectMake(CGRectGetMaxX(self.label1.frame), CGRectGetMaxY(_line1.frame) + 15, 100, 12);
+    self.ownerLabel.frame = CGRectMake(CGRectGetMaxX(self.label1.frame), CGRectGetMaxY(_line1.frame) + 15, 180, 12);
 
     self.label2.frame = CGRectMake(16, CGRectGetMaxY(_label1.frame) + 10, 40, 12);
 
-    self.itemsLabel.frame = CGRectMake(CGRectGetMaxX(self.label2.frame), CGRectGetMaxY(_label1.frame) + 10, 100, 12);
+    self.itemsLabel.frame = CGRectMake(CGRectGetMaxX(self.label2.frame), CGRectGetMaxY(_label1.frame) + 10, 180, 12);
 
     self.label3.frame = CGRectMake(16, CGRectGetMaxY(_label2.frame) + 10, 57, 12);
-    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.label3.frame)+10, CGRectGetMaxY(_label2.frame) + 10, 150, 12);
+    self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.label3.frame)+10, CGRectGetMaxY(_label2.frame) + 10, 180, 12);
 
     self.getCarBtn.frame = CGRectMake(SCREEN_WIDTH - 115, CGRectGetMaxY(_line1.frame) + 26, 80, 30);
 }
