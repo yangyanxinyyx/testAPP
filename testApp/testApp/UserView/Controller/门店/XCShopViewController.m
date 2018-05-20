@@ -354,7 +354,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                     }
                     unlink([filePath  UTF8String]);
                 }
-                strongSelf.storePhotoArrM = [strongSelf getOrigianShopPhotoWithModel:strongSelf.storeModel];
                 [strongSelf.lincePhotoArrM removeAllObjects];
                 NSArray *urlStrArr  = response[@"data"];
                 for (NSString *urlPath in urlStrArr) {
@@ -407,17 +406,26 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                 for (NSString *filePath in uploadPathArrM) {
+                    if(isUsableNSString(filePath, @""))
+                    {
+                        if([strongSelf.storePhotoArrM containsObject:filePath])
+                        {
+                            [strongSelf.storePhotoArrM removeObject:filePath];
+                        }
+                        
+                    }
                     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
                     }
                     unlink([filePath  UTF8String]);
                 }
-                strongSelf.storePhotoArrM = [strongSelf getOrigianShopPhotoWithModel:strongSelf.storeModel];
                 NSArray *urlStrArr  = response[@"data"];
                 for (NSString *urlPath in urlStrArr) {
                     if (isUsable(urlPath, [NSString class])) {
                         [strongSelf.storePhotoArrM addObject:urlPath];
                         [strongSelf.networkURLArrM addObject:urlPath];
+                    }else {
+                        
                     }
                 }
                 /// 提交修改门店
@@ -884,9 +892,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                                                     cell:(XCCheckoutDetailPhotoCell *)cell
 {
     self.currentPhotoCell = cell;
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
-    [action showInView:self.navigationController.view];
-    
+//    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
+//    [action showInView:self.navigationController.view];
+    TZImagePickerController *imagePickerVc = [self createPickerPhotoViewController];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
 #pragma mark - UIActionSheet delegate
@@ -903,20 +912,28 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             break;
         case 1:
         {
+        
             if ([self.currentPhotoCell.title isEqualToString:@"营业执照上传,1张"]) {
-                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-                imagePickerVc.allowPickingVideo = NO;
-                imagePickerVc.sortAscendingByModificationDate = YES;
+//                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+//                imagePickerVc.allowPickingVideo = NO;
+//                imagePickerVc.allowCrop = YES ;
+//                imagePickerVc.cropRect = CGRectMake(0, clip_Y, clipWidth, clipHeight);
+//                imagePickerVc.sortAscendingByModificationDate = YES;
+                TZImagePickerController *imagePickerVc = [self createPickerPhotoViewController];
                 [self presentViewController:imagePickerVc animated:YES completion:nil];
             }else {
-                NSInteger maxCount = 4;
-                NSInteger count = maxCount - self.storePhotoArrM.count;
-                if (count < 0) {
-                    count = 0 ;
-                }
-                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-                imagePickerVc.allowPickingVideo = NO;
-                imagePickerVc.sortAscendingByModificationDate = YES;
+//                NSInteger maxCount = 4;
+//                NSInteger count = maxCount - self.storePhotoArrM.count;
+//                if (count < 0) {
+//                    count = 0 ;
+//                }
+//                TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+//                imagePickerVc.allowPickingVideo = NO;
+//                imagePickerVc.allowCrop = YES ;
+//                imagePickerVc.cropRect = CGRectMake(0, clip_Y, clipWidth, clipHeight);
+//                imagePickerVc.sortAscendingByModificationDate = YES;
+//                [self presentViewController:imagePickerVc animated:YES completion:nil];
+                TZImagePickerController *imagePickerVc = [self createPickerPhotoViewController];
                 [self presentViewController:imagePickerVc animated:YES completion:nil];
             }
         }
@@ -1336,6 +1353,20 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             [self.searchAPI AMapGeocodeSearch:req];
         }
     }
+}
+
+- (TZImagePickerController *)createPickerPhotoViewController
+{
+    CGFloat rate = 25/16.0;
+    NSInteger clipWidth = SCREEN_WIDTH;
+    NSInteger clipHeight = SCREEN_WIDTH / rate;
+    NSInteger clip_Y = (SCREEN_HEIGHT - clipHeight) * 0.5 ;
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+    imagePickerVc.allowPickingVideo = NO;
+    imagePickerVc.allowCrop = YES ;
+    imagePickerVc.cropRect = CGRectMake(0, clip_Y, clipWidth, clipHeight);
+    imagePickerVc.sortAscendingByModificationDate = YES;
+    return imagePickerVc;
 }
 
 #pragma mark -  ========== 添加键盘通知 ==========
