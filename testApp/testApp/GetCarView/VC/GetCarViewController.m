@@ -10,8 +10,10 @@
 #import "GetCarView.h"
 #import "GetCarDetailModel.h"
 #import "XCPhotoPreViewController.h"
+#import "MoneyInputVIew.h"
+#import "LYZAlertView.h"
 
-@interface GetCarViewController ()<BaseNavigationBarDelegate,GetCarViewDelegate>
+@interface GetCarViewController ()<BaseNavigationBarDelegate,GetCarViewDelegate,MoneyInputVIewDelegate>
 
 
 @end
@@ -82,43 +84,99 @@
     [getCarBtn addTarget:self action:@selector(pressGetCarBtn) forControlEvents:UIControlEventTouchUpInside];
     getCarBtn.layer.cornerRadius = 5;
     getCarBtn.layer.masksToBounds = YES;
-    [getCarBtn setTitle:@"接车" forState:UIControlStateNormal];
     getCarBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
     [self.view addSubview:getCarBtn];
 
+    if (self.getCarBtnType == GetCarBtnTypeGet) {
+        [getCarBtn setTitle:@"接车" forState:UIControlStateNormal];
+
+    }else if (self.getCarBtnType == GetCarBtnTypePay){
+        [getCarBtn setTitle:@"完成" forState:UIControlStateNormal];
+
+    }else{
+        getCarBtn.hidden = YES;
+    }
 }
 
 - (void)pressGetCarBtn
 {
-    NSDictionary *param = @{@"id":_orderID};
-    [RequestAPI getGetCar:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        if (isUsableDictionary(response)) {
-            if ([response[@"result"] integerValue] == 1) {
-                NSLog(@"接车成功");
-                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    if (self.getCarBtnType == GetCarBtnTypeGet) {
 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"接车信息已发出!" complete:^{
+        LYZAlertView *alert = [LYZAlertView alterViewWithTitle:@"是否接车?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+            NSDictionary *param = @{@"id":_orderID};
+            [RequestAPI getGetCar:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                if (isUsableDictionary(response)) {
+                    if ([response[@"result"] integerValue] == 1) {
+                        NSLog(@"接车成功");
+                        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
 
-                        if (self.delegate && [self.delegate respondsToSelector:@selector(reloadGetCarListWithPlateNO)]) {
-                            [self.delegate reloadGetCarListWithPlateNO];
-                            [self.navigationController popViewControllerAnimated:YES];
-                        }
-                    }];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"接车信息已发出!" complete:^{
 
-                    [self.view addSubview:tipsView];
-                });
-            }else{
-                NSLog(@"接车失败");
-                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"接车错误" complete:nil];
+                                if (self.delegate && [self.delegate respondsToSelector:@selector(reloadGetCarListWithPlateNO)]) {
+                                    [self.delegate reloadGetCarListWithPlateNO];
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                }
+                            }];
+
+                            [self.view addSubview:tipsView];
+                        });
+                    }else{
+                        NSLog(@"接车失败");
+                        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"接车错误" complete:nil];
+                        [self.view addSubview:tipsView];
+                    }
+                }
+
+            } fail:^(id error) {
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
                 [self.view addSubview:tipsView];
+            }];
+        }];
+        [self.view addSubview:alert];
+    }else{
+
+            if ([self.orderCategory isEqualToString:@"维修"]) {
+                MoneyInputVIew *moneyInput = [[MoneyInputVIew alloc] init];
+                moneyInput.orderId = self.orderID;
+                moneyInput.delegate = self;
+                [self.view addSubview:moneyInput];
+            }else{
+                LYZAlertView *alert = [LYZAlertView alterViewWithTitle:@"是否完成?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
+                    NSDictionary *param = @{@"id":_orderID};
+                    [RequestAPI getGetCarFinish:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                        if (isUsableDictionary(response)) {
+                            if ([response[@"result"] integerValue] == 1) {
+                                NSLog(@"交易成功");
+                                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易完成!" complete:^{
+                                        if (self.delegate && [self.delegate respondsToSelector:@selector(reloadGetCarListWithPlateNO)]) {
+                                            [self.delegate reloadGetCarListWithPlateNO];
+                                            [self.navigationController popViewControllerAnimated:YES];
+                                        }
+                                    }];
+
+                                    [self.view addSubview:tipsView];
+
+                                });
+
+                            }else{
+                                NSLog(@"交易失败");
+                                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易错误" complete:nil];
+                                [self.view addSubview:tipsView];
+                            }
+                        }
+
+                    } fail:^(id error) {
+                        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+                        [self.view addSubview:tipsView];
+                    }];
+                }];
+                [self.view addSubview:alert];
             }
         }
-
-    } fail:^(id error) {
-        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-        [self.view addSubview:tipsView];
-    }];
 
 }
 
@@ -127,6 +185,14 @@
     XCPhotoPreViewController *vc = [[XCPhotoPreViewController alloc] initWithTitle:@"照片预览" sources:source];
     [vc updatePositionWithIndex:index];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)reloadGetCarListWithPlateNO
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadGetCarListWithPlateNO)]) {
+        [self.delegate reloadGetCarListWithPlateNO];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -76,13 +76,20 @@
         [self.contentView addSubview:_line0];
         _line0.backgroundColor = COLOR_RGB_255(242, 242, 242);
 
-        _getCarBtn = [[UIButton alloc] init];
+        _getCarBtn = [[UILabel alloc] init];
         [self.contentView addSubview:_getCarBtn];
-        [_getCarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _getCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_getCarBtn addTarget:self action:@selector(pressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        _getCarBtn.layer.cornerRadius = 3;
-        _getCarBtn.layer.masksToBounds = YES;
+        _getCarBtn.font = [UIFont systemFontOfSize:14];
+        _getCarBtn.textAlignment = NSTextAlignmentRight;
+
+        _nextBtn = [[UIButton alloc] init];
+        [self.contentView addSubview:_nextBtn];
+        [_nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _nextBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_nextBtn addTarget:self action:@selector(pressNextBtn:) forControlEvents:UIControlEventTouchUpInside];
+        _nextBtn.layer.cornerRadius = 3;
+        _nextBtn.layer.masksToBounds = YES;
+        [self.nextBtn setTitle:@"查看" forState:UIControlStateNormal];
+        self.nextBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
 
     }
     return self;
@@ -109,7 +116,8 @@
     self.label3.frame = CGRectMake(16, CGRectGetMaxY(_label2.frame) + 10, 57, 12);
     self.timeLabel.frame = CGRectMake(CGRectGetMaxX(self.label3.frame)+10, CGRectGetMaxY(_label2.frame) + 10, 180, 12);
 
-    self.getCarBtn.frame = CGRectMake(SCREEN_WIDTH - 115, CGRectGetMaxY(_line1.frame) + 26, 80, 30);
+    self.getCarBtn.frame = CGRectMake(SCREEN_WIDTH - 95, 5, 80, 40);
+    self.nextBtn.frame = CGRectMake(SCREEN_WIDTH - 95, CGRectGetMaxY(_line1.frame) + 26, 80, 30);
 }
 
 - (void)setGetCarBtnType:(GetCarBtnType)getCarBtnType
@@ -117,21 +125,22 @@
     _getCarBtnType = getCarBtnType;
 
     if (_getCarBtnType == GetCarBtnTypeGet) {
-        [self.getCarBtn setTitle:@"查看" forState:UIControlStateNormal];
-        self.getCarBtn.backgroundColor = COLOR_RGB_255(0, 72, 162);
+        self.getCarBtn.text = @"未接车";
+        self.getCarBtn.textColor = COLOR_RGB_255(0, 72, 162);
         _label3.text = @"预约时间:";
     }else if (_getCarBtnType == GetCarBtnTypePay){
-        [self.getCarBtn setTitle:@"完成" forState:UIControlStateNormal];
-        self.getCarBtn.backgroundColor = COLOR_RGB_255(57, 174, 54);
+        self.getCarBtn.text = @"已接车";
+        self.getCarBtn.textColor = COLOR_RGB_255(57, 174, 54);
         _label3.text = @"接车时间:";
     }else{
-        [self.getCarBtn setTitle:@"交易完成" forState:UIControlStateNormal];
-        self.getCarBtn.backgroundColor = COLOR_RGB_255(182, 182, 182);
+        self.getCarBtn.text = @"交易完成";
+        self.getCarBtn.textColor = COLOR_RGB_255(182, 182, 182);
+        _label3.text = @"接车时间:";
     }
 
 }
 
-- (void)pressBtn:(UIButton *)sender
+- (void)pressNextBtn:(UIButton *)sender
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(pressGetCarBtn:)]) {
         [self.delegate pressGetCarBtn:self];

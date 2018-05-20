@@ -266,54 +266,14 @@ static NSString *identifier = @"listCell";
 {
     NSIndexPath *indexPath = [_tab indexPathForCell:cell];
     GetCarModel *model = self.dataSource[indexPath.row];
-    if (cell.getCarBtnType == GetCarBtnTypeGet) {
-        GetCarViewController *VC = [[GetCarViewController alloc] init];
-        VC.delegate = self;
-        VC.orderID = model.orderID;
-        VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
-        VC.orderCategory = model.orderCategory;
-        VC.appointmentTime = model.appointmentTime;
-        [self.navigationController pushViewController:VC animated:YES];
-    }else if (cell.getCarBtnType == GetCarBtnTypePay){
-        if ([model.orderCategory isEqualToString:@"维修"]) {
-            MoneyInputVIew *moneyInput = [[MoneyInputVIew alloc] init];
-            moneyInput.orderId = model.orderID;
-            moneyInput.delegate = self;
-            [self.view addSubview:moneyInput];
-        }else{
-            LYZAlertView *alert = [LYZAlertView alterViewWithTitle:@"是否完成?" content:nil confirmStr:@"是" cancelStr:@"否" confirmClick:^(LYZAlertView *alertView) {
-                NSDictionary *param = @{@"id":model.orderID};
-                [RequestAPI getGetCarFinish:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                    if (isUsableDictionary(response)) {
-                        if ([response[@"result"] integerValue] == 1) {
-                            NSLog(@"交易成功");
-                            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易完成!" complete:^{
-                                    [self reloadGetCarListWithPlateNO];
-                                }];
-
-                                [self.view addSubview:tipsView];
-                                [self.view sendSubviewToBack:tipsView];
-
-                            });
-
-                        }else{
-                            NSLog(@"交易失败");
-                            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"交易错误" complete:nil];
-                            [self.view addSubview:tipsView];
-                        }
-                    }
-
-                } fail:^(id error) {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-                    [self.view addSubview:tipsView];
-                }];
-            }];
-            [self.view addSubview:alert];
-        }
-    }
+    GetCarViewController *VC = [[GetCarViewController alloc] init];
+    VC.delegate = self;
+    VC.orderID = model.orderID;
+    VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
+    VC.orderCategory = model.orderCategory;
+    VC.appointmentTime = model.appointmentTime;
+    VC.getCarBtnType = cell.getCarBtnType;
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 - (void)reloadGetCarListWithPlateNO
