@@ -13,6 +13,8 @@
 #import "XCCustomerFollowViewController.h"
 #import "XCUserViolationDetailModel.h"
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "PriceUnderwritingImportTableViewCell.h"
+#define kimportTableCellID @"importTableCellID"
 @interface XCCustomerDetailViewController ()
 @property (nonatomic, strong) UIButton  * customerFollowUpBtn ;
 @property (nonatomic, strong) UIButton * subscribeBtn ;
@@ -33,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-
+    [self.tableView registerClass:[PriceUnderwritingImportTableViewCell class] forCellReuseIdentifier:kimportTableCellID];
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
@@ -187,7 +189,7 @@
     self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"客户名称:",@"客户来源:",@"性别:",
                                                             @"生日:",@"区域:",@"地址:",
                                                             @"身份证:",@"车牌号:",@"品牌型号:",
-                                                                 @"初登日期:",@"车架号:",@"发动机号:",@"联系方式:"]];
+                                                            @"初登日期:",@"车架号:",@"发动机号:",@"联系方式:",@"跟进类型:",@"跟进时间:",@"备注:"]];
 }
 
 - (void)initUI
@@ -260,14 +262,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *title = self.dataArrM[indexPath.row];
-    XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
-    [cell setTitle:title];
-    [cell setupCellWithCustomerDetailModel:self.model];
-    return cell;
+    if (indexPath.row == self.dataArrM.count - 1) {
+        PriceUnderwritingImportTableViewCell *cell = (PriceUnderwritingImportTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kimportTableCellID forIndexPath:indexPath];
+        if (isUsableNSString(self.model.content, @"")) {
+            cell.textView.text = self.model.content;
+        }else {
+            cell.textView.text = @"";
+        }
+        cell.textView.editable = NO;
+        return cell;
+    }else {
+        XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
+        [cell setTitle:title];
+        [cell setupCellWithCustomerDetailModel:self.model];
+        return cell;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == self.dataArrM.count - 1) {
+        return 233 * ViewRateBaseOnIP6;
+    }
     return (30 + 25 ) * ViewRateBaseOnIP6;
 }
 

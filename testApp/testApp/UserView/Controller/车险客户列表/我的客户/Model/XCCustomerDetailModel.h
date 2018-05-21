@@ -57,6 +57,15 @@
 /** 联系方式 */
 @property (nonatomic, copy) NSString * phoneNo;
 
+//10-05-20 添加
+/** 跟进内容 */
+@property (nonatomic, copy) NSString * content;
+
+/** 操作类型 */
+@property (nonatomic, copy) NSString * operate;
+
+/** 跟进时间 */
+@property (nonatomic, copy) NSString * nextFollowTime;
 
 //预约维修Model用
 /** 门店ID */
