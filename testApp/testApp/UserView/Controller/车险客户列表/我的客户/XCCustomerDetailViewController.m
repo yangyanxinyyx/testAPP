@@ -56,9 +56,40 @@
         NSLog(@"location:%@", location);
         self.location = location;
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"kehuxiangqing" object:nil];
 
 }
 
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    
+    NSLog(@"%@",notification.userInfo);
+    NSLog(@"---接收到通知---");
+    if (self.model) {
+        NSDictionary *param = @{
+                                @"carId":self.model.carId,
+                                @"customerId":self.model.customerId
+                                };
+        __weak typeof (self)weakSelf = self;
+        [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
+                detailModel.customerId = weakSelf.model.customerId;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.model = detailModel;
+                    [weakSelf.tableView reloadData];
+                });
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            }
+        } fail:^(id error) {
+            [weakSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+        }];
+    }
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
