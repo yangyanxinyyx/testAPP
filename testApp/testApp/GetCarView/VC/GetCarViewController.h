@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController1.h"
+#import "GetCarListCell.h"
 
 @protocol GetCarViewControllerDelegate <NSObject>
 
@@ -22,5 +23,6 @@
 @property (nonatomic,assign) BOOL isFix;
 @property (nonatomic,strong) NSString *orderCategory;
 @property (nonatomic,strong) NSString *appointmentTime;
+@property (nonatomic,assign) GetCarBtnType getCarBtnType;
 
 @end

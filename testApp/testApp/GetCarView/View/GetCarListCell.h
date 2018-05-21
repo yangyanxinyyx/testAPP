@@ -31,7 +31,9 @@ typedef NS_ENUM(NSInteger, GetCarBtnType) {
 
 @property (nonatomic,strong) UILabel *timeLabel;
 
-@property (nonatomic,strong) UIButton *getCarBtn;
+@property (nonatomic,strong) UIButton *nextBtn;
+
+@property (nonatomic,strong) UILabel *getCarBtn;
 
 @property (nonatomic,assign) GetCarBtnType getCarBtnType;
 
