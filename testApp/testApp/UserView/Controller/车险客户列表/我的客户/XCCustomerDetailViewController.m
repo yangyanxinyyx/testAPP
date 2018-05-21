@@ -176,7 +176,7 @@
                                     @"carId":weakSelf.model.carId,
                                     };
             [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                                if (response[@"data"][@"lists"]) {
+                if (isUsable(response[@"data"], [NSDictionary class])) {
                     NSArray *dataArr = response[@"data"][@"lists"];
                     NSMutableArray *detailModelArrM = [[NSMutableArray alloc] init];
                     for (NSDictionary *dataInfo in dataArr) {
@@ -196,7 +196,7 @@
                     violationVC.model = weakSelf.model;
                     [weakSelf.navigationController pushViewController:violationVC animated:YES];
                 }else{
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
