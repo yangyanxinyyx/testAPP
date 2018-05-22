@@ -216,7 +216,6 @@
         [textFiledCell setTitle:titleName];
         [textFiledCell setTitlePlaceholder:@"输入价格"];
         textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
-        textFiledCell.isNumField = YES;
         return textFiledCell;
 }
 
