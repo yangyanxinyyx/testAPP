@@ -158,8 +158,10 @@
 
 - (void)requestFailureHandler
 {
-    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
-    [self.view addSubview:tipsView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    });
 }
 
 
@@ -252,8 +254,6 @@
     [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         BOOL configureSucess  = NO;
         if (response[@"data"]) {
-            
-          
             XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
             detailModel.customerId = model.customerId;
             XCCustomerDetailViewController *detailVC = [[XCCustomerDetailViewController alloc] initWithTitle:@"客户详情"];

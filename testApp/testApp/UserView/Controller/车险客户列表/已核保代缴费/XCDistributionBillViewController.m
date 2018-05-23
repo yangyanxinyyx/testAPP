@@ -192,7 +192,6 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
         case 9:
         case 10: {
             textFiledCell.titlePlaceholder = @"请输入金额";
-            textFiledCell.isNumField = YES;
             textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         }
             break;
@@ -213,7 +212,6 @@ XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
             break;
         case 11:
         {
-            textFiledCell.isNumField = YES;
             textFiledCell.titlePlaceholder = @"请输入金额";
             textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
 

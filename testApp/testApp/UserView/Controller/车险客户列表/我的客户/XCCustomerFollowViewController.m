@@ -10,6 +10,7 @@
 #import "SelectTimeView.h"
 #import "PriceUnderwritingImportTableViewCell.h"
 #define kimportTableCellID @"importTableCellID"
+#import "AppDelegate.h"
 @interface XCCustomerFollowViewController ()<XCDistributionFooterViewDelegate,PriceUnderwritingImportTableViewCellDelegate>
 
 /** 操作类型记录 */
@@ -105,6 +106,8 @@
 
         if ([response[@"result"] integerValue] == 1) {
             [strongSelf showAlterInfoWithNetWork:@"提交成功" complete:^{
+                NSNotification *notification = [NSNotification notificationWithName:@"kehuxiangqing" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 [strongSelf.navigationController popViewControllerAnimated:YES];
             }];
         }else {

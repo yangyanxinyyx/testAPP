@@ -203,7 +203,7 @@
             return NO;
         }
         NSCharacterSet *cs;
-        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890."] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         BOOL basicTest = [string isEqualToString:filtered];
         if(!basicTest)  {

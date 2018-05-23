@@ -320,6 +320,20 @@
             [_placeholderLabel setText:@" "];
         }
     }
+    else if ([self.title isEqualToString:@"跟进类型:"]) {
+        if (isUsableNSString(model.operate,@"")) {
+            [_placeholderLabel setText:model.operate];
+        }else {
+            [_placeholderLabel setText:@" "];
+        }
+    }
+    else if ([self.title isEqualToString:@"跟进时间:"]) {
+        if (isUsableNSString(model.nextFollowTime,@"")) {
+            [_placeholderLabel setText:model.nextFollowTime];
+        }else {
+            [_placeholderLabel setText:@" "];
+        }
+    }
 }
 
 - (void)setupCellWithChargeBackModel:(XCCheckoutDetailBaseModel *)model

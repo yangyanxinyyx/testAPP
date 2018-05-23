@@ -13,6 +13,8 @@
 #import "XCCustomerFollowViewController.h"
 #import "XCUserViolationDetailModel.h"
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "PriceUnderwritingImportTableViewCell.h"
+#define kimportTableCellID @"importTableCellID"
 @interface XCCustomerDetailViewController ()
 @property (nonatomic, strong) UIButton  * customerFollowUpBtn ;
 @property (nonatomic, strong) UIButton * subscribeBtn ;
@@ -33,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.tableView registerClass:[XCCheckoutDetailTextCell class] forCellReuseIdentifier:kTextCellID];
-
+    [self.tableView registerClass:[PriceUnderwritingImportTableViewCell class] forCellReuseIdentifier:kimportTableCellID];
     [self initUI];
     [self configureData];
     [self.tableView reloadData];
@@ -54,9 +56,40 @@
         NSLog(@"location:%@", location);
         self.location = location;
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(InfoNotificationAction:) name:@"kehuxiangqing" object:nil];
 
 }
 
+- (void)InfoNotificationAction:(NSNotification *)notification{
+    
+    NSLog(@"%@",notification.userInfo);
+    NSLog(@"---接收到通知---");
+    if (self.model) {
+        NSDictionary *param = @{
+                                @"carId":self.model.carId,
+                                @"customerId":self.model.customerId
+                                };
+        __weak typeof (self)weakSelf = self;
+        [RequestAPI getCustomerParticularsList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (response[@"data"]) {
+                XCCustomerDetailModel *detailModel = [XCCustomerDetailModel yy_modelWithJSON:response[@"data"]];
+                detailModel.customerId = weakSelf.model.customerId;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.model = detailModel;
+                    [weakSelf.tableView reloadData];
+                });
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            }
+        } fail:^(id error) {
+            [weakSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+        }];
+    }
+}
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -143,7 +176,7 @@
                                     @"carId":weakSelf.model.carId,
                                     };
             [RequestAPI getWZMessageByCarId:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                                if (response[@"data"][@"lists"]) {
+                if (isUsable(response[@"data"], [NSDictionary class])) {
                     NSArray *dataArr = response[@"data"][@"lists"];
                     NSMutableArray *detailModelArrM = [[NSMutableArray alloc] init];
                     for (NSDictionary *dataInfo in dataArr) {
@@ -163,7 +196,7 @@
                     violationVC.model = weakSelf.model;
                     [weakSelf.navigationController pushViewController:violationVC animated:YES];
                 }else{
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
@@ -187,7 +220,7 @@
     self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"客户名称:",@"客户来源:",@"性别:",
                                                             @"生日:",@"区域:",@"地址:",
                                                             @"身份证:",@"车牌号:",@"品牌型号:",
-                                                                 @"初登日期:",@"车架号:",@"发动机号:",@"联系方式:"]];
+                                                            @"初登日期:",@"车架号:",@"发动机号:",@"联系方式:",@"跟进类型:",@"跟进时间:",@"备注:"]];
 }
 
 - (void)initUI
@@ -260,14 +293,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *title = self.dataArrM[indexPath.row];
-    XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
-    [cell setTitle:title];
-    [cell setupCellWithCustomerDetailModel:self.model];
-    return cell;
+    if (indexPath.row == self.dataArrM.count - 1) {
+        PriceUnderwritingImportTableViewCell *cell = (PriceUnderwritingImportTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kimportTableCellID forIndexPath:indexPath];
+        if (isUsableNSString(self.model.content, @"")) {
+            cell.textView.text = self.model.content;
+        }else {
+            cell.textView.text = @"";
+        }
+        cell.textView.editable = NO;
+        return cell;
+    }else {
+        XCCheckoutDetailTextCell *cell = (XCCheckoutDetailTextCell *)[tableView dequeueReusableCellWithIdentifier:kTextCellID forIndexPath:indexPath];
+        [cell setTitle:title];
+        [cell setupCellWithCustomerDetailModel:self.model];
+        return cell;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == self.dataArrM.count - 1) {
+        return 233 * ViewRateBaseOnIP6;
+    }
     return (30 + 25 ) * ViewRateBaseOnIP6;
 }
 

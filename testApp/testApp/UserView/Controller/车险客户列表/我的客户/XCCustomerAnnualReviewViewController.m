@@ -446,7 +446,6 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
       
         XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
         textFiledCell.delegate = self;
-        textFiledCell.isNumField = YES;
         textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         [textFiledCell setTitle:title];
         textFiledCell.shouldShowSeparator = YES;

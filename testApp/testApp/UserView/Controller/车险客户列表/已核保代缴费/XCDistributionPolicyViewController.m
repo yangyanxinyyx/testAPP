@@ -246,7 +246,6 @@ XCDistributionFooterViewDelegate,XCDistributionInputCellDelegate,XCCheckoutDetai
         }
         textFiledCell.titlePlaceholder = @"请输入金额";
         textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
-        textFiledCell.isNumField = YES;
     }else if([titleName isEqualToString:@"客户名称:"] ) {
         textFiledCell.titlePlaceholder = @"输入客户名称";
     }else if([titleName isEqualToString:@"联系电话:"]) {
