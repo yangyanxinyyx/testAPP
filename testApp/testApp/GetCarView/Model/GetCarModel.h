@@ -15,6 +15,9 @@
 @property (nonatomic,strong) NSString *customerName;
 @property (nonatomic,strong) NSString *phone;
 @property (nonatomic,strong) NSString *appointmentTime;
+@property (nonatomic,strong) NSString *finishTime;
+@property (nonatomic,strong) NSString *receptionTime;
+
 @property (nonatomic,strong) NSString *useStatus;
 @property (nonatomic,strong) NSString *plateNo;
 

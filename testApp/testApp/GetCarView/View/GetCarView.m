@@ -13,7 +13,7 @@
 
 @implementation GetCarView
 
-- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString *)orderCategory
+- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString *)orderCategory getCarType:(GetCarBtnType)getCarType
 {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor clearColor];
@@ -29,21 +29,33 @@
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
         scrollView.backgroundColor = [UIColor whiteColor];
         [self addSubview:scrollView];
-        scrollView.contentSize = CGSizeMake(0, isFix ? 495 : 530- 72 +36*model.detailList.count);
+        scrollView.contentSize = CGSizeMake(0, isFix ? 495  + 40: 530- 72 +36*model.detailList.count + 40);
         scrollView.bounces = NO;
         scrollView.showsVerticalScrollIndicator = !isFix;
         scrollView.delegate = self;
 
-        NSArray *titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"项      目:"];
-        NSArray *titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",orderCategory]];
-        for (int i=0 ; i<6; i++) {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 44)];
+        NSArray *titleArray1 = nil;
+        NSArray *titleArray2 = nil;
+        if (getCarType == GetCarBtnTypeGet) {
+            titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"项      目:"];
+            titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",orderCategory]];
+        }else if (getCarType == GetCarBtnTypePay){
+            titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"接车时间:",@"项      目:"];
+            titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",model.receptionTime],[NSString stringWithFormat:@"%@",orderCategory]];
+        }else{
+            titleArray1 = @[@"客户名称:",@"车  牌  号:",@"车  型  号:",@"联系电话:",@"预约时间:",@"完成时间",@"项      目:"];
+            titleArray2 = @[[NSString stringWithFormat:@"%@",model.customerName],[NSString stringWithFormat:@"%@",model.plateNo],[NSString stringWithFormat:@"%@",model.brand],[NSString stringWithFormat:@"%@",model.phone],[NSString stringWithFormat:@"%@",model.appointmentTime],[NSString stringWithFormat:@"%@",model.finishTime],[NSString stringWithFormat:@"%@",orderCategory]];
+        }
+
+
+        for (int i=0 ; i<titleArray1.count; i++) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40*i, 68, 40)];
             label.font = [UIFont systemFontOfSize:14];
             label.textColor = COLOR_RGB_255(68, 68, 68);
             label.text = titleArray1[i];
             [scrollView addSubview:label];
 
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(82, 40*i, SCREEN_WIDTH - 82 - 15, 44)];
+            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(82, 40*i, SCREEN_WIDTH - 82 - 15, 40)];
             label2.font = [UIFont systemFontOfSize:13];
             label2.textColor = COLOR_RGB_255(165, 165, 165);
             label2.text = titleArray2[i];
@@ -54,17 +66,17 @@
             [scrollView addSubview:line];
         }
 
-        UIView *seqline = [[UIView alloc] initWithFrame:CGRectMake(0, 240, SCREEN_WIDTH, 5)];
+        UIView *seqline = [[UIView alloc] initWithFrame:CGRectMake(0, 240 + 40, SCREEN_WIDTH, 5)];
         seqline.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [scrollView addSubview:seqline];
 
-        UILabel *requireLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 245, 150, 40)];
+        UILabel *requireLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 245 + 40, 150, 40)];
         requireLabel.font = [UIFont systemFontOfSize:14];
         requireLabel.textColor = COLOR_RGB_255(68, 68, 68);
         requireLabel.text = @"要求描述";
         [scrollView addSubview:requireLabel];
 
-        UILabel *requireLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 285, SCREEN_WIDTH-30, 80)];
+        UILabel *requireLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 285 + 40, SCREEN_WIDTH-30, 80)];
         requireLabel2.font = [UIFont systemFontOfSize:13];
         requireLabel2.textColor = COLOR_RGB_255(165, 165, 165);
         requireLabel2.numberOfLines = 0;
@@ -72,14 +84,14 @@
         requireLabel2.text = [text isEqualToString:@"(null)"] ? @"暂无描述" : model.remark;
         [scrollView addSubview:requireLabel2];
 
-        UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 365, SCREEN_WIDTH, 5)];
+        UIView *seqline2 = [[UIView alloc] initWithFrame:CGRectMake(0, 365 + 40, SCREEN_WIDTH, 5)];
         seqline2.backgroundColor = COLOR_RGB_255(242, 242, 242);
         [scrollView addSubview:seqline2];
 
 
         if (isFix) {
             //维修
-            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365, SCREEN_WIDTH - 15, 35)];
+            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365 + 40, SCREEN_WIDTH - 15, 35)];
             itemLabel.font = [UIFont systemFontOfSize:14];
             itemLabel.textColor = COLOR_RGB_255(68, 68, 68);
             itemLabel.text = @"相关照片";
@@ -117,7 +129,7 @@
 
         }else{
             //接车
-            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365, SCREEN_WIDTH - 15, 44)];
+            UILabel *itemLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 365 + 40, SCREEN_WIDTH - 15, 44)];
             itemLabel.font = [UIFont systemFontOfSize:14];
             itemLabel.textColor = COLOR_RGB_255(68, 68, 68);
             itemLabel.text = @"服务";

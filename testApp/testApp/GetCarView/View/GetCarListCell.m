@@ -135,7 +135,7 @@
     }else{
         self.getCarBtn.text = @"交易完成";
         self.getCarBtn.textColor = COLOR_RGB_255(182, 182, 182);
-        _label3.text = @"预约时间:";
+        _label3.text = @"完成时间:";
     }
 
 }

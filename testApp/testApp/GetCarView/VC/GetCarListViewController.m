@@ -253,10 +253,13 @@ static NSString *identifier = @"listCell";
     cell.timeLabel.text = model.appointmentTime;
     if ([model.useStatus isEqualToString:@"待消费"]) {
         cell.getCarBtnType = 0;
+        cell.timeLabel.text = model.appointmentTime;
     }else if ([model.useStatus isEqualToString:@"消费中"]){
         cell.getCarBtnType = 1;
+        cell.timeLabel.text = model.receptionTime;
     }else{
         cell.getCarBtnType = 2;
+        cell.timeLabel.text = model.finishTime;
     }
 
     return cell;
@@ -272,6 +275,8 @@ static NSString *identifier = @"listCell";
     VC.isFix = [model.orderCategory isEqualToString:@"维修"] ? YES : NO;
     VC.orderCategory = model.orderCategory;
     VC.appointmentTime = model.appointmentTime;
+    VC.receptionTime = model.receptionTime;
+    VC.finishTime = model.finishTime;
     VC.getCarBtnType = cell.getCarBtnType;
     [self.navigationController pushViewController:VC animated:YES];
 }

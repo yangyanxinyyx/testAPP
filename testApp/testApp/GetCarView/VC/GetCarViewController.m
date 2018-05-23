@@ -25,6 +25,11 @@
     BaseNavigationBar *topBar = [[BaseNavigationBar alloc] init];
     topBar.delegate  = self;
     topBar.title = @"接车";
+    if (self.getCarBtnType == GetCarBtnTypePay) {
+        topBar.title = @"已接车";
+    }else if (self.getCarBtnType == GetCarBtnTypeFinish){
+        topBar.title = @"交易完成";
+    }
     [self.view addSubview:topBar];
 
     self.view.backgroundColor = COLOR_RGB_255(242, 242, 242);
@@ -55,6 +60,8 @@
                     __block GetCarDetailModel *model = [[GetCarDetailModel alloc] init];
                     [model setValuesForKeysWithDictionary:data];
                     model.appointmentTime = _appointmentTime;
+                    model.receptionTime = _receptionTime;
+                    model.finishTime = _finishTime;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self createUIWithModel:model];
                     });
@@ -74,7 +81,7 @@
 
 - (void)createUIWithModel:(GetCarDetailModel *)model;
 {
-    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 495 : 530) model:model isFix:_isFix orderCategory:_orderCategory];
+    GetCarView *view = [[GetCarView alloc] initWithFrame:CGRectMake(0, 10 + kHeightForNavigation, SCREEN_WIDTH, _isFix ? 495 : 530) model:model isFix:_isFix orderCategory:_orderCategory getCarType:self.getCarBtnType];
     view.delegate = self;
     [self.view addSubview:view];
 

@@ -29,4 +29,6 @@
 @property (nonatomic,strong) NSString *url4;
 
 @property (nonatomic,strong) NSString *appointmentTime;
+@property (nonatomic,strong) NSString *finishTime;
+@property (nonatomic,strong) NSString *receptionTime;
 @end

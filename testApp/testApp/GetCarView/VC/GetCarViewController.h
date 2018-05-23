@@ -23,6 +23,8 @@
 @property (nonatomic,assign) BOOL isFix;
 @property (nonatomic,strong) NSString *orderCategory;
 @property (nonatomic,strong) NSString *appointmentTime;
+@property (nonatomic,strong) NSString *finishTime;
+@property (nonatomic,strong) NSString *receptionTime;
 @property (nonatomic,assign) GetCarBtnType getCarBtnType;
 
 @end

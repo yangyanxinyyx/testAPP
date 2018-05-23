@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GetCarDetailModel.h"
+#import "GetCarListCell.h"
 
 @protocol GetCarViewDelegate <NSObject>
 
@@ -21,7 +22,7 @@
 @property (nonatomic,weak)id<GetCarViewDelegate>delegate;
 
 
-- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString*)orderCategory;
+- (instancetype)initWithFrame:(CGRect)frame model:(GetCarDetailModel *)model isFix:(BOOL)isFix orderCategory:(NSString*)orderCategory getCarType:(GetCarBtnType)getCarType;
 
 
 @end
