@@ -1357,7 +1357,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 
 - (TZImagePickerController *)createPickerPhotoViewController
 {
-    CGFloat rate = 25/16.0;
+    CGFloat rate = 35/18.0;
     NSInteger clipWidth = SCREEN_WIDTH;
     NSInteger clipHeight = SCREEN_WIDTH / rate;
     NSInteger clip_Y = (SCREEN_HEIGHT - clipHeight) * 0.5 ;
