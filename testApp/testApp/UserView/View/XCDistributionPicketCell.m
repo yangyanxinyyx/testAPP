@@ -110,12 +110,13 @@
 
 - (void)setupCellWithShopModel:(XCShopModel *)model
 {
-    if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
-        [self.valueLabel setText:model.city];
-    }else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
-        [self.valueLabel setText:model.area];
-    }
-    else if ([self.title isEqualToString:@"门店标签"]) {
+//    if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
+//        [self.valueLabel setText:model.city];
+//    }else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
+//        [self.valueLabel setText:model.area];
+//    }
+//    else
+        if ([_titleLabel.text isEqualToString:@"门店标签"]) {
         
         NSMutableArray *labelArr = [[NSMutableArray alloc] init];
         if (isUsableNSString(model.label1, @"")) {

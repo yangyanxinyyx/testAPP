@@ -60,6 +60,16 @@
     
     
     if (_shouldShowClickView) {
+        NSMutableString *tmpTitleM = [NSMutableString stringWithString:self.title];
+        NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+        if (strArr.count > 1) {
+            tmpTitleM = strArr[1];
+        }
+        
+        if ([tmpTitleM isEqualToString:@"详细地址"]) {
+            UIImage *arrowImage = [UIImage imageNamed:@"map2"];
+            [_clickBtn setImage:arrowImage forState:UIControlStateNormal];
+        }
         labelSize = CGSizeMake(20 * ViewRateBaseOnIP6, self.frame.size.height);
         [_clickBtn setFrame:CGRectMake(self.frame.size.width - (labelSize.width +  30 * ViewRateBaseOnIP6), (self.frame.size.height - labelSize.height) * 0.5 , labelSize.width, labelSize.height)];
     }else {
@@ -112,7 +122,7 @@
     if ([self.title isEqualToString:@"门店名称:"] && isUsableNSString(model.name,@"")) {
         [_textField setText:model.name];
     }
-    else if ([self.title isEqualToString:@"门店电话:"] && isUsableNSString(model.tel, @"")) {
+    else if ([self.title isEqualToString:@"联系方式:"] && isUsableNSString(model.tel, @"")) {
         [_textField setText:model.tel];
     }
     else if ([self.title isEqualToString:@"负责人:"] && isUsableNSString(model.corporateName, @"")) {
@@ -121,24 +131,16 @@
     else if ([self.title isEqualToString:@"负责人电话:"] && isUsableNSString(model.corporateCellphone, @"")) {
         [_textField setText:model.corporateCellphone];
     }
-    else if ([self.title isEqualToString:@"业务员提成:"]) {
-        if (isUsable(model.salesmanCommission, [NSNumber class])) {
-            [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.salesmanCommission doubleValue]]];
-        }else {
-            [_textField setText:@"0.00 %"];
-        }
-    }
-    else if ([self.title isEqualToString:@"团队经理提成:"]) {
-        if (isUsable(model.managerCommission, [NSNumber class])) {
-               [_textField setText:[NSString stringWithFormat:@"%.2f %%",[model.managerCommission doubleValue]]];
-        }else {
-            [_textField setText:@"0.00 %"];
-        }
-    }
     else if ([self.title isEqualToString:@"门店审核状态"]&&isUsableNSString(model.storeStatus, @"")) {
         [_textField setText:model.storeStatus];
     }
-    else if ([self.title isEqualToString:@"详细地址:"]&&isUsableNSString(model.address, @"")) {
+    else if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
+        [_textField setText:model.city];
+    }
+    else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
+        [_textField setText:model.area];
+    }
+    else if ([self.title isEqualToString:@"详细地址"]&&isUsableNSString(model.address, @"")) {
         [_textField setText:model.address];
     }
     
@@ -258,7 +260,7 @@
     [self addSubview:_secondTextField];
     
     _clickBtn = [UIButton buttonWithType: 0];
-    UIImage *arrowImage = [UIImage imageNamed:@"map2"];
+    UIImage *arrowImage = [UIImage imageNamed:@"next"];
     [_clickBtn setImage:arrowImage forState:UIControlStateNormal];
     [_clickBtn addTarget:self action:@selector(clickNextBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_clickBtn];

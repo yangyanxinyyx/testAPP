@@ -115,7 +115,10 @@
             XCShopLabelChildView *subView = [_contentScrollView viewWithTag:1000 + i];
             if (subView) {
                 if (subView.isSelected) {
-                    [tmpselectArrM addObject:subView.title];
+                    NSMutableString *tmpString = [NSMutableString stringWithString:subView.title];
+                    NSArray *tempArr =  [tmpString componentsSeparatedByString:@"  "];
+                    NSString *resultStr = [tempArr componentsJoinedByString:@""];
+                    [tmpselectArrM addObject:resultStr];
                 }
             }
         }
@@ -155,7 +158,7 @@
           if (isUsableNSString(title, @"")) {
               NSMutableString *mutalString = [[NSMutableString alloc] initWithString:title];
               if (mutalString.length == 2) {
-                  [mutalString insertString:@"  " atIndex:1];
+                  [mutalString insertString:@"  "atIndex:1];
                   title = mutalString;
               }
           }
