@@ -14,6 +14,7 @@
 }
 @property (nonatomic, strong) UILabel *labelContext;
 @property (nonatomic, strong) UIImageView *imageViewSelect;
+@property (nonatomic, strong) UIButton *buttonSearch;
 
 @end
 
@@ -31,6 +32,10 @@
         [self.contentView addSubview:self.labelContext];
         self.imageViewSelect = [[UIImageView alloc] init];
         [self.contentView addSubview:self.imageViewSelect];
+        self.buttonSearch = [[UIButton alloc] init];
+        [self.contentView addSubview:self.buttonSearch];
+        self.buttonSearch.hidden = YES;
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
  
     }
@@ -40,12 +45,19 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-
-    
-
     self.textField.font = [UIFont systemFontOfSize:24 * ViewRateBaseOnIP6];
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
+    
+    if (self.textField.tag == 0) {
+        self.buttonSearch.hidden = NO;
+        self.buttonSearch.frame = CGRectMake(SCREEN_WIDTH - 85 * ViewRateBaseOnIP6, 26 *ViewRateBaseOnIP6, 35 * ViewRateBaseOnIP6, 35 * ViewRateBaseOnIP6);
+        [self.buttonSearch setImage:[UIImage imageNamed:@"search1"] forState:UIControlStateNormal];
+        [self.buttonSearch addTarget:self action:@selector(searchCustomerInfo:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+        self.buttonSearch.hidden = YES;
+    }
 }
 
 - (void)setLabelNameText:(NSString *)text isChoose:(BOOL)isChoose placeholderStr:(NSString *)placeholderStr isSelect:(BOOL)isSelect{
@@ -57,7 +69,11 @@
         self.labelName.frame = CGRectMake(30 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6, 130 * ViewRateBaseOnIP6, 27 * ViewRateBaseOnIP6);
         self.labelName.font = [UIFont systemFontOfSize:27 * ViewRateBaseOnIP6];
         [self.labelName sizeToFit];
-        self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        if (self.textField.tag == 0) {
+            self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 278 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        } else {
+            self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        }
         self.textField.placeholder = placeholderStr;
     } else {
         
@@ -67,7 +83,12 @@
         self.textField.placeholder = placeholderStr;
         self.labelName.text = text;
         [self.labelName sizeToFit];
-        self.textField.frame = CGRectMake(CGRectGetMaxX(self.labelName.frame) + 10 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        if (self.textField.tag == 0) {
+            self.textField.frame = CGRectMake(173 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 278 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        } else {
+            self.textField.frame = CGRectMake(CGRectGetMaxX(self.labelName.frame) + 10 * ViewRateBaseOnIP6, 5 * ViewRateBaseOnIP6, SCREEN_WIDTH - 193 * ViewRateBaseOnIP6, 74 * ViewRateBaseOnIP6);
+        }
+        
         
     }
     if (isSelect) {
@@ -77,6 +98,7 @@
     } else {
         self.imageViewSelect.hidden = YES;
     }
+
 
 }
 
@@ -125,6 +147,9 @@
     [self.textField endEditing:YES];
 }
 
+- (void)searchCustomerInfo:(UIButton *)but{
+    [self.delegate toucheButtonSearch];
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
