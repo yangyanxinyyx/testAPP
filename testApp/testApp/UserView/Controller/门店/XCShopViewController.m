@@ -54,8 +54,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 @property (nonatomic, strong) NSArray * storeTitleArr;
 /** 预设 */
 @property (nonatomic, strong) NSArray * placeHolderArr ;
-/** 服务tableViewTitle数据 */
-@property (nonatomic, strong) NSArray * serviceTitleArr ;
 /** 选中当前CellTitle */
 @property (nonatomic, strong) NSString * selectedTitle ;
 /** 选中当前的Cell */
@@ -143,7 +141,6 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                             @"请输入负责人电话",@"城市",@"地区",
                             @"",@"",@"待审核",
                             @"1张",@"4张"];
-    self.serviceTitleArr = @[@"洗车项目",@"美容项目",@"保养项目"];
 }
 #pragma mark - Action Method
 
@@ -470,62 +467,26 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.serviceTableView) {
-        
-        switch (indexPath.row) {
-            case 0:{ //洗车项目
-                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                if (self.services.count > 0) {
-                    NSArray *arr = self.services[indexPath.row];
-                    for (NSDictionary *dataInfo in arr) {
-                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                        if (serviceModel) {
-                            [serviceDataArrM addObject:serviceModel];
-                        }
-                    }
+        NSDictionary *servicesInfo = self.services[indexPath.row];
+        if (isUsable(servicesInfo, [NSDictionary class])) {
+            NSString *titleName = @"";
+            NSString *categoryName = @"";
+            NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
+            titleName = servicesInfo[@"categoryServie"];
+            categoryName = servicesInfo[@"category"];
+            NSArray  *services = servicesInfo[@"list"];
+            for (NSDictionary *dataInfo in services) {
+                XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
+                if (serviceModel) {
+                    [serviceDataArrM addObject:serviceModel];
                 }
-                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"洗车项目"];
-                serviceDetailVC.titleTypeStr = @"洗车";
-                serviceDetailVC.dataArr = serviceDataArrM;
-                [self.navigationController pushViewController:serviceDetailVC animated:YES];
             }
-                break;
-            case 1: { //美容项目
-                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                if (self.services.count > 0) {
-                    NSArray *arr = self.services[indexPath.row];
-                    for (NSDictionary *dataInfo in arr) {
-                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                        if (serviceModel) {
-                            [serviceDataArrM addObject:serviceModel];
-                        }
-                    }
-                }
-                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"美容项目"];
-                serviceDetailVC.titleTypeStr = @"美容";
-                serviceDetailVC.dataArr = serviceDataArrM;
-                [self.navigationController pushViewController:serviceDetailVC animated:YES];
-            }
-                break;
-            case 2: { //保养项目
-                NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-                
-                if (self.services.count > 0) {
-                    NSArray *arr = self.services[indexPath.row];
-                    for (NSDictionary *dataInfo in arr) {
-                        XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
-                        if (serviceModel) {
-                            [serviceDataArrM addObject:serviceModel];
-                        }
-                    }
-                }
-                XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:@"保养项目"];
-                serviceDetailVC.titleTypeStr = @"保养";
-                serviceDetailVC.dataArr = serviceDataArrM;
-                [self.navigationController pushViewController:serviceDetailVC animated:YES];
-            }
-                break;
-            default:
-                break;
+            XCShopServiceDetailListViewController *serviceDetailVC = [[XCShopServiceDetailListViewController alloc] initWithTitle:titleName];
+            serviceDetailVC.titleTypeStr = categoryName;
+            serviceDetailVC.dataArr = serviceDataArrM;
+            [self.navigationController pushViewController:serviceDetailVC animated:YES];
+        }else {
+            [self showAlterInfoWithNetWork:@"网络数据错误" complete:nil];
         }
     }
     else if (tableView == self.storeTableView) {
@@ -662,20 +623,20 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
         self.viewLastY.hidden = NO ;
     } else {
         self.viewLastY.hidden = YES ;
-
+        self.services = [[NSArray alloc] init];
         NSDictionary *param = @{
                                 @"storeId":[UserInfoManager shareInstance].storeID,
                                 };
         __weak __typeof(self) weakSelf = self;
         [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if (response[@"data"]) {
-                NSDictionary *dataInfo = response[@"data"];
-                NSArray *xcServicesArr = dataInfo[@"xcServiceList"];
-                NSArray *mrServicesArr = dataInfo[@"mrServiceList"];
-                NSArray *byServicesArr = dataInfo[@"byServiceList"];
-                strongSelf.services = [[NSMutableArray alloc] initWithArray:@[xcServicesArr,mrServicesArr,byServicesArr]];
+            if (isUsable(response[@"data"], [NSArray class])) {
+                NSArray *dataInfoArr = response[@"data"];
+                strongSelf.services = dataInfoArr;
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.serviceTableView reloadData];
+            });
             [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
         } fail:^(id error) {
             __strong __typeof__(weakSelf)strongSelf = weakSelf;
@@ -1117,7 +1078,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
     if (tableView == self.storeTableView) {
         return self.storeTitleArr.count;
     }else { //服务信息
-        return self.serviceTitleArr.count;
+        return self.services.count;
     }
 }
 
@@ -1216,10 +1177,12 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
         }
     }else  {
         //服务TableView
-        NSString *title = nil;
-        if (self.serviceTitleArr.count > indexPath.row) {
-            title = self.serviceTitleArr[indexPath.row];
-        }
+        NSString *title = @"";
+        NSDictionary *serviceInfo = self.services[indexPath.row];
+        title = serviceInfo[@"categoryServie"];
+//        if (self.serviceTitleArr.count > indexPath.row) {
+//            title = self.serviceTitleArr[indexPath.row];
+//        }
         XCDistributionPicketCell *picketCell =(XCDistributionPicketCell *)[tableView dequeueReusableCellWithIdentifier:kPicketCellID];
         picketCell.titleLabel.text = title;
         if (picketCell == nil) {

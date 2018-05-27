@@ -113,7 +113,7 @@
 //门店信息
 #define SHOPSDETAIL_API [NSString stringWithFormat:@"%@/api/web/store/getStore",API_PREFIX]
 //门店服务
-#define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreService",API_PREFIX]
+#define SHOPSSERVICE_API [NSString stringWithFormat:@"%@/api/web/store/findStoreServiceTwo",API_PREFIX]
 //修改门店详情
 #define SHOPUPDATESTORE_API [NSString stringWithFormat:@"%@/api/web/store/updateStore",API_PREFIX]
 //编辑服务
