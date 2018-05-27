@@ -99,7 +99,6 @@
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - (kHeightForNavigation + safeAreaBottom + bottomHeight))];
     [_bottomLine setFrame:CGRectMake(0, SCREEN_HEIGHT - bottomHeight - 1 - safeAreaBottom, SCREEN_WIDTH, 1)];
-    
     [_customerFollowUpBtn setFrame:CGRectMake(55 * ViewRateBaseOnIP6,CGRectGetMaxY(_bottomLine.frame) + (SCREEN_HEIGHT - CGRectGetMaxY(_bottomLine.frame)  - 80 * ViewRateBaseOnIP6) * 0.5 , 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     [_subscribeBtn setFrame:CGRectMake(CGRectGetMaxX(_customerFollowUpBtn.frame) + 40 * ViewRateBaseOnIP6, _customerFollowUpBtn.frame.origin.y, 300 * ViewRateBaseOnIP6, 80 * ViewRateBaseOnIP6)];
     
@@ -109,7 +108,6 @@
 
 - (void)clickCustomerFollowUpBtn:(UIButton *)button
 {
-    
     __block NSMutableArray * selectArrM = [[NSMutableArray alloc] init];
     __weak __typeof(self) weakSelf = self;
     NSDictionary *param = @{
@@ -125,7 +123,8 @@
             followVC.selectArr = selectArrM;
             [strongSelf.navigationController pushViewController:followVC animated:YES];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+            [weakSelf.view addSubview:tipsView];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
@@ -153,7 +152,7 @@
                                     @"carId":_model.carId,
                                     };
             [RequestAPI getCarVerificationMoney:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-                if (response[@"data"]) {
+                if (isUsable(response[@"data"], [NSArray class])) {
                     NSArray *origionDataArr = response[@"data"];
                         if (origionDataArr) {
                             XCCustomerAnnualReviewViewController *annualReviewVC = [[XCCustomerAnnualReviewViewController alloc] initWithTitle:@"年审预约"];
@@ -162,7 +161,7 @@
                             [weakSelf.navigationController pushViewController:annualReviewVC animated:YES];
                         }
                 }else {
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"预约失败" complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
                     [weakSelf.view addSubview:tipsView];
                 }
                 [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
