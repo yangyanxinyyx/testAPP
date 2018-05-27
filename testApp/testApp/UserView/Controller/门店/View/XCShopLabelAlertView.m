@@ -152,12 +152,19 @@
                   isSelected = YES;
               }
           }
+          if (isUsableNSString(title, @"")) {
+              NSMutableString *mutalString = [[NSMutableString alloc] initWithString:title];
+              if (mutalString.length == 2) {
+                  [mutalString insertString:@"  " atIndex:1];
+                  title = mutalString;
+              }
+          }
           XCShopLabelChildView *childView = [[XCShopLabelChildView alloc] initWithFrame:CGRectMake(0, i * [XCShopLabelChildView getViewHeight],_centerView.frame.size.width, [XCShopLabelChildView getViewHeight]) Title:title Selected:isSelected];
           childView.tag = 1000 + i;
           [_contentScrollView addSubview:childView];
       }
   }
-    [_contentScrollView setContentSize:CGSizeMake(_centerView.frame.size.width, _dataArr.count * [XCShopLabelChildView getViewHeight])];
+    [_contentScrollView setContentSize:CGSizeMake(_centerView.frame.size.width, _dataArr.count * [XCShopLabelChildView getViewHeight] + 40 * ViewRateBaseOnIP6)];
 }
 
 
