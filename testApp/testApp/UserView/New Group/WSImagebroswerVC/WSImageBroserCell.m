@@ -11,7 +11,6 @@
 
 @interface WSImageBroserCell()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIImageView *imageView;
 
 @end
 
@@ -43,6 +42,20 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     tap.numberOfTapsRequired = 2;
     [self addGestureRecognizer:tap];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(clickLongPress:)];
+    [self addGestureRecognizer:longPress];
+    
+}
+
+- (void)clickLongPress:(UILongPressGestureRecognizer *)longPress
+{
+    if (longPress.state == UIGestureRecognizerStateChanged) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(WSImageBroserCellLongPressCell:)]) {
+            [self.delegate WSImageBroserCellLongPressCell:self];
+        }
+    }
+   
 }
 
 - (void)tap:(UITapGestureRecognizer *)tap {
@@ -64,7 +77,6 @@
         UIImage *placeHolderImage = [UIImage imageNamed:@"placeHolder"];
         [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:placeHolderImage];
     }
-    
 }
 
 -(UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView{//两手指触摸放大时调用，返回需要改变的view

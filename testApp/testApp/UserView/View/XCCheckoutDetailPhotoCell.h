@@ -23,6 +23,8 @@
 
 /** 判断是否年审预约类型 默认NO */
 @property (nonatomic, assign) BOOL isAnnualType ;
+/** 置顶功能(门店图片使用)  默认为NO*/
+@property (nonatomic, assign) BOOL  isShowTopTag ;
 
 /** <# 类型描述  #> */
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;

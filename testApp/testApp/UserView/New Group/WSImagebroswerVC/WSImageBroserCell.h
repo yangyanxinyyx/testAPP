@@ -1,15 +1,21 @@
 //
 //  WSImageBroserCell.h
 //  doucui
-//
-//  Created by 吴振松 on 16/10/12.
-//  Copyright © 2016年 lootai. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 #import "WSImageModel.h"
+@class WSImageBroserCell;
+@protocol WSImageBroserCellDelegate <NSObject>
+
+- (void)WSImageBroserCellLongPressCell:(WSImageBroserCell *)cell;
+
+@end
 
 @interface WSImageBroserCell : UICollectionViewCell
+@property (nonatomic, weak) id<WSImageBroserCellDelegate> delegate;
 @property (nonatomic, strong) WSImageModel *model;
+@property (nonatomic, strong) UIImageView *imageView;
+
 
 @end
