@@ -71,7 +71,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 - (void)configureData
 {
     _storePhotoArrM = [[NSMutableArray alloc] init];
-    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"预约时间",@"类型选择",@"年审费用:",@"行驶证拍照"]];
+    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"联系人:",@"联系电话:",@"车牌号:",@"预约时间:",@"类型选择:",@"年审费用:",@"行驶证拍照(最多4张)"]];
 }
 - (void)initUI
 {
@@ -81,7 +81,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weak __typeof(self) weakSelf = self;
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.section == 0 && indexPath.row == 3) {
         SelectTiemHoursView *selectView = [[SelectTiemHoursView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectView.block = ^(NSString *string) {
             weakSelf.appointmentTime = string;
@@ -90,7 +90,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
         };
         [self.view addSubview:selectView];
     }
-    else if (indexPath.section == 0 && indexPath.row == 1) {
+    else if (indexPath.section == 0 && indexPath.row == 4) {
         //类选择
         if (self.dataArr) {
             
@@ -105,13 +105,12 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
             
             LYZSelectView *selectView =[LYZSelectView alterViewWithArray:titleArrM confirmClick:^(LYZSelectView *alertView, NSString *selectStr) {
                 XCDistributionPicketCell *cell = (XCDistributionPicketCell *)[tableView cellForRowAtIndexPath:indexPath];
-                XCCheckoutDetailTextFiledCell *moneyCell = (XCCheckoutDetailTextFiledCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+                XCCheckoutDetailTextFiledCell *moneyCell = (XCCheckoutDetailTextFiledCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
                 NSUInteger index = [titleArrM indexOfObject:selectStr];
                 NSString *selectMoney = [moneyArrM objectAtIndex:index];
-                [moneyCell setTitlePlaceholder:[NSString stringWithMoneyNumber:[selectMoney doubleValue]]];
+
+                moneyCell.textField.text =  [NSString stringWithMoneyNumber:[selectMoney doubleValue]];
                 [cell setTitleValue:selectStr];
-                
-                
                 weakSelf.onlineType = selectStr;
                 weakSelf.orderPrice = [NSNumber numberWithDouble:[selectMoney doubleValue]];
             }];
@@ -120,39 +119,110 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
     }
 }
 
+#pragma mark - XCDistributionFooterViewDelegate
+
+- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
+{
+    //提交
+    BOOL configureSuccess = YES;
+    //上传图片
+    __block NSMutableArray *uploadDataArrM = [[NSMutableArray alloc] init];
+    __block NSMutableArray *uploadPathArrM = [[NSMutableArray alloc] init];
+    for (NSString *filePath in self.storePhotoArrM) {
+        if (![self isUsefulURLWith:filePath]) {
+            NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL URLWithString:filePath]];
+            if (uploadData) {
+                [uploadDataArrM addObject:uploadData];
+                [uploadPathArrM addObject:filePath];
+            }
+        }
+    }
+    NSString *errorString = @"客户信息错误";
+    if (uploadPathArrM.count <= 0) {
+        configureSuccess = NO ;
+        errorString = @"请添加正确证件照片!";
+    }
+    if (!isUsable(self.model.customerId, [NSNumber class])) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.customerName, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.phoneNo, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsable(self.model.carId, [NSNumber class])) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.plateNo, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsable(self.orderPrice, [NSNumber class])) {
+        configureSuccess = NO ;
+        errorString = @"类型对应价格信息有错";
+    }
+    if (!isUsableNSString(self.onlineType, @"")) {
+        configureSuccess = NO ;
+        errorString = @"请选择类型";
+    }
+    if (!isUsableNSString(self.appointmentTime, @"")) {
+        configureSuccess = NO ;
+        errorString = @"请选择预约时间";
+    }
+
+    __weak __typeof(self) weakSelf = self;
+
+    
+    if (configureSuccess) {
+        if (uploadPathArrM.count > 0) {
+            /// 上传图片
+            NSDictionary *param = @{
+                                    @"file":uploadDataArrM,
+                                    };
+            [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
+                    for (NSString *filePath in uploadPathArrM) {
+                        if([strongSelf.storePhotoArrM containsObject:filePath])
+                        {
+                            [strongSelf.storePhotoArrM removeObject:filePath];
+                        }
+                        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                        }
+                        unlink([filePath  UTF8String]);
+                    }
+                    NSArray *urlStrArr  = response[@"data"];
+                    for (NSString *urlPath in urlStrArr) {
+                        [strongSelf.storePhotoArrM addObject:urlPath];
+                        [strongSelf.networkURLArrM addObject:urlPath];
+                        
+                    }
+                    /// 提交年审费用
+                    [strongSelf postAnnualNetworkBill];
+                }else {
+                    [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+                    return ;            }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            } fail:^(id error) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+                return ;
+            }];
+        }else {
+             [self showAlterInfoWithNetWork:@"请添加正确证件照片!" complete:nil];
+        }
+    }else {
+          [self showAlterInfoWithNetWork:errorString complete:nil];
+    }
+}
+
+
 - (void)postAnnualNetworkBill
 {
     __weak __typeof(self) weakSelf = self;
-    //提交
-    BOOL configureSuccess = YES;
-    if (!self.model.customerId) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.customerName) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.phoneNo) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.customerName) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.carId) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.plateNo) {
-        configureSuccess = NO ;
-    }
-    if (!self.orderPrice) {
-        configureSuccess = NO ;
-    }
-    if (!self.appointmentTime) {
-        configureSuccess = NO ;
-    }
-    if (!self.onlineType) {
-        configureSuccess = NO ;
-    }
     
+
     NSString *url1Str = @"";
     NSString *url2Str = @"";
     NSString *url3Str = @"";
@@ -193,11 +263,11 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
  
         if ([response[@"result"] integerValue] == 1) {
-            [strongSelf showAlterInfoWithNetWork:@"预约成功" complete:^{
+            [strongSelf showAlterInfoWithNetWork:@"委托成功" complete:^{
                 [strongSelf.navigationController popViewControllerAnimated:YES];
             }];
         }else {
-            [strongSelf showAlterInfoWithNetWork:@"预约失败" complete:nil];
+            [strongSelf showAlterInfoWithNetWork:@"委托失败" complete:nil];
         }
         [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
     } fail:^(id error) {
@@ -219,14 +289,31 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
     }
 }
 
+- (void)XCCheckoutDetailTextFiledSubmitTextField:(UITextField *)textField title:(NSString *)title
+{
+    if ([title isEqualToString:@"联系电话:"]) {
+        if ([self valiMobile:textField.text]) {
+            self.model.phoneNo = textField.text;
+        }else {
+            [self showAlterInfoWithNetWork:@"请输入正确格式电话" complete:nil];
+        }
+    }
+    else if ([title isEqualToString:@"联系人:"]) {
+        self.model.customerName = textField.text;
+    }
+    else if ([title isEqualToString:@"车牌号:"]) {
+        self.model.plateNo = textField.text;
+    }
+}
+
 - (BOOL)XCCheckoutDetailTextFiledShouldChangeCharactersInRange:(NSRange)range
                                              replacementString:(NSString *)string
                                                          title:(NSString *)title
                                                      textFiled:(UITextField *)textFiled
 {
-    if ([title isEqualToString:@"年审费用:"]) {
+    if ([title isEqualToString:@"联系电话:"]) {
         NSCharacterSet *cs;
-        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890."] invertedSet];
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         BOOL basicTest = [string isEqualToString:filtered];
         if(!basicTest)  {
@@ -237,63 +324,6 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
     return YES;
 }
 
-#pragma mark - XCDistributionFooterViewDelegate
-- (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
-{
-    __weak __typeof(self) weakSelf = self;
-    //上传图片
-    __block NSMutableArray *uploadDataArrM = [[NSMutableArray alloc] init];
-    __block NSMutableArray *uploadPathArrM = [[NSMutableArray alloc] init];
-    for (NSString *filePath in self.storePhotoArrM) {
-        if (![self isUsefulURLWith:filePath]) {
-            NSData *uploadData = [NSData dataWithContentsOfURL:[NSURL URLWithString:filePath]];
-            if (uploadData) {
-                [uploadDataArrM addObject:uploadData];
-                [uploadPathArrM addObject:filePath];
-            }
-            
-        }
-    }
-    if (uploadPathArrM.count > 0) {
-        /// 上传图片
-        NSDictionary *param = @{
-                                @"file":uploadDataArrM,
-                                };
-        [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
-                for (NSString *filePath in uploadPathArrM) {
-                    if([strongSelf.storePhotoArrM containsObject:filePath])
-                    {
-                        [strongSelf.storePhotoArrM removeObject:filePath];
-                    }
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                    }
-                    unlink([filePath  UTF8String]);
-                }
-                NSArray *urlStrArr  = response[@"data"];
-                for (NSString *urlPath in urlStrArr) {
-                    [strongSelf.storePhotoArrM addObject:urlPath];
-                    [strongSelf.networkURLArrM addObject:urlPath];
-                    
-                }
-                /// 提交年审费用
-                [strongSelf postAnnualNetworkBill];
-            }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
-                return ;            }
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-        } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
-            return ;
-        }];
-    }else {
-        [self showAlterInfoWithNetWork:@"请添加正确证件照片！" complete:nil];
-    }
-    
-}
 
 #pragma mark - XCCheckoutDetailPhotoCellDelegate
 
@@ -334,10 +364,9 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell
 {
     self.currentPhotoCell = cell;
-//    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
-//    [action showInView:self.navigationController.view];
-    TZImagePickerController *imagePickerVc = [self createPickerPhotoViewController];
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从照片库选取",nil];
+    [action showInView:self.navigationController.view];
+
 }
 
 #pragma mark - TZImagePickerControllerDelegate 新照片
@@ -401,36 +430,36 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 
 #pragma mark - UIActionSheet delegate
 
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    switch (buttonIndex) {
-//        case 0:
-//        {
-//            UIImagePickerController *vc = [UIImagePickerController new];
-//            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
-//            vc.delegate = self;
-//            [self.navigationController presentViewController:vc animated:YES completion:nil];
-//        }
-//            break;
-//        case 1:
-//        {
-//            NSInteger maxCount = 4;
-//            NSInteger count = maxCount - self.storePhotoArrM.count;
-//            if (count < 0) {
-//                count = 0 ;
-//            }
-//            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-//            imagePickerVc.allowPickingVideo = NO;
-//            imagePickerVc.allowTakePicture = NO;
-//            imagePickerVc.sortAscendingByModificationDate = YES;
-//            [self presentViewController:imagePickerVc animated:YES completion:nil];
-//
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
-//}
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *vc = [UIImagePickerController new];
+            vc.sourceType = UIImagePickerControllerSourceTypeCamera;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
+            vc.delegate = self;
+            [self.navigationController presentViewController:vc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            NSInteger maxCount = 4;
+            NSInteger count = maxCount - self.storePhotoArrM.count;
+            if (count < 0) {
+                count = 0 ;
+            }
+            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:count columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+            imagePickerVc.allowPickingVideo = NO;
+            imagePickerVc.allowTakePicture = NO;
+            imagePickerVc.sortAscendingByModificationDate = YES;
+            [self presentViewController:imagePickerVc animated:YES completion:nil];
+
+        }
+            break;
+
+        default:
+            break;
+    }
+}
 
 #pragma mark - UITableViewDataSource&&UITableViewDelegate
 
@@ -442,23 +471,34 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
     
     NSString *title = self.dataArrM[indexPath.row];
 
-    if (indexPath.row == 2) {
-      
+    if ([self isTextTypeCellWithIndexPath:indexPath]) {
         XCCheckoutDetailTextFiledCell *textFiledCell = (XCCheckoutDetailTextFiledCell *)[tableView dequeueReusableCellWithIdentifier:kTextFiledCellID forIndexPath:indexPath];
         textFiledCell.delegate = self;
-        textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
-        [textFiledCell setTitle:title];
+        textFiledCell.titleLabel.text = title;
         textFiledCell.shouldShowSeparator = YES;
-        textFiledCell.userInteractionEnabled = NO;
+        
+        if ([title isEqualToString:@"年审费用:"]) {
+            [textFiledCell setTitle:title];
+            textFiledCell.userInteractionEnabled = NO;
             if (self.dataArr.count == 1) {
                 NSNumber *money  = [self.dataArr firstObject][@"money"];
                 self.orderPrice = money;
                 [textFiledCell setTitlePlaceholder:[money stringValue]];
             }
-//        [textFiledCell setTitlePlaceholder:placetext];
-        return textFiledCell;
+        }
+        else if ([title isEqualToString:@"联系人:"]) {
+            textFiledCell.textField.text = self.model.customerName;
+        }
+        else if ([title isEqualToString:@"联系电话:"]) {
+            textFiledCell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+            textFiledCell.textField.text = self.model.phoneNo;
+        }
+        else if ([title isEqualToString:@"车牌号:"]) {
+            textFiledCell.textField.text = self.model.plateNo;
+        }
         
-    }else if(indexPath.row == 3) {
+        return textFiledCell;
+    }else if(indexPath.row == 6) {
         XCCheckoutDetailPhotoCell *photoCell = (XCCheckoutDetailPhotoCell *)[tableView dequeueReusableCellWithIdentifier:kPhotoCellID forIndexPath:indexPath];
         photoCell.delegate = self;
         photoCell.maxPhoto = 4;
@@ -487,14 +527,14 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     XCDistributionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kFooterViewID];
-    [footerView setTitle:@"预约"];
+    [footerView setTitle:@"委托办理"];
     footerView.delegate = self;
     return footerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 3) {
+    if (indexPath.row == 6) {
         return [XCCheckoutDetailPhotoCell getCellHeight];
     }
     return 88 * ViewRateBaseOnIP6;
@@ -536,19 +576,29 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
     [self.storePhotoArrM addObject:[tmpFileURL absoluteString]];
 }
 
-- (TZImagePickerController *)createPickerPhotoViewController
+- (BOOL)isTextTypeCellWithIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat rate = 25/16.0;
-    NSInteger clipWidth = SCREEN_WIDTH;
-    NSInteger clipHeight = SCREEN_WIDTH / rate;
-    NSInteger clip_Y = (SCREEN_HEIGHT - clipHeight) * 0.5 ;
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
-    imagePickerVc.allowPickingVideo = NO;
-    imagePickerVc.allowCrop = YES ;
-    imagePickerVc.cropRect = CGRectMake(0, clip_Y, clipWidth, clipHeight);
-    imagePickerVc.sortAscendingByModificationDate = YES;
-    return imagePickerVc;
+    BOOL isTextType = NO;
+    if ((indexPath.row == 5) || (indexPath.row == 0) || (indexPath.row == 1) || (indexPath.row == 2)) {
+        return YES;
+    }
+    
+    return isTextType;
 }
+
+//- (TZImagePickerController *)createPickerPhotoViewController
+//{
+//    CGFloat rate = 25/16.0;
+//    NSInteger clipWidth = SCREEN_WIDTH;
+//    NSInteger clipHeight = SCREEN_WIDTH / rate;
+//    NSInteger clip_Y = (SCREEN_HEIGHT - clipHeight) * 0.5 ;
+//    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:4 delegate:self pushPhotoPickerVc:YES];
+//    imagePickerVc.allowPickingVideo = NO;
+//    imagePickerVc.allowCrop = YES ;
+//    imagePickerVc.cropRect = CGRectMake(0, clip_Y, clipWidth, clipHeight);
+//    imagePickerVc.sortAscendingByModificationDate = YES;
+//    return imagePickerVc;
+//}
 
 #pragma mark - Setter&Getter
 - (void)setModel:(XCCustomerDetailModel *)model

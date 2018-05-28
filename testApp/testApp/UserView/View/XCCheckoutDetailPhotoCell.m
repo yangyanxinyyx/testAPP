@@ -35,6 +35,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _maxPhoto = 1;
+        _isShowTopTag = NO;
         [self configSubVies];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }

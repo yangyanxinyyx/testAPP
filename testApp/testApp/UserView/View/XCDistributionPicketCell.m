@@ -110,10 +110,32 @@
 
 - (void)setupCellWithShopModel:(XCShopModel *)model
 {
-    if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
-        [self.valueLabel setText:model.city];
-    }else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
-        [self.valueLabel setText:model.area];
+//    if ([self.title isEqualToString:@"所属城市"]&&isUsableNSString(model.city, @"")) {
+//        [self.valueLabel setText:model.city];
+//    }else if ([self.title isEqualToString:@"所在地区"]&&isUsableNSString(model.area, @"")) {
+//        [self.valueLabel setText:model.area];
+//    }
+//    else
+        if ([_titleLabel.text isEqualToString:@"门店标签"]) {
+        
+        NSMutableArray *labelArr = [[NSMutableArray alloc] init];
+        if (isUsableNSString(model.label1, @"")) {
+            [labelArr addObject:model.label1];
+        }
+        if (isUsableNSString(model.label2, @"")) {
+            [labelArr addObject:model.label2];
+        }
+        if (isUsableNSString(model.label3, @"")) {
+            [labelArr addObject:model.label3];
+        }
+        if (isUsableNSString(model.label4, @"")) {
+            [labelArr addObject:model.label4];
+        }
+        if (isUsableNSString(model.label5, @"")) {
+            [labelArr addObject:model.label5];
+        }
+        NSString *labelStr = [labelArr componentsJoinedByString:@"、"];
+        [self.valueLabel setText:labelStr];
     }
 }
 #pragma mark - Delegates & Notifications

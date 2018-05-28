@@ -89,6 +89,8 @@
 		A728F19420A48FED00E2654D /* callphone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A728F19220A48FEC00E2654D /* callphone@3x.png */; };
 		A72CFCFB207FC32400017DFA /* XCShopServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */; };
 		A72F94B5207A6B2E00100212 /* UILabel+createLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */; };
+		A75194B020B92568004896A8 /* XCShopLabelAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75194AF20B92568004896A8 /* XCShopLabelAlertView.m */; };
+		A75194B320BA8C60004896A8 /* XCShopLabelChildView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75194B220BA8C60004896A8 /* XCShopLabelChildView.m */; };
 		A751F62420981C6E0084C492 /* XCPickerCityHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A751F62320981C6E0084C492 /* XCPickerCityHandler.m */; };
 		A751F6262098206C0084C492 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = A751F6252098206C0084C492 /* city.plist */; };
 		A75335562092C1BE0061CB8C /* XCUserListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A75335552092C1BE0061CB8C /* XCUserListFooterView.m */; };
@@ -495,6 +497,10 @@
 		A72CFCFA207FC32400017DFA /* XCShopServiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopServiceModel.m; sourceTree = "<group>"; };
 		A72F94B3207A6B2D00100212 /* UILabel+createLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+createLabel.m"; path = "testApp/Extend/categary/UILabel+createLabel.m"; sourceTree = SOURCE_ROOT; };
 		A72F94B4207A6B2E00100212 /* UILabel+createLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+createLabel.h"; path = "testApp/Extend/categary/UILabel+createLabel.h"; sourceTree = SOURCE_ROOT; };
+		A75194AE20B92568004896A8 /* XCShopLabelAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopLabelAlertView.h; sourceTree = "<group>"; };
+		A75194AF20B92568004896A8 /* XCShopLabelAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopLabelAlertView.m; sourceTree = "<group>"; };
+		A75194B120BA8C60004896A8 /* XCShopLabelChildView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCShopLabelChildView.h; sourceTree = "<group>"; };
+		A75194B220BA8C60004896A8 /* XCShopLabelChildView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCShopLabelChildView.m; sourceTree = "<group>"; };
 		A751F62220981C6E0084C492 /* XCPickerCityHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XCPickerCityHandler.h; sourceTree = "<group>"; };
 		A751F62320981C6E0084C492 /* XCPickerCityHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XCPickerCityHandler.m; sourceTree = "<group>"; };
 		A751F6252098206C0084C492 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
@@ -1144,6 +1150,10 @@
 				A724C740209B5751002BBC21 /* XCShopRejectView.m */,
 				A757DA71209D69BC004100CD /* XCShopServiceAddsServiceFooterView.h */,
 				A757DA72209D69BC004100CD /* XCShopServiceAddsServiceFooterView.m */,
+				A75194AE20B92568004896A8 /* XCShopLabelAlertView.h */,
+				A75194AF20B92568004896A8 /* XCShopLabelAlertView.m */,
+				A75194B120BA8C60004896A8 /* XCShopLabelChildView.h */,
+				A75194B220BA8C60004896A8 /* XCShopLabelChildView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2506,6 +2516,7 @@
 				A72148B22083B5B2009E6DDC /* XCUserFinancialAuditDetailViewController.m in Sources */,
 				FC4F7D032067748100468032 /* BaseViewController1.m in Sources */,
 				FC32BFAB2079AA5900817156 /* PriceCommerceInsTableViewCell.m in Sources */,
+				A75194B320BA8C60004896A8 /* XCShopLabelChildView.m in Sources */,
 				258EFCB8208F79EB00FB06C0 /* YXTestNumber.m in Sources */,
 				FC32BF412079AA2000817156 /* XCCheckoutDetailHeaderView.m in Sources */,
 				FC32BF452079AA2000817156 /* XCCheckoutDetailTextFiledCell.m in Sources */,
@@ -2534,6 +2545,7 @@
 				FC32BFA12079AA5900817156 /* PriceCarInsuranceQViewController.m in Sources */,
 				FC32BF322079AA2000817156 /* XCCustomerFollowViewController.m in Sources */,
 				A79A510B20597A4F000D8D0F /* UIColor+Help.m in Sources */,
+				A75194B020B92568004896A8 /* XCShopLabelAlertView.m in Sources */,
 				A71AA9682087AFB100E78990 /* XCCustomerShopSrcollerViewCell.m in Sources */,
 				FC32BFA02079AA5900817156 /* PriceAdjustViewController.m in Sources */,
 				FC32BF2B2079AA2000817156 /* XCUserWaitingToPayingViewController.m in Sources */,

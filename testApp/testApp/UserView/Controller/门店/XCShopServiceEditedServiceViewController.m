@@ -13,9 +13,9 @@
 
 @interface XCShopServiceEditedServiceViewController ()<XCDistributionFooterViewDelegate,XCCheckoutDetailTextFiledCellDelegate>
 
-/** 门店价格 */
+/** 专属原价 */
 @property (nonatomic, strong) NSNumber * price ;
-/** 高级会员价格 */
+/** 专属会员价 */
 @property (nonatomic, strong) NSNumber * vipPrice ;
 
 /** <# 注释 #> */
@@ -53,7 +53,7 @@
 
 - (void)configureData
 {
-    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"原价:",@"标准售价:",@"门店价格:",@"高级会员价格:"]];
+    self.dataArrM = [[NSMutableArray alloc] initWithArray:@[@"品牌原价:",@"品牌会员价:",@"专属原价:",@"专属会员价:"]];
 }
 - (void)initUI
 {
@@ -82,14 +82,14 @@
     }
     if (!isUsable(self.price, [NSNumber class])) {
         if (_isNewService) {
-            [self showAlterInfoWithNetWork:@"请输入门店价格" complete:nil];
+            [self showAlterInfoWithNetWork:@"请输入专属原价" complete:nil];
             return;
         }
         _price = [NSNumber numberWithDouble:0];
     }
     if (!isUsable(self.vipPrice, [NSNumber class])) {
         if (_isNewService) {
-            [self showAlterInfoWithNetWork:@"请输入高级会员价格" complete:nil];
+            [self showAlterInfoWithNetWork:@"请输入专属会员价" complete:nil];
             return;
         }
         _vipPrice = [NSNumber numberWithDouble:0];
@@ -152,10 +152,10 @@
     if (strArr.count > 1) {
         title = strArr[1];
     }
-    if ([title isEqualToString:@"门店价格:"]) {
+    if ([title isEqualToString:@"专属原价:"]) {
         textField.text = [self.price stringValue];
     }
-    else if ([title isEqualToString:@"高级会员价格:"]) {
+    else if ([title isEqualToString:@"专属会员价:"]) {
         textField.text = [self.vipPrice stringValue];
     }
 }
@@ -167,12 +167,12 @@
         title = strArr[1];
     }
     
-    if ([title isEqualToString:@"门店价格:"]) {
+    if ([title isEqualToString:@"专属原价:"]) {
         self.price = [NSNumber numberWithDouble:[textField.text doubleValue]];
         textField.text = [NSString stringWithMoneyNumber:[self.price  doubleValue]];
 
     }
-    else if ([title isEqualToString:@"高级会员价格:"]) {
+    else if ([title isEqualToString:@"专属会员价:"]) {
         self.vipPrice = [NSNumber numberWithDouble:[textField.text doubleValue]];
         textField.text = [NSString stringWithMoneyNumber:[self.vipPrice  doubleValue]];
     }

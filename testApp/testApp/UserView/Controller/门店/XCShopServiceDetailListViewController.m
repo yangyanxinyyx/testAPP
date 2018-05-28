@@ -92,20 +92,18 @@
     __weak __typeof(self) weakSelf = self;
     [RequestAPI getStoreService:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
         __strong __typeof__(weakSelf)strongSelf = weakSelf;
-        if (response[@"data"]) {
-            NSDictionary *dataInfo = response[@"data"];
-            NSArray *arr;
-            if ([self.titleTypeStr isEqualToString:@"洗车"]) {
-                arr = dataInfo[@"xcServiceList"];
+        if (isUsable(response[@"data"], [NSArray class])) {
+            NSArray *dataInfoArr = response[@"data"];
+            NSArray  *services = @[];
+            for (NSDictionary *dataInfo in dataInfoArr) {
+                NSString *categoryName = dataInfo[@"category"];
+                if ([self.titleTypeStr isEqualToString:categoryName]) {
+                    services = dataInfo[@"list"];
+                }
             }
-            else if ([self.titleTypeStr isEqualToString:@"美容"]) {
-                arr = dataInfo[@"mrServiceList"];
-            }
-            else if ([self.titleTypeStr isEqualToString:@"保养"]) {
-                arr = dataInfo[@"byServiceList"];
-            }
+
             NSMutableArray * serviceDataArrM = [[NSMutableArray alloc] init];
-            for (NSDictionary *dataInfo in arr) {
+            for (NSDictionary *dataInfo in services) {
                 XCShopServiceModel *serviceModel = [XCShopServiceModel yy_modelWithJSON:dataInfo];
                 if (serviceModel) {
                     [serviceDataArrM addObject:serviceModel];

@@ -10,7 +10,9 @@
 #import "UILabel+createLabel.h"
 #import "WSImageBroserCell.h"
 #import "LYZAlertView.h"
-@interface XCPhotoPreViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+#import <AssetsLibrary/AssetsLibrary.h>
+
+@interface XCPhotoPreViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,WSImageBroserCellDelegate,UIActionSheetDelegate>
 
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -18,6 +20,10 @@
 /** 即将删除ArrM */
 @property (nonatomic, strong) NSMutableArray * tmpDeleArr ;
 @property (nonatomic, assign) NSInteger showIndex;
+/** <# 注释 #> */
+//@property (nonatomic, copy) NSString * downLoadImageUrlStr ;
+/** <# 注释 #> */
+@property (nonatomic, strong) UIImage * downLoadImage ;
 
 @end
 
@@ -156,6 +162,54 @@
 }
 
 #pragma mark - Delegates & Notifications
+
+#pragma mark - UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            [ProgressControll showProgressNormal];
+            UIImageWriteToSavedPhotosAlbum(_downLoadImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL );
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+//必要实现的协议方法, 不然会崩溃
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    
+    NSString *errorStr = @"保存失败";
+    if (!error) {
+        errorStr = @"保存成功";
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ProgressControll dismissProgress];
+        [self showAlterInfoWithNetWork:errorStr complete:nil];
+    });
+    
+}
+
+- (void)showAlterInfoWithNetWork:(NSString *)titleStr complete:(void (^)(void))complete
+{
+    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:titleStr complete:complete];
+    [self.view addSubview:tipsView];
+}
+
+#pragma mark - WSImageBroserCellDelegate
+
+- (void)WSImageBroserCellLongPressCell:(WSImageBroserCell *)cell
+{
+    _downLoadImage = [UIImage imageWithCGImage:cell.imageView.image.CGImage];
+    NSLog(@"===>长按保存图片:%@",_downLoadImage);
+    
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存图片",nil];
+    [action showInView:self.navigationController.view];
+    
+}
+
 #pragma mark - collectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _imageArray.count;
@@ -163,6 +217,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WSImageBroserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([WSImageBroserCell class]) forIndexPath:indexPath];
+    cell.delegate = self;
     if(indexPath.row < _imageArray.count) {
         cell.model = _imageArray[indexPath.row];
     }
