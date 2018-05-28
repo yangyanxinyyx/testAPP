@@ -108,7 +108,7 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
                 XCCheckoutDetailTextFiledCell *moneyCell = (XCCheckoutDetailTextFiledCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
                 NSUInteger index = [titleArrM indexOfObject:selectStr];
                 NSString *selectMoney = [moneyArrM objectAtIndex:index];
-//                [moneyCell setTitlePlaceholder:[NSString stringWithMoneyNumber:[selectMoney doubleValue]]];
+
                 moneyCell.textField.text =  [NSString stringWithMoneyNumber:[selectMoney doubleValue]];
                 [cell setTitleValue:selectStr];
                 weakSelf.onlineType = selectStr;
@@ -123,7 +123,8 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
 
 - (void)XCDistributionFooterViewClickConfirmBtn:(UIButton *)confirmBtn
 {
-    __weak __typeof(self) weakSelf = self;
+    //提交
+    BOOL configureSuccess = YES;
     //上传图片
     __block NSMutableArray *uploadDataArrM = [[NSMutableArray alloc] init];
     __block NSMutableArray *uploadPathArrM = [[NSMutableArray alloc] init];
@@ -134,84 +135,94 @@ UIImagePickerControllerDelegate,XCCheckoutDetailTextFiledCellDelegate,TZImagePic
                 [uploadDataArrM addObject:uploadData];
                 [uploadPathArrM addObject:filePath];
             }
-            
         }
     }
-    if (uploadPathArrM.count > 0) {
-        /// 上传图片
-        NSDictionary *param = @{
-                                @"file":uploadDataArrM,
-                                };
-        [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
-                for (NSString *filePath in uploadPathArrM) {
-                    if([strongSelf.storePhotoArrM containsObject:filePath])
-                    {
-                        [strongSelf.storePhotoArrM removeObject:filePath];
-                    }
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-                    }
-                    unlink([filePath  UTF8String]);
-                }
-                NSArray *urlStrArr  = response[@"data"];
-                for (NSString *urlPath in urlStrArr) {
-                    [strongSelf.storePhotoArrM addObject:urlPath];
-                    [strongSelf.networkURLArrM addObject:urlPath];
-                    
-                }
-                /// 提交年审费用
-                [strongSelf postAnnualNetworkBill];
-            }else {
-                [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
-                return ;            }
-            [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
-        } fail:^(id error) {
-            __strong __typeof__(weakSelf)strongSelf = weakSelf;
-            [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
-            return ;
-        }];
-    }else {
-        [self showAlterInfoWithNetWork:@"请添加正确证件照片！" complete:nil];
+    NSString *errorString = @"客户信息错误";
+    if (uploadPathArrM.count <= 0) {
+        configureSuccess = NO ;
+        errorString = @"请添加正确证件照片!";
     }
+    if (!isUsable(self.model.customerId, [NSNumber class])) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.customerName, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.phoneNo, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsable(self.model.carId, [NSNumber class])) {
+        configureSuccess = NO ;
+    }
+    if (!isUsableNSString(self.model.plateNo, @"")) {
+        configureSuccess = NO ;
+    }
+    if (!isUsable(self.orderPrice, [NSNumber class])) {
+        configureSuccess = NO ;
+        errorString = @"类型对应价格信息有错";
+    }
+    if (!isUsableNSString(self.onlineType, @"")) {
+        configureSuccess = NO ;
+        errorString = @"请选择类型";
+    }
+    if (!isUsableNSString(self.appointmentTime, @"")) {
+        configureSuccess = NO ;
+        errorString = @"请选择预约时间";
+    }
+
+    __weak __typeof(self) weakSelf = self;
+
     
+    if (configureSuccess) {
+        if (uploadPathArrM.count > 0) {
+            /// 上传图片
+            NSDictionary *param = @{
+                                    @"file":uploadDataArrM,
+                                    };
+            [RequestAPI appUploadPicture:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                if ([response[@"result"] integerValue] == 1 &&response[@"data"]) {
+                    for (NSString *filePath in uploadPathArrM) {
+                        if([strongSelf.storePhotoArrM containsObject:filePath])
+                        {
+                            [strongSelf.storePhotoArrM removeObject:filePath];
+                        }
+                        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+                        }
+                        unlink([filePath  UTF8String]);
+                    }
+                    NSArray *urlStrArr  = response[@"data"];
+                    for (NSString *urlPath in urlStrArr) {
+                        [strongSelf.storePhotoArrM addObject:urlPath];
+                        [strongSelf.networkURLArrM addObject:urlPath];
+                        
+                    }
+                    /// 提交年审费用
+                    [strongSelf postAnnualNetworkBill];
+                }else {
+                    [strongSelf showAlterInfoWithNetWork:@"提交失败" complete:nil];
+                    return ;            }
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+            } fail:^(id error) {
+                __strong __typeof__(weakSelf)strongSelf = weakSelf;
+                [strongSelf showAlterInfoWithNetWork:@"网络错误" complete:nil];
+                return ;
+            }];
+        }else {
+             [self showAlterInfoWithNetWork:@"请添加正确证件照片!" complete:nil];
+        }
+    }else {
+          [self showAlterInfoWithNetWork:errorString complete:nil];
+    }
 }
 
 
 - (void)postAnnualNetworkBill
 {
     __weak __typeof(self) weakSelf = self;
-    //提交
-    BOOL configureSuccess = YES;
-    if (!self.model.customerId) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.customerName) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.phoneNo) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.customerName) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.carId) {
-        configureSuccess = NO ;
-    }
-    if (!self.model.plateNo) {
-        configureSuccess = NO ;
-    }
-    if (!self.orderPrice) {
-        configureSuccess = NO ;
-    }
-    if (!self.appointmentTime) {
-        configureSuccess = NO ;
-    }
-    if (!self.onlineType) {
-        configureSuccess = NO ;
-    }
     
+
     NSString *url1Str = @"";
     NSString *url2Str = @"";
     NSString *url3Str = @"";

@@ -210,7 +210,7 @@
     [self.view addSubview:alterView];
 }
 
-#pragma mark - Delegates & Notifications
+#pragma mark
 
 #pragma mark - Privacy Method
 

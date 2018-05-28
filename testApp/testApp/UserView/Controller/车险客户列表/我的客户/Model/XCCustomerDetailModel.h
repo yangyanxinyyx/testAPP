@@ -14,7 +14,6 @@
 @property (nonatomic, strong) NSNumber * customerId;
 /** 客户详情 */
 @property (nonatomic, copy) NSString * customerName;
-
 /** 客户来源 */
 @property (nonatomic, copy) NSString * source;
 

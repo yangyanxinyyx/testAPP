@@ -80,7 +80,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     __weak __typeof(self) weakSelf = self;
 
-    if (indexPath.section == 0 && indexPath.row == 3) {
+    if (indexPath.section == 0 && indexPath.row == 4) {
             XCCustomerShopListView *listView = [[XCCustomerShopListView alloc] initWithDataArr:self.shopModelArrM confirmBlock:^(XCCustomerShopModel *model) {
             weakSelf.model.storeName = model.name;
             weakSelf.model.storeId = model.shopID;
@@ -89,7 +89,7 @@
             [(XCDistributionPicketCell *)cell setTitleValue:model.name];
         }];
         [self.view addSubview:listView];
-    }else if (indexPath.section == 0 && indexPath.row == 4){
+    }else if (indexPath.section == 0 && indexPath.row == 3){
         SelectTiemHoursView *selectTimeView =[[SelectTiemHoursView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         selectTimeView.block = ^(NSString *string) {
             weakSelf.model.appointmentTime = string;
@@ -488,6 +488,17 @@
             cell.shouldShowSeparator = NO;
         }
         cell.titleLabel.attributedText = [NSString stringWithImportentValue:title];
+        if ([title isEqualToString:@"预约时间:"]) {
+            if (isUsableNSString(self.model.appointmentTime, @"")) {
+                cell.titleValue = self.model.appointmentTime;
+            }
+        }
+        else if ([title isEqualToString:@"门店选择:"])
+        {
+            if (isUsableNSString(self.model.storeName, @"")) {
+                cell.titleValue = self.model.storeName;
+            }
+        }
         return cell;
     }
 }
