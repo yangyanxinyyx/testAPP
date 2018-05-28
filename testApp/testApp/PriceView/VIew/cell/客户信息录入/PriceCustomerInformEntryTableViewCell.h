@@ -10,6 +10,7 @@
 @protocol PriceCustomerInformEntryTableViewCellDelegate <NSObject>
 - (void)textFieldBeginEditing:(UITextField *)textField;
 - (void)textFieldendEditing:(UITextField *)textField;
+- (void)toucheButtonSearch;
 @end
 @interface PriceCustomerInformEntryTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *labelName;
