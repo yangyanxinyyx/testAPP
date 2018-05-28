@@ -231,6 +231,12 @@
 
     [_nowMonthView removeFromSuperview];
     [_lastMonthView removeFromSuperview];
+    if (_imageScrollView && _imageScrollView.superview) {
+        [_imageScrollView removeFromSuperview];
+    }
+    if (_announcementView && _announcementView.superview) {
+        [_announcementView removeFromSuperview];
+    }
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableArray *muImageArray = [NSMutableArray array];
