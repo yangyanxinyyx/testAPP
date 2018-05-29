@@ -289,6 +289,22 @@
     
 }
 
+- (void)XCCheckoutDetailPhotoCellChangePhotoArr:(NSArray *)photoArr cell:(XCCheckoutDetailPhotoCell *)cell
+{
+    NSString *title = cell.titleLabel.text;
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    if([title isEqualToString:@"相关照片上传(最多4张)"])
+    {
+        if(photoArr.count > 0) {
+            self.storePhotoArrM = [NSMutableArray arrayWithArray:photoArr];
+        }
+    }
+}
+
 #pragma mark - TZImagePickerControllerDelegate 新照片
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto
 {

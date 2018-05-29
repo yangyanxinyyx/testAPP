@@ -12,23 +12,21 @@
 @protocol XCCheckoutDetailPhotoCellDelegate <NSObject>
 - (void)XCCheckoutDetailPhotoCellClickAddPhotosImageView:(UIImageView *)imageView cell:(XCCheckoutDetailPhotoCell *)cell;
 - (void)XCCheckoutDetailPhotoCellClickphotoWithURL:(NSURL  *)photoURL index:(NSInteger)index cell:(XCCheckoutDetailPhotoCell *)cell;
+- (void)XCCheckoutDetailPhotoCellChangePhotoArr:(NSArray *)photoArr cell:(XCCheckoutDetailPhotoCell *)cell;
 @end
 
 @interface XCCheckoutDetailPhotoCell : UITableViewCell
 @property (nonatomic, strong) NSString * title ;
-@property (nonatomic, strong) NSArray * photoArr ;
+@property (nonatomic, strong) NSMutableArray * photoArr ;
 @property (nonatomic, strong) UILabel * titleLabel ;
 
 @property (nonatomic, assign) NSInteger  maxPhoto ;
 
-/** 判断是否年审预约类型 默认NO */
-@property (nonatomic, assign) BOOL isAnnualType ;
 /** 置顶功能(门店图片使用)  默认为NO*/
 @property (nonatomic, assign) BOOL  isShowTopTag ;
 
 /** <# 类型描述  #> */
 @property (nonatomic, weak) id<XCCheckoutDetailPhotoCellDelegate> delegate ;
 + (CGFloat)getCellHeight;
-- (void)setupCellWithShopModel:(XCShopModel *)model;
 
 @end

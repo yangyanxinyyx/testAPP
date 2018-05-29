@@ -885,10 +885,15 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
                     }
                     [strongSelf.storePhotoArrM removeObject:imagePath];
                 }
-                [cell setPhotoArr:self.storePhotoArrM];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                [cell setPhotoArr:strongSelf.storePhotoArrM];
+                });
             }
-            NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
-            [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSIndexPath *indexPath = [strongSelf.storeTableView indexPathForCell:cell];
+                [strongSelf.storeTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            });
+           
         }];
         if ([self.storeModel.storeStatus isEqualToString:kshopStatusDaiShenHe]) {
             previewVC.shouldShowDeleBtm = NO;
@@ -909,6 +914,22 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 //    [action showInView:self.navigationController.view];
     TZImagePickerController *imagePickerVc = [self createPickerPhotoViewController];
     [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (void)XCCheckoutDetailPhotoCellChangePhotoArr:(NSArray *)photoArr cell:(XCCheckoutDetailPhotoCell *)cell
+{
+    NSString *title = cell.titleLabel.text;
+    NSMutableString *tmpTitleM = [NSMutableString stringWithString:title];
+    NSArray *strArr = [tmpTitleM componentsSeparatedByString:@" "];
+    if (strArr.count > 1) {
+        title = strArr[1];
+    }
+    if([title isEqualToString:@"门店图片,最多4张"])
+    {
+        if(photoArr.count > 0) {
+            self.storePhotoArrM = [NSMutableArray arrayWithArray:photoArr];
+        }
+    }
 }
 
 #pragma mark - UIActionSheet delegate
@@ -1094,12 +1115,10 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
             [photoCell setTitle:title];
             if ([title isEqualToString:@"营业执照上传,1张"]) {
                 [photoCell setMaxPhoto:1];
-                photoCell.isAnnualType = YES;
                 [photoCell setPhotoArr:self.lincePhotoArrM];
             }
             if ([title isEqualToString:@"门店图片,最多4张"]) {
                 [photoCell setMaxPhoto:4];
-                photoCell.isAnnualType = NO;
                 [photoCell setPhotoArr:self.storePhotoArrM];
             }
             return photoCell;
