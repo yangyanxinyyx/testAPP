@@ -54,4 +54,5 @@
 
 + (CGFloat)getCellHeight;
 + (CGFloat)getCaseCellHeightWithClip:(BOOL)clip;
++ (CGFloat)getCellHeightWithCount:(NSUInteger)count;
 @end

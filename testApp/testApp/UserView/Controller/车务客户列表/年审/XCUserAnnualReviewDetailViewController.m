@@ -62,9 +62,13 @@
 
 - (void)configureData
 {
-    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",
-                                  @"联系电话:",@"年审到期时间:",@"备注:"];
+//    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
+//                                  @"车架号:",@"发动机号:",
+//                                  @"联系电话:",@"年审到期时间:",@"备注:"];
+    NSArray *baseTitleNameArr = @[@"客户名称:",@"联系电话:",@"车牌号:",
+                                  @"品牌型号:",@"车架号:",@"发动机号:",
+                                  @"车类型:",@"年审费用:",@"年审到期时间:",
+                                  @"备注:"];
     self.dataTitleArrM = [[NSMutableArray alloc] initWithArray:baseTitleNameArr];
 
 }
@@ -151,7 +155,7 @@
     if (indexPath.row == 0 ) {
         return [XCUserCaseDetailProgressCell getCellHeight];
     }else if (indexPath.row == 1) {
-        return  [XCUserCaseDetailTextCell getCellHeight];
+        return  [XCUserCaseDetailTextCell getCellHeightWithCount:self.dataTitleArrM.count];
     }else {
         return [XCUserCaseScrollerViewCell getCellHeight];
     }

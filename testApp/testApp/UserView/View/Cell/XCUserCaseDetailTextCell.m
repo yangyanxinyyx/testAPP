@@ -37,6 +37,16 @@
     return (20 + 557 - (24+24)) * ViewRateBaseOnIP6;
 }
 
++ (CGFloat)getCellHeightWithCount:(NSUInteger)count
+{
+    if (count > 0 ) {
+        return (20 + 88 + 1) * ViewRateBaseOnIP6  + (count - 1) * (30+24) * ViewRateBaseOnIP6 + 30 * ViewRateBaseOnIP6;
+    }else {
+        return (20 + 88 + 1) * ViewRateBaseOnIP6 + 30 * ViewRateBaseOnIP6;
+    }
+  
+}
+
 + (CGFloat)getCaseCellHeightWithClip:(BOOL)clip
 {
     if(clip) {
@@ -67,6 +77,7 @@
 
 - (void)layoutSubviews
 {
+   
     [super layoutSubviews];
     CGFloat leftMargin = 30 * ViewRateBaseOnIP6;
     
@@ -135,17 +146,22 @@
 
 - (void)setupCellWithCarTransactionDetailModel:(XCCarTransactioDetailModel *)model
 {
-    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
-                                  @"车架号:",@"发动机号:",
-                                  @"联系电话:",@"年审到期时间:",@"备注:"];
+//    NSArray *baseTitleNameArr = @[@"客户名称:",@"车牌号:",@"品牌型号:",
+//                                  @"车架号:",@"发动机号:",
+//                                  @"联系电话:",@"年审到期时间:",@"备注:"];
+    NSArray *baseTitleNameArr = @[@"客户名称:",@"联系电话:",@"车牌号:",
+                                  @"品牌型号:",@"车架号:",@"发动机号:",
+                                  @"车类型:",@"年审费用:",@"年审到期时间:",
+                                  @"备注:"];
     
     NSString * name = @"";
+    NSString * phone = @"";
     NSString * plateNo = @"";
     NSString * brand = @"";
     NSString * vinNo = @"";
     NSString * engineNo = @"";
-//    NSString * Carmodel = @"";
-    NSString * phone = @"";
+    NSString * carType = @"";
+    NSString * annualPrice = @"";
     NSString * time = @"";
     NSString * remark = @"";
     
@@ -158,6 +174,7 @@
     }
     if (isUsableNSString(model.brand, @"")) {
         brand = model.brand;
+        carType = model.brand;
     }
     if (isUsableNSString(model.vinNo, @"")) {
         vinNo = model.vinNo;
@@ -165,21 +182,23 @@
     if (isUsableNSString(model.engineNo,@"")) {
         engineNo = model.engineNo;
     }
-//    if (isUsableNSString(model.model, @"")) {
-//        Carmodel = model.model;
-//    }
     if (isUsableNSString(model.phone, @"")) {
         phone = model.phone;
     }
+    if (isUsableNSString(model.phone, @"")) {
+        phone = model.phone;
+    }
+    if (isUsable(model.orderPrice, [NSNumber class])) {
+        annualPrice = [NSString stringWithMoneyNumber:[model.orderPrice doubleValue]];
+    }
     if (isUsableNSString(model.motTestTime, @"")) {
         time = model.motTestTime;
-        
     }
     if (isUsableNSString(model.remark, @"")) {
         remark = model.remark;
     }
-    self.titleValueArr = @[name,plateNo,brand,vinNo,engineNo,phone,time,remark];
-
+//    self.titleValueArr = @[name,plateNo,brand,vinNo,engineNo,phone,time,remark];
+self.titleValueArr = @[name,phone,plateNo,brand,vinNo,engineNo,carType,annualPrice,time,remark];
     for (int i = 0 ; i < _labelArrM.count; i++) {
         NSString * title = baseTitleNameArr[i];
         UILabel *label = _labelArrM[i];
