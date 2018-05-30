@@ -65,7 +65,9 @@
 - (void)InfoNotificationAction:(NSNotification *)notification{
     
     self.textField.text = @"";
-    [self pressCustomerVehicleEnquiriesWithCriteria:@""];
+    _infoView.hidden = YES;
+    _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+    _buttonPrice.userInteractionEnabled = NO;
     
 }
 
