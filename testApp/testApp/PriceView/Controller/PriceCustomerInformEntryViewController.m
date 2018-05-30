@@ -407,7 +407,7 @@
                 cell.textField.text = @"";
             }
         } else if (indexPath.row == 3){
-            [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
+            [cell setLabelNameText:@"身份证号:" isChoose:NO placeholderStr:@"请输入您的身份证号码" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
             if ([self.dictionaryInfo objectForKey:@"identity"]) {
                 cell.textField.text = [self.dictionaryInfo objectForKey:@"identity"];
