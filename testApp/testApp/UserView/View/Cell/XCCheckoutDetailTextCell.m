@@ -540,9 +540,8 @@
                 [_placeholderLabel setText:@""];
             }
         }
-
     }
-    else if ([self.titleLabel.text isEqualToString:@"原      价:"] )
+    else if ([self.titleLabel.text isEqualToString:@"品牌原价:"] )
     {
         if (isUsable(model.servicePrice, [NSNumber class])) {
             [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.servicePrice doubleValue]]];
@@ -550,7 +549,7 @@
             [_placeholderLabel setText:@"¥0.00"];
         }
     }
-    else if ([self.titleLabel.text isEqualToString:@"标准售价:"] )
+    else if ([self.titleLabel.text isEqualToString:@"品牌会员价:"] )
     {
         if (isUsable(model.serviceVipPrice, [NSNumber class])) {
             [_placeholderLabel setText:[NSString stringWithMoneyNumber:[model.serviceVipPrice doubleValue]]];
@@ -558,7 +557,7 @@
             [_placeholderLabel setText:@"¥0.00"];
         }
     }
-    else if ([self.titleLabel.text isEqualToString:@"门店价格:"] )
+    else if ([self.titleLabel.text isEqualToString:@"专属原价:"] )
     {
         _placeholderLabel.textColor = [UIColor redColor];
         if (isUsable(model.price, [NSNumber class])) {
@@ -567,7 +566,7 @@
             [_placeholderLabel setText:@"¥0.00"];
         }
     }
-    else if ([self.titleLabel.text isEqualToString:@"高级会员价:"] )
+    else if ([self.titleLabel.text isEqualToString:@"专属会员价:"] )
     {
         _placeholderLabel.textColor = [UIColor redColor];
         if (isUsable(model.vipPrice, [NSNumber class])) {
