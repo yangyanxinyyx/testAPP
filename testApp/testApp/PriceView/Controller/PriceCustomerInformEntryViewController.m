@@ -87,14 +87,15 @@
                         [self.navigationController popViewControllerAnimated:YES];
                         if (_requestSucces) {
                             _requestSucces(weakSelf.dictionaryInfo[@"plateNo"]);
-                        }
+                            
+                        } 
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
                 });
                 
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"获取客户信息失败" complete:^{
+                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:^{
                         
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
@@ -263,7 +264,7 @@
             });
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"获取客户信息失败" complete:nil];
             
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             });
