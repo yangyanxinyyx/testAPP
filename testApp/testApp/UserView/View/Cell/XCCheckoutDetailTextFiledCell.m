@@ -122,7 +122,7 @@
     if ([self.title isEqualToString:@"门店名称:"] && isUsableNSString(model.name,@"")) {
         [_textField setText:model.name];
     }
-    else if ([self.title isEqualToString:@"联系方式:"] && isUsableNSString(model.tel, @"")) {
+    else if ([self.title isEqualToString:@"门店电话:"] && isUsableNSString(model.tel, @"")) {
         [_textField setText:model.tel];
     }
     else if ([self.title isEqualToString:@"负责人:"] && isUsableNSString(model.corporateName, @"")) {

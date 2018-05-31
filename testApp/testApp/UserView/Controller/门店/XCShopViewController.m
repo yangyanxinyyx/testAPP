@@ -133,7 +133,7 @@ TZImagePickerControllerDelegate,XCDistributionPicketCellDelegate,AMapSearchDeleg
 }
 - (void)configureData
 {
-    self.storeTitleArr = @[@"门店名称:",@"联系方式:",@"负责人:",
+    self.storeTitleArr = @[@"门店名称:",@"门店电话:",@"负责人:",
                            @"负责人电话:",@"所属城市",@"所在地区",
                            @"详细地址",@"门店标签",@"门店审核状态",
                            @"营业执照上传,1张",@"门店图片,最多4张"];
