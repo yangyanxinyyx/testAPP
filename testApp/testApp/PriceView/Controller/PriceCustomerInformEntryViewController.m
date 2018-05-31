@@ -85,14 +85,16 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"提交成功!" complete:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                        _requestSucces(weakSelf.dictionaryInfo[@"plateNo"]);
+                        if (_requestSucces) {
+                            _requestSucces(weakSelf.dictionaryInfo[@"plateNo"]);
+                        }
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
                 });
                 
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:[NSString stringWithFormat:@"%@",response[@"errormsg"]] complete:^{
+                    FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"获取客户信息失败" complete:^{
                         
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
