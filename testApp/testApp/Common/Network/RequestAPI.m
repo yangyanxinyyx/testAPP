@@ -156,6 +156,9 @@
 //核保 api/web/policy/insertPolicy
 #define UNDERWRITING_API [NSString stringWithFormat:@"%@/api/web/policy/insertPolicy",API_PREFIX]
 
+// 客户信息录入搜索客户信息接口
+#define USERINFOBYLICENSENO_API [NSString stringWithFormat:@"%@/api/web/bihu/getUserInfoByLicenseNo",API_PREFIX]
+
 @implementation RequestAPI
 
 +(void)getRequest:(NSString *)url isPOST:(BOOL)isPOST paramenter:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
@@ -359,6 +362,15 @@
 //客户信息录入
 + (void)getCustomerInformationInput:(NSDictionary *)paramenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
     [self getRequest:CustomerInformatioInput_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
+// 客户信息录入搜索客户信息接口
++ (void)getCustomerInforSearchInfor:(NSDictionary *)parmenter header:(NSString *)header success:(void (^)(id))success fail:(void (^)(id))fail{
+    [self getRequest:USERINFOBYLICENSENO_API isPOST:YES paramenter:parmenter header:header success:^(id response) {
         success(response);
     } fail:^(id error) {
         fail(error);

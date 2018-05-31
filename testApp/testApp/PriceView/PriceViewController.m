@@ -148,8 +148,8 @@
                     _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
                 }
                 
-                if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
-                    _insuranceView.labelContent.text = [data objectForKey:@"jqInsuranceTime"];
+                if (![[data objectForKey:@"motTestTime"] isKindOfClass:[NSNull class]]) {
+                    _insuranceView.labelContent.text = [data objectForKey:@"motTestTime"];
                 }
                 NSNumber *salesmanName = [data objectForKey:@"salesmanName"];
                 if (![salesmanName isKindOfClass:[NSNull class]] ) {
