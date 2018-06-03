@@ -15,6 +15,12 @@
 //登录
 #define LOGIN_API [NSString stringWithFormat:@"%@/api/app/userLogin",API_PREFIX]
 
+//获取验证码
+#define GETVERIFICATION_API [NSString stringWithFormat:@"%@/api/verificationCode/getVerificationCode",API_PREFIX]
+
+//忘记密码
+#define FORGETPASSWORD_API [NSString stringWithFormat:@"%@/api/app/forgetPassword",API_PREFIX]
+
 //修改密码
 #define UPDATEPASSWORD_API [NSString stringWithFormat:@"%@/api/web/sysUser/updatePassword",API_PREFIX]
 
@@ -225,6 +231,24 @@
         success(response);
     } fail:^(id error) {
          fail(error);
+    }];
+}
+
++(void)getVerificationCode:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:GETVERIFICATION_API isPOST:NO paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
+    }];
+}
+
++(void)getForgetPassword:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail{
+
+    [self getRequest:FORGETPASSWORD_API isPOST:YES paramenter:paramenter header:header success:^(id response) {
+        success(response);
+    } fail:^(id error) {
+        fail(error);
     }];
 }
 

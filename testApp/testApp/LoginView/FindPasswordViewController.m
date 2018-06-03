@@ -95,11 +95,81 @@
 
 - (void)pressSendCodeBtn:(UIButton *)sender
 {
+    UITextField *tf = [self.view viewWithTag:0];
+
+    NSDictionary *param = @{@"phone":tf.text};
+    [RequestAPI getVerificationCode:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (isUsableDictionary(response)) {
+            if ([response[@"result"] integerValue] == 1) {
+                NSLog(@"发送验证码成功");
+                [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"验证码发送成功!" complete:^{
+                    }];
+
+                    [self.view addSubview:tipsView];
+                });
+            }else{
+                NSLog(@"发送验证码失败");
+                FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"发送验证码失败" complete:nil];
+                [self.view addSubview:tipsView];
+            }
+        }
+    } fail:^(id error) {
+        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+        [self.view addSubview:tipsView];
+    }];
 
 }
 
 - (void)pressConfirmBtn:(UIButton *)sender
 {
+     UITextField *tf1 = [self.view viewWithTag:0];
+     UITextField *tf2 = [self.view viewWithTag:1];
+    UITextField *tf3 = [self.view viewWithTag:3];
+     UITextField *tf4 = [self.view viewWithTag:4];
+
+    NSString *phone = tf1.text;
+    NSString *code = tf2.text;
+    NSString *password = tf3.text;
+    __block NSString *password2 = tf4.text;
+    if (isUsableNSString(phone, @"") && isUsableNSString(code, @"") && isUsableNSString(password, @"") && isUsableNSString(password2, @"") ) {
+        NSDictionary *param = @{@"phone":tf1.text,
+                                @"code":tf2.text,
+                                @"password":tf3.text
+                                };
+        [RequestAPI getForgetPassword:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+            if (isUsableDictionary(response)) {
+                if ([response[@"result"] integerValue] == 1) {
+                    NSLog(@"忘记密码成功");
+                    [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"设置密码成功!" complete:^{
+                            [[NSUserDefaults standardUserDefaults] setValue:password2 forKey:@"kUserPassword"];
+                        }];
+
+                        [self.view addSubview:tipsView];
+                    });
+                }else{
+                    NSLog(@"忘记密码失败");
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"设置密码失败" complete:nil];
+                    [self.view addSubview:tipsView];
+                }
+            }
+        } fail:^(id error) {
+            FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
+            [self.view addSubview:tipsView];
+        }];
+
+
+
+
+
+    }
+
+
+
+
     FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"密码设置成功" complete:nil];
     [self.view addSubview:tipsView];
 }
