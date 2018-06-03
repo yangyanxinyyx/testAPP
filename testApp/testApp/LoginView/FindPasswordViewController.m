@@ -45,7 +45,7 @@
         accoutTextField.leftView=imageView;
         accoutTextField.leftViewMode = UITextFieldViewModeAlways;
         accoutTextField.font = [UIFont systemFontOfSize:14];
-        accoutTextField.tag = i;
+        accoutTextField.tag = i + 1;
         [accoutTextField addTarget:self action:@selector(textFieldDidChangePhoneNnumber:) forControlEvents:UIControlEventEditingChanged];
 
         if (i == 0) {
@@ -95,7 +95,7 @@
 
 - (void)pressSendCodeBtn:(UIButton *)sender
 {
-    UITextField *tf = [self.view viewWithTag:0];
+    UITextField *tf = [self.view viewWithTag:1];
 
     NSDictionary *param = @{@"phone":tf.text};
     [RequestAPI getVerificationCode:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
@@ -124,8 +124,8 @@
 
 - (void)pressConfirmBtn:(UIButton *)sender
 {
-     UITextField *tf1 = [self.view viewWithTag:0];
-     UITextField *tf2 = [self.view viewWithTag:1];
+     UITextField *tf1 = [self.view viewWithTag:1];
+     UITextField *tf2 = [self.view viewWithTag:2];
     UITextField *tf3 = [self.view viewWithTag:3];
      UITextField *tf4 = [self.view viewWithTag:4];
 
@@ -152,7 +152,7 @@
                     });
                 }else{
                     NSLog(@"忘记密码失败");
-                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"设置密码失败" complete:nil];
+                    FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
                     [self.view addSubview:tipsView];
                 }
             }
@@ -194,7 +194,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.view endEditing:YES];
-        if (textField.tag == 0) {
+        if (textField.tag == 1) {
             NSString *str = [YXTestNumber testingMobile:textField.text];
             if (str && str.length > 0) {
                 FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:str complete:^{
@@ -203,7 +203,7 @@
                 [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
             }
 
-        }else if (textField.tag == 1){
+        }else if (textField.tag == 2){
 
         }else {
             if (textField.text.length < 6 && textField.text.length > 0) {
@@ -214,8 +214,8 @@
             }
         }
 
-    if (textField.tag == 3) {
-        UITextField *passField = [self.view viewWithTag:2];
+    if (textField.tag == 4) {
+        UITextField *passField = [self.view viewWithTag:3];
         if (![textField.text isEqualToString:passField.text]) {
             FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"请确认密码保持一致" complete:^{
                 textField.text = @"";
@@ -227,7 +227,7 @@
 }
 
 - (void)textFieldDidChangePhoneNnumber:(UITextField *)textField{
-    if (textField.tag == 0) {
+    if (textField.tag == 1) {
         if (textField.text.length > 11) {
             textField.text = [textField.text substringToIndex:11];
         }
