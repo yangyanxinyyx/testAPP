@@ -65,7 +65,9 @@
 - (void)InfoNotificationAction:(NSNotification *)notification{
     
     self.textField.text = @"";
-    [self pressCustomerVehicleEnquiriesWithCriteria:@""];
+    _infoView.hidden = YES;
+    _buttonPrice.backgroundColor = [UIColor colorWithHexString:@"#a5a5a5"];
+    _buttonPrice.userInteractionEnabled = NO;
     
 }
 
@@ -146,8 +148,8 @@
                     _bussinessRisksView.labelContent.text = [data objectForKey:@"insuranceTime"];
                 }
                 
-                if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
-                    _insuranceView.labelContent.text = [data objectForKey:@"jqInsuranceTime"];
+                if (![[data objectForKey:@"motTestTime"] isKindOfClass:[NSNull class]]) {
+                    _insuranceView.labelContent.text = [data objectForKey:@"motTestTime"];
                 }
                 NSNumber *salesmanName = [data objectForKey:@"salesmanName"];
                 if (![salesmanName isKindOfClass:[NSNull class]] ) {

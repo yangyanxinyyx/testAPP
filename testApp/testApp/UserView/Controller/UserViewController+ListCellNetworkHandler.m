@@ -120,9 +120,15 @@
         }];
     }
     else if ([self isCaseTypeVCWithModel:model]) {
+        NSString *caseType = model.title;
+        if ([model.title isEqualToString:@"人伤代垫付案件"]) {
+            caseType = @"代垫付案件";
+        }else if ([model.title isEqualToString:@"无责案件"]) {
+            caseType = @"无责事故案件";
+        }
         //三大案件
         NSDictionary *param = @{
-                                @"caseType":model.title,
+                                @"caseType":caseType,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -219,13 +225,13 @@
     if ([model.title isEqualToString:@"人伤案件"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"无责事故案件"]) {
+    else if ([model.title isEqualToString:@"无责案件"]) {
         result = YES;
     }
     else if ([model.title isEqualToString:@"特殊案件"]) {
         result = YES;
     }
-    else if ([model.title isEqualToString:@"代垫付案件"]) {
+    else if ([model.title isEqualToString:@"人伤代垫付案件"]) {
         result = YES;
     }
     return result;

@@ -11,6 +11,8 @@
 #import "XCUserCaseListModel.h"
 #import "XCUserCaseDetailModel.h"
 #import <YYModel.h>
+#define kcaseType @"代垫付案件"
+
 @interface XCUserBePaymentCaseViewController ()
 
 @end
@@ -25,7 +27,7 @@
     __weak typeof (self)weakSelf = self;
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         NSDictionary *param = @{
-                                @"caseType":self.navTitle,
+                                @"caseType":kcaseType,
                                 @"PageIndex":[NSNumber numberWithInt:1],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };
@@ -58,7 +60,7 @@
     self.tableView.mj_footer = [MJRefreshBackStateFooter footerWithRefreshingBlock:^{
         weakSelf.pageIndex ++;
         NSDictionary *param = @{
-                                @"caseType":self.navTitle,
+                                @"caseType":kcaseType,
                                 @"PageIndex":[NSNumber numberWithInt:weakSelf.pageIndex],
                                 @"PageSize":[NSNumber numberWithInt:10]
                                 };

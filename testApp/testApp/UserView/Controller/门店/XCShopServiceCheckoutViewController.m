@@ -27,8 +27,8 @@
 #pragma mark - Init Method
 - (void)configureData
 {
-    self.dataArrM = [NSMutableArray arrayWithArray:@[@"当前状态:",@"拒绝时间:",@"原      价:",
-                                                     @"标准售价:",@"门店价格:",@"高级会员价:",
+    self.dataArrM = [NSMutableArray arrayWithArray:@[@"当前状态:",@"拒绝时间:",@"品牌原价:",
+                                                     @"品牌会员价:",@"专属原价:",@"专属会员价:",
                                                      @"服务介绍:",@"拒绝原因:"]];
 }
 

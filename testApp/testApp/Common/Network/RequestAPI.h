@@ -65,6 +65,9 @@
 //客户信息录入
 + (void)getCustomerInformationInput:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 
+//客户信息录入搜索客户信息接口
++ (void)getCustomerInforSearchInfor:(NSDictionary *)parmenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
+
 //报价记录
 + (void)getPriceRecord:(NSDictionary *)paramenter header:(NSString *)header success:(void(^)(id response))success fail:(void(^)(id error))fail;
 

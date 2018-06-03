@@ -57,10 +57,8 @@
         for (int i = 0 ; i < _scrollView.subviews.count; i++) {
             UIImageView *imageView = _scrollView.subviews[i];
             [imageView setFrame:CGRectMake(i * (140 +16)* ViewRateBaseOnIP6, 0, imageViewW , imageViewW)];
-            
         }
     }
-
 }
 
 #pragma mark - Action Method

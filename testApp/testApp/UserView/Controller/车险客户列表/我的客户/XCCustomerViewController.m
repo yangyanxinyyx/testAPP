@@ -124,6 +124,11 @@
 {
     PriceCustomerInformEntryViewController *customerADDVC = [[PriceCustomerInformEntryViewController alloc] init];
     customerADDVC.titleName = @"新增客户";
+    __weak __typeof(self) weakSelf = self;
+    __strong __typeof__(weakSelf)strongSelf = weakSelf;
+    customerADDVC.requestSucces = ^(NSString *string) {
+        [strongSelf postResetCustomerList];
+    };
     [self.navigationController pushViewController:customerADDVC animated:YES];
 }
 
@@ -162,6 +167,36 @@
         FinishTipsView *tipsView = [[FinishTipsView alloc] initWithTitle:@"网络错误" complete:nil];
         [self.view addSubview:tipsView];
     });
+}
+
+- (void)postResetCustomerList
+{
+    NSDictionary *param = @{
+                            @"PageIndex":[NSNumber numberWithInt:1],
+                            @"PageSize":[NSNumber numberWithInt:10]
+                            };
+    __weak __typeof(self) weakSelf = self;
+    weakSelf.pageIndex = 1;
+    [RequestAPI getCustomerList:param header:[UserInfoManager shareInstance].ticketID success:^(id response) {
+        if (response[@"data"]) {
+            if (response[@"data"][@"dataSet"]) {
+                NSMutableArray *dataArrM = [[NSMutableArray alloc] init];
+                NSArray *origionDataArr = response[@"data"][@"dataSet"];
+                for (NSDictionary *dataInfo in origionDataArr) {
+                    XCCustomerListModel *baseModel = [XCCustomerListModel yy_modelWithJSON:dataInfo];
+                    if (baseModel) {
+                        [dataArrM addObject:baseModel];
+                    }
+                }
+                weakSelf.dataArr = dataArrM;
+                [weakSelf.tableView reloadData];
+            }
+            NSNumber *pageCountNum = response[@"data"][@"pageCount"];
+            weakSelf.pageCount = [pageCountNum intValue];
+        }
+        [UserInfoManager shareInstance].ticketID = response[@"newTicketId"] ? response[@"newTicketId"] : @"";
+    } fail:^(id error) {
+    }];
 }
 
 

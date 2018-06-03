@@ -132,7 +132,7 @@
            CGFloat height = [UILabel getXCTextHeightLineWithString:_carTranDetailModel.weizhangClause withWidth:self.view.bounds.size.width - 30 * ViewRateBaseOnIP6 * 2 withFontSize:26];
             return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num - 1) + height + 30 * ViewRateBaseOnIP6  ;
         }else {
-            return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num )  + 30 * ViewRateBaseOnIP6  ;
+            return (20 + 88 + 30 + 24) * ViewRateBaseOnIP6 + ((30 + 24) * ViewRateBaseOnIP6) * (num)  + 30 * ViewRateBaseOnIP6  ;
         }
     }
 }

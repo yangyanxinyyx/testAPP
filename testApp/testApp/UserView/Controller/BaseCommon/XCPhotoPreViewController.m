@@ -29,9 +29,14 @@
 
 @implementation XCPhotoPreViewController
 
-
-
 #pragma mark - lifeCycle
+
+- (void)dealloc
+{
+    NSLog(@"XCPhotoPreViewController Delloc");
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -42,7 +47,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+    [_collectionView setFrame:CGRectMake(0, kHeightForNavigation, SCREEN_WIDTH, SCREEN_HEIGHT - kHeightForNavigation - safeAreaBottom)];
 }
 
 #pragma mark - Init Method
@@ -81,7 +86,6 @@
     
     return self;
 }
-
 
 - (void)configureData
 {

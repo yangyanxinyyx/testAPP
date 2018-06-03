@@ -85,7 +85,10 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:@"提交成功!" complete:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                        _requestSucces(weakSelf.dictionaryInfo[@"plateNo"]);
+                        if (_requestSucces) {
+                            _requestSucces(weakSelf.dictionaryInfo[@"plateNo"]);
+                            
+                        } 
                     }];
                     [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
                 });
@@ -110,9 +113,86 @@
     }
 }
 
-- (void)requestPriceContentParameter:(NSString *)Parameter{
-   
+
+- (void)pressCustomerSearchInfoWithCriteria:(NSString *)criteria{
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:criteria forKey:@"licenseNo"];
+    [dic setValue:[UserInfoManager shareInstance].code forKey:@"custKey"];
+    [RequestAPI getCustomerInforSearchInfor:dic header:[UserInfoManager shareInstance].ticketID success:^(id response){
+        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSDictionary *data = response[@"data"];
+                NSNumber *customerName = [data objectForKey:@"insuredName"];
+                if (![customerName isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"insuredName"] forKey:@"customerName"];
+                }
+            
+                //初登日期
+                NSNumber *registerDate = [data objectForKey:@"registerDate"];
+                if (![registerDate isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"registerDate"] forKey:@"recordDate"];
+                }
+//                insuredIdCard 身份证
+                NSNumber *insuredIdCard = [data objectForKey:@"insuredIdCard"];
+                if (![insuredIdCard isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"insuredIdCard"] forKey:@"identity"];
+                }
+
+//                insuredMobile 手机号码
+                NSNumber *insuredMobile = [data objectForKey:@"insuredMobile"];
+                if (![insuredMobile isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"insuredMobile"] forKey:@"phoneNo"];
+                }
+                
+                NSNumber *brand = [data objectForKey:@"modleName"];
+                if (![brand isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"modleName"] forKey:@"brand"];
+                }
+                
+                NSNumber *vinNo = [data objectForKey:@"carVin"];
+                if (![vinNo isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"carVin"] forKey:@"vinNo"];
+                }
+                
+                NSNumber *engineNo = [data objectForKey:@"engineNo"];
+                if (![engineNo isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"engineNo"] forKey:@"engineNo"];
+                }
+                
+                
+                
+                if (![[data objectForKey:@"motTestTime"] isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"motTestTime"] forKey:@"motTestTime"];
+                }
+                
+                if (![[data objectForKey:@"businessExpireDate"] isKindOfClass:[NSNull class]]) {
+                    [self.dictionaryInfo setObject:[data objectForKey:@"businessExpireDate"] forKey:@"insuranceTime"];
+                }
+                
+                
+                [self.myTableView reloadData];
+                
+                
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
+                
+                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+            });
+        }
+        
+    } fail:^(id error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:error complete:nil];
+            
+            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
+        });
+    }];
 }
+
 
 #pragma mark - cell delegate
 - (void)textFieldBeginEditing:(UITextField *)textField{
@@ -197,83 +277,9 @@
 - (void)toucheButtonSearch{
     NSString *plateNO = [self.dictionaryInfo objectForKey:@"plateNo"];
     if (plateNO.length != 0 && ![plateNO isKindOfClass:[NSNull class]] && plateNO) {
-        [self pressCustomerVehicleEnquiriesWithCriteria:[self.dictionaryInfo objectForKey:@"plateNo"]];
+        [self pressCustomerSearchInfoWithCriteria:[self.dictionaryInfo objectForKey:@"plateNo"]];
     }
     
-}
-- (void)pressCustomerVehicleEnquiriesWithCriteria:(NSString *)criteria{
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:criteria forKey:@"criteria"];
-    [RequestAPI getCustomerVehicleEnquiries:dic header:[UserInfoManager shareInstance].ticketID success:^(id response) {
-        if (response[@"data"] && [response[@"data"] isKindOfClass:[NSDictionary class]]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                NSDictionary *data = response[@"data"];
-                NSNumber *customerName = [data objectForKey:@"customerName"];
-                if (![customerName isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"customerName"] forKey:@"customerName"];
-                }
-                NSNumber *birthday = [data objectForKey:@"birthday"];
-                if (![birthday isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"birthday"] forKey:@"birthday"];
-                }
-                
-                NSNumber *sex = [data objectForKey:@"sex"];
-                if (![sex isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"sex"] forKey:@"sex"];
-                }
-                
-                NSNumber *address = [data objectForKey:@"address"];
-                if (![address isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"address"] forKey:@"address"];
-                }
-                
-                NSNumber *brand = [data objectForKey:@"brand"];
-                if (![brand isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"brand"] forKey:@"brand"];
-                }
-                
-                NSNumber *vinNo = [data objectForKey:@"vinNo"];
-                if (![vinNo isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"vinNo"] forKey:@"vinNo"];
-                }
-                
-                NSNumber *engineNo = [data objectForKey:@"engineNo"];
-                if (![engineNo isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"engineNo"] forKey:@"engineNo"];
-                }
-                
-                
-                
-                if (![[data objectForKey:@"insuranceTime"] isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"insuranceTime"] forKey:@"insuranceTime"];
-                }
-                
-                if (![[data objectForKey:@"jqInsuranceTime"] isKindOfClass:[NSNull class]]) {
-                    [self.dictionaryInfo setObject:[data objectForKey:@"jqInsuranceTime"] forKey:@"jqInsuranceTime"];
-                }
-                
-    
-                [self.myTableView reloadData];
-                
-                
-            });
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:response[@"errormsg"] complete:nil];
-            
-                [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-            });
-        }
-        
-    } fail:^(id error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            FinishTipsView *finishTV = [[FinishTipsView alloc] initWithTitle:error complete:nil];
-        
-            [[UIApplication sharedApplication].keyWindow addSubview:finishTV];
-        });
-    }];
 }
 
 #pragma mark - tabnleview detegate
@@ -407,7 +413,7 @@
                 cell.textField.text = @"";
             }
         } else if (indexPath.row == 3){
-            [cell setLabelNameText:@"*身份证号:" isChoose:YES placeholderStr:@"请输入您的身份证号码" isSelect:NO];
+            [cell setLabelNameText:@"身份证号:" isChoose:NO placeholderStr:@"请输入您的身份证号码" isSelect:NO];
             cell.textField.userInteractionEnabled = YES;
             if ([self.dictionaryInfo objectForKey:@"identity"]) {
                 cell.textField.text = [self.dictionaryInfo objectForKey:@"identity"];

@@ -1179,6 +1179,37 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		A75194B420BB144F004896A8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FC32BEF22079AA2000817156 /* XCCheckoutDetailInputCell.h */,
+				FC32BEF32079AA2000817156 /* XCCheckoutDetailInputCell.m */,
+				FC32BEF42079AA2000817156 /* XCCheckoutDetailPhotoCell.h */,
+				FC32BEF52079AA2000817156 /* XCCheckoutDetailPhotoCell.m */,
+				FC32BEF62079AA2000817156 /* XCCheckoutDetailTextCell.h */,
+				FC32BEF72079AA2000817156 /* XCCheckoutDetailTextCell.m */,
+				FC32BEF82079AA2000817156 /* XCCheckoutDetailTextFiledCell.h */,
+				FC32BEF92079AA2000817156 /* XCCheckoutDetailTextFiledCell.m */,
+				FC32BEFA2079AA2000817156 /* XCCheckoutTableViewCell.h */,
+				FC32BEFB2079AA2000817156 /* XCCheckoutTableViewCell.m */,
+				FC32BEFC2079AA2000817156 /* XCMyCommissionListCell.h */,
+				FC32BEFD2079AA2000817156 /* XCMyCommissionListCell.m */,
+				FC32BEFE2079AA2000817156 /* XCUserCaseDetailProgressCell.h */,
+				FC32BEFF2079AA2000817156 /* XCUserCaseDetailProgressCell.m */,
+				FC32BF002079AA2000817156 /* XCUserCaseDetailTextCell.h */,
+				FC32BF012079AA2000817156 /* XCUserCaseDetailTextCell.m */,
+				FC32BF022079AA2000817156 /* XCUserCaseListCell.h */,
+				FC32BF032079AA2000817156 /* XCUserCaseListCell.m */,
+				FC32BF042079AA2000817156 /* XCUserCaseScrollerViewCell.h */,
+				FC32BF052079AA2000817156 /* XCUserCaseScrollerViewCell.m */,
+				FC32BF122079AA2000817156 /* XCDistributionInputCell.h */,
+				FC32BF132079AA2000817156 /* XCDistributionInputCell.m */,
+				FC32BF142079AA2000817156 /* XCDistributionPicketCell.h */,
+				FC32BF152079AA2000817156 /* XCDistributionPicketCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A751F627209851C30084C492 /* VIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -1583,36 +1614,13 @@
 		FC32BEED2079AA2000817156 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A75194B420BB144F004896A8 /* Cell */,
 				FC32BEEE2079AA2000817156 /* XCCheckoutBaseFooterView.h */,
 				FC32BEEF2079AA2000817156 /* XCCheckoutBaseFooterView.m */,
 				FC32BEF02079AA2000817156 /* XCCheckoutDetailHeaderView.h */,
 				FC32BEF12079AA2000817156 /* XCCheckoutDetailHeaderView.m */,
-				FC32BEF22079AA2000817156 /* XCCheckoutDetailInputCell.h */,
-				FC32BEF32079AA2000817156 /* XCCheckoutDetailInputCell.m */,
-				FC32BEF42079AA2000817156 /* XCCheckoutDetailPhotoCell.h */,
-				FC32BEF52079AA2000817156 /* XCCheckoutDetailPhotoCell.m */,
-				FC32BEF62079AA2000817156 /* XCCheckoutDetailTextCell.h */,
-				FC32BEF72079AA2000817156 /* XCCheckoutDetailTextCell.m */,
-				FC32BEF82079AA2000817156 /* XCCheckoutDetailTextFiledCell.h */,
-				FC32BEF92079AA2000817156 /* XCCheckoutDetailTextFiledCell.m */,
-				FC32BEFA2079AA2000817156 /* XCCheckoutTableViewCell.h */,
-				FC32BEFB2079AA2000817156 /* XCCheckoutTableViewCell.m */,
-				FC32BEFC2079AA2000817156 /* XCMyCommissionListCell.h */,
-				FC32BEFD2079AA2000817156 /* XCMyCommissionListCell.m */,
-				FC32BEFE2079AA2000817156 /* XCUserCaseDetailProgressCell.h */,
-				FC32BEFF2079AA2000817156 /* XCUserCaseDetailProgressCell.m */,
-				FC32BF002079AA2000817156 /* XCUserCaseDetailTextCell.h */,
-				FC32BF012079AA2000817156 /* XCUserCaseDetailTextCell.m */,
-				FC32BF022079AA2000817156 /* XCUserCaseListCell.h */,
-				FC32BF032079AA2000817156 /* XCUserCaseListCell.m */,
-				FC32BF042079AA2000817156 /* XCUserCaseScrollerViewCell.h */,
-				FC32BF052079AA2000817156 /* XCUserCaseScrollerViewCell.m */,
 				FC32BF102079AA2000817156 /* XCDistributionFooterView.h */,
 				FC32BF112079AA2000817156 /* XCDistributionFooterView.m */,
-				FC32BF122079AA2000817156 /* XCDistributionInputCell.h */,
-				FC32BF132079AA2000817156 /* XCDistributionInputCell.m */,
-				FC32BF142079AA2000817156 /* XCDistributionPicketCell.h */,
-				FC32BF152079AA2000817156 /* XCDistributionPicketCell.m */,
 				FC32BF062079AA2000817156 /* 个人中心 */,
 				A71F118F207CBE4A00D57FEF /* XCShopDetailListCell.h */,
 				A71F1190207CBE4A00D57FEF /* XCShopDetailListCell.m */,
@@ -2813,7 +2821,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -2844,7 +2852,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G583SJY324;
+				DEVELOPMENT_TEAM = CM54Q38BZA;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
